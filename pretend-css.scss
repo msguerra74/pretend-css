@@ -10,28 +10,9 @@
 
 
 
-// --- SCSS Variables --- //
-// Edit Colors and Widths
+// --- Project Settings --- //
 
-// Colors
-// --
-// Use the following tool to find the $color--shade value in between
-// the lightest and darkest shade values:
-// https://meyerweb.com/eric/tools/color-blend/
-$color--action: #ec5659;
-$color--primary: null;
-$color--secondary: null;
-$color--tertiary: null;
-$color--accent: null;
-$color--shade: #808080;
-
-// Widths
-$width--xs: 320px; // Minimum viewport width
-$width--s: 480px; // Small breakpoint
-$width--m: 640px; // Medium breakpoint
-$width--l: 960px; // Large breakpoint
-$width--xl: 1280px; // Maximum viewport width
-$width--wide: 1440px; // Widest width and maximum media width
+@import "pretend-css-settings";
 
 
 
