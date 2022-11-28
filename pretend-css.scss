@@ -52,10 +52,11 @@
 
 // Breakpoint Generator
 // --
-// Usage: @include breakpoint(640px) {}
+// Usage: @include breakpoint(640px, max) {}
 // @param: $_width // Breakpoint width
-@mixin breakpoint($_width) {
-    @media (max-width: px-rem($_width)) {
+// @param: $_minmax // min-width vs max-width
+@mixin breakpoint($_width, $_minmax: max) {
+    @media (#{$_minmax}-width: px-rem($_width)) {
         @content;
     }
 }
@@ -120,6 +121,7 @@
     }
 
     // Shade Colors
+    --shade--black: #000000;
     --shade--darkest: #{color.scale($color--shade, $lightness: -90%)};
     --shade--darker: #{color.scale($color--shade, $lightness: -70%)};
     --shade--dark: #{color.scale($color--shade, $lightness: -50%)};
@@ -127,14 +129,17 @@
     --shade--light: #{color.scale($color--shade, $lightness: 50%)};
     --shade--lighter: #{color.scale($color--shade, $lightness: 70%)};
     --shade--lightest: #{color.scale($color--shade, $lightness: 90%)};
+    --shade--white: #ffffff;
 
     // Dark Mode Shade Colors
+    --shade--black-white: var(--shade--black);
     --shade--darkest-lightest: var(--shade--darkest);
     --shade--darker-lighter: var(--shade--darker);
     --shade--dark-light: var(--shade--dark);
     --shade--light-dark: var(--shade--light);
     --shade--lighter-darker: var(--shade--lighter);
     --shade--lightest-darkest: var(--shade--lightest);
+    --shade--white-black: var(--shade--white);
 
     // Misc Colors
     --bg--blur-color: #{rgba(color.scale($color--shade, $lightness: 90%), .9)};
@@ -238,12 +243,14 @@
 // Dark Mode
 @media (prefers-color-scheme: dark) {
     :root {
+        --shade--black-white: var(--shade--white);
         --shade--darkest-lightest: var(--shade--lightest);
         --shade--darker-lighter: var(--shade--lighter);
         --shade--dark-light: var(--shade--light);
         --shade--light-dark: var(--shade--dark);
         --shade--lighter-darker: var(--shade--darker);
         --shade--lightest-darkest: var(--shade--darkest);
+        --shade--white-black: var(--shade--black);
         --bg--blur-color: #{rgba(color.scale($color--shade, $lightness: -90%), .9)};
         --shadow--color: 0 0% 5%;
         --shadow--strength: 25%;
@@ -1640,6 +1647,46 @@ img.aspect--golden {
     }
 }
 
+.content-column-gap--xs {
+    column-gap: var(--space--xs);
+}
+
+.content-column-gap--s {
+    column-gap: var(--space--s);
+}
+
+.content-column-gap--m {
+    column-gap: var(--space--m);
+}
+
+.content-column-gap--base {
+    column-gap: var(--space--base);
+}
+
+.content-column-gap--content {
+    column-gap: var(--spacer--content);
+}
+
+.content-column-gap--l {
+    column-gap: var(--spacer--l);
+}
+
+.content-column-gap--xl {
+    column-gap: var(--spacer--xl);
+}
+
+.content-column-gap--2xl {
+    column-gap: var(--spacer--2xl);
+}
+
+.content-column-gap--3xl {
+    column-gap: var(--spacer--3xl);
+}
+
+.content-column-gap--4xl {
+    column-gap: var(--spacer--4xl);
+}
+
 .content-column-rule--dashed {
     column-rule: dashed;
 }
@@ -1650,6 +1697,58 @@ img.aspect--golden {
 
 .content-column-rule--solid {
     column-rule: solid;
+}
+
+.content-column-rule--action {
+    column-rule-color: var(--action);
+}
+
+@if $color--primary {
+    .content-column-rule--primary {
+        column-rule-color: var(--primary);
+    }
+}
+
+@if $color--secondary {
+    .content-column-rule--secondary {
+        column-rule-color: var(--secondary);
+    }
+}
+
+@if $color--tertiary {
+    .content-column-rule--tertiary {
+        column-rule-color: var(--tertiary);
+    }
+}
+
+@if $color--accent {
+    .content-column-rule--accent {
+        column-rule-color: var(--accent);
+    }
+}
+
+.content-column-rule--dark {
+    column-rule-color: var(--shade--darkest-lightest);
+}
+
+.content-column-rule--light {
+    column-rule-color: var(--shade--lightest);
+}
+
+.content-column-rule-width--px {
+    column-rule-width: var(--space--px);
+}
+
+.content-column-rule-width--2px {
+    column-rule-width: var(--space--2px);
+}
+
+.content-column-rule-width--xs {
+    column-rule-width: var(--space--xs);
+}
+
+.content-column-rule-width--s {
+    column-rule-width: var(--space--s);
 }
 
 .content-column-span--all {
@@ -2317,7 +2416,7 @@ img.aspect--golden {
 
 // Grid Alternate
 
-@include breakpoint($width--xl) {
+@include breakpoint($width--xl, min) {
     .grid--xl-alternate>.grid--2:nth-of-type(even)>*:last-child {
         order: -1;
     }
@@ -2371,7 +2470,7 @@ img.aspect--golden {
     }
 }
 
-@include breakpoint($width--l) {
+@include breakpoint($width--l, min) {
     .grid--l-alternate>.grid--2:nth-of-type(even)>*:last-child {
         order: -1;
     }
@@ -2425,7 +2524,7 @@ img.aspect--golden {
     }
 }
 
-@include breakpoint($width--m) {
+@include breakpoint($width--m, min) {
     .grid--m-alternate>.grid--2:nth-of-type(even)>*:last-child {
         order: -1;
     }
@@ -2479,7 +2578,7 @@ img.aspect--golden {
     }
 }
 
-@include breakpoint($width--s) {
+@include breakpoint($width--s, min) {
     .grid--s-alternate>.grid--2:nth-of-type(even)>*:last-child {
         order: -1;
     }
@@ -3867,6 +3966,44 @@ img.aspect--golden {
 
 .isolation--isolate {
     isolation: isolate;
+}
+
+// List Marker
+
+.list-marker--action li::marker {
+    color: var(--action);
+}
+
+@if $color--primary {
+    .list-marker--primary li::marker {
+        color: var(--primary);
+    }
+}
+
+@if $color--secondary {
+    .list-marker--secondary li::marker {
+        color: var(--secondary);
+    }
+}
+
+@if $color--tertiary {
+    .list-marker--tertiary li::marker {
+        color: var(--tertiary);
+    }
+}
+
+@if $color--accent {
+    .list-marker--accent li::marker {
+        color: var(--accent);
+    }
+}
+
+.list-marker--dark li::marker {
+    color: var(--shade--darkest-lightest);
+}
+
+.list-marker--light li::marker {
+    color: var(--shade--light);
 }
 
 // Margin Top
