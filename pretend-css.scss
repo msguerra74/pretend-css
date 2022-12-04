@@ -82,19 +82,19 @@ $width--max: 1600px;
 // Uncomment this function to use with @use "sass:math"; in Sass 2.0
 // @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
 //     $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
-//     $_intersect: px-rem($_min-size - $_slope * $_min-width);
+//     $_intercept: px-rem($_min-size - $_slope * $_min-width);
 //     $_slope-vw: $_slope * 100vw;
 //     $_min-size-rem: px-rem($_min-size);
 //     $_max-size-rem: px-rem($_max-size);
-//     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intersect}), #{$_max-size-rem});
+//     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 // }
 @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
     $_slope: ($_max-size - $_min-size) / ($_max-width - $_min-width);
-    $_intersect: px-rem($_min-size - $_slope * $_min-width);
+    $_intercept: px-rem($_min-size - $_slope * $_min-width);
     $_slope-vw: $_slope * 100vw;
     $_min-size-rem: px-rem($_min-size);
     $_max-size-rem: px-rem($_max-size);
-    @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intersect}), #{$_max-size-rem});
+    @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 }
 
 // PX to REM Conversion
@@ -110,7 +110,6 @@ $width--max: 1600px;
 
 //     @return $_rem;
 // }
-
 @function px-rem($_px) {
     @if type-of($_px)=="number" and not unitless($_px) {
         @return ($_px / ($_px * 0 + 1) / 16 + rem);
