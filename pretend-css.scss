@@ -1,7 +1,13 @@
-// Pretend CSS
-// --
-// Made by Pretend
-// https://madebypretend.com
+/**
+ * Pretend CSS
+ * --
+ * Made by Pretend
+ * https://madebypretend.com
+ **/
+
+
+
+@use "sass:math";
 
 
 
@@ -9,6 +15,9 @@
 // ---------- Settings ---------- //
 
 
+
+// WordPress Builder
+$cwicly: true; // Using Cwicly // true/false
 
 // Action Color Shades
 $action: #ef4444; // Action Base
@@ -46,6 +55,14 @@ $shade--h: 0; // Hue
 $shade--s: 0%; // Saturation
 $shade--l: 9%; // Lightness
 
+// Custom Max Sizing
+$space--max: 168px; // Null if unneeded
+$text--max: 168px; // Null if unneeded
+$width--max: 1600px; // Null if unneeded
+
+// Misc
+$radius--base: 0; // Default border radius
+
 // Widths
 $width--xs: 320px; // Minimum viewport width
 $width--s: 480px; // Small breakpoint and fluid sizing minimum width
@@ -53,11 +70,7 @@ $width--m: 640px; // Medium breakpoint
 $width--l: 960px; // Large breakpoint
 $width--xl: 1280px; // Maximum viewport width and fluid sizing maximum width
 $width--wide: 1440px; // Widest width and maximum media width
-
-// Custom Max Sizing
-$space--custom: 168px;
-$text--custom: 168px;
-$width--custom: 1600px;
+$width--prose: 60ch; // Readable text width
 
 
 
@@ -78,18 +91,8 @@ $width--custom: 1600px;
 // @param: $_max-size // Maximum Size
 // @param: $_min-width // Minimum Breakpoint
 // @param: $_max-width // Maximum Breakpoint
-// ---
-// Uncomment this function to use with @use "sass:math"; in Sass 2.0
-// @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
-//     $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
-//     $_intercept: px-rem($_min-size - $_slope * $_min-width);
-//     $_slope-vw: $_slope * 100vw;
-//     $_min-size-rem: px-rem($_min-size);
-//     $_max-size-rem: px-rem($_max-size);
-//     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
-// }
 @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
-    $_slope: ($_max-size - $_min-size) / ($_max-width - $_min-width);
+    $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
     $_intercept: px-rem($_min-size - $_slope * $_min-width);
     $_slope-vw: $_slope * 100vw;
     $_min-size-rem: px-rem($_min-size);
@@ -101,18 +104,9 @@ $width--custom: 1600px;
 // --
 // Usage: px-rem(16px)
 // @param: $_px // Pixel value
-// ---
-// Uncomment this function to use with @use "sass:math"; in Sass 2.0
-// @function px-rem($_px) {
-//     @if type-of($_px)=="number" and not unitless($_px) {
-//         @return (math.div(math.div($_px, ($_px * 0 + 1)), 16) + rem);
-//     }
-
-//     @return $_rem;
-// }
 @function px-rem($_px) {
     @if type-of($_px)=="number" and not unitless($_px) {
-        @return ($_px / ($_px * 0 + 1) / 16 + rem);
+        @return (math.div(math.div($_px, ($_px * 0 + 1)), 16) + rem);
     }
 
     @return $_rem;
@@ -144,295 +138,331 @@ $width--custom: 1600px;
 :root {
     // Action Colors
     --action: #{$action};
-    --action--darkest: #{hsl($action--h, $action--s, 10)};
-    --action--darkest-10: #{hsla($action--h, $action--s, 10, .1)};
-    --action--darkest-20: #{hsla($action--h, $action--s, 10, .2)};
-    --action--darkest-40: #{hsla($action--h, $action--s, 10, .4)};
-    --action--darkest-60: #{hsla($action--h, $action--s, 10, .6)};
-    --action--darkest-80: #{hsla($action--h, $action--s, 10, .8)};
-    --action--darkest-90: #{hsla($action--h, $action--s, 10, .9)};
-    --action--darker: #{hsl($action--h, $action--s, 20)};
-    --action--darker-10: #{hsla($action--h, $action--s, 20, .1)};
-    --action--darker-20: #{hsla($action--h, $action--s, 20, .2)};
-    --action--darker-40: #{hsla($action--h, $action--s, 20, .4)};
-    --action--darker-60: #{hsla($action--h, $action--s, 20, .6)};
-    --action--darker-80: #{hsla($action--h, $action--s, 20, .8)};
-    --action--darker-90: #{hsla($action--h, $action--s, 20, .9)};
-    --action--dark: #{hsl($action--h, $action--s, 40)};
-    --action--dark-10: #{hsla($action--h, $action--s, 40, .1)};
-    --action--dark-20: #{hsla($action--h, $action--s, 40, .2)};
-    --action--dark-40: #{hsla($action--h, $action--s, 40, .4)};
-    --action--dark-60: #{hsla($action--h, $action--s, 40, .6)};
-    --action--dark-80: #{hsla($action--h, $action--s, 40, .8)};
-    --action--dark-90: #{hsla($action--h, $action--s, 40, .9)};
-    --action--light: #{hsl($action--h, $action--s, 60)};
-    --action--light-10: #{hsla($action--h, $action--s, 60, .1)};
-    --action--light-20: #{hsla($action--h, $action--s, 60, .2)};
-    --action--light-40: #{hsla($action--h, $action--s, 60, .4)};
-    --action--light-60: #{hsla($action--h, $action--s, 60, .6)};
-    --action--light-80: #{hsla($action--h, $action--s, 60, .8)};
-    --action--light-90: #{hsla($action--h, $action--s, 60, .9)};
-    --action--lighter: #{hsl($action--h, $action--s, 80)};
-    --action--lighter-10: #{hsla($action--h, $action--s, 80, .1)};
-    --action--lighter-20: #{hsla($action--h, $action--s, 80, .2)};
-    --action--lighter-40: #{hsla($action--h, $action--s, 80, .4)};
-    --action--lighter-60: #{hsla($action--h, $action--s, 80, .6)};
-    --action--lighter-80: #{hsla($action--h, $action--s, 80, .8)};
-    --action--lighter-90: #{hsla($action--h, $action--s, 80, .9)};
-    --action--lightest: #{hsl($action--h, $action--s, 95)};
-    --action--lightest-10: #{hsla($action--h, $action--s, 95, .1)};
-    --action--lightest-20: #{hsla($action--h, $action--s, 95, .2)};
-    --action--lightest-40: #{hsla($action--h, $action--s, 95, .4)};
-    --action--lightest-60: #{hsla($action--h, $action--s, 95, .6)};
-    --action--lightest-80: #{hsla($action--h, $action--s, 95, .8)};
-    --action--lightest-90: #{hsla($action--h, $action--s, 95, .9)};
+    --action-10: #{hsla($action--h, $action--s, $action--l, .1)};
+    --action-20: #{hsla($action--h, $action--s, $action--l, .2)};
+    --action-40: #{hsla($action--h, $action--s, $action--l, .4)};
+    --action-60: #{hsla($action--h, $action--s, $action--l, .6)};
+    --action-80: #{hsla($action--h, $action--s, $action--l, .8)};
+    --action-90: #{hsla($action--h, $action--s, $action--l, .9)};
+    --action--darkest: #{hsl($action--h, $action--s, 10%)};
+    --action--darkest-10: #{hsla($action--h, $action--s, 10%, .1)};
+    --action--darkest-20: #{hsla($action--h, $action--s, 10%, .2)};
+    --action--darkest-40: #{hsla($action--h, $action--s, 10%, .4)};
+    --action--darkest-60: #{hsla($action--h, $action--s, 10%, .6)};
+    --action--darkest-80: #{hsla($action--h, $action--s, 10%, .8)};
+    --action--darkest-90: #{hsla($action--h, $action--s, 10%, .9)};
+    --action--darker: #{hsl($action--h, $action--s, 20%)};
+    --action--darker-10: #{hsla($action--h, $action--s, 20%, .1)};
+    --action--darker-20: #{hsla($action--h, $action--s, 20%, .2)};
+    --action--darker-40: #{hsla($action--h, $action--s, 20%, .4)};
+    --action--darker-60: #{hsla($action--h, $action--s, 20%, .6)};
+    --action--darker-80: #{hsla($action--h, $action--s, 20%, .8)};
+    --action--darker-90: #{hsla($action--h, $action--s, 20%, .9)};
+    --action--dark: #{hsl($action--h, $action--s, 40%)};
+    --action--dark-10: #{hsla($action--h, $action--s, 40%, .1)};
+    --action--dark-20: #{hsla($action--h, $action--s, 40%, .2)};
+    --action--dark-40: #{hsla($action--h, $action--s, 40%, .4)};
+    --action--dark-60: #{hsla($action--h, $action--s, 40%, .6)};
+    --action--dark-80: #{hsla($action--h, $action--s, 40%, .8)};
+    --action--dark-90: #{hsla($action--h, $action--s, 40%, .9)};
+    --action--light: #{hsl($action--h, $action--s, 60%)};
+    --action--light-10: #{hsla($action--h, $action--s, 60%, .1)};
+    --action--light-20: #{hsla($action--h, $action--s, 60%, .2)};
+    --action--light-40: #{hsla($action--h, $action--s, 60%, .4)};
+    --action--light-60: #{hsla($action--h, $action--s, 60%, .6)};
+    --action--light-80: #{hsla($action--h, $action--s, 60%, .8)};
+    --action--light-90: #{hsla($action--h, $action--s, 60%, .9)};
+    --action--lighter: #{hsl($action--h, $action--s, 80%)};
+    --action--lighter-10: #{hsla($action--h, $action--s, 80%, .1)};
+    --action--lighter-20: #{hsla($action--h, $action--s, 80%, .2)};
+    --action--lighter-40: #{hsla($action--h, $action--s, 80%, .4)};
+    --action--lighter-60: #{hsla($action--h, $action--s, 80%, .6)};
+    --action--lighter-80: #{hsla($action--h, $action--s, 80%, .8)};
+    --action--lighter-90: #{hsla($action--h, $action--s, 80%, .9)};
+    --action--lightest: #{hsl($action--h, $action--s, 95%)};
+    --action--lightest-10: #{hsla($action--h, $action--s, 95%, .1)};
+    --action--lightest-20: #{hsla($action--h, $action--s, 95%, .2)};
+    --action--lightest-40: #{hsla($action--h, $action--s, 95%, .4)};
+    --action--lightest-60: #{hsla($action--h, $action--s, 95%, .6)};
+    --action--lightest-80: #{hsla($action--h, $action--s, 95%, .8)};
+    --action--lightest-90: #{hsla($action--h, $action--s, 95%, .9)};
 
     // Primary Colors
     @if $primary {
         --primary: #{$primary};
-        --primary--darkest: #{hsl($primary--h, $primary--s, 10)};
-        --primary--darkest-10: #{hsla($primary--h, $primary--s, 10, .1)};
-        --primary--darkest-20: #{hsla($primary--h, $primary--s, 10, .2)};
-        --primary--darkest-40: #{hsla($primary--h, $primary--s, 10, .4)};
-        --primary--darkest-60: #{hsla($primary--h, $primary--s, 10, .6)};
-        --primary--darkest-80: #{hsla($primary--h, $primary--s, 10, .8)};
-        --primary--darkest-90: #{hsla($primary--h, $primary--s, 10, .9)};
-        --primary--darker: #{hsl($primary--h, $primary--s, 20)};
-        --primary--darker-10: #{hsla($primary--h, $primary--s, 20, .1)};
-        --primary--darker-20: #{hsla($primary--h, $primary--s, 20, .2)};
-        --primary--darker-40: #{hsla($primary--h, $primary--s, 20, .4)};
-        --primary--darker-60: #{hsla($primary--h, $primary--s, 20, .6)};
-        --primary--darker-80: #{hsla($primary--h, $primary--s, 20, .8)};
-        --primary--darker-90: #{hsla($primary--h, $primary--s, 20, .9)};
-        --primary--dark: #{hsl($primary--h, $primary--s, 40)};
-        --primary--dark-10: #{hsla($primary--h, $primary--s, 40, .1)};
-        --primary--dark-20: #{hsla($primary--h, $primary--s, 40, .2)};
-        --primary--dark-40: #{hsla($primary--h, $primary--s, 40, .4)};
-        --primary--dark-60: #{hsla($primary--h, $primary--s, 40, .6)};
-        --primary--dark-80: #{hsla($primary--h, $primary--s, 40, .8)};
-        --primary--dark-90: #{hsla($primary--h, $primary--s, 40, .9)};
-        --primary--light: #{hsl($primary--h, $primary--s, 60)};
-        --primary--light-10: #{hsla($primary--h, $primary--s, 60, .1)};
-        --primary--light-20: #{hsla($primary--h, $primary--s, 60, .2)};
-        --primary--light-40: #{hsla($primary--h, $primary--s, 60, .4)};
-        --primary--light-60: #{hsla($primary--h, $primary--s, 60, .6)};
-        --primary--light-80: #{hsla($primary--h, $primary--s, 60, .8)};
-        --primary--light-90: #{hsla($primary--h, $primary--s, 60, .9)};
-        --primary--lighter: #{hsl($primary--h, $primary--s, 80)};
-        --primary--lighter-10: #{hsla($primary--h, $primary--s, 80, .1)};
-        --primary--lighter-20: #{hsla($primary--h, $primary--s, 80, .2)};
-        --primary--lighter-40: #{hsla($primary--h, $primary--s, 80, .4)};
-        --primary--lighter-60: #{hsla($primary--h, $primary--s, 80, .6)};
-        --primary--lighter-80: #{hsla($primary--h, $primary--s, 80, .8)};
-        --primary--lighter-90: #{hsla($primary--h, $primary--s, 80, .9)};
-        --primary--lightest: #{hsl($primary--h, $primary--s, 95)};
-        --primary--lightest-10: #{hsla($primary--h, $primary--s, 95, .1)};
-        --primary--lightest-20: #{hsla($primary--h, $primary--s, 95, .2)};
-        --primary--lightest-40: #{hsla($primary--h, $primary--s, 95, .4)};
-        --primary--lightest-60: #{hsla($primary--h, $primary--s, 95, .6)};
-        --primary--lightest-80: #{hsla($primary--h, $primary--s, 95, .8)};
-        --primary--lightest-90: #{hsla($primary--h, $primary--s, 95, .9)};
+        --primary-10: #{hsla($primary--h, $primary--s, $primary--l, .1)};
+        --primary-20: #{hsla($primary--h, $primary--s, $primary--l, .2)};
+        --primary-40: #{hsla($primary--h, $primary--s, $primary--l, .4)};
+        --primary-60: #{hsla($primary--h, $primary--s, $primary--l, .6)};
+        --primary-80: #{hsla($primary--h, $primary--s, $primary--l, .8)};
+        --primary-90: #{hsla($primary--h, $primary--s, $primary--l, .9)};
+        --primary--darkest: #{hsl($primary--h, $primary--s, 10%)};
+        --primary--darkest-10: #{hsla($primary--h, $primary--s, 10%, .1)};
+        --primary--darkest-20: #{hsla($primary--h, $primary--s, 10%, .2)};
+        --primary--darkest-40: #{hsla($primary--h, $primary--s, 10%, .4)};
+        --primary--darkest-60: #{hsla($primary--h, $primary--s, 10%, .6)};
+        --primary--darkest-80: #{hsla($primary--h, $primary--s, 10%, .8)};
+        --primary--darkest-90: #{hsla($primary--h, $primary--s, 10%, .9)};
+        --primary--darker: #{hsl($primary--h, $primary--s, 20%)};
+        --primary--darker-10: #{hsla($primary--h, $primary--s, 20%, .1)};
+        --primary--darker-20: #{hsla($primary--h, $primary--s, 20%, .2)};
+        --primary--darker-40: #{hsla($primary--h, $primary--s, 20%, .4)};
+        --primary--darker-60: #{hsla($primary--h, $primary--s, 20%, .6)};
+        --primary--darker-80: #{hsla($primary--h, $primary--s, 20%, .8)};
+        --primary--darker-90: #{hsla($primary--h, $primary--s, 20%, .9)};
+        --primary--dark: #{hsl($primary--h, $primary--s, 40%)};
+        --primary--dark-10: #{hsla($primary--h, $primary--s, 40%, .1)};
+        --primary--dark-20: #{hsla($primary--h, $primary--s, 40%, .2)};
+        --primary--dark-40: #{hsla($primary--h, $primary--s, 40%, .4)};
+        --primary--dark-60: #{hsla($primary--h, $primary--s, 40%, .6)};
+        --primary--dark-80: #{hsla($primary--h, $primary--s, 40%, .8)};
+        --primary--dark-90: #{hsla($primary--h, $primary--s, 40%, .9)};
+        --primary--light: #{hsl($primary--h, $primary--s, 60%)};
+        --primary--light-10: #{hsla($primary--h, $primary--s, 60%, .1)};
+        --primary--light-20: #{hsla($primary--h, $primary--s, 60%, .2)};
+        --primary--light-40: #{hsla($primary--h, $primary--s, 60%, .4)};
+        --primary--light-60: #{hsla($primary--h, $primary--s, 60%, .6)};
+        --primary--light-80: #{hsla($primary--h, $primary--s, 60%, .8)};
+        --primary--light-90: #{hsla($primary--h, $primary--s, 60%, .9)};
+        --primary--lighter: #{hsl($primary--h, $primary--s, 80%)};
+        --primary--lighter-10: #{hsla($primary--h, $primary--s, 80%, .1)};
+        --primary--lighter-20: #{hsla($primary--h, $primary--s, 80%, .2)};
+        --primary--lighter-40: #{hsla($primary--h, $primary--s, 80%, .4)};
+        --primary--lighter-60: #{hsla($primary--h, $primary--s, 80%, .6)};
+        --primary--lighter-80: #{hsla($primary--h, $primary--s, 80%, .8)};
+        --primary--lighter-90: #{hsla($primary--h, $primary--s, 80%, .9)};
+        --primary--lightest: #{hsl($primary--h, $primary--s, 95%)};
+        --primary--lightest-10: #{hsla($primary--h, $primary--s, 95%, .1)};
+        --primary--lightest-20: #{hsla($primary--h, $primary--s, 95%, .2)};
+        --primary--lightest-40: #{hsla($primary--h, $primary--s, 95%, .4)};
+        --primary--lightest-60: #{hsla($primary--h, $primary--s, 95%, .6)};
+        --primary--lightest-80: #{hsla($primary--h, $primary--s, 95%, .8)};
+        --primary--lightest-90: #{hsla($primary--h, $primary--s, 95%, .9)};
     }
 
     // Secondary Colors
     @if $secondary {
         --secondary: #{$secondary};
-        --secondary--darkest: #{hsl($secondary--h, $secondary--s, 10)};
-        --secondary--darkest-10: #{hsla($secondary--h, $secondary--s, 10, .1)};
-        --secondary--darkest-20: #{hsla($secondary--h, $secondary--s, 10, .2)};
-        --secondary--darkest-40: #{hsla($secondary--h, $secondary--s, 10, .4)};
-        --secondary--darkest-60: #{hsla($secondary--h, $secondary--s, 10, .6)};
-        --secondary--darkest-80: #{hsla($secondary--h, $secondary--s, 10, .8)};
-        --secondary--darkest-90: #{hsla($secondary--h, $secondary--s, 10, .9)};
-        --secondary--darker: #{hsl($secondary--h, $secondary--s, 20)};
-        --secondary--darker-10: #{hsla($secondary--h, $secondary--s, 20, .1)};
-        --secondary--darker-20: #{hsla($secondary--h, $secondary--s, 20, .2)};
-        --secondary--darker-40: #{hsla($secondary--h, $secondary--s, 20, .4)};
-        --secondary--darker-60: #{hsla($secondary--h, $secondary--s, 20, .6)};
-        --secondary--darker-80: #{hsla($secondary--h, $secondary--s, 20, .8)};
-        --secondary--darker-90: #{hsla($secondary--h, $secondary--s, 20, .9)};
-        --secondary--dark: #{hsl($secondary--h, $secondary--s, 40)};
-        --secondary--dark-10: #{hsla($secondary--h, $secondary--s, 40, .1)};
-        --secondary--dark-20: #{hsla($secondary--h, $secondary--s, 40, .2)};
-        --secondary--dark-40: #{hsla($secondary--h, $secondary--s, 40, .4)};
-        --secondary--dark-60: #{hsla($secondary--h, $secondary--s, 40, .6)};
-        --secondary--dark-80: #{hsla($secondary--h, $secondary--s, 40, .8)};
-        --secondary--dark-90: #{hsla($secondary--h, $secondary--s, 40, .9)};
-        --secondary--light: #{hsl($secondary--h, $secondary--s, 60)};
-        --secondary--light-10: #{hsla($secondary--h, $secondary--s, 60, .1)};
-        --secondary--light-20: #{hsla($secondary--h, $secondary--s, 60, .2)};
-        --secondary--light-40: #{hsla($secondary--h, $secondary--s, 60, .4)};
-        --secondary--light-60: #{hsla($secondary--h, $secondary--s, 60, .6)};
-        --secondary--light-80: #{hsla($secondary--h, $secondary--s, 60, .8)};
-        --secondary--light-90: #{hsla($secondary--h, $secondary--s, 60, .9)};
-        --secondary--lighter: #{hsl($secondary--h, $secondary--s, 80)};
-        --secondary--lighter-10: #{hsla($secondary--h, $secondary--s, 80, .1)};
-        --secondary--lighter-20: #{hsla($secondary--h, $secondary--s, 80, .2)};
-        --secondary--lighter-40: #{hsla($secondary--h, $secondary--s, 80, .4)};
-        --secondary--lighter-60: #{hsla($secondary--h, $secondary--s, 80, .6)};
-        --secondary--lighter-80: #{hsla($secondary--h, $secondary--s, 80, .8)};
-        --secondary--lighter-90: #{hsla($secondary--h, $secondary--s, 80, .9)};
-        --secondary--lightest: #{hsl($secondary--h, $secondary--s, 95)};
-        --secondary--lightest-10: #{hsla($secondary--h, $secondary--s, 95, .1)};
-        --secondary--lightest-20: #{hsla($secondary--h, $secondary--s, 95, .2)};
-        --secondary--lightest-40: #{hsla($secondary--h, $secondary--s, 95, .4)};
-        --secondary--lightest-60: #{hsla($secondary--h, $secondary--s, 95, .6)};
-        --secondary--lightest-80: #{hsla($secondary--h, $secondary--s, 95, .8)};
-        --secondary--lightest-90: #{hsla($secondary--h, $secondary--s, 95, .9)};
+        --secondary-10: #{hsla($secondary--h, $secondary--s, $secondary--l, .1)};
+        --secondary-20: #{hsla($secondary--h, $secondary--s, $secondary--l, .2)};
+        --secondary-40: #{hsla($secondary--h, $secondary--s, $secondary--l, .4)};
+        --secondary-60: #{hsla($secondary--h, $secondary--s, $secondary--l, .6)};
+        --secondary-80: #{hsla($secondary--h, $secondary--s, $secondary--l, .8)};
+        --secondary-90: #{hsla($secondary--h, $secondary--s, $secondary--l, .9)};
+        --secondary--darkest: #{hsl($secondary--h, $secondary--s, 10%)};
+        --secondary--darkest-10: #{hsla($secondary--h, $secondary--s, 10%, .1)};
+        --secondary--darkest-20: #{hsla($secondary--h, $secondary--s, 10%, .2)};
+        --secondary--darkest-40: #{hsla($secondary--h, $secondary--s, 10%, .4)};
+        --secondary--darkest-60: #{hsla($secondary--h, $secondary--s, 10%, .6)};
+        --secondary--darkest-80: #{hsla($secondary--h, $secondary--s, 10%, .8)};
+        --secondary--darkest-90: #{hsla($secondary--h, $secondary--s, 10%, .9)};
+        --secondary--darker: #{hsl($secondary--h, $secondary--s, 20%)};
+        --secondary--darker-10: #{hsla($secondary--h, $secondary--s, 20%, .1)};
+        --secondary--darker-20: #{hsla($secondary--h, $secondary--s, 20%, .2)};
+        --secondary--darker-40: #{hsla($secondary--h, $secondary--s, 20%, .4)};
+        --secondary--darker-60: #{hsla($secondary--h, $secondary--s, 20%, .6)};
+        --secondary--darker-80: #{hsla($secondary--h, $secondary--s, 20%, .8)};
+        --secondary--darker-90: #{hsla($secondary--h, $secondary--s, 20%, .9)};
+        --secondary--dark: #{hsl($secondary--h, $secondary--s, 40%)};
+        --secondary--dark-10: #{hsla($secondary--h, $secondary--s, 40%, .1)};
+        --secondary--dark-20: #{hsla($secondary--h, $secondary--s, 40%, .2)};
+        --secondary--dark-40: #{hsla($secondary--h, $secondary--s, 40%, .4)};
+        --secondary--dark-60: #{hsla($secondary--h, $secondary--s, 40%, .6)};
+        --secondary--dark-80: #{hsla($secondary--h, $secondary--s, 40%, .8)};
+        --secondary--dark-90: #{hsla($secondary--h, $secondary--s, 40%, .9)};
+        --secondary--light: #{hsl($secondary--h, $secondary--s, 60%)};
+        --secondary--light-10: #{hsla($secondary--h, $secondary--s, 60%, .1)};
+        --secondary--light-20: #{hsla($secondary--h, $secondary--s, 60%, .2)};
+        --secondary--light-40: #{hsla($secondary--h, $secondary--s, 60%, .4)};
+        --secondary--light-60: #{hsla($secondary--h, $secondary--s, 60%, .6)};
+        --secondary--light-80: #{hsla($secondary--h, $secondary--s, 60%, .8)};
+        --secondary--light-90: #{hsla($secondary--h, $secondary--s, 60%, .9)};
+        --secondary--lighter: #{hsl($secondary--h, $secondary--s, 80%)};
+        --secondary--lighter-10: #{hsla($secondary--h, $secondary--s, 80%, .1)};
+        --secondary--lighter-20: #{hsla($secondary--h, $secondary--s, 80%, .2)};
+        --secondary--lighter-40: #{hsla($secondary--h, $secondary--s, 80%, .4)};
+        --secondary--lighter-60: #{hsla($secondary--h, $secondary--s, 80%, .6)};
+        --secondary--lighter-80: #{hsla($secondary--h, $secondary--s, 80%, .8)};
+        --secondary--lighter-90: #{hsla($secondary--h, $secondary--s, 80%, .9)};
+        --secondary--lightest: #{hsl($secondary--h, $secondary--s, 95%)};
+        --secondary--lightest-10: #{hsla($secondary--h, $secondary--s, 95%, .1)};
+        --secondary--lightest-20: #{hsla($secondary--h, $secondary--s, 95%, .2)};
+        --secondary--lightest-40: #{hsla($secondary--h, $secondary--s, 95%, .4)};
+        --secondary--lightest-60: #{hsla($secondary--h, $secondary--s, 95%, .6)};
+        --secondary--lightest-80: #{hsla($secondary--h, $secondary--s, 95%, .8)};
+        --secondary--lightest-90: #{hsla($secondary--h, $secondary--s, 95%, .9)};
     }
 
     // Tertiary Colors
     @if $tertiary {
         --tertiary: #{$tertiary};
-        --tertiary--darkest: #{hsl($tertiary--h, $tertiary--s, 10)};
-        --tertiary--darkest-10: #{hsla($tertiary--h, $tertiary--s, 10, .1)};
-        --tertiary--darkest-20: #{hsla($tertiary--h, $tertiary--s, 10, .2)};
-        --tertiary--darkest-40: #{hsla($tertiary--h, $tertiary--s, 10, .4)};
-        --tertiary--darkest-60: #{hsla($tertiary--h, $tertiary--s, 10, .6)};
-        --tertiary--darkest-80: #{hsla($tertiary--h, $tertiary--s, 10, .8)};
-        --tertiary--darkest-90: #{hsla($tertiary--h, $tertiary--s, 10, .9)};
-        --tertiary--darker: #{hsl($tertiary--h, $tertiary--s, 20)};
-        --tertiary--darker-10: #{hsla($tertiary--h, $tertiary--s, 20, .1)};
-        --tertiary--darker-20: #{hsla($tertiary--h, $tertiary--s, 20, .2)};
-        --tertiary--darker-40: #{hsla($tertiary--h, $tertiary--s, 20, .4)};
-        --tertiary--darker-60: #{hsla($tertiary--h, $tertiary--s, 20, .6)};
-        --tertiary--darker-80: #{hsla($tertiary--h, $tertiary--s, 20, .8)};
-        --tertiary--darker-90: #{hsla($tertiary--h, $tertiary--s, 20, .9)};
-        --tertiary--dark: #{hsl($tertiary--h, $tertiary--s, 40)};
-        --tertiary--dark-10: #{hsla($tertiary--h, $tertiary--s, 40, .1)};
-        --tertiary--dark-20: #{hsla($tertiary--h, $tertiary--s, 40, .2)};
-        --tertiary--dark-40: #{hsla($tertiary--h, $tertiary--s, 40, .4)};
-        --tertiary--dark-60: #{hsla($tertiary--h, $tertiary--s, 40, .6)};
-        --tertiary--dark-80: #{hsla($tertiary--h, $tertiary--s, 40, .8)};
-        --tertiary--dark-90: #{hsla($tertiary--h, $tertiary--s, 40, .9)};
-        --tertiary--light: #{hsl($tertiary--h, $tertiary--s, 60)};
-        --tertiary--light-10: #{hsla($tertiary--h, $tertiary--s, 60, .1)};
-        --tertiary--light-20: #{hsla($tertiary--h, $tertiary--s, 60, .2)};
-        --tertiary--light-40: #{hsla($tertiary--h, $tertiary--s, 60, .4)};
-        --tertiary--light-60: #{hsla($tertiary--h, $tertiary--s, 60, .6)};
-        --tertiary--light-80: #{hsla($tertiary--h, $tertiary--s, 60, .8)};
-        --tertiary--light-90: #{hsla($tertiary--h, $tertiary--s, 60, .9)};
-        --tertiary--lighter: #{hsl($tertiary--h, $tertiary--s, 80)};
-        --tertiary--lighter-10: #{hsla($tertiary--h, $tertiary--s, 80, .1)};
-        --tertiary--lighter-20: #{hsla($tertiary--h, $tertiary--s, 80, .2)};
-        --tertiary--lighter-40: #{hsla($tertiary--h, $tertiary--s, 80, .4)};
-        --tertiary--lighter-60: #{hsla($tertiary--h, $tertiary--s, 80, .6)};
-        --tertiary--lighter-80: #{hsla($tertiary--h, $tertiary--s, 80, .8)};
-        --tertiary--lighter-90: #{hsla($tertiary--h, $tertiary--s, 80, .9)};
-        --tertiary--lightest: #{hsl($tertiary--h, $tertiary--s, 95)};
-        --tertiary--lightest-10: #{hsla($tertiary--h, $tertiary--s, 95, .1)};
-        --tertiary--lightest-20: #{hsla($tertiary--h, $tertiary--s, 95, .2)};
-        --tertiary--lightest-40: #{hsla($tertiary--h, $tertiary--s, 95, .4)};
-        --tertiary--lightest-60: #{hsla($tertiary--h, $tertiary--s, 95, .6)};
-        --tertiary--lightest-80: #{hsla($tertiary--h, $tertiary--s, 95, .8)};
-        --tertiary--lightest-90: #{hsla($tertiary--h, $tertiary--s, 95, .9)};
+        --tertiary-10: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .1)};
+        --tertiary-20: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .2)};
+        --tertiary-40: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .4)};
+        --tertiary-60: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .6)};
+        --tertiary-80: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .8)};
+        --tertiary-90: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .9)};
+        --tertiary--darkest: #{hsl($tertiary--h, $tertiary--s, 10%)};
+        --tertiary--darkest-10: #{hsla($tertiary--h, $tertiary--s, 10%, .1)};
+        --tertiary--darkest-20: #{hsla($tertiary--h, $tertiary--s, 10%, .2)};
+        --tertiary--darkest-40: #{hsla($tertiary--h, $tertiary--s, 10%, .4)};
+        --tertiary--darkest-60: #{hsla($tertiary--h, $tertiary--s, 10%, .6)};
+        --tertiary--darkest-80: #{hsla($tertiary--h, $tertiary--s, 10%, .8)};
+        --tertiary--darkest-90: #{hsla($tertiary--h, $tertiary--s, 10%, .9)};
+        --tertiary--darker: #{hsl($tertiary--h, $tertiary--s, 20%)};
+        --tertiary--darker-10: #{hsla($tertiary--h, $tertiary--s, 20%, .1)};
+        --tertiary--darker-20: #{hsla($tertiary--h, $tertiary--s, 20%, .2)};
+        --tertiary--darker-40: #{hsla($tertiary--h, $tertiary--s, 20%, .4)};
+        --tertiary--darker-60: #{hsla($tertiary--h, $tertiary--s, 20%, .6)};
+        --tertiary--darker-80: #{hsla($tertiary--h, $tertiary--s, 20%, .8)};
+        --tertiary--darker-90: #{hsla($tertiary--h, $tertiary--s, 20%, .9)};
+        --tertiary--dark: #{hsl($tertiary--h, $tertiary--s, 40%)};
+        --tertiary--dark-10: #{hsla($tertiary--h, $tertiary--s, 40%, .1)};
+        --tertiary--dark-20: #{hsla($tertiary--h, $tertiary--s, 40%, .2)};
+        --tertiary--dark-40: #{hsla($tertiary--h, $tertiary--s, 40%, .4)};
+        --tertiary--dark-60: #{hsla($tertiary--h, $tertiary--s, 40%, .6)};
+        --tertiary--dark-80: #{hsla($tertiary--h, $tertiary--s, 40%, .8)};
+        --tertiary--dark-90: #{hsla($tertiary--h, $tertiary--s, 40%, .9)};
+        --tertiary--light: #{hsl($tertiary--h, $tertiary--s, 60%)};
+        --tertiary--light-10: #{hsla($tertiary--h, $tertiary--s, 60%, .1)};
+        --tertiary--light-20: #{hsla($tertiary--h, $tertiary--s, 60%, .2)};
+        --tertiary--light-40: #{hsla($tertiary--h, $tertiary--s, 60%, .4)};
+        --tertiary--light-60: #{hsla($tertiary--h, $tertiary--s, 60%, .6)};
+        --tertiary--light-80: #{hsla($tertiary--h, $tertiary--s, 60%, .8)};
+        --tertiary--light-90: #{hsla($tertiary--h, $tertiary--s, 60%, .9)};
+        --tertiary--lighter: #{hsl($tertiary--h, $tertiary--s, 80%)};
+        --tertiary--lighter-10: #{hsla($tertiary--h, $tertiary--s, 80%, .1)};
+        --tertiary--lighter-20: #{hsla($tertiary--h, $tertiary--s, 80%, .2)};
+        --tertiary--lighter-40: #{hsla($tertiary--h, $tertiary--s, 80%, .4)};
+        --tertiary--lighter-60: #{hsla($tertiary--h, $tertiary--s, 80%, .6)};
+        --tertiary--lighter-80: #{hsla($tertiary--h, $tertiary--s, 80%, .8)};
+        --tertiary--lighter-90: #{hsla($tertiary--h, $tertiary--s, 80%, .9)};
+        --tertiary--lightest: #{hsl($tertiary--h, $tertiary--s, 95%)};
+        --tertiary--lightest-10: #{hsla($tertiary--h, $tertiary--s, 95%, .1)};
+        --tertiary--lightest-20: #{hsla($tertiary--h, $tertiary--s, 95%, .2)};
+        --tertiary--lightest-40: #{hsla($tertiary--h, $tertiary--s, 95%, .4)};
+        --tertiary--lightest-60: #{hsla($tertiary--h, $tertiary--s, 95%, .6)};
+        --tertiary--lightest-80: #{hsla($tertiary--h, $tertiary--s, 95%, .8)};
+        --tertiary--lightest-90: #{hsla($tertiary--h, $tertiary--s, 95%, .9)};
     }
 
     // Accent Colors
     @if $accent {
         --accent: #{$accent};
-        --accent--darkest: #{hsl($accent--h, $accent--s, 10)};
-        --accent--darkest-10: #{hsla($accent--h, $accent--s, 10, .1)};
-        --accent--darkest-20: #{hsla($accent--h, $accent--s, 10, .2)};
-        --accent--darkest-40: #{hsla($accent--h, $accent--s, 10, .4)};
-        --accent--darkest-60: #{hsla($accent--h, $accent--s, 10, .6)};
-        --accent--darkest-80: #{hsla($accent--h, $accent--s, 10, .8)};
-        --accent--darkest-90: #{hsla($accent--h, $accent--s, 10, .9)};
-        --accent--darker: #{hsl($accent--h, $accent--s, 20)};
-        --accent--darker-10: #{hsla($accent--h, $accent--s, 20, .1)};
-        --accent--darker-20: #{hsla($accent--h, $accent--s, 20, .2)};
-        --accent--darker-40: #{hsla($accent--h, $accent--s, 20, .4)};
-        --accent--darker-60: #{hsla($accent--h, $accent--s, 20, .6)};
-        --accent--darker-80: #{hsla($accent--h, $accent--s, 20, .8)};
-        --accent--darker-90: #{hsla($accent--h, $accent--s, 20, .9)};
-        --accent--dark: #{hsl($accent--h, $accent--s, 40)};
-        --accent--dark-10: #{hsla($accent--h, $accent--s, 40, .1)};
-        --accent--dark-20: #{hsla($accent--h, $accent--s, 40, .2)};
-        --accent--dark-40: #{hsla($accent--h, $accent--s, 40, .4)};
-        --accent--dark-60: #{hsla($accent--h, $accent--s, 40, .6)};
-        --accent--dark-80: #{hsla($accent--h, $accent--s, 40, .8)};
-        --accent--dark-90: #{hsla($accent--h, $accent--s, 40, .9)};
-        --accent--light: #{hsl($accent--h, $accent--s, 60)};
-        --accent--light-10: #{hsla($accent--h, $accent--s, 60, .1)};
-        --accent--light-20: #{hsla($accent--h, $accent--s, 60, .2)};
-        --accent--light-40: #{hsla($accent--h, $accent--s, 60, .4)};
-        --accent--light-60: #{hsla($accent--h, $accent--s, 60, .6)};
-        --accent--light-80: #{hsla($accent--h, $accent--s, 60, .8)};
-        --accent--light-90: #{hsla($accent--h, $accent--s, 60, .9)};
-        --accent--lighter: #{hsl($accent--h, $accent--s, 80)};
-        --accent--lighter-10: #{hsla($accent--h, $accent--s, 80, .1)};
-        --accent--lighter-20: #{hsla($accent--h, $accent--s, 80, .2)};
-        --accent--lighter-40: #{hsla($accent--h, $accent--s, 80, .4)};
-        --accent--lighter-60: #{hsla($accent--h, $accent--s, 80, .6)};
-        --accent--lighter-80: #{hsla($accent--h, $accent--s, 80, .8)};
-        --accent--lighter-90: #{hsla($accent--h, $accent--s, 80, .9)};
-        --accent--lightest: #{hsl($accent--h, $accent--s, 95)};
-        --accent--lightest-10: #{hsla($accent--h, $accent--s, 95, .1)};
-        --accent--lightest-20: #{hsla($accent--h, $accent--s, 95, .2)};
-        --accent--lightest-40: #{hsla($accent--h, $accent--s, 95, .4)};
-        --accent--lightest-60: #{hsla($accent--h, $accent--s, 95, .6)};
-        --accent--lightest-80: #{hsla($accent--h, $accent--s, 95, .8)};
-        --accent--lightest-90: #{hsla($accent--h, $accent--s, 95, .9)};
+        --accent-10: #{hsla($accent--h, $accent--s, $accent--l, .1)};
+        --accent-20: #{hsla($accent--h, $accent--s, $accent--l, .2)};
+        --accent-40: #{hsla($accent--h, $accent--s, $accent--l, .4)};
+        --accent-60: #{hsla($accent--h, $accent--s, $accent--l, .6)};
+        --accent-80: #{hsla($accent--h, $accent--s, $accent--l, .8)};
+        --accent-90: #{hsla($accent--h, $accent--s, $accent--l, .9)};
+        --accent--darkest: #{hsl($accent--h, $accent--s, 10%)};
+        --accent--darkest-10: #{hsla($accent--h, $accent--s, 10%, .1)};
+        --accent--darkest-20: #{hsla($accent--h, $accent--s, 10%, .2)};
+        --accent--darkest-40: #{hsla($accent--h, $accent--s, 10%, .4)};
+        --accent--darkest-60: #{hsla($accent--h, $accent--s, 10%, .6)};
+        --accent--darkest-80: #{hsla($accent--h, $accent--s, 10%, .8)};
+        --accent--darkest-90: #{hsla($accent--h, $accent--s, 10%, .9)};
+        --accent--darker: #{hsl($accent--h, $accent--s, 20%)};
+        --accent--darker-10: #{hsla($accent--h, $accent--s, 20%, .1)};
+        --accent--darker-20: #{hsla($accent--h, $accent--s, 20%, .2)};
+        --accent--darker-40: #{hsla($accent--h, $accent--s, 20%, .4)};
+        --accent--darker-60: #{hsla($accent--h, $accent--s, 20%, .6)};
+        --accent--darker-80: #{hsla($accent--h, $accent--s, 20%, .8)};
+        --accent--darker-90: #{hsla($accent--h, $accent--s, 20%, .9)};
+        --accent--dark: #{hsl($accent--h, $accent--s, 40%)};
+        --accent--dark-10: #{hsla($accent--h, $accent--s, 40%, .1)};
+        --accent--dark-20: #{hsla($accent--h, $accent--s, 40%, .2)};
+        --accent--dark-40: #{hsla($accent--h, $accent--s, 40%, .4)};
+        --accent--dark-60: #{hsla($accent--h, $accent--s, 40%, .6)};
+        --accent--dark-80: #{hsla($accent--h, $accent--s, 40%, .8)};
+        --accent--dark-90: #{hsla($accent--h, $accent--s, 40%, .9)};
+        --accent--light: #{hsl($accent--h, $accent--s, 60%)};
+        --accent--light-10: #{hsla($accent--h, $accent--s, 60%, .1)};
+        --accent--light-20: #{hsla($accent--h, $accent--s, 60%, .2)};
+        --accent--light-40: #{hsla($accent--h, $accent--s, 60%, .4)};
+        --accent--light-60: #{hsla($accent--h, $accent--s, 60%, .6)};
+        --accent--light-80: #{hsla($accent--h, $accent--s, 60%, .8)};
+        --accent--light-90: #{hsla($accent--h, $accent--s, 60%, .9)};
+        --accent--lighter: #{hsl($accent--h, $accent--s, 80%)};
+        --accent--lighter-10: #{hsla($accent--h, $accent--s, 80%, .1)};
+        --accent--lighter-20: #{hsla($accent--h, $accent--s, 80%, .2)};
+        --accent--lighter-40: #{hsla($accent--h, $accent--s, 80%, .4)};
+        --accent--lighter-60: #{hsla($accent--h, $accent--s, 80%, .6)};
+        --accent--lighter-80: #{hsla($accent--h, $accent--s, 80%, .8)};
+        --accent--lighter-90: #{hsla($accent--h, $accent--s, 80%, .9)};
+        --accent--lightest: #{hsl($accent--h, $accent--s, 95%)};
+        --accent--lightest-10: #{hsla($accent--h, $accent--s, 95%, .1)};
+        --accent--lightest-20: #{hsla($accent--h, $accent--s, 95%, .2)};
+        --accent--lightest-40: #{hsla($accent--h, $accent--s, 95%, .4)};
+        --accent--lightest-60: #{hsla($accent--h, $accent--s, 95%, .6)};
+        --accent--lightest-80: #{hsla($accent--h, $accent--s, 95%, .8)};
+        --accent--lightest-90: #{hsla($accent--h, $accent--s, 95%, .9)};
     }
 
     // Shade Colors
     --shade--black: #000000;
-    --shade--black-10: #{hsla(0, 0, 0, .1)};
-    --shade--black-20: #{hsla(0, 0, 0, .2)};
-    --shade--black-40: #{hsla(0, 0, 0, .4)};
-    --shade--black-60: #{hsla(0, 0, 0, .6)};
-    --shade--black-80: #{hsla(0, 0, 0, .8)};
-    --shade--black-90: #{hsla(0, 0, 0, .9)};
+    --shade--black-10: #{hsla(0, 0%, 0%, .1)};
+    --shade--black-20: #{hsla(0, 0%, 0%, .2)};
+    --shade--black-40: #{hsla(0, 0%, 0%, .4)};
+    --shade--black-60: #{hsla(0, 0%, 0%, .6)};
+    --shade--black-80: #{hsla(0, 0%, 0%, .8)};
+    --shade--black-90: #{hsla(0, 0%, 0%, .9)};
     --shade: #{$shade};
-    --shade--darkest: #{hsl($shade--h, $shade--s, 10)};
-    --shade--darkest-10: #{hsla($shade--h, $shade--s, 10, .1)};
-    --shade--darkest-20: #{hsla($shade--h, $shade--s, 10, .2)};
-    --shade--darkest-40: #{hsla($shade--h, $shade--s, 10, .4)};
-    --shade--darkest-60: #{hsla($shade--h, $shade--s, 10, .6)};
-    --shade--darkest-80: #{hsla($shade--h, $shade--s, 10, .8)};
-    --shade--darkest-90: #{hsla($shade--h, $shade--s, 10, .9)};
-    --shade--darker: #{hsl($shade--h, $shade--s, 20)};
-    --shade--darker-10: #{hsla($shade--h, $shade--s, 20, .1)};
-    --shade--darker-20: #{hsla($shade--h, $shade--s, 20, .2)};
-    --shade--darker-40: #{hsla($shade--h, $shade--s, 20, .4)};
-    --shade--darker-60: #{hsla($shade--h, $shade--s, 20, .6)};
-    --shade--darker-80: #{hsla($shade--h, $shade--s, 20, .8)};
-    --shade--darker-90: #{hsla($shade--h, $shade--s, 20, .9)};
-    --shade--dark: #{hsl($shade--h, $shade--s, 40)};
-    --shade--dark-10: #{hsla($shade--h, $shade--s, 40, .1)};
-    --shade--dark-20: #{hsla($shade--h, $shade--s, 40, .2)};
-    --shade--dark-40: #{hsla($shade--h, $shade--s, 40, .4)};
-    --shade--dark-60: #{hsla($shade--h, $shade--s, 40, .6)};
-    --shade--dark-80: #{hsla($shade--h, $shade--s, 40, .8)};
-    --shade--dark-90: #{hsla($shade--h, $shade--s, 40, .9)};
-    --shade--light: #{hsl($shade--h, $shade--s, 60)};
-    --shade--light-10: #{hsla($shade--h, $shade--s, 60, .1)};
-    --shade--light-20: #{hsla($shade--h, $shade--s, 60, .2)};
-    --shade--light-40: #{hsla($shade--h, $shade--s, 60, .4)};
-    --shade--light-60: #{hsla($shade--h, $shade--s, 60, .6)};
-    --shade--light-80: #{hsla($shade--h, $shade--s, 60, .8)};
-    --shade--light-90: #{hsla($shade--h, $shade--s, 60, .9)};
-    --shade--lighter: #{hsl($shade--h, $shade--s, 80)};
-    --shade--lighter-10: #{hsla($shade--h, $shade--s, 80, .1)};
-    --shade--lighter-20: #{hsla($shade--h, $shade--s, 80, .2)};
-    --shade--lighter-40: #{hsla($shade--h, $shade--s, 80, .4)};
-    --shade--lighter-60: #{hsla($shade--h, $shade--s, 80, .6)};
-    --shade--lighter-80: #{hsla($shade--h, $shade--s, 80, .8)};
-    --shade--lighter-90: #{hsla($shade--h, $shade--s, 80, .9)};
-    --shade--lightest: #{hsl($shade--h, $shade--s, 95)};
-    --shade--lightest-10: #{hsla($shade--h, $shade--s, 95, .1)};
-    --shade--lightest-20: #{hsla($shade--h, $shade--s, 95, .2)};
-    --shade--lightest-40: #{hsla($shade--h, $shade--s, 95, .4)};
-    --shade--lightest-60: #{hsla($shade--h, $shade--s, 95, .6)};
-    --shade--lightest-80: #{hsla($shade--h, $shade--s, 95, .8)};
-    --shade--lightest-90: #{hsla($shade--h, $shade--s, 95, .9)};
+    --shade-10: #{hsla($shade--h, $shade--s, $shade--l, .1)};
+    --shade-20: #{hsla($shade--h, $shade--s, $shade--l, .2)};
+    --shade-40: #{hsla($shade--h, $shade--s, $shade--l, .4)};
+    --shade-60: #{hsla($shade--h, $shade--s, $shade--l, .6)};
+    --shade-80: #{hsla($shade--h, $shade--s, $shade--l, .8)};
+    --shade-90: #{hsla($shade--h, $shade--s, $shade--l, .9)};
+    --shade--darkest: #{hsl($shade--h, $shade--s, 10%)};
+    --shade--darkest-10: #{hsla($shade--h, $shade--s, 10%, .1)};
+    --shade--darkest-20: #{hsla($shade--h, $shade--s, 10%, .2)};
+    --shade--darkest-40: #{hsla($shade--h, $shade--s, 10%, .4)};
+    --shade--darkest-60: #{hsla($shade--h, $shade--s, 10%, .6)};
+    --shade--darkest-80: #{hsla($shade--h, $shade--s, 10%, .8)};
+    --shade--darkest-90: #{hsla($shade--h, $shade--s, 10%, .9)};
+    --shade--darker: #{hsl($shade--h, $shade--s, 20%)};
+    --shade--darker-10: #{hsla($shade--h, $shade--s, 20%, .1)};
+    --shade--darker-20: #{hsla($shade--h, $shade--s, 20%, .2)};
+    --shade--darker-40: #{hsla($shade--h, $shade--s, 20%, .4)};
+    --shade--darker-60: #{hsla($shade--h, $shade--s, 20%, .6)};
+    --shade--darker-80: #{hsla($shade--h, $shade--s, 20%, .8)};
+    --shade--darker-90: #{hsla($shade--h, $shade--s, 20%, .9)};
+    --shade--dark: #{hsl($shade--h, $shade--s, 40%)};
+    --shade--dark-10: #{hsla($shade--h, $shade--s, 40%, .1)};
+    --shade--dark-20: #{hsla($shade--h, $shade--s, 40%, .2)};
+    --shade--dark-40: #{hsla($shade--h, $shade--s, 40%, .4)};
+    --shade--dark-60: #{hsla($shade--h, $shade--s, 40%, .6)};
+    --shade--dark-80: #{hsla($shade--h, $shade--s, 40%, .8)};
+    --shade--dark-90: #{hsla($shade--h, $shade--s, 40%, .9)};
+    --shade--light: #{hsl($shade--h, $shade--s, 60%)};
+    --shade--light-10: #{hsla($shade--h, $shade--s, 60%, .1)};
+    --shade--light-20: #{hsla($shade--h, $shade--s, 60%, .2)};
+    --shade--light-40: #{hsla($shade--h, $shade--s, 60%, .4)};
+    --shade--light-60: #{hsla($shade--h, $shade--s, 60%, .6)};
+    --shade--light-80: #{hsla($shade--h, $shade--s, 60%, .8)};
+    --shade--light-90: #{hsla($shade--h, $shade--s, 60%, .9)};
+    --shade--lighter: #{hsl($shade--h, $shade--s, 80%)};
+    --shade--lighter-10: #{hsla($shade--h, $shade--s, 80%, .1)};
+    --shade--lighter-20: #{hsla($shade--h, $shade--s, 80%, .2)};
+    --shade--lighter-40: #{hsla($shade--h, $shade--s, 80%, .4)};
+    --shade--lighter-60: #{hsla($shade--h, $shade--s, 80%, .6)};
+    --shade--lighter-80: #{hsla($shade--h, $shade--s, 80%, .8)};
+    --shade--lighter-90: #{hsla($shade--h, $shade--s, 80%, .9)};
+    --shade--lightest: #{hsl($shade--h, $shade--s, 95%)};
+    --shade--lightest-10: #{hsla($shade--h, $shade--s, 95%, .1)};
+    --shade--lightest-20: #{hsla($shade--h, $shade--s, 95%, .2)};
+    --shade--lightest-40: #{hsla($shade--h, $shade--s, 95%, .4)};
+    --shade--lightest-60: #{hsla($shade--h, $shade--s, 95%, .6)};
+    --shade--lightest-80: #{hsla($shade--h, $shade--s, 95%, .8)};
+    --shade--lightest-90: #{hsla($shade--h, $shade--s, 95%, .9)};
     --shade--white: #ffffff;
-    --shade--white-10: #{hsla(0, 0, 100, .1)};
-    --shade--white-20: #{hsla(0, 0, 100, .2)};
-    --shade--white-40: #{hsla(0, 0, 100, .4)};
-    --shade--white-60: #{hsla(0, 0, 100, .6)};
-    --shade--white-80: #{hsla(0, 0, 100, .8)};
-    --shade--white-90: #{hsla(0, 0, 100, .9)};
+    --shade--white-10: #{hsla(0, 0%, 100%, .1)};
+    --shade--white-20: #{hsla(0, 0%, 100%, .2)};
+    --shade--white-40: #{hsla(0, 0%, 100%, .4)};
+    --shade--white-60: #{hsla(0, 0%, 100%, .6)};
+    --shade--white-80: #{hsla(0, 0%, 100%, .8)};
+    --shade--white-90: #{hsla(0, 0%, 100%, .9)};
 
     // Dark Mode Shade Colors
     --shade--black-white: var(--shade--black);
@@ -498,7 +528,7 @@ $width--custom: 1600px;
     --color--body: var(--shade--darkest-lightest);
 
     // Misc
-    --radius--base: 0;
+    --radius--base: #{$radius--base};
     --transition--fast: .2s;
     --transition--normal: .4s;
     --transition--slow: .6s;
@@ -535,12 +565,13 @@ $width--custom: 1600px;
 
     // Responsive Section Spacing
     --section--base: #{fluid(24px, 48px)};
-    --section--2xl: #{fluid(72px, 96px)};
-    --section--3xl: #{fluid(72px, 120px)};
-    --section--4xl: #{fluid(72px, 144px)};
+    --section--xl: #{fluid(48px, 72px)};
+    --section--2xl: #{fluid(48px, 96px)};
+    --section--3xl: #{fluid(48px, 120px)};
+    --section--4xl: #{fluid(48px, 144px)};
 
-    @if $space--custom {
-        --section--custom: #{fluid(72px, $space--custom)};
+    @if $space--max {
+        --section--max: #{fluid(48px, $space--max)};
     }
 
     // Spacing
@@ -557,8 +588,8 @@ $width--custom: 1600px;
     --space--3xl: #{px-rem(120px)};
     --space--4xl: #{px-rem(144px)};
 
-    @if $space--custom {
-        --space--custom: #{px-rem($space--custom)};
+    @if $space--max {
+        --space--max: #{px-rem($space--max)};
     }
 
     // Responsive Base Spacing
@@ -569,8 +600,8 @@ $width--custom: 1600px;
     --spacer--3xl: #{fluid(24px, 120px)};
     --spacer--4xl: #{fluid(24px, 144px)};
 
-    @if $space--custom {
-        --spacer--custom: #{fluid(24px, $space--custom)};
+    @if $space--max {
+        --spacer--max: #{fluid(24px, $space--max)};
     }
 
     // Text
@@ -593,8 +624,8 @@ $width--custom: 1600px;
     --text--banner: #{fluid(40px, 120px)};
     --text--marquee: #{fluid(40px, 144px)};
 
-    @if $text--custom {
-        --text--custom: #{fluid(40px, $text--custom)};
+    @if $text--max {
+        --text--max: #{fluid(40px, $text--max)};
     }
 
     // Widths
@@ -604,10 +635,10 @@ $width--custom: 1600px;
     --width--l: #{px-rem($width--l)};
     --width--xl: #{px-rem($width--xl)};
     --width--wide: #{px-rem($width--wide)};
-    --width--prose: 60ch;
+    --width--prose: #{$width--prose};
 
-    @if $width--custom {
-        --width--custom: #{px-rem($width--custom)};
+    @if $width--max {
+        --width--max: #{px-rem($width--max)};
     }
 }
 
@@ -676,6 +707,12 @@ $width--custom: 1600px;
     }
 }
 
+
+
+// --- Additional Checks --- //
+
+
+
 // Check for CSS Backdrop Filter Support
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
     :root {
@@ -709,88 +746,90 @@ $width--custom: 1600px;
 
 
 
-// --- Reset --- //
+@if $cwicly !=true {
+    // --- Reset --- //
 
 
 
-*,
-::after,
-::before {
-    box-sizing: border-box;
-}
+    *,
+    ::after,
+    ::before {
+        box-sizing: border-box;
+    }
 
-body {
-    margin: 0;
-}
+    body {
+        margin: 0;
+    }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    transition: inherit;
-}
+    a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition: inherit;
+    }
 
-button {
-    color: inherit;
-    border-width: 0;
-    font-family: inherit;
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    padding: 0;
-    cursor: pointer;
-    background: initial;
-}
+    button {
+        color: inherit;
+        border-width: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        padding: 0;
+        cursor: pointer;
+        background: initial;
+    }
 
-figure {
-    margin: 0;
-}
+    figure {
+        margin: 0;
+    }
 
-input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-    margin: 0;
-}
+    input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
 
-dd,
-ol,
-ul {
-    margin: 0;
-    padding: 0;
-}
+    dd,
+    ol,
+    ul {
+        margin: 0;
+        padding: 0;
+    }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
 
-p {
-    margin: 0;
-}
+    p {
+        margin: 0;
+    }
 
-cite {
-    font-style: normal;
-}
+    cite {
+        font-style: normal;
+    }
 
-fieldset {
-    border-width: 0;
-    padding: 0;
-    margin: 0;
-}
+    fieldset {
+        border-width: 0;
+        padding: 0;
+        margin: 0;
+    }
 
-input {
-    font-size: var(--text--base);
-    font-family: inherit;
-}
+    input {
+        font-size: var(--text--base);
+        font-family: inherit;
+    }
 
-select,
-textarea {
-    font: inherit;
+    select,
+    textarea {
+        font: inherit;
+    }
 }
 
 
@@ -959,27 +998,51 @@ ul.list--flat,
     }
 
     &--black {
+        background-color: var(--shade--black);
+        border-color: var(--shade--black);
+        color: var(--shade--white);
+    }
+
+    &--black-white {
         background-color: var(--shade--black-white);
         border-color: var(--shade--black-white);
         color: var(--shade--white-black);
     }
 
-    &--dark {
+    &--darkest {
+        background-color: var(--shade--darkest);
+        border-color: var(--shade--darkest);
+        color: var(--shade--lightest);
+    }
+
+    &--darkest-lightest {
         background-color: var(--shade--darkest-lightest);
         border-color: var(--shade--darkest-lightest);
         color: var(--shade--lightest-darkest);
     }
 
-    &--light {
+    &--lightest {
         background-color: var(--shade--lightest);
         border-color: var(--shade--lightest);
         color: var(--shade--darkest);
+    }
+
+    &--lightest-darkest {
+        background-color: var(--shade--lightest-darkest);
+        border-color: var(--shade--lightest-darkest);
+        color: var(--shade--darkest-lightest);
     }
 
     &--white {
         background-color: var(--shade--white);
         border-color: var(--shade--white);
         color: var(--shade--black);
+    }
+
+    &--white-black {
+        background-color: var(--shade--white-black);
+        border-color: var(--shade--white-black);
+        color: var(--shade--black-white);
     }
 }
 
@@ -1015,19 +1078,35 @@ ul.list--flat,
     }
 
     &.btn--black {
+        color: var(--shade--black);
+    }
+
+    &.btn--black-white {
         color: var(--shade--black-white);
     }
 
-    &.btn--dark {
+    &.btn--darkest {
+        color: var(--shade--darkest);
+    }
+
+    &.btn--darkest {
         color: var(--shade--darkest-lightest);
     }
 
-    &.btn--light {
+    &.btn--lightest {
         color: var(--shade--lightest);
+    }
+
+    &.btn--lightest-darkest {
+        color: var(--shade--lightest-darkest);
     }
 
     &.btn--white {
         color: var(--shade--white);
+    }
+
+    &.btn--white-black {
+        color: var(--shade--white-black);
     }
 }
 
@@ -1092,8 +1171,8 @@ ul.list--flat,
 }
 
 .section--xl {
-    gap: var(--space--xl);
-    padding: var(--space--xl) var(--section--base);
+    gap: var(--section--xl);
+    padding: var(--section--xl) var(--section--base);
 }
 
 .section--2xl {
@@ -1111,10 +1190,10 @@ ul.list--flat,
     padding: var(--section--4xl) var(--section--base);
 }
 
-@if $space--custom {
-    .section--custom {
-        gap: var(--section--custom);
-        padding: var(--section--custom) var(--section--base);
+@if $space--max {
+    .section--max {
+        gap: var(--section--max);
+        padding: var(--section--max) var(--section--base);
     }
 }
 
@@ -3463,19 +3542,35 @@ img.aspect--golden {
 }
 
 .content-column-rule--black {
+    column-rule-color: var(--shade--black);
+}
+
+.content-column-rule--black-white {
     column-rule-color: var(--shade--black-white);
 }
 
-.content-column-rule--dark {
+.content-column-rule--darkest {
+    column-rule-color: var(--shade--darkest);
+}
+
+.content-column-rule--darkest-lightest {
     column-rule-color: var(--shade--darkest-lightest);
 }
 
-.content-column-rule--light {
+.content-column-rule--lightest {
     column-rule-color: var(--shade--lightest);
+}
+
+.content-column-rule--lightest-darkest {
+    column-rule-color: var(--shade--lightest-darkest);
 }
 
 .content-column-rule--white {
     column-rule-color: var(--shade--white);
+}
+
+.content-column-rule--white-black {
+    column-rule-color: var(--shade--white-black);
 }
 
 .content-column-rule-width--px {
@@ -3777,9 +3872,9 @@ img.aspect--golden {
     gap: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .gap--custom {
-        gap: var(--spacer--custom);
+@if $space--max {
+    .gap--max {
+        gap: var(--spacer--max);
     }
 }
 
@@ -5972,19 +6067,35 @@ img.aspect--golden {
 }
 
 .list-marker--black li::marker {
+    color: var(--shade--black);
+}
+
+.list-marker--black-white li::marker {
     color: var(--shade--black-white);
 }
 
-.list-marker--dark li::marker {
+.list-marker--darkest li::marker {
+    color: var(--shade--darkest);
+}
+
+.list-marker--darkest-lightest li::marker {
     color: var(--shade--darkest-lightest);
 }
 
-.list-marker--light li::marker {
-    color: var(--shade--light);
+.list-marker--lightest li::marker {
+    color: var(--shade--lightest);
+}
+
+.list-marker--lightest-darkest li::marker {
+    color: var(--shade--lightest-darkest);
 }
 
 .list-marker--white li::marker {
     color: var(--shade--white);
+}
+
+.list-marker--white-black li::marker {
+    color: var(--shade--white-black);
 }
 
 // Margin Top
@@ -6033,9 +6144,9 @@ img.aspect--golden {
     margin-top: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-top--custom {
-        margin-top: var(--spacer--custom);
+@if $space--max {
+    .margin-top--max {
+        margin-top: var(--spacer--max);
     }
 }
 
@@ -6085,9 +6196,9 @@ img.aspect--golden {
     margin-right: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-right--custom {
-        margin-right: var(--spacer--custom);
+@if $space--max {
+    .margin-right--max {
+        margin-right: var(--spacer--max);
     }
 }
 
@@ -6137,9 +6248,9 @@ img.aspect--golden {
     margin-bottom: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-bottom--custom {
-        margin-bottom: var(--spacer--custom);
+@if $space--max {
+    .margin-bottom--max {
+        margin-bottom: var(--spacer--max);
     }
 }
 
@@ -6189,9 +6300,9 @@ img.aspect--golden {
     margin-left: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-left--custom {
-        margin-left: var(--spacer--custom);
+@if $space--max {
+    .margin-left--max {
+        margin-left: var(--spacer--max);
     }
 }
 
@@ -8593,9 +8704,9 @@ img.aspect--golden {
     padding: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .padding--custom {
-        padding: var(--spacer--custom);
+@if $space--max {
+    .padding--max {
+        padding: var(--spacer--max);
     }
 }
 
@@ -8951,9 +9062,9 @@ img.aspect--golden {
     line-height: var(--line-height--heading);
 }
 
-@if $text--custom {
-    .text--custom {
-        font-size: var(--text--custom);
+@if $text--max {
+    .text--max {
+        font-size: var(--text--max);
         line-height: var(--line-height--heading);
     }
 }
@@ -9155,13 +9266,13 @@ img.aspect--golden {
     max-width: var(--width--wide);
 }
 
-@if $width--custom {
-    .width--custom {
+@if $width--max {
+    .width--max {
         align-self: flex-start;
         margin-left: 50%;
         transform: translateX(-50%);
         width: 100vw;
-        max-width: var(--width--custom);
+        max-width: var(--width--max);
     }
 }
 
