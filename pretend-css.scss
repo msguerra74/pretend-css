@@ -17,6 +17,7 @@
 
 
 // WordPress Builder
+$bricks: true; // Using Bricks // true/false
 $cwicly: false; // Using Cwicly // true/false
 
 // Action Color Shades
@@ -55,14 +56,11 @@ $shade--h: 0; // Hue
 $shade--s: 0%; // Saturation
 $shade--l: 9%; // Lightness
 
-// Custom Max Sizing
-$space--custom: 168px; // Null if unneeded
-$text--custom: 168px; // Null if unneeded
-$width--custom: 1600px; // Null if unneeded
-
 // Misc
 $gap--grid: 48px; // Default grid gap
 $radius--button: 0; // Default border radius
+$space--max: 168px; // Max space size
+$text--max: 168px; // Max text size
 
 // Widths
 $width--xs: 320px; // Minimum viewport width
@@ -70,7 +68,9 @@ $width--s: 480px; // Small breakpoint and fluid sizing minimum width
 $width--m: 640px; // Medium breakpoint
 $width--l: 960px; // Large breakpoint
 $width--xl: 1280px; // Maximum viewport width and fluid sizing maximum width
-$width--wide: 1440px; // Widest width and maximum media width
+$width--wide: 1440px; // Wide breakout width
+$width--max: 1600px; // Max breakout width and max media width
+$width--website: 1920px; // Website container width
 $width--prose: 60ch; // Readable text width
 
 
@@ -524,7 +524,7 @@ $width--prose: 60ch; // Readable text width
     --shade--white-black-90: var(--shade--white-90);
 
     // Misc Colors
-    --bg--blur-color: var(--shade--lightest-90);
+    --bg-color--blur: var(--shade--lightest-90);
     --bg-color--body: var(--shade--lightest-darkest);
     --color--body: var(--shade--darkest-lightest);
 
@@ -591,10 +591,7 @@ $width--prose: 60ch; // Readable text width
     --section--2xl: #{fluid(48px, 96px)};
     --section--3xl: #{fluid(48px, 120px)};
     --section--4xl: #{fluid(48px, 144px)};
-
-    @if $space--custom {
-        --section--custom: #{fluid(48px, $space--custom)};
-    }
+    --section--max: #{fluid(48px, $space--max)};
 
     // Spacing
     --space--px: #{px-rem(1px)};
@@ -609,10 +606,7 @@ $width--prose: 60ch; // Readable text width
     --space--2xl: #{px-rem(96px)};
     --space--3xl: #{px-rem(120px)};
     --space--4xl: #{px-rem(144px)};
-
-    @if $space--custom {
-        --space--custom: #{px-rem($space--custom)};
-    }
+    --space--max: #{px-rem($space--max)};
 
     // Responsive Base Spacing
     --spacer--content: #{fluid(24px, 32px)};
@@ -621,10 +615,7 @@ $width--prose: 60ch; // Readable text width
     --spacer--2xl: #{fluid(24px, 96px)};
     --spacer--3xl: #{fluid(24px, 120px)};
     --spacer--4xl: #{fluid(24px, 144px)};
-
-    @if $space--custom {
-        --spacer--custom: #{fluid(24px, $space--custom)};
-    }
+    --spacer--max: #{fluid(24px, $space--max)};
 
     // Text
     --font-weight--heading: 700;
@@ -645,10 +636,7 @@ $width--prose: 60ch; // Readable text width
     --text--featured: #{fluid(40px, 96px)};
     --text--banner: #{fluid(40px, 120px)};
     --text--marquee: #{fluid(40px, 144px)};
-
-    @if $text--custom {
-        --text--custom: #{fluid(40px, $text--custom)};
-    }
+    --text--max: #{fluid(40px, $text--max)};
 
     // Widths
     --width--xs: #{px-rem($width--xs)};
@@ -657,11 +645,9 @@ $width--prose: 60ch; // Readable text width
     --width--l: #{px-rem($width--l)};
     --width--xl: #{px-rem($width--xl)};
     --width--wide: #{px-rem($width--wide)};
+    --width--max: #{px-rem($width--max)};
+    --width--website: #{px-rem($width--website)};
     --width--prose: #{$width--prose};
-
-    @if $width--custom {
-        --width--custom: #{px-rem($width--custom)};
-    }
 }
 
 // Dark Mode
@@ -723,7 +709,7 @@ $width--prose: 60ch; // Readable text width
         --shade--white-black-60: var(--shade--black-60);
         --shade--white-black-80: var(--shade--black-80);
         --shade--white-black-90: var(--shade--black-90);
-        --bg--blur-color: var(--shade--darkest-90);
+        --bg-color--blur: var(--shade--darkest-90);
         --shadow--color: 0 0% 5%;
         --shadow--strength: 20%;
     }
@@ -739,13 +725,13 @@ $width--prose: 60ch; // Readable text width
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
     :root {
         // Misc
-        --bg--blur-color: var(--shade--lightest-40);
+        --bg-color--blur: var(--shade--lightest-40);
     }
 
     // Dark Mode
     @media (prefers-color-scheme: dark) {
         :root {
-            --bg--blur-color: var(--shade--darkest-40);
+            --bg-color--blur: var(--shade--darkest-40);
         }
     }
 }
@@ -768,10 +754,12 @@ $width--prose: 60ch; // Readable text width
 
 
 
-@if $cwicly !=true {
-    // --- Reset --- //
+// --- Builder Specific --- //
 
+// Bricks
 
+@if $bricks {
+    // CSS Reset
 
     *,
     ::after,
@@ -851,6 +839,49 @@ $width--prose: 60ch; // Readable text width
     select,
     textarea {
         font: inherit;
+    }
+
+    // Website width
+
+    body>header,
+    body>main,
+    body>footer {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--width--website);
+    }
+}
+
+// Cwicly
+
+@if $cwicly {
+
+    // Containers
+
+    .block {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .container {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--width--xl);
+        width: 100%;
+    }
+
+
+    // Website Width
+
+    .wp-site-blocks {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--width--website);
     }
 }
 
@@ -1151,25 +1182,6 @@ ul.list--flat,
 
 // Containers
 
-@if $cwicly {
-    .block {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .container {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: var(--width--xl);
-        width: 100%;
-    }
-}
-
 .block,
 .container {
     gap: var(--spacer--content);
@@ -1185,7 +1197,7 @@ ul.list--flat,
 .section--2xl,
 .section--3xl,
 .section--4xl,
-.section--custom {
+.section--max {
     display: flex;
     flex-direction: column;
 }
@@ -1225,11 +1237,9 @@ ul.list--flat,
     padding: var(--section--4xl) var(--section--base);
 }
 
-@if $space--custom {
-    .section--custom {
-        gap: var(--section--custom);
-        padding: var(--section--custom) var(--section--base);
-    }
+.section--max {
+    gap: var(--section--max);
+    padding: var(--section--max) var(--section--base);
 }
 
 
@@ -1752,17 +1762,17 @@ img.aspect--golden {
 
 .bg-blur--low {
     backdrop-filter: blur(var(--space--xs));
-    background-color: var(--bg--blur-color);
+    background-color: var(--bg-color--blur);
 }
 
 .bg-blur--mid {
     backdrop-filter: blur(var(--space--m));
-    background-color: var(--bg--blur-color);
+    background-color: var(--bg-color--blur);
 }
 
 .bg-blur--high {
     backdrop-filter: blur(var(--space--base));
-    background-color: var(--bg--blur-color);
+    background-color: var(--bg-color--blur);
 }
 
 // Background Colors
@@ -4378,10 +4388,8 @@ img.aspect--golden {
     gap: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .gap--custom {
-        gap: var(--spacer--custom);
-    }
+.gap--max {
+    gap: var(--spacer--max);
 }
 
 .gap--grid {
@@ -6654,10 +6662,8 @@ img.aspect--golden {
     margin-top: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-top--custom {
-        margin-top: var(--spacer--custom);
-    }
+.margin-top--max {
+    margin-top: var(--spacer--max);
 }
 
 // Margin Right
@@ -6706,10 +6712,8 @@ img.aspect--golden {
     margin-right: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-right--custom {
-        margin-right: var(--spacer--custom);
-    }
+.margin-right--max {
+    margin-right: var(--spacer--max);
 }
 
 // Margin Bottom
@@ -6758,10 +6762,8 @@ img.aspect--golden {
     margin-bottom: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-bottom--custom {
-        margin-bottom: var(--spacer--custom);
-    }
+.margin-bottom--max {
+    margin-bottom: var(--spacer--max);
 }
 
 // Margin left
@@ -6810,10 +6812,8 @@ img.aspect--golden {
     margin-left: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .margin-left--custom {
-        margin-left: var(--spacer--custom);
-    }
+.margin-left--max {
+    margin-left: var(--spacer--max);
 }
 
 // Object Fit
@@ -9214,10 +9214,8 @@ img.aspect--golden {
     padding: var(--spacer--4xl);
 }
 
-@if $space--custom {
-    .padding--custom {
-        padding: var(--spacer--custom);
-    }
+.padding--max {
+    padding: var(--spacer--max);
 }
 
 .padding-top--flat {
@@ -9572,11 +9570,9 @@ img.aspect--golden {
     line-height: var(--line-height--heading);
 }
 
-@if $text--custom {
-    .text--custom {
-        font-size: var(--text--custom);
-        line-height: var(--line-height--heading);
-    }
+.text--max {
+    font-size: var(--text--max);
+    line-height: var(--line-height--heading);
 }
 
 // Text Style
@@ -9730,6 +9726,38 @@ img.aspect--golden {
 
 // Width
 
+.breakout--wide {
+    align-self: flex-start;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    max-width: var(--width--wide);
+    width: 100vw;
+}
+
+.breakout--max {
+    align-self: flex-start;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    max-width: var(--width--max);
+    width: 100vw;
+}
+
+.breakout--website {
+    align-self: flex-start;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    max-width: var(--width--website);
+    width: 100vw;
+}
+
+.breakout--full {
+    align-self: flex-start;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: 100vw;
+    width: 100vw;
+}
+
 .width--xs {
     max-width: var(--width--xs);
     width: 100%;
@@ -9755,6 +9783,21 @@ img.aspect--golden {
     width: 100%;
 }
 
+.width--wide {
+    max-width: var(--width--wide);
+    width: 100%;
+}
+
+.width--max {
+    max-width: var(--width--max);
+    width: 100%;
+}
+
+.width--website {
+    max-width: var(--width--website);
+    width: 100%;
+}
+
 .width--fill {
     width: 100%;
 }
@@ -9766,32 +9809,6 @@ img.aspect--golden {
 .width--prose {
     max-width: var(--width--prose);
     width: 100%;
-}
-
-.width--wide {
-    align-self: flex-start;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    max-width: var(--width--wide);
-}
-
-@if $width--custom {
-    .width--custom {
-        align-self: flex-start;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        max-width: var(--width--custom);
-    }
-}
-
-.width--full {
-    align-self: flex-start;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    max-width: 100vw;
-    width: 100vw;
 }
 
 // Z-Index
