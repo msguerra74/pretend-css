@@ -17,7 +17,7 @@
 
 
 // WordPress Builder
-$cwicly: true; // Using Cwicly // true/false
+$cwicly: false; // Using Cwicly // true/false
 
 // Action Color Shades
 $action: #ef4444; // Action Base
@@ -62,7 +62,7 @@ $width--custom: 1600px; // Null if unneeded
 
 // Misc
 $gap--grid: 48px; // Default grid gap
-$radius--base: 0; // Default border radius
+$radius--button: 0; // Default border radius
 
 // Widths
 $width--xs: 320px; // Minimum viewport width
@@ -550,7 +550,7 @@ $width--prose: 60ch; // Readable text width
 
     // Misc
     --gap--grid: #{fluid(24px, $gap--grid)};
-    --radius--base: #{$radius--base};
+    --radius--button: #{$radius--button};
     --transition--fast: .2s;
     --transition--normal: .4s;
     --transition--slow: .6s;
@@ -974,7 +974,7 @@ ul.list--flat,
 
 .btn {
     align-items: center;
-    border-radius: var(--radius--base);
+    border-radius: var(--radius--button);
     border-style: solid;
     border-width: var(--space--2px);
     display: inline-flex;
@@ -1118,7 +1118,7 @@ ul.list--flat,
         color: var(--shade--darkest);
     }
 
-    &.btn--darkest {
+    &.btn--darkest-lightest {
         color: var(--shade--darkest-lightest);
     }
 
@@ -1151,24 +1151,28 @@ ul.list--flat,
 
 // Containers
 
-.block {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacer--content);
-    width: 100%;
-    z-index: 1;
+@if $cwicly {
+    .block {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .container {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: var(--width--xl);
+        width: 100%;
+    }
 }
 
+.block,
 .container {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
     gap: var(--spacer--content);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--width--xl);
-    width: 100%;
     z-index: 1;
 }
 
@@ -1280,14 +1284,87 @@ ul.list--flat,
     margin-left: var(--spacer--content);
 }
 
-@include breakpoint($width--m) {
+@include breakpoint($width--xl) {
+    .float--xl-left {
+        float: left;
+        margin-bottom: var(--spacer--content);
+        margin-right: var(--spacer--content);
+    }
 
-    .float--left,
-    .float--right {
+    .float--xl-none {
         float: none;
         margin-bottom: 0;
         margin-left: 0;
         margin-right: 0;
+    }
+
+    .float--xl-right {
+        float: right;
+        margin-bottom: var(--spacer--content);
+        margin-left: var(--spacer--content);
+    }
+}
+
+@include breakpoint($width--l) {
+    .float--l-left {
+        float: left;
+        margin-bottom: var(--spacer--content);
+        margin-right: var(--spacer--content);
+    }
+
+    .float--l-none {
+        float: none;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .float--l-right {
+        float: right;
+        margin-bottom: var(--spacer--content);
+        margin-left: var(--spacer--content);
+    }
+}
+
+@include breakpoint($width--m) {
+    .float--m-left {
+        float: left;
+        margin-bottom: var(--spacer--content);
+        margin-right: var(--spacer--content);
+    }
+
+    .float--m-none {
+        float: none;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .float--m-right {
+        float: right;
+        margin-bottom: var(--spacer--content);
+        margin-left: var(--spacer--content);
+    }
+}
+
+@include breakpoint($width--s) {
+    .float--s-left {
+        float: left;
+        margin-bottom: var(--spacer--content);
+        margin-right: var(--spacer--content);
+    }
+
+    .float--s-none {
+        float: none;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .float--s-right {
+        float: right;
+        margin-bottom: var(--spacer--content);
+        margin-left: var(--spacer--content);
     }
 }
 
