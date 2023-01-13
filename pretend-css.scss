@@ -80,13 +80,23 @@ $width--prose: 60ch; // Readable text width
     // Body
     --bg-color--body: var(--shade--lightest-darkest);
     --color--body: var(--shade--darkest-lightest);
+    --font-size--body: var(--text--base);
     --line-height--body: 1.6;
 
     // Buttons
+    --border--button: var(--space--2px);
+    --font-weight--button: 400;
     --gap--button: var(--space--s);
     --radius--button: 0;
+    --text-transform--button: uppercase;
 
     // Headings
+    --font-size--h1: var(--text--title);
+    --font-size--h2: var(--text--heading);
+    --font-size--h3: var(--text--large);
+    --font-size--h4: var(--text--intro);
+    --font-size--h5: var(--text--lede);
+    --font-size--h6: var(--text--base);
     --font-weight--h1: 700;
     --font-weight--h2: 700;
     --font-weight--h3: 700;
@@ -932,7 +942,7 @@ html {
 body {
     background-color: var(--bg-color--body);
     color: var(--color--body);
-    font-size: var(--text--base);
+    font-size: var(--font-size--body);
     line-height: var(--line-height--body);
     min-height: 100vh;
     min-width: var(--width--xs);
@@ -969,42 +979,42 @@ h6,
 
 h1,
 .h--1 {
-    font-size: var(--text--title);
+    font-size: var(--font-size--h1);
     font-weight: var(--font-weight--h1);
     text-transform: var(--text-transform--h1);
 }
 
 h2,
 .h--2 {
-    font-size: var(--text--heading);
+    font-size: var(--font-size--h2);
     font-weight: var(--font-weight--h2);
     text-transform: var(--text-transform--h2);
 }
 
 h3,
 .h--3 {
-    font-size: var(--text--large);
+    font-size: var(--font-size--h3);
     font-weight: var(--font-weight--h3);
     text-transform: var(--text-transform--h3);
 }
 
 h4,
 .h--4 {
-    font-size: var(--text--intro);
+    font-size: var(--font-size--h4);
     font-weight: var(--font-weight--h4);
     text-transform: var(--text-transform--h4);
 }
 
 h5,
 .h--5 {
-    font-size: var(--text--lede);
+    font-size: var(--font-size--h5);
     font-weight: var(--font-weight--h5);
     text-transform: var(--text-transform--h5);
 }
 
 h6,
 .h--6 {
-    font-size: var(--text--base);
+    font-size: var(--font-size--h6);
     font-weight: var(--font-weight--h6);
     text-transform: var(--text-transform--h6);
 }
@@ -1038,8 +1048,9 @@ ul.list--flat,
     align-items: center;
     border-radius: var(--radius--button);
     border-style: solid;
-    border-width: var(--space--2px);
+    border-width: var(--border--button);
     display: inline-flex;
+    font-weight: var(--font-weight--button);
     gap: var(--gap--button);
     justify-content: center;
     letter-spacing: var(--letter-spacing);
@@ -1047,6 +1058,7 @@ ul.list--flat,
     padding: var(--space--m) var(--spacer--l);
     text-align: center;
     text-decoration: none;
+    text-transform: var(--text-transform--button);
     transition: var(--transition--fast);
     white-space: nowrap;
     width: fit-content;
