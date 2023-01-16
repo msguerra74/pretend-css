@@ -6873,10 +6873,6 @@ img.aspect--golden {
     object-fit: cover;
 }
 
-.object--none {
-    object-fit: none;
-}
-
 // Object Position
 
 .object--top-left {
@@ -9341,10 +9337,6 @@ img.aspect--golden {
     position: relative;
 }
 
-.static {
-    position: static;
-}
-
 .sticky {
     position: sticky;
     top: 0;
@@ -9684,10 +9676,6 @@ img.aspect--golden {
 
 .text--italic {
     font-style: italic;
-}
-
-.text--normal {
-    font-style: normal;
 }
 
 // Text Transform
