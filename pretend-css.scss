@@ -87,6 +87,7 @@ $width--prose: 60ch; // Readable text width
     --border--button: var(--space--2px);
     --font-weight--button: 400;
     --gap--button: var(--space--s);
+    --letter-spacing--button: var(--space--px);
     --radius--button: 0;
     --text-transform--button: uppercase;
 
@@ -184,6 +185,9 @@ $width--prose: 60ch; // Readable text width
 :root {
     // Action Colors
     --action: #{$action};
+    --action--h: #{$action--h};
+    --action--s: #{$action--s};
+    --action--l: #{$action--l};
     --action-10: #{hsla($action--h, $action--s, $action--l, .1)};
     --action-20: #{hsla($action--h, $action--s, $action--l, .2)};
     --action-40: #{hsla($action--h, $action--s, $action--l, .4)};
@@ -236,6 +240,9 @@ $width--prose: 60ch; // Readable text width
     // Primary Colors
     @if $primary {
         --primary: #{$primary};
+        --primary--h: #{$primary--h};
+        --primary--s: #{$primary--s};
+        --primary--l: #{$primary--l};
         --primary-10: #{hsla($primary--h, $primary--s, $primary--l, .1)};
         --primary-20: #{hsla($primary--h, $primary--s, $primary--l, .2)};
         --primary-40: #{hsla($primary--h, $primary--s, $primary--l, .4)};
@@ -289,6 +296,9 @@ $width--prose: 60ch; // Readable text width
     // Secondary Colors
     @if $secondary {
         --secondary: #{$secondary};
+        --secondary--h: #{$secondary--h};
+        --secondary--s: #{$secondary--s};
+        --secondary--l: #{$secondary--l};
         --secondary-10: #{hsla($secondary--h, $secondary--s, $secondary--l, .1)};
         --secondary-20: #{hsla($secondary--h, $secondary--s, $secondary--l, .2)};
         --secondary-40: #{hsla($secondary--h, $secondary--s, $secondary--l, .4)};
@@ -342,6 +352,9 @@ $width--prose: 60ch; // Readable text width
     // Tertiary Colors
     @if $tertiary {
         --tertiary: #{$tertiary};
+        --tertiary--h: #{$tertiary--h};
+        --tertiary--s: #{$tertiary--s};
+        --tertiary--l: #{$tertiary--l};
         --tertiary-10: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .1)};
         --tertiary-20: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .2)};
         --tertiary-40: #{hsla($tertiary--h, $tertiary--s, $tertiary--l, .4)};
@@ -395,6 +408,9 @@ $width--prose: 60ch; // Readable text width
     // Accent Colors
     @if $accent {
         --accent: #{$accent};
+        --accent--h: #{$accent--h};
+        --accent--s: #{$accent--s};
+        --accent--l: #{$accent--l};
         --accent-10: #{hsla($accent--h, $accent--s, $accent--l, .1)};
         --accent-20: #{hsla($accent--h, $accent--s, $accent--l, .2)};
         --accent-40: #{hsla($accent--h, $accent--s, $accent--l, .4)};
@@ -454,6 +470,9 @@ $width--prose: 60ch; // Readable text width
     --shade--black-80: #{hsla(0, 0%, 0%, .8)};
     --shade--black-90: #{hsla(0, 0%, 0%, .9)};
     --shade: #{$shade};
+    --shade--h: #{$shade--h};
+    --shade--s: #{$shade--s};
+    --shade--l: #{$shade--l};
     --shade-10: #{hsla($shade--h, $shade--s, $shade--l, .1)};
     --shade-20: #{hsla($shade--h, $shade--s, $shade--l, .2)};
     --shade-40: #{hsla($shade--h, $shade--s, $shade--l, .4)};
@@ -921,7 +940,11 @@ $width--prose: 60ch; // Readable text width
 
 
 
-:focus {
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
     outline-color: var(--action) !important;
     outline-offset: var(--space--2px) !important;
     outline-style: solid !important;
@@ -1053,7 +1076,7 @@ ul.list--flat,
     font-weight: var(--font-weight--button);
     gap: var(--gap--button);
     justify-content: center;
-    letter-spacing: var(--letter-spacing);
+    letter-spacing: var(--letter-spacing--button);
     line-height: 1;
     padding: var(--space--m) var(--spacer--l);
     text-align: center;
