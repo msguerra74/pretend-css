@@ -806,6 +806,8 @@ $width--prose: 60ch; // Readable text width
 
 // --- Builder Specific --- //
 
+
+
 // Bricks
 
 @if $bricks {
@@ -945,10 +947,8 @@ $width--prose: 60ch; // Readable text width
 }
 
 :focus-visible {
-    outline-color: var(--action) !important;
-    outline-offset: var(--space--2px) !important;
-    outline-style: solid !important;
-    outline-width: var(--space--2px) !important;
+    outline: var(--space--2px) solid var(--action) !important;
+    outline-offset: var(--space--2px);
 }
 
 ::selection {
