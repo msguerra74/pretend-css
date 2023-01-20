@@ -9715,6 +9715,89 @@ img.aspect--golden {
     text-transform: uppercase;
 }
 
+// Text Vertical
+
+.text--vertical-left,
+.text--vertical-right,
+.text--xl-vertical-left,
+.text--xl-vertical-right,
+.text--l-vertical-left,
+.text--l-vertical-right,
+.text--m-vertical-left,
+.text--m-vertical-right,
+.text--s-vertical-left,
+.text--s-vertical-right {
+    writing-mode: vertical-lr;
+}
+
+.text--vertical-left {
+    transform: scale(-1);
+}
+
+.text--vertical-right {
+    transform: scale(1);
+}
+
+@include breakpoint($width--xl) {
+    .text--xl-vertical-left {
+        transform: scale(-1);
+    }
+
+    .text--xl-vertical-right {
+        transform: scale(1);
+    }
+
+    .text--xl-vertical-unset {
+        transform: scale(1);
+        writing-mode: unset;
+    }
+}
+
+@include breakpoint($width--l) {
+    .text--l-vertical-left {
+        transform: scale(-1);
+    }
+
+    .text--l-vertical-right {
+        transform: scale(1);
+    }
+
+    .text--l-vertical-unset {
+        transform: scale(1);
+        writing-mode: unset;
+    }
+}
+
+@include breakpoint($width--m) {
+    .text--m-vertical-left {
+        transform: scale(-1);
+    }
+
+    .text--m-vertical-right {
+        transform: scale(1);
+    }
+
+    .text--m-vertical-unset {
+        transform: scale(1);
+        writing-mode: unset;
+    }
+}
+
+@include breakpoint($width--s) {
+    .text--s-vertical-left {
+        transform: scale(-1);
+    }
+
+    .text--s-vertical-right {
+        transform: scale(1);
+    }
+
+    .text--s-vertical-unset {
+        transform: scale(1);
+        writing-mode: unset;
+    }
+}
+
 // Text Weight
 
 .text--100 {
