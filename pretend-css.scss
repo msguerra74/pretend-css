@@ -107,10 +107,10 @@ $width--prose: 60ch; // Readable text width
     --line-height--heading: 1.2;
     --text-transform--h1: uppercase;
     --text-transform--h2: uppercase;
-    --text-transform--h3: capitalize;
-    --text-transform--h4: capitalize;
-    --text-transform--h5: capitalize;
-    --text-transform--h6: capitalize;
+    --text-transform--h3: none;
+    --text-transform--h4: none;
+    --text-transform--h5: none;
+    --text-transform--h6: none;
 
     // Misc
     --letter-spacing: var(--space--px);
