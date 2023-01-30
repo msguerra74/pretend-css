@@ -6,7 +6,6 @@
  **/
 
 
-
 @use "sass:math";
 
 
@@ -20,6 +19,7 @@
 
 // CSS Options
 $css--base: true; // Add CSS Base Styles // true/false
+$css--components: true; // Add CSS Component Classes // true/false
 $css--helpers: true; // Add CSS Helper Classes // true/false
 $css--classes: true; // Add CSS Classes // true/false
 
@@ -93,7 +93,7 @@ $width--prose: 60ch; // Readable text width
     }
 
     // Buttons
-    @if $css--helpers {
+    @if $css--components {
         --border--button: var(--space--2px);
         --font-weight--button: 400;
         --gap--button: var(--space--s);
@@ -1078,6 +1078,381 @@ picture {
 
 
 
+// ---- CSS Components --- //
+
+
+
+@if $css--components {
+    // Background Media
+
+    .bg-media {
+        height: 100% !important;
+        left: 0;
+        margin-top: 0;
+        object-fit: cover;
+        object-position: 50%;
+        overflow: hidden;
+        position: absolute !important;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+
+        &>video {
+            object-fit: cover;
+        }
+    }
+
+    // Buttons
+
+    .btn {
+        align-items: center;
+        border-radius: var(--radius--button);
+        border-style: solid;
+        border-width: var(--border--button);
+        display: inline-flex;
+        font-weight: var(--font-weight--button);
+        gap: var(--gap--button);
+        justify-content: center;
+        letter-spacing: var(--letter-spacing--button);
+        line-height: 1;
+        padding: var(--space--m) var(--spacer--l);
+        text-align: center;
+        text-decoration: none;
+        text-transform: var(--text-transform--button);
+        transition: var(--transition--fast);
+        white-space: nowrap;
+        width: fit-content;
+
+        &--action {
+            background-color: var(--action);
+            border-color: var(--action);
+            color: var(--action--lightest);
+        }
+
+        @if $primary {
+            &--primary {
+                background-color: var(--primary);
+                border-color: var(--primary);
+                color: var(--primary--lightest);
+            }
+        }
+
+        @if $secondary {
+            &--secondary {
+                background-color: var(--secondary);
+                border-color: var(--secondary);
+                color: var(--secondary--lightest);
+            }
+        }
+
+        @if $tertiary {
+            &--tertiary {
+                background-color: var(--tertiary);
+                border-color: var(--tertiary);
+                color: var(--tertiary--lightest);
+            }
+        }
+
+        @if $accent {
+            &--accent {
+                background-color: var(--accent);
+                border-color: var(--accent);
+                color: var(--accent--lightest);
+            }
+        }
+
+        &--black {
+            background-color: var(--shade--black);
+            border-color: var(--shade--black);
+            color: var(--shade--white);
+        }
+
+        &--black-white {
+            background-color: var(--shade--black-white);
+            border-color: var(--shade--black-white);
+            color: var(--shade--white-black);
+        }
+
+        &--darkest {
+            background-color: var(--shade--darkest);
+            border-color: var(--shade--darkest);
+            color: var(--shade--lightest);
+        }
+
+        &--darkest-lightest {
+            background-color: var(--shade--darkest-lightest);
+            border-color: var(--shade--darkest-lightest);
+            color: var(--shade--lightest-darkest);
+        }
+
+        &--lightest {
+            background-color: var(--shade--lightest);
+            border-color: var(--shade--lightest);
+            color: var(--shade--darkest);
+        }
+
+        &--lightest-darkest {
+            background-color: var(--shade--lightest-darkest);
+            border-color: var(--shade--lightest-darkest);
+            color: var(--shade--darkest-lightest);
+        }
+
+        &--white {
+            background-color: var(--shade--white);
+            border-color: var(--shade--white);
+            color: var(--shade--black);
+        }
+
+        &--white-black {
+            background-color: var(--shade--white-black);
+            border-color: var(--shade--white-black);
+            color: var(--shade--black-white);
+        }
+    }
+
+    .btn--outline {
+        background-color: initial !important;
+
+        &.btn--action {
+            color: var(--action);
+        }
+
+        @if $primary {
+            &.btn--primary {
+                color: var(--primary);
+            }
+        }
+
+        @if $secondary {
+            &.btn--secondary {
+                color: var(--secondary);
+            }
+        }
+
+        @if $tertiary {
+            &.btn--tertiary {
+                color: var(--tertiary);
+            }
+        }
+
+        @if $accent {
+            &.btn--accent {
+                color: var(--accent);
+            }
+        }
+
+        &.btn--black {
+            color: var(--shade--black);
+        }
+
+        &.btn--black-white {
+            color: var(--shade--black-white);
+        }
+
+        &.btn--darkest {
+            color: var(--shade--darkest);
+        }
+
+        &.btn--darkest-lightest {
+            color: var(--shade--darkest-lightest);
+        }
+
+        &.btn--lightest {
+            color: var(--shade--lightest);
+        }
+
+        &.btn--lightest-darkest {
+            color: var(--shade--lightest-darkest);
+        }
+
+        &.btn--white {
+            color: var(--shade--white);
+        }
+
+        &.btn--white-black {
+            color: var(--shade--white-black);
+        }
+    }
+
+    .btn--s {
+        font-size: var(--space--m);
+        padding: var(--space--s) var(--space--base);
+    }
+
+    .btn--l {
+        font-size: var(--text--lede);
+        padding: var(--space--m) var(--spacer--xl);
+    }
+
+    // Containers
+
+    .block {
+        gap: var(--gap--content);
+        z-index: 1;
+    }
+
+    .container {
+        gap: var(--gap--layout);
+        z-index: 1;
+    }
+
+    // Overlay Link
+
+    .overlay--link a {
+        position: static;
+    }
+
+    .overlay--link>a::after {
+        bottom: 0;
+        content: "";
+        cursor: pointer;
+        display: flex;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    // Sections
+
+    .section--flat,
+    .section--base,
+    .section--l,
+    .section--xl,
+    .section--2xl,
+    .section--3xl,
+    .section--4xl,
+    .section--max {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section--flat {
+        gap: 0;
+        padding: 0 var(--section--base);
+    }
+
+    .section--base {
+        gap: var(--section--base);
+        padding: var(--section--base);
+    }
+
+    .section--l {
+        gap: var(--space--l);
+        padding: var(--space--l) var(--section--base);
+    }
+
+    .section--xl {
+        gap: var(--section--xl);
+        padding: var(--section--xl) var(--section--base);
+    }
+
+    .section--2xl {
+        gap: var(--section--2xl);
+        padding: var(--section--2xl) var(--section--base);
+    }
+
+    .section--3xl {
+        gap: var(--section--3xl);
+        padding: var(--section--3xl) var(--section--base);
+    }
+
+    .section--4xl {
+        gap: var(--section--4xl);
+        padding: var(--section--4xl) var(--section--base);
+    }
+
+    .section--max {
+        gap: var(--section--max);
+        padding: var(--section--max) var(--section--base);
+    }
+
+    // Text Vertical
+
+    .text--vertical-left,
+    .text--vertical-right,
+    .text--xl-vertical-left,
+    .text--xl-vertical-right,
+    .text--l-vertical-left,
+    .text--l-vertical-right,
+    .text--m-vertical-left,
+    .text--m-vertical-right,
+    .text--s-vertical-left,
+    .text--s-vertical-right {
+        writing-mode: vertical-lr;
+    }
+
+    .text--vertical-left {
+        transform: scale(-1);
+    }
+
+    .text--vertical-right {
+        transform: scale(1);
+    }
+
+    @include breakpoint($width--xl) {
+        .text--xl-vertical-left {
+            transform: scale(-1);
+        }
+
+        .text--xl-vertical-right {
+            transform: scale(1);
+        }
+
+        .text--xl-vertical-unset {
+            transform: scale(1);
+            writing-mode: unset;
+        }
+    }
+
+    @include breakpoint($width--l) {
+        .text--l-vertical-left {
+            transform: scale(-1);
+        }
+
+        .text--l-vertical-right {
+            transform: scale(1);
+        }
+
+        .text--l-vertical-unset {
+            transform: scale(1);
+            writing-mode: unset;
+        }
+    }
+
+    @include breakpoint($width--m) {
+        .text--m-vertical-left {
+            transform: scale(-1);
+        }
+
+        .text--m-vertical-right {
+            transform: scale(1);
+        }
+
+        .text--m-vertical-unset {
+            transform: scale(1);
+            writing-mode: unset;
+        }
+    }
+
+    @include breakpoint($width--s) {
+        .text--s-vertical-left {
+            transform: scale(-1);
+        }
+
+        .text--s-vertical-right {
+            transform: scale(1);
+        }
+
+        .text--s-vertical-unset {
+            transform: scale(1);
+            writing-mode: unset;
+        }
+    }
+}
+
+
+
 // --- CSS Helpers --- //
 
 
@@ -1566,207 +1941,6 @@ picture {
         backdrop-filter: blur(var(--space--base));
     }
 
-    // Background Media
-
-    .bg-media {
-        height: 100% !important;
-        left: 0;
-        margin-top: 0;
-        object-fit: cover;
-        object-position: 50%;
-        overflow: hidden;
-        position: absolute !important;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-
-        &>video {
-            object-fit: cover;
-        }
-    }
-
-    // Buttons
-
-    .btn {
-        align-items: center;
-        border-radius: var(--radius--button);
-        border-style: solid;
-        border-width: var(--border--button);
-        display: inline-flex;
-        font-weight: var(--font-weight--button);
-        gap: var(--gap--button);
-        justify-content: center;
-        letter-spacing: var(--letter-spacing--button);
-        line-height: 1;
-        padding: var(--space--m) var(--spacer--l);
-        text-align: center;
-        text-decoration: none;
-        text-transform: var(--text-transform--button);
-        transition: var(--transition--fast);
-        white-space: nowrap;
-        width: fit-content;
-
-        &--action {
-            background-color: var(--action);
-            border-color: var(--action);
-            color: var(--action--lightest);
-        }
-
-        @if $primary {
-            &--primary {
-                background-color: var(--primary);
-                border-color: var(--primary);
-                color: var(--primary--lightest);
-            }
-        }
-
-        @if $secondary {
-            &--secondary {
-                background-color: var(--secondary);
-                border-color: var(--secondary);
-                color: var(--secondary--lightest);
-            }
-        }
-
-        @if $tertiary {
-            &--tertiary {
-                background-color: var(--tertiary);
-                border-color: var(--tertiary);
-                color: var(--tertiary--lightest);
-            }
-        }
-
-        @if $accent {
-            &--accent {
-                background-color: var(--accent);
-                border-color: var(--accent);
-                color: var(--accent--lightest);
-            }
-        }
-
-        &--black {
-            background-color: var(--shade--black);
-            border-color: var(--shade--black);
-            color: var(--shade--white);
-        }
-
-        &--black-white {
-            background-color: var(--shade--black-white);
-            border-color: var(--shade--black-white);
-            color: var(--shade--white-black);
-        }
-
-        &--darkest {
-            background-color: var(--shade--darkest);
-            border-color: var(--shade--darkest);
-            color: var(--shade--lightest);
-        }
-
-        &--darkest-lightest {
-            background-color: var(--shade--darkest-lightest);
-            border-color: var(--shade--darkest-lightest);
-            color: var(--shade--lightest-darkest);
-        }
-
-        &--lightest {
-            background-color: var(--shade--lightest);
-            border-color: var(--shade--lightest);
-            color: var(--shade--darkest);
-        }
-
-        &--lightest-darkest {
-            background-color: var(--shade--lightest-darkest);
-            border-color: var(--shade--lightest-darkest);
-            color: var(--shade--darkest-lightest);
-        }
-
-        &--white {
-            background-color: var(--shade--white);
-            border-color: var(--shade--white);
-            color: var(--shade--black);
-        }
-
-        &--white-black {
-            background-color: var(--shade--white-black);
-            border-color: var(--shade--white-black);
-            color: var(--shade--black-white);
-        }
-    }
-
-    .btn--outline {
-        background-color: initial !important;
-
-        &.btn--action {
-            color: var(--action);
-        }
-
-        @if $primary {
-            &.btn--primary {
-                color: var(--primary);
-            }
-        }
-
-        @if $secondary {
-            &.btn--secondary {
-                color: var(--secondary);
-            }
-        }
-
-        @if $tertiary {
-            &.btn--tertiary {
-                color: var(--tertiary);
-            }
-        }
-
-        @if $accent {
-            &.btn--accent {
-                color: var(--accent);
-            }
-        }
-
-        &.btn--black {
-            color: var(--shade--black);
-        }
-
-        &.btn--black-white {
-            color: var(--shade--black-white);
-        }
-
-        &.btn--darkest {
-            color: var(--shade--darkest);
-        }
-
-        &.btn--darkest-lightest {
-            color: var(--shade--darkest-lightest);
-        }
-
-        &.btn--lightest {
-            color: var(--shade--lightest);
-        }
-
-        &.btn--lightest-darkest {
-            color: var(--shade--lightest-darkest);
-        }
-
-        &.btn--white {
-            color: var(--shade--white);
-        }
-
-        &.btn--white-black {
-            color: var(--shade--white-black);
-        }
-    }
-
-    .btn--s {
-        font-size: var(--space--m);
-        padding: var(--space--s) var(--space--base);
-    }
-
-    .btn--l {
-        font-size: var(--text--lede);
-        padding: var(--space--m) var(--spacer--xl);
-    }
-
     // Clear
 
     .clear::before,
@@ -1777,18 +1951,6 @@ picture {
 
     .clear::after {
         clear: both;
-    }
-
-    // Containers
-
-    .block {
-        gap: var(--gap--content);
-        z-index: 1;
-    }
-
-    .container {
-        gap: var(--gap--layout);
-        z-index: 1;
     }
 
     // Content Columns
@@ -2092,23 +2254,6 @@ picture {
         color: var(--shade--white-black);
     }
 
-    // Overlay Link
-
-    .overlay--link a {
-        position: static;
-    }
-
-    .overlay--link>a::after {
-        bottom: 0;
-        content: "";
-        cursor: pointer;
-        display: flex;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
     // Owl Spacing
 
     .owl--xs>*+* {
@@ -2153,143 +2298,6 @@ picture {
 
     .owl--max>*+* {
         margin-top: var(--spacer--max);
-    }
-
-    // Sections
-
-    .section--flat,
-    .section--base,
-    .section--l,
-    .section--xl,
-    .section--2xl,
-    .section--3xl,
-    .section--4xl,
-    .section--max {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .section--flat {
-        gap: 0;
-        padding: 0 var(--section--base);
-    }
-
-    .section--base {
-        gap: var(--section--base);
-        padding: var(--section--base);
-    }
-
-    .section--l {
-        gap: var(--space--l);
-        padding: var(--space--l) var(--section--base);
-    }
-
-    .section--xl {
-        gap: var(--section--xl);
-        padding: var(--section--xl) var(--section--base);
-    }
-
-    .section--2xl {
-        gap: var(--section--2xl);
-        padding: var(--section--2xl) var(--section--base);
-    }
-
-    .section--3xl {
-        gap: var(--section--3xl);
-        padding: var(--section--3xl) var(--section--base);
-    }
-
-    .section--4xl {
-        gap: var(--section--4xl);
-        padding: var(--section--4xl) var(--section--base);
-    }
-
-    .section--max {
-        gap: var(--section--max);
-        padding: var(--section--max) var(--section--base);
-    }
-
-    // Text Vertical
-
-    .text--vertical-left,
-    .text--vertical-right,
-    .text--xl-vertical-left,
-    .text--xl-vertical-right,
-    .text--l-vertical-left,
-    .text--l-vertical-right,
-    .text--m-vertical-left,
-    .text--m-vertical-right,
-    .text--s-vertical-left,
-    .text--s-vertical-right {
-        writing-mode: vertical-lr;
-    }
-
-    .text--vertical-left {
-        transform: scale(-1);
-    }
-
-    .text--vertical-right {
-        transform: scale(1);
-    }
-
-    @include breakpoint($width--xl) {
-        .text--xl-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--xl-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--xl-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .text--l-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--l-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--l-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .text--m-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--m-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--m-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
-    }
-
-    @include breakpoint($width--s) {
-        .text--s-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--s-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--s-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
     }
 
     // Visibility
