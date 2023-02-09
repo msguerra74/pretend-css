@@ -1,17 +1,21 @@
 /**
  * Pretend CSS
- * --
  * Made by Pretend
  * https://madebypretend.com
  **/
 
 
-@use "sass:math";
+// For future use with Sass Math
+// @use "sass:math";
 
 
 
 // ---------- Project ----------- //
 // ---------- Settings ---------- //
+
+
+
+// Modify the following SCSS and CSS variables to customize the CSS output
 
 
 
@@ -40,13 +44,13 @@ $primary--s: 84%; // Saturation
 $primary--l: 60%; // Lightness
 
 // Secondary Color Shades
-$secondary: #21c45d; // Secondary Base
+$secondary: #22c55e; // Secondary Base
 $secondary--h: 142; // Hue
 $secondary--s: 71%; // Saturation
 $secondary--l: 45%; // Lightness
 
 // Tertiary Color Shades
-$tertiary: #3c83f6; // Tertiary Base
+$tertiary: #3b82f6; // Tertiary Base
 $tertiary--h: 217; // Hue
 $tertiary--s: 91%; // Saturation
 $tertiary--l: 60%; // Lightness
@@ -64,8 +68,12 @@ $shade--s: 0%; // Saturation
 $shade--l: 9%; // Lightness
 
 // Misc
-$gap--content: 32px; // Default content gap, for blocks
-$gap--layout: 48px; // Default layout gap, containers and grids
+$gap--content: 32px; // Default content gap for blocks
+$gap--layout: 48px; // Default layout gap for containers and grids
+$min--layout: 48px; // Min layout gap for containers and grids
+$min--section: 48px; // Min vertical spacing for Responsive Section Spacing
+$min--spacer: 24px; // Min spacer spacing for Responsive Base Spacing
+$min--text: 40px; // Min text size for Title Text Sizes and larger
 $space--max: 168px; // Max space size
 $text--max: 168px; // Max text size
 
@@ -77,7 +85,7 @@ $width--l: 960px; // Large breakpoint
 $width--xl: 1280px; // Maximum viewport width and fluid sizing maximum width
 $width--wide: 1440px; // Wide breakout width
 $width--max: 1600px; // Max breakout width and max media width
-$width--website: 1920px; // Website container width
+$width--viewport: 1920px; // Website container width
 $width--prose: 60ch; // Readable text width
 
 // --- CSS Variables --- //
@@ -134,6 +142,12 @@ $width--prose: 60ch; // Readable text width
 
 
 
+////////////////////////////////////////////////
+// DO NOT MODIFY ANYTHING BELOW THIS SECTION //
+////////////////////////////////////////////////
+
+
+
 // --- SCSS Functions --- //
 
 
@@ -145,8 +159,20 @@ $width--prose: 60ch; // Readable text width
 // @param: $_max-size // Maximum Size
 // @param: $_min-width // Minimum Breakpoint
 // @param: $_max-width // Maximum Breakpoint
+
+// For future use with Sass Math
+// @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
+//     $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
+//     $_intercept: px-rem($_min-size - $_slope * $_min-width);
+//     $_slope-vw: $_slope * 100vw;
+//     $_min-size-rem: px-rem($_min-size);
+//     $_max-size-rem: px-rem($_max-size);
+//     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
+// }
+
+// Without Sass Math
 @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
-    $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
+    $_slope: ($_max-size - $_min-size) / ($_max-width - $_min-width);
     $_intercept: px-rem($_min-size - $_slope * $_min-width);
     $_slope-vw: $_slope * 100vw;
     $_min-size-rem: px-rem($_min-size);
@@ -158,9 +184,20 @@ $width--prose: 60ch; // Readable text width
 // --
 // Usage: px-rem(16px)
 // @param: $_px // Pixel value
+
+// For future use with Sass Math
+// @function px-rem($_px) {
+//     @if type-of($_px)=="number" and not unitless($_px) {
+//         @return (math.div(math.div($_px, ($_px * 0 + 1)), 16) + rem);
+//     }
+
+//     @return $_rem;
+// }
+
+// Without Sass Math
 @function px-rem($_px) {
     @if type-of($_px)=="number" and not unitless($_px) {
-        @return (math.div(math.div($_px, ($_px * 0 + 1)), 16) + rem);
+        @return ($_px / ($_px * 0 + 1) / 16)+rem;
     }
 
     @return $_rem;
@@ -627,7 +664,7 @@ $width--prose: 60ch; // Readable text width
 
     // Misc
     --gap--content: #{px-rem($gap--content)};
-    --gap--layout: #{fluid(48px, $gap--layout)};
+    --gap--layout: #{fluid($min--layout, $gap--layout)};
     --letter-spacing: var(--space--px);
     --transition--fast: .2s;
     --transition--normal: .4s;
@@ -665,11 +702,11 @@ $width--prose: 60ch; // Readable text width
 
     // Responsive Section Spacing
     --section--base: #{fluid(24px, 48px)};
-    --section--xl: #{fluid(48px, 72px)};
-    --section--2xl: #{fluid(48px, 96px)};
-    --section--3xl: #{fluid(48px, 120px)};
-    --section--4xl: #{fluid(48px, 144px)};
-    --section--max: #{fluid(48px, $space--max)};
+    --section--xl: #{fluid($min--section, 72px)};
+    --section--2xl: #{fluid($min--section, 96px)};
+    --section--3xl: #{fluid($min--section, 120px)};
+    --section--4xl: #{fluid($min--section, 144px)};
+    --section--max: #{fluid($min--section, $space--max)};
 
     // Spacing
     --space--px: #{px-rem(1px)};
@@ -687,13 +724,13 @@ $width--prose: 60ch; // Readable text width
     --space--max: #{px-rem($space--max)};
 
     // Responsive Base Spacing
-    --spacer--plus: #{fluid(24px, 32px)};
-    --spacer--l: #{fluid(24px, 48px)};
-    --spacer--xl: #{fluid(24px, 72px)};
-    --spacer--2xl: #{fluid(24px, 96px)};
-    --spacer--3xl: #{fluid(24px, 120px)};
-    --spacer--4xl: #{fluid(24px, 144px)};
-    --spacer--max: #{fluid(24px, $space--max)};
+    --spacer--plus: #{fluid($min--spacer, 32px)};
+    --spacer--l: #{fluid($min--spacer, 48px)};
+    --spacer--xl: #{fluid($min--spacer, 72px)};
+    --spacer--2xl: #{fluid($min--spacer, 96px)};
+    --spacer--3xl: #{fluid($min--spacer, 120px)};
+    --spacer--4xl: #{fluid($min--spacer, 144px)};
+    --spacer--max: #{fluid($min--spacer, $space--max)};
 
     // Text Sizes
     --text--fine: #{fluid(12px, 14px)};
@@ -703,12 +740,12 @@ $width--prose: 60ch; // Readable text width
     --text--intro: #{fluid(20px, 24px)};
     --text--large: #{fluid(24px, 32px)};
     --text--heading: #{fluid(32px, 40px)};
-    --text--title: #{fluid(40px, 48px)};
-    --text--hero: #{fluid(40px, 72px)};
-    --text--featured: #{fluid(40px, 96px)};
-    --text--banner: #{fluid(40px, 120px)};
-    --text--marquee: #{fluid(40px, 144px)};
-    --text--max: #{fluid(40px, $text--max)};
+    --text--title: #{fluid($min--text, 48px)};
+    --text--hero: #{fluid($min--text, 72px)};
+    --text--featured: #{fluid($min--text, 96px)};
+    --text--banner: #{fluid($min--text, 120px)};
+    --text--marquee: #{fluid($min--text, 144px)};
+    --text--max: #{fluid($min--text, $text--max)};
 
     // Widths
     --width--xs: #{px-rem($width--xs)};
@@ -718,7 +755,7 @@ $width--prose: 60ch; // Readable text width
     --width--xl: #{px-rem($width--xl)};
     --width--wide: #{px-rem($width--wide)};
     --width--max: #{px-rem($width--max)};
-    --width--website: #{px-rem($width--website)};
+    --width--viewport: #{px-rem($width--viewport)};
     --width--prose: #{$width--prose};
 }
 
@@ -833,96 +870,14 @@ $width--prose: 60ch; // Readable text width
 // Bricks
 
 @if $bricks {
-    // CSS Reset
-
-    *,
-    ::after,
-    ::before {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-        cursor: pointer;
-        transition: inherit;
-    }
-
-    button {
-        color: inherit;
-        border-width: 0;
-        font-family: inherit;
-        font-size: inherit;
-        font-style: inherit;
-        font-weight: inherit;
-        line-height: inherit;
-        padding: 0;
-        cursor: pointer;
-        background: initial;
-    }
-
-    figure {
-        margin: 0;
-    }
-
-    input::-moz-focus-inner {
-        border: 0;
-        padding: 0;
-        margin: 0;
-    }
-
-    dd,
-    ol,
-    ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-    }
-
-    p {
-        margin: 0;
-    }
-
-    cite {
-        font-style: normal;
-    }
-
-    fieldset {
-        border-width: 0;
-        padding: 0;
-        margin: 0;
-    }
-
-    input {
-        font-size: var(--text--base);
-        font-family: inherit;
-    }
-
-    select,
-    textarea {
-        font: inherit;
-    }
-
-    // Website Width
+    // Viewport Width
 
     body>header,
     body>main,
     body>footer {
         margin-left: auto;
         margin-right: auto;
-        max-width: var(--width--website);
+        max-width: var(--width--viewport);
     }
 }
 
@@ -948,12 +903,19 @@ $width--prose: 60ch; // Readable text width
         width: 100%;
     }
 
-    // Website Width
+    // Cwicly
+
+    // Prevent background video from creating extra gap spacing
+    .cc-background-video {
+        display: none;
+    }
+
+    // Viewport Width
 
     .wp-site-blocks {
         margin-left: auto;
         margin-right: auto;
-        max-width: var(--width--website);
+        max-width: var(--width--viewport);
     }
 }
 
@@ -1083,9 +1045,9 @@ picture {
 
 
 @if $css--components {
-    // Background Media
+    // Background Overlay
 
-    .bg-media {
+    .bg-overlay {
         height: 100% !important;
         left: 0;
         margin-top: 0;
@@ -1096,10 +1058,6 @@ picture {
         top: 0;
         width: 100%;
         z-index: 0;
-
-        &>video {
-            object-fit: cover;
-        }
     }
 
     // Buttons
@@ -2347,7 +2305,7 @@ picture {
         align-self: flex-start;
         margin-left: 50%;
         transform: translateX(-50%);
-        max-width: var(--width--website);
+        max-width: var(--width--viewport);
         width: 100vw;
     }
 
@@ -10081,8 +10039,8 @@ picture {
         width: 100%;
     }
 
-    .width--website {
-        max-width: var(--width--website);
+    .width--viewport {
+        max-width: var(--width--viewport);
         width: 100%;
     }
 
