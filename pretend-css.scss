@@ -6959,6 +6959,7 @@ picture {
 
     .height--full {
         min-height: 100vh;
+        min-height: 100svh;
     }
 
     @include breakpoint($width--xl) {
@@ -6968,6 +6969,7 @@ picture {
 
         .height--xl-full {
             min-height: 100vh;
+            min-height: 100svh;
         }
     }
 
@@ -6978,6 +6980,7 @@ picture {
 
         .height--l-full {
             min-height: 100vh;
+            min-height: 100svh;
         }
     }
 
@@ -6988,6 +6991,7 @@ picture {
 
         .height--m-full {
             min-height: 100vh;
+            min-height: 100svh;
         }
     }
 
@@ -6998,6 +7002,7 @@ picture {
 
         .height--s-full {
             min-height: 100vh;
+            min-height: 100svh;
         }
     }
 
