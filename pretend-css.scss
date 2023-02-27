@@ -19,49 +19,49 @@
 
 
 
-// --- SCSS Variables --- //
+// --- SCSS Variable Options --- //
 
 // CSS Options
-$css--base: true; // Add CSS Base Styles // true/false
+$css--base: false; // Add CSS Base Styles // true/false
 $css--components: true; // Add CSS Component Classes // true/false
 $css--helpers: true; // Add CSS Helper Classes // true/false
-$css--classes: true; // Add CSS Classes // true/false
+$css--classes: false; // Add CSS Classes // true/false
 
 // WordPress Builder Options
 $bricks: true; // Using Bricks // true/false
-$cwicly: false; // Using Cwicly // true/false
+$cwicly: true; // Using Cwicly // true/false
 
-// Action Color Shades
+// Action Colors
 $action: #ef4444; // Action Base
 $action--h: 0; // Hue
 $action--s: 84%; // Saturation
 $action--l: 60%; // Lightness
 
-// Primary Color Shades
+// Primary Colors
 $primary: #ef4444; // Primary Base
 $primary--h: 0; // Hue
 $primary--s: 84%; // Saturation
 $primary--l: 60%; // Lightness
 
-// Secondary Color Shades
+// Secondary Colors
 $secondary: #22c55e; // Secondary Base
 $secondary--h: 142; // Hue
 $secondary--s: 71%; // Saturation
 $secondary--l: 45%; // Lightness
 
-// Tertiary Color Shades
+// Tertiary Colors
 $tertiary: #3b82f6; // Tertiary Base
 $tertiary--h: 217; // Hue
 $tertiary--s: 91%; // Saturation
 $tertiary--l: 60%; // Lightness
 
-// Accent Color Shades
-$accent: #a855f7; // Accent Base
-$accent--h: 271; // Hue
-$accent--s: 91%; // Saturation
-$accent--l: 65%; // Lightness
+// Quaternary Colors
+$quaternary: #a855f7; // Quaternary Base
+$quaternary--h: 271; // Hue
+$quaternary--s: 91%; // Saturation
+$quaternary--l: 65%; // Lightness
 
-// Shade Color Shades
+// Shade Colors
 $shade: #171717; // Shade Base
 $shade--h: 0; // Hue
 $shade--s: 0%; // Saturation
@@ -88,7 +88,7 @@ $width--max: 1600px; // Max breakout width and max media width
 $width--viewport: 1920px; // Website container width
 $width--prose: 60ch; // Readable text width
 
-// --- CSS Variables --- //
+// --- CSS Variable Options --- //
 
 :root {
 
@@ -222,7 +222,7 @@ $width--prose: 60ch; // Readable text width
 
 
 
-// --- CSS Variables --- //
+// --- CSS Default Variables --- //
 
 
 
@@ -457,60 +457,60 @@ $width--prose: 60ch; // Readable text width
         --tertiary--lightest-90: #{hsla($tertiary--h, $tertiary--s, 95%, .9)};
     }
 
-    // Accent Colors
-    @if $accent {
-        --accent: #{$accent};
-        --accent--h: #{$accent--h};
-        --accent--s: #{$accent--s};
-        --accent--l: #{$accent--l};
-        --accent-10: #{hsla($accent--h, $accent--s, $accent--l, .1)};
-        --accent-20: #{hsla($accent--h, $accent--s, $accent--l, .2)};
-        --accent-40: #{hsla($accent--h, $accent--s, $accent--l, .4)};
-        --accent-60: #{hsla($accent--h, $accent--s, $accent--l, .6)};
-        --accent-80: #{hsla($accent--h, $accent--s, $accent--l, .8)};
-        --accent-90: #{hsla($accent--h, $accent--s, $accent--l, .9)};
-        --accent--darkest: #{hsl($accent--h, $accent--s, 10%)};
-        --accent--darkest-10: #{hsla($accent--h, $accent--s, 10%, .1)};
-        --accent--darkest-20: #{hsla($accent--h, $accent--s, 10%, .2)};
-        --accent--darkest-40: #{hsla($accent--h, $accent--s, 10%, .4)};
-        --accent--darkest-60: #{hsla($accent--h, $accent--s, 10%, .6)};
-        --accent--darkest-80: #{hsla($accent--h, $accent--s, 10%, .8)};
-        --accent--darkest-90: #{hsla($accent--h, $accent--s, 10%, .9)};
-        --accent--darker: #{hsl($accent--h, $accent--s, 20%)};
-        --accent--darker-10: #{hsla($accent--h, $accent--s, 20%, .1)};
-        --accent--darker-20: #{hsla($accent--h, $accent--s, 20%, .2)};
-        --accent--darker-40: #{hsla($accent--h, $accent--s, 20%, .4)};
-        --accent--darker-60: #{hsla($accent--h, $accent--s, 20%, .6)};
-        --accent--darker-80: #{hsla($accent--h, $accent--s, 20%, .8)};
-        --accent--darker-90: #{hsla($accent--h, $accent--s, 20%, .9)};
-        --accent--dark: #{hsl($accent--h, $accent--s, 40%)};
-        --accent--dark-10: #{hsla($accent--h, $accent--s, 40%, .1)};
-        --accent--dark-20: #{hsla($accent--h, $accent--s, 40%, .2)};
-        --accent--dark-40: #{hsla($accent--h, $accent--s, 40%, .4)};
-        --accent--dark-60: #{hsla($accent--h, $accent--s, 40%, .6)};
-        --accent--dark-80: #{hsla($accent--h, $accent--s, 40%, .8)};
-        --accent--dark-90: #{hsla($accent--h, $accent--s, 40%, .9)};
-        --accent--light: #{hsl($accent--h, $accent--s, 60%)};
-        --accent--light-10: #{hsla($accent--h, $accent--s, 60%, .1)};
-        --accent--light-20: #{hsla($accent--h, $accent--s, 60%, .2)};
-        --accent--light-40: #{hsla($accent--h, $accent--s, 60%, .4)};
-        --accent--light-60: #{hsla($accent--h, $accent--s, 60%, .6)};
-        --accent--light-80: #{hsla($accent--h, $accent--s, 60%, .8)};
-        --accent--light-90: #{hsla($accent--h, $accent--s, 60%, .9)};
-        --accent--lighter: #{hsl($accent--h, $accent--s, 80%)};
-        --accent--lighter-10: #{hsla($accent--h, $accent--s, 80%, .1)};
-        --accent--lighter-20: #{hsla($accent--h, $accent--s, 80%, .2)};
-        --accent--lighter-40: #{hsla($accent--h, $accent--s, 80%, .4)};
-        --accent--lighter-60: #{hsla($accent--h, $accent--s, 80%, .6)};
-        --accent--lighter-80: #{hsla($accent--h, $accent--s, 80%, .8)};
-        --accent--lighter-90: #{hsla($accent--h, $accent--s, 80%, .9)};
-        --accent--lightest: #{hsl($accent--h, $accent--s, 95%)};
-        --accent--lightest-10: #{hsla($accent--h, $accent--s, 95%, .1)};
-        --accent--lightest-20: #{hsla($accent--h, $accent--s, 95%, .2)};
-        --accent--lightest-40: #{hsla($accent--h, $accent--s, 95%, .4)};
-        --accent--lightest-60: #{hsla($accent--h, $accent--s, 95%, .6)};
-        --accent--lightest-80: #{hsla($accent--h, $accent--s, 95%, .8)};
-        --accent--lightest-90: #{hsla($accent--h, $accent--s, 95%, .9)};
+    // Quaternary Colors
+    @if $quaternary {
+        --quaternary: #{$quaternary};
+        --quaternary--h: #{$quaternary--h};
+        --quaternary--s: #{$quaternary--s};
+        --quaternary--l: #{$quaternary--l};
+        --quaternary-10: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .1)};
+        --quaternary-20: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .2)};
+        --quaternary-40: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .4)};
+        --quaternary-60: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .6)};
+        --quaternary-80: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .8)};
+        --quaternary-90: #{hsla($quaternary--h, $quaternary--s, $quaternary--l, .9)};
+        --quaternary--darkest: #{hsl($quaternary--h, $quaternary--s, 10%)};
+        --quaternary--darkest-10: #{hsla($quaternary--h, $quaternary--s, 10%, .1)};
+        --quaternary--darkest-20: #{hsla($quaternary--h, $quaternary--s, 10%, .2)};
+        --quaternary--darkest-40: #{hsla($quaternary--h, $quaternary--s, 10%, .4)};
+        --quaternary--darkest-60: #{hsla($quaternary--h, $quaternary--s, 10%, .6)};
+        --quaternary--darkest-80: #{hsla($quaternary--h, $quaternary--s, 10%, .8)};
+        --quaternary--darkest-90: #{hsla($quaternary--h, $quaternary--s, 10%, .9)};
+        --quaternary--darker: #{hsl($quaternary--h, $quaternary--s, 20%)};
+        --quaternary--darker-10: #{hsla($quaternary--h, $quaternary--s, 20%, .1)};
+        --quaternary--darker-20: #{hsla($quaternary--h, $quaternary--s, 20%, .2)};
+        --quaternary--darker-40: #{hsla($quaternary--h, $quaternary--s, 20%, .4)};
+        --quaternary--darker-60: #{hsla($quaternary--h, $quaternary--s, 20%, .6)};
+        --quaternary--darker-80: #{hsla($quaternary--h, $quaternary--s, 20%, .8)};
+        --quaternary--darker-90: #{hsla($quaternary--h, $quaternary--s, 20%, .9)};
+        --quaternary--dark: #{hsl($quaternary--h, $quaternary--s, 40%)};
+        --quaternary--dark-10: #{hsla($quaternary--h, $quaternary--s, 40%, .1)};
+        --quaternary--dark-20: #{hsla($quaternary--h, $quaternary--s, 40%, .2)};
+        --quaternary--dark-40: #{hsla($quaternary--h, $quaternary--s, 40%, .4)};
+        --quaternary--dark-60: #{hsla($quaternary--h, $quaternary--s, 40%, .6)};
+        --quaternary--dark-80: #{hsla($quaternary--h, $quaternary--s, 40%, .8)};
+        --quaternary--dark-90: #{hsla($quaternary--h, $quaternary--s, 40%, .9)};
+        --quaternary--light: #{hsl($quaternary--h, $quaternary--s, 60%)};
+        --quaternary--light-10: #{hsla($quaternary--h, $quaternary--s, 60%, .1)};
+        --quaternary--light-20: #{hsla($quaternary--h, $quaternary--s, 60%, .2)};
+        --quaternary--light-40: #{hsla($quaternary--h, $quaternary--s, 60%, .4)};
+        --quaternary--light-60: #{hsla($quaternary--h, $quaternary--s, 60%, .6)};
+        --quaternary--light-80: #{hsla($quaternary--h, $quaternary--s, 60%, .8)};
+        --quaternary--light-90: #{hsla($quaternary--h, $quaternary--s, 60%, .9)};
+        --quaternary--lighter: #{hsl($quaternary--h, $quaternary--s, 80%)};
+        --quaternary--lighter-10: #{hsla($quaternary--h, $quaternary--s, 80%, .1)};
+        --quaternary--lighter-20: #{hsla($quaternary--h, $quaternary--s, 80%, .2)};
+        --quaternary--lighter-40: #{hsla($quaternary--h, $quaternary--s, 80%, .4)};
+        --quaternary--lighter-60: #{hsla($quaternary--h, $quaternary--s, 80%, .6)};
+        --quaternary--lighter-80: #{hsla($quaternary--h, $quaternary--s, 80%, .8)};
+        --quaternary--lighter-90: #{hsla($quaternary--h, $quaternary--s, 80%, .9)};
+        --quaternary--lightest: #{hsl($quaternary--h, $quaternary--s, 95%)};
+        --quaternary--lightest-10: #{hsla($quaternary--h, $quaternary--s, 95%, .1)};
+        --quaternary--lightest-20: #{hsla($quaternary--h, $quaternary--s, 95%, .2)};
+        --quaternary--lightest-40: #{hsla($quaternary--h, $quaternary--s, 95%, .4)};
+        --quaternary--lightest-60: #{hsla($quaternary--h, $quaternary--s, 95%, .6)};
+        --quaternary--lightest-80: #{hsla($quaternary--h, $quaternary--s, 95%, .8)};
+        --quaternary--lightest-90: #{hsla($quaternary--h, $quaternary--s, 95%, .9)};
     }
 
     // Shade Colors
@@ -884,23 +884,25 @@ $width--prose: 60ch; // Readable text width
 // Cwicly
 
 @if $cwicly {
-    // Containers
+    @if $css--components {
+        // Containers
 
-    .block {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+        .block {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-    .container {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: var(--width--xl);
-        width: 100%;
+        .container {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: var(--width--xl);
+            width: 100%;
+        }
     }
 
     // Cwicly
@@ -947,6 +949,7 @@ html {
 
 body {
     min-height: 100vh;
+    min-height: 100svh;
     min-width: var(--width--xs);
     overflow-wrap: break-word;
     overflow-x: hidden;
@@ -957,8 +960,6 @@ picture {
     display: block;
     max-width: 100%;
 }
-
-
 
 @if $css--base {
     body {
@@ -1040,7 +1041,7 @@ picture {
 
 
 
-// ---- CSS Components --- //
+// --- CSS Components --- //
 
 
 
@@ -1111,11 +1112,11 @@ picture {
             }
         }
 
-        @if $accent {
-            &--accent {
-                background-color: var(--accent);
-                border-color: var(--accent);
-                color: var(--accent--lightest);
+        @if $quaternary {
+            &--quaternary {
+                background-color: var(--quaternary);
+                border-color: var(--quaternary);
+                color: var(--quaternary--lightest);
             }
         }
 
@@ -1193,9 +1194,9 @@ picture {
             }
         }
 
-        @if $accent {
-            &.btn--accent {
-                color: var(--accent);
+        @if $quaternary {
+            &.btn--quaternary {
+                color: var(--quaternary);
             }
         }
 
@@ -2079,9 +2080,9 @@ picture {
         }
     }
 
-    @if $accent {
-        .content-column-rule--accent {
-            column-rule-color: var(--accent);
+    @if $quaternary {
+        .content-column-rule--quaternary {
+            column-rule-color: var(--quaternary);
         }
     }
 
@@ -2174,9 +2175,9 @@ picture {
         }
     }
 
-    @if $accent {
-        .list-marker--accent li::marker {
-            color: var(--accent);
+    @if $quaternary {
+        .list-marker--quaternary li::marker {
+            color: var(--quaternary);
         }
     }
 
@@ -2301,7 +2302,7 @@ picture {
         width: 100vw;
     }
 
-    .breakout--website {
+    .breakout--viewport {
         align-self: flex-start;
         margin-left: 50%;
         transform: translateX(-50%);
@@ -2374,6 +2375,78 @@ picture {
 
     .text--justify {
         text-align: justify;
+    }
+
+    @include breakpoint($width--xl) {
+        .text--xl-center {
+            text-align: center;
+        }
+
+        .text--xl-left {
+            text-align: left;
+        }
+
+        .text--xl-right {
+            text-align: right;
+        }
+
+        .text--xl-justify {
+            text-align: justify;
+        }
+    }
+
+    @include breakpoint($width--l) {
+        .text--l-center {
+            text-align: center;
+        }
+
+        .text--l-left {
+            text-align: left;
+        }
+
+        .text--l-right {
+            text-align: right;
+        }
+
+        .text--l-justify {
+            text-align: justify;
+        }
+    }
+
+    @include breakpoint($width--m) {
+        .text--m-center {
+            text-align: center;
+        }
+
+        .text--m-left {
+            text-align: left;
+        }
+
+        .text--m-right {
+            text-align: right;
+        }
+
+        .text--m-justify {
+            text-align: justify;
+        }
+    }
+
+    @include breakpoint($width--s) {
+        .text--s-center {
+            text-align: center;
+        }
+
+        .text--s-left {
+            text-align: left;
+        }
+
+        .text--s-right {
+            text-align: right;
+        }
+
+        .text--s-justify {
+            text-align: justify;
+        }
     }
 
     // Background Colors
@@ -3168,199 +3241,199 @@ picture {
         }
     }
 
-    @if $accent {
-        .bg-accent {
-            background-color: var(--accent);
+    @if $quaternary {
+        .bg-quaternary {
+            background-color: var(--quaternary);
 
             &-10 {
-                background-color: var(--accent-10);
+                background-color: var(--quaternary-10);
             }
 
             &-20 {
-                background-color: var(--accent-20);
+                background-color: var(--quaternary-20);
             }
 
             &-40 {
-                background-color: var(--accent-40);
+                background-color: var(--quaternary-40);
             }
 
             &-60 {
-                background-color: var(--accent-60);
+                background-color: var(--quaternary-60);
             }
 
             &-80 {
-                background-color: var(--accent-80);
+                background-color: var(--quaternary-80);
             }
 
             &-90 {
-                background-color: var(--accent-90);
+                background-color: var(--quaternary-90);
             }
 
             &--darkest {
-                background-color: var(--accent--darkest);
+                background-color: var(--quaternary--darkest);
 
                 &-10 {
-                    background-color: var(--accent--darkest-10);
+                    background-color: var(--quaternary--darkest-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--darkest-20);
+                    background-color: var(--quaternary--darkest-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--darkest-40);
+                    background-color: var(--quaternary--darkest-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--darkest-60);
+                    background-color: var(--quaternary--darkest-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--darkest-80);
+                    background-color: var(--quaternary--darkest-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--darkest-90);
+                    background-color: var(--quaternary--darkest-90);
                 }
             }
 
             &--darker {
-                background-color: var(--accent--darker);
+                background-color: var(--quaternary--darker);
 
                 &-10 {
-                    background-color: var(--accent--darker-10);
+                    background-color: var(--quaternary--darker-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--darker-20);
+                    background-color: var(--quaternary--darker-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--darker-40);
+                    background-color: var(--quaternary--darker-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--darker-60);
+                    background-color: var(--quaternary--darker-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--darker-80);
+                    background-color: var(--quaternary--darker-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--darker-90);
+                    background-color: var(--quaternary--darker-90);
                 }
             }
 
             &--dark {
-                background-color: var(--accent--dark);
+                background-color: var(--quaternary--dark);
 
                 &-10 {
-                    background-color: var(--accent--dark-10);
+                    background-color: var(--quaternary--dark-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--dark-20);
+                    background-color: var(--quaternary--dark-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--dark-40);
+                    background-color: var(--quaternary--dark-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--dark-60);
+                    background-color: var(--quaternary--dark-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--dark-80);
+                    background-color: var(--quaternary--dark-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--dark-90);
+                    background-color: var(--quaternary--dark-90);
                 }
             }
 
             &--light {
-                background-color: var(--accent--light);
+                background-color: var(--quaternary--light);
 
                 &-10 {
-                    background-color: var(--accent--light-10);
+                    background-color: var(--quaternary--light-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--light-20);
+                    background-color: var(--quaternary--light-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--light-40);
+                    background-color: var(--quaternary--light-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--light-60);
+                    background-color: var(--quaternary--light-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--light-80);
+                    background-color: var(--quaternary--light-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--light-90);
+                    background-color: var(--quaternary--light-90);
                 }
             }
 
             &--lighter {
-                background-color: var(--accent--lighter);
+                background-color: var(--quaternary--lighter);
 
                 &-10 {
-                    background-color: var(--accent--lighter-10);
+                    background-color: var(--quaternary--lighter-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--lighter-20);
+                    background-color: var(--quaternary--lighter-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--lighter-40);
+                    background-color: var(--quaternary--lighter-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--lighter-60);
+                    background-color: var(--quaternary--lighter-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--lighter-80);
+                    background-color: var(--quaternary--lighter-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--lighter-90);
+                    background-color: var(--quaternary--lighter-90);
                 }
             }
 
             &--lightest {
-                background-color: var(--accent--lightest);
+                background-color: var(--quaternary--lightest);
 
                 &-10 {
-                    background-color: var(--accent--lightest-10);
+                    background-color: var(--quaternary--lightest-10);
                 }
 
                 &-20 {
-                    background-color: var(--accent--lightest-20);
+                    background-color: var(--quaternary--lightest-20);
                 }
 
                 &-40 {
-                    background-color: var(--accent--lightest-40);
+                    background-color: var(--quaternary--lightest-40);
                 }
 
                 &-60 {
-                    background-color: var(--accent--lightest-60);
+                    background-color: var(--quaternary--lightest-60);
                 }
 
                 &-80 {
-                    background-color: var(--accent--lightest-80);
+                    background-color: var(--quaternary--lightest-80);
                 }
 
                 &-90 {
-                    background-color: var(--accent--lightest-90);
+                    background-color: var(--quaternary--lightest-90);
                 }
             }
         }
@@ -3962,32 +4035,32 @@ picture {
         }
     }
 
-    @if $accent {
-        .accent {
-            color: var(--accent);
+    @if $quaternary {
+        .quaternary {
+            color: var(--quaternary);
 
             &--darkest {
-                color: var(--accent--darkest);
+                color: var(--quaternary--darkest);
             }
 
             &--darker {
-                color: var(--accent--darker);
+                color: var(--quaternary--darker);
             }
 
             &--dark {
-                color: var(--accent--dark);
+                color: var(--quaternary--dark);
             }
 
             &--light {
-                color: var(--accent--light);
+                color: var(--quaternary--light);
             }
 
             &--lighter {
-                color: var(--accent--lighter);
+                color: var(--quaternary--lighter);
             }
 
             &--lightest {
-                color: var(--accent--lightest);
+                color: var(--quaternary--lightest);
             }
         }
     }
@@ -7695,50 +7768,50 @@ picture {
         }
     }
 
-    @if $accent {
+    @if $quaternary {
 
-        .overlay-accent-10,
-        .overlay-accent-20,
-        .overlay-accent-40,
-        .overlay-accent-60,
-        .overlay-accent-80,
-        .overlay-accent-90,
-        .overlay-accent--darkest-10,
-        .overlay-accent--darkest-20,
-        .overlay-accent--darkest-40,
-        .overlay-accent--darkest-60,
-        .overlay-accent--darkest-80,
-        .overlay-accent--darkest-90,
-        .overlay-accent--darker-10,
-        .overlay-accent--darker-20,
-        .overlay-accent--darker-40,
-        .overlay-accent--darker-60,
-        .overlay-accent--darker-80,
-        .overlay-accent--darker-90,
-        .overlay-accent--dark-10,
-        .overlay-accent--dark-20,
-        .overlay-accent--dark-40,
-        .overlay-accent--dark-60,
-        .overlay-accent--dark-80,
-        .overlay-accent--dark-90,
-        .overlay-accent--light-10,
-        .overlay-accent--light-20,
-        .overlay-accent--light-40,
-        .overlay-accent--light-60,
-        .overlay-accent--light-80,
-        .overlay-accent--light-90,
-        .overlay-accent--lighter-10,
-        .overlay-accent--lighter-20,
-        .overlay-accent--lighter-40,
-        .overlay-accent--lighter-60,
-        .overlay-accent--lighter-80,
-        .overlay-accent--lighter-90,
-        .overlay-accent--lightest-10,
-        .overlay-accent--lightest-20,
-        .overlay-accent--lightest-40,
-        .overlay-accent--lightest-60,
-        .overlay-accent--lightest-80,
-        .overlay-accent--lightest-90 {
+        .overlay-quaternary-10,
+        .overlay-quaternary-20,
+        .overlay-quaternary-40,
+        .overlay-quaternary-60,
+        .overlay-quaternary-80,
+        .overlay-quaternary-90,
+        .overlay-quaternary--darkest-10,
+        .overlay-quaternary--darkest-20,
+        .overlay-quaternary--darkest-40,
+        .overlay-quaternary--darkest-60,
+        .overlay-quaternary--darkest-80,
+        .overlay-quaternary--darkest-90,
+        .overlay-quaternary--darker-10,
+        .overlay-quaternary--darker-20,
+        .overlay-quaternary--darker-40,
+        .overlay-quaternary--darker-60,
+        .overlay-quaternary--darker-80,
+        .overlay-quaternary--darker-90,
+        .overlay-quaternary--dark-10,
+        .overlay-quaternary--dark-20,
+        .overlay-quaternary--dark-40,
+        .overlay-quaternary--dark-60,
+        .overlay-quaternary--dark-80,
+        .overlay-quaternary--dark-90,
+        .overlay-quaternary--light-10,
+        .overlay-quaternary--light-20,
+        .overlay-quaternary--light-40,
+        .overlay-quaternary--light-60,
+        .overlay-quaternary--light-80,
+        .overlay-quaternary--light-90,
+        .overlay-quaternary--lighter-10,
+        .overlay-quaternary--lighter-20,
+        .overlay-quaternary--lighter-40,
+        .overlay-quaternary--lighter-60,
+        .overlay-quaternary--lighter-80,
+        .overlay-quaternary--lighter-90,
+        .overlay-quaternary--lightest-10,
+        .overlay-quaternary--lightest-20,
+        .overlay-quaternary--lightest-40,
+        .overlay-quaternary--lightest-60,
+        .overlay-quaternary--lightest-80,
+        .overlay-quaternary--lightest-90 {
             position: relative;
             z-index: 0;
         }
@@ -8059,50 +8132,50 @@ picture {
         }
     }
 
-    @if $accent {
+    @if $quaternary {
 
-        .overlay-accent-10::before,
-        .overlay-accent-20::before,
-        .overlay-accent-40::before,
-        .overlay-accent-60::before,
-        .overlay-accent-80::before,
-        .overlay-accent-90::before,
-        .overlay-accent--darkest-10::before,
-        .overlay-accent--darkest-20::before,
-        .overlay-accent--darkest-40::before,
-        .overlay-accent--darkest-60::before,
-        .overlay-accent--darkest-80::before,
-        .overlay-accent--darkest-90::before,
-        .overlay-accent--darker-10::before,
-        .overlay-accent--darker-20::before,
-        .overlay-accent--darker-40::before,
-        .overlay-accent--darker-60::before,
-        .overlay-accent--darker-80::before,
-        .overlay-accent--darker-90::before,
-        .overlay-accent--dark-10::before,
-        .overlay-accent--dark-20::before,
-        .overlay-accent--dark-40::before,
-        .overlay-accent--dark-60::before,
-        .overlay-accent--dark-80::before,
-        .overlay-accent--dark-90::before,
-        .overlay-accent--light-10::before,
-        .overlay-accent--light-20::before,
-        .overlay-accent--light-40::before,
-        .overlay-accent--light-60::before,
-        .overlay-accent--light-80::before,
-        .overlay-accent--light-90::before,
-        .overlay-accent--lighter-10::before,
-        .overlay-accent--lighter-20::before,
-        .overlay-accent--lighter-40::before,
-        .overlay-accent--lighter-60::before,
-        .overlay-accent--lighter-80::before,
-        .overlay-accent--lighter-90::before,
-        .overlay-accent--lightest-10::before,
-        .overlay-accent--lightest-20::before,
-        .overlay-accent--lightest-40::before,
-        .overlay-accent--lightest-60::before,
-        .overlay-accent--lightest-80::before,
-        .overlay-accent--lightest-90::before {
+        .overlay-quaternary-10::before,
+        .overlay-quaternary-20::before,
+        .overlay-quaternary-40::before,
+        .overlay-quaternary-60::before,
+        .overlay-quaternary-80::before,
+        .overlay-quaternary-90::before,
+        .overlay-quaternary--darkest-10::before,
+        .overlay-quaternary--darkest-20::before,
+        .overlay-quaternary--darkest-40::before,
+        .overlay-quaternary--darkest-60::before,
+        .overlay-quaternary--darkest-80::before,
+        .overlay-quaternary--darkest-90::before,
+        .overlay-quaternary--darker-10::before,
+        .overlay-quaternary--darker-20::before,
+        .overlay-quaternary--darker-40::before,
+        .overlay-quaternary--darker-60::before,
+        .overlay-quaternary--darker-80::before,
+        .overlay-quaternary--darker-90::before,
+        .overlay-quaternary--dark-10::before,
+        .overlay-quaternary--dark-20::before,
+        .overlay-quaternary--dark-40::before,
+        .overlay-quaternary--dark-60::before,
+        .overlay-quaternary--dark-80::before,
+        .overlay-quaternary--dark-90::before,
+        .overlay-quaternary--light-10::before,
+        .overlay-quaternary--light-20::before,
+        .overlay-quaternary--light-40::before,
+        .overlay-quaternary--light-60::before,
+        .overlay-quaternary--light-80::before,
+        .overlay-quaternary--light-90::before,
+        .overlay-quaternary--lighter-10::before,
+        .overlay-quaternary--lighter-20::before,
+        .overlay-quaternary--lighter-40::before,
+        .overlay-quaternary--lighter-60::before,
+        .overlay-quaternary--lighter-80::before,
+        .overlay-quaternary--lighter-90::before,
+        .overlay-quaternary--lightest-10::before,
+        .overlay-quaternary--lightest-20::before,
+        .overlay-quaternary--lightest-40::before,
+        .overlay-quaternary--lightest-60::before,
+        .overlay-quaternary--lightest-80::before,
+        .overlay-quaternary--lightest-90::before {
             bottom: 0;
             content: "";
             left: 0;
@@ -8847,185 +8920,185 @@ picture {
         }
     }
 
-    @if $accent {
-        .overlay-accent {
+    @if $quaternary {
+        .overlay-quaternary {
             &-10::before {
-                background-color: var(--accent-10);
+                background-color: var(--quaternary-10);
             }
 
             &-20::before {
-                background-color: var(--accent-20);
+                background-color: var(--quaternary-20);
             }
 
             &-40::before {
-                background-color: var(--accent-40);
+                background-color: var(--quaternary-40);
             }
 
             &-60::before {
-                background-color: var(--accent-60);
+                background-color: var(--quaternary-60);
             }
 
             &-80::before {
-                background-color: var(--accent-80);
+                background-color: var(--quaternary-80);
             }
 
             &-90::before {
-                background-color: var(--accent-90);
+                background-color: var(--quaternary-90);
             }
 
             &--darkest {
                 &-10::before {
-                    background-color: var(--accent--darkest-10);
+                    background-color: var(--quaternary--darkest-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--darkest-20);
+                    background-color: var(--quaternary--darkest-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--darkest-40);
+                    background-color: var(--quaternary--darkest-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--darkest-60);
+                    background-color: var(--quaternary--darkest-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--darkest-80);
+                    background-color: var(--quaternary--darkest-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--darkest-90);
+                    background-color: var(--quaternary--darkest-90);
                 }
             }
 
             &--darker {
                 &-10::before {
-                    background-color: var(--accent--darker-10);
+                    background-color: var(--quaternary--darker-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--darker-20);
+                    background-color: var(--quaternary--darker-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--darker-40);
+                    background-color: var(--quaternary--darker-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--darker-60);
+                    background-color: var(--quaternary--darker-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--darker-80);
+                    background-color: var(--quaternary--darker-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--darker-90);
+                    background-color: var(--quaternary--darker-90);
                 }
             }
 
             &--dark {
                 &-10::before {
-                    background-color: var(--accent--dark-10);
+                    background-color: var(--quaternary--dark-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--dark-20);
+                    background-color: var(--quaternary--dark-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--dark-40);
+                    background-color: var(--quaternary--dark-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--dark-60);
+                    background-color: var(--quaternary--dark-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--dark-80);
+                    background-color: var(--quaternary--dark-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--dark-90);
+                    background-color: var(--quaternary--dark-90);
                 }
             }
 
             &--light {
                 &-10::before {
-                    background-color: var(--accent--light-10);
+                    background-color: var(--quaternary--light-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--light-20);
+                    background-color: var(--quaternary--light-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--light-40);
+                    background-color: var(--quaternary--light-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--light-60);
+                    background-color: var(--quaternary--light-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--light-80);
+                    background-color: var(--quaternary--light-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--light-90);
+                    background-color: var(--quaternary--light-90);
                 }
             }
 
             &--lighter {
                 &-10::before {
-                    background-color: var(--accent--lighter-10);
+                    background-color: var(--quaternary--lighter-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--lighter-20);
+                    background-color: var(--quaternary--lighter-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--lighter-40);
+                    background-color: var(--quaternary--lighter-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--lighter-60);
+                    background-color: var(--quaternary--lighter-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--lighter-80);
+                    background-color: var(--quaternary--lighter-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--lighter-90);
+                    background-color: var(--quaternary--lighter-90);
                 }
             }
 
             &--lightest {
                 &-10::before {
-                    background-color: var(--accent--lightest-10);
+                    background-color: var(--quaternary--lightest-10);
                 }
 
                 &-20::before {
-                    background-color: var(--accent--lightest-20);
+                    background-color: var(--quaternary--lightest-20);
                 }
 
                 &-40::before {
-                    background-color: var(--accent--lightest-40);
+                    background-color: var(--quaternary--lightest-40);
                 }
 
                 &-60::before {
-                    background-color: var(--accent--lightest-60);
+                    background-color: var(--quaternary--lightest-60);
                 }
 
                 &-80::before {
-                    background-color: var(--accent--lightest-80);
+                    background-color: var(--quaternary--lightest-80);
                 }
 
                 &-90::before {
-                    background-color: var(--accent--lightest-90);
+                    background-color: var(--quaternary--lightest-90);
                 }
             }
         }
