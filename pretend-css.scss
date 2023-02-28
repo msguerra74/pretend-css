@@ -1,4 +1,4 @@
-/**
+/*!
  * Pretend CSS
  * Made by Pretend
  * https://madebypretend.com
@@ -215,7 +215,7 @@ $width--prose: 60ch; // Readable text width
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
 @mixin breakpoint($_width, $_minmax: max) {
-    @media (#{$_minmax}-width: px-rem($_width)) {
+    @media (#{$_minmax}-width: #{px-rem($_width)}) {
         @content;
     }
 }
