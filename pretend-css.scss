@@ -22,13 +22,13 @@
 // --- SCSS Variable Options --- //
 
 // CSS Options
-$css--base: false; // Add CSS Base Styles // true/false
+$css--base: true; // Add CSS Base Styles // true/false
 $css--components: true; // Add CSS Component Classes // true/false
 $css--helpers: true; // Add CSS Helper Classes // true/false
-$css--classes: false; // Add CSS Classes // true/false
+$css--classes: true; // Add CSS Classes // true/false
 
 // WordPress Builder Options
-$bricks: true; // Using Bricks // true/false
+$bricks: false; // Using Bricks // true/false
 $cwicly: true; // Using Cwicly // true/false
 
 // Action Colors
@@ -125,8 +125,8 @@ $width--prose: 60ch; // Readable text width
         --font-weight--h5: 700;
         --font-weight--h6: 700;
         --line-height--heading: 1.2;
-        --text-transform--h1: uppercase;
-        --text-transform--h2: uppercase;
+        --text-transform--h1: none;
+        --text-transform--h2: none;
         --text-transform--h3: none;
         --text-transform--h4: none;
         --text-transform--h5: none;
@@ -1420,12 +1420,14 @@ picture {
 
     // Alignment
 
+    .alignleft,
     .float--left {
         float: left;
         margin-bottom: var(--spacer--plus);
         margin-right: var(--spacer--plus);
     }
 
+    .alignright,
     .float--right {
         float: right;
         margin-bottom: var(--spacer--plus);
@@ -2339,6 +2341,7 @@ picture {
         text-align: center;
     }
 
+    .aligncenter,
     .center--self {
         margin-left: auto;
         margin-right: auto;
