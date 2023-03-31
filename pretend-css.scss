@@ -405,7 +405,9 @@ h6,
 
 .section--flat,
 .section--base,
+.section--base-content,
 .section--content,
+.section--base-layout,
 .section--layout,
 .section--l,
 .section--xl,
@@ -423,12 +425,22 @@ h6,
 
 .section--base {
     gap: var(--space--base);
-    padding: var(--space--layout) var(--spacer--base-layout);
+    padding: var(--space--base) var(--spacer--base-layout);
+}
+
+.section--base-content {
+    gap: var(--spacer--base-content);
+    padding: var(--spacer--base-content) var(--spacer--base-layout);
 }
 
 .section--content {
     gap: var(--space--content);
     padding: var(--space--content) var(--spacer--base-layout);
+}
+
+.section--base-layout {
+    gap: var(--spacer--base-layout);
+    padding: var(--spacer--base-layout) var(--spacer--base-layout);
 }
 
 .section--layout {
@@ -5615,7 +5627,8 @@ ul.list--flat,
 
 /* Make Cwicly editor look normal when used with Bricks */
 
-html :where(.wp-block) {
+/*
+html :where(.wp-block):not(.center--self) {
     margin-bottom: 0;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -5623,6 +5636,7 @@ html :where(.wp-block) {
     max-width: none;
     width: 100%;
 }
+*/
 
 /* ~~~ Happy Forms ~~~ */
 
