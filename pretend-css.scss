@@ -27,7 +27,8 @@
     --gap--btn: var(--space--s);
     --letter-spacing--btn: .1rem;
     --line-height--btn: 1;
-    --padding--btn: calc(var(--space--base) / 2) var(--space--base);
+    --padding--btn-y: calc(var(--space--base) / 2);
+    --padding--btn-x: var(--space--base);
     --text-transform--btn: uppercase;
     --width--btn: fit-content;
 
@@ -88,11 +89,6 @@
     --color--lighter-darker: var(--color--lighter);
     --color--white-black: var(--color--white);
 
-    /* Gap */
-    --gap--content: var(--spacer--base-content);
-    --gap--grid: var(--spacer--base-layout);
-    --gap--layout: var(--space--layout);
-
     /* Grid */
     --grid--1: repeat(1, minmax(0, 1fr));
     --grid--2: repeat(2, minmax(0, 1fr));
@@ -126,7 +122,7 @@
     --grid--span-12: span 12;
 
     /* Misc */
-    --bg-blur--color: hsla(0, 0%, 100%, .9);
+    --bg-blur--color: hsl(0 0% 100% / 90%);
     --transition--fast: .2s;
     --transition--normal: .3s;
     --transition--slow: .4s;
@@ -184,10 +180,10 @@
     --spacer--base-content: clamp(2.4rem, 1vw + 1.92rem, 3.2rem);
     --spacer--base-layout: clamp(2.4rem, 3vw + .96rem, 4.8rem);
     --spacer--l: clamp(4.8rem, 2vw + 3.84rem, 6.4rem);
-    --spacer--xl: clamp(4.8rem, 6vw + 1.92rem, 9.6rem);
-    --spacer--2xl: clamp(4.8rem, 10vw + 0rem, 12.8rem);
-    --spacer--3xl: clamp(4.8rem, 12vw + -.96rem, 14.4rem);
-    --spacer--4xl: clamp(4.8rem, 14vw + -1.92rem, 16rem);
+    --spacer--xl: clamp(6.4rem, 4vw + 4.48rem, 9.6rem);
+    --spacer--2xl: clamp(6.4rem, 8vw + 2.56rem, 12.8rem);
+    --spacer--3xl: clamp(6.4rem, 10vw + 1.6rem, 14.4rem);
+    --spacer--4xl: clamp(6.4rem, 12vw + 0.64rem, 16rem);
 
     /* Text */
     --text--fine: clamp(1.2rem, .25vw + 1.08rem, 1.4rem);
@@ -226,7 +222,7 @@
         --color--lighter-darker: var(--color--darker);
         --color--white-black: var(--color--black);
         /* Misc */
-        --bg-blur--color: hsla(0, 0%, 0%, .9);
+        --bg-blur--color: hsl(0 0% 0% / 90%);
         /* Shadow */
         --shadow--color: 0 0% 5%;
         --shadow--strength: 20%;
@@ -237,14 +233,14 @@
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
     :root {
         /* Misc */
-        --bg-blur--color: hsla(0, 0%, 100%, .4);
+        --bg-blur--color: hsl(0 0% 100% / 40%);
     }
 
     /* Dark Mode */
     @media (prefers-color-scheme: dark) {
         :root {
             /* Misc */
-            --bg-blur--color: hsla(0, 0%, 0%, .4);
+            --bg-blur--color: hsl(0 0% 0% / 40%);
         }
     }
 }
@@ -378,7 +374,7 @@ h6,
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--gap--content);
+    gap: var(--space--content);
     z-index: 1;
     width: 100%;
 }
@@ -388,14 +384,14 @@ h6,
 }
 
 .block--float>*+* {
-    margin-top: var(--gap--content);
+    margin-top: var(--space--content);
 }
 
 .container {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--gap--content);
+    gap: var(--space--content);
     margin-left: auto;
     margin-right: auto;
     max-width: var(--width--xl);
@@ -1062,7 +1058,7 @@ img.aspect--widescreen {
     justify-content: center;
     letter-spacing: var(--letter-spacing--btn);
     line-height: var(--line-height--btn);
-    padding: var(--padding--btn);
+    padding: var(--padding--btn-y) var(--padding--btn-x);
     text-align: center;
     text-decoration: none;
     text-transform: var(--text-transform--btn);
@@ -5687,7 +5683,7 @@ html :where(.wp-block):not(.center--self) {
     border-width: var(--space--2px) !important;
     font-size: var(--text--small) !important;
     line-height: 1 !important;
-    padding: calc(var(--space--base) / 2) var(--space--base) !important;
+    padding: var(--padding--btn-y) var(--padding--btn-x) !important;
     text-transform: uppercase !important;
 }
 
