@@ -2833,30 +2833,42 @@ img.aspect--widescreen {
 /* Hide and Show */
 
 .hide {
-    display: none !important;
+    display: none;
 }
 
 .show {
-    display: block !important;
+    display: block;
+}
+
+.show--flex {
+    display: flex;
 }
 
 @media (max-width: 960px) {
-    .hide-l {
-        display: none !important;
+    .hide--l {
+        display: none;
     }
 
-    .show-l {
-        display: block !important;
+    .show--l {
+        display: block;
+    }
+
+    .show--l-flex {
+        display: flex;
     }
 }
 
 @media (max-width: 640px) {
-    .hide-m {
-        display: none !important;
+    .hide--m {
+        display: none;
     }
 
-    .show-m {
-        display: block !important;
+    .show--m {
+        display: block;
+    }
+
+    .show--m-flex {
+        display: flex;
     }
 }
 
