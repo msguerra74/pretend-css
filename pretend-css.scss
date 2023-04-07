@@ -1,18 +1,34 @@
 /**
  * Pretend CSS
- * Made by Pretend
  * https://madebypretend.com
  **/
 
-/* ~~~ Settings ~~~ */
-
 :root {
-    /* Aspect Ratio */
-    --aspect--square: 1;
-    --aspect--landscape: 4 / 3;
-    --aspect--portrait: 3 / 4;
-    --aspect--cinema: 16 / 9;
-    --aspect--widescreen: 2 / 1;
+    /* ~~~ Configuration ~~~ */
+
+    /* Body */
+    --bg-color--body: var(--color--lighter-darker);
+    --color--body: var(--color--darker-lighter);
+    --font-size--body: var(--text--base);
+    --font-weight--body: 400;
+    --line-height--body: 1.6;
+
+    /* Button */
+    --bg-color--btn: var(--color--interaction);
+    --border-color--btn: var(--color--interaction);
+    --border-radius--btn: 0;
+    --border-style--btn: solid;
+    --border-width--btn: var(--space--2px);
+    --color--btn: var(--color--lighter);
+    --font-size--btn: var(--text--small);
+    --font-weight--btn: 400;
+    --gap--btn: var(--space--s);
+    --letter-spacing--btn: var(--space--px);
+    --line-height--btn: 1;
+    --padding-y--btn: calc(var(--space--base) / 2);
+    --padding-x--btn: var(--space--base);
+    --text-transform--btn: uppercase;
+    --transition--btn: var(--transition--fast);
 
     /* Color */
     --color--interaction: #ec5659;
@@ -20,6 +36,37 @@
     --color--secondary: var(--color--interaction);
     --color--tertiary: var(--color--interaction);
     --color--quaternary: var(--color--interaction);
+
+    /* Color - Shade */
+    --color--darker: #18181b;
+    --color--dark: #27272a;
+    --color--mid: #71717a;
+    --color--light: #e4e4e7;
+    --color--lighter: #fafafa;
+
+    /* Headings */
+    --font-size--h1: var(--text--title);
+    --font-size--h2: var(--text--heading);
+    --font-size--h3: var(--text--large);
+    --font-size--h4: var(--text--intro);
+    --font-size--h5: var(--text--lede);
+    --font-size--h6: var(--text--base);
+    --font-weight--h1: 700;
+    --font-weight--h2: 700;
+    --font-weight--h3: 700;
+    --font-weight--h4: 700;
+    --font-weight--h5: 700;
+    --font-weight--h6: 700;
+    --line-height--heading: 1.2;
+
+    /* ~~~ Variables ~~~ */
+
+    /* Aspect Ratio */
+    --aspect--square: 1;
+    --aspect--landscape: 4 / 3;
+    --aspect--portrait: 3 / 4;
+    --aspect--cinema: 16 / 9;
+    --aspect--widescreen: 2 / 1;
 
     /* Color - Misc */
     --color--danger: #ef4444;
@@ -30,11 +77,6 @@
 
     /* Color - Shade */
     --color--black: #000;
-    --color--darker: #18181b;
-    --color--dark: #27272a;
-    --color--mid: #71717a;
-    --color--light: #e4e4e7;
-    --color--lighter: #fafafa;
     --color--white: #fff;
 
     /* Color - Dark Mode */
@@ -140,8 +182,6 @@
     --spacer--4xl: clamp(6.4rem, 12vw + 0.64rem, 16rem);
 
     /* Text */
-    --line-height--body: 1.6;
-    --line-height--heading: 1.2;
     --text--fine: clamp(1.2rem, .25vw + 1.08rem, 1.4rem);
     --text--small: clamp(1.4rem, .25vw + 1.28rem, 1.6rem);
     --text--base: clamp(1.6rem, .25vw + 1.48rem, 1.8rem);
@@ -255,8 +295,13 @@ html:focus-within {
 }
 
 body {
+    background-color: var(--bg-color--body);
+    color: var(--color--body);
+    font-size: var(--font-size--body);
     -webkit-font-smoothing: antialiased;
+    font-weight: var(--font-weight--body);
     height: 100%;
+    line-height: var(--line-height--body);
     margin-left: auto;
     margin-right: auto;
     max-width: var(--width--widest);
@@ -266,7 +311,12 @@ body {
     overflow-x: hidden;
 }
 
-main>article a:not([class]) {
+main>article a {
+    color: var(--color--interaction);
+}
+
+main>article a:not([class]),
+.a--link {
     color: var(--color--darker-lighter);
     text-decoration: underline;
     text-decoration-color: var(--color--interaction);
@@ -275,7 +325,8 @@ main>article a:not([class]) {
     transition: var(--transition--fast);
 }
 
-main>article a:not([class]):hover {
+main>article a:not([class]):hover,
+.a--link:hover {
     color: var(--color--interaction);
     text-decoration-color: var(--color--mid);
 }
@@ -296,7 +347,76 @@ textarea {
     font: inherit;
 }
 
-/* ~~~ Containers ~~~ */
+h1,
+.h--1 {
+    font-size: var(--font-size--h1);
+    font-weight: var(--font-weight--h1);
+    line-height: var(--line-height--heading);
+}
+
+h2,
+.h--2 {
+    font-size: var(--font-size--h2);
+    font-weight: var(--font-weight--h2);
+    line-height: var(--line-height--heading);
+}
+
+h3,
+.h--3 {
+    font-size: var(--font-size--h3);
+    font-weight: var(--font-weight--h3);
+    line-height: var(--line-height--heading);
+}
+
+h4,
+.h--4 {
+    font-size: var(--font-size--h4);
+    font-weight: var(--font-weight--h4);
+}
+
+h5,
+.h--5 {
+    font-size: var(--font-size--h5);
+    font-weight: var(--font-weight--h5);
+}
+
+h6,
+.h--6 {
+    font-size: var(--font-size--h6);
+    font-weight: var(--font-weight--h6);
+}
+
+/* ~~~ Components ~~~ */
+
+/* Buttons */
+
+.btn {
+    align-items: center;
+    background-color: var(--bg-color--btn);
+    border: var(--border-width--btn) var(--border-style--btn) var(--border-color--btn);
+    border-radius: var(--border-radius--btn);
+    color: var(--color--btn);
+    display: inline-flex;
+    font-size: var(--font-size--btn);
+    font-weight: var(--font-weight--btn);
+    gap: var(--gap--btn);
+    letter-spacing: var(--letter-spacing--btn);
+    line-height: var(--line-height--btn);
+    justify-content: center;
+    padding: var(--padding-y--btn) var(--padding-x--btn);
+    text-align: center;
+    text-decoration: none;
+    text-transform: var(--text-transform--btn);
+    transition: var(--transition--btn);
+    width: fit-content;
+}
+
+.btn--outline {
+    background-color: initial !important;
+    color: var(--border-color--btn);
+}
+
+/* Containers */
 
 .block {
     align-items: flex-start;
@@ -3514,6 +3634,10 @@ ul.list--flat,
     padding: var(--spacer--4xl);
 }
 
+.padding--btn {
+    padding: var(--padding-y--btn) var(--padding-x--btn);
+}
+
 .padding-bottom--flat {
     padding-bottom: 0;
 }
@@ -4015,6 +4139,12 @@ ul.list--flat,
     display: none;
 }
 
+/* Show links in the block editor */
+
+.editor-styles-wrapper a:not(.a--link) {
+    color: var(--color--interaction);
+}
+
 /* ~~~ Happy Forms ~~~ */
 
 .happyform {
@@ -4024,7 +4154,7 @@ ul.list--flat,
 /* Required Mark */
 
 .happyform .happyforms-required {
-    color: var(--color--interaction) !important;
+    color: var(--color--danger) !important;
 }
 
 /* Sliding Scale */
@@ -4047,8 +4177,8 @@ ul.list--flat,
 .happyform .happyforms-styles .happyforms-input-group__prefix,
 .happyform .happyforms-styles .happyforms-input-group__suffix,
 .happyform .happyforms-styles .happyforms-part--phone .happyforms-input-group__prefix select {
-    font-size: var(--text--small) !important;
-    letter-spacing: var(--space--px) !important;
+    font-size: var(--font-size--btn) !important;
+    letter-spacing: var(--letter-spacing--btn) !important;
 }
 
 /* Buttons */
@@ -4061,11 +4191,11 @@ ul.list--flat,
 .happyform .happyforms-styles button.happyforms-plain-button,
 .happyform .happyforms-styles button.happyforms-text-button,
 .happyform .happyforms-styles button.submit.happyforms-button--submit {
-    border-width: var(--space--2px) !important;
-    font-size: var(--text--small) !important;
-    line-height: 1 !important;
-    padding: calc(var(--space--base) / 2) var(--space--base) !important;
-    text-transform: uppercase !important;
+    border-width: var(--border-width--btn) !important;
+    font-size: var(--font-size--btn) !important;
+    line-height: var(--line-height--btn) !important;
+    padding: var(--padding-y--btn) var(--padding-x--btn) !important;
+    text-transform: var(--text-transform--btn) !important;
 }
 
 .happyform .happyforms-styles.happyforms-form--submit-button-border-radius-square .happyforms-button,
@@ -4075,13 +4205,13 @@ ul.list--flat,
 .happyform .happyforms-styles.happyforms-form--submit-button-border-radius-square button.happyforms-button--submit:hover,
 .happyform .happyforms-styles.happyforms-form--submit-button-border-radius-square button[type=submit].happyforms-button--submit,
 .happyform .happyforms-styles.happyforms-form--submit-button-border-radius-square button[type=submit].happyforms-button--submit:hover {
-    border-radius: 0 !important;
+    border-radius: var(--border-radius--btn) !important;
 }
 
 /* Descriptions */
 
 .happyform .happyforms-styles .happyforms-part__description {
-    font-size: var(--text--small) !important;
+    font-size: var(--font-size--btn) !important;
 }
 
 /* Inputs */
@@ -4097,7 +4227,7 @@ ul.list--flat,
 .happyform .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part--address__results ul,
 .happyform .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part--signature .happyforms--signature-area--container,
 .happyform .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part:not(.happyforms-part--phone) select.happyforms-select {
-    border-radius: 0 !important;
+    border-radius: var(--border-radius--btn) !important;
 }
 
 .happyform .happyforms-styles .happyforms-part input[type=email],
@@ -4110,7 +4240,7 @@ ul.list--flat,
 .happyform .happyforms-styles .happyforms-part--scrollable_terms .scrollbox,
 .happyform .happyforms-styles .happyforms-part--signature .happyforms--signature-area--container,
 .happyform .happyforms-styles .happyforms-part:not(.happyforms-part--phone) select.happyforms-select {
-    border-width: var(--space--2px) !important;
+    border-width: var(--border-width--btn) !important;
 }
 
 /* Labels */
@@ -4125,6 +4255,6 @@ ul.list--flat,
 .happyform .happyforms-styles .happyforms-input-group__prefix,
 .happyform .happyforms-styles .happyforms-input-group__suffix,
 .happyform .happyforms-styles .happyforms-part--phone .happyforms-input-group__prefix select {
-    background-color: var(--color--interaction) !important;
-    color: var(--color--lighter) !important;
+    background-color: var(--bg-color--btn) !important;
+    color: var(--color--btn) !important;
 }
