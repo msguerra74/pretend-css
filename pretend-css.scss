@@ -4133,6 +4133,17 @@ ul.list--flat,
 
 /* ~~~ Cwicly ~~~ */
 
+/* Make Cwicly editor look normal when used with Bricks */
+
+html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
+    align-items: start;
+    margin-bottom: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0;
+    max-width: 100%;
+}
+
 /* Prevent background video from creating extra gap spacing */
 
 .cc-background-video {
