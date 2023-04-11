@@ -6,6 +6,20 @@
 :root {
     /* ~~~ Configuration ~~~ */
 
+    /* Color */
+    --color--interaction: #ec5659;
+    --color--primary: var(--color--interaction);
+    --color--secondary: var(--color--interaction);
+    --color--tertiary: var(--color--interaction);
+    --color--quaternary: var(--color--interaction);
+
+    /* Color - Shade */
+    --color--darker: #18181b;
+    --color--dark: #27272a;
+    --color--mid: #71717a;
+    --color--light: #e4e4e7;
+    --color--lighter: #fafafa;
+
     /* Body */
     --bg-color--body: var(--color--lighter-darker);
     --color--body: var(--color--darker-lighter);
@@ -29,20 +43,6 @@
     --padding-x--btn: var(--space--base);
     --text-transform--btn: uppercase;
     --transition--btn: var(--transition--fast);
-
-    /* Color */
-    --color--interaction: #ec5659;
-    --color--primary: var(--color--interaction);
-    --color--secondary: var(--color--interaction);
-    --color--tertiary: var(--color--interaction);
-    --color--quaternary: var(--color--interaction);
-
-    /* Color - Shade */
-    --color--darker: #18181b;
-    --color--dark: #27272a;
-    --color--mid: #71717a;
-    --color--light: #e4e4e7;
-    --color--lighter: #fafafa;
 
     /* Headings */
     --font-size--h1: var(--text--title);
