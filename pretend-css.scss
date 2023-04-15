@@ -412,9 +412,99 @@ h6,
     width: fit-content;
 }
 
+.btn--black {
+    --bg-color--btn: var(--color--black);
+    --border-color--btn: var(--color--black);
+    --color--btn: var(--color--white);
+}
+
+.btn--black-white {
+    --bg-color--btn: var(--color--black-white);
+    --border-color--btn: var(--color--black-white);
+    --color--btn: var(--color--white-black);
+}
+
+.btn--darker {
+    --bg-color--btn: var(--color--darker);
+    --border-color--btn: var(--color--darker);
+    --color--btn: var(--color--lighter);
+}
+
+.btn--darker-lighter {
+    --bg-color--btn: var(--color--darker-lighter);
+    --border-color--btn: var(--color--darker-lighter);
+    --color--btn: var(--color--lighter-darker);
+}
+
+.btn--dark {
+    --bg-color--btn: var(--color--dark);
+    --border-color--btn: var(--color--dark);
+    --color--btn: var(--color--light);
+}
+
+.btn--dark-light {
+    --bg-color--btn: var(--color--dark-light);
+    --border-color--btn: var(--color--dark-light);
+    --color--btn: var(--color--light-dark);
+}
+
+.btn--mid {
+    --bg-color--btn: var(--color--mid);
+    --border-color--btn: var(--color--mid);
+    --color--btn: var(--color--white);
+}
+
+.btn--light {
+    --bg-color--btn: var(--color--light);
+    --border-color--btn: var(--color--light);
+    --color--btn: var(--color--dark);
+}
+
+.btn--light-dark {
+    --bg-color--btn: var(--color--light-dark);
+    --border-color--btn: var(--color--light-dark);
+    --color--btn: var(--color--dark-light);
+}
+
+.btn--lighter {
+    --bg-color--btn: var(--color--lighter);
+    --border-color--btn: var(--color--lighter);
+    --color--btn: var(--color--darker);
+}
+
+.btn--lighter-darker {
+    --bg-color--btn: var(--color--lighter-darker);
+    --border-color--btn: var(--color--lighter-darker);
+    --color--btn: var(--color--darker-lighter);
+}
+
+.btn--white {
+    --bg-color--btn: var(--color--white);
+    --border-color--btn: var(--color--white);
+    --color--btn: var(--color--black);
+}
+
+.btn--white-black {
+    --bg-color--btn: var(--color--white-black);
+    --border-color--btn: var(--color--white-black);
+    --color--btn: var(--color--black-white);
+}
+
 .btn--outline {
-    background-color: initial !important;
+    --bg-color--btn: initial !important;
     color: var(--border-color--btn);
+}
+
+.btn--small {
+    --font-size--btn: var(--text--fine);
+    --padding-y--btn: var(--space--s);
+    --padding-x--btn: var(--space--m);
+}
+
+.btn--large {
+    --font-size--btn: var(--text--base);
+    --padding-y--btn: var(--space--m);
+    --padding-x--btn: var(--space--content);
 }
 
 /* Containers */
