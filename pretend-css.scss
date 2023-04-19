@@ -4148,7 +4148,7 @@ ul.list--flat,
 .width--wider,
 .width--widest,
 .width--fill,
-.widht--prose {
+.width--prose {
     width: 100%;
 }
 
@@ -4251,6 +4251,7 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
 
 .happyform {
     overflow-x: hidden !important;
+    width: 100% !important;
 }
 
 /* Required Mark */
@@ -4264,6 +4265,12 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
 .happyform .happyforms-part--scale__inputwrap {
     background-color: var(--color--lighter) !important;
     padding: var(--space--s) 0 var(--space--m) !important;
+}
+
+/* Steps */
+
+.happyform .happyforms-styles .happyforms-message-notice.happyforms-step-wrapper-notice {
+    align-items: end !important;
 }
 
 /* Buttons, Prefixes, and Suffixes */
@@ -4332,6 +4339,7 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
     border-radius: var(--border-radius--btn) !important;
 }
 
+.happyform .happyforms-attachment-box,
 .happyform .happyforms-styles .happyforms-part input[type=email],
 .happyform .happyforms-styles .happyforms-part input[type=number],
 .happyform .happyforms-styles .happyforms-part input[type=password],
@@ -4354,9 +4362,14 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
 
 /* Prefixes and Suffixes */
 
+.happyform .happyforms-styles a.happyforms-plain-button,
+.happyform .happyforms-styles button.happyforms-plain-button,
+.happyform .happyforms-styles .happyforms-flex.happyforms-step_information_wrapper button.submit.happyforms-submit.happyforms-button--submit.happyforms-back-step,
 .happyform .happyforms-styles .happyforms-input-group__prefix,
 .happyform .happyforms-styles .happyforms-input-group__suffix,
 .happyform .happyforms-styles .happyforms-part--phone .happyforms-input-group__prefix select {
     background-color: var(--bg-color--btn) !important;
+    border-width: var(--border-width--btn) !important;
     color: var(--color--btn) !important;
+    text-decoration: none !important;
 }
