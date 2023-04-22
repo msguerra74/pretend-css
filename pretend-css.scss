@@ -4254,6 +4254,14 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
     width: 100% !important;
 }
 
+.happyforms-styles p {
+    color: var(--color--darker-lighter) !important;
+}
+
+.happyforms-styles .happyforms-part--divider hr {
+    border-width: var(--border-width--btn) 0 0 0 !important;
+}
+
 /* Required Mark */
 
 .happyform .happyforms-required {
@@ -4339,7 +4347,7 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
     border-radius: var(--border-radius--btn) !important;
 }
 
-.happyform .happyforms-attachment-box,
+.happyform .happyforms-styles .happyforms-attachment-box,
 .happyform .happyforms-styles .happyforms-part input[type=email],
 .happyform .happyforms-styles .happyforms-part input[type=number],
 .happyform .happyforms-styles .happyforms-part input[type=password],
@@ -4347,6 +4355,7 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
 .happyform .happyforms-styles .happyforms-part input[type=tel],
 .happyform .happyforms-styles .happyforms-part input[type=text],
 .happyform .happyforms-styles .happyforms-part textarea,
+.happyform .happyforms-styles .happyforms-part--payments .stripe-element,
 .happyform .happyforms-styles .happyforms-part--scrollable_terms .scrollbox,
 .happyform .happyforms-styles .happyforms-part--signature .happyforms--signature-area--container,
 .happyform .happyforms-styles .happyforms-part:not(.happyforms-part--phone) select.happyforms-select {
