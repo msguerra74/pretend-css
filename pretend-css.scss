@@ -997,6 +997,120 @@ img.aspect--widescreen {
     z-index: -1;
 }
 
+/* Border */
+
+.border--base {
+    border-color: var(--color--mid);
+    border-radius: var(--border-radius--btn);
+    border-style: var(--border-style--btn);
+    border-width: var(--border-width--btn);
+}
+
+.border--btn {
+    border: var(--border-width--btn) var(--border-style--btn) var(--border-color--btn);
+    border-radius: var(--border-radius--btn);
+}
+
+.border--interaction {
+    border-color: var(--color--interaction);
+}
+
+.border--primary {
+    border-color: var(--color--primary);
+}
+
+.border--secondary {
+    border-color: var(--color--secondary);
+}
+
+.border--tertiary {
+    border-color: var(--color--tertiary);
+}
+
+.border--quaternary {
+    border-color: var(--color--quaternary);
+}
+
+.border--black {
+    border-color: var(--color--black);
+}
+
+.border--black-white {
+    border-color: var(--color--black-white);
+}
+
+.border--darker {
+    border-color: var(--color--darker);
+}
+
+.border--darker-lighter {
+    border-color: var(--color--darker-lighter);
+}
+
+.border--dark {
+    border-color: var(--color--dark);
+}
+
+.border--dark-light {
+    border-color: var(--color--dark-light);
+}
+
+.border--mid {
+    border-color: var(--color--mid);
+}
+
+.border--light {
+    border-color: var(--color--light);
+}
+
+.border--light-dark {
+    border-color: var(--color--light-dark);
+}
+
+.border--lighter {
+    border-color: var(--color--lighter);
+}
+
+.border--lighter-darker {
+    border-color: var(--color--lighter-darker);
+}
+
+.border--white {
+    border-color: var(--color--white);
+}
+
+.border--white-black {
+    border-color: var(--color--white-black);
+}
+
+.border--dashed {
+    border-style: dashed;
+}
+
+.border--dotted {
+    border-style: dotted;
+}
+
+.border--solid {
+    border-style: solid;
+}
+
+.border--px {
+    border-width: var(--space--px);
+}
+
+.border--2px {
+    border-width: var(--space--2px);
+}
+
+.border--xs {
+    border-width: var(--space--xs);
+}
+
+.border--s {
+    border-width: var(--space--s);
+}
+
 /* Breakout */
 
 .breakout--wide {
