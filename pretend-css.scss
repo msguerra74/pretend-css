@@ -57,7 +57,14 @@
     --font-weight--h4: 700;
     --font-weight--h5: 700;
     --font-weight--h6: 700;
+    --letter-spacing--heading: var(--space--px);
     --line-height--heading: 1.2;
+    --text-transform--h1: none;
+    --text-transform--h2: none;
+    --text-transform--h3: none;
+    --text-transform--h4: none;
+    --text-transform--h5: none;
+    --text-transform--h6: none;
 
     /* ~~~ Variables ~~~ */
 
@@ -349,10 +356,26 @@ textarea {
 }
 
 h1,
+.h--1,
+h2,
+.h--2,
+h3,
+.h--3,
+h4,
+.h--4,
+h5,
+.h--5,
+h6,
+.h--6 {
+    letter-spacing: var(--letter-spacing--heading);
+}
+
+h1,
 .h--1 {
     font-size: var(--font-size--h1);
     font-weight: var(--font-weight--h1);
     line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h1);
 }
 
 h2,
@@ -360,6 +383,7 @@ h2,
     font-size: var(--font-size--h2);
     font-weight: var(--font-weight--h2);
     line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h2);
 }
 
 h3,
@@ -367,24 +391,28 @@ h3,
     font-size: var(--font-size--h3);
     font-weight: var(--font-weight--h3);
     line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h3);
 }
 
 h4,
 .h--4 {
     font-size: var(--font-size--h4);
     font-weight: var(--font-weight--h4);
+    text-transform: var(--text-transform--h4);
 }
 
 h5,
 .h--5 {
     font-size: var(--font-size--h5);
     font-weight: var(--font-weight--h5);
+    text-transform: var(--text-transform--h5);
 }
 
 h6,
 .h--6 {
     font-size: var(--font-size--h6);
     font-weight: var(--font-weight--h6);
+    text-transform: var(--text-transform--h6);
 }
 
 /* ~~~ Components ~~~ */
@@ -4340,6 +4368,7 @@ ul.list--flat,
 
 /* Make Cwicly editor look normal when used with Bricks */
 
+/*
 html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
     align-items: start;
     margin-bottom: 0;
@@ -4348,6 +4377,7 @@ html :where(.wp-block):not(.center--all):not(.center--self):not(.center--x) {
     margin-top: 0;
     max-width: 100%;
 }
+*/
 
 /* Prevent background video from creating extra gap spacing */
 
