@@ -1,12 +1,12 @@
 /**
  * Pretend CSS
  * https://madebypretend.com
- **/
+ */
 
 // For future use with Sass Math
 @use "sass:math";
 
-// --- SCSS Variable Options --- //
+// === SCSS Variable Options === //
 
 // Width
 $width--xs: 320px; // Minimum viewport width
@@ -18,7 +18,7 @@ $width--wide: 1440px; // Wide breakout width
 $width--wider: 1600px; // Max breakout width and max media width
 $width--widest: 1920px; // Website container width
 
-// --- SCSS Functions --- //
+// === SCSS Functions === //
 
 // Fluid Sizing
 // --
@@ -71,7 +71,7 @@ $width--widest: 1920px; // Website container width
 //     @return $_rem;
 // }
 
-// --- SCSS Mixins --- //
+// === SCSS Mixins === //
 
 // Breakpoint Generator
 // --
@@ -85,7 +85,7 @@ $width--widest: 1920px; // Website container width
 }
 
 :root {
-    /* --- Start Configuration --- */
+    /* === Start Configuration === */
 
     /* Color */
     --color--interaction: #ec5659;
@@ -162,7 +162,7 @@ $width--widest: 1920px; // Website container width
     --text-transform--h5: none;
     --text-transform--h6: none;
 
-    /* --- End Configuration --- */
+    /* === End Configuration === */
 
     // Aspect Ratio
     --aspect--square: 1;
@@ -362,7 +362,7 @@ $width--widest: 1920px; // Website container width
     }
 }
 
-// --- Base --- //
+// === Base === //
 
 :focus:not(:focus-visible) {
     outline: none;
@@ -516,7 +516,7 @@ textarea {
     line-height: 1.2 !important;
 }
 
-// --- Component --- //
+// === Component === //
 
 // Button
 
@@ -740,7 +740,7 @@ form.form button {
     padding: var(--spacer--4xl) var(--spacer--base-layout);
 }
 
-// --- Classes --- //
+// === Classes === //
 
 // Alignment
 
@@ -5916,7 +5916,7 @@ ul.list--flat,
     z-index: 10000;
 }
 
-// --- Bricks Form --- //
+// === Bricks Form === //
 
 form.form {
     width: 100%;
