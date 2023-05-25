@@ -10,7 +10,7 @@
 
 // Options
 $essentials: true; // Include essential CSS classes
-$non-essentials: false; // Include non-essential CSS classes
+$non-essentials: true; // Include non-essential CSS classes
 $bricks-form: true; // Include Bricks form styling
 
 // Width
@@ -5449,11 +5449,11 @@ textarea {
     }
 
     .radius--l {
-        border-radius: var(--radius--base);
+        border-radius: var(--radius--l);
     }
 
     .radius--xl {
-        border-radius: var(--radius--content);
+        border-radius: var(--radius--xl);
     }
 
     .radius--round {
@@ -5474,11 +5474,11 @@ textarea {
         }
 
         .radius--xl-l {
-            border-radius: var(--radius--base);
+            border-radius: var(--radius--l);
         }
 
         .radius--xl-xl {
-            border-radius: var(--radius--content);
+            border-radius: var(--radius--xl);
         }
 
         .radius--xl-round {
@@ -5500,11 +5500,11 @@ textarea {
         }
 
         .radius--l-l {
-            border-radius: var(--radius--base);
+            border-radius: var(--radius--l);
         }
 
         .radius--l-xl {
-            border-radius: var(--radius--content);
+            border-radius: var(--radius--xl);
         }
 
         .radius--l-round {
@@ -5526,11 +5526,11 @@ textarea {
         }
 
         .radius--m-l {
-            border-radius: var(--radius--base);
+            border-radius: var(--radius--l);
         }
 
         .radius--m-xl {
-            border-radius: var(--radius--content);
+            border-radius: var(--radius--xl);
         }
 
         .radius--m-round {
@@ -5552,11 +5552,11 @@ textarea {
         }
 
         .radius--s-l {
-            border-radius: var(--radius--base);
+            border-radius: var(--radius--l);
         }
 
         .radius--s-xl {
-            border-radius: var(--radius--content);
+            border-radius: var(--radius--xl);
         }
 
         .radius--s-round {
