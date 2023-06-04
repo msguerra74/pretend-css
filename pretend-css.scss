@@ -9,8 +9,8 @@
 // === SCSS Variable Options === //
 
 // Options
-$essentials: true; // Include essential CSS classes
-$non-essentials: true; // Include non-essential CSS classes
+$essential: true; // Include essential CSS classes
+$non-essential: true; // Include non-essential CSS classes
 $bricks-form: true; // Include Bricks form styling
 
 // Width
@@ -522,7 +522,9 @@ textarea {
     line-height: 1.2 !important;
 }
 
-@if $essentials {
+@if $essential {
+    // === Components === //
+
     // Button
 
     form.form button,
@@ -1838,6 +1840,12 @@ textarea {
         column-span: all;
     }
 
+    // Flex Align
+
+    .flex--grow>* {
+        flex-grow: 1;
+    }
+
     // Flex Grid
 
     .flex-grid--1 {
@@ -1863,6 +1871,7 @@ textarea {
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--gap--flex-grid);
+        justify-content: center;
     }
 
     .flex-grid--1.gap--xs,
@@ -1982,6 +1991,7 @@ textarea {
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
+            justify-content: center;
         }
 
         .flex-grid--xl-1.gap--xs,
@@ -2102,6 +2112,7 @@ textarea {
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
+            justify-content: center;
         }
 
         .flex-grid--l-1.gap--xs,
@@ -2222,6 +2233,7 @@ textarea {
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
+            justify-content: center;
         }
 
         .flex-grid--m-1.gap--xs,
@@ -2342,6 +2354,7 @@ textarea {
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
+            justify-content: center;
         }
 
         .flex-grid--s-1.gap--xs,
@@ -3384,7 +3397,7 @@ textarea {
     }
 }
 
-@if $non-essentials {
+@if $non-essential {
     // Flex
 
     .flex {
@@ -3879,10 +3892,6 @@ textarea {
         .justify-items--s-stretch {
             justify-items: stretch;
         }
-    }
-
-    .flex--grow>* {
-        flex-grow: 1;
     }
 
     .flex--wrap {
