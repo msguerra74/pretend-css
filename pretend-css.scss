@@ -1,12 +1,12 @@
 /**
- * Pretend CSS
- * https://madebypretend.com
+ * Pretend CSS Framework
+ * https://pretend.studio
  */
 
 // For future use with Sass Math
 @use "sass:math";
 
-// === SCSS Variable Options === //
+// - - - SCSS Variable Options - - - //
 
 // Options
 $essential: true; // Include essential CSS classes
@@ -23,7 +23,7 @@ $width--wide: 1440px; // Wide breakout width
 $width--wider: 1600px; // Max breakout width and max media width
 $width--widest: 1920px; // Website container width
 
-// === SCSS Functions === //
+// - - - SCSS Functions - - - //
 
 // Fluid Sizing
 // --
@@ -76,7 +76,7 @@ $width--widest: 1920px; // Website container width
 //     @return $_rem;
 // }
 
-// === SCSS Mixins === //
+// - - - SCSS Mixins - - - //
 
 // Breakpoint Generator
 // --
@@ -90,7 +90,7 @@ $width--widest: 1920px; // Website container width
 }
 
 :root {
-    /* === Start Configuration === */
+    /* - - - Start Configuration - - - */
 
     /* Color */
     --color--interaction: #ec5659;
@@ -100,11 +100,11 @@ $width--widest: 1920px; // Website container width
     --color--quaternary: var(--color--interaction);
 
     /* Color - Shade */
-    --color--darker: #18181b;
-    --color--dark: #27272a;
-    --color--mid: #71717a;
-    --color--light: #e4e4e7;
-    --color--lighter: #fafafa;
+    --color--darker: #111111;
+    --color--dark: #222222;
+    --color--mid: #898989;
+    --color--light: #f0f0f0;
+    --color--lighter: #f7f7f7;
 
     /* Body */
     --bg-color--body: var(--color--lighter-darker);
@@ -167,7 +167,7 @@ $width--widest: 1920px; // Website container width
     --text-transform--h5: none;
     --text-transform--h6: none;
 
-    /* === End Configuration === */
+    /* - - - End Configuration - - - */
 
     // Aspect Ratio
     --aspect--square: 1;
@@ -367,7 +367,7 @@ $width--widest: 1920px; // Website container width
     }
 }
 
-// === Base === //
+// - - - Base - - - //
 
 :focus:not(:focus-visible) {
     outline: none;
@@ -523,7 +523,7 @@ textarea {
 }
 
 @if $essential {
-    // === Components === //
+    // - - - Components - - - //
 
     // Button
 
@@ -669,7 +669,7 @@ textarea {
         padding: var(--spacer--4xl) var(--spacer--base-layout);
     }
 
-    // === Classes === //
+    // - - - Classes - - - //
 
     // Alignment
 
@@ -5919,7 +5919,7 @@ textarea {
 }
 
 @if $bricks-form {
-    // === Bricks Form === //
+    // - - - Bricks Form - - - //
 
     form.form {
         width: 100%;
