@@ -6193,19 +6193,15 @@ ul.list--flat,
 
     .form {
         overflow-x: hidden !important;
+        width: 100% !important;
     }
 
-    // Required Mark
-
-    .form .happyforms-required {
-        color: var(--color--required-input) !important;
+    .happyforms-styles p {
+        color: var(--color--label) !important;
     }
 
-    // Sliding Scale
-
-    .form .happyforms-part--scale__inputwrap {
-        background-color: var(--color--lighter) !important;
-        padding: var(--space--s) 0 var(--space--m) !important;
+    .happyforms-styles .happyforms-part--divider hr {
+        border-width: var(--border-width--input) 0 0 0 !important;
     }
 
     // Button, Prefix, and Suffix
@@ -6252,10 +6248,27 @@ ul.list--flat,
         border-radius: var(--border-radius--btn) !important;
     }
 
+    // Checkbox and Radio
+
+    .form .happyforms-styles .happyforms-part .checkmark {
+        border: var(--border-width--input) var(--border-style--input) !important;
+        border-color: var(--border-color--input) !important;
+    }
+
     // Description
 
     .form .happyforms-styles .happyforms-part__description {
         font-size: var(--font-size--btn) !important;
+    }
+
+    // Error
+
+    .form .happyforms-part-error-notice span {
+        color: var(--color--danger) !important;
+    }
+
+    .form .happyforms-part-error-notice svg {
+        display: none !important;
     }
 
     // Input
@@ -6270,10 +6283,12 @@ ul.list--flat,
     .form .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part textarea,
     .form .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part--address__results ul,
     .form .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part--signature .happyforms--signature-area--container,
-    .form .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part:not(.happyforms-part--phone) select.happyforms-select {
+    .form .happyforms-styles.happyforms-form--part-border-radius-square .happyforms-part:not(.happyforms-part--phone) select.happyforms-select,
+    .form .happyforms-styles .happyforms-part--scrollable_terms .scrollbox {
         border-radius: var(--border-radius--input) !important;
     }
 
+    .form .happyforms-styles .happyforms-attachment-box,
     .form .happyforms-styles .happyforms-part input[type=email],
     .form .happyforms-styles .happyforms-part input[type=number],
     .form .happyforms-styles .happyforms-part input[type=password],
@@ -6281,6 +6296,7 @@ ul.list--flat,
     .form .happyforms-styles .happyforms-part input[type=tel],
     .form .happyforms-styles .happyforms-part input[type=text],
     .form .happyforms-styles .happyforms-part textarea,
+    .form .happyforms-styles .happyforms-part--payments .stripe-element,
     .form .happyforms-styles .happyforms-part--scrollable_terms .scrollbox,
     .form .happyforms-styles .happyforms-part--signature .happyforms--signature-area--container,
     .form .happyforms-styles .happyforms-part:not(.happyforms-part--phone) select.happyforms-select {
@@ -6296,10 +6312,34 @@ ul.list--flat,
 
     // Prefix and Suffix
 
+    .form .happyforms-styles a.happyforms-plain-button,
+    .form .happyforms-styles button.happyforms-plain-button,
+    .form .happyforms-styles .happyforms-flex.happyforms-step_information_wrapper button.submit.happyforms-submit.happyforms-button--submit.happyforms-back-step,
     .form .happyforms-styles .happyforms-input-group__prefix,
     .form .happyforms-styles .happyforms-input-group__suffix,
     .form .happyforms-styles .happyforms-part--phone .happyforms-input-group__prefix select {
         background-color: var(--bg-color--btn) !important;
+        border-width: var(--border-width--btn) !important;
         color: var(--color--btn) !important;
+        text-decoration: none !important;
+    }
+
+    // Required Mark
+
+    .form .happyforms-required {
+        color: var(--color--required-input) !important;
+    }
+
+    // Sliding Scale
+
+    .form .happyforms-styles .happyforms-part input[type=range] {
+        background-color: var(--color--mid) !important;
+        height: var(--border-width--input) !important;
+    }
+
+    // Step
+
+    .form .happyforms-styles .happyforms-message-notice.happyforms-step-wrapper-notice {
+        align-items: end !important;
     }
 }
