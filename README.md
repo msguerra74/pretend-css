@@ -1,3 +1,3 @@
 # Pretend CSS
 
-[Pretend](https://madebypretend.com)
+[Pretend](https://pretend.studio)
