@@ -1,6 +1,6 @@
 /**
  * Pretend CSS
- * https://madebypretend.com
+ * https://pretend.studio
  */
 
 @use "sass:math";
@@ -21,8 +21,8 @@ $builder--bricks: true; // Include Bricks styling
 $builder--cwicly: false; // Include Cwicly styling
 
 // Form
-$form--bricks: true; // Include Bricks form styling
-$form--happyforms: false; // Include HappyForms styling
+$form--bricks: false; // Include Bricks form styling
+$form--happyforms: true; // Include HappyForms styling
 
 // Width
 $width--xs: 320px; // Minimum viewport width
