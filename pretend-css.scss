@@ -674,6 +674,33 @@ textarea {
 
     // Alignment
 
+    .center--all {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .center--x {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .center--y {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+    }
+
     .aligncenter,
     .center--self {
         margin-left: auto;
@@ -1837,6 +1864,80 @@ textarea {
         z-index: 10;
     }
 
+    // Hide and Show
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .show--flex {
+        display: flex;
+    }
+
+    @if $breakpoint--xl {
+        @include breakpoint($width--xl) {
+            .hide--xl {
+                display: none;
+            }
+
+            .show--xl {
+                display: block;
+            }
+
+            .show--xl-flex {
+                display: flex;
+            }
+        }
+    }
+
+    @include breakpoint($width--l) {
+        .hide--l {
+            display: none;
+        }
+
+        .show--l {
+            display: block;
+        }
+
+        .show--l-flex {
+            display: flex;
+        }
+    }
+
+    @include breakpoint($width--m) {
+        .hide--m {
+            display: none;
+        }
+
+        .show--m {
+            display: block;
+        }
+
+        .show--m-flex {
+            display: flex;
+        }
+    }
+
+    @if $breakpoint--s {
+        @include breakpoint($width--s) {
+            .hide--s {
+                display: none;
+            }
+
+            .show--s {
+                display: block;
+            }
+
+            .show--s-flex {
+                display: flex;
+            }
+        }
+    }
+
     // Hide Visually
 
     .hide--visually {
@@ -1996,6 +2097,16 @@ textarea {
         color: var(--color--white-black);
     }
 
+    // Padding
+
+    .padding--btn {
+        padding: var(--padding-y--btn) var(--padding-x--btn);
+    }
+
+    .padding--input {
+        padding: var(--padding--input);
+    }
+
     // Shadow
 
     .shadow--low {
@@ -2069,6 +2180,16 @@ textarea {
                 box-shadow: var(--shadow--high);
             }
         }
+    }
+
+    // Text
+
+    .text--btn {
+        font-size: var(--font-size--btn);
+        font-weight: var(--font-weight--btn);
+        letter-spacing: var(--letter-spacing--btn);
+        line-height: var(--line-height--btn);
+        text-transform: var(--text-transform--btn);
     }
 
     // Text Vertical
@@ -2153,39 +2274,16 @@ textarea {
             }
         }
     }
+
+    // Width
+
+    .width--fit {
+        max-width: fit-content;
+    }
 }
 
 @if $class--extra {
     // - - - Extra Classes - - - //
-
-    // Alignment
-
-    .center--all {
-        align-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .center--x {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .center--y {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-    }
 
     // Flex
 
@@ -4781,80 +4879,6 @@ textarea {
         }
     }
 
-    // Hide and Show
-
-    .hide {
-        display: none;
-    }
-
-    .show {
-        display: block;
-    }
-
-    .show--flex {
-        display: flex;
-    }
-
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .hide--xl {
-                display: none;
-            }
-
-            .show--xl {
-                display: block;
-            }
-
-            .show--xl-flex {
-                display: flex;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .hide--l {
-            display: none;
-        }
-
-        .show--l {
-            display: block;
-        }
-
-        .show--l-flex {
-            display: flex;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .hide--m {
-            display: none;
-        }
-
-        .show--m {
-            display: block;
-        }
-
-        .show--m-flex {
-            display: flex;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .hide--s {
-                display: none;
-            }
-
-            .show--s {
-                display: block;
-            }
-
-            .show--s-flex {
-                display: flex;
-            }
-        }
-    }
-
     // Inline
 
     .inline {
@@ -5427,14 +5451,6 @@ textarea {
         padding: var(--spacer--4xl);
     }
 
-    .padding--btn {
-        padding: var(--padding-y--btn) var(--padding-x--btn);
-    }
-
-    .padding--input {
-        padding: var(--padding--input);
-    }
-
     .padding-bottom--flat {
         padding-bottom: 0;
     }
@@ -5639,16 +5655,6 @@ textarea {
                 border-radius: var(--border-radius--input);
             }
         }
-    }
-
-    // Text
-
-    .text--btn {
-        font-size: var(--font-size--btn);
-        font-weight: var(--font-weight--btn);
-        letter-spacing: var(--letter-spacing--btn);
-        line-height: var(--line-height--btn);
-        text-transform: var(--text-transform--btn);
     }
 
     // Text Align
@@ -5916,10 +5922,6 @@ textarea {
     .width--fill,
     .width--prose {
         width: 100%;
-    }
-
-    .width--fit {
-        max-width: fit-content;
     }
 
     .width--xs {
