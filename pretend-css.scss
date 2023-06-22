@@ -118,8 +118,8 @@ $width--widest: 1920px; // Website container width
     --gap--btn: var(--space--s);
     --letter-spacing--btn: var(--space--px);
     --line-height--btn: 1;
-    --padding-x--btn: var(--space--base);
-    --padding-y--btn: calc(var(--space--base) / 2);
+    --padding-x--btn: var(--space--content);
+    --padding-y--btn: var(--space--m);
     --text-transform--btn: uppercase;
     --transition--btn: var(--transition--fast);
 
@@ -136,7 +136,7 @@ $width--widest: 1920px; // Website container width
     --font-size--label: var(--text--base);
     --font-weight--label: 400;
     --line-height--input: 1;
-    --padding--input: calc(var(--space--base) / 2);
+    --padding--input: var(--space--m);
 
     /* Heading */
     --font-size--h1: var(--text--title);
@@ -546,8 +546,8 @@ textarea {
 
     .btn--large {
         --font-size--btn: var(--text--base);
-        --padding-y--btn: var(--space--m);
-        --padding-x--btn: var(--space--content);
+        --padding-y--btn: var(--space--base);
+        --padding-x--btn: var(--space--layout);
     }
 
     // Container
