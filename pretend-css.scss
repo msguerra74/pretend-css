@@ -10,7 +10,7 @@
 // Class
 $class--component: true; // Include component classes
 $class--essential: true; // Include essential classes
-$class--extra: true; // Include extra classes
+$class--extra: false; // Include extra classes
 
 // Breakpoint
 $breakpoint--s: true; // Include small breakpoint classes
@@ -77,7 +77,7 @@ $width--widest: 1920px; // Website container width
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
 @mixin breakpoint($_width, $_minmax: max) {
-    @media (#{$_minmax}-width: #{px-relative($_width, em)}) {
+    @media (#{$_minmax}-width: #{$_width}) {
         @content;
     }
 }
@@ -583,7 +583,7 @@ textarea {
             max-width: var(--width--xl);
         }
 
-        gap: var(--space--content);
+        gap: var(--space--layout);
         z-index: 1;
     }
 
