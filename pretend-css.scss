@@ -10,7 +10,7 @@
 // Class
 $class--component: true; // Include component classes
 $class--essential: true; // Include essential classes
-$class--extra: false; // Include extra classes
+$class--extra: true; // Include extra classes
 
 // Breakpoint
 $breakpoint--s: true; // Include small breakpoint classes
@@ -24,15 +24,30 @@ $builder--cwicly: false; // Include Cwicly styling
 $form--bricks: false; // Include Bricks form styling
 $form--happyforms: true; // Include HappyForms styling
 
+// Scaled spacing and text
+$scaling: true; // Use scaled vs manual spacing and text
+$scale-base-min--space: 24px; // Minimum base space size
+$scale-base-max--space: 32px; // Maximum base space size
+$scale-base-min--text: 16px; // Minimum base text size
+$scale-base-max--text: 18px; // Maximum base text size
+$scale-ratio-min--space: 1.25; // Major Third scale
+$scale-ratio-max--space: 1.333; // Perfect Fourth scale
+$scale-ratio-min--text: 1.125; // Major Second scale
+$scale-ratio-max--text: 1.333; // Perfect Fourth scale
+$scale-sizes-min--space: "s", "xs"; // Minimum space scale sizes
+$scale-sizes-max--space: "l", "xl", "2xl", "3xl", "4xl", "5xl"; // Maximum space scale sizes
+$scale-sizes-min--text: "small", "fine"; // Minimum text scale sizes
+$scale-sizes-max--text: "lede", "large", "h3", "h2", "h1", "hero"; // Maximum text scale sizes
+
 // Width
-$width--xs: 320px; // Minimum viewport width
-$width--s: 480px; // Small breakpoint and fluid sizing minimum width
+$width--min: 320px; // Minimum width
+$width--s: 480px; // Small breakpoint
 $width--m: 640px; // Medium breakpoint
 $width--l: 960px; // Large breakpoint
-$width--xl: 1280px; // Maximum viewport width and fluid sizing maximum width
-$width--wide: 1440px; // Wide breakout width
-$width--wider: 1600px; // Max breakout width and max media width
-$width--widest: 1920px; // Website container width
+$width--xl: 1280px; // Website width
+$width--wide: 1440px; // Wide width
+$width--wider: 1600px; // Wider width
+$width--max: 1920px; // Maximum width
 
 // - - - SCSS Functions - - - //
 
@@ -115,11 +130,11 @@ $width--widest: 1920px; // Website container width
     --color--btn: var(--color--lighter);
     --font-size--btn: var(--text--small);
     --font-weight--btn: 400;
-    --gap--btn: var(--space--s);
+    --gap--btn: var(--space--8px);
     --letter-spacing--btn: var(--space--px);
     --line-height--btn: 1;
-    --padding-x--btn: var(--space--content);
-    --padding-y--btn: var(--space--m);
+    --padding-x--btn: var(--space--m);
+    --padding-y--btn: var(--space--xs);
     --text-transform--btn: uppercase;
     --transition--btn: var(--transition--fast);
 
@@ -136,13 +151,13 @@ $width--widest: 1920px; // Website container width
     --font-size--label: var(--text--base);
     --font-weight--label: 400;
     --line-height--input: 1;
-    --padding--input: var(--space--m);
+    --padding--input: var(--space--xs);
 
     /* Heading */
-    --font-size--h1: var(--text--title);
-    --font-size--h2: var(--text--heading);
-    --font-size--h3: var(--text--large);
-    --font-size--h4: var(--text--intro);
+    --font-size--h1: var(--text--h1);
+    --font-size--h2: var(--text--h2);
+    --font-size--h3: var(--text--h3);
+    --font-size--h4: var(--text--large);
     --font-size--h5: var(--text--lede);
     --font-size--h6: var(--text--base);
     --font-weight--h1: 700;
@@ -215,15 +230,15 @@ $width--widest: 1920px; // Website container width
     --object--end: 85%;
     --text--spacing: var(--space--px);
     --transition--fast: .2s;
-    --transition--normal: .3s;
-    --transition--slow: .4s;
+    --transition--normal: .4s;
+    --transition--slow: .6s;
 
     // Radius
-    --radius--xs: var(--space--xs);
-    --radius--s: var(--space--s);
-    --radius--m: var(--space--m);
-    --radius--l: var(--space--base);
-    --radius--xl: var(--space--content);
+    --radius--xs: var(--space--4px);
+    --radius--s: var(--space--8px);
+    --radius--m: var(--space--xs);
+    --radius--l: var(--space--s);
+    --radius--xl: var(--space--m);
     --radius--round: 50%;
 
     // Shadow
@@ -250,54 +265,74 @@ $width--widest: 1920px; // Website container width
     // Space
     --space--px: #{px-relative(1px)};
     --space--2px: #{px-relative(2px)};
-    --space--xs: #{px-relative(4px)};
-    --space--s: #{px-relative(8px)};
-    --space--m: #{px-relative(16px)};
-    --space--base: #{px-relative(24px)};
-    --space--content: #{px-relative(32px)};
-    --space--layout: #{px-relative(48px)};
-    --space--l: #{px-relative(64px)};
-    --space--xl: #{px-relative(96px)};
-    --space--2xl: #{px-relative(128px)};
-    --space--3xl: #{px-relative(144px)};
-    --space--4xl: #{px-relative(160px)};
-    --space--5xl: #{px-relative(192px)};
+    --space--4px: #{px-relative(4px)};
+    --space--8px: #{px-relative(8px)};
 
-    // Spacer
-    --spacer--base-content: #{fluid(24px, 32px)};
-    --spacer--base-layout: #{fluid(24px, 48px)};
-    --spacer--l: #{fluid(48px, 64px)};
-    --spacer--xl: #{fluid(64px, 96px)};
-    --spacer--2xl: #{fluid(64px, 128px)};
-    --spacer--3xl: #{fluid(96px, 144px)};
-    --spacer--4xl: #{fluid(96px, 160px)};
-    --spacer--5xl: #{fluid(96px, 192px)};
+    @if $scaling {
 
-    // Text
-    --text--fine: #{fluid(12px, 14px)};
-    --text--small: #{fluid(14px, 16px)};
-    --text--base: #{fluid(16px, 18px)};
-    --text--lede: #{fluid(18px, 20px)};
-    --text--intro: #{fluid(20px, 24px)};
-    --text--large: #{fluid(24px, 32px)};
-    --text--heading: #{fluid(32px, 40px)};
-    --text--title: #{fluid(40px, 48px)};
-    --text--l: #{fluid(40px, 64px)};
-    --text--xl: #{fluid(40px, 96px)};
-    --text--2xl: #{fluid(40px, 128px)};
-    --text--3xl: #{fluid(40px, 144px)};
-    --text--4xl: #{fluid(40px, 160px)};
-    --text--5xl: #{fluid(40px, 192px)};
+        // Space
+        @each $_space-size in $scale-sizes-min--space {
+            $scale-base-min--space: math.div($scale-base-min--space, $scale-ratio-min--space);
+            $scale-base-max--space: math.div($scale-base-max--space, $scale-ratio-max--space);
+            --space--#{$_space-size}: #{fluid($scale-base-min--space, $scale-base-max--space)};
+        }
+
+        --space--m: #{fluid($scale-base-min--space, $scale-base-max--space)};
+
+        @each $_space-size in $scale-sizes-max--space {
+            $scale-base-min--space: $scale-base-min--space * $scale-ratio-min--space;
+            $scale-base-max--space: $scale-base-max--space * $scale-ratio-max--space;
+            --space--#{$_space-size}: #{fluid($scale-base-min--space, $scale-base-max--space)};
+        }
+
+        // Text
+        @each $_text-size in $scale-sizes-min--text {
+            $scale-base-min--text: math.div($scale-base-min--text, $scale-ratio-min--text);
+            --text--#{$_text-size}: #{px-relative($scale-base-min--text)};
+        }
+
+        --text--base: #{fluid($scale-base-min--text, $scale-base-max--text)};
+
+        @each $_text-size in $scale-sizes-max--text {
+            $scale-base-min--text: $scale-base-min--text * $scale-ratio-min--text;
+            $scale-base-max--text: $scale-base-max--text * $scale-ratio-max--text;
+            --text--#{$_text-size}: #{fluid($scale-base-min--text, $scale-base-max--text)};
+        }
+    }
+
+    @else {
+        // Space
+        --space--xs: #{fluid(16px, 18px)};
+        --space--s: #{fluid(20px, 24px)};
+        --space--m: #{fluid(24px, 32px)};
+        --space--l: #{fluid(30px, 42px)};
+        --space--xl: #{fluid(38px, 56px)};
+        --space--2xl: #{fluid(46px, 76px)};
+        --space--3xl: #{fluid(58px, 102px)};
+        --space--4xl: #{fluid(74px, 134px)};
+        --space--5xl: #{fluid(92px, 180px)};
+
+        // Text
+        --text--fine: #{px-relative(12px)};
+        --text--small: #{px-relative(14px)};
+        --text--base: #{fluid(16px, 18px)};
+        --text--lede: #{fluid(18px, 24px)};
+        --text--large: #{fluid(20px, 32px)};
+        --text--h3: #{fluid(22px, 42px)};
+        --text--h2: #{fluid(26px, 56px)};
+        --text--h1: #{fluid(28px, 76px)};
+        --text--hero: #{fluid(32px, 100px)};
+    }
 
     // Width
-    --width--xs: #{px-relative($width--xs)};
+    --width--min: #{px-relative($width--min)};
     --width--s: #{px-relative($width--s)};
     --width--m: #{px-relative($width--m)};
     --width--l: #{px-relative($width--l)};
     --width--xl: #{px-relative($width--xl)};
     --width--wide: #{px-relative($width--wide)};
     --width--wider: #{px-relative($width--wider)};
-    --width--widest: #{px-relative($width--widest)};
+    --width--max: #{px-relative($width--max)};
     --width--prose: 65ch;
 }
 
@@ -344,10 +379,13 @@ $width--widest: 1920px; // Website container width
     *,
     ::before,
     ::after {
-        animation-duration: .01ms !important;
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
         animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
         scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
     }
 }
 
@@ -397,9 +435,9 @@ body {
     line-height: var(--line-height--body);
     margin-left: auto;
     margin-right: auto;
-    max-width: var(--width--widest);
+    max-width: var(--width--max);
     min-height: 100vh;
-    min-width: var(--width--xs);
+    min-width: var(--width--min);
     overflow-wrap: break-word;
     overflow-x: hidden;
     width: 100%;
@@ -484,6 +522,7 @@ h4,
 .h4 {
     font-size: var(--font-size--h4);
     font-weight: var(--font-weight--h4);
+    line-height: var(--line-height--heading);
     text-transform: var(--text-transform--h4);
 }
 
@@ -540,14 +579,14 @@ textarea {
 
     .btn--small {
         --font-size--btn: var(--text--fine);
-        --padding-y--btn: var(--space--s);
-        --padding-x--btn: var(--space--m);
+        --padding-y--btn: var(--space--8px);
+        --padding-x--btn: var(--space--xs);
     }
 
     .btn--large {
         --font-size--btn: var(--text--base);
-        --padding-y--btn: var(--space--base);
-        --padding-x--btn: var(--space--layout);
+        --padding-y--btn: var(--space--m);
+        --padding-x--btn: var(--space--l);
     }
 
     // Container
@@ -560,7 +599,7 @@ textarea {
             width: 100%;
         }
 
-        gap: var(--space--content);
+        gap: var(--space--m);
         z-index: 1;
     }
 
@@ -569,7 +608,7 @@ textarea {
     }
 
     .block--float>*+* {
-        margin-top: var(--space--content);
+        margin-top: var(--space--m);
     }
 
     .container {
@@ -583,18 +622,16 @@ textarea {
             max-width: var(--width--xl);
         }
 
-        gap: var(--space--layout);
+        gap: var(--space--m);
         z-index: 1;
     }
 
     // Section
 
     .section--flat,
-    .section--base,
-    .section--base-content,
-    .section--content,
-    .section--base-layout,
-    .section--layout,
+    .section--xs,
+    .section--s,
+    .section--m,
     .section--l,
     .section--xl,
     .section--2xl,
@@ -607,62 +644,52 @@ textarea {
 
     .section--flat {
         gap: 0;
-        padding: 0 var(--spacer--base-layout);
+        padding: 0 var(--space--m);
     }
 
-    .section--base {
-        gap: var(--space--base);
-        padding: var(--space--base) var(--spacer--base-layout);
+    .section--xs {
+        gap: var(--space--xs);
+        padding: var(--space--xs) var(--space--m);
     }
 
-    .section--base-content {
-        gap: var(--spacer--base-content);
-        padding: var(--spacer--base-content) var(--spacer--base-layout);
+    .section--s {
+        gap: var(--space--s);
+        padding: var(--space--s) var(--space--m);
     }
 
-    .section--content {
-        gap: var(--space--content);
-        padding: var(--space--content) var(--spacer--base-layout);
-    }
-
-    .section--base-layout {
-        gap: var(--spacer--base-layout);
-        padding: var(--spacer--base-layout) var(--spacer--base-layout);
-    }
-
-    .section--layout {
-        gap: var(--space--layout);
-        padding: var(--space--layout) var(--spacer--base-layout);
+    .section--m {
+        gap: var(--space--m);
+        padding: var(--space--m);
     }
 
     .section--l {
-        gap: var(--spacer--l);
-        padding: var(--spacer--l) var(--spacer--base-layout);
+        gap: var(--space--l);
+        padding: var(--space--l) var(--space--m);
     }
 
     .section--xl {
-        gap: var(--spacer--xl);
-        padding: var(--spacer--xl) var(--spacer--base-layout);
+        gap: var(--space--xl);
+        padding: var(--space--xl) var(--space--m);
     }
 
     .section--2xl {
-        gap: var(--spacer--2xl);
-        padding: var(--spacer--2xl) var(--spacer--base-layout);
+        gap: var(--space--2xl);
+        padding: var(--space--2xl) var(--space--m);
     }
 
     .section--3xl {
-        gap: var(--spacer--3xl);
-        padding: var(--spacer--3xl) var(--spacer--base-layout);
+        gap: var(--space--3xl);
+        padding: var(--space--3xl) var(--space--m);
     }
 
     .section--4xl {
-        gap: var(--spacer--4xl);
-        padding: var(--spacer--4xl) var(--spacer--base-layout);
+        gap: var(--space--4xl);
+        padding: var(--space--4xl) var(--space--m);
     }
 
     .section--5xl {
-        gap: var(--spacer--5xl);
-        padding: var(--spacer--5xl) var(--spacer--base-layout);
+        gap: var(--space--5xl);
+        padding: var(--space--5xl) var(--space--m);
     }
 }
 
@@ -708,24 +735,24 @@ textarea {
     .float--left,
     .float--left-offset {
         float: left;
-        margin-bottom: var(--space--base);
-        margin-right: var(--space--base);
+        margin-bottom: var(--space--m);
+        margin-right: var(--space--m);
     }
 
     .float--left-offset {
-        margin-left: calc(var(--spacer--base-layout) * -1);
+        margin-left: calc(var(--space--m) * -1);
     }
 
     .alignright,
     .float--right,
     .float--right-offset {
         float: right;
-        margin-bottom: var(--space--base);
-        margin-left: var(--space--base);
+        margin-bottom: var(--space--m);
+        margin-left: var(--space--m);
     }
 
     .float--right-offset {
-        margin-right: calc(var(--spacer--base-layout) * -1);
+        margin-right: calc(var(--space--m) * -1);
     }
 
     @if $breakpoint--xl {
@@ -739,9 +766,9 @@ textarea {
 
             .float--xl-left {
                 float: left;
-                margin-bottom: var(--space--base);
+                margin-bottom: var(--space--m);
                 margin-left: 0;
-                margin-right: var(--space--base);
+                margin-right: var(--space--m);
             }
 
             .float--xl-none {
@@ -753,8 +780,8 @@ textarea {
 
             .float--xl-right {
                 float: right;
-                margin-bottom: var(--space--base);
-                margin-left: var(--space--base);
+                margin-bottom: var(--space--m);
+                margin-left: var(--space--m);
                 margin-right: 0;
             }
         }
@@ -770,9 +797,9 @@ textarea {
 
         .float--l-left {
             float: left;
-            margin-bottom: var(--space--base);
+            margin-bottom: var(--space--m);
             margin-left: 0;
-            margin-right: var(--space--base);
+            margin-right: var(--space--m);
         }
 
         .float--l-none {
@@ -784,8 +811,8 @@ textarea {
 
         .float--l-right {
             float: right;
-            margin-bottom: var(--space--base);
-            margin-left: var(--space--base);
+            margin-bottom: var(--space--m);
+            margin-left: var(--space--m);
             margin-right: 0;
         }
     }
@@ -800,9 +827,9 @@ textarea {
 
         .float--m-left {
             float: left;
-            margin-bottom: var(--space--base);
+            margin-bottom: var(--space--m);
             margin-left: 0;
-            margin-right: var(--space--base);
+            margin-right: var(--space--m);
         }
 
         .float--m-none {
@@ -814,8 +841,8 @@ textarea {
 
         .float--m-right {
             float: right;
-            margin-bottom: var(--space--base);
-            margin-left: var(--space--base);
+            margin-bottom: var(--space--m);
+            margin-left: var(--space--m);
             margin-right: 0;
         }
     }
@@ -831,9 +858,9 @@ textarea {
 
             .float--s-left {
                 float: left;
-                margin-bottom: var(--space--base);
+                margin-bottom: var(--space--m);
                 margin-left: 0;
-                margin-right: var(--space--base);
+                margin-right: var(--space--m);
             }
 
             .float--s-none {
@@ -845,8 +872,8 @@ textarea {
 
             .float--s-right {
                 float: right;
-                margin-bottom: var(--space--base);
-                margin-left: var(--space--base);
+                margin-bottom: var(--space--m);
+                margin-left: var(--space--m);
                 margin-right: 0;
             }
         }
@@ -1094,15 +1121,15 @@ textarea {
     }
 
     .bg-blur--low {
-        backdrop-filter: blur(var(--space--xs));
+        backdrop-filter: blur(var(--space--4px));
     }
 
     .bg-blur--mid {
-        backdrop-filter: blur(var(--space--m));
+        backdrop-filter: blur(var(--space--xs));
     }
 
     .bg-blur--high {
-        backdrop-filter: blur(var(--space--base));
+        backdrop-filter: blur(var(--space--m));
     }
 
     // Background Color
@@ -1342,16 +1369,12 @@ textarea {
         border-width: var(--space--2px);
     }
 
-    .border--xs {
-        border-width: var(--space--xs);
+    .border--4px {
+        border-width: var(--space--4px);
     }
 
-    .border--s {
-        border-width: var(--space--s);
-    }
-
-    .border--m {
-        border-width: var(--space--m);
+    .border--8px {
+        border-width: var(--space--8px);
     }
 
     .border-bottom--flat {
@@ -1366,16 +1389,12 @@ textarea {
         border-width: 0 0 var(--space--2px) 0;
     }
 
-    .border-bottom--xs {
-        border-width: 0 0 var(--space--xs) 0;
+    .border-bottom--4px {
+        border-width: 0 0 var(--space--4px) 0;
     }
 
-    .border-bottom--s {
-        border-width: 0 0 var(--space--s) 0;
-    }
-
-    .border-bottom--m {
-        border-width: 0 0 var(--space--m) 0;
+    .border-bottom--8px {
+        border-width: 0 0 var(--space--8px) 0;
     }
 
     .border-left--flat {
@@ -1390,16 +1409,12 @@ textarea {
         border-width: 0 0 0 var(--space--2px);
     }
 
-    .border-left--xs {
-        border-width: 0 0 0 var(--space--xs);
+    .border-left--4px {
+        border-width: 0 0 0 var(--space--4px);
     }
 
-    .border-left--s {
-        border-width: 0 0 0 var(--space--s);
-    }
-
-    .border-left--m {
-        border-width: 0 0 0 var(--space--m);
+    .border-left--8px {
+        border-width: 0 0 0 var(--space--8px);
     }
 
     .border-right--flat {
@@ -1414,16 +1429,12 @@ textarea {
         border-width: 0 var(--space--2px) 0 0;
     }
 
-    .border-right--xs {
-        border-width: 0 var(--space--xs) 0 0;
+    .border-right--4px {
+        border-width: 0 var(--space--4px) 0 0;
     }
 
-    .border-right--s {
-        border-width: 0 var(--space--s) 0 0;
-    }
-
-    .border-right--m {
-        border-width: 0 var(--space--m) 0 0;
+    .border-right--8px {
+        border-width: 0 var(--space--8px) 0 0;
     }
 
     .border-top--flat {
@@ -1438,16 +1449,12 @@ textarea {
         border-width: var(--space--2px) 0 0 0;
     }
 
-    .border-top--xs {
-        border-width: var(--space--xs) 0 0 0;
+    .border-top--4px {
+        border-width: var(--space--4px) 0 0 0;
     }
 
-    .border-top--s {
-        border-width: var(--space--s) 0 0 0;
-    }
-
-    .border-top--m {
-        border-width: var(--space--m) 0 0 0;
+    .border-top--8px {
+        border-width: var(--space--8px) 0 0 0;
     }
 
     .border--btn {
@@ -1478,11 +1485,11 @@ textarea {
         width: 100vw;
     }
 
-    .breakout--widest {
+    .breakout--max {
         align-self: flex-start;
         margin-left: 50%;
         transform: translateX(-50%);
-        max-width: var(--width--widest);
+        max-width: var(--width--max);
         width: 100vw;
     }
 
@@ -1734,6 +1741,14 @@ textarea {
         }
     }
 
+    .content-column-gap--4px {
+        column-gap: var(--space--4px);
+    }
+
+    .content-column-gap--8px {
+        column-gap: var(--space--8px);
+    }
+
     .content-column-gap--xs {
         column-gap: var(--space--xs);
     }
@@ -1744,26 +1759,6 @@ textarea {
 
     .content-column-gap--m {
         column-gap: var(--space--m);
-    }
-
-    .content-column-gap--base {
-        column-gap: var(--space--base);
-    }
-
-    .content-column-gap--base-content {
-        column-gap: var(--spacer--base-content);
-    }
-
-    .content-column-gap--content {
-        column-gap: var(--space--content);
-    }
-
-    .content-column-gap--base-layout {
-        column-gap: var(--spacer--base-layout);
-    }
-
-    .content-column-gap--layout {
-        column-gap: var(--space-layout);
     }
 
     .content-column-rule--dashed {
@@ -1878,16 +1873,12 @@ textarea {
         column-rule-width: var(--space--2px);
     }
 
-    .content-column-rule-width--xs {
-        column-rule-width: var(--space--xs);
+    .content-column-rule-width--4px {
+        column-rule-width: var(--space--4px);
     }
 
-    .content-column-rule-width--s {
-        column-rule-width: var(--space--s);
-    }
-
-    .content-column-rule-width--m {
-        column-rule-width: var(--space--m);
+    .content-column-rule-width--8px {
+        column-rule-width: var(--space--8px);
     }
 
     .content-column-span--all {
@@ -2944,7 +2935,7 @@ textarea {
     // Flex Grid
 
     .flex-grid--1 {
-        --gap--flex-grid: var(--spacer--base-layout);
+        --gap--flex-grid: var(--space--m);
         display: flex;
         flex-direction: column;
         gap: var(--gap--flex-grid);
@@ -2961,12 +2952,30 @@ textarea {
     .flex-grid--4,
     .flex-grid--5,
     .flex-grid--6 {
-        --gap--flex-grid: var(--spacer--base-layout);
+        --gap--flex-grid: var(--space--m);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--gap--flex-grid);
         justify-content: center;
+    }
+
+    .flex-grid--1.gap--4px,
+    .flex-grid--2.gap--4px,
+    .flex-grid--3.gap--4px,
+    .flex-grid--4.gap--4px,
+    .flex-grid--5.gap--4px,
+    .flex-grid--6.gap--4px {
+        --gap--flex-grid: var(--space--4px);
+    }
+
+    .flex-grid--1.gap--8px,
+    .flex-grid--2.gap--8px,
+    .flex-grid--3.gap--8px,
+    .flex-grid--4.gap--8px,
+    .flex-grid--5.gap--8px,
+    .flex-grid--6.gap--8px {
+        --gap--flex-grid: var(--space--8px);
     }
 
     .flex-grid--1.gap--xs,
@@ -2985,60 +2994,6 @@ textarea {
     .flex-grid--5.gap--s,
     .flex-grid--6.gap--s {
         --gap--flex-grid: var(--space--s);
-    }
-
-    .flex-grid--1.gap--m,
-    .flex-grid--2.gap--m,
-    .flex-grid--3.gap--m,
-    .flex-grid--4.gap--m,
-    .flex-grid--5.gap--m,
-    .flex-grid--6.gap--m {
-        --gap--flex-grid: var(--space--m);
-    }
-
-    .flex-grid--1.gap--base,
-    .flex-grid--2.gap--base,
-    .flex-grid--3.gap--base,
-    .flex-grid--4.gap--base,
-    .flex-grid--5.gap--base,
-    .flex-grid--6.gap--base {
-        --gap--flex-grid: var(--space--base);
-    }
-
-    .flex-grid--1.gap--base-content,
-    .flex-grid--2.gap--base-content,
-    .flex-grid--3.gap--base-content,
-    .flex-grid--4.gap--base-content,
-    .flex-grid--5.gap--base-content,
-    .flex-grid--6.gap--base-content {
-        --gap--flex-grid: var(--spacer--base-content);
-    }
-
-    .flex-grid--1.gap--content,
-    .flex-grid--2.gap--content,
-    .flex-grid--3.gap--content,
-    .flex-grid--4.gap--content,
-    .flex-grid--5.gap--content,
-    .flex-grid--6.gap--content {
-        --gap--flex-grid: var(--space--content);
-    }
-
-    .flex-grid--1.gap--base-layout,
-    .flex-grid--2.gap--base-layout,
-    .flex-grid--3.gap--base-layout,
-    .flex-grid--4.gap--base-layout,
-    .flex-grid--5.gap--base-layout,
-    .flex-grid--6.gap--base-layout {
-        --gap--flex-grid: var(--spacer--base-layout);
-    }
-
-    .flex-grid--1.gap--layout,
-    .flex-grid--2.gap--layout,
-    .flex-grid--3.gap--layout,
-    .flex-grid--4.gap--layout,
-    .flex-grid--5.gap--layout,
-    .flex-grid--6.gap--layout {
-        --gap--flex-grid: var(--space--layout);
     }
 
     .flex-grid--2>* {
@@ -3065,7 +3020,7 @@ textarea {
         @include breakpoint($width--xl) {
 
             .flex-grid--xl-1 {
-                --gap--flex-grid: var(--spacer--base-layout);
+                --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: column;
                 gap: var(--gap--flex-grid);
@@ -3082,12 +3037,30 @@ textarea {
             .flex-grid--xl-4,
             .flex-grid--xl-5,
             .flex-grid--xl-6 {
-                --gap--flex-grid: var(--spacer--base-layout);
+                --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: var(--gap--flex-grid);
                 justify-content: center;
+            }
+
+            .flex-grid--xl-1.gap--4px,
+            .flex-grid--xl-2.gap--4px,
+            .flex-grid--xl-3.gap--4px,
+            .flex-grid--xl-4.gap--4px,
+            .flex-grid--xl-5.gap--4px,
+            .flex-grid--xl-6.gap--4px {
+                --gap--flex-grid: var(--space--4px);
+            }
+
+            .flex-grid--xl-1.gap--8px,
+            .flex-grid--xl-2.gap--8px,
+            .flex-grid--xl-3.gap--8px,
+            .flex-grid--xl-4.gap--8px,
+            .flex-grid--xl-5.gap--8px,
+            .flex-grid--xl-6.gap--8px {
+                --gap--flex-grid: var(--space--8px);
             }
 
             .flex-grid--xl-1.gap--xs,
@@ -3106,60 +3079,6 @@ textarea {
             .flex-grid--xl-5.gap--s,
             .flex-grid--xl-6.gap--s {
                 --gap--flex-grid: var(--space--s);
-            }
-
-            .flex-grid--xl-1.gap--m,
-            .flex-grid--xl-2.gap--m,
-            .flex-grid--xl-3.gap--m,
-            .flex-grid--xl-4.gap--m,
-            .flex-grid--xl-5.gap--m,
-            .flex-grid--xl-6.gap--m {
-                --gap--flex-grid: var(--space--m);
-            }
-
-            .flex-grid--xl-1.gap--base,
-            .flex-grid--xl-2.gap--base,
-            .flex-grid--xl-3.gap--base,
-            .flex-grid--xl-4.gap--base,
-            .flex-grid--xl-5.gap--base,
-            .flex-grid--xl-6.gap--base {
-                --gap--flex-grid: var(--space--base);
-            }
-
-            .flex-grid--xl-1.gap--base-content,
-            .flex-grid--xl-2.gap--base-content,
-            .flex-grid--xl-3.gap--base-content,
-            .flex-grid--xl-4.gap--base-content,
-            .flex-grid--xl-5.gap--base-content,
-            .flex-grid--xl-6.gap--base-content {
-                --gap--flex-grid: var(--spacer--base-content);
-            }
-
-            .flex-grid--xl-1.gap--content,
-            .flex-grid--xl-2.gap--content,
-            .flex-grid--xl-3.gap--content,
-            .flex-grid--xl-4.gap--content,
-            .flex-grid--xl-5.gap--content,
-            .flex-grid--xl-6.gap--content {
-                --gap--flex-grid: var(--space--content);
-            }
-
-            .flex-grid--xl-1.gap--base-layout,
-            .flex-grid--xl-2.gap--base-layout,
-            .flex-grid--xl-3.gap--base-layout,
-            .flex-grid--xl-4.gap--base-layout,
-            .flex-grid--xl-5.gap--base-layout,
-            .flex-grid--xl-6.gap--base-layout {
-                --gap--flex-grid: var(--spacer--base-layout);
-            }
-
-            .flex-grid--xl-1.gap--layout,
-            .flex-grid--xl-2.gap--layout,
-            .flex-grid--xl-3.gap--layout,
-            .flex-grid--xl-4.gap--layout,
-            .flex-grid--xl-5.gap--layout,
-            .flex-grid--xl-6.gap--layout {
-                --gap--flex-grid: var(--space--layout);
             }
 
             .flex-grid--xl-2>* {
@@ -3187,7 +3106,7 @@ textarea {
     @include breakpoint($width--l) {
 
         .flex-grid--l-1 {
-            --gap--flex-grid: var(--spacer--base-layout);
+            --gap--flex-grid: var(--space--m);
             display: flex;
             flex-direction: column;
             gap: var(--gap--flex-grid);
@@ -3204,12 +3123,30 @@ textarea {
         .flex-grid--l-4,
         .flex-grid--l-5,
         .flex-grid--l-6 {
-            --gap--flex-grid: var(--spacer--base-layout);
+            --gap--flex-grid: var(--space--m);
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
             justify-content: center;
+        }
+
+        .flex-grid--l-1.gap--4px,
+        .flex-grid--l-2.gap--4px,
+        .flex-grid--l-3.gap--4px,
+        .flex-grid--l-4.gap--4px,
+        .flex-grid--l-5.gap--4px,
+        .flex-grid--l-6.gap--4px {
+            --gap--flex-grid: var(--space--4px);
+        }
+
+        .flex-grid--l-1.gap--8px,
+        .flex-grid--l-2.gap--8px,
+        .flex-grid--l-3.gap--8px,
+        .flex-grid--l-4.gap--8px,
+        .flex-grid--l-5.gap--8px,
+        .flex-grid--l-6.gap--8px {
+            --gap--flex-grid: var(--space--8px);
         }
 
         .flex-grid--l-1.gap--xs,
@@ -3228,60 +3165,6 @@ textarea {
         .flex-grid--l-5.gap--s,
         .flex-grid--l-6.gap--s {
             --gap--flex-grid: var(--space--s);
-        }
-
-        .flex-grid--l-1.gap--m,
-        .flex-grid--l-2.gap--m,
-        .flex-grid--l-3.gap--m,
-        .flex-grid--l-4.gap--m,
-        .flex-grid--l-5.gap--m,
-        .flex-grid--l-6.gap--m {
-            --gap--flex-grid: var(--space--m);
-        }
-
-        .flex-grid--l-1.gap--base,
-        .flex-grid--l-2.gap--base,
-        .flex-grid--l-3.gap--base,
-        .flex-grid--l-4.gap--base,
-        .flex-grid--l-5.gap--base,
-        .flex-grid--l-6.gap--base {
-            --gap--flex-grid: var(--space--base);
-        }
-
-        .flex-grid--l-1.gap--base-content,
-        .flex-grid--l-2.gap--base-content,
-        .flex-grid--l-3.gap--base-content,
-        .flex-grid--l-4.gap--base-content,
-        .flex-grid--l-5.gap--base-content,
-        .flex-grid--l-6.gap--base-content {
-            --gap--flex-grid: var(--spacer--base-content);
-        }
-
-        .flex-grid--l-1.gap--content,
-        .flex-grid--l-2.gap--content,
-        .flex-grid--l-3.gap--content,
-        .flex-grid--l-4.gap--content,
-        .flex-grid--l-5.gap--content,
-        .flex-grid--l-6.gap--content {
-            --gap--flex-grid: var(--space--content);
-        }
-
-        .flex-grid--l-1.gap--base-layout,
-        .flex-grid--l-2.gap--base-layout,
-        .flex-grid--l-3.gap--base-layout,
-        .flex-grid--l-4.gap--base-layout,
-        .flex-grid--l-5.gap--base-layout,
-        .flex-grid--l-6.gap--base-layout {
-            --gap--flex-grid: var(--spacer--base-layout);
-        }
-
-        .flex-grid--l-1.gap--layout,
-        .flex-grid--l-2.gap--layout,
-        .flex-grid--l-3.gap--layout,
-        .flex-grid--l-4.gap--layout,
-        .flex-grid--l-5.gap--layout,
-        .flex-grid--l-6.gap--layout {
-            --gap--flex-grid: var(--space--layout);
         }
 
         .flex-grid--l-2>* {
@@ -3308,7 +3191,7 @@ textarea {
     @include breakpoint($width--m) {
 
         .flex-grid--m-1 {
-            --gap--flex-grid: var(--spacer--base-layout);
+            --gap--flex-grid: var(--space--m);
             display: flex;
             flex-direction: column;
             gap: var(--gap--flex-grid);
@@ -3325,12 +3208,30 @@ textarea {
         .flex-grid--m-4,
         .flex-grid--m-5,
         .flex-grid--m-6 {
-            --gap--flex-grid: var(--spacer--base-layout);
+            --gap--flex-grid: var(--space--m);
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             gap: var(--gap--flex-grid);
             justify-content: center;
+        }
+
+        .flex-grid--m-1.gap--4px,
+        .flex-grid--m-2.gap--4px,
+        .flex-grid--m-3.gap--4px,
+        .flex-grid--m-4.gap--4px,
+        .flex-grid--m-5.gap--4px,
+        .flex-grid--m-6.gap--4px {
+            --gap--flex-grid: var(--space--4px);
+        }
+
+        .flex-grid--m-1.gap--8px,
+        .flex-grid--m-2.gap--8px,
+        .flex-grid--m-3.gap--8px,
+        .flex-grid--m-4.gap--8px,
+        .flex-grid--m-5.gap--8px,
+        .flex-grid--m-6.gap--8px {
+            --gap--flex-grid: var(--space--8px);
         }
 
         .flex-grid--m-1.gap--xs,
@@ -3349,60 +3250,6 @@ textarea {
         .flex-grid--m-5.gap--s,
         .flex-grid--m-6.gap--s {
             --gap--flex-grid: var(--space--s);
-        }
-
-        .flex-grid--m-1.gap--m,
-        .flex-grid--m-2.gap--m,
-        .flex-grid--m-3.gap--m,
-        .flex-grid--m-4.gap--m,
-        .flex-grid--m-5.gap--m,
-        .flex-grid--m-6.gap--m {
-            --gap--flex-grid: var(--space--m);
-        }
-
-        .flex-grid--m-1.gap--base,
-        .flex-grid--m-2.gap--base,
-        .flex-grid--m-3.gap--base,
-        .flex-grid--m-4.gap--base,
-        .flex-grid--m-5.gap--base,
-        .flex-grid--m-6.gap--base {
-            --gap--flex-grid: var(--space--base);
-        }
-
-        .flex-grid--m-1.gap--base-content,
-        .flex-grid--m-2.gap--base-content,
-        .flex-grid--m-3.gap--base-content,
-        .flex-grid--m-4.gap--base-content,
-        .flex-grid--m-5.gap--base-content,
-        .flex-grid--m-6.gap--base-content {
-            --gap--flex-grid: var(--spacer--base-content);
-        }
-
-        .flex-grid--m-1.gap--content,
-        .flex-grid--m-2.gap--content,
-        .flex-grid--m-3.gap--content,
-        .flex-grid--m-4.gap--content,
-        .flex-grid--m-5.gap--content,
-        .flex-grid--m-6.gap--content {
-            --gap--flex-grid: var(--space--content);
-        }
-
-        .flex-grid--m-1.gap--base-layout,
-        .flex-grid--m-2.gap--base-layout,
-        .flex-grid--m-3.gap--base-layout,
-        .flex-grid--m-4.gap--base-layout,
-        .flex-grid--m-5.gap--base-layout,
-        .flex-grid--m-6.gap--base-layout {
-            --gap--flex-grid: var(--spacer--base-layout);
-        }
-
-        .flex-grid--m-1.gap--layout,
-        .flex-grid--m-2.gap--layout,
-        .flex-grid--m-3.gap--layout,
-        .flex-grid--m-4.gap--layout,
-        .flex-grid--m-5.gap--layout,
-        .flex-grid--m-6.gap--layout {
-            --gap--flex-grid: var(--space--layout);
         }
 
         .flex-grid--m-2>* {
@@ -3430,7 +3277,7 @@ textarea {
         @include breakpoint($width--s) {
 
             .flex-grid--s-1 {
-                --gap--flex-grid: var(--spacer--base-layout);
+                --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: column;
                 gap: var(--gap--flex-grid);
@@ -3447,12 +3294,30 @@ textarea {
             .flex-grid--s-4,
             .flex-grid--s-5,
             .flex-grid--s-6 {
-                --gap--flex-grid: var(--spacer--base-layout);
+                --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: var(--gap--flex-grid);
                 justify-content: center;
+            }
+
+            .flex-grid--s-1.gap--4px,
+            .flex-grid--s-2.gap--4px,
+            .flex-grid--s-3.gap--4px,
+            .flex-grid--s-4.gap--4px,
+            .flex-grid--s-5.gap--4px,
+            .flex-grid--s-6.gap--4px {
+                --gap--flex-grid: var(--space--4px);
+            }
+
+            .flex-grid--s-1.gap--8px,
+            .flex-grid--s-2.gap--8px,
+            .flex-grid--s-3.gap--8px,
+            .flex-grid--s-4.gap--8px,
+            .flex-grid--s-5.gap--8px,
+            .flex-grid--s-6.gap--8px {
+                --gap--flex-grid: var(--space--8px);
             }
 
             .flex-grid--s-1.gap--xs,
@@ -3471,60 +3336,6 @@ textarea {
             .flex-grid--s-5.gap--s,
             .flex-grid--s-6.gap--s {
                 --gap--flex-grid: var(--space--s);
-            }
-
-            .flex-grid--s-1.gap--m,
-            .flex-grid--s-2.gap--m,
-            .flex-grid--s-3.gap--m,
-            .flex-grid--s-4.gap--m,
-            .flex-grid--s-5.gap--m,
-            .flex-grid--s-6.gap--m {
-                --gap--flex-grid: var(--space--m);
-            }
-
-            .flex-grid--s-1.gap--base,
-            .flex-grid--s-2.gap--base,
-            .flex-grid--s-3.gap--base,
-            .flex-grid--s-4.gap--base,
-            .flex-grid--s-5.gap--base,
-            .flex-grid--s-6.gap--base {
-                --gap--flex-grid: var(--space--base);
-            }
-
-            .flex-grid--s-1.gap--base-content,
-            .flex-grid--s-2.gap--base-content,
-            .flex-grid--s-3.gap--base-content,
-            .flex-grid--s-4.gap--base-content,
-            .flex-grid--s-5.gap--base-content,
-            .flex-grid--s-6.gap--base-content {
-                --gap--flex-grid: var(--spacer--base-content);
-            }
-
-            .flex-grid--s-1.gap--content,
-            .flex-grid--s-2.gap--content,
-            .flex-grid--s-3.gap--content,
-            .flex-grid--s-4.gap--content,
-            .flex-grid--s-5.gap--content,
-            .flex-grid--s-6.gap--content {
-                --gap--flex-grid: var(--space--content);
-            }
-
-            .flex-grid--s-1.gap--base-layout,
-            .flex-grid--s-2.gap--base-layout,
-            .flex-grid--s-3.gap--base-layout,
-            .flex-grid--s-4.gap--base-layout,
-            .flex-grid--s-5.gap--base-layout,
-            .flex-grid--s-6.gap--base-layout {
-                --gap--flex-grid: var(--spacer--base-layout);
-            }
-
-            .flex-grid--s-1.gap--layout,
-            .flex-grid--s-2.gap--layout,
-            .flex-grid--s-3.gap--layout,
-            .flex-grid--s-4.gap--layout,
-            .flex-grid--s-5.gap--layout,
-            .flex-grid--s-6.gap--layout {
-                --gap--flex-grid: var(--space--layout);
             }
 
             .flex-grid--s-2>* {
@@ -3569,6 +3380,14 @@ textarea {
         gap: 0;
     }
 
+    .gap--4px {
+        gap: var(--space--4px);
+    }
+
+    .gap--8px {
+        gap: var(--space--8px);
+    }
+
     .gap--xs {
         gap: var(--space--xs);
     }
@@ -3581,48 +3400,28 @@ textarea {
         gap: var(--space--m);
     }
 
-    .gap--base {
-        gap: var(--space--base);
-    }
-
-    .gap--base-content {
-        gap: var(--spacer--base-content);
-    }
-
-    .gap--content {
-        gap: var(--space--content);
-    }
-
-    .gap--base-layout {
-        gap: var(--spacer--base-layout);
-    }
-
-    .gap--layout {
-        gap: var(--space--layout);
-    }
-
     .gap--l {
-        gap: var(--spacer--l);
+        gap: var(--space--l);
     }
 
     .gap--xl {
-        gap: var(--spacer--xl);
+        gap: var(--space--xl);
     }
 
     .gap--2xl {
-        gap: var(--spacer--2xl);
+        gap: var(--space--2xl);
     }
 
     .gap--3xl {
-        gap: var(--spacer--3xl);
+        gap: var(--space--3xl);
     }
 
     .gap--4xl {
-        gap: var(--spacer--4xl);
+        gap: var(--space--4xl);
     }
 
     .gap--5xl {
-        gap: var(--spacer--5xl);
+        gap: var(--space--5xl);
     }
 
     // Grid
@@ -4948,6 +4747,14 @@ textarea {
         margin-bottom: 0;
     }
 
+    .margin-bottom--4px {
+        margin-bottom: var(--space--4px);
+    }
+
+    .margin-bottom--8px {
+        margin-bottom: var(--space--8px);
+    }
+
     .margin-bottom--xs {
         margin-bottom: var(--space--xs);
     }
@@ -4960,54 +4767,42 @@ textarea {
         margin-bottom: var(--space--m);
     }
 
-    .margin-bottom--base {
-        margin-bottom: var(--space--base);
-    }
-
-    .margin-bottom--base-content {
-        margin-bottom: var(--spacer--base-content);
-    }
-
-    .margin-bottom--content {
-        margin-bottom: var(--space--content);
-    }
-
-    .margin-bottom--base-layout {
-        margin-bottom: var(--spacer--base-layout);
-    }
-
-    .margin-bottom--layout {
-        margin-bottom: var(--space--layout);
-    }
-
     .margin-bottom--l {
-        margin-bottom: var(--spacer--l);
+        margin-bottom: var(--space--l);
     }
 
     .margin-bottom--xl {
-        margin-bottom: var(--spacer--xl);
+        margin-bottom: var(--space--xl);
     }
 
     .margin-bottom--2xl {
-        margin-bottom: var(--spacer--2xl);
+        margin-bottom: var(--space--2xl);
     }
 
     .margin-bottom--3xl {
-        margin-bottom: var(--spacer--3xl);
+        margin-bottom: var(--space--3xl);
     }
 
     .margin-bottom--4xl {
-        margin-bottom: var(--spacer--4xl);
+        margin-bottom: var(--space--4xl);
     }
 
     .margin-bottom--5xl {
-        margin-bottom: var(--spacer--5xl);
+        margin-bottom: var(--space--5xl);
     }
 
     // Margin Left
 
     .margin-left--flat {
         margin-left: 0;
+    }
+
+    .margin-left--4px {
+        margin-left: var(--space--4px);
+    }
+
+    .margin-left--8px {
+        margin-left: var(--space--8px);
     }
 
     .margin-left--xs {
@@ -5022,54 +4817,42 @@ textarea {
         margin-left: var(--space--m);
     }
 
-    .margin-left--base {
-        margin-left: var(--space--base);
-    }
-
-    .margin-left--base-content {
-        margin-left: var(--spacer--base-content);
-    }
-
-    .margin-left--content {
-        margin-left: var(--space--content);
-    }
-
-    .margin-left--base-layout {
-        margin-left: var(--spacer--base-layout);
-    }
-
-    .margin-left--layout {
-        margin-left: var(--space--layout);
-    }
-
     .margin-left--l {
-        margin-left: var(--spacer--l);
+        margin-left: var(--space--l);
     }
 
     .margin-left--xl {
-        margin-left: var(--spacer--xl);
+        margin-left: var(--space--xl);
     }
 
     .margin-left--2xl {
-        margin-left: var(--spacer--2xl);
+        margin-left: var(--space--2xl);
     }
 
     .margin-left--3xl {
-        margin-left: var(--spacer--3xl);
+        margin-left: var(--space--3xl);
     }
 
     .margin-left--4xl {
-        margin-left: var(--spacer--4xl);
+        margin-left: var(--space--4xl);
     }
 
     .margin-left--5xl {
-        margin-left: var(--spacer--5xl);
+        margin-left: var(--space--5xl);
     }
 
     // Margin Right
 
     .margin-right--flat {
         margin-right: 0;
+    }
+
+    .margin-right--4px {
+        margin-right: var(--space--4px);
+    }
+
+    .margin-right--8px {
+        margin-right: var(--space--8px);
     }
 
     .margin-right--xs {
@@ -5084,54 +4867,42 @@ textarea {
         margin-right: var(--space--m);
     }
 
-    .margin-right--base {
-        margin-right: var(--space--base);
-    }
-
-    .margin-right--base-content {
-        margin-right: var(--spacer--base-content);
-    }
-
-    .margin-right--content {
-        margin-right: var(--space--content);
-    }
-
-    .margin-right--base-layout {
-        margin-right: var(--spacer--base-layout);
-    }
-
-    .margin-right--layout {
-        margin-right: var(--space--layout);
-    }
-
     .margin-right--l {
-        margin-right: var(--spacer--l);
+        margin-right: var(--space--l);
     }
 
     .margin-right--xl {
-        margin-right: var(--spacer--xl);
+        margin-right: var(--space--xl);
     }
 
     .margin-right--2xl {
-        margin-right: var(--spacer--2xl);
+        margin-right: var(--space--2xl);
     }
 
     .margin-right--3xl {
-        margin-right: var(--spacer--3xl);
+        margin-right: var(--space--3xl);
     }
 
     .margin-right--4xl {
-        margin-right: var(--spacer--4xl);
+        margin-right: var(--space--4xl);
     }
 
     .margin-right--5xl {
-        margin-right: var(--spacer--5xl);
+        margin-right: var(--space--5xl);
     }
 
     // Margin Top
 
     .margin-top--flat {
         margin-top: 0;
+    }
+
+    .margin-top--4px {
+        margin-top: var(--space--4px);
+    }
+
+    .margin-top--8px {
+        margin-top: var(--space--8px);
     }
 
     .margin-top--xs {
@@ -5146,48 +4917,28 @@ textarea {
         margin-top: var(--space--m);
     }
 
-    .margin-top--base {
-        margin-top: var(--space--base);
-    }
-
-    .margin-top--base-content {
-        margin-top: var(--spacer--base-content);
-    }
-
-    .margin-top--content {
-        margin-top: var(--space--content);
-    }
-
-    .margin-top--base-layout {
-        margin-top: var(--spacer--base-layout);
-    }
-
-    .margin-top--layout {
-        margin-top: var(--space--layout);
-    }
-
     .margin-top--l {
-        margin-top: var(--spacer--l);
+        margin-top: var(--space--l);
     }
 
     .margin-top--xl {
-        margin-top: var(--spacer--xl);
+        margin-top: var(--space--xl);
     }
 
     .margin-top--2xl {
-        margin-top: var(--spacer--2xl);
+        margin-top: var(--space--2xl);
     }
 
     .margin-top--3xl {
-        margin-top: var(--spacer--3xl);
+        margin-top: var(--space--3xl);
     }
 
     .margin-top--4xl {
-        margin-top: var(--spacer--4xl);
+        margin-top: var(--space--4xl);
     }
 
     .margin-top--5xl {
-        margin-top: var(--spacer--5xl);
+        margin-top: var(--space--5xl);
     }
 
     // Object Fit
@@ -5464,6 +5215,14 @@ textarea {
         padding: 0;
     }
 
+    .padding--4px {
+        padding: var(--space--4px);
+    }
+
+    .padding--8px {
+        padding: var(--space--8px);
+    }
+
     .padding--xs {
         padding: var(--space--xs);
     }
@@ -5476,48 +5235,28 @@ textarea {
         padding: var(--space--m);
     }
 
-    .padding--base {
-        padding: var(--space--base);
-    }
-
-    .padding--base-content {
-        padding: var(--spacer--base-content);
-    }
-
-    .padding--content {
-        padding: var(--space--content);
-    }
-
-    .padding--base-layout {
-        padding: var(--spacer--base-layout);
-    }
-
-    .padding--layout {
-        padding: var(--space--layout);
-    }
-
     .padding--l {
-        padding: var(--spacer--l);
+        padding: var(--space--l);
     }
 
     .padding--xl {
-        padding: var(--spacer--xl);
+        padding: var(--space--xl);
     }
 
     .padding--2xl {
-        padding: var(--spacer--2xl);
+        padding: var(--space--2xl);
     }
 
     .padding--3xl {
-        padding: var(--spacer--3xl);
+        padding: var(--space--3xl);
     }
 
     .padding--4xl {
-        padding: var(--spacer--4xl);
+        padding: var(--space--4xl);
     }
 
     .padding--5xl {
-        padding: var(--spacer--5xl);
+        padding: var(--space--5xl);
     }
 
     .padding-bottom--flat {
@@ -5548,7 +5287,7 @@ textarea {
     }
 
     .sticky--offset {
-        top: var(--space--layout);
+        top: var(--space--m);
     }
 
     // Radius
@@ -5855,52 +5594,28 @@ textarea {
         font-size: var(--text--lede);
     }
 
-    .text--intro {
-        font-size: var(--text--intro);
-    }
-
     .text--large {
         font-size: var(--text--large);
         line-height: var(--line-height--heading);
     }
 
-    .text--heading {
-        font-size: var(--text--heading);
+    .text--h3 {
+        font-size: var(--text--h3);
         line-height: var(--line-height--heading);
     }
 
-    .text--title {
-        font-size: var(--text--title);
+    .text--h2 {
+        font-size: var(--text--h2);
         line-height: var(--line-height--heading);
     }
 
-    .text--l {
-        font-size: var(--text--l);
+    .text--h1 {
+        font-size: var(--text--h1);
         line-height: var(--line-height--heading);
     }
 
-    .text--xl {
-        font-size: var(--text--xl);
-        line-height: var(--line-height--heading);
-    }
-
-    .text--2xl {
-        font-size: var(--text--2xl);
-        line-height: var(--line-height--heading);
-    }
-
-    .text--3xl {
-        font-size: var(--text--3xl);
-        line-height: var(--line-height--heading);
-    }
-
-    .text--4xl {
-        font-size: var(--text--4xl);
-        line-height: var(--line-height--heading);
-    }
-
-    .text--5xl {
-        font-size: var(--text--5xl);
+    .text--hero {
+        font-size: var(--text--hero);
         line-height: var(--line-height--heading);
     }
 
@@ -5984,21 +5699,21 @@ textarea {
 
     // Width
 
-    .width--xs,
+    .width--min,
     .width--s,
     .width--m,
     .width--l,
     .width--xl,
     .width--wide,
     .width--wider,
-    .width--widest,
+    .width--max,
     .width--fill,
     .width--prose {
         width: 100%;
     }
 
-    .width--xs {
-        max-width: var(--width--xs);
+    .width--min {
+        max-width: var(--width--min);
     }
 
     .width--s {
@@ -6025,8 +5740,8 @@ textarea {
         max-width: var(--width--wider);
     }
 
-    .width--widest {
-        max-width: var(--width--widest);
+    .width--max {
+        max-width: var(--width--max);
     }
 
     .width--prose {
@@ -6095,7 +5810,7 @@ textarea {
         font-size: var(--font-size--label);
         text-transform: none;
         font-weight: var(--font-weight--label);
-        margin-bottom: var(--space--s);
+        margin-bottom: var(--space--8px);
     }
 
     form.form label.required::after {
@@ -6120,11 +5835,11 @@ textarea {
     }
 
     form.form textarea {
-        min-height: var(--space--4xl);
+        min-height: var(--space--5xl);
     }
 
     form.form .form-group {
-        margin-bottom: var(--space--content);
+        margin-bottom: var(--space--m);
         padding: 0 var(--space--m) !important;
     }
 
@@ -6144,12 +5859,12 @@ textarea {
         border: var(--border-width--input) var(--border-style--input) var(--border-color--input);
         content: "";
         display: block;
-        height: var(--space--base);
+        height: var(--space--m);
         left: 0;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: var(--space--base);
+        width: var(--space--m);
     }
 
     form.form input[type=checkbox]::before {
@@ -6166,12 +5881,12 @@ textarea {
         background-color: var(--color--interaction);
         background-size: 50%;
         content: "";
-        height: var(--space--base);
+        height: var(--space--m);
         left: 0;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: var(--space--base);
+        width: var(--space--m);
     }
 
     form.form input[type=checkbox]:checked::after {
@@ -6188,12 +5903,12 @@ textarea {
 
     form.form .options-wrapper li {
         display: flex;
-        gap: var(--space--s);
+        gap: var(--space--8px);
         position: relative;
     }
 
     form.form .options-wrapper li+li {
-        margin-top: var(--space--s)
+        margin-top: var(--space--8px)
     }
 
     // File Upload
@@ -6205,21 +5920,21 @@ textarea {
     }
 
     form.form .file .remove {
-        --padding-x--btn: var(--space--m);
-        --padding-y--btn: var(--space--s);
+        --padding-x--btn: var(--space--xs);
+        --padding-y--btn: var(--space--8px);
         font-size: var(--text--fine);
         padding: var(--padding-y--btn) var(--padding-x--btn);
     }
 
     form.form .file .brf-field-image-preview,
     form.form .file .file-result {
-        margin-bottom: var(--space--m);
+        margin-bottom: var(--space--xs);
     }
 
     // Message
 
     form.form .message {
-        margin-top: var(--space--content) !important;
+        margin-top: var(--space--m) !important;
     }
 
     form.form .message.success {
@@ -6250,7 +5965,7 @@ textarea {
     // Step
 
     form.form .form-group.brf-steps {
-        top: calc(var(--space--l) * -1) !important;
+        top: calc(var(--space--xl) * -1) !important;
     }
 
     form.form .form-group .current {
@@ -6258,7 +5973,7 @@ textarea {
     }
 
     form.form .form-group.step-progress {
-        gap: var(--space--content);
+        gap: var(--space--m);
     }
 
     form.form .form-group.step-progress,
@@ -6272,9 +5987,9 @@ textarea {
         background-color: var(--bg-color--input) !important;
         border: var(--border-width--input) var(--border-style--input) var(--border-color--input);
         color: var(--color--input);
-        gap: var(--space--content);
-        margin: 0 var(--space--m) var(--space--content) var(--space--m) !important;
-        padding: var(--space--m) !important;
+        gap: var(--space--m);
+        margin: 0 var(--space--xs) var(--space--m) var(--space--xs) !important;
+        padding: var(--space--xs) !important;
     }
 
     form.form #brf-summary>[class^="brf-summary"] {
