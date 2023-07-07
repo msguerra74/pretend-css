@@ -24,8 +24,8 @@ $builder--cwicly: false; // Include Cwicly styling
 $form--bricks: false; // Include Bricks form styling
 $form--happyforms: true; // Include HappyForms styling
 
-// Scaled spacing and text
-$scaling: true; // Use scaled vs manual spacing and text
+// Scale space and text
+$scaling: true; // Use scaling vs fixed space and text
 $scale-base-min--space: 24px; // Minimum base space size
 $scale-base-max--space: 32px; // Maximum base space size
 $scale-base-min--text: 16px; // Minimum base text size
@@ -34,10 +34,8 @@ $scale-ratio-min--space: 1.25; // Major Third scale
 $scale-ratio-max--space: 1.333; // Perfect Fourth scale
 $scale-ratio-min--text: 1.125; // Major Second scale
 $scale-ratio-max--text: 1.333; // Perfect Fourth scale
-$scale-sizes-min--space: "s", "xs"; // Minimum space scale sizes
-$scale-sizes-max--space: "l", "xl", "2xl", "3xl", "4xl", "5xl"; // Maximum space scale sizes
-$scale-sizes-min--text: "small", "fine"; // Minimum text scale sizes
-$scale-sizes-max--text: "lede", "large", "h3", "h2", "h1", "hero"; // Maximum text scale sizes
+$scale-sizes--min: "s", "xs"; // Minimum space and text scale sizes
+$scale-sizes--max: "l", "xl", "2xl", "3xl", "4xl", "5xl"; // Maximum space and text scale sizes
 
 // Width
 $width--min: 320px; // Minimum width
@@ -45,8 +43,8 @@ $width--s: 480px; // Small breakpoint
 $width--m: 640px; // Medium breakpoint
 $width--l: 960px; // Large breakpoint
 $width--xl: 1280px; // Website width
-$width--wide: 1440px; // Wide width
-$width--wider: 1600px; // Wider width
+$width--wide: 1440px; // Wide breakout width
+$width--wider: 1600px; // Wider breakout width
 $width--max: 1920px; // Maximum width
 
 // - - - SCSS Functions - - - //
@@ -117,7 +115,7 @@ $width--max: 1920px; // Maximum width
     /* Body */
     --bg-color--body: var(--color--lighter-darker);
     --color--body: var(--color--darker-lighter);
-    --font-size--body: var(--text--base);
+    --font-size--body: var(--text--m);
     --font-weight--body: 400;
     --line-height--body: 1.6;
 
@@ -128,7 +126,7 @@ $width--max: 1920px; // Maximum width
     --border-style--btn: solid;
     --border-width--btn: var(--space--2px);
     --color--btn: var(--color--lighter);
-    --font-size--btn: var(--text--small);
+    --font-size--btn: var(--text--s);
     --font-weight--btn: 400;
     --gap--btn: var(--space--8px);
     --letter-spacing--btn: var(--space--px);
@@ -148,18 +146,18 @@ $width--max: 1920px; // Maximum width
     --color--label: var(--color--darker-lighter);
     --color--placeholder: var(--color--mid);
     --color--required-input: var(--color--interaction);
-    --font-size--label: var(--text--base);
+    --font-size--label: var(--text--m);
     --font-weight--label: 400;
     --line-height--input: 1;
     --padding--input: var(--space--xs);
 
     /* Heading */
-    --font-size--h1: var(--text--h1);
-    --font-size--h2: var(--text--h2);
-    --font-size--h3: var(--text--h3);
-    --font-size--h4: var(--text--large);
-    --font-size--h5: var(--text--lede);
-    --font-size--h6: var(--text--base);
+    --font-size--h1: var(--text--4xl);
+    --font-size--h2: var(--text--3xl);
+    --font-size--h3: var(--text--2xl);
+    --font-size--h4: var(--text--xl);
+    --font-size--h5: var(--text--l);
+    --font-size--h6: var(--text--m);
     --font-weight--h1: 700;
     --font-weight--h2: 700;
     --font-weight--h3: 700;
@@ -228,7 +226,7 @@ $width--max: 1920px; // Maximum width
     --object--start: 15%;
     --object--center: 50%;
     --object--end: 85%;
-    --text--increase: 1.5;
+    --text--enlarge: 1.5;
     --text--spacing: var(--space--px);
     --transition--fast: .2s;
     --transition--normal: .4s;
@@ -272,57 +270,57 @@ $width--max: 1920px; // Maximum width
     @if $scaling {
 
         // Space
-        @each $_space-size in $scale-sizes-min--space {
-            $scale-base-min--space: math.div($scale-base-min--space, $scale-ratio-min--space);
-            $scale-base-max--space: math.div($scale-base-max--space, $scale-ratio-max--space);
+        @each $_space-size in $scale-sizes--min {
+            $scale-base-min--space: math.round(math.div($scale-base-min--space, $scale-ratio-min--space));
+            $scale-base-max--space: math.round(math.div($scale-base-max--space, $scale-ratio-max--space));
             --space--#{$_space-size}: #{fluid($scale-base-min--space, $scale-base-max--space)};
         }
 
         --space--m: #{fluid($scale-base-min--space, $scale-base-max--space)};
 
-        @each $_space-size in $scale-sizes-max--space {
-            $scale-base-min--space: $scale-base-min--space * $scale-ratio-min--space;
-            $scale-base-max--space: $scale-base-max--space * $scale-ratio-max--space;
+        @each $_space-size in $scale-sizes--max {
+            $scale-base-min--space: math.round($scale-base-min--space * $scale-ratio-min--space);
+            $scale-base-max--space: math.round($scale-base-max--space * $scale-ratio-max--space);
             --space--#{$_space-size}: #{fluid($scale-base-min--space, $scale-base-max--space)};
         }
 
         // Text
-        @each $_text-size in $scale-sizes-min--text {
-            $scale-base-min--text: math.div($scale-base-min--text, $scale-ratio-min--text);
+        @each $_text-size in $scale-sizes--min {
+            $scale-base-min--text: math.round(math.div($scale-base-min--text, $scale-ratio-min--text));
             --text--#{$_text-size}: #{px-relative($scale-base-min--text)};
         }
 
-        --text--base: #{fluid($scale-base-min--text, $scale-base-max--text)};
+        --text--m: #{fluid($scale-base-min--text, $scale-base-max--text)};
 
-        @each $_text-size in $scale-sizes-max--text {
-            $scale-base-min--text: $scale-base-min--text * $scale-ratio-min--text;
-            $scale-base-max--text: $scale-base-max--text * $scale-ratio-max--text;
+        @each $_text-size in $scale-sizes--max {
+            $scale-base-min--text: math.round($scale-base-min--text * $scale-ratio-min--text);
+            $scale-base-max--text: math.round($scale-base-max--text * $scale-ratio-max--text);
             --text--#{$_text-size}: #{fluid($scale-base-min--text, $scale-base-max--text)};
         }
     }
 
     @else {
         // Space
-        --space--xs: #{fluid(16px, 18px)};
-        --space--s: #{fluid(20px, 24px)};
+        --space--xs: #{fluid(15px, 18px)};
+        --space--s: #{fluid(19px, 24px)};
         --space--m: #{fluid(24px, 32px)};
-        --space--l: #{fluid(30px, 42px)};
-        --space--xl: #{fluid(38px, 56px)};
-        --space--2xl: #{fluid(46px, 76px)};
-        --space--3xl: #{fluid(58px, 102px)};
-        --space--4xl: #{fluid(74px, 134px)};
-        --space--5xl: #{fluid(92px, 180px)};
+        --space--l: #{fluid(30px, 43px)};
+        --space--xl: #{fluid(38px, 57px)};
+        --space--2xl: #{fluid(48px, 76px)};
+        --space--3xl: #{fluid(60px, 101px)};
+        --space--4xl: #{fluid(75px, 135px)};
+        --space--5xl: #{fluid(94px, 180px)};
 
         // Text
-        --text--fine: #{px-relative(12px)};
-        --text--small: #{px-relative(14px)};
-        --text--base: #{fluid(16px, 18px)};
-        --text--lede: #{fluid(18px, 24px)};
-        --text--large: #{fluid(20px, 32px)};
-        --text--h3: #{fluid(22px, 42px)};
-        --text--h2: #{fluid(26px, 56px)};
-        --text--h1: #{fluid(28px, 76px)};
-        --text--hero: #{fluid(32px, 100px)};
+        --text--xs: #{px-relative(12px)};
+        --text--s: #{px-relative(14px)};
+        --text--m: #{fluid(16px, 18px)};
+        --text--l: #{fluid(18px, 24px)};
+        --text--xl: #{fluid(20px, 32px)};
+        --text--2xl: #{fluid(23px, 43px)};
+        --text--3xl: #{fluid(26px, 57px)};
+        --text--4xl: #{fluid(29px, 76px)};
+        --text--5xl: #{fluid(33px, 101px)};
     }
 
     // Width
@@ -579,13 +577,13 @@ textarea {
     }
 
     .btn--small {
-        --font-size--btn: var(--text--fine);
+        --font-size--btn: var(--text--xs);
         --padding-y--btn: var(--space--8px);
         --padding-x--btn: var(--space--xs);
     }
 
     .btn--large {
-        --font-size--btn: var(--text--base);
+        --font-size--btn: var(--text--m);
         --padding-y--btn: var(--space--m);
         --padding-x--btn: var(--space--l);
     }
@@ -5579,81 +5577,81 @@ textarea {
 
     // Text Size
 
-    .text--fine {
-        font-size: var(--text--fine);
+    .text--xs {
+        font-size: var(--text--xs);
     }
 
-    .text--fine.text--increase {
-        font-size: calc(var(--text--fine) * var(--text--increase));
+    .text--xs.text--enlarge {
+        font-size: calc(var(--text--xs) * var(--text--enlarge));
     }
 
-    .text--small {
-        font-size: var(--text--small);
+    .text--s {
+        font-size: var(--text--s);
     }
 
-    .text--small.text--increase {
-        font-size: calc(var(--text--small) * var(--text--increase));
+    .text--s.text--enlarge {
+        font-size: calc(var(--text--s) * var(--text--enlarge));
     }
 
-    .text--base {
-        font-size: var(--text--base);
+    .text--m {
+        font-size: var(--text--m);
     }
 
-    .text--base.text--increase {
-        font-size: calc(var(--text--base) * var(--text--increase));
+    .text--m.text--enlarge {
+        font-size: calc(var(--text--m) * var(--text--enlarge));
     }
 
-    .text--lede {
-        font-size: var(--text--lede);
+    .text--l {
+        font-size: var(--text--l);
     }
 
-    .text--lede.text--increase {
-        font-size: calc(var(--text--lede) * var(--text--increase));
+    .text--l.text--enlarge {
+        font-size: calc(var(--text--l) * var(--text--enlarge));
     }
 
-    .text--large {
-        font-size: var(--text--large);
+    .text--xl {
+        font-size: var(--text--xl);
         line-height: var(--line-height--heading);
     }
 
-    .text--large.text--increase {
-        font-size: calc(var(--text--large) * var(--text--increase));
+    .text--xl.text--enlarge {
+        font-size: calc(var(--text--xl) * var(--text--enlarge));
     }
 
-    .text--h3 {
-        font-size: var(--text--h3);
+    .text--2xl {
+        font-size: var(--text--2xl);
         line-height: var(--line-height--heading);
     }
 
-    .text--h3.text--increase {
-        font-size: calc(var(--text--h3) * var(--text--increase));
+    .text--2xl.text--enlarge {
+        font-size: calc(var(--text--2xl) * var(--text--enlarge));
     }
 
-    .text--h2 {
-        font-size: var(--text--h2);
+    .text--3xl {
+        font-size: var(--text--3xl);
         line-height: var(--line-height--heading);
     }
 
-    .text--h2.text--increase {
-        font-size: calc(var(--text--h2) * var(--text--increase));
+    .text--3xl.text--enlarge {
+        font-size: calc(var(--text--3xl) * var(--text--enlarge));
     }
 
-    .text--h1 {
-        font-size: var(--text--h1);
+    .text--4xl {
+        font-size: var(--text--4xl);
         line-height: var(--line-height--heading);
     }
 
-    .text--h1.text--increase {
-        font-size: calc(var(--text--h1) * var(--text--increase));
+    .text--4xl.text--enlarge {
+        font-size: calc(var(--text--4xl) * var(--text--enlarge));
     }
 
-    .text--hero {
-        font-size: var(--text--hero);
+    .text--5xl {
+        font-size: var(--text--5xl);
         line-height: var(--line-height--heading);
     }
 
-    .text--hero.text--increase {
-        font-size: calc(var(--text--hero) * var(--text--increase));
+    .text--5xl.text--enlarge {
+        font-size: calc(var(--text--5xl) * var(--text--enlarge));
     }
 
     // Text Spacing
@@ -5852,7 +5850,7 @@ textarea {
 
     form.form label.required::after {
         color: var(--color--required-input);
-        font-size: var(--text--base);
+        font-size: var(--text--m);
     }
 
     form.form input[type=text],
@@ -5952,14 +5950,14 @@ textarea {
 
     form.form .file label.choose-files {
         border: var(--border-width--btn) var(--border-style--btn) var(--border-color--btn);
-        font-size: var(--text--fine);
+        font-size: var(--text--xs);
         text-transform: uppercase;
     }
 
     form.form .file .remove {
         --padding-x--btn: var(--space--xs);
         --padding-y--btn: var(--space--8px);
-        font-size: var(--text--fine);
+        font-size: var(--text--xs);
         padding: var(--padding-y--btn) var(--padding-x--btn);
     }
 
