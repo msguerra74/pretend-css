@@ -228,6 +228,7 @@ $width--max: 1920px; // Maximum width
     --object--start: 15%;
     --object--center: 50%;
     --object--end: 85%;
+    --text--increase: 1.5;
     --text--spacing: var(--space--px);
     --transition--fast: .2s;
     --transition--normal: .4s;
@@ -5582,16 +5583,32 @@ textarea {
         font-size: var(--text--fine);
     }
 
+    .text--fine.text--increase {
+        font-size: calc(var(--text--fine) * var(--text--increase));
+    }
+
     .text--small {
         font-size: var(--text--small);
+    }
+
+    .text--small.text--increase {
+        font-size: calc(var(--text--small) * var(--text--increase));
     }
 
     .text--base {
         font-size: var(--text--base);
     }
 
+    .text--base.text--increase {
+        font-size: calc(var(--text--base) * var(--text--increase));
+    }
+
     .text--lede {
         font-size: var(--text--lede);
+    }
+
+    .text--lede.text--increase {
+        font-size: calc(var(--text--lede) * var(--text--increase));
     }
 
     .text--large {
@@ -5599,9 +5616,17 @@ textarea {
         line-height: var(--line-height--heading);
     }
 
+    .text--large.text--increase {
+        font-size: calc(var(--text--large) * var(--text--increase));
+    }
+
     .text--h3 {
         font-size: var(--text--h3);
         line-height: var(--line-height--heading);
+    }
+
+    .text--h3.text--increase {
+        font-size: calc(var(--text--h3) * var(--text--increase));
     }
 
     .text--h2 {
@@ -5609,14 +5634,26 @@ textarea {
         line-height: var(--line-height--heading);
     }
 
+    .text--h2.text--increase {
+        font-size: calc(var(--text--h2) * var(--text--increase));
+    }
+
     .text--h1 {
         font-size: var(--text--h1);
         line-height: var(--line-height--heading);
     }
 
+    .text--h1.text--increase {
+        font-size: calc(var(--text--h1) * var(--text--increase));
+    }
+
     .text--hero {
         font-size: var(--text--hero);
         line-height: var(--line-height--heading);
+    }
+
+    .text--hero.text--increase {
+        font-size: calc(var(--text--hero) * var(--text--increase));
     }
 
     // Text Spacing
