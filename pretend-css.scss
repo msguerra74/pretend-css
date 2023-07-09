@@ -5,24 +5,27 @@
 
 @use "sass:math";
 
-// - - - SCSS Variable Options - - - //
+// - - - - - Start SCSS Variable Configuration - - - - - //
 
 // Class
 $class--component: true; // Include component classes
 $class--essential: true; // Include essential classes
-$class--extra: true; // Include extra classes
+$class--extra: false; // Include extra classes
 
 // Breakpoint
-$breakpoint--s: true; // Include small breakpoint classes
-$breakpoint--xl: true; // Include extra large breakpoint classes
+$breakpoint--s: false; // Include small breakpoint classes
+$breakpoint--xl: false; // Include extra large breakpoint classes
 
 // Builder
-$builder--bricks: true; // Include Bricks styling
-$builder--cwicly: false; // Include Cwicly styling
+$builder--bricks: false; // Include Bricks styling
+$builder--cwicly: true; // Include Cwicly styling
 
 // Form
 $form--bricks: false; // Include Bricks form styling
 $form--happyforms: true; // Include HappyForms styling
+
+// Misc
+$font-size--root: 16; // Root font size (16 or 10)
 
 // Scale space and text
 $scaling: true; // Use scaling vs fixed space and text
@@ -47,7 +50,9 @@ $width--wide: 1440px; // Wide breakout width
 $width--wider: 1600px; // Wider breakout width
 $width--max: 1920px; // Maximum width
 
-// - - - SCSS Functions - - - //
+// - - - - - End SCSS Variable Configuration - - - - - //
+
+// - - - - - SCSS Functions - - - - - //
 
 // Fluid Sizing
 // --
@@ -57,7 +62,7 @@ $width--max: 1920px; // Maximum width
 // @param: $_min-width // Minimum Breakpoint
 // @param: $_max-width // Maximum Breakpoint
 
-// For future use with Sass Math
+// For use with Sass Math
 @function fluid($_min-size, $_max-size, $_min-width: $width--s, $_max-width: $width--xl) {
     $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
     $_intercept: px-relative($_min-size - $_slope * $_min-width);
@@ -72,17 +77,18 @@ $width--max: 1920px; // Maximum width
 // Usage: px-relative(16px, rem)
 // @param: $_px // Pixel value
 // @param: $_unit // Unit type
+// @param: $_root // Root font size: $font-size--root
 
-// For future use with Sass Math
-@function px-relative($_px, $_unit: rem) {
+// For use with Sass Math
+@function px-relative($_px, $_unit: rem, $_root: $font-size--root) {
     @if type-of($_px)=="number" and not unitless($_px) {
-        @return (math.div(math.div($_px, ($_px * 0 + 1)), 10) + $_unit);
+        @return (math.div(math.div($_px, ($_px * 0 + 1)), $_root) + $_unit);
     }
 
     @return $_rem;
 }
 
-// - - - SCSS Mixins - - - //
+// - - - - - SCSS Mixins - - - - - //
 
 // Breakpoint Generator
 // --
@@ -96,7 +102,7 @@ $width--max: 1920px; // Maximum width
 }
 
 :root {
-    /* - - - Start Configuration - - - */
+    /* - - - - - Start CSS Variable Configuration - - - - - */
 
     /* Color */
     --color--interaction: #ec5659;
@@ -106,10 +112,10 @@ $width--max: 1920px; // Maximum width
     --color--quaternary: var(--color--interaction);
 
     /* Color - Shade */
-    --color--darker: #111111;
-    --color--dark: #222222;
-    --color--mid: #898989;
-    --color--light: #f0f0f0;
+    --color--darker: #171717;
+    --color--dark: #272727;
+    --color--mid: #878787;
+    --color--light: #e7e7e7;
     --color--lighter: #f7f7f7;
 
     /* Body */
@@ -173,7 +179,7 @@ $width--max: 1920px; // Maximum width
     --text-transform--h5: none;
     --text-transform--h6: none;
 
-    /* - - - End Configuration - - - */
+    /* - - - - - End CSS Variable Configuration - - - - - */
 
     // Aspect Ratio
     --aspect--square: 1;
@@ -388,7 +394,7 @@ $width--max: 1920px; // Maximum width
     }
 }
 
-// - - - Base - - - //
+// - - - - - Base - - - - - //
 
 :focus:not(:focus-visible) {
     outline: none;
@@ -416,8 +422,16 @@ $width--max: 1920px; // Maximum width
 }
 
 html {
-    font-size: 62.5%;
+    @if $font-size--root ==10 {
+        font-size: 62.5%;
+    }
+
+    @else {
+        font-size: 100%;
+    }
+
     height: 100%;
+    text-size-adjust: none;
 }
 
 html:focus-within {
@@ -545,7 +559,7 @@ textarea {
 }
 
 @if $class--component {
-    // - - - Components - - - //
+    // - - - - - Components - - - - - //
 
     // Button
 
@@ -693,7 +707,7 @@ textarea {
 }
 
 @if $class--essential {
-    // - - - Essential Classes - - - //
+    // - - - - - Essential Classes - - - - - //
 
     // Alignment
 
@@ -878,235 +892,237 @@ textarea {
         }
     }
 
-    // Aspect Ratio
+    @if not $builder--cwicly {
+        // Aspect Ratio
 
-    img.aspect--square,
-    img.aspect--landscape,
-    img.aspect--portrait,
-    img.aspect--cinema,
-    img.aspect--widescreen {
-        object-fit: cover;
-        width: 100%;
-    }
-
-    .aspect--square iframe,
-    .aspect--landscape iframe,
-    .aspect--portrait iframe,
-    .aspect--cinema iframe,
-    .aspect--widescreen iframe {
-        height: 100%;
-        width: 100%;
-    }
-
-    .aspect--square,
-    .aspect--square iframe {
-        aspect-ratio: var(--aspect--square);
-    }
-
-    .aspect--landscape,
-    .aspect--landscape iframe {
-        aspect-ratio: var(--aspect--landscape);
-    }
-
-    .aspect--portrait,
-    .aspect--portrait iframe {
-        aspect-ratio: var(--aspect--portrait);
-    }
-
-    .aspect--cinema,
-    .aspect--cinema iframe {
-        aspect-ratio: var(--aspect--cinema);
-    }
-
-    .aspect--widescreen,
-    .aspect--widescreen iframe {
-        aspect-ratio: var(--aspect--widescreen);
-    }
-
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-
-            img.aspect--xl-square,
-            img.aspect--xl-landscape,
-            img.aspect--xl-portrait,
-            img.aspect--xl-cinema,
-            img.aspect--xl-widescreen {
-                object-fit: cover;
-                width: 100%;
-            }
-
-            .aspect--xl-square iframe,
-            .aspect--xl-landscape iframe,
-            .aspect--xl-portrait iframe,
-            .aspect--xl-cinema iframe,
-            .aspect--xl-widescreen iframe {
-                height: 100%;
-                width: 100%;
-            }
-
-            .aspect--xl-square,
-            .aspect--xl-square iframe {
-                aspect-ratio: var(--aspect--square);
-            }
-
-            .aspect--xl-landscape,
-            .aspect--xl-landscape iframe {
-                aspect-ratio: var(--aspect--landscape);
-            }
-
-            .aspect--xl-portrait,
-            .aspect--xl-portrait iframe {
-                aspect-ratio: var(--aspect--portrait);
-            }
-
-            .aspect--xl-cinema,
-            .aspect--xl-cinema iframe {
-                aspect-ratio: var(--aspect--cinema);
-            }
-
-            .aspect--xl-widescreen,
-            .aspect--xl-widescreen iframe {
-                aspect-ratio: var(--aspect--widescreen);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-
-        img.aspect--l-square,
-        img.aspect--l-landscape,
-        img.aspect--l-portrait,
-        img.aspect--l-cinema,
-        img.aspect--l-widescreen {
+        img.aspect--square,
+        img.aspect--landscape,
+        img.aspect--portrait,
+        img.aspect--cinema,
+        img.aspect--widescreen {
             object-fit: cover;
             width: 100%;
         }
 
-        .aspect--l-square iframe,
-        .aspect--l-landscape iframe,
-        .aspect--l-portrait iframe,
-        .aspect--l-cinema iframe,
-        .aspect--l-widescreen iframe {
+        .aspect--square iframe,
+        .aspect--landscape iframe,
+        .aspect--portrait iframe,
+        .aspect--cinema iframe,
+        .aspect--widescreen iframe {
             height: 100%;
             width: 100%;
         }
 
-        .aspect--l-square,
-        .aspect--l-square iframe {
+        .aspect--square,
+        .aspect--square iframe {
             aspect-ratio: var(--aspect--square);
         }
 
-        .aspect--l-landscape,
-        .aspect--l-landscape iframe {
+        .aspect--landscape,
+        .aspect--landscape iframe {
             aspect-ratio: var(--aspect--landscape);
         }
 
-        .aspect--l-portrait,
-        .aspect--l-portrait iframe {
+        .aspect--portrait,
+        .aspect--portrait iframe {
             aspect-ratio: var(--aspect--portrait);
         }
 
-        .aspect--l-cinema,
-        .aspect--l-cinema iframe {
+        .aspect--cinema,
+        .aspect--cinema iframe {
             aspect-ratio: var(--aspect--cinema);
         }
 
-        .aspect--l-widescreen,
-        .aspect--l-widescreen iframe {
+        .aspect--widescreen,
+        .aspect--widescreen iframe {
             aspect-ratio: var(--aspect--widescreen);
         }
-    }
 
-    @include breakpoint($width--m) {
+        @if $breakpoint--xl {
+            @include breakpoint($width--xl) {
 
-        img.aspect--m-square,
-        img.aspect--m-landscape,
-        img.aspect--m-portrait,
-        img.aspect--m-cinema,
-        img.aspect--m-widescreen {
-            object-fit: cover;
-            width: 100%;
+                img.aspect--xl-square,
+                img.aspect--xl-landscape,
+                img.aspect--xl-portrait,
+                img.aspect--xl-cinema,
+                img.aspect--xl-widescreen {
+                    object-fit: cover;
+                    width: 100%;
+                }
+
+                .aspect--xl-square iframe,
+                .aspect--xl-landscape iframe,
+                .aspect--xl-portrait iframe,
+                .aspect--xl-cinema iframe,
+                .aspect--xl-widescreen iframe {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .aspect--xl-square,
+                .aspect--xl-square iframe {
+                    aspect-ratio: var(--aspect--square);
+                }
+
+                .aspect--xl-landscape,
+                .aspect--xl-landscape iframe {
+                    aspect-ratio: var(--aspect--landscape);
+                }
+
+                .aspect--xl-portrait,
+                .aspect--xl-portrait iframe {
+                    aspect-ratio: var(--aspect--portrait);
+                }
+
+                .aspect--xl-cinema,
+                .aspect--xl-cinema iframe {
+                    aspect-ratio: var(--aspect--cinema);
+                }
+
+                .aspect--xl-widescreen,
+                .aspect--xl-widescreen iframe {
+                    aspect-ratio: var(--aspect--widescreen);
+                }
+            }
         }
 
-        .aspect--m-square iframe,
-        .aspect--m-landscape iframe,
-        .aspect--m-portrait iframe,
-        .aspect--m-cinema iframe,
-        .aspect--m-widescreen iframe {
-            height: 100%;
-            width: 100%;
-        }
+        @include breakpoint($width--l) {
 
-        .aspect--m-square,
-        .aspect--m-square iframe {
-            aspect-ratio: var(--aspect--square);
-        }
-
-        .aspect--m-landscape,
-        .aspect--m-landscape iframe {
-            aspect-ratio: var(--aspect--landscape);
-        }
-
-        .aspect--m-portrait,
-        .aspect--m-portrait iframe {
-            aspect-ratio: var(--aspect--portrait);
-        }
-
-        .aspect--m-cinema,
-        .aspect--m-cinema iframe {
-            aspect-ratio: var(--aspect--cinema);
-        }
-
-        .aspect--m-widescreen,
-        .aspect--m-widescreen iframe {
-            aspect-ratio: var(--aspect--widescreen);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-
-            img.aspect--s-square,
-            img.aspect--s-landscape,
-            img.aspect--s-portrait,
-            img.aspect--s-cinema,
-            img.aspect--s-widescreen {
+            img.aspect--l-square,
+            img.aspect--l-landscape,
+            img.aspect--l-portrait,
+            img.aspect--l-cinema,
+            img.aspect--l-widescreen {
                 object-fit: cover;
                 width: 100%;
             }
 
-            .aspect--s-square iframe,
-            .aspect--s-landscape iframe,
-            .aspect--s-portrait iframe,
-            .aspect--s-cinema iframe,
-            .aspect--s-widescreen iframe {
+            .aspect--l-square iframe,
+            .aspect--l-landscape iframe,
+            .aspect--l-portrait iframe,
+            .aspect--l-cinema iframe,
+            .aspect--l-widescreen iframe {
                 height: 100%;
                 width: 100%;
             }
 
-            .aspect--s-square,
-            .aspect--s-square iframe {
+            .aspect--l-square,
+            .aspect--l-square iframe {
                 aspect-ratio: var(--aspect--square);
             }
 
-            .aspect--s-landscape,
-            .aspect--s-landscape iframe {
+            .aspect--l-landscape,
+            .aspect--l-landscape iframe {
                 aspect-ratio: var(--aspect--landscape);
             }
 
-            .aspect--s-portrait,
-            .aspect--s-portrait iframe {
+            .aspect--l-portrait,
+            .aspect--l-portrait iframe {
                 aspect-ratio: var(--aspect--portrait);
             }
 
-            .aspect--s-cinema,
-            .aspect--s-cinema iframe {
+            .aspect--l-cinema,
+            .aspect--l-cinema iframe {
                 aspect-ratio: var(--aspect--cinema);
             }
 
-            .aspect--s-widescreen,
-            .aspect--s-widescreen iframe {
+            .aspect--l-widescreen,
+            .aspect--l-widescreen iframe {
                 aspect-ratio: var(--aspect--widescreen);
+            }
+        }
+
+        @include breakpoint($width--m) {
+
+            img.aspect--m-square,
+            img.aspect--m-landscape,
+            img.aspect--m-portrait,
+            img.aspect--m-cinema,
+            img.aspect--m-widescreen {
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .aspect--m-square iframe,
+            .aspect--m-landscape iframe,
+            .aspect--m-portrait iframe,
+            .aspect--m-cinema iframe,
+            .aspect--m-widescreen iframe {
+                height: 100%;
+                width: 100%;
+            }
+
+            .aspect--m-square,
+            .aspect--m-square iframe {
+                aspect-ratio: var(--aspect--square);
+            }
+
+            .aspect--m-landscape,
+            .aspect--m-landscape iframe {
+                aspect-ratio: var(--aspect--landscape);
+            }
+
+            .aspect--m-portrait,
+            .aspect--m-portrait iframe {
+                aspect-ratio: var(--aspect--portrait);
+            }
+
+            .aspect--m-cinema,
+            .aspect--m-cinema iframe {
+                aspect-ratio: var(--aspect--cinema);
+            }
+
+            .aspect--m-widescreen,
+            .aspect--m-widescreen iframe {
+                aspect-ratio: var(--aspect--widescreen);
+            }
+        }
+
+        @if $breakpoint--s {
+            @include breakpoint($width--s) {
+
+                img.aspect--s-square,
+                img.aspect--s-landscape,
+                img.aspect--s-portrait,
+                img.aspect--s-cinema,
+                img.aspect--s-widescreen {
+                    object-fit: cover;
+                    width: 100%;
+                }
+
+                .aspect--s-square iframe,
+                .aspect--s-landscape iframe,
+                .aspect--s-portrait iframe,
+                .aspect--s-cinema iframe,
+                .aspect--s-widescreen iframe {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .aspect--s-square,
+                .aspect--s-square iframe {
+                    aspect-ratio: var(--aspect--square);
+                }
+
+                .aspect--s-landscape,
+                .aspect--s-landscape iframe {
+                    aspect-ratio: var(--aspect--landscape);
+                }
+
+                .aspect--s-portrait,
+                .aspect--s-portrait iframe {
+                    aspect-ratio: var(--aspect--portrait);
+                }
+
+                .aspect--s-cinema,
+                .aspect--s-cinema iframe {
+                    aspect-ratio: var(--aspect--cinema);
+                }
+
+                .aspect--s-widescreen,
+                .aspect--s-widescreen iframe {
+                    aspect-ratio: var(--aspect--widescreen);
+                }
             }
         }
     }
@@ -1246,214 +1262,217 @@ textarea {
         z-index: -1;
     }
 
-    // Border
+    @if not $builder--cwicly {
+        // Border
 
-    .border--interaction {
-        border-color: var(--color--interaction);
-    }
+        .border--interaction {
+            border-color: var(--color--interaction);
+        }
 
-    .border--primary {
-        border-color: var(--color--primary);
-    }
+        .border--primary {
+            border-color: var(--color--primary);
+        }
 
-    .border--secondary {
-        border-color: var(--color--secondary);
-    }
+        .border--secondary {
+            border-color: var(--color--secondary);
+        }
 
-    .border--tertiary {
-        border-color: var(--color--tertiary);
-    }
+        .border--tertiary {
+            border-color: var(--color--tertiary);
+        }
 
-    .border--quaternary {
-        border-color: var(--color--quaternary);
-    }
+        .border--quaternary {
+            border-color: var(--color--quaternary);
+        }
 
-    .border--danger {
-        border-color: var(--color--danger);
-    }
+        .border--danger {
+            border-color: var(--color--danger);
+        }
 
-    .border--highlight {
-        border-color: var(--color--highlight);
-    }
+        .border--highlight {
+            border-color: var(--color--highlight);
+        }
 
-    .border--info {
-        border-color: var(--color--info);
-    }
+        .border--info {
+            border-color: var(--color--info);
+        }
 
-    .border--success {
-        border-color: var(--color--success);
-    }
+        .border--success {
+            border-color: var(--color--success);
+        }
 
-    .border--warning {
-        border-color: var(--color--warning);
-    }
+        .border--warning {
+            border-color: var(--color--warning);
+        }
 
-    .border--black {
-        border-color: var(--color--black);
-    }
+        .border--black {
+            border-color: var(--color--black);
+        }
 
-    .border--black-white {
-        border-color: var(--color--black-white);
-    }
+        .border--black-white {
+            border-color: var(--color--black-white);
+        }
 
-    .border--darker {
-        border-color: var(--color--darker);
-    }
+        .border--darker {
+            border-color: var(--color--darker);
+        }
 
-    .border--darker-lighter {
-        border-color: var(--color--darker-lighter);
-    }
+        .border--darker-lighter {
+            border-color: var(--color--darker-lighter);
+        }
 
-    .border--dark {
-        border-color: var(--color--dark);
-    }
+        .border--dark {
+            border-color: var(--color--dark);
+        }
 
-    .border--dark-light {
-        border-color: var(--color--dark-light);
-    }
+        .border--dark-light {
+            border-color: var(--color--dark-light);
+        }
 
-    .border--mid {
-        border-color: var(--color--mid);
-    }
+        .border--mid {
+            border-color: var(--color--mid);
+        }
 
-    .border--light {
-        border-color: var(--color--light);
-    }
+        .border--light {
+            border-color: var(--color--light);
+        }
 
-    .border--light-dark {
-        border-color: var(--color--light-dark);
-    }
+        .border--light-dark {
+            border-color: var(--color--light-dark);
+        }
 
-    .border--lighter {
-        border-color: var(--color--lighter);
-    }
+        .border--lighter {
+            border-color: var(--color--lighter);
+        }
 
-    .border--lighter-darker {
-        border-color: var(--color--lighter-darker);
-    }
+        .border--lighter-darker {
+            border-color: var(--color--lighter-darker);
+        }
 
-    .border--white {
-        border-color: var(--color--white);
-    }
+        .border--white {
+            border-color: var(--color--white);
+        }
 
-    .border--white-black {
-        border-color: var(--color--white-black);
-    }
+        .border--white-black {
+            border-color: var(--color--white-black);
+        }
 
-    .border--transparent {
-        border-color: transparent;
-    }
+        .border--transparent {
+            border-color: transparent;
+        }
 
-    .border--dashed {
-        border-style: dashed;
-    }
+        .border--dashed {
+            border-style: dashed;
+        }
 
-    .border--dotted {
-        border-style: dotted;
-    }
+        .border--dotted {
+            border-style: dotted;
+        }
 
-    .border--solid {
-        border-style: solid;
-    }
+        .border--solid {
+            border-style: solid;
+        }
 
-    .border--flat {
-        border-width: 0;
-    }
+        .border--flat {
+            border-width: 0;
+        }
 
-    .border--px {
-        border-width: var(--space--px);
-    }
+        .border--px {
+            border-width: var(--space--px);
+        }
 
-    .border--2px {
-        border-width: var(--space--2px);
-    }
+        .border--2px {
+            border-width: var(--space--2px);
+        }
 
-    .border--4px {
-        border-width: var(--space--4px);
-    }
+        .border--4px {
+            border-width: var(--space--4px);
+        }
 
-    .border--8px {
-        border-width: var(--space--8px);
-    }
+        .border--8px {
+            border-width: var(--space--8px);
+        }
 
-    .border-bottom--flat {
-        border-bottom-width: 0;
-    }
+        .border-bottom--flat {
+            border-bottom-width: 0;
+        }
 
-    .border-bottom--px {
-        border-width: 0 0 var(--space--px) 0;
-    }
+        .border-bottom--px {
+            border-width: 0 0 var(--space--px) 0;
+        }
 
-    .border-bottom--2px {
-        border-width: 0 0 var(--space--2px) 0;
-    }
+        .border-bottom--2px {
+            border-width: 0 0 var(--space--2px) 0;
+        }
 
-    .border-bottom--4px {
-        border-width: 0 0 var(--space--4px) 0;
-    }
+        .border-bottom--4px {
+            border-width: 0 0 var(--space--4px) 0;
+        }
 
-    .border-bottom--8px {
-        border-width: 0 0 var(--space--8px) 0;
-    }
+        .border-bottom--8px {
+            border-width: 0 0 var(--space--8px) 0;
+        }
 
-    .border-left--flat {
-        border-left-width: 0;
-    }
+        .border-left--flat {
+            border-left-width: 0;
+        }
 
-    .border-left--px {
-        border-width: 0 0 0 var(--space--px);
-    }
+        .border-left--px {
+            border-width: 0 0 0 var(--space--px);
+        }
 
-    .border-left--2px {
-        border-width: 0 0 0 var(--space--2px);
-    }
+        .border-left--2px {
+            border-width: 0 0 0 var(--space--2px);
+        }
 
-    .border-left--4px {
-        border-width: 0 0 0 var(--space--4px);
-    }
+        .border-left--4px {
+            border-width: 0 0 0 var(--space--4px);
+        }
 
-    .border-left--8px {
-        border-width: 0 0 0 var(--space--8px);
-    }
+        .border-left--8px {
+            border-width: 0 0 0 var(--space--8px);
+        }
 
-    .border-right--flat {
-        border-right-width: 0;
-    }
+        .border-right--flat {
+            border-right-width: 0;
+        }
 
-    .border-right--px {
-        border-width: 0 var(--space--px) 0 0;
-    }
+        .border-right--px {
+            border-width: 0 var(--space--px) 0 0;
+        }
 
-    .border-right--2px {
-        border-width: 0 var(--space--2px) 0 0;
-    }
+        .border-right--2px {
+            border-width: 0 var(--space--2px) 0 0;
+        }
 
-    .border-right--4px {
-        border-width: 0 var(--space--4px) 0 0;
-    }
+        .border-right--4px {
+            border-width: 0 var(--space--4px) 0 0;
+        }
 
-    .border-right--8px {
-        border-width: 0 var(--space--8px) 0 0;
-    }
+        .border-right--8px {
+            border-width: 0 var(--space--8px) 0 0;
+        }
 
-    .border-top--flat {
-        border-top-width: 0;
-    }
+        .border-top--flat {
+            border-top-width: 0;
+        }
 
-    .border-top--px {
-        border-width: var(--space--px) 0 0 0;
-    }
+        .border-top--px {
+            border-width: var(--space--px) 0 0 0;
+        }
 
-    .border-top--2px {
-        border-width: var(--space--2px) 0 0 0;
-    }
+        .border-top--2px {
+            border-width: var(--space--2px) 0 0 0;
+        }
 
-    .border-top--4px {
-        border-width: var(--space--4px) 0 0 0;
-    }
+        .border-top--4px {
+            border-width: var(--space--4px) 0 0 0;
+        }
 
-    .border-top--8px {
-        border-width: var(--space--8px) 0 0 0;
+        .border-top--8px {
+            border-width: var(--space--8px) 0 0 0;
+        }
+
     }
 
     .border--btn {
@@ -1974,13 +1993,13 @@ textarea {
     .hide--visually {
         border: 0;
         clip: rect(0, 0, 0, 0);
-        height: .1rem;
-        margin: -.1rem;
+        height: px-relative(1px);
+        margin: calc(px-relative(1px) * -1);
         overflow: hidden;
         padding: 0;
         position: absolute;
         white-space: nowrap;
-        width: .1rem;
+        width: px-relative(1px);
     }
 
     .hide--visually.focusable:active,
@@ -2021,111 +2040,113 @@ textarea {
         top: 0;
     }
 
-    // List Flat
+    @if not $builder--cwicly {
+        // List Flat
 
-    ol.list--flat,
-    ul.list--flat,
-    .list--flat>ol,
-    .list--flat>ul {
-        list-style: none;
-        list-style-type: none;
-        margin-block-end: 0;
-        margin-block-start: 0;
-        padding-left: 0;
-    }
+        ol.list--flat,
+        ul.list--flat,
+        .list--flat>ol,
+        .list--flat>ul {
+            list-style: none;
+            list-style-type: none;
+            margin-block-end: 0;
+            margin-block-start: 0;
+            padding-left: 0;
+        }
 
-    // List Marker
+        // List Marker
 
-    .list-marker--interaction li::marker {
-        color: var(--color--interaction);
-    }
+        .list-marker--interaction li::marker {
+            color: var(--color--interaction);
+        }
 
-    .list-marker--primary li::marker {
-        color: var(--color--primary);
-    }
+        .list-marker--primary li::marker {
+            color: var(--color--primary);
+        }
 
-    .list-marker--secondary li::marker {
-        color: var(--color--secondary);
-    }
+        .list-marker--secondary li::marker {
+            color: var(--color--secondary);
+        }
 
-    .list-marker--tertiary li::marker {
-        color: var(--color--tertiary);
-    }
+        .list-marker--tertiary li::marker {
+            color: var(--color--tertiary);
+        }
 
-    .list-marker--quaternary li::marker {
-        color: var(--color--quaternary);
-    }
+        .list-marker--quaternary li::marker {
+            color: var(--color--quaternary);
+        }
 
-    .list-marker--danger li::marker {
-        color: var(--color--danger);
-    }
+        .list-marker--danger li::marker {
+            color: var(--color--danger);
+        }
 
-    .list-marker--highlight li::marker {
-        color: var(--color--highlight);
-    }
+        .list-marker--highlight li::marker {
+            color: var(--color--highlight);
+        }
 
-    .list-marker--info li::marker {
-        color: var(--color--info);
-    }
+        .list-marker--info li::marker {
+            color: var(--color--info);
+        }
 
-    .list-marker--success li::marker {
-        color: var(--color--success);
-    }
+        .list-marker--success li::marker {
+            color: var(--color--success);
+        }
 
-    .list-marker--warning li::marker {
-        color: var(--color--warning);
-    }
+        .list-marker--warning li::marker {
+            color: var(--color--warning);
+        }
 
-    .list-marker--black li::marker {
-        color: var(--color--black);
-    }
+        .list-marker--black li::marker {
+            color: var(--color--black);
+        }
 
-    .list-marker--black-white li::marker {
-        color: var(--color--black-white);
-    }
+        .list-marker--black-white li::marker {
+            color: var(--color--black-white);
+        }
 
-    .list-marker--darker li::marker {
-        color: var(--color--darker);
-    }
+        .list-marker--darker li::marker {
+            color: var(--color--darker);
+        }
 
-    .list-marker--darker-lighter li::marker {
-        color: var(--color--darker-lighter);
-    }
+        .list-marker--darker-lighter li::marker {
+            color: var(--color--darker-lighter);
+        }
 
-    .list-marker--dark li::marker {
-        color: var(--color--dark);
-    }
+        .list-marker--dark li::marker {
+            color: var(--color--dark);
+        }
 
-    .list-marker--dark-light li::marker {
-        color: var(--color--dark-light);
-    }
+        .list-marker--dark-light li::marker {
+            color: var(--color--dark-light);
+        }
 
-    .list-marker--mid li::marker {
-        color: var(--color--mid);
-    }
+        .list-marker--mid li::marker {
+            color: var(--color--mid);
+        }
 
-    .list-marker--light li::marker {
-        color: var(--color--light);
-    }
+        .list-marker--light li::marker {
+            color: var(--color--light);
+        }
 
-    .list-marker--light-dark li::marker {
-        color: var(--color--light-dark);
-    }
+        .list-marker--light-dark li::marker {
+            color: var(--color--light-dark);
+        }
 
-    .list-marker--lighter li::marker {
-        color: var(--color--lighter);
-    }
+        .list-marker--lighter li::marker {
+            color: var(--color--lighter);
+        }
 
-    .list-marker--lighter-darker li::marker {
-        color: var(--color--lighter-darker);
-    }
+        .list-marker--lighter-darker li::marker {
+            color: var(--color--lighter-darker);
+        }
 
-    .list-marker--white li::marker {
-        color: var(--color--white);
-    }
+        .list-marker--white li::marker {
+            color: var(--color--white);
+        }
 
-    .list-marker--white-black li::marker {
-        color: var(--color--white-black);
+        .list-marker--white-black li::marker {
+            color: var(--color--white-black);
+        }
     }
 
     // Padding
@@ -2309,16 +2330,10 @@ textarea {
             }
         }
     }
-
-    // Width
-
-    .width--fit {
-        max-width: fit-content;
-    }
 }
 
 @if $class--extra {
-    // - - - Extra Classes - - - //
+    // - - - - - Extra Classes - - - - - //
 
     // Flex
 
@@ -5779,6 +5794,10 @@ textarea {
         max-width: var(--width--max);
     }
 
+    .width--fit {
+        max-width: fit-content;
+    }
+
     .width--prose {
         max-width: var(--width--prose);
     }
@@ -5815,7 +5834,7 @@ textarea {
 }
 
 @if $builder--cwicly {
-    // Prevent background video from creating extra gap spacing */
+    // Prevent background video from creating extra gap spacing
 
     .cc-background-video {
         display: none;
@@ -5823,7 +5842,7 @@ textarea {
 }
 
 @if $form--bricks {
-    // - - - Bricks Form - - - //
+    // - - - - - Bricks Form - - - - - //
 
     form.form {
         width: 100%;
@@ -6033,7 +6052,7 @@ textarea {
 }
 
 @if $form--happyforms {
-    // - - - HappyForms - - - //
+    // - - - - - HappyForms - - - - - //
 
     .form {
         overflow-x: hidden !important;
