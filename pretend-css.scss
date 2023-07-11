@@ -18,13 +18,13 @@ $color--tertiary: $color--interaction;
 $color--quaternary: $color--interaction;
 
 // Color - Shade
-$color--black: #000000;
+$color--darkest: #000000;
 $color--darker: #171717;
 $color--dark: #272727;
 $color--mid: #878787;
 $color--light: #e7e7e7;
 $color--lighter: #f7f7f7;
-$color--white: #ffffff;
+$color--lightest: #ffffff;
 
 // Color - Misc
 $color--danger: #ef4444;
@@ -34,10 +34,6 @@ $color--success: #10b981;
 $color--warning: #f59e0b;
 
 // - - - Default Project Options - - - //
-
-// Breakpoint
-$breakpoint--s: false; // Include small breakpoint classes
-$breakpoint--xl: false; // Include extra large breakpoint classes
 
 // Builder
 $builder--bricks: false; // Include Bricks styling
@@ -77,6 +73,14 @@ $width--xl: 1280px; // Website width
 $width--wide: 1440px; // Wide breakout width
 $width--wider: 1600px; // Wider breakout width
 $width--max: 1920px; // Maximum width
+
+// Width - Breakpoint
+$breakpoint: (
+    // xl: $width--xl,
+    l: $width--l,
+    m: $width--m,
+    // s: $width--s,
+);
 
 // - - - - - End SCSS Variable Configuration - - - - - //
 // - - - - - See Also: CSS Variable Configuration - - - - - //
@@ -134,47 +138,40 @@ $width--max: 1920px; // Maximum width
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
 @mixin breakpoint($_width, $_minmax: max) {
-    @media (#{$_minmax}-width: #{$_width}) {
+    @media (#{$_minmax}-width: #{px-relative($_width, em)}) {
         @content;
     }
 }
 
-/*
-// Hex Color Value Key
-
-// Color
---color--interaction: #{$color--interaction};
---color--primary: #{$color--primary};
---color--secondary: #{$color--secondary};
---color--tertiary: #{$color--tertiary};
---color--quaternary: #{$color--quaternary};
-
-// Color - Shade
---color--black: #{$color--black};
---color--darker: #{$color--darker};
---color--dark: #{$color--dark};
---color--mid: #{$color--mid};
---color--light: #{$color--light};
---color--lighter: #{$color--lighter};
---color--white: #{$color--white};
-
-// Color - Misc
---color--danger: #{$color--danger};
---color--highlight: #{$color--highlight};
---color--info: #{$color--info};
---color--success: #{$color--success};
---color--warning: #{$color--warning};
-*/
-
 :root {
     /* - - - - - Start CSS Variable Configuration - - - - - */
 
-    /* Color */
-    --color--interaction: hsl(#{hex-hsl($color--interaction)});
-    --color--primary: hsl(#{hex-hsl($color--primary)});
-    --color--secondary: hsl(#{hex-hsl($color--secondary)});
-    --color--tertiary: hsl(#{hex-hsl($color--tertiary)});
-    --color--quaternary: hsl(#{hex-hsl($color--quaternary)});
+    /* Color - Get HSL: https://convertacolor.com */
+    // Interaction
+    --color--interaction: #{$color--interaction};
+    --h--interaction: #{hue($color--interaction)};
+    --s--interaction: #{saturation($color--interaction)};
+    --l--interaction: #{lightness($color--interaction)};
+    // Primary
+    --color--primary: #{$color--primary};
+    --h--primary: #{hue($color--primary)};
+    --s--primary: #{saturation($color--primary)};
+    --l--primary: #{lightness($color--primary)};
+    // Secondary
+    --color--secondary: #{$color--secondary};
+    --h--secondary: #{hue($color--secondary)};
+    --s--secondary: #{saturation($color--secondary)};
+    --l--secondary: #{lightness($color--secondary)};
+    // Tertiary
+    --color--tertiary: #{$color--tertiary};
+    --h--tertiary: #{hue($color--tertiary)};
+    --s--tertiary: #{saturation($color--tertiary)};
+    --l--tertiary: #{lightness($color--tertiary)};
+    // Quaternary
+    --color--quaternary: #{$color--quaternary};
+    --h--quaternary: #{hue($color--quaternary)};
+    --s--quaternary: #{saturation($color--quaternary)};
+    --l--quaternary: #{lightness($color--quaternary)};
 
     /* Body */
     --bg-color--body: var(--color--lighter-darker);
@@ -201,7 +198,7 @@ $width--max: 1920px; // Maximum width
     --transition--btn: var(--transition--fast);
 
     /* Form */
-    --bg-color--input: var(--color--white-black);
+    --bg-color--input: var(--color--lightest-darkest);
     --border-color--input: var(--color--mid);
     --border-radius--input: 0;
     --border-style--input: solid;
@@ -247,28 +244,100 @@ $width--max: 1920px; // Maximum width
     --aspect--widescreen: 2 / 1;
 
     // Color - Shade
-    --color--black: hsl(#{hex-hsl($color--black)});
-    --color--darker: hsl(#{hex-hsl($color--darker)});
-    --color--dark: hsl(#{hex-hsl($color--dark)});
-    --color--mid: hsl(#{hex-hsl($color--mid)});
-    --color--light: hsl(#{hex-hsl($color--light)});
-    --color--lighter: hsl(#{hex-hsl($color--lighter)});
-    --color--white: hsl(#{hex-hsl($color--white)});
+    // Darkest
+    --color--darkest: #{$color--darkest};
+    --h--darkest: #{hue($color--darkest)};
+    --s--darkest: #{saturation($color--darkest)};
+    --l--darkest: #{lightness($color--darkest)};
+    // Darker
+    --color--darker: #{$color--darker};
+    --h--darker: #{hue($color--darker)};
+    --s--darker: #{saturation($color--darker)};
+    --l--darker: #{lightness($color--darker)};
+    // Dark
+    --color--dark: #{$color--dark};
+    --h--dark: #{hue($color--dark)};
+    --s--dark: #{saturation($color--dark)};
+    --l--dark: #{lightness($color--dark)};
+    // Mid
+    --color--mid: #{$color--mid};
+    --h--mid: #{hue($color--mid)};
+    --s--mid: #{saturation($color--mid)};
+    --l--mid: #{lightness($color--mid)};
+    // Light
+    --color--light: #{$color--light};
+    --h--light: #{hue($color--light)};
+    --s--light: #{saturation($color--light)};
+    --l--light: #{lightness($color--light)};
+    // Lighter
+    --color--lighter: #{$color--lighter};
+    --h--lighter: #{hue($color--lighter)};
+    --s--lighter: #{saturation($color--lighter)};
+    --l--lighter: #{lightness($color--lighter)};
+    // Lightest
+    --color--lightest: #{$color--lightest};
+    --h--lightest: #{hue($color--lightest)};
+    --s--lightest: #{saturation($color--lightest)};
+    --l--lightest: #{lightness($color--lightest)};
 
     // Color - Misc
-    --color--danger: hsl(#{hex-hsl($color--danger)});
-    --color--highlight: hsl(#{hex-hsl($color--highlight)});
-    --color--info: hsl(#{hex-hsl($color--info)});
-    --color--success: hsl(#{hex-hsl($color--success)});
-    --color--warning: hsl(#{hex-hsl($color--warning)});
+    // Danger
+    --color--danger: #{$color--danger};
+    --h--danger: #{hue($color--danger)};
+    --s--danger: #{saturation($color--danger)};
+    --l--danger: #{lightness($color--danger)};
+    // Highlight
+    --color--highlight: #{$color--highlight};
+    --h--highlight: #{hue($color--highlight)};
+    --s--highlight: #{saturation($color--highlight)};
+    --l--highlight: #{lightness($color--highlight)};
+    // Info
+    --color--info: #{$color--info};
+    --h--info: #{hue($color--info)};
+    --s--info: #{saturation($color--info)};
+    --l--info: #{lightness($color--info)};
+    // Success
+    --color--success: #{$color--success};
+    --h--success: #{hue($color--success)};
+    --s--success: #{saturation($color--success)};
+    --l--success: #{lightness($color--success)};
+    // Warning
+    --color--warning: #{$color--warning};
+    --h--warning: #{hue($color--warning)};
+    --s--warning: #{saturation($color--warning)};
+    --l--warning: #{lightness($color--warning)};
 
     // Color - Dark Mode
-    --color--black-white: var(--color--black);
+    // Darkest Lightest
+    --color--darkest-lightest: var(--color--darkest);
+    --h--darkest-lightest: var(--h--darkest);
+    --s--darkest-lightest: var(--s--darkest);
+    --l--darkest-lightest: var(--l--darkest);
+    // Darker Lighter
     --color--darker-lighter: var(--color--darker);
+    --h--darker-lighter: var(--h--darker);
+    --s--darker-lighter: var(--s--darker);
+    --l--darker-lighter: var(--l--darker);
+    // Dark Light
     --color--dark-light: var(--color--dark);
+    --h--dark-light: var(--h--dark);
+    --s--dark-light: var(--s--dark);
+    --l--dark-light: var(--l--dark);
+    // Light Dark
     --color--light-dark: var(--color--light);
+    --h--light-dark: var(--h--light);
+    --s--light-dark: var(--s--light);
+    --l--light-dark: var(--l--light);
+    // Lighter Darker
     --color--lighter-darker: var(--color--lighter);
-    --color--white-black: var(--color--white);
+    --h--lighter-darker: var(--h--lighter);
+    --s--lighter-darker: var(--s--lighter);
+    --l--lighter-darker: var(--l--lighter);
+    // Lightest Darkest
+    --color--lightest-darkest: var(--color--lightest);
+    --h--lightest-darkest: var(--h--lightest);
+    --s--lightest-darkest: var(--s--lightest);
+    --l--lightest-darkest: var(--l--lightest);
 
     // Grid
     --grid--1: repeat(1, minmax(0, 1fr));
@@ -291,7 +360,7 @@ $width--max: 1920px; // Maximum width
     --grid--span-6: span 6;
 
     // Misc
-    --bg-blur--color: hsl(#{hex-hsl($color--white)} / 90%);
+    --bg-blur--color: hsl(var(--h--lightest-darkest) var(--s--lightest-darkest) var(--l--lightest-darkest) / 0.9);
     --object--start: 15%;
     --object--center: 50%;
     --object--end: 85%;
@@ -408,14 +477,36 @@ $width--max: 1920px; // Maximum width
 @media(prefers-color-scheme: dark) {
     :root {
         // Color - Dark Mode
-        --color--black-white: var(--color--white);
+        // Darkest Lightest
+        --color--darkest-lightest: var(--color--lightest);
+        --h--darkest-lightest: var(--h--lightest);
+        --s--darkest-lightest: var(--s--lightest);
+        --l--darkest-lightest: var(--l--lightest);
+        // Darker Lighter
         --color--darker-lighter: var(--color--lighter);
+        --h--darker-lighter: var(--h--lighter);
+        --s--darker-lighter: var(--s--lighter);
+        --l--darker-lighter: var(--l--lighter);
+        // Dark Light
         --color--dark-light: var(--color--light);
+        --h--dark-light: var(--h--light);
+        --s--dark-light: var(--s--light);
+        --l--dark-light: var(--l--light);
+        // Light Dark
         --color--light-dark: var(--color--dark);
+        --h--light-dark: var(--h--dark);
+        --s--light-dark: var(--s--dark);
+        --l--light-dark: var(--l--dark);
+        // Lighter Darker
         --color--lighter-darker: var(--color--darker);
-        --color--white-black: var(--color--black);
-        // Misc
-        --bg-blur--color: hsl(#{hex-hsl($color--black)} / 90%);
+        --h--lighter-darker: var(--h--darker);
+        --s--lighter-darker: var(--s--darker);
+        --l--lighter-darker: var(--l--darker);
+        // Lightest Darkest
+        --color--lightest-darkest: var(--color--darkest);
+        --h--lightest-darkest: var(--h--darkest);
+        --s--lightest-darkest: var(--s--darkest);
+        --l--lightest-darkest: var(--l--darkest);
         // Shadow
         --shadow--color: #{hex-hsl(#0d0d0d)};
         --shadow--strength: 20%;
@@ -426,15 +517,7 @@ $width--max: 1920px; // Maximum width
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
     :root {
         // Misc
-        --bg-blur--color: hsl(#{hex-hsl($color--white)} / 40%);
-    }
-
-    // Dark Mode
-    @media (prefers-color-scheme: dark) {
-        :root {
-            // Misc
-            --bg-blur--color: hsl(#{hex-hsl($color--black)} / 40%);
-        }
+        --bg-blur--color: hsl(var(--h--lightest-darkest) var(--s--lightest-darkest) var(--l--lightest-darkest) / 0.4);
     }
 }
 
@@ -804,122 +887,31 @@ textarea {
         margin-right: calc(var(--space--m) * -1);
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .center--xl-self {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .center--#{$_key}-self {
                 float: none;
                 margin-bottom: 0;
                 margin-left: auto;
                 margin-right: auto;
             }
 
-            .float--xl-left {
+            .float--#{$_key}-left {
                 float: left;
                 margin-bottom: var(--space--m);
                 margin-left: 0;
                 margin-right: var(--space--m);
             }
 
-            .float--xl-none {
+            .float--#{$_key}-none {
                 float: none;
                 margin-bottom: 0;
                 margin-left: 0;
                 margin-right: 0;
             }
 
-            .float--xl-right {
-                float: right;
-                margin-bottom: var(--space--m);
-                margin-left: var(--space--m);
-                margin-right: 0;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .center--l-self {
-            float: none;
-            margin-bottom: 0;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .float--l-left {
-            float: left;
-            margin-bottom: var(--space--m);
-            margin-left: 0;
-            margin-right: var(--space--m);
-        }
-
-        .float--l-none {
-            float: none;
-            margin-bottom: 0;
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .float--l-right {
-            float: right;
-            margin-bottom: var(--space--m);
-            margin-left: var(--space--m);
-            margin-right: 0;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .center--m-self {
-            float: none;
-            margin-bottom: 0;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .float--m-left {
-            float: left;
-            margin-bottom: var(--space--m);
-            margin-left: 0;
-            margin-right: var(--space--m);
-        }
-
-        .float--m-none {
-            float: none;
-            margin-bottom: 0;
-            margin-left: 0;
-            margin-right: 0;
-        }
-
-        .float--m-right {
-            float: right;
-            margin-bottom: var(--space--m);
-            margin-left: var(--space--m);
-            margin-right: 0;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .center--s-self {
-                float: none;
-                margin-bottom: 0;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .float--s-left {
-                float: left;
-                margin-bottom: var(--space--m);
-                margin-left: 0;
-                margin-right: var(--space--m);
-            }
-
-            .float--s-none {
-                float: none;
-                margin-bottom: 0;
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            .float--s-right {
+            .float--#{$_key}-right {
                 float: right;
                 margin-bottom: var(--space--m);
                 margin-left: var(--space--m);
@@ -974,189 +966,50 @@ textarea {
             aspect-ratio: var(--aspect--widescreen);
         }
 
-        @if $breakpoint--xl {
-            @include breakpoint($width--xl) {
+        @each $_key,
+        $_value in $breakpoint {
+            @include breakpoint($_value) {
 
-                img.aspect--xl-square,
-                img.aspect--xl-landscape,
-                img.aspect--xl-portrait,
-                img.aspect--xl-cinema,
-                img.aspect--xl-widescreen {
+                img.aspect--#{$_key}-square,
+                img.aspect--#{$_key}-landscape,
+                img.aspect--#{$_key}-portrait,
+                img.aspect--#{$_key}-cinema,
+                img.aspect--#{$_key}-widescreen {
                     object-fit: cover;
                     width: 100%;
                 }
 
-                .aspect--xl-square iframe,
-                .aspect--xl-landscape iframe,
-                .aspect--xl-portrait iframe,
-                .aspect--xl-cinema iframe,
-                .aspect--xl-widescreen iframe {
+                .aspect--#{$_key}-square iframe,
+                .aspect--#{$_key}-landscape iframe,
+                .aspect--#{$_key}-portrait iframe,
+                .aspect--#{$_key}-cinema iframe,
+                .aspect--#{$_key}-widescreen iframe {
                     height: 100%;
                     width: 100%;
                 }
 
-                .aspect--xl-square,
-                .aspect--xl-square iframe {
+                .aspect--#{$_key}-square,
+                .aspect--#{$_key}-square iframe {
                     aspect-ratio: var(--aspect--square);
                 }
 
-                .aspect--xl-landscape,
-                .aspect--xl-landscape iframe {
+                .aspect--#{$_key}-landscape,
+                .aspect--#{$_key}-landscape iframe {
                     aspect-ratio: var(--aspect--landscape);
                 }
 
-                .aspect--xl-portrait,
-                .aspect--xl-portrait iframe {
+                .aspect--#{$_key}-portrait,
+                .aspect--#{$_key}-portrait iframe {
                     aspect-ratio: var(--aspect--portrait);
                 }
 
-                .aspect--xl-cinema,
-                .aspect--xl-cinema iframe {
+                .aspect--#{$_key}-cinema,
+                .aspect--#{$_key}-cinema iframe {
                     aspect-ratio: var(--aspect--cinema);
                 }
 
-                .aspect--xl-widescreen,
-                .aspect--xl-widescreen iframe {
-                    aspect-ratio: var(--aspect--widescreen);
-                }
-            }
-        }
-
-        @include breakpoint($width--l) {
-
-            img.aspect--l-square,
-            img.aspect--l-landscape,
-            img.aspect--l-portrait,
-            img.aspect--l-cinema,
-            img.aspect--l-widescreen {
-                object-fit: cover;
-                width: 100%;
-            }
-
-            .aspect--l-square iframe,
-            .aspect--l-landscape iframe,
-            .aspect--l-portrait iframe,
-            .aspect--l-cinema iframe,
-            .aspect--l-widescreen iframe {
-                height: 100%;
-                width: 100%;
-            }
-
-            .aspect--l-square,
-            .aspect--l-square iframe {
-                aspect-ratio: var(--aspect--square);
-            }
-
-            .aspect--l-landscape,
-            .aspect--l-landscape iframe {
-                aspect-ratio: var(--aspect--landscape);
-            }
-
-            .aspect--l-portrait,
-            .aspect--l-portrait iframe {
-                aspect-ratio: var(--aspect--portrait);
-            }
-
-            .aspect--l-cinema,
-            .aspect--l-cinema iframe {
-                aspect-ratio: var(--aspect--cinema);
-            }
-
-            .aspect--l-widescreen,
-            .aspect--l-widescreen iframe {
-                aspect-ratio: var(--aspect--widescreen);
-            }
-        }
-
-        @include breakpoint($width--m) {
-
-            img.aspect--m-square,
-            img.aspect--m-landscape,
-            img.aspect--m-portrait,
-            img.aspect--m-cinema,
-            img.aspect--m-widescreen {
-                object-fit: cover;
-                width: 100%;
-            }
-
-            .aspect--m-square iframe,
-            .aspect--m-landscape iframe,
-            .aspect--m-portrait iframe,
-            .aspect--m-cinema iframe,
-            .aspect--m-widescreen iframe {
-                height: 100%;
-                width: 100%;
-            }
-
-            .aspect--m-square,
-            .aspect--m-square iframe {
-                aspect-ratio: var(--aspect--square);
-            }
-
-            .aspect--m-landscape,
-            .aspect--m-landscape iframe {
-                aspect-ratio: var(--aspect--landscape);
-            }
-
-            .aspect--m-portrait,
-            .aspect--m-portrait iframe {
-                aspect-ratio: var(--aspect--portrait);
-            }
-
-            .aspect--m-cinema,
-            .aspect--m-cinema iframe {
-                aspect-ratio: var(--aspect--cinema);
-            }
-
-            .aspect--m-widescreen,
-            .aspect--m-widescreen iframe {
-                aspect-ratio: var(--aspect--widescreen);
-            }
-        }
-
-        @if $breakpoint--s {
-            @include breakpoint($width--s) {
-
-                img.aspect--s-square,
-                img.aspect--s-landscape,
-                img.aspect--s-portrait,
-                img.aspect--s-cinema,
-                img.aspect--s-widescreen {
-                    object-fit: cover;
-                    width: 100%;
-                }
-
-                .aspect--s-square iframe,
-                .aspect--s-landscape iframe,
-                .aspect--s-portrait iframe,
-                .aspect--s-cinema iframe,
-                .aspect--s-widescreen iframe {
-                    height: 100%;
-                    width: 100%;
-                }
-
-                .aspect--s-square,
-                .aspect--s-square iframe {
-                    aspect-ratio: var(--aspect--square);
-                }
-
-                .aspect--s-landscape,
-                .aspect--s-landscape iframe {
-                    aspect-ratio: var(--aspect--landscape);
-                }
-
-                .aspect--s-portrait,
-                .aspect--s-portrait iframe {
-                    aspect-ratio: var(--aspect--portrait);
-                }
-
-                .aspect--s-cinema,
-                .aspect--s-cinema iframe {
-                    aspect-ratio: var(--aspect--cinema);
-                }
-
-                .aspect--s-widescreen,
-                .aspect--s-widescreen iframe {
+                .aspect--#{$_key}-widescreen,
+                .aspect--#{$_key}-widescreen iframe {
                     aspect-ratio: var(--aspect--widescreen);
                 }
             }
@@ -1225,12 +1078,12 @@ textarea {
         background-color: var(--color--warning);
     }
 
-    .bg--black {
-        background-color: var(--color--black);
+    .bg--darkest {
+        background-color: var(--color--darkest);
     }
 
-    .bg--black-white {
-        background-color: var(--color--black-white);
+    .bg--darkest-lightest {
+        background-color: var(--color--darkest-lightest);
     }
 
     .bg--darker {
@@ -1269,12 +1122,12 @@ textarea {
         background-color: var(--color--lighter-darker);
     }
 
-    .bg--white {
-        background-color: var(--color--white);
+    .bg--lightest {
+        background-color: var(--color--lightest);
     }
 
-    .bg--white-black {
-        background-color: var(--color--white-black);
+    .bg--lightest-darkest {
+        background-color: var(--color--lightest-darkest);
     }
 
     .bg--transparent {
@@ -1341,12 +1194,12 @@ textarea {
             border-color: var(--color--warning);
         }
 
-        .border--black {
-            border-color: var(--color--black);
+        .border--darkest {
+            border-color: var(--color--darkest);
         }
 
-        .border--black-white {
-            border-color: var(--color--black-white);
+        .border--darkest-lightest {
+            border-color: var(--color--darkest-lightest);
         }
 
         .border--darker {
@@ -1385,12 +1238,12 @@ textarea {
             border-color: var(--color--lighter-darker);
         }
 
-        .border--white {
-            border-color: var(--color--white);
+        .border--lightest {
+            border-color: var(--color--lightest);
         }
 
-        .border--white-black {
-            border-color: var(--color--white-black);
+        .border--lightest-darkest {
+            border-color: var(--color--lightest-darkest);
         }
 
         .border--transparent {
@@ -1609,12 +1462,12 @@ textarea {
         color: var(--color--warning);
     }
 
-    .color--black {
-        color: var(--color--black);
+    .color--darkest {
+        color: var(--color--darkest);
     }
 
-    .color--black-white {
-        color: var(--color--black-white);
+    .color--darkest-lightest {
+        color: var(--color--darkest-lightest);
     }
 
     .color--darker {
@@ -1653,12 +1506,12 @@ textarea {
         color: var(--color--lighter-darker);
     }
 
-    .color--white {
-        color: var(--color--white);
+    .color--lightest {
+        color: var(--color--lightest);
     }
 
-    .color--white-black {
-        color: var(--color--white-black);
+    .color--lightest-darkest {
+        color: var(--color--lightest-darkest);
     }
 
     // Content Column
@@ -1687,109 +1540,30 @@ textarea {
         column-count: 6;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .content-column--xl-1 {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .content-column--#{$_key}-1 {
                 column-count: 1;
             }
 
-            .content-column--xl-2 {
+            .content-column--#{$_key}-2 {
                 column-count: 2;
             }
 
-            .content-column--xl-3 {
+            .content-column--#{$_key}-3 {
                 column-count: 3;
             }
 
-            .content-column--xl-4 {
+            .content-column--#{$_key}-4 {
                 column-count: 4;
             }
 
-            .content-column--xl-5 {
+            .content-column--#{$_key}-5 {
                 column-count: 5;
             }
 
-            .content-column--xl-6 {
-                column-count: 6;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .content-column--l-1 {
-            column-count: 1;
-        }
-
-        .content-column--l-2 {
-            column-count: 2;
-        }
-
-        .content-column--l-3 {
-            column-count: 3;
-        }
-
-        .content-column--l-4 {
-            column-count: 4;
-        }
-
-        .content-column--l-5 {
-            column-count: 5;
-        }
-
-        .content-column--l-6 {
-            column-count: 6;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .content-column--m-1 {
-            column-count: 1;
-        }
-
-        .content-column--m-2 {
-            column-count: 2;
-        }
-
-        .content-column--m-3 {
-            column-count: 3;
-        }
-
-        .content-column--m-4 {
-            column-count: 4;
-        }
-
-        .content-column--m-5 {
-            column-count: 5;
-        }
-
-        .content-column--m-6 {
-            column-count: 6;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .content-column--s-1 {
-                column-count: 1;
-            }
-
-            .content-column--s-2 {
-                column-count: 2;
-            }
-
-            .content-column--s-3 {
-                column-count: 3;
-            }
-
-            .content-column--s-4 {
-                column-count: 4;
-            }
-
-            .content-column--s-5 {
-                column-count: 5;
-            }
-
-            .content-column--s-6 {
+            .content-column--#{$_key}-6 {
                 column-count: 6;
             }
         }
@@ -1867,12 +1641,12 @@ textarea {
         column-rule-color: var(--color--warning);
     }
 
-    .content-column-rule--black {
-        column-rule-color: var(--color--black);
+    .content-column-rule--darkest {
+        column-rule-color: var(--color--darkest);
     }
 
-    .content-column-rule--black-white {
-        column-rule-color: var(--color--black-white);
+    .content-column-rule--darkest-lightest {
+        column-rule-color: var(--color--darkest-lightest);
     }
 
     .content-column-rule--darker {
@@ -1911,12 +1685,12 @@ textarea {
         column-rule-color: var(--color--lighter-darker);
     }
 
-    .content-column-rule--white {
-        column-rule-color: var(--color--white);
+    .content-column-rule--lightest {
+        column-rule-color: var(--color--lightest);
     }
 
-    .content-column-rule--white-black {
-        column-rule-color: var(--color--white-black);
+    .content-column-rule--lightest-darkest {
+        column-rule-color: var(--color--lightest-darkest);
     }
 
     .content-column-rule-width--px {
@@ -1964,61 +1738,18 @@ textarea {
         display: flex;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .hide--xl {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .hide--#{$_key} {
                 display: none;
             }
 
-            .show--xl {
+            .show--#{$_key} {
                 display: block;
             }
 
-            .show--xl-flex {
-                display: flex;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .hide--l {
-            display: none;
-        }
-
-        .show--l {
-            display: block;
-        }
-
-        .show--l-flex {
-            display: flex;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .hide--m {
-            display: none;
-        }
-
-        .show--m {
-            display: block;
-        }
-
-        .show--m-flex {
-            display: flex;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .hide--s {
-                display: none;
-            }
-
-            .show--s {
-                display: block;
-            }
-
-            .show--s-flex {
+            .show--#{$_key}-flex {
                 display: flex;
             }
         }
@@ -2132,12 +1863,12 @@ textarea {
             color: var(--color--warning);
         }
 
-        .list-marker--black li::marker {
-            color: var(--color--black);
+        .list-marker--darkest li::marker {
+            color: var(--color--darkest);
         }
 
-        .list-marker--black-white li::marker {
-            color: var(--color--black-white);
+        .list-marker--darkest-lightest li::marker {
+            color: var(--color--darkest-lightest);
         }
 
         .list-marker--darker li::marker {
@@ -2176,12 +1907,12 @@ textarea {
             color: var(--color--lighter-darker);
         }
 
-        .list-marker--white li::marker {
-            color: var(--color--white);
+        .list-marker--lightest li::marker {
+            color: var(--color--lightest);
         }
 
-        .list-marker--white-black li::marker {
-            color: var(--color--white-black);
+        .list-marker--lightest-darkest li::marker {
+            color: var(--color--lightest-darkest);
         }
     }
 
@@ -2199,62 +1930,18 @@ textarea {
         box-shadow: var(--shadow--high);
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .shadow--xl-low {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .shadow--#{$_key}-low {
                 box-shadow: var(--shadow--low);
             }
 
-            .shadow--xl-mid {
+            .shadow--#{$_key}-mid {
                 box-shadow: var(--shadow--mid);
             }
 
-            .shadow--xl-high {
-                box-shadow: var(--shadow--high);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .shadow--l-low {
-            box-shadow: var(--shadow--low);
-        }
-
-        .shadow--l-mid {
-            box-shadow: var(--shadow--mid);
-        }
-
-        .shadow--l-high {
-            box-shadow: var(--shadow--high);
-        }
-    }
-
-    @include breakpoint($width--m) {
-
-        .shadow--m-low {
-            box-shadow: var(--shadow--low);
-        }
-
-        .shadow--m-mid {
-            box-shadow: var(--shadow--mid);
-        }
-
-        .shadow--m-high {
-            box-shadow: var(--shadow--high);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .shadow--s-low {
-                box-shadow: var(--shadow--low);
-            }
-
-            .shadow--s-mid {
-                box-shadow: var(--shadow--mid);
-            }
-
-            .shadow--s-high {
+            .shadow--#{$_key}-high {
                 box-shadow: var(--shadow--high);
             }
         }
@@ -2275,88 +1962,24 @@ textarea {
         transform: scale(1);
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
 
-            .text--xl-vertical-left,
-            .text--xl-vertical-right {
+            .text--#{$_key}-vertical-left,
+            .text--#{$_key}-vertical-right {
                 writing-mode: vertical-lr;
             }
 
-            .text--xl-vertical-left {
+            .text--#{$_key}-vertical-left {
                 transform: scale(-1);
             }
 
-            .text--xl-vertical-right {
+            .text--#{$_key}-vertical-right {
                 transform: scale(1);
             }
 
-            .text--xl-vertical-unset {
-                transform: scale(1);
-                writing-mode: unset;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-
-        .text--l-vertical-left,
-        .text--l-vertical-right {
-            writing-mode: vertical-lr;
-        }
-
-        .text--l-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--l-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--l-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
-    }
-
-    @include breakpoint($width--m) {
-
-        .text--m-vertical-left,
-        .text--m-vertical-right {
-            writing-mode: vertical-lr;
-        }
-
-        .text--m-vertical-left {
-            transform: scale(-1);
-        }
-
-        .text--m-vertical-right {
-            transform: scale(1);
-        }
-
-        .text--m-vertical-unset {
-            transform: scale(1);
-            writing-mode: unset;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-
-            .text--s-vertical-left,
-            .text--s-vertical-right {
-                writing-mode: vertical-lr;
-            }
-
-            .text--s-vertical-left {
-                transform: scale(-1);
-            }
-
-            .text--s-vertical-right {
-                transform: scale(1);
-            }
-
-            .text--s-vertical-unset {
+            .text--#{$_key}-vertical-unset {
                 transform: scale(1);
                 writing-mode: unset;
             }
@@ -2500,397 +2123,102 @@ textarea {
         justify-items: stretch;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .align-content--xl-start {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .align-content--#{$_key}-start {
                 align-content: flex-start;
             }
 
-            .align-content--xl-center {
+            .align-content--#{$_key}-center {
                 align-content: center;
             }
 
-            .align-content--xl-end {
+            .align-content--#{$_key}-end {
                 align-content: flex-end;
             }
 
-            .align-content--xl-baseline {
+            .align-content--#{$_key}-baseline {
                 align-content: baseline;
             }
 
-            .align-content--xl-stretch {
+            .align-content--#{$_key}-stretch {
                 align-content: stretch;
             }
 
-            .align-items--xl-start {
+            .align-items--#{$_key}-start {
                 align-items: flex-start;
             }
 
-            .align-items--xl-center {
+            .align-items--#{$_key}-center {
                 align-items: center;
             }
 
-            .align-items--xl-end {
+            .align-items--#{$_key}-end {
                 align-items: flex-end;
             }
 
-            .align-items--xl-baseline {
+            .align-items--#{$_key}-baseline {
                 align-items: baseline;
             }
 
-            .align-items--xl-stretch {
+            .align-items--#{$_key}-stretch {
                 align-items: stretch;
             }
 
-            .align-self--xl-start {
+            .align-self--#{$_key}-start {
                 align-self: flex-start;
             }
 
-            .align-self--xl-center {
+            .align-self--#{$_key}-center {
                 align-self: center;
             }
 
-            .align-self--xl-end {
+            .align-self--#{$_key}-end {
                 align-self: flex-end;
             }
 
-            .align-self--xl-stretch {
+            .align-self--#{$_key}-stretch {
                 align-self: stretch;
             }
 
-            .justify-content--xl-start {
+            .justify-content--#{$_key}-start {
                 justify-content: flex-start;
             }
 
-            .justify-content--xl-center {
+            .justify-content--#{$_key}-center {
                 justify-content: center;
             }
 
-            .justify-content--xl-end {
+            .justify-content--#{$_key}-end {
                 justify-content: flex-end;
             }
 
-            .justify-content--xl-around {
+            .justify-content--#{$_key}-around {
                 justify-content: space-around;
             }
 
-            .justify-content--xl-between {
+            .justify-content--#{$_key}-between {
                 justify-content: space-between;
             }
 
-            .justify-content--xl-stretch {
+            .justify-content--#{$_key}-stretch {
                 justify-content: stretch;
             }
 
-            .justify-items--xl-start {
+            .justify-items--#{$_key}-start {
                 justify-items: flex-start;
             }
 
-            .justify-items--xl-center {
+            .justify-items--#{$_key}-center {
                 justify-items: center;
             }
 
-            .justify-items--xl-end {
+            .justify-items--#{$_key}-end {
                 justify-items: flex-end;
             }
 
-            .justify-items--xl-stretch {
-                justify-items: stretch;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .align-content--l-start {
-            align-content: flex-start;
-        }
-
-        .align-content--l-center {
-            align-content: center;
-        }
-
-        .align-content--l-end {
-            align-content: flex-end;
-        }
-
-        .align-content--l-baseline {
-            align-content: baseline;
-        }
-
-        .align-content--l-stretch {
-            align-content: stretch;
-        }
-
-        .align-items--l-start {
-            align-items: flex-start;
-        }
-
-        .align-items--l-center {
-            align-items: center;
-        }
-
-        .align-items--l-end {
-            align-items: flex-end;
-        }
-
-        .align-items--l-baseline {
-            align-items: baseline;
-        }
-
-        .align-items--l-stretch {
-            align-items: stretch;
-        }
-
-        .align-self--l-start {
-            align-self: flex-start;
-        }
-
-        .align-self--l-center {
-            align-self: center;
-        }
-
-        .align-self--l-end {
-            align-self: flex-end;
-        }
-
-        .align-self--l-stretch {
-            align-self: stretch;
-        }
-
-        .justify-content--l-start {
-            justify-content: flex-start;
-        }
-
-        .justify-content--l-center {
-            justify-content: center;
-        }
-
-        .justify-content--l-end {
-            justify-content: flex-end;
-        }
-
-        .justify-content--l-around {
-            justify-content: space-around;
-        }
-
-        .justify-content--l-between {
-            justify-content: space-between;
-        }
-
-        .justify-content--l-stretch {
-            justify-content: stretch;
-        }
-
-        .justify-items--l-start {
-            justify-items: flex-start;
-        }
-
-        .justify-items--l-center {
-            justify-items: center;
-        }
-
-        .justify-items--l-end {
-            justify-items: flex-end;
-        }
-
-        .justify-items--l-stretch {
-            justify-items: stretch;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .align-content--m-start {
-            align-content: flex-start;
-        }
-
-        .align-content--m-center {
-            align-content: center;
-        }
-
-        .align-content--m-end {
-            align-content: flex-end;
-        }
-
-        .align-content--m-baseline {
-            align-content: baseline;
-        }
-
-        .align-content--m-stretch {
-            align-content: stretch;
-        }
-
-        .align-items--m-start {
-            align-items: flex-start;
-        }
-
-        .align-items--m-center {
-            align-items: center;
-        }
-
-        .align-items--m-end {
-            align-items: flex-end;
-        }
-
-        .align-items--m-baseline {
-            align-items: baseline;
-        }
-
-        .align-items--m-stretch {
-            align-items: stretch;
-        }
-
-        .align-self--m-start {
-            align-self: flex-start;
-        }
-
-        .align-self--m-center {
-            align-self: center;
-        }
-
-        .align-self--m-end {
-            align-self: flex-end;
-        }
-
-        .align-self--m-stretch {
-            align-self: stretch;
-        }
-
-        .justify-content--m-start {
-            justify-content: flex-start;
-        }
-
-        .justify-content--m-center {
-            justify-content: center;
-        }
-
-        .justify-content--m-end {
-            justify-content: flex-end;
-        }
-
-        .justify-content--m-around {
-            justify-content: space-around;
-        }
-
-        .justify-content--m-between {
-            justify-content: space-between;
-        }
-
-        .justify-content--m-stretch {
-            justify-content: stretch;
-        }
-
-        .justify-items--m-start {
-            justify-items: flex-start;
-        }
-
-        .justify-items--m-center {
-            justify-items: center;
-        }
-
-        .justify-items--m-end {
-            justify-items: flex-end;
-        }
-
-        .justify-items--m-stretch {
-            justify-items: stretch;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .align-content--s-start {
-                align-content: flex-start;
-            }
-
-            .align-content--s-center {
-                align-content: center;
-            }
-
-            .align-content--s-end {
-                align-content: flex-end;
-            }
-
-            .align-content--s-baseline {
-                align-content: baseline;
-            }
-
-            .align-content--s-stretch {
-                align-content: stretch;
-            }
-
-            .align-items--s-start {
-                align-items: flex-start;
-            }
-
-            .align-items--s-center {
-                align-items: center;
-            }
-
-            .align-items--s-end {
-                align-items: flex-end;
-            }
-
-            .align-items--s-baseline {
-                align-items: baseline;
-            }
-
-            .align-items--s-stretch {
-                align-items: stretch;
-            }
-
-            .align-self--s-start {
-                align-self: flex-start;
-            }
-
-            .align-self--s-center {
-                align-self: center;
-            }
-
-            .align-self--s-end {
-                align-self: flex-end;
-            }
-
-            .align-self--s-stretch {
-                align-self: stretch;
-            }
-
-            .justify-content--s-start {
-                justify-content: flex-start;
-            }
-
-            .justify-content--s-center {
-                justify-content: center;
-            }
-
-            .justify-content--s-end {
-                justify-content: flex-end;
-            }
-
-            .justify-content--s-around {
-                justify-content: space-around;
-            }
-
-            .justify-content--s-between {
-                justify-content: space-between;
-            }
-
-            .justify-content--s-stretch {
-                justify-content: stretch;
-            }
-
-            .justify-items--s-start {
-                justify-items: flex-start;
-            }
-
-            .justify-items--s-center {
-                justify-items: center;
-            }
-
-            .justify-items--s-end {
-                justify-items: flex-end;
-            }
-
-            .justify-items--s-stretch {
+            .justify-items--#{$_key}-stretch {
                 justify-items: stretch;
             }
         }
@@ -2931,77 +2259,22 @@ textarea {
         flex-direction: row-reverse;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .flex--xl-column {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .flex--#{$_key}-column {
                 flex-direction: column;
             }
 
-            .flex--xl-column-reverse {
+            .flex--#{$_key}-column-reverse {
                 flex-direction: column-reverse;
             }
 
-            .flex--xl-row {
+            .flex--#{$_key}-row {
                 flex-direction: row;
             }
 
-            .flex--xl-row-reverse {
-                flex-direction: row-reverse;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .flex--l-column {
-            flex-direction: column;
-        }
-
-        .flex--l-column-reverse {
-            flex-direction: column-reverse;
-        }
-
-        .flex--l-row {
-            flex-direction: row;
-        }
-
-        .flex--l-row-reverse {
-            flex-direction: row-reverse;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .flex--m-column {
-            flex-direction: column;
-        }
-
-        .flex--m-column-reverse {
-            flex-direction: column-reverse;
-        }
-
-        .flex--m-row {
-            flex-direction: row;
-        }
-
-        .flex--m-row-reverse {
-            flex-direction: row-reverse;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .flex--s-column {
-                flex-direction: column;
-            }
-
-            .flex--s-column-reverse {
-                flex-direction: column-reverse;
-            }
-
-            .flex--s-row {
-                flex-direction: row;
-            }
-
-            .flex--s-row-reverse {
+            .flex--#{$_key}-row-reverse {
                 flex-direction: row-reverse;
             }
         }
@@ -3091,27 +2364,27 @@ textarea {
         flex-basis: calc((100% - var(--gap--flex-grid) * 5) / 6);
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-
-            .flex-grid--xl-1 {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .flex-grid--#{$_key}-1 {
                 --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: column;
                 gap: var(--gap--flex-grid);
             }
 
-            .flex-grid--xl-1>* {
+            .flex-grid--#{$_key}-1>* {
                 width: 100%;
                 max-width: 100%;
                 flex-basis: auto;
             }
 
-            .flex-grid--xl-2,
-            .flex-grid--xl-3,
-            .flex-grid--xl-4,
-            .flex-grid--xl-5,
-            .flex-grid--xl-6 {
+            .flex-grid--#{$_key}-2,
+            .flex-grid--#{$_key}-3,
+            .flex-grid--#{$_key}-4,
+            .flex-grid--#{$_key}-5,
+            .flex-grid--#{$_key}-6 {
                 --gap--flex-grid: var(--space--m);
                 display: flex;
                 flex-direction: row;
@@ -3120,316 +2393,59 @@ textarea {
                 justify-content: center;
             }
 
-            .flex-grid--xl-1.gap--4px,
-            .flex-grid--xl-2.gap--4px,
-            .flex-grid--xl-3.gap--4px,
-            .flex-grid--xl-4.gap--4px,
-            .flex-grid--xl-5.gap--4px,
-            .flex-grid--xl-6.gap--4px {
+            .flex-grid--#{$_key}-1.gap--4px,
+            .flex-grid--#{$_key}-2.gap--4px,
+            .flex-grid--#{$_key}-3.gap--4px,
+            .flex-grid--#{$_key}-4.gap--4px,
+            .flex-grid--#{$_key}-5.gap--4px,
+            .flex-grid--#{$_key}-6.gap--4px {
                 --gap--flex-grid: var(--space--4px);
             }
 
-            .flex-grid--xl-1.gap--8px,
-            .flex-grid--xl-2.gap--8px,
-            .flex-grid--xl-3.gap--8px,
-            .flex-grid--xl-4.gap--8px,
-            .flex-grid--xl-5.gap--8px,
-            .flex-grid--xl-6.gap--8px {
+            .flex-grid--#{$_key}-1.gap--8px,
+            .flex-grid--#{$_key}-2.gap--8px,
+            .flex-grid--#{$_key}-3.gap--8px,
+            .flex-grid--#{$_key}-4.gap--8px,
+            .flex-grid--#{$_key}-5.gap--8px,
+            .flex-grid--#{$_key}-6.gap--8px {
                 --gap--flex-grid: var(--space--8px);
             }
 
-            .flex-grid--xl-1.gap--xs,
-            .flex-grid--xl-2.gap--xs,
-            .flex-grid--xl-3.gap--xs,
-            .flex-grid--xl-4.gap--xs,
-            .flex-grid--xl-5.gap--xs,
-            .flex-grid--xl-6.gap--xs {
+            .flex-grid--#{$_key}-1.gap--xs,
+            .flex-grid--#{$_key}-2.gap--xs,
+            .flex-grid--#{$_key}-3.gap--xs,
+            .flex-grid--#{$_key}-4.gap--xs,
+            .flex-grid--#{$_key}-5.gap--xs,
+            .flex-grid--#{$_key}-6.gap--xs {
                 --gap--flex-grid: var(--space--xs);
             }
 
-            .flex-grid--xl-1.gap--s,
-            .flex-grid--xl-2.gap--s,
-            .flex-grid--xl-3.gap--s,
-            .flex-grid--xl-4.gap--s,
-            .flex-grid--xl-5.gap--s,
-            .flex-grid--xl-6.gap--s {
+            .flex-grid--#{$_key}-1.gap--s,
+            .flex-grid--#{$_key}-2.gap--s,
+            .flex-grid--#{$_key}-3.gap--s,
+            .flex-grid--#{$_key}-4.gap--s,
+            .flex-grid--#{$_key}-5.gap--s,
+            .flex-grid--#{$_key}-6.gap--s {
                 --gap--flex-grid: var(--space--s);
             }
 
-            .flex-grid--xl-2>* {
+            .flex-grid--#{$_key}-2>* {
                 flex-basis: calc((100% - var(--gap--flex-grid) * 1) / 2);
             }
 
-            .flex-grid--xl-3>* {
+            .flex-grid--#{$_key}-3>* {
                 flex-basis: calc((100% - var(--gap--flex-grid) * 2) / 3);
             }
 
-            .flex-grid--xl-4>* {
+            .flex-grid--#{$_key}-4>* {
                 flex-basis: calc((100% - var(--gap--flex-grid) * 3) / 4);
             }
 
-            .flex-grid--xl-5>* {
+            .flex-grid--#{$_key}-5>* {
                 flex-basis: calc((100% - var(--gap--flex-grid) * 4) / 5);
             }
 
-            .flex-grid--xl-6>* {
-                flex-basis: calc((100% - var(--gap--flex-grid) * 5) / 6);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-
-        .flex-grid--l-1 {
-            --gap--flex-grid: var(--space--m);
-            display: flex;
-            flex-direction: column;
-            gap: var(--gap--flex-grid);
-        }
-
-        .flex-grid--l-1>* {
-            width: 100%;
-            max-width: 100%;
-            flex-basis: auto;
-        }
-
-        .flex-grid--l-2,
-        .flex-grid--l-3,
-        .flex-grid--l-4,
-        .flex-grid--l-5,
-        .flex-grid--l-6 {
-            --gap--flex-grid: var(--space--m);
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: var(--gap--flex-grid);
-            justify-content: center;
-        }
-
-        .flex-grid--l-1.gap--4px,
-        .flex-grid--l-2.gap--4px,
-        .flex-grid--l-3.gap--4px,
-        .flex-grid--l-4.gap--4px,
-        .flex-grid--l-5.gap--4px,
-        .flex-grid--l-6.gap--4px {
-            --gap--flex-grid: var(--space--4px);
-        }
-
-        .flex-grid--l-1.gap--8px,
-        .flex-grid--l-2.gap--8px,
-        .flex-grid--l-3.gap--8px,
-        .flex-grid--l-4.gap--8px,
-        .flex-grid--l-5.gap--8px,
-        .flex-grid--l-6.gap--8px {
-            --gap--flex-grid: var(--space--8px);
-        }
-
-        .flex-grid--l-1.gap--xs,
-        .flex-grid--l-2.gap--xs,
-        .flex-grid--l-3.gap--xs,
-        .flex-grid--l-4.gap--xs,
-        .flex-grid--l-5.gap--xs,
-        .flex-grid--l-6.gap--xs {
-            --gap--flex-grid: var(--space--xs);
-        }
-
-        .flex-grid--l-1.gap--s,
-        .flex-grid--l-2.gap--s,
-        .flex-grid--l-3.gap--s,
-        .flex-grid--l-4.gap--s,
-        .flex-grid--l-5.gap--s,
-        .flex-grid--l-6.gap--s {
-            --gap--flex-grid: var(--space--s);
-        }
-
-        .flex-grid--l-2>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 1) / 2);
-        }
-
-        .flex-grid--l-3>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 2) / 3);
-        }
-
-        .flex-grid--l-4>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 3) / 4);
-        }
-
-        .flex-grid--l-5>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 4) / 5);
-        }
-
-        .flex-grid--l-6>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 5) / 6);
-        }
-    }
-
-    @include breakpoint($width--m) {
-
-        .flex-grid--m-1 {
-            --gap--flex-grid: var(--space--m);
-            display: flex;
-            flex-direction: column;
-            gap: var(--gap--flex-grid);
-        }
-
-        .flex-grid--m-1>* {
-            width: 100%;
-            max-width: 100%;
-            flex-basis: auto;
-        }
-
-        .flex-grid--m-2,
-        .flex-grid--m-3,
-        .flex-grid--m-4,
-        .flex-grid--m-5,
-        .flex-grid--m-6 {
-            --gap--flex-grid: var(--space--m);
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: var(--gap--flex-grid);
-            justify-content: center;
-        }
-
-        .flex-grid--m-1.gap--4px,
-        .flex-grid--m-2.gap--4px,
-        .flex-grid--m-3.gap--4px,
-        .flex-grid--m-4.gap--4px,
-        .flex-grid--m-5.gap--4px,
-        .flex-grid--m-6.gap--4px {
-            --gap--flex-grid: var(--space--4px);
-        }
-
-        .flex-grid--m-1.gap--8px,
-        .flex-grid--m-2.gap--8px,
-        .flex-grid--m-3.gap--8px,
-        .flex-grid--m-4.gap--8px,
-        .flex-grid--m-5.gap--8px,
-        .flex-grid--m-6.gap--8px {
-            --gap--flex-grid: var(--space--8px);
-        }
-
-        .flex-grid--m-1.gap--xs,
-        .flex-grid--m-2.gap--xs,
-        .flex-grid--m-3.gap--xs,
-        .flex-grid--m-4.gap--xs,
-        .flex-grid--m-5.gap--xs,
-        .flex-grid--m-6.gap--xs {
-            --gap--flex-grid: var(--space--xs);
-        }
-
-        .flex-grid--m-1.gap--s,
-        .flex-grid--m-2.gap--s,
-        .flex-grid--m-3.gap--s,
-        .flex-grid--m-4.gap--s,
-        .flex-grid--m-5.gap--s,
-        .flex-grid--m-6.gap--s {
-            --gap--flex-grid: var(--space--s);
-        }
-
-        .flex-grid--m-2>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 1) / 2);
-        }
-
-        .flex-grid--m-3>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 2) / 3);
-        }
-
-        .flex-grid--m-4>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 3) / 4);
-        }
-
-        .flex-grid--m-5>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 4) / 5);
-        }
-
-        .flex-grid--m-6>* {
-            flex-basis: calc((100% - var(--gap--flex-grid) * 5) / 6);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-
-            .flex-grid--s-1 {
-                --gap--flex-grid: var(--space--m);
-                display: flex;
-                flex-direction: column;
-                gap: var(--gap--flex-grid);
-            }
-
-            .flex-grid--s-1>* {
-                width: 100%;
-                max-width: 100%;
-                flex-basis: auto;
-            }
-
-            .flex-grid--s-2,
-            .flex-grid--s-3,
-            .flex-grid--s-4,
-            .flex-grid--s-5,
-            .flex-grid--s-6 {
-                --gap--flex-grid: var(--space--m);
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: var(--gap--flex-grid);
-                justify-content: center;
-            }
-
-            .flex-grid--s-1.gap--4px,
-            .flex-grid--s-2.gap--4px,
-            .flex-grid--s-3.gap--4px,
-            .flex-grid--s-4.gap--4px,
-            .flex-grid--s-5.gap--4px,
-            .flex-grid--s-6.gap--4px {
-                --gap--flex-grid: var(--space--4px);
-            }
-
-            .flex-grid--s-1.gap--8px,
-            .flex-grid--s-2.gap--8px,
-            .flex-grid--s-3.gap--8px,
-            .flex-grid--s-4.gap--8px,
-            .flex-grid--s-5.gap--8px,
-            .flex-grid--s-6.gap--8px {
-                --gap--flex-grid: var(--space--8px);
-            }
-
-            .flex-grid--s-1.gap--xs,
-            .flex-grid--s-2.gap--xs,
-            .flex-grid--s-3.gap--xs,
-            .flex-grid--s-4.gap--xs,
-            .flex-grid--s-5.gap--xs,
-            .flex-grid--s-6.gap--xs {
-                --gap--flex-grid: var(--space--xs);
-            }
-
-            .flex-grid--s-1.gap--s,
-            .flex-grid--s-2.gap--s,
-            .flex-grid--s-3.gap--s,
-            .flex-grid--s-4.gap--s,
-            .flex-grid--s-5.gap--s,
-            .flex-grid--s-6.gap--s {
-                --gap--flex-grid: var(--space--s);
-            }
-
-            .flex-grid--s-2>* {
-                flex-basis: calc((100% - var(--gap--flex-grid) * 1) / 2);
-            }
-
-            .flex-grid--s-3>* {
-                flex-basis: calc((100% - var(--gap--flex-grid) * 2) / 3);
-            }
-
-            .flex-grid--s-4>* {
-                flex-basis: calc((100% - var(--gap--flex-grid) * 3) / 4);
-            }
-
-            .flex-grid--s-5>* {
-                flex-basis: calc((100% - var(--gap--flex-grid) * 4) / 5);
-            }
-
-            .flex-grid--s-6>* {
+            .flex-grid--#{$_key}-6>* {
                 flex-basis: calc((100% - var(--gap--flex-grid) * 5) / 6);
             }
         }
@@ -3566,169 +2582,45 @@ textarea {
         grid-template-columns: var(--grid--3-2)
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
 
-            .grid--xl-1,
-            .grid--xl-2,
-            .grid--xl-3,
-            .grid--xl-4,
-            .grid--xl-5,
-            .grid--xl-6 {
+            .grid--#{$_key}-1,
+            .grid--#{$_key}-2,
+            .grid--#{$_key}-3,
+            .grid--#{$_key}-4,
+            .grid--#{$_key}-5,
+            .grid--#{$_key}-6 {
                 display: grid;
                 width: 100%;
             }
 
-            .grid--xl-1 {
+            .grid--#{$_key}-1 {
                 grid-template-columns: var(--grid--1);
             }
 
-            .grid--xl-1>* {
+            .grid--#{$_key}-1>* {
                 grid-column: 1 !important;
             }
 
-            .grid--xl-2 {
+            .grid--#{$_key}-2 {
                 grid-template-columns: var(--grid--2);
             }
 
-            .grid--xl-3 {
+            .grid--#{$_key}-3 {
                 grid-template-columns: var(--grid--3);
             }
 
-            .grid--xl-4 {
+            .grid--#{$_key}-4 {
                 grid-template-columns: var(--grid--4);
             }
 
-            .grid--xl-5 {
+            .grid--#{$_key}-5 {
                 grid-template-columns: var(--grid--5);
             }
 
-            .grid--xl-6 {
-                grid-template-columns: var(--grid--6);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-
-        .grid--l-1,
-        .grid--l-2,
-        .grid--l-3,
-        .grid--l-4,
-        .grid--l-5,
-        .grid--l-6 {
-            display: grid;
-            width: 100%;
-        }
-
-        .grid--l-1 {
-            grid-template-columns: var(--grid--1);
-        }
-
-        .grid--l-1>* {
-            grid-column: 1 !important;
-        }
-
-        .grid--l-2 {
-            grid-template-columns: var(--grid--2);
-        }
-
-        .grid--l-3 {
-            grid-template-columns: var(--grid--3);
-        }
-
-        .grid--l-4 {
-            grid-template-columns: var(--grid--4);
-        }
-
-        .grid--l-5 {
-            grid-template-columns: var(--grid--5);
-        }
-
-        .grid--l-6 {
-            grid-template-columns: var(--grid--6);
-        }
-    }
-
-    @include breakpoint($width--m) {
-
-        .grid--m-1,
-        .grid--m-2,
-        .grid--m-3,
-        .grid--m-4,
-        .grid--m-5,
-        .grid--m-6 {
-            display: grid;
-            width: 100%;
-        }
-
-        .grid--m-1 {
-            grid-template-columns: var(--grid--1);
-        }
-
-        .grid--m-1>* {
-            grid-column: 1 !important;
-        }
-
-        .grid--m-2 {
-            grid-template-columns: var(--grid--2);
-        }
-
-        .grid--m-3 {
-            grid-template-columns: var(--grid--3);
-        }
-
-        .grid--m-4 {
-            grid-template-columns: var(--grid--4);
-        }
-
-        .grid--m-5 {
-            grid-template-columns: var(--grid--5);
-        }
-
-        .grid--m-6 {
-            grid-template-columns: var(--grid--6);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-
-            .grid--s-1,
-            .grid--s-2,
-            .grid--s-3,
-            .grid--s-4,
-            .grid--s-5,
-            .grid--s-6 {
-                display: grid;
-                width: 100%;
-            }
-
-            .grid--s-1 {
-                grid-template-columns: var(--grid--1);
-            }
-
-            .grid--s-1>* {
-                grid-column: 1 !important;
-            }
-
-            .grid--s-2 {
-                grid-template-columns: var(--grid--2);
-            }
-
-            .grid--s-3 {
-                grid-template-columns: var(--grid--3);
-            }
-
-            .grid--s-4 {
-                grid-template-columns: var(--grid--4);
-            }
-
-            .grid--s-5 {
-                grid-template-columns: var(--grid--5);
-            }
-
-            .grid--s-6 {
+            .grid--#{$_key}-6 {
                 grid-template-columns: var(--grid--6);
             }
         }
@@ -3736,221 +2628,58 @@ textarea {
 
     // Grid Alternate
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl, min) {
-            .grid--xl-alternate>.grid--2:nth-of-type(even)>*:last-child {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value, min) {
+            .grid--#{$_key}-alternate>.grid--2:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--1-2:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--1-2:nth-of-type(even) {
                 grid-template-columns: var(--grid--2-1);
             }
 
-            .grid--xl-alternate>.grid--1-2:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--1-2:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--1-3:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--1-3:nth-of-type(even) {
                 grid-template-columns: var(--grid--3-1);
             }
 
-            .grid--xl-alternate>.grid--1-3:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--1-3:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--2-1:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--2-1:nth-of-type(even) {
                 grid-template-columns: var(--grid--1-2);
             }
 
-            .grid--xl-alternate>.grid--2-1:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--2-1:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--2-3:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--2-3:nth-of-type(even) {
                 grid-template-columns: var(--grid--3-2);
             }
 
-            .grid--xl-alternate>.grid--2-3:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--2-3:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--3-1:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--3-1:nth-of-type(even) {
                 grid-template-columns: var(--grid--1-3);
             }
 
-            .grid--xl-alternate>.grid--3-1:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--3-1:nth-of-type(even)>*:last-child {
                 order: -1;
             }
 
-            .grid--xl-alternate>.grid--3-2:nth-of-type(even) {
+            .grid--#{$_key}-alternate>.grid--3-2:nth-of-type(even) {
                 grid-template-columns: var(--grid--2-3);
             }
 
-            .grid--xl-alternate>.grid--3-2:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-        }
-    }
-
-    @include breakpoint($width--l, min) {
-        .grid--l-alternate>.grid--2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--1-2:nth-of-type(even) {
-            grid-template-columns: var(--grid--2-1);
-        }
-
-        .grid--l-alternate>.grid--1-2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--1-3:nth-of-type(even) {
-            grid-template-columns: var(--grid--3-1);
-        }
-
-        .grid--l-alternate>.grid--1-3:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--2-1:nth-of-type(even) {
-            grid-template-columns: var(--grid--1-2);
-        }
-
-        .grid--l-alternate>.grid--2-1:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--2-3:nth-of-type(even) {
-            grid-template-columns: var(--grid--3-2);
-        }
-
-        .grid--l-alternate>.grid--2-3:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--3-1:nth-of-type(even) {
-            grid-template-columns: var(--grid--1-3);
-        }
-
-        .grid--l-alternate>.grid--3-1:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--l-alternate>.grid--3-2:nth-of-type(even) {
-            grid-template-columns: var(--grid--2-3);
-        }
-
-        .grid--l-alternate>.grid--3-2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-    }
-
-    @include breakpoint($width--m, min) {
-        .grid--m-alternate>.grid--2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--1-2:nth-of-type(even) {
-            grid-template-columns: var(--grid--2-1);
-        }
-
-        .grid--m-alternate>.grid--1-2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--1-3:nth-of-type(even) {
-            grid-template-columns: var(--grid--3-1);
-        }
-
-        .grid--m-alternate>.grid--1-3:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--2-1:nth-of-type(even) {
-            grid-template-columns: var(--grid--1-2);
-        }
-
-        .grid--m-alternate>.grid--2-1:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--2-3:nth-of-type(even) {
-            grid-template-columns: var(--grid--3-2);
-        }
-
-        .grid--m-alternate>.grid--2-3:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--3-1:nth-of-type(even) {
-            grid-template-columns: var(--grid--1-3);
-        }
-
-        .grid--m-alternate>.grid--3-1:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-
-        .grid--m-alternate>.grid--3-2:nth-of-type(even) {
-            grid-template-columns: var(--grid--2-3);
-        }
-
-        .grid--m-alternate>.grid--3-2:nth-of-type(even)>*:last-child {
-            order: -1;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s, min) {
-            .grid--s-alternate>.grid--2:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--1-2:nth-of-type(even) {
-                grid-template-columns: var(--grid--2-1);
-            }
-
-            .grid--s-alternate>.grid--1-2:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--1-3:nth-of-type(even) {
-                grid-template-columns: var(--grid--3-1);
-            }
-
-            .grid--s-alternate>.grid--1-3:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--2-1:nth-of-type(even) {
-                grid-template-columns: var(--grid--1-2);
-            }
-
-            .grid--s-alternate>.grid--2-1:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--2-3:nth-of-type(even) {
-                grid-template-columns: var(--grid--3-2);
-            }
-
-            .grid--s-alternate>.grid--2-3:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--3-1:nth-of-type(even) {
-                grid-template-columns: var(--grid--1-3);
-            }
-
-            .grid--s-alternate>.grid--3-1:nth-of-type(even)>*:last-child {
-                order: -1;
-            }
-
-            .grid--s-alternate>.grid--3-2:nth-of-type(even) {
-                grid-template-columns: var(--grid--2-3);
-            }
-
-            .grid--s-alternate>.grid--3-2:nth-of-type(even)>*:last-child {
+            .grid--#{$_key}-alternate>.grid--3-2:nth-of-type(even)>*:last-child {
                 order: -1;
             }
         }
@@ -4098,573 +2827,146 @@ textarea {
         grid-column-end: 6;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .row-span--xl-1 {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .row-span--#{$_key}-1 {
                 grid-row: var(--grid--span-1);
             }
 
-            .column-span--xl-1 {
+            .column-span--#{$_key}-1 {
                 grid-column: var(--grid--span-1);
             }
 
-            .row-start--xl-1 {
+            .row-start--#{$_key}-1 {
                 grid-row-start: 1;
             }
 
-            .column-start--xl-1 {
+            .column-start--#{$_key}-1 {
                 grid-column-start: 1;
             }
 
-            .column-end--xl-1 {
+            .column-end--#{$_key}-1 {
                 grid-column-end: 1;
             }
 
-            .row-span--xl-2 {
+            .row-span--#{$_key}-2 {
                 grid-row: var(--grid--span-2);
             }
 
-            .column-span--xl-2 {
+            .column-span--#{$_key}-2 {
                 grid-column: var(--grid--span-2);
             }
 
-            .row-start--xl-2 {
+            .row-start--#{$_key}-2 {
                 grid-row-start: 2;
             }
 
-            .row-end--xl-2 {
+            .row-end--#{$_key}-2 {
                 grid-row-end: 2;
             }
 
-            .column-start--xl-2 {
+            .column-start--#{$_key}-2 {
                 grid-column-start: 2;
             }
 
-            .column-end--xl-2 {
+            .column-end--#{$_key}-2 {
                 grid-column-end: 2;
             }
 
-            .row-span--xl-3 {
+            .row-span--#{$_key}-3 {
                 grid-row: var(--grid--span-3);
             }
 
-            .column-span--xl-3 {
+            .column-span--#{$_key}-3 {
                 grid-column: var(--grid--span-3);
             }
 
-            .row-start--xl-3 {
+            .row-start--#{$_key}-3 {
                 grid-row-start: 3;
             }
 
-            .row-end--xl-3 {
+            .row-end--#{$_key}-3 {
                 grid-row-end: 3;
             }
 
-            .column-start--xl-3 {
+            .column-start--#{$_key}-3 {
                 grid-column-start: 3;
             }
 
-            .column-end--xl-3 {
+            .column-end--#{$_key}-3 {
                 grid-column-end: 3;
             }
 
-            .row-span--xl-4 {
+            .row-span--#{$_key}-4 {
                 grid-row: var(--grid--span-4);
             }
 
-            .column-span--xl-4 {
+            .column-span--#{$_key}-4 {
                 grid-column: var(--grid--span-4);
             }
 
-            .row-start--xl-4 {
+            .row-start--#{$_key}-4 {
                 grid-row-start: 4;
             }
 
-            .row-end--xl-4 {
+            .row-end--#{$_key}-4 {
                 grid-row-end: 4;
             }
 
-            .column-start--xl-4 {
+            .column-start--#{$_key}-4 {
                 grid-column-start: 4;
             }
 
-            .column-end--xl-4 {
+            .column-end--#{$_key}-4 {
                 grid-column-end: 4;
             }
 
-            .row-span--xl-5 {
+            .row-span--#{$_key}-5 {
                 grid-row: var(--grid--span-5);
             }
 
-            .column-span--xl-5 {
+            .column-span--#{$_key}-5 {
                 grid-column: var(--grid--span-5);
             }
 
-            .row-start--xl-5 {
+            .row-start--#{$_key}-5 {
                 grid-row-start: 5;
             }
 
-            .row-end--xl-5 {
+            .row-end--#{$_key}-5 {
                 grid-row-end: 5;
             }
 
-            .column-start--xl-5 {
+            .column-start--#{$_key}-5 {
                 grid-column-start: 5;
             }
 
-            .column-end--xl-5 {
+            .column-end--#{$_key}-5 {
                 grid-column-end: 5;
             }
 
-            .row-span--xl-6 {
+            .row-span--#{$_key}-6 {
                 grid-row: var(--grid--span-6);
             }
 
-            .column-span--xl-6 {
+            .column-span--#{$_key}-6 {
                 grid-column: var(--grid--span-6);
             }
 
-            .row-start--xl-6 {
+            .row-start--#{$_key}-6 {
                 grid-row-start: 6;
             }
 
-            .row-end--xl-6 {
+            .row-end--#{$_key}-6 {
                 grid-row-end: 6;
             }
 
-            .column-start--xl-6 {
+            .column-start--#{$_key}-6 {
                 grid-column-start: 6;
             }
 
-            .column-end--xl-6 {
-                grid-column-end: 6;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .row-span--l-1 {
-            grid-row: var(--grid--span-1);
-        }
-
-        .column-span--l-1 {
-            grid-column: var(--grid--span-1);
-        }
-
-        .row-start--l-1 {
-            grid-row-start: 1;
-        }
-
-        .column-start--l-1 {
-            grid-column-start: 1;
-        }
-
-        .column-end--l-1 {
-            grid-column-end: 1;
-        }
-
-        .row-span--l-2 {
-            grid-row: var(--grid--span-2);
-        }
-
-        .column-span--l-2 {
-            grid-column: var(--grid--span-2);
-        }
-
-        .row-start--l-2 {
-            grid-row-start: 2;
-        }
-
-        .row-end--l-2 {
-            grid-row-end: 2;
-        }
-
-        .column-start--l-2 {
-            grid-column-start: 2;
-        }
-
-        .column-end--l-2 {
-            grid-column-end: 2;
-        }
-
-        .row-span--l-3 {
-            grid-row: var(--grid--span-3);
-        }
-
-        .column-span--l-3 {
-            grid-column: var(--grid--span-3);
-        }
-
-        .row-start--l-3 {
-            grid-row-start: 3;
-        }
-
-        .row-end--l-3 {
-            grid-row-end: 3;
-        }
-
-        .column-start--l-3 {
-            grid-column-start: 3;
-        }
-
-        .column-end--l-3 {
-            grid-column-end: 3;
-        }
-
-        .row-span--l-4 {
-            grid-row: var(--grid--span-4);
-        }
-
-        .column-span--l-4 {
-            grid-column: var(--grid--span-4);
-        }
-
-        .row-start--l-4 {
-            grid-row-start: 4;
-        }
-
-        .row-end--l-4 {
-            grid-row-end: 4;
-        }
-
-        .column-start--l-4 {
-            grid-column-start: 4;
-        }
-
-        .column-end--l-4 {
-            grid-column-end: 4;
-        }
-
-        .row-span--l-5 {
-            grid-row: var(--grid--span-5);
-        }
-
-        .column-span--l-5 {
-            grid-column: var(--grid--span-5);
-        }
-
-        .row-start--l-5 {
-            grid-row-start: 5;
-        }
-
-        .row-end--l-5 {
-            grid-row-end: 5;
-        }
-
-        .column-start--l-5 {
-            grid-column-start: 5;
-        }
-
-        .column-end--l-5 {
-            grid-column-end: 5;
-        }
-
-        .row-span--l-6 {
-            grid-row: var(--grid--span-6);
-        }
-
-        .column-span--l-6 {
-            grid-column: var(--grid--span-6);
-        }
-
-        .row-start--l-6 {
-            grid-row-start: 6;
-        }
-
-        .row-end--l-6 {
-            grid-row-end: 6;
-        }
-
-        .column-start--l-6 {
-            grid-column-start: 6;
-        }
-
-        .column-end--l-6 {
-            grid-column-end: 6;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .row-span--m-1 {
-            grid-row: var(--grid--span-1);
-        }
-
-        .column-span--m-1 {
-            grid-column: var(--grid--span-1);
-        }
-
-        .row-start--m-1 {
-            grid-row-start: 1;
-        }
-
-        .column-start--m-1 {
-            grid-column-start: 1;
-        }
-
-        .column-end--m-1 {
-            grid-column-end: 1;
-        }
-
-        .row-span--m-2 {
-            grid-row: var(--grid--span-2);
-        }
-
-        .column-span--m-2 {
-            grid-column: var(--grid--span-2);
-        }
-
-        .row-start--m-2 {
-            grid-row-start: 2;
-        }
-
-        .row-end--m-2 {
-            grid-row-end: 2;
-        }
-
-        .column-start--m-2 {
-            grid-column-start: 2;
-        }
-
-        .column-end--m-2 {
-            grid-column-end: 2;
-        }
-
-        .row-span--m-3 {
-            grid-row: var(--grid--span-3);
-        }
-
-        .column-span--m-3 {
-            grid-column: var(--grid--span-3);
-        }
-
-        .row-start--m-3 {
-            grid-row-start: 3;
-        }
-
-        .row-end--m-3 {
-            grid-row-end: 3;
-        }
-
-        .column-start--m-3 {
-            grid-column-start: 3;
-        }
-
-        .column-end--m-3 {
-            grid-column-end: 3;
-        }
-
-        .row-span--m-4 {
-            grid-row: var(--grid--span-4);
-        }
-
-        .column-span--m-4 {
-            grid-column: var(--grid--span-4);
-        }
-
-        .row-start--m-4 {
-            grid-row-start: 4;
-        }
-
-        .row-end--m-4 {
-            grid-row-end: 4;
-        }
-
-        .column-start--m-4 {
-            grid-column-start: 4;
-        }
-
-        .column-end--m-4 {
-            grid-column-end: 4;
-        }
-
-        .row-span--m-5 {
-            grid-row: var(--grid--span-5);
-        }
-
-        .column-span--m-5 {
-            grid-column: var(--grid--span-5);
-        }
-
-        .row-start--m-5 {
-            grid-row-start: 5;
-        }
-
-        .row-end--m-5 {
-            grid-row-end: 5;
-        }
-
-        .column-start--m-5 {
-            grid-column-start: 5;
-        }
-
-        .column-end--m-5 {
-            grid-column-end: 5;
-        }
-
-        .row-span--m-6 {
-            grid-row: var(--grid--span-6);
-        }
-
-        .column-span--m-6 {
-            grid-column: var(--grid--span-6);
-        }
-
-        .row-start--m-6 {
-            grid-row-start: 6;
-        }
-
-        .row-end--m-6 {
-            grid-row-end: 6;
-        }
-
-        .column-start--m-6 {
-            grid-column-start: 6;
-        }
-
-        .column-end--m-6 {
-            grid-column-end: 6;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .row-span--s-1 {
-                grid-row: var(--grid--span-1);
-            }
-
-            .column-span--s-1 {
-                grid-column: var(--grid--span-1);
-            }
-
-            .row-start--s-1 {
-                grid-row-start: 1;
-            }
-
-            .column-start--s-1 {
-                grid-column-start: 1;
-            }
-
-            .column-end--s-1 {
-                grid-column-end: 1;
-            }
-
-            .row-span--s-2 {
-                grid-row: var(--grid--span-2);
-            }
-
-            .column-span--s-2 {
-                grid-column: var(--grid--span-2);
-            }
-
-            .row-start--s-2 {
-                grid-row-start: 2;
-            }
-
-            .row-end--s-2 {
-                grid-row-end: 2;
-            }
-
-            .column-start--s-2 {
-                grid-column-start: 2;
-            }
-
-            .column-end--s-2 {
-                grid-column-end: 2;
-            }
-
-            .row-span--s-3 {
-                grid-row: var(--grid--span-3);
-            }
-
-            .column-span--s-3 {
-                grid-column: var(--grid--span-3);
-            }
-
-            .row-start--s-3 {
-                grid-row-start: 3;
-            }
-
-            .row-end--s-3 {
-                grid-row-end: 3;
-            }
-
-            .column-start--s-3 {
-                grid-column-start: 3;
-            }
-
-            .column-end--s-3 {
-                grid-column-end: 3;
-            }
-
-            .row-span--s-4 {
-                grid-row: var(--grid--span-4);
-            }
-
-            .column-span--s-4 {
-                grid-column: var(--grid--span-4);
-            }
-
-            .row-start--s-4 {
-                grid-row-start: 4;
-            }
-
-            .row-end--s-4 {
-                grid-row-end: 4;
-            }
-
-            .column-start--s-4 {
-                grid-column-start: 4;
-            }
-
-            .column-end--s-4 {
-                grid-column-end: 4;
-            }
-
-            .row-span--s-5 {
-                grid-row: var(--grid--span-5);
-            }
-
-            .column-span--s-5 {
-                grid-column: var(--grid--span-5);
-            }
-
-            .row-start--s-5 {
-                grid-row-start: 5;
-            }
-
-            .row-end--s-5 {
-                grid-row-end: 5;
-            }
-
-            .column-start--s-5 {
-                grid-column-start: 5;
-            }
-
-            .column-end--s-5 {
-                grid-column-end: 5;
-            }
-
-            .row-span--s-6 {
-                grid-row: var(--grid--span-6);
-            }
-
-            .column-span--s-6 {
-                grid-column: var(--grid--span-6);
-            }
-
-            .row-start--s-6 {
-                grid-row-start: 6;
-            }
-
-            .row-end--s-6 {
-                grid-row-end: 6;
-            }
-
-            .column-start--s-6 {
-                grid-column-start: 6;
-            }
-
-            .column-end--s-6 {
+            .column-end--#{$_key}-6 {
                 grid-column-end: 6;
             }
         }
@@ -4684,61 +2986,18 @@ textarea {
         grid-column-end: -1;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .order--xl-first {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .order--#{$_key}-first {
                 order: -1;
             }
 
-            .order--xl-last {
+            .order--#{$_key}-last {
                 order: 1000;
             }
 
-            .column-end--xl-last {
-                grid-column-end: -1;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .order--l-first {
-            order: -1;
-        }
-
-        .order--l-last {
-            order: 1000;
-        }
-
-        .column-end--l-last {
-            grid-column-end: -1;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .order--m-first {
-            order: -1;
-        }
-
-        .order--m-last {
-            order: 1000;
-        }
-
-        .column-end--m-last {
-            grid-column-end: -1;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .order--s-first {
-                order: -1;
-            }
-
-            .order--s-last {
-                order: 1000;
-            }
-
-            .column-end--s-last {
+            .column-end--#{$_key}-last {
                 grid-column-end: -1;
             }
         }
@@ -4758,45 +3017,14 @@ textarea {
         min-height: 100vh;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .height--xl-auto {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .height--#{$_key}-auto {
                 min-height: auto;
             }
 
-            .height--xl-full {
-                min-height: 100vh;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .height--l-auto {
-            min-height: auto;
-        }
-
-        .height--l-full {
-            min-height: 100vh;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .height--m-auto {
-            min-height: auto;
-        }
-
-        .height--m-full {
-            min-height: 100vh;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .height--s-auto {
-                min-height: auto;
-            }
-
-            .height--s-full {
+            .height--#{$_key}-full {
                 min-height: 100vh;
             }
         }
@@ -5064,157 +3292,42 @@ textarea {
         object-position: var(--object--end);
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .object--xl-top-left {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .object--#{$_key}-top-left {
                 object-position: var(--object--start);
             }
 
-            .object--xl-top-center {
+            .object--#{$_key}-top-center {
                 object-position: var(--object--center) var(--object--start);
             }
 
-            .object--xl-top-right {
+            .object--#{$_key}-top-right {
                 object-position: var(--object--end) var(--object--start);
             }
 
-            .object--xl-center-left {
+            .object--#{$_key}-center-left {
                 object-position: var(--object--start) var(--object--center);
             }
 
-            .object--xl-center {
+            .object--#{$_key}-center {
                 object-position: var(--object--center);
             }
 
-            .object--xl-center-right {
+            .object--#{$_key}-center-right {
                 object-position: var(--object--end) var(--object--center);
             }
 
-            .object--xl-bottom-left {
+            .object--#{$_key}-bottom-left {
                 object-position: var(--object--start) var(--object--end);
             }
 
-            .object--xl-bottom-center {
+            .object--#{$_key}-bottom-center {
                 object-position: var(--object--center) var(--object--end);
             }
 
-            .object--xl-bottom-right {
-                object-position: var(--object--end);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .object--l-top-left {
-            object-position: var(--object--start);
-        }
-
-        .object--l-top-center {
-            object-position: var(--object--center) var(--object--start);
-        }
-
-        .object--l-top-right {
-            object-position: var(--object--end) var(--object--start);
-        }
-
-        .object--l-center-left {
-            object-position: var(--object--start) var(--object--center);
-        }
-
-        .object--l-center {
-            object-position: var(--object--center);
-        }
-
-        .object--l-center-right {
-            object-position: var(--object--end) var(--object--center);
-        }
-
-        .object--l-bottom-left {
-            object-position: var(--object--start) var(--object--end);
-        }
-
-        .object--l-bottom-center {
-            object-position: var(--object--center) var(--object--end);
-        }
-
-        .object--l-bottom-right {
-            object-position: var(--object--end);
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .object--m-top-left {
-            object-position: var(--object--start);
-        }
-
-        .object--m-top-center {
-            object-position: var(--object--center) var(--object--start);
-        }
-
-        .object--m-top-right {
-            object-position: var(--object--end) var(--object--start);
-        }
-
-        .object--m-center-left {
-            object-position: var(--object--start) var(--object--center);
-        }
-
-        .object--m-center {
-            object-position: var(--object--center);
-        }
-
-        .object--m-center-right {
-            object-position: var(--object--end) var(--object--center);
-        }
-
-        .object--m-bottom-left {
-            object-position: var(--object--start) var(--object--end);
-        }
-
-        .object--m-bottom-center {
-            object-position: var(--object--center) var(--object--end);
-        }
-
-        .object--m-bottom-right {
-            object-position: var(--object--end);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .object--s-top-left {
-                object-position: var(--object--start);
-            }
-
-            .object--s-top-center {
-                object-position: var(--object--center) var(--object--start);
-            }
-
-            .object--s-top-right {
-                object-position: var(--object--end) var(--object--start);
-            }
-
-            .object--s-center-left {
-                object-position: var(--object--start) var(--object--center);
-            }
-
-            .object--s-center {
-                object-position: var(--object--center);
-            }
-
-            .object--s-center-right {
-                object-position: var(--object--end) var(--object--center);
-            }
-
-            .object--s-bottom-left {
-                object-position: var(--object--start) var(--object--end);
-            }
-
-            .object--s-bottom-center {
-                object-position: var(--object--center) var(--object--end);
-            }
-
-            .object--s-bottom-right {
+            .object--#{$_key}-bottom-right {
                 object-position: var(--object--end);
             }
         }
@@ -5425,77 +3538,22 @@ textarea {
         text-align: justify;
     }
 
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .text--xl-center {
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .text--#{$_key}-center {
                 text-align: center;
             }
 
-            .text--xl-left {
+            .text--#{$_key}-left {
                 text-align: left;
             }
 
-            .text--xl-right {
+            .text--#{$_key}-right {
                 text-align: right;
             }
 
-            .text--xl-justify {
-                text-align: justify;
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .text--l-center {
-            text-align: center;
-        }
-
-        .text--l-left {
-            text-align: left;
-        }
-
-        .text--l-right {
-            text-align: right;
-        }
-
-        .text--l-justify {
-            text-align: justify;
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .text--m-center {
-            text-align: center;
-        }
-
-        .text--m-left {
-            text-align: left;
-        }
-
-        .text--m-right {
-            text-align: right;
-        }
-
-        .text--m-justify {
-            text-align: justify;
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .text--s-center {
-                text-align: center;
-            }
-
-            .text--s-left {
-                text-align: left;
-            }
-
-            .text--s-right {
-                text-align: right;
-            }
-
-            .text--s-justify {
+            .text--#{$_key}-justify {
                 text-align: justify;
             }
         }
@@ -5930,7 +3988,7 @@ textarea {
 
     form.form .message.success {
         background-color: var(--color--success) !important;
-        color: var(--color--white) !important;
+        color: var(--color--lightest) !important;
     }
 
     // Rich Text
