@@ -1,16 +1,39 @@
 /**
  * Pretend CSS
  * https://pretend.studio
- */
+**/
 
 @use "sass:math";
 
 // - - - - - Start SCSS Variable Configuration - - - - - //
+// - - - - - See Also: CSS Variable Configuration - - - - - //
 
-// Class
-$class--component: true; // Include component classes
-$class--essential: true; // Include essential classes
-$class--extra: false; // Include extra classes
+// - - - Per Project Values - - - //
+
+// Color
+$color--interaction: #ec5659;
+$color--primary: $color--interaction;
+$color--secondary: $color--interaction;
+$color--tertiary: $color--interaction;
+$color--quaternary: $color--interaction;
+
+// Color - Shade
+$color--black: #000000;
+$color--darker: #171717;
+$color--dark: #272727;
+$color--mid: #878787;
+$color--light: #e7e7e7;
+$color--lighter: #f7f7f7;
+$color--white: #ffffff;
+
+// Color - Misc
+$color--danger: #ef4444;
+$color--highlight: #fcd34d;
+$color--info: #0ea5e9;
+$color--success: #10b981;
+$color--warning: #f59e0b;
+
+// - - - Default Project Options - - - //
 
 // Breakpoint
 $breakpoint--s: false; // Include small breakpoint classes
@@ -19,6 +42,11 @@ $breakpoint--xl: false; // Include extra large breakpoint classes
 // Builder
 $builder--bricks: false; // Include Bricks styling
 $builder--cwicly: true; // Include Cwicly styling
+
+// Class
+$class--component: true; // Include component classes
+$class--essential: true; // Include essential classes
+$class--extra: false; // Include extra classes
 
 // Form
 $form--bricks: false; // Include Bricks form styling
@@ -51,6 +79,7 @@ $width--wider: 1600px; // Wider breakout width
 $width--max: 1920px; // Maximum width
 
 // - - - - - End SCSS Variable Configuration - - - - - //
+// - - - - - See Also: CSS Variable Configuration - - - - - //
 
 // - - - - - SCSS Functions - - - - - //
 
@@ -72,9 +101,18 @@ $width--max: 1920px; // Maximum width
     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 }
 
+// Hex to HSL Color Conversion
+// --
+// Usage: hex-hsl(#ec5659)
+// @param: $_hex // Hex color value
+
+@function hex-hsl($_hex) {
+    @return hue($_hex) saturation($_hex) lightness($_hex);
+}
+
 // PX to Relative Unit Conversion
 // --
-// Usage: px-relative(16px, rem)
+// Usage: px-relative(16px, rem, 16)
 // @param: $_px // Pixel value
 // @param: $_unit // Unit type
 // @param: $_root // Root font size: $font-size--root
@@ -101,22 +139,42 @@ $width--max: 1920px; // Maximum width
     }
 }
 
+/*
+// Hex Color Value Key
+
+// Color
+--color--interaction: #{$color--interaction};
+--color--primary: #{$color--primary};
+--color--secondary: #{$color--secondary};
+--color--tertiary: #{$color--tertiary};
+--color--quaternary: #{$color--quaternary};
+
+// Color - Shade
+--color--black: #{$color--black};
+--color--darker: #{$color--darker};
+--color--dark: #{$color--dark};
+--color--mid: #{$color--mid};
+--color--light: #{$color--light};
+--color--lighter: #{$color--lighter};
+--color--white: #{$color--white};
+
+// Color - Misc
+--color--danger: #{$color--danger};
+--color--highlight: #{$color--highlight};
+--color--info: #{$color--info};
+--color--success: #{$color--success};
+--color--warning: #{$color--warning};
+*/
+
 :root {
     /* - - - - - Start CSS Variable Configuration - - - - - */
 
     /* Color */
-    --color--interaction: #ec5659;
-    --color--primary: var(--color--interaction);
-    --color--secondary: var(--color--interaction);
-    --color--tertiary: var(--color--interaction);
-    --color--quaternary: var(--color--interaction);
-
-    /* Color - Shade */
-    --color--darker: #171717;
-    --color--dark: #272727;
-    --color--mid: #878787;
-    --color--light: #e7e7e7;
-    --color--lighter: #f7f7f7;
+    --color--interaction: hsl(#{hex-hsl($color--interaction)});
+    --color--primary: hsl(#{hex-hsl($color--primary)});
+    --color--secondary: hsl(#{hex-hsl($color--secondary)});
+    --color--tertiary: hsl(#{hex-hsl($color--tertiary)});
+    --color--quaternary: hsl(#{hex-hsl($color--quaternary)});
 
     /* Body */
     --bg-color--body: var(--color--lighter-darker);
@@ -188,16 +246,21 @@ $width--max: 1920px; // Maximum width
     --aspect--cinema: 16 / 9;
     --aspect--widescreen: 2 / 1;
 
-    // Color - Misc
-    --color--danger: #ef4444;
-    --color--highlight: #fcd34d;
-    --color--info: #0ea5e9;
-    --color--success: #10b981;
-    --color--warning: #f59e0b;
-
     // Color - Shade
-    --color--black: #000;
-    --color--white: #fff;
+    --color--black: hsl(#{hex-hsl($color--black)});
+    --color--darker: hsl(#{hex-hsl($color--darker)});
+    --color--dark: hsl(#{hex-hsl($color--dark)});
+    --color--mid: hsl(#{hex-hsl($color--mid)});
+    --color--light: hsl(#{hex-hsl($color--light)});
+    --color--lighter: hsl(#{hex-hsl($color--lighter)});
+    --color--white: hsl(#{hex-hsl($color--white)});
+
+    // Color - Misc
+    --color--danger: hsl(#{hex-hsl($color--danger)});
+    --color--highlight: hsl(#{hex-hsl($color--highlight)});
+    --color--info: hsl(#{hex-hsl($color--info)});
+    --color--success: hsl(#{hex-hsl($color--success)});
+    --color--warning: hsl(#{hex-hsl($color--warning)});
 
     // Color - Dark Mode
     --color--black-white: var(--color--black);
@@ -228,7 +291,7 @@ $width--max: 1920px; // Maximum width
     --grid--span-6: span 6;
 
     // Misc
-    --bg-blur--color: hsl(0 0% 100% / 90%);
+    --bg-blur--color: hsl(#{hex-hsl($color--white)} / 90%);
     --object--start: 15%;
     --object--center: 50%;
     --object--end: 85%;
@@ -247,7 +310,7 @@ $width--max: 1920px; // Maximum width
     --radius--round: 50%;
 
     // Shadow
-    --shadow--color: 0 0% 40%;
+    --shadow--color: #{hex-hsl(#666666)};
     --shadow--strength: 5%;
     --shadow--low: 0 #{px-relative(-1px)} #{px-relative(3px)} 0 hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
     0 #{px-relative(1px)} #{px-relative(2px)} #{px-relative(-5px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
@@ -352,9 +415,9 @@ $width--max: 1920px; // Maximum width
         --color--lighter-darker: var(--color--darker);
         --color--white-black: var(--color--black);
         // Misc
-        --bg-blur--color: hsl(0 0% 0% / 90%);
+        --bg-blur--color: hsl(#{hex-hsl($color--black)} / 90%);
         // Shadow
-        --shadow--color: 0 0% 5%;
+        --shadow--color: #{hex-hsl(#0d0d0d)};
         --shadow--strength: 20%;
     }
 }
@@ -363,14 +426,14 @@ $width--max: 1920px; // Maximum width
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
     :root {
         // Misc
-        --bg-blur--color: hsl(0 0% 100% / 40%);
+        --bg-blur--color: hsl(#{hex-hsl($color--white)} / 40%);
     }
 
     // Dark Mode
     @media (prefers-color-scheme: dark) {
         :root {
             // Misc
-            --bg-blur--color: hsl(0 0% 0% / 40%);
+            --bg-blur--color: hsl(#{hex-hsl($color--black)} / 40%);
         }
     }
 }
@@ -711,33 +774,6 @@ textarea {
 
     // Alignment
 
-    .center--all {
-        align-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .center--x {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .center--y {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-    }
-
     .aligncenter,
     .center--self {
         margin-left: auto;
@@ -892,7 +928,7 @@ textarea {
         }
     }
 
-    @if not $builder--cwicly {
+    @if not $builder--cwicly or $class--extra {
         // Aspect Ratio
 
         img.aspect--square,
@@ -1262,7 +1298,7 @@ textarea {
         z-index: -1;
     }
 
-    @if not $builder--cwicly {
+    @if not $builder--cwicly or $class--extra {
         // Border
 
         .border--interaction {
@@ -2040,7 +2076,7 @@ textarea {
         top: 0;
     }
 
-    @if not $builder--cwicly {
+    @if not $builder--cwicly or $class--extra {
         // List Flat
 
         ol.list--flat,
@@ -2149,16 +2185,6 @@ textarea {
         }
     }
 
-    // Padding
-
-    .padding--btn {
-        padding: var(--padding-y--btn) var(--padding-x--btn);
-    }
-
-    .padding--input {
-        padding: var(--padding--input);
-    }
-
     // Shadow
 
     .shadow--low {
@@ -2234,28 +2260,10 @@ textarea {
         }
     }
 
-    // Text
-
-    .text--btn {
-        font-size: var(--font-size--btn);
-        font-weight: var(--font-weight--btn);
-        letter-spacing: var(--letter-spacing--btn);
-        line-height: var(--line-height--btn);
-        text-transform: var(--text-transform--btn);
-    }
-
     // Text Vertical
 
     .text--vertical-left,
-    .text--vertical-right,
-    .text--xl-vertical-left,
-    .text--xl-vertical-right,
-    .text--l-vertical-left,
-    .text--l-vertical-right,
-    .text--m-vertical-left,
-    .text--m-vertical-right,
-    .text--s-vertical-left,
-    .text--s-vertical-right {
+    .text--vertical-right {
         writing-mode: vertical-lr;
     }
 
@@ -2269,6 +2277,12 @@ textarea {
 
     @if $breakpoint--xl {
         @include breakpoint($width--xl) {
+
+            .text--xl-vertical-left,
+            .text--xl-vertical-right {
+                writing-mode: vertical-lr;
+            }
+
             .text--xl-vertical-left {
                 transform: scale(-1);
             }
@@ -2285,6 +2299,12 @@ textarea {
     }
 
     @include breakpoint($width--l) {
+
+        .text--l-vertical-left,
+        .text--l-vertical-right {
+            writing-mode: vertical-lr;
+        }
+
         .text--l-vertical-left {
             transform: scale(-1);
         }
@@ -2300,6 +2320,12 @@ textarea {
     }
 
     @include breakpoint($width--m) {
+
+        .text--m-vertical-left,
+        .text--m-vertical-right {
+            writing-mode: vertical-lr;
+        }
+
         .text--m-vertical-left {
             transform: scale(-1);
         }
@@ -2316,6 +2342,12 @@ textarea {
 
     @if $breakpoint--s {
         @include breakpoint($width--s) {
+
+            .text--s-vertical-left,
+            .text--s-vertical-right {
+                writing-mode: vertical-lr;
+            }
+
             .text--s-vertical-left {
                 transform: scale(-1);
             }
@@ -2334,6 +2366,35 @@ textarea {
 
 @if $class--extra {
     // - - - - - Extra Classes - - - - - //
+
+    // Alignment
+
+    .center--all {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .center--x {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .center--y {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+    }
 
     // Flex
 
@@ -5273,6 +5334,14 @@ textarea {
         padding: var(--space--5xl);
     }
 
+    .padding--btn {
+        padding: var(--padding-y--btn) var(--padding-x--btn);
+    }
+
+    .padding--input {
+        padding: var(--padding--input);
+    }
+
     .padding-bottom--flat {
         padding-bottom: 0;
     }
@@ -5336,146 +5405,6 @@ textarea {
 
     .radius--input {
         border-radius: var(--border-radius--input);
-    }
-
-    @if $breakpoint--xl {
-        @include breakpoint($width--xl) {
-            .radius--xl-xs {
-                border-radius: var(--radius--xs);
-            }
-
-            .radius--xl-s {
-                border-radius: var(--radius--s);
-            }
-
-            .radius--xl-m {
-                border-radius: var(--radius--m);
-            }
-
-            .radius--xl-l {
-                border-radius: var(--radius--l);
-            }
-
-            .radius--xl-xl {
-                border-radius: var(--radius--xl);
-            }
-
-            .radius--xl-round {
-                border-radius: var(--radius--round);
-            }
-
-            .radius--xl-btn {
-                border-radius: var(--border-radius--btn);
-            }
-
-            .radius--xl-input {
-                border-radius: var(--border-radius--input);
-            }
-        }
-    }
-
-    @include breakpoint($width--l) {
-        .radius--l-xs {
-            border-radius: var(--radius--xs);
-        }
-
-        .radius--l-s {
-            border-radius: var(--radius--s);
-        }
-
-        .radius--l-m {
-            border-radius: var(--radius--m);
-        }
-
-        .radius--l-l {
-            border-radius: var(--radius--l);
-        }
-
-        .radius--l-xl {
-            border-radius: var(--radius--xl);
-        }
-
-        .radius--l-round {
-            border-radius: var(--radius--round);
-        }
-
-        .radius--l-btn {
-            border-radius: var(--border-radius--btn);
-        }
-
-        .radius--l-input {
-            border-radius: var(--border-radius--input);
-        }
-    }
-
-    @include breakpoint($width--m) {
-        .radius--m-xs {
-            border-radius: var(--radius--xs);
-        }
-
-        .radius--m-s {
-            border-radius: var(--radius--s);
-        }
-
-        .radius--m-m {
-            border-radius: var(--radius--m);
-        }
-
-        .radius--m-l {
-            border-radius: var(--radius--l);
-        }
-
-        .radius--m-xl {
-            border-radius: var(--radius--xl);
-        }
-
-        .radius--m-round {
-            border-radius: var(--radius--round);
-        }
-
-        .radius--m-btn {
-            border-radius: var(--border-radius--btn);
-        }
-
-        .radius--m-input {
-            border-radius: var(--border-radius--input);
-        }
-    }
-
-    @if $breakpoint--s {
-        @include breakpoint($width--s) {
-            .radius--s-xs {
-                border-radius: var(--radius--xs);
-            }
-
-            .radius--s-s {
-                border-radius: var(--radius--s);
-            }
-
-            .radius--s-m {
-                border-radius: var(--radius--m);
-            }
-
-            .radius--s-l {
-                border-radius: var(--radius--l);
-            }
-
-            .radius--s-xl {
-                border-radius: var(--radius--xl);
-            }
-
-            .radius--s-round {
-                border-radius: var(--radius--round);
-            }
-
-            .radius--s-btn {
-                border-radius: var(--border-radius--btn);
-            }
-
-            .radius--s-input {
-                border-radius: var(--border-radius--input);
-            }
-        }
     }
 
     // Text Align
@@ -5590,6 +5519,20 @@ textarea {
         text-decoration: underline;
     }
 
+    // Text Misc
+
+    .text--btn {
+        font-size: var(--font-size--btn);
+        font-weight: var(--font-weight--btn);
+        letter-spacing: var(--letter-spacing--btn);
+        line-height: var(--line-height--btn);
+        text-transform: var(--text-transform--btn);
+    }
+
+    .text--spacing {
+        letter-spacing: var(--text--spacing);
+    }
+
     // Text Size
 
     .text--xs {
@@ -5667,12 +5610,6 @@ textarea {
 
     .text--5xl.text--enlarge {
         font-size: calc(var(--text--5xl) * var(--text--enlarge));
-    }
-
-    // Text Spacing
-
-    .text--spacing {
-        letter-spacing: var(--text--spacing);
     }
 
     // Text Style
