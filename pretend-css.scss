@@ -39,7 +39,7 @@ $builder--bricks: false; // Include Bricks styling
 $builder--cwicly: true; // Include Cwicly styling
 
 // Class
-$class--elements: true; // Include component classes
+$class--element: true; // Include component classes
 $class--essential: true; // Include essential classes
 $class--extra: false; // Include extra classes
 
@@ -716,7 +716,7 @@ textarea {
     line-height: var(--line-height--heading) !important;
 }
 
-@if $class--elements {
+@if $class--element {
     // - - - - - Elements - - - - - //
 
     // Button
