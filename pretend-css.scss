@@ -78,7 +78,7 @@ $breakpoint: (
     // xl: $width--xl,
     l: $width--l,
     m: $width--m,
-    // s: $width--s,
+    // s: $width--s
 );
 
 // - - - - - End SCSS Variable Configuration - - - - - //
@@ -171,16 +171,6 @@ $breakpoint: (
     --s--quaternary: #{saturation($color--quaternary)};
     --l--quaternary: #{lightness($color--quaternary)};
 
-    /* Body */
-    --bg-color--body: var(--color--lighter-darker);
-    --color--body: var(--color--darker-lighter);
-    --color--link: var(--color--interaction);
-    --color-hover--link: var(--color--link);
-    --font-family--body: var(--text--fallback);
-    --font-size--body: var(--text--m);
-    --font-weight--body: 400;
-    --line-height--body: 1.6;
-
     /* Button */
     --bg-color--btn: var(--color--interaction);
     --bg-color-hover--btn: var(--bg-color--btn);
@@ -194,7 +184,7 @@ $breakpoint: (
     --font-size--btn: var(--text--s);
     --font-weight--btn: 400;
     --gap--btn: var(--space--8px);
-    --letter-spacing--btn: var(--space--px);
+    --letter-spacing--btn: var(--text--spaced);
     --line-height--btn: 1;
     --padding-x--btn: var(--space--m);
     --padding-y--btn: var(--space--xs);
@@ -206,42 +196,21 @@ $breakpoint: (
     --gap--grid: var(--space--m);
 
     /* Form */
-    --bg-color--input: var(--color--lightest-darkest);
-    --border-color--input: var(--color--mid);
+    --bg-color--input: var(--color--lighter-darker);
+    --bg-color-hover--input: var(--bg-color--input);
+    --border-color--input: var(--color--darker-lighter);
+    --border-color-hover--input: var(--border-color--input);
     --border-radius--input: 0;
     --border-style--input: solid;
     --border-width--input: var(--space--2px);
     --color--input: var(--color--darker-lighter);
     --color--label: var(--color--darker-lighter);
     --color--placeholder: var(--color--mid);
-    --color--attention: var(--color--interaction);
+    --color--attention: var(--color--danger);
     --font-size--label: var(--text--m);
     --font-weight--label: 400;
     --line-height--input: 1;
     --padding--input: var(--space--xs);
-
-    /* Heading */
-    --font-family--heading: inherit;
-    --font-size--h1: var(--text--4xl);
-    --font-size--h2: var(--text--3xl);
-    --font-size--h3: var(--text--2xl);
-    --font-size--h4: var(--text--xl);
-    --font-size--h5: var(--text--l);
-    --font-size--h6: var(--text--m);
-    --font-weight--h1: 700;
-    --font-weight--h2: 700;
-    --font-weight--h3: 700;
-    --font-weight--h4: 700;
-    --font-weight--h5: 700;
-    --font-weight--h6: 700;
-    --letter-spacing--heading: var(--space--px);
-    --line-height--heading: 1.2;
-    --text-transform--h1: uppercase;
-    --text-transform--h2: none;
-    --text-transform--h3: none;
-    --text-transform--h4: none;
-    --text-transform--h5: none;
-    --text-transform--h6: none;
 
     /* - - - - - End CSS Variable Configuration - - - - - */
 
@@ -370,11 +339,12 @@ $breakpoint: (
 
     // Misc
     --bg-blur--color: hsl(var(--h--lightest-darkest) var(--s--lightest-darkest) var(--l--lightest-darkest) / 0.9);
+    --line-height--body: 1.6;
+    --line-height--heading: 1.2;
     --multiplier: 1.5;
     --object--start: 15%;
     --object--center: 50%;
     --object--end: 85%;
-    --text--fallback: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
     --text--spaced: var(--space--px);
     --transition--fast: .2s;
     --transition--normal: .4s;
@@ -605,14 +575,8 @@ html:focus-within {
 }
 
 body {
-    background-color: var(--bg-color--body);
-    color: var(--color--body);
-    font-family: var(--font-family--body);
-    font-size: var(--font-size--body);
     -webkit-font-smoothing: antialiased;
-    font-weight: var(--font-weight--body);
     height: 100%;
-    line-height: var(--line-height--body);
     margin-left: auto;
     margin-right: auto;
     max-width: var(--width--widest);
@@ -622,14 +586,6 @@ body {
     overflow-wrap: break-word;
     overflow-x: hidden;
     width: 100%;
-}
-
-main > article a {
-    color: var(--color--link);
-
-    &:hover {
-        color: var(--color-hover--link);
-    }
 }
 
 main > article a:not([class]),
@@ -661,68 +617,6 @@ input,
 select {
     font: inherit;
     line-height: var(--line-height--btn) !important;
-}
-
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-    font-family: var(--font-family--heading);
-    letter-spacing: var(--letter-spacing--heading);
-}
-
-h1,
-.h1 {
-    font-size: var(--font-size--h1);
-    font-weight: var(--font-weight--h1);
-    line-height: var(--line-height--heading);
-    text-transform: var(--text-transform--h1);
-}
-
-h2,
-.h2 {
-    font-size: var(--font-size--h2);
-    font-weight: var(--font-weight--h2);
-    line-height: var(--line-height--heading);
-    text-transform: var(--text-transform--h2);
-}
-
-h3,
-.h3 {
-    font-size: var(--font-size--h3);
-    font-weight: var(--font-weight--h3);
-    line-height: var(--line-height--heading);
-    text-transform: var(--text-transform--h3);
-}
-
-h4,
-.h4 {
-    font-size: var(--font-size--h4);
-    font-weight: var(--font-weight--h4);
-    line-height: var(--line-height--heading);
-    text-transform: var(--text-transform--h4);
-}
-
-h5,
-.h5 {
-    font-size: var(--font-size--h5);
-    font-weight: var(--font-weight--h5);
-    text-transform: var(--text-transform--h5);
-}
-
-h6,
-.h6 {
-    font-size: var(--font-size--h6);
-    font-weight: var(--font-weight--h6);
-    text-transform: var(--text-transform--h6);
 }
 
 textarea {
@@ -1768,6 +1662,152 @@ textarea {
 
     .content-column-span--all {
         column-span: all;
+    }
+
+    // Gap
+
+    .gap--flat {
+        gap: 0;
+    }
+
+    .gap-column--flat {
+        column-gap: 0;
+    }
+
+    .gap-row--flat {
+        row-gap: 0;
+    }
+
+    .gap--4px {
+        gap: var(--space--4px);
+    }
+
+    .gap-column--4px {
+        column-gap: var(--space--4px);
+    }
+
+    .gap-row--4px {
+        row-gap: var(--space--4px);
+    }
+
+    .gap--8px {
+        gap: var(--space--8px);
+    }
+
+    .gap-column--8px {
+        column-gap: var(--space--8px);
+    }
+
+    .gap-row--8px {
+        row-gap: var(--space--8px);
+    }
+
+    .gap--xs {
+        gap: var(--space--xs);
+    }
+
+    .gap-column--xs {
+        column-gap: var(--space--xs);
+    }
+
+    .gap-row--xs {
+        row-gap: var(--space--xs);
+    }
+
+    .gap--s {
+        gap: var(--space--s);
+    }
+
+    .gap-column--s {
+        column-gap: var(--space--s);
+    }
+
+    .gap-row--s {
+        row-gap: var(--space--s);
+    }
+
+    .gap--m {
+        gap: var(--space--m);
+    }
+
+    .gap-column--m {
+        column-gap: var(--space--m);
+    }
+
+    .gap-row--m {
+        row-gap: var(--space--m);
+    }
+
+    .gap--l {
+        gap: var(--space--l);
+    }
+
+    .gap-column--l {
+        column-gap: var(--space--l);
+    }
+
+    .gap-row--l {
+        row-gap: var(--space--l);
+    }
+
+    .gap--xl {
+        gap: var(--space--xl);
+    }
+
+    .gap-column--xl {
+        column-gap: var(--space--xl);
+    }
+
+    .gap-row--xl {
+        row-gap: var(--space--xl);
+    }
+
+    .gap--2xl {
+        gap: var(--space--2xl);
+    }
+
+    .gap-column--2xl {
+        column-gap: var(--space--2xl);
+    }
+
+    .gap-row--2xl {
+        row-gap: var(--space--2xl);
+    }
+
+    .gap--3xl {
+        gap: var(--space--3xl);
+    }
+
+    .gap-column--3xl {
+        column-gap: var(--space--3xl);
+    }
+
+    .gap-row--3xl {
+        row-gap: var(--space--3xl);
+    }
+
+    .gap--4xl {
+        gap: var(--space--4xl);
+    }
+
+    .gap-column--4xl {
+        column-gap: var(--space--4xl);
+    }
+
+    .gap-row--4xl {
+        row-gap: var(--space--4xl);
+    }
+
+    .gap--5xl {
+        gap: var(--space--5xl);
+    }
+
+    .gap-column--5xl {
+        column-gap: var(--space--5xl);
+    }
+
+    .gap-row--5xl {
+        row-gap: var(--space--5xl);
     }
 
     // Grid
@@ -3049,152 +3089,6 @@ textarea {
         transform: scale(-1, -1);
     }
 
-    // Gap
-
-    .gap--flat {
-        gap: 0;
-    }
-
-    .gap-column--flat {
-        column-gap: 0;
-    }
-
-    .gap-row--flat {
-        row-gap: 0;
-    }
-
-    .gap--4px {
-        gap: var(--space--4px);
-    }
-
-    .gap-column--4px {
-        column-gap: var(--space--4px);
-    }
-
-    .gap-row--4px {
-        row-gap: var(--space--4px);
-    }
-
-    .gap--8px {
-        gap: var(--space--8px);
-    }
-
-    .gap-column--8px {
-        column-gap: var(--space--8px);
-    }
-
-    .gap-row--8px {
-        row-gap: var(--space--8px);
-    }
-
-    .gap--xs {
-        gap: var(--space--xs);
-    }
-
-    .gap-column--xs {
-        column-gap: var(--space--xs);
-    }
-
-    .gap-row--xs {
-        row-gap: var(--space--xs);
-    }
-
-    .gap--s {
-        gap: var(--space--s);
-    }
-
-    .gap-column--s {
-        column-gap: var(--space--s);
-    }
-
-    .gap-row--s {
-        row-gap: var(--space--s);
-    }
-
-    .gap--m {
-        gap: var(--space--m);
-    }
-
-    .gap-column--m {
-        column-gap: var(--space--m);
-    }
-
-    .gap-row--m {
-        row-gap: var(--space--m);
-    }
-
-    .gap--l {
-        gap: var(--space--l);
-    }
-
-    .gap-column--l {
-        column-gap: var(--space--l);
-    }
-
-    .gap-row--l {
-        row-gap: var(--space--l);
-    }
-
-    .gap--xl {
-        gap: var(--space--xl);
-    }
-
-    .gap-column--xl {
-        column-gap: var(--space--xl);
-    }
-
-    .gap-row--xl {
-        row-gap: var(--space--xl);
-    }
-
-    .gap--2xl {
-        gap: var(--space--2xl);
-    }
-
-    .gap-column--2xl {
-        column-gap: var(--space--2xl);
-    }
-
-    .gap-row--2xl {
-        row-gap: var(--space--2xl);
-    }
-
-    .gap--3xl {
-        gap: var(--space--3xl);
-    }
-
-    .gap-column--3xl {
-        column-gap: var(--space--3xl);
-    }
-
-    .gap-row--3xl {
-        row-gap: var(--space--3xl);
-    }
-
-    .gap--4xl {
-        gap: var(--space--4xl);
-    }
-
-    .gap-column--4xl {
-        column-gap: var(--space--4xl);
-    }
-
-    .gap-row--4xl {
-        row-gap: var(--space--4xl);
-    }
-
-    .gap--5xl {
-        gap: var(--space--5xl);
-    }
-
-    .gap-column--5xl {
-        column-gap: var(--space--5xl);
-    }
-
-    .gap-row--5xl {
-        row-gap: var(--space--5xl);
-    }
-
     // Grid Order
 
     .order--first {
@@ -4254,6 +4148,13 @@ textarea {
 
     .form .happyforms-part-error-notice svg {
         display: none !important;
+    }
+
+    .form .happyforms-styles .happyforms-message-notices .error {
+        background-color: var(--color--warning) !important;
+        border: var(--border-width--input) var(--border-style--input) var(--border-color--input) !important;
+        color: var(--color--darker) !important;
+        padding: var(--padding--input) !important;
     }
 
     // Input
