@@ -171,6 +171,15 @@ $breakpoint: (
     --s--quaternary: #{saturation($color--quaternary)};
     --l--quaternary: #{lightness($color--quaternary)};
 
+    /* Body */
+    --bg-color--body: var(--color--lighter-darker);
+    --color--body: var(--color--darker-lighter);
+    --color--link: var(--color--interaction);
+    --color-hover--link: var(--color--link);
+    --font-size--body: var(--text--m);
+    --font-weight--body: 400;
+    --line-height--body: 1.6;
+
     /* Button */
     --bg-color--btn: var(--color--interaction);
     --bg-color-hover--btn: var(--bg-color--btn);
@@ -211,6 +220,28 @@ $breakpoint: (
     --font-weight--label: 400;
     --line-height--input: 1;
     --padding--input: var(--space--xs);
+
+    /* Heading */
+    --font-size--h1: var(--text--4xl);
+    --font-size--h2: var(--text--3xl);
+    --font-size--h3: var(--text--2xl);
+    --font-size--h4: var(--text--xl);
+    --font-size--h5: var(--text--l);
+    --font-size--h6: var(--text--m);
+    --font-weight--h1: 700;
+    --font-weight--h2: 700;
+    --font-weight--h3: 700;
+    --font-weight--h4: 700;
+    --font-weight--h5: 700;
+    --font-weight--h6: 700;
+    --letter-spacing--heading: var(--text--spaced);
+    --line-height--heading: 1.2;
+    --text-transform--h1: uppercase;
+    --text-transform--h2: none;
+    --text-transform--h3: none;
+    --text-transform--h4: none;
+    --text-transform--h5: none;
+    --text-transform--h6: none;
 
     /* - - - - - End CSS Variable Configuration - - - - - */
 
@@ -339,8 +370,6 @@ $breakpoint: (
 
     // Misc
     --bg-blur--color: hsl(var(--h--lightest-darkest) var(--s--lightest-darkest) var(--l--lightest-darkest) / 0.9);
-    --line-height--body: 1.6;
-    --line-height--heading: 1.2;
     --multiplier: 1.5;
     --object--start: 15%;
     --object--center: 50%;
@@ -359,25 +388,25 @@ $breakpoint: (
     --radius--round: 50%;
 
     // Shadow
-    --shadow--color: #{hex-hsl(#666666)};
-    --shadow--strength: 5%;
-    --shadow--low: 0 #{px-relative(-1px)} #{px-relative(3px)} 0 hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
-    0 #{px-relative(1px)} #{px-relative(2px)} #{px-relative(-5px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
-    0 #{px-relative(2px)} #{px-relative(5px)} #{px-relative(-5px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 4%)),
-    0 #{px-relative(4px)} #{px-relative(12px)} #{px-relative(-5px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 5%)),
-    0 #{px-relative(12px)} #{px-relative(15px)} #{px-relative(-5px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 7%));
-    --shadow--mid: 0 #{px-relative(-2px)} #{px-relative(5px)} 0 hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
-    0 #{px-relative(1px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 3%)),
-    0 #{px-relative(2px)} #{px-relative(2px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 3%)),
-    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 4%)),
-    0 #{px-relative(9px)} #{px-relative(9px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 5%)),
-    0 #{px-relative(16px)} #{px-relative(16px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 6%));
-    --shadow--high: 0 #{px-relative(-1px)} #{px-relative(2px)} 0 hsl(var(--shadow--color)/calc(var(--shadow--strength) + 2%)),
-    0 #{px-relative(2px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 3%)),
-    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 3%)),
-    0 #{px-relative(10px)} #{px-relative(10px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 4%)),
-    0 #{px-relative(20px)} #{px-relative(20px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 5%)),
-    0 #{px-relative(40px)} #{px-relative(40px)} #{px-relative(-2px)} hsl(var(--shadow--color)/calc(var(--shadow--strength) + 7%));
+    --_shadow--color: #{hex-hsl(#666666)};
+    --_shadow--strength: 5%;
+    --shadow--low: 0 #{px-relative(-1px)} #{px-relative(3px)} 0 hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 2%)),
+    0 #{px-relative(1px)} #{px-relative(2px)} #{px-relative(-5px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 2%)),
+    0 #{px-relative(2px)} #{px-relative(5px)} #{px-relative(-5px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 4%)),
+    0 #{px-relative(4px)} #{px-relative(12px)} #{px-relative(-5px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 5%)),
+    0 #{px-relative(12px)} #{px-relative(15px)} #{px-relative(-5px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 7%));
+    --shadow--mid: 0 #{px-relative(-2px)} #{px-relative(5px)} 0 hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 2%)),
+    0 #{px-relative(1px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 3%)),
+    0 #{px-relative(2px)} #{px-relative(2px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 3%)),
+    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 4%)),
+    0 #{px-relative(9px)} #{px-relative(9px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 5%)),
+    0 #{px-relative(16px)} #{px-relative(16px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 6%));
+    --shadow--high: 0 #{px-relative(-1px)} #{px-relative(2px)} 0 hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 2%)),
+    0 #{px-relative(2px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 3%)),
+    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 3%)),
+    0 #{px-relative(10px)} #{px-relative(10px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 4%)),
+    0 #{px-relative(20px)} #{px-relative(20px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 5%)),
+    0 #{px-relative(40px)} #{px-relative(40px)} #{px-relative(-2px)} hsl(var(--_shadow--color)/calc(var(--_shadow--strength) + 7%));
 
     // Space
     --space--px: #{px-relative(1px)};
@@ -498,8 +527,8 @@ $breakpoint: (
         --s--lightest-darkest: var(--s--darkest);
         --l--lightest-darkest: var(--l--darkest);
         // Shadow
-        --shadow--color: #{hex-hsl(#0d0d0d)};
-        --shadow--strength: 20%;
+        --_shadow--color: #{hex-hsl(#0d0d0d)};
+        --_shadow--strength: 20%;
     }
 }
 
@@ -575,8 +604,13 @@ html:focus-within {
 }
 
 body {
+    background-color: var(--bg-color--body);
+    color: var(--color--body);
+    font-size: var(--font-size--body);
     -webkit-font-smoothing: antialiased;
+    font-weight: var(--font-weight--body);
     height: 100%;
+    line-height: var(--line-height--body);
     margin-left: auto;
     margin-right: auto;
     max-width: var(--width--widest);
@@ -588,17 +622,25 @@ body {
     width: 100%;
 }
 
+main > article a {
+    color: var(--color--link);
+
+    &:hover {
+        color: var(--color-hover--link);
+    }
+}
+
 main > article a:not([class]),
 .link {
     color: var(--color--darker-lighter);
     text-decoration: underline;
-    text-decoration-color: var(--color--interaction);
+    text-decoration-color: var(--color--link);
     text-decoration-thickness: var(--space--2px);
     text-underline-offset: var(--space--2px);
     transition: var(--transition--fast);
 
     &:hover {
-        color: var(--color--interaction);
+        color: var(--color-hover--link);
         text-decoration-color: var(--color--mid);
     }
 }
@@ -617,6 +659,67 @@ input,
 select {
     font: inherit;
     line-height: var(--line-height--btn) !important;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+    letter-spacing: var(--letter-spacing--heading);
+}
+
+h1,
+.h1 {
+    font-size: var(--font-size--h1);
+    font-weight: var(--font-weight--h1);
+    line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h1);
+}
+
+h2,
+.h2 {
+    font-size: var(--font-size--h2);
+    font-weight: var(--font-weight--h2);
+    line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h2);
+}
+
+h3,
+.h3 {
+    font-size: var(--font-size--h3);
+    font-weight: var(--font-weight--h3);
+    line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h3);
+}
+
+h4,
+.h4 {
+    font-size: var(--font-size--h4);
+    font-weight: var(--font-weight--h4);
+    line-height: var(--line-height--heading);
+    text-transform: var(--text-transform--h4);
+}
+
+h5,
+.h5 {
+    font-size: var(--font-size--h5);
+    font-weight: var(--font-weight--h5);
+    text-transform: var(--text-transform--h5);
+}
+
+h6,
+.h6 {
+    font-size: var(--font-size--h6);
+    font-weight: var(--font-weight--h6);
+    text-transform: var(--text-transform--h6);
 }
 
 textarea {
@@ -3092,30 +3195,30 @@ textarea {
     // Grid Order
 
     .order--first {
-        order: -1;
+        order: var(--z--back);
     }
 
     .order--last {
-        order: 10000;
+        order: var(--z--top);
     }
 
     .column-end--last {
-        grid-column-end: -1;
+        grid-column-end: var(--z--back);
     }
 
     @each $_key,
     $_value in $breakpoint {
         @include breakpoint($_value) {
             .order--#{$_key}-first {
-                order: -1;
+                order: var(--z--back);
             }
 
             .order--#{$_key}-last {
-                order: 10000;
+                order: var(--z--top);
             }
 
             .column-end--#{$_key}-last {
-                grid-column-end: -1;
+                grid-column-end: var(--z--back);
             }
         }
     }
