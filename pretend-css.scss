@@ -430,20 +430,6 @@ $breakpoint: (
             $scale-base-max--space: math.round($scale-base-max--space * $scale-ratio-max--space);
             --space--#{$_space-size}: #{fluid($scale-base-min--space, $scale-base-max--space)};
         }
-
-        // Text
-        @each $_text-size in $scale-sizes--min {
-            $scale-base-min--text: math.round(math.div($scale-base-min--text, $scale-ratio-min--text));
-            --text--#{$_text-size}: #{px-relative($scale-base-min--text)};
-        }
-
-        --text--m: #{fluid($scale-base-min--text, $scale-base-max--text)};
-
-        @each $_text-size in $scale-sizes--max {
-            $scale-base-min--text: math.round($scale-base-min--text * $scale-ratio-min--text);
-            $scale-base-max--text: math.round($scale-base-max--text * $scale-ratio-max--text);
-            --text--#{$_text-size}: #{fluid($scale-base-min--text, $scale-base-max--text)};
-        }
     }
 
     @else {
@@ -457,10 +443,25 @@ $breakpoint: (
         --space--3xl: #{fluid(60px, 101px)};
         --space--4xl: #{fluid(75px, 135px)};
         --space--5xl: #{fluid(94px, 180px)};
+    }
 
+    // Text
+    --text--xs: #{fluid(12px, 14px)};
+    --text--s: #{fluid(14px, 16px)};
+
+    @if $scaling {
         // Text
-        --text--xs: #{px-relative(12px)};
-        --text--s: #{px-relative(14px)};
+        --text--m: #{fluid($scale-base-min--text, $scale-base-max--text)};
+
+        @each $_text-size in $scale-sizes--max {
+            $scale-base-min--text: math.round($scale-base-min--text * $scale-ratio-min--text);
+            $scale-base-max--text: math.round($scale-base-max--text * $scale-ratio-max--text);
+            --text--#{$_text-size}: #{fluid($scale-base-min--text, $scale-base-max--text)};
+        }
+    }
+
+    @else {
+        // Text
         --text--m: #{fluid(16px, 18px)};
         --text--l: #{fluid(18px, 24px)};
         --text--xl: #{fluid(20px, 32px)};
@@ -765,6 +766,7 @@ textarea {
         color: var(--border-color--btn);
 
         &:hover {
+            --bg-color-hover--btn: initial !important;
             color: var(--border-color-hover--btn)
         }
     }
@@ -1929,6 +1931,7 @@ textarea {
     .grid--3-1,
     .grid--3-2 {
         display: grid;
+        gap: var(--gap--grid);
         width: 100%;
     }
 
