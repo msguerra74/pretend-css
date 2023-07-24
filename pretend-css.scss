@@ -623,7 +623,7 @@ body {
     width: 100%;
 }
 
-main > article a {
+main a {
     color: var(--color--link);
 
     &:hover {
@@ -631,9 +631,9 @@ main > article a {
     }
 }
 
-main > article a:not([class]),
+main a:not([class]),
 .link {
-    color: var(--color--darker-lighter);
+    color: inherit;
     text-decoration: underline;
     text-decoration-color: var(--color--link);
     text-decoration-thickness: var(--space--2px);
@@ -1992,7 +1992,13 @@ textarea {
             .grid--#{$_key}-3,
             .grid--#{$_key}-4,
             .grid--#{$_key}-5,
-            .grid--#{$_key}-6 {
+            .grid--#{$_key}-6,
+            .grid--#{$_key}-1-2,
+            .grid--#{$_key}-1-3,
+            .grid--#{$_key}-2-1,
+            .grid--#{$_key}-2-3,
+            .grid--#{$_key}-3-1,
+            .grid--#{$_key}-3-2 {
                 display: grid;
                 width: 100%;
             }
@@ -2023,6 +2029,30 @@ textarea {
 
             .grid--#{$_key}-6 {
                 grid-template-columns: var(--grid--6);
+            }
+
+            .grid--#{$_key}-1-2 {
+                grid-template-columns: var(--grid--1-2);
+            }
+
+            .grid--#{$_key}-1-3 {
+                grid-template-columns: var(--grid--1-3);
+            }
+
+            .grid--#{$_key}-2-1 {
+                grid-template-columns: var(--grid--2-1);
+            }
+
+            .grid--#{$_key}-2-3 {
+                grid-template-columns: var(--grid--2-3);
+            }
+
+            .grid--#{$_key}-3-1 {
+                grid-template-columns: var(--grid--3-1);
+            }
+
+            .grid--#{$_key}-3-2 {
+                grid-template-columns: var(--grid--3-2);
             }
         }
     }
@@ -2228,6 +2258,10 @@ textarea {
         grid-column-end: 6;
     }
 
+    .column-end--7 {
+        grid-column-end: 7;
+    }
+
     @each $_key,
     $_value in $breakpoint {
         @include breakpoint($_value) {
@@ -2369,6 +2403,10 @@ textarea {
 
             .column-end--#{$_key}-6 {
                 grid-column-end: 6;
+            }
+
+            .column-end--#{$_key}-7 {
+                grid-column-end: 7;
             }
         }
     }
@@ -4257,7 +4295,7 @@ textarea {
     }
 
     .form .happyforms-styles .happyforms-message-notices .error {
-        background-color: var(--color--warning) !important;
+        background-color: var(--color--danger) !important;
         border: var(--border-width--input) var(--border-style--input) var(--border-color--input) !important;
         color: var(--color--darker) !important;
         padding: var(--padding--input) !important;
