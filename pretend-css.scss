@@ -5,7 +5,7 @@
 
 
 
-// --- SCSS Settings --- //
+// - - - SCSS Settings - - - //
 
 // Color
 $action: hsl(359deg 80% 63%);
@@ -60,7 +60,7 @@ $breakpoint: (
 
 
 
-// --- SCSS Functions --- //
+// - - - SCSS Functions - - - //
 
 // Fluid Sizing
 // --
@@ -94,7 +94,7 @@ $breakpoint: (
 
 
 
-// --- SCSS Mixins --- //
+// - - - SCSS Mixins - - - //
 
 // Breakpoint Generator
 // --
@@ -109,10 +109,10 @@ $breakpoint: (
 
 
 
-// --- CSS Settings --- //
+// - - - CSS Settings - - - //
 
 :root {
-    /* --- Start CSS Variable Configuration --- */
+    /* - - - Start CSS Variable Configuration - - - */
 
     /* Action Color */
     --color-action-h: #{hue($action)};
@@ -338,10 +338,10 @@ $breakpoint: (
     --h6-line-height: inherit;
     --h6-text-transform: none;
 
-    /* --- End CSS Variable Configuration --- */
+    /* - - - End CSS Variable Configuration - - - */
 
     // Action Color
-    --color-action: #{$action};
+    --color-action: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l));
     --color-action-hover: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-hover));
     --color-action-05: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .05);
     --color-action-10: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .1);
@@ -361,7 +361,7 @@ $breakpoint: (
     --color-action-darker: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-darker));
 
     // Primary Color
-    --color-primary: #{$primary};
+    --color-primary: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l));
     --color-primary-hover: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-hover));
     --color-primary-05: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .05);
     --color-primary-10: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .1);
@@ -381,7 +381,7 @@ $breakpoint: (
     --color-primary-darker: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-darker));
 
     // Secondary Color
-    --color-secondary: #{$secondary};
+    --color-secondary: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l));
     --color-secondary-hover: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-hover));
     --color-secondary-05: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .05);
     --color-secondary-10: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .1);
@@ -401,7 +401,7 @@ $breakpoint: (
     --color-secondary-darker: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-darker));
 
     // Tertiary Color
-    --color-tertiary: #{$tertiary};
+    --color-tertiary: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l));
     --color-tertiary-hover: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-hover));
     --color-tertiary-05: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .05);
     --color-tertiary-10: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .1);
@@ -421,7 +421,7 @@ $breakpoint: (
     --color-tertiary-darker: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-darker));
 
     // Quaternary Color
-    --color-quaternary: #{$quaternary};
+    --color-quaternary: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l));
     --color-quaternary-hover: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-hover));
     --color-quaternary-05: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .05);
     --color-quaternary-10: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .1);
@@ -601,7 +601,7 @@ $breakpoint: (
     --shade-black-white-95: var(--shade-black-95);
 
     // Danger Color
-    --color-danger: #{$danger};
+    --color-danger: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l));
     --color-danger-hover: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-hover));
     --color-danger-lighter: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-lighter));
     --color-danger-light: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-light));
@@ -610,7 +610,7 @@ $breakpoint: (
     --color-danger-darker: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-darker));
 
     // Highlight Color
-    --color-highlight: #{$highlight};
+    --color-highlight: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l));
     --color-highlight-hover: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-hover));
     --color-highlight-lighter: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-lighter));
     --color-highlight-light: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-light));
@@ -619,7 +619,7 @@ $breakpoint: (
     --color-highlight-darker: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-darker));
 
     // Info Color
-    --color-info: #{$info};
+    --color-info: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l));
     --color-info-hover: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-hover));
     --color-info-lighter: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-lighter));
     --color-info-light: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-light));
@@ -628,7 +628,7 @@ $breakpoint: (
     --color-info-darker: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-darker));
 
     // Success Color
-    --color-success: #{$success};
+    --color-success: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l));
     --color-success-hover: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-hover));
     --color-success-lighter: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-lighter));
     --color-success-light: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-light));
@@ -637,7 +637,7 @@ $breakpoint: (
     --color-success-darker: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-darker));
 
     // Warning Color
-    --color-warning: #{$warning};
+    --color-warning: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l));
     --color-warning-hover: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-hover));
     --color-warning-lighter: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-lighter));
     --color-warning-light: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-light));
@@ -790,7 +790,7 @@ $breakpoint: (
 
 
 
-// --- Dark Mode --- //
+// - - - Dark Mode - - - //
 
 @media(prefers-color-scheme: dark) {
     :root {
@@ -876,7 +876,7 @@ $breakpoint: (
 
 
 
-// --- CSS Support --- //
+// - - - CSS Support - - - //
 
 // Check for CSS Backdrop Filter Support
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
@@ -888,7 +888,7 @@ $breakpoint: (
 
 
 
-// --- Reduced Motion --- //
+// - - - Reduced Motion - - - //
 
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {
@@ -910,7 +910,7 @@ $breakpoint: (
 
 
 
-// --- Base --- //
+// - - - Base - - - //
 
 // Focus
 :focus:not(:focus-visible) {
@@ -1128,7 +1128,7 @@ h6,
 
 
 
-// --- Elements --- //
+// - - - Elements - - - //
 
 // Button
 .btn {
@@ -1629,7 +1629,7 @@ h6,
 
 
 
-// --- Utilities --- //
+// - - - Utilities - - - //
 
 // Alignment
 .center--all {
@@ -2634,7 +2634,7 @@ $_value in $breakpoint {
 }
 
 @if $fluent-forms {
-    // --- Fluent Forms --- //
+    // - - - Fluent Forms - - - //
 
     // Form Container Horizontal Gap
     .form .frm-fluent-form .ff-t-container {
