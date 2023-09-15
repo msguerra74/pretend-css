@@ -23,30 +23,18 @@ $success: hsl(160, 82%, 39%);
 $warning: hsl(38, 92%, 50%);
 
 // Option
-$focus-style: box-shadow; // box-shadow or outline
-$font-size-root: 16; // 16 or 10
-$scaling: true; // Use scaling vs fixed space and text
-$scale-base-min-space: 24px; // Minimum base space size
-$scale-base-max-space: 32px; // Maximum base space size
-$scale-base-min-text: 16px; // Minimum base text size
-$scale-base-max-text: 18px; // Maximum base text size
-$scale-ratio-min-space: 1.25; // Major Third scale
-$scale-ratio-max-space: 1.333; // Perfect Fourth scale
-$scale-ratio-min-text: 1.125; // Major Second scale
-$scale-ratio-max-text: 1.333; // Perfect Fourth scale
-$scale-sizes-max: "l", "xl", "2xl", "3xl", "4xl", "5xl"; // Maximum space and text scale sizes
+$root-font-size: 16; // 16 or 10
 
 // Plugins
 $fluent-forms: true; // Activate Fluent Forms styles
 
 // Widths
 $width-min: 320px;
-$width-s: 480px;
-$width-m: 640px;
-$width-l: 960px;
+$width-s: 512px;
+$width-m: 768px;
+$width-l: 1024px;
 $width-xl: 1280px;
-$width-wide: 1440px;
-$width-wider: 1600px;
+$width-wide: 1536px;
 $width-max: 1920px;
 $width-website: $width-xl;
 
@@ -64,27 +52,29 @@ $breakpoint: (
 
 // Fluid Sizing
 // --
-// Usage: fluid(16px, 18px, 320px, 1280px)
+// Usage: fluid(16px, 18px, 480px, 1280px)
 // @param: $_min-size // Minimum Size
 // @param: $_max-size // Maximum Size
 // @param: $_min-width // Minimum Breakpoint
 // @param: $_max-width // Maximum Breakpoint
-@function fluid($_min-size, $_max-size, $_min-width: $width-min, $_max-width: $width-website) {
-    $_slope: ($_max-size - $_min-size) / ($_max-width - $_min-width);
-    $_intercept: px-relative($_min-size - $_slope * $_min-width);
-    $_slope-vw: $_slope * 100vw;
-    $_min-size-rem: px-relative($_min-size);
-    $_max-size-rem: px-relative($_max-size);
-    @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
+@function fluid($_min-size, $_max-size, $_min-width: $width-s, $_max-width: $width-website) {
+    $_slope: (
+        $_max-size - $_min-size) / ($_max-width - $_min-width
+    );
+$_intercept: px-rel($_min-size - $_slope * $_min-width);
+$_slope-vw: $_slope * 100vw;
+$_min-size-rem: px-rel($_min-size);
+$_max-size-rem: px-rel($_max-size);
+@return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 }
 
 // PX to Relative Unit Conversion
 // --
-// Usage: px-relative(16px, rem, 16)
+// Usage: px-rel(16px, rem, 16)
 // @param: $_px // Pixel value
 // @param: $_unit // Unit type: em, rem
-// @param: $_root // Root font size: $font-size-root
-@function px-relative($_px, $_unit: rem, $_root: $font-size-root) {
+// @param: $_root // Root font size: $root-font-size
+@function px-rel($_px, $_unit: rem, $_root: $root-font-size) {
     @if type-of($_px)=="number" and not unitless($_px) {
         @return ((($_px / ($_px * 0 + 1)) / $_root) + $_unit);
     }
@@ -101,8 +91,8 @@ $breakpoint: (
 // Usage: @include breakpoint(640px, max) {}
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
-@mixin breakpoint($_width, $_minmax: max) {
-    @media (#{$_minmax}-width: #{px-relative($_width, em)}) {
+@mixin breakpoint($_width, $_minmax: max, $_unit: em) {
+    @media (#{$_minmax}-width: #{px-rel($_width, $_unit)}) {
         @content;
     }
 }
@@ -118,125 +108,61 @@ $breakpoint: (
     --color-action-h: #{hue($action)};
     --color-action-s: #{saturation($action)};
     --color-action-l: #{lightness($action)};
-    --color-action-l-hover: #{lightness($action) + 5};
-    --color-action-l-lighter: 95%;
-    --color-action-l-light: 85%;
-    --color-action-l-mid: 50%;
-    --color-action-l-dark: 25%;
-    --color-action-l-darker: 10%;
 
     /* Primary Color */
     --color-primary-h: #{hue($primary)};
     --color-primary-s: #{saturation($primary)};
     --color-primary-l: #{lightness($primary)};
-    --color-primary-l-hover: #{lightness($primary) + 5};
-    --color-primary-l-lighter: 95%;
-    --color-primary-l-light: 85%;
-    --color-primary-l-mid: 50%;
-    --color-primary-l-dark: 25%;
-    --color-primary-l-darker: 10%;
 
     /* Secondary Color */
     --color-secondary-h: #{hue($secondary)};
     --color-secondary-s: #{saturation($secondary)};
     --color-secondary-l: #{lightness($secondary)};
-    --color-secondary-l-hover: #{lightness($secondary) + 5};
-    --color-secondary-l-lighter: 95%;
-    --color-secondary-l-light: 85%;
-    --color-secondary-l-mid: 50%;
-    --color-secondary-l-dark: 25%;
-    --color-secondary-l-darker: 10%;
 
     /* Tertiary Color */
     --color-tertiary-h: #{hue($tertiary)};
     --color-tertiary-s: #{saturation($tertiary)};
     --color-tertiary-l: #{lightness($tertiary)};
-    --color-tertiary-l-hover: #{lightness($tertiary) + 5};
-    --color-tertiary-l-lighter: 95%;
-    --color-tertiary-l-light: 85%;
-    --color-tertiary-l-mid: 50%;
-    --color-tertiary-l-dark: 25%;
-    --color-tertiary-l-darker: 10%;
 
     /* Quaternary Color */
     --color-quaternary-h: #{hue($quaternary)};
     --color-quaternary-s: #{saturation($quaternary)};
     --color-quaternary-l: #{lightness($quaternary)};
-    --color-quaternary-l-hover: #{lightness($quaternary) + 5};
-    --color-quaternary-l-lighter: 95%;
-    --color-quaternary-l-light: 85%;
-    --color-quaternary-l-mid: 50%;
-    --color-quaternary-l-dark: 25%;
-    --color-quaternary-l-darker: 10%;
 
     /* Shade Color */
     --shade-h: #{hue($shade)};
     --shade-s: #{saturation($shade)};
     --shade-l: #{lightness($shade)};
-    --shade-l-lighter: 95%;
-    --shade-l-light: 85%;
-    --shade-l-mid: 50%;
-    --shade-l-dark: 25%;
-    --shade-l-darker: 10%;
 
     /* Danger Color */
     --color-danger-h: #{hue($danger)};
     --color-danger-s: #{saturation($danger)};
     --color-danger-l: #{lightness($danger)};
-    --color-danger-l-hover: #{lightness($danger) + 5};
-    --color-danger-l-lighter: 95%;
-    --color-danger-l-light: 85%;
-    --color-danger-l-mid: 50%;
-    --color-danger-l-dark: 25%;
-    --color-danger-l-darker: 10%;
 
     /* Highlight Color */
     --color-highlight-h: #{hue($highlight)};
     --color-highlight-s: #{saturation($highlight)};
     --color-highlight-l: #{lightness($highlight)};
-    --color-highlight-l-hover: #{lightness($highlight) + 5};
-    --color-highlight-l-lighter: 95%;
-    --color-highlight-l-light: 85%;
-    --color-highlight-l-mid: 50%;
-    --color-highlight-l-dark: 25%;
-    --color-highlight-l-darker: 10%;
 
     /* Info Color */
     --color-info-h: #{hue($info)};
     --color-info-s: #{saturation($info)};
     --color-info-l: #{lightness($info)};
-    --color-info-l-hover: #{lightness($info) + 5};
-    --color-info-l-lighter: 95%;
-    --color-info-l-light: 85%;
-    --color-info-l-mid: 50%;
-    --color-info-l-dark: 25%;
-    --color-info-l-darker: 10%;
 
     /* Success Color */
     --color-success-h: #{hue($success)};
     --color-success-s: #{saturation($success)};
     --color-success-l: #{lightness($success)};
-    --color-success-l-hover: #{lightness($success) + 5};
-    --color-success-l-lighter: 95%;
-    --color-success-l-light: 85%;
-    --color-success-l-mid: 50%;
-    --color-success-l-dark: 25%;
-    --color-success-l-darker: 10%;
 
     /* Warning Color */
     --color-warning-h: #{hue($warning)};
     --color-warning-s: #{saturation($warning)};
     --color-warning-l: #{lightness($warning)};
-    --color-warning-l-hover: #{lightness($warning) + 5};
-    --color-warning-l-lighter: 95%;
-    --color-warning-l-light: 85%;
-    --color-warning-l-mid: 50%;
-    --color-warning-l-dark: 25%;
-    --color-warning-l-darker: 10%;
 
     /* Focus */
     --focus-color: var(--color-action);
-    --focus-outline-width: var(--space-4);
+    --focus-shadow: 0 0 0;
+    --focus-width: var(--pixel-m);
 
     /* Selection */
     --selection-bg-color: var(--color-action);
@@ -248,9 +174,9 @@ $breakpoint: (
     /* Body */
     --body-bg-color: var(--shade-lighter-darker);
     --body-color: var(--shade-darker-lighter);
-    --body-font-size: var(--text-m);
+    --body-font-size: var(--text-base);
     --body-font-weight: 400;
-    --body-line-height: 1.5;
+    --body-line-height: 1.6;
 
     /* Link */
     --a-color: var(--color-action);
@@ -260,20 +186,20 @@ $breakpoint: (
     --link-decoration: underline;
     --link-decoration-color: var(--color-action);
     --link-decoration-color-hover: var(--shade-mid);
-    --link-decoration-thickness: var(--space-2);
-    --link-underline-offset: var(--space-2);
+    --link-decoration-thickness: var(--pixel-s);
+    --link-underline-offset: var(--pixel-s);
 
     /* Button */
     --btn-border-radius: 0;
     --btn-border-style: solid;
-    --btn-border-width: var(--space-2);
-    --btn-font-size: var(--text-s);
+    --btn-border-width: var(--pixel-s);
+    --btn-font-size: var(--text-small);
     --btn-font-weight: 400;
-    --btn-gap: var(--gap-icon);
+    --btn-gap: var(--space-icon);
     --btn-letter-spacing: normal;
     --btn-line-height: 1;
-    --btn-padding-x: var(--space-m);
-    --btn-padding-y: var(--space-xs);
+    --btn-padding-x: var(--space-s);
+    --btn-padding-y: var(--pixel-xl);
     --btn-text-transform: uppercase;
     --btn-transition: .3s;
     --btn-width: fit-content;
@@ -281,68 +207,77 @@ $breakpoint: (
     /* Form */
     --form-attention-color: var(--color-action);
     --form-error-color: var(--color-danger);
-    --form-error-font-size: var(--text-s);
-    --form-gap: var(--gap-grid);
+    --form-error-font-size: var(--text-small);
+    --form-gap: var(--spacer-m);
     --input-bg-color: var(--shade-lighter-darker);
     --input-bg-color-focus: var(--shade-white-black);
     --input-border-color: var(--shade-mid);
     --input-border-color-focus: var(--color-action);
     --input-border-radius: var(--btn-border-radius);
-    --input-border-style: solid;
+    --input-border-style: var(--btn-border-style);
     --input-border-width: var(--btn-border-width);
     --input-color: var(--shade-darker-lighter);
     --input-font-size: inherit;
-    --input-height: px-relative(48px);
+    --input-height: var(--space-m);
     --input-line-height: 1.2;
-    --input-padding-x: var(--space-xs);
-    --input-padding-y: var(--input-padding-x);
+    --input-padding-x: var(--pixel-xl);
+    --input-padding-y: var(--pixel-l);
     --label-color: inherit;
     --label-font-size: inherit;
     --label-font-weight: 400;
     --placeholder-color: var(--shade-mid);
+    --placeholder-opacity: .5;
     --submit-bg-color: var(--color-action);
-    --submit-bg-color-hover: var(--color-action-hover);
     --submit-color: var(--color-action-lighter);
-    --submit-color-hover: var(--submit-color);
     --submit-border-radius: var(--btn-border-radius);
 
     /* Heading */
     --h1-color: inherit;
-    --h1-font-size: var(--text-4xl);
+    --h1-font-size: var(--text-title);
     --h1-font-weight: 700;
     --h1-line-height: 1.2;
     --h1-text-transform: uppercase;
     --h2-color: inherit;
-    --h2-font-size: var(--text-3xl);
+    --h2-font-size: var(--text-heading);
     --h2-font-weight: 700;
     --h2-line-height: 1.2;
     --h2-text-transform: none;
     --h3-color: inherit;
-    --h3-font-size: var(--text-2xl);
+    --h3-font-size: var(--text-large);
     --h3-font-weight: 700;
-    --h3-line-height: 1.2;
+    --h3-line-height: 1.4;
     --h3-text-transform: none;
     --h4-color: inherit;
-    --h4-font-size: var(--text-xl);
+    --h4-font-size: var(--text-intro);
     --h4-font-weight: 700;
-    --h4-line-height: 1.2;
+    --h4-line-height: 1.4;
     --h4-text-transform: none;
     --h5-color: inherit;
-    --h5-font-size: var(--text-l);
+    --h5-font-size: var(--text-lede);
     --h5-font-weight: 700;
     --h5-line-height: inherit;
     --h5-text-transform: none;
     --h6-color: inherit;
-    --h6-font-size: var(--text-m);
+    --h6-font-size: var(--text-base);
     --h6-font-weight: 700;
     --h6-line-height: inherit;
     --h6-text-transform: none;
 
+    /* Contextual */
+    --space-card: var(--spacer-s);
+    --space-content: var(--space-s);
+    --space-grid: var(--space-m);
+    --space-icon: var(--pixel-l);
+    --space-layout: var(--spacer-l);
+    --space-section: var(--spacer-max);
+    --space-x: var(--spacer-m);
+    --width-prose: 65ch;
+    --width-website: #{px-rel($width-website)};
+
     /* - - - End CSS Variable Configuration - - - */
 
     // Action Color
-    --color-action: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l));
-    --color-action-hover: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-hover));
+    --color-action: #{$action};
     --color-action-05: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .05);
     --color-action-10: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .1);
     --color-action-20: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .2);
@@ -354,15 +289,14 @@ $breakpoint: (
     --color-action-80: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .8);
     --color-action-90: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .9);
     --color-action-95: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l) / .95);
-    --color-action-lighter: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-lighter));
-    --color-action-light: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-light));
-    --color-action-mid: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-mid));
-    --color-action-dark: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-dark));
-    --color-action-darker: hsl(var(--color-action-h) var(--color-action-s) var(--color-action-l-darker));
+    --color-action-lighter: hsl(var(--color-action-h) var(--color-action-s) 95%);
+    --color-action-light: hsl(var(--color-action-h) var(--color-action-s) 85%);
+    --color-action-mid: hsl(var(--color-action-h) var(--color-action-s) 50%);
+    --color-action-dark: hsl(var(--color-action-h) var(--color-action-s) 25%);
+    --color-action-darker: hsl(var(--color-action-h) var(--color-action-s) 10%);
 
     // Primary Color
-    --color-primary: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l));
-    --color-primary-hover: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-hover));
+    --color-primary: #{$primary};
     --color-primary-05: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .05);
     --color-primary-10: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .1);
     --color-primary-20: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .2);
@@ -374,15 +308,14 @@ $breakpoint: (
     --color-primary-80: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .8);
     --color-primary-90: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .9);
     --color-primary-95: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / .95);
-    --color-primary-lighter: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-lighter));
-    --color-primary-light: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-light));
-    --color-primary-mid: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-mid));
-    --color-primary-dark: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-dark));
-    --color-primary-darker: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l-darker));
+    --color-primary-lighter: hsl(var(--color-primary-h) var(--color-primary-s) 95%);
+    --color-primary-light: hsl(var(--color-primary-h) var(--color-primary-s) 85%);
+    --color-primary-mid: hsl(var(--color-primary-h) var(--color-primary-s) 50%);
+    --color-primary-dark: hsl(var(--color-primary-h) var(--color-primary-s) 25%);
+    --color-primary-darker: hsl(var(--color-primary-h) var(--color-primary-s) 10%);
 
     // Secondary Color
-    --color-secondary: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l));
-    --color-secondary-hover: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-hover));
+    --color-secondary: #{$secondary};
     --color-secondary-05: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .05);
     --color-secondary-10: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .1);
     --color-secondary-20: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .2);
@@ -394,15 +327,14 @@ $breakpoint: (
     --color-secondary-80: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .8);
     --color-secondary-90: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .9);
     --color-secondary-95: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l) / .95);
-    --color-secondary-lighter: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-lighter));
-    --color-secondary-light: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-light));
-    --color-secondary-mid: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-mid));
-    --color-secondary-dark: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-dark));
-    --color-secondary-darker: hsl(var(--color-secondary-h) var(--color-secondary-s) var(--color-secondary-l-darker));
+    --color-secondary-lighter: hsl(var(--color-secondary-h) var(--color-secondary-s) 95%);
+    --color-secondary-light: hsl(var(--color-secondary-h) var(--color-secondary-s) 85%);
+    --color-secondary-mid: hsl(var(--color-secondary-h) var(--color-secondary-s) 50%);
+    --color-secondary-dark: hsl(var(--color-secondary-h) var(--color-secondary-s) 25%);
+    --color-secondary-darker: hsl(var(--color-secondary-h) var(--color-secondary-s) 10%);
 
     // Tertiary Color
-    --color-tertiary: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l));
-    --color-tertiary-hover: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-hover));
+    --color-tertiary: #{$tertiary};
     --color-tertiary-05: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .05);
     --color-tertiary-10: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .1);
     --color-tertiary-20: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .2);
@@ -414,15 +346,14 @@ $breakpoint: (
     --color-tertiary-80: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .8);
     --color-tertiary-90: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .9);
     --color-tertiary-95: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l) / .95);
-    --color-tertiary-lighter: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-lighter));
-    --color-tertiary-light: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-light));
-    --color-tertiary-mid: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-mid));
-    --color-tertiary-dark: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-dark));
-    --color-tertiary-darker: hsl(var(--color-tertiary-h) var(--color-tertiary-s) var(--color-tertiary-l-darker));
+    --color-tertiary-lighter: hsl(var(--color-tertiary-h) var(--color-tertiary-s) 95%);
+    --color-tertiary-light: hsl(var(--color-tertiary-h) var(--color-tertiary-s) 85%);
+    --color-tertiary-mid: hsl(var(--color-tertiary-h) var(--color-tertiary-s) 50%);
+    --color-tertiary-dark: hsl(var(--color-tertiary-h) var(--color-tertiary-s) 25%);
+    --color-tertiary-darker: hsl(var(--color-tertiary-h) var(--color-tertiary-s) 10%);
 
     // Quaternary Color
-    --color-quaternary: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l));
-    --color-quaternary-hover: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-hover));
+    --color-quaternary: #{$quaternary};
     --color-quaternary-05: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .05);
     --color-quaternary-10: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .1);
     --color-quaternary-20: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .2);
@@ -434,11 +365,11 @@ $breakpoint: (
     --color-quaternary-80: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .8);
     --color-quaternary-90: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .9);
     --color-quaternary-95: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l) / .95);
-    --color-quaternary-lighter: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-lighter));
-    --color-quaternary-light: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-light));
-    --color-quaternary-mid: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-mid));
-    --color-quaternary-dark: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-dark));
-    --color-quaternary-darker: hsl(var(--color-quaternary-h) var(--color-quaternary-s) var(--color-quaternary-l-darker));
+    --color-quaternary-lighter: hsl(var(--color-quaternary-h) var(--color-quaternary-s) 95%);
+    --color-quaternary-light: hsl(var(--color-quaternary-h) var(--color-quaternary-s) 85%);
+    --color-quaternary-mid: hsl(var(--color-quaternary-h) var(--color-quaternary-s) 50%);
+    --color-quaternary-dark: hsl(var(--color-quaternary-h) var(--color-quaternary-s) 25%);
+    --color-quaternary-darker: hsl(var(--color-quaternary-h) var(--color-quaternary-s) 10%);
 
     // Shade Color
     --shade-white: hsl(0deg 0% 100%);
@@ -453,66 +384,66 @@ $breakpoint: (
     --shade-white-80: hsl(0deg 0% 100% / .8);
     --shade-white-90: hsl(0deg 0% 100% / .9);
     --shade-white-95: hsl(0deg 0% 100% / .95);
-    --shade-lighter: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter));
-    --shade-lighter-05: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .05);
-    --shade-lighter-10: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .1);
-    --shade-lighter-20: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .2);
-    --shade-lighter-30: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .3);
-    --shade-lighter-40: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .4);
-    --shade-lighter-50: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .5);
-    --shade-lighter-60: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .6);
-    --shade-lighter-70: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .7);
-    --shade-lighter-80: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .8);
-    --shade-lighter-90: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .9);
-    --shade-lighter-95: hsl(var(--shade-h) var(--shade-s) var(--shade-l-lighter) / .95);
-    --shade-light: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light));
-    --shade-light-05: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .05);
-    --shade-light-10: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .1);
-    --shade-light-20: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .2);
-    --shade-light-30: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .3);
-    --shade-light-40: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .4);
-    --shade-light-50: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .5);
-    --shade-light-60: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .6);
-    --shade-light-70: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .7);
-    --shade-light-80: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .8);
-    --shade-light-90: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .9);
-    --shade-light-95: hsl(var(--shade-h) var(--shade-s) var(--shade-l-light) / .95);
-    --shade-mid: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid));
-    --shade-mid-05: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .05);
-    --shade-mid-10: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .1);
-    --shade-mid-20: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .2);
-    --shade-mid-30: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .3);
-    --shade-mid-40: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .4);
-    --shade-mid-50: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .5);
-    --shade-mid-60: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .6);
-    --shade-mid-70: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .7);
-    --shade-mid-80: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .8);
-    --shade-mid-90: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .9);
-    --shade-mid-95: hsl(var(--shade-h) var(--shade-s) var(--shade-l-mid) / .95);
-    --shade-dark: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark));
-    --shade-dark-05: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .05);
-    --shade-dark-10: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .1);
-    --shade-dark-20: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .2);
-    --shade-dark-30: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .3);
-    --shade-dark-40: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .4);
-    --shade-dark-50: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .5);
-    --shade-dark-60: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .6);
-    --shade-dark-70: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .7);
-    --shade-dark-80: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .8);
-    --shade-dark-90: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .9);
-    --shade-dark-95: hsl(var(--shade-h) var(--shade-s) var(--shade-l-dark) / .95);
-    --shade-darker: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker));
-    --shade-darker-05: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .05);
-    --shade-darker-10: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .1);
-    --shade-darker-20: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .2);
-    --shade-darker-30: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .3);
-    --shade-darker-40: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .4);
-    --shade-darker-50: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .5);
-    --shade-darker-60: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .6);
-    --shade-darker-70: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .7);
-    --shade-darker-80: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .8);
-    --shade-darker-90: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .9);
-    --shade-darker-95: hsl(var(--shade-h) var(--shade-s) var(--shade-l-darker) / .95);
+    --shade-lighter: hsl(var(--shade-h) var(--shade-s) 95%);
+    --shade-lighter-05: hsl(var(--shade-h) var(--shade-s) 95% / .05);
+    --shade-lighter-10: hsl(var(--shade-h) var(--shade-s) 95% / .1);
+    --shade-lighter-20: hsl(var(--shade-h) var(--shade-s) 95% / .2);
+    --shade-lighter-30: hsl(var(--shade-h) var(--shade-s) 95% / .3);
+    --shade-lighter-40: hsl(var(--shade-h) var(--shade-s) 95% / .4);
+    --shade-lighter-50: hsl(var(--shade-h) var(--shade-s) 95% / .5);
+    --shade-lighter-60: hsl(var(--shade-h) var(--shade-s) 95% / .6);
+    --shade-lighter-70: hsl(var(--shade-h) var(--shade-s) 95% / .7);
+    --shade-lighter-80: hsl(var(--shade-h) var(--shade-s) 95% / .8);
+    --shade-lighter-90: hsl(var(--shade-h) var(--shade-s) 95% / .9);
+    --shade-lighter-95: hsl(var(--shade-h) var(--shade-s) 95% / .95);
+    --shade-light: hsl(var(--shade-h) var(--shade-s) 85%);
+    --shade-light-05: hsl(var(--shade-h) var(--shade-s) 85% / .05);
+    --shade-light-10: hsl(var(--shade-h) var(--shade-s) 85% / .1);
+    --shade-light-20: hsl(var(--shade-h) var(--shade-s) 85% / .2);
+    --shade-light-30: hsl(var(--shade-h) var(--shade-s) 85% / .3);
+    --shade-light-40: hsl(var(--shade-h) var(--shade-s) 85% / .4);
+    --shade-light-50: hsl(var(--shade-h) var(--shade-s) 85% / .5);
+    --shade-light-60: hsl(var(--shade-h) var(--shade-s) 85% / .6);
+    --shade-light-70: hsl(var(--shade-h) var(--shade-s) 85% / .7);
+    --shade-light-80: hsl(var(--shade-h) var(--shade-s) 85% / .8);
+    --shade-light-90: hsl(var(--shade-h) var(--shade-s) 85% / .9);
+    --shade-light-95: hsl(var(--shade-h) var(--shade-s) 85% / .95);
+    --shade-mid: hsl(var(--shade-h) var(--shade-s) 50%);
+    --shade-mid-05: hsl(var(--shade-h) var(--shade-s) 50% / .05);
+    --shade-mid-10: hsl(var(--shade-h) var(--shade-s) 50% / .1);
+    --shade-mid-20: hsl(var(--shade-h) var(--shade-s) 50% / .2);
+    --shade-mid-30: hsl(var(--shade-h) var(--shade-s) 50% / .3);
+    --shade-mid-40: hsl(var(--shade-h) var(--shade-s) 50% / .4);
+    --shade-mid-50: hsl(var(--shade-h) var(--shade-s) 50% / .5);
+    --shade-mid-60: hsl(var(--shade-h) var(--shade-s) 50% / .6);
+    --shade-mid-70: hsl(var(--shade-h) var(--shade-s) 50% / .7);
+    --shade-mid-80: hsl(var(--shade-h) var(--shade-s) 50% / .8);
+    --shade-mid-90: hsl(var(--shade-h) var(--shade-s) 50% / .9);
+    --shade-mid-95: hsl(var(--shade-h) var(--shade-s) 50% / .95);
+    --shade-dark: hsl(var(--shade-h) var(--shade-s) 25%);
+    --shade-dark-05: hsl(var(--shade-h) var(--shade-s) 25% / .05);
+    --shade-dark-10: hsl(var(--shade-h) var(--shade-s) 25% / .1);
+    --shade-dark-20: hsl(var(--shade-h) var(--shade-s) 25% / .2);
+    --shade-dark-30: hsl(var(--shade-h) var(--shade-s) 25% / .3);
+    --shade-dark-40: hsl(var(--shade-h) var(--shade-s) 25% / .4);
+    --shade-dark-50: hsl(var(--shade-h) var(--shade-s) 25% / .5);
+    --shade-dark-60: hsl(var(--shade-h) var(--shade-s) 25% / .6);
+    --shade-dark-70: hsl(var(--shade-h) var(--shade-s) 25% / .7);
+    --shade-dark-80: hsl(var(--shade-h) var(--shade-s) 25% / .8);
+    --shade-dark-90: hsl(var(--shade-h) var(--shade-s) 25% / .9);
+    --shade-dark-95: hsl(var(--shade-h) var(--shade-s) 25% / .95);
+    --shade-darker: hsl(var(--shade-h) var(--shade-s) 10%);
+    --shade-darker-05: hsl(var(--shade-h) var(--shade-s) 10% / .05);
+    --shade-darker-10: hsl(var(--shade-h) var(--shade-s) 10% / .1);
+    --shade-darker-20: hsl(var(--shade-h) var(--shade-s) 10% / .2);
+    --shade-darker-30: hsl(var(--shade-h) var(--shade-s) 10% / .3);
+    --shade-darker-40: hsl(var(--shade-h) var(--shade-s) 10% / .4);
+    --shade-darker-50: hsl(var(--shade-h) var(--shade-s) 10% / .5);
+    --shade-darker-60: hsl(var(--shade-h) var(--shade-s) 10% / .6);
+    --shade-darker-70: hsl(var(--shade-h) var(--shade-s) 10% / .7);
+    --shade-darker-80: hsl(var(--shade-h) var(--shade-s) 10% / .8);
+    --shade-darker-90: hsl(var(--shade-h) var(--shade-s) 10% / .9);
+    --shade-darker-95: hsl(var(--shade-h) var(--shade-s) 10% / .95);
     --shade-black: hsl(0deg 0% 0%);
     --shade-black-05: hsl(0deg 0% 0% / .05);
     --shade-black-10: hsl(0deg 0% 0% / .1);
@@ -602,48 +533,43 @@ $breakpoint: (
 
     // Danger Color
     --color-danger: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l));
-    --color-danger-hover: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-hover));
-    --color-danger-lighter: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-lighter));
-    --color-danger-light: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-light));
-    --color-danger-mid: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-mid));
-    --color-danger-dark: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-dark));
-    --color-danger-darker: hsl(var(--color-danger-h) var(--color-danger-s) var(--color-danger-l-darker));
+    --color-danger-lighter: hsl(var(--color-danger-h) var(--color-danger-s) 95%);
+    --color-danger-light: hsl(var(--color-danger-h) var(--color-danger-s) 85%);
+    --color-danger-mid: hsl(var(--color-danger-h) var(--color-danger-s) 50%);
+    --color-danger-dark: hsl(var(--color-danger-h) var(--color-danger-s) 25%);
+    --color-danger-darker: hsl(var(--color-danger-h) var(--color-danger-s) 10%);
 
     // Highlight Color
     --color-highlight: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l));
-    --color-highlight-hover: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-hover));
-    --color-highlight-lighter: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-lighter));
-    --color-highlight-light: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-light));
-    --color-highlight-mid: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-mid));
-    --color-highlight-dark: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-dark));
-    --color-highlight-darker: hsl(var(--color-highlight-h) var(--color-highlight-s) var(--color-highlight-l-darker));
+    --color-highlight-lighter: hsl(var(--color-highlight-h) var(--color-highlight-s) 95%);
+    --color-highlight-light: hsl(var(--color-highlight-h) var(--color-highlight-s) 85%);
+    --color-highlight-mid: hsl(var(--color-highlight-h) var(--color-highlight-s) 50%);
+    --color-highlight-dark: hsl(var(--color-highlight-h) var(--color-highlight-s) 25%);
+    --color-highlight-darker: hsl(var(--color-highlight-h) var(--color-highlight-s) 10%);
 
     // Info Color
     --color-info: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l));
-    --color-info-hover: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-hover));
-    --color-info-lighter: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-lighter));
-    --color-info-light: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-light));
-    --color-info-mid: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-mid));
-    --color-info-dark: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-dark));
-    --color-info-darker: hsl(var(--color-info-h) var(--color-info-s) var(--color-info-l-darker));
+    --color-info-lighter: hsl(var(--color-info-h) var(--color-info-s) 95%);
+    --color-info-light: hsl(var(--color-info-h) var(--color-info-s) 85%);
+    --color-info-mid: hsl(var(--color-info-h) var(--color-info-s) 50%);
+    --color-info-dark: hsl(var(--color-info-h) var(--color-info-s) 25%);
+    --color-info-darker: hsl(var(--color-info-h) var(--color-info-s) 10%);
 
     // Success Color
     --color-success: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l));
-    --color-success-hover: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-hover));
-    --color-success-lighter: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-lighter));
-    --color-success-light: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-light));
-    --color-success-mid: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-mid));
-    --color-success-dark: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-dark));
-    --color-success-darker: hsl(var(--color-success-h) var(--color-success-s) var(--color-success-l-darker));
+    --color-success-lighter: hsl(var(--color-success-h) var(--color-success-s) 95%);
+    --color-success-light: hsl(var(--color-success-h) var(--color-success-s) 85%);
+    --color-success-mid: hsl(var(--color-success-h) var(--color-success-s) 50%);
+    --color-success-dark: hsl(var(--color-success-h) var(--color-success-s) 25%);
+    --color-success-darker: hsl(var(--color-success-h) var(--color-success-s) 10%);
 
     // Warning Color
     --color-warning: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l));
-    --color-warning-hover: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-hover));
-    --color-warning-lighter: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-lighter));
-    --color-warning-light: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-light));
-    --color-warning-mid: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-mid));
-    --color-warning-dark: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-dark));
-    --color-warning-darker: hsl(var(--color-warning-h) var(--color-warning-s) var(--color-warning-l-darker));
+    --color-warning-lighter: hsl(var(--color-warning-h) var(--color-warning-s) 95%);
+    --color-warning-light: hsl(var(--color-warning-h) var(--color-warning-s) 85%);
+    --color-warning-mid: hsl(var(--color-warning-h) var(--color-warning-s) 50%);
+    --color-warning-dark: hsl(var(--color-warning-h) var(--color-warning-s) 25%);
+    --color-warning-darker: hsl(var(--color-warning-h) var(--color-warning-s) 10%);
 
     // Aspect Ratio
     --aspect-square: 1;
@@ -651,16 +577,6 @@ $breakpoint: (
     --aspect-portrait: 3 / 4;
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
-
-    // Contextual
-    --gap-content: var(--space-m);
-    --gap-icon: var(--space-8);
-    --gap-grid: var(--space-m);
-    --gap-section: var(--space-section-y);
-    --space-section-x: var(--space-m);
-    --space-section-y: var(--space-3xl);
-    --width-prose: 65ch;
-    --width-website: #{px-relative($width-website)};
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -685,98 +601,78 @@ $breakpoint: (
     // Misc
     --blur-bg-color: var(--shade-lighter-darker-90);
 
+    // Pixel
+    --pixel-xs: #{px-rel(1px)};
+    --pixel-s: #{px-rel(2px)};
+    --pixel-m: #{px-rel(4px)};
+    --pixel-l: #{px-rel(8px)};
+    --pixel-xl: #{px-rel(16px)};
+
     // Radius
-    --radius-xs: var(--space-4);
-    --radius-s: var(--space-8);
-    --radius-m: var(--space-xs);
-    --radius-l: var(--space-s);
-    --radius-xl: var(--space-m);
-    --radius-oval: 100rem;
+    --radius-xs: var(--pixel-m);
+    --radius-s: var(--pixel-l);
+    --radius-m: var(--pixel-xl);
+    --radius-l: var(--space-xs);
+    --radius-xl: var(--space-s);
+    --radius-oval: 10em;
     --radius-round: 50%;
 
     // Shadow
     --shadow-color: var(--shade-mid);
     --shadow-strength: 5%;
-
-    --shadow-low: 0 #{px-relative(-1px)} #{px-relative(3px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
-    0 #{px-relative(1px)} #{px-relative(2px)} #{px-relative(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
-    0 #{px-relative(2px)} #{px-relative(5px)} #{px-relative(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
-    0 #{px-relative(4px)} #{px-relative(12px)} #{px-relative(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
-    0 #{px-relative(12px)} #{px-relative(15px)} #{px-relative(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
-    --shadow-mid: 0 #{px-relative(-2px)} #{px-relative(5px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
-    0 #{px-relative(1px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
-    0 #{px-relative(2px)} #{px-relative(2px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
-    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
-    0 #{px-relative(9px)} #{px-relative(9px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
-    0 #{px-relative(16px)} #{px-relative(16px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 6%));
-    --shadow-high: 0 #{px-relative(-1px)} #{px-relative(2px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
-    0 #{px-relative(2px)} #{px-relative(1px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
-    0 #{px-relative(5px)} #{px-relative(5px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
-    0 #{px-relative(10px)} #{px-relative(10px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
-    0 #{px-relative(20px)} #{px-relative(20px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
-    0 #{px-relative(40px)} #{px-relative(40px)} #{px-relative(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
+    --shadow-low: 0 #{px-rel(-1px)} #{px-rel(3px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+    0 #{px-rel(1px)} #{px-rel(2px)} #{px-rel(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+    0 #{px-rel(2px)} #{px-rel(5px)} #{px-rel(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+    0 #{px-rel(4px)} #{px-rel(12px)} #{px-rel(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+    0 #{px-rel(12px)} #{px-rel(15px)} #{px-rel(-5px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
+    --shadow-mid: 0 #{px-rel(-2px)} #{px-rel(5px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+    0 #{px-rel(1px)} #{px-rel(1px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+    0 #{px-rel(2px)} #{px-rel(2px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+    0 #{px-rel(5px)} #{px-rel(5px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+    0 #{px-rel(9px)} #{px-rel(9px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+    0 #{px-rel(16px)} #{px-rel(16px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 6%));
+    --shadow-high: 0 #{px-rel(-1px)} #{px-rel(2px)} 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+    0 #{px-rel(2px)} #{px-rel(1px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+    0 #{px-rel(5px)} #{px-rel(5px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+    0 #{px-rel(10px)} #{px-rel(10px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+    0 #{px-rel(20px)} #{px-rel(20px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+    0 #{px-rel(40px)} #{px-rel(40px)} #{px-rel(-2px)} hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
 
     // Space
-    --space-1: #{px-relative(1px)};
-    --space-2: #{px-relative(2px)};
-    --space-4: #{px-relative(4px)};
-    --space-8: #{px-relative(8px)};
-    --space-xs: #{fluid(16px, 18px)};
-    --space-s: #{fluid(18px, 24px)};
+    --space-xs: #{px-rel(24px)};
+    --space-s: #{px-rel(32px)};
+    --space-m: #{px-rel(48px)};
+    --space-l: #{px-rel(64px)};
+    --space-xl: #{px-rel(96px)};
+    --space-max: #{px-rel(128px)};
 
-    @if $scaling {
-        --space-m: #{fluid($scale-base-min-space, $scale-base-max-space)};
-
-        @each $_space-size in $scale-sizes-max {
-            $scale-base-min-space: $scale-base-min-space * $scale-ratio-min-space;
-            $scale-base-max-space: $scale-base-max-space * $scale-ratio-max-space;
-            --space-#{$_space-size}: #{fluid($scale-base-min-space, $scale-base-max-space)};
-        }
-    }
-
-    @else {
-        --space-m: #{fluid(24px, 32px)};
-        --space-l: #{fluid(30px, 43px)};
-        --space-xl: #{fluid(38px, 57px)};
-        --space-2xl: #{fluid(48px, 76px)};
-        --space-3xl: #{fluid(60px, 101px)};
-        --space-4xl: #{fluid(75px, 135px)};
-        --space-5xl: #{fluid(94px, 180px)};
-    }
+    // Spacer
+    --spacer-s: #{fluid(24px, 32px)};
+    --spacer-m: #{fluid(24px, 48px)};
+    --spacer-l: #{fluid(48px, 64px)};
+    --spacer-xl: #{fluid(64px, 96px)};
+    --spacer-max: #{fluid(64px, 128px)};
 
     // Text
-    --text-xs: #{fluid(12px, 14px)};
-    --text-s: #{fluid(14px, 16px)};
-
-    @if $scaling {
-        --text-m: #{fluid($scale-base-min-text, $scale-base-max-text)};
-
-        @each $_text-size in $scale-sizes-max {
-            $scale-base-min-text: $scale-base-min-text * $scale-ratio-min-text;
-            $scale-base-max-text: $scale-base-max-text * $scale-ratio-max-text;
-            --text-#{$_text-size}: #{fluid($scale-base-min-text, $scale-base-max-text)};
-        }
-    }
-
-    @else {
-        --text-m: #{fluid(16px, 18px)};
-        --text-l: #{fluid(18px, 24px)};
-        --text-xl: #{fluid(20px, 32px)};
-        --text-2xl: #{fluid(23px, 43px)};
-        --text-3xl: #{fluid(26px, 57px)};
-        --text-4xl: #{fluid(29px, 76px)};
-        --text-5xl: #{fluid(33px, 101px)};
-    }
+    --text-fine: #{fluid(12px, 14px)};
+    --text-small: #{fluid(14px, 16px)};
+    --text-base: #{fluid(16px, 18px)};
+    --text-lede: #{fluid(18px, 20px)};
+    --text-intro: #{fluid(20px, 24px)};
+    --text-large: #{fluid(24px, 32px)};
+    --text-heading: #{fluid(32px, 40px)};
+    --text-title: #{fluid(40px, 48px)};
+    --text-hero: #{fluid(40px, 64px)};
+    --text-max: #{fluid(40px, 96px)};
 
     // Width
-    --width-min: #{px-relative($width-min)};
-    --width-s: #{px-relative($width-s)};
-    --width-m: #{px-relative($width-m)};
-    --width-l: #{px-relative($width-l)};
-    --width-xl: #{px-relative($width-xl)};
-    --width-wide: #{px-relative($width-wide)};
-    --width-wider: #{px-relative($width-wider)};
-    --width-max: #{px-relative($width-max)};
+    --width-min: #{px-rel($width-min)};
+    --width-s: #{px-rel($width-s)};
+    --width-m: #{px-rel($width-m)};
+    --width-l: #{px-rel($width-l)};
+    --width-xl: #{px-rel($width-xl)};
+    --width-wide: #{px-rel($width-wide)};
+    --width-max: #{px-rel($width-max)};
 
     // Z-Index
     --z-back: -1;
@@ -919,17 +815,8 @@ $breakpoint: (
 }
 
 :focus-visible {
-    @if $focus-style =="box-shadow" {
-        box-shadow: 0 0 0 var(--focus-outline-width) var(--focus-color);
-        outline: none !important;
-    }
-
-    @else {
-        outline-color: var(--focus-color);
-        outline-offset: var(--focus-outline-width);
-        outline-style: solid;
-        outline-width: var(--focus-outline-width);
-    }
+    box-shadow: var(--focus-shadow) var(--focus-width) var(--focus-color);
+    outline: none !important;
 }
 
 // Focus Color
@@ -984,10 +871,9 @@ $breakpoint: (
     margin: 0;
 }
 
-
 // HTML
 html {
-    @if $font-size-root ==10 {
+    @if $root-font-size ==10 {
         font-size: 62.5%;
     }
 
@@ -1046,6 +932,60 @@ main a:not([class]),
     &:hover {
         color: var(--link-color-hover);
         text-decoration-color: var(--link-decoration-color-hover);
+    }
+}
+
+.link--action {
+    --link-decoration-color: var(--color-action);
+
+    &:hover {
+        --link-color-hover: var(--color-action);
+        --link-decoration-color-hover: var(--color-action);
+    }
+}
+
+.link--action-lighter {
+    --link-decoration-color: var(--color-action-lighter);
+
+    &:hover {
+        --link-color-hover: var(--color-action-lighter);
+        --link-decoration-color-hover: var(--color-action-lighter);
+    }
+}
+
+.link--action-light {
+    --link-decoration-color: var(--color-action-light);
+
+    &:hover {
+        --link-color-hover: var(--color-action-light);
+        --link-decoration-color-hover: var(--color-action-light);
+    }
+}
+
+.link--action-mid {
+    --link-decoration-color: var(--color-action-mid);
+
+    &:hover {
+        --link-color-hover: var(--color-action-mid);
+        --link-decoration-color-hover: var(--color-action-mid);
+    }
+}
+
+.link--action-dark {
+    --link-decoration-color: var(--color-action-dark);
+
+    &:hover {
+        --link-color-hover: var(--color-action-dark);
+        --link-decoration-color-hover: var(--color-action-dark);
+    }
+}
+
+.link--action-darker {
+    --link-decoration-color: var(--color-action-darker);
+
+    &:hover {
+        --link-color-hover: var(--color-action-darker);
+        --link-decoration-color-hover: var(--color-action-darker);
     }
 }
 
@@ -1153,15 +1093,15 @@ h6,
 
 // Button Size
 .btn--s {
-    --btn-font-size: var(--text-xs);
-    --btn-padding-y: var(--space-8);
-    --btn-padding-x: var(--space-xs);
+    --btn-font-size: var(--text-fine);
+    --btn-padding-y: var(--pixel-l);
+    --btn-padding-x: var(--pixel-xl);
 }
 
 .btn--l {
-    --btn-font-size: var(--text-m);
-    --btn-padding-y: var(--space-m);
-    --btn-padding-x: var(--space-l);
+    --btn-font-size: var(--text-base);
+    --btn-padding-y: var(--space-xs);
+    --btn-padding-x: var(--space-m);
 }
 
 // Button Color
@@ -1172,20 +1112,9 @@ h6,
     border-color: var(--color-action);
     color: var(--color-action-lighter);
 
-    &:hover {
-        background-color: var(--color-action-hover);
-        border-color: var(--color-action-hover);
-        color: var(--color-action-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-action) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-action-hover) !important;
-        }
     }
 }
 
@@ -1196,20 +1125,9 @@ h6,
     border-color: var(--color-primary);
     color: var(--color-primary-lighter);
 
-    &:hover {
-        background-color: var(--color-primary-hover);
-        border-color: var(--color-primary-hover);
-        color: var(--color-primary-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-primary) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-primary-hover) !important;
-        }
     }
 }
 
@@ -1220,20 +1138,9 @@ h6,
     border-color: var(--color-secondary);
     color: var(--color-secondary-lighter);
 
-    &:hover {
-        background-color: var(--color-secondary-hover);
-        border-color: var(--color-secondary-hover);
-        color: var(--color-secondary-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-secondary) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-secondary-hover) !important;
-        }
     }
 }
 
@@ -1244,20 +1151,9 @@ h6,
     border-color: var(--color-tertiary);
     color: var(--color-tertiary-lighter);
 
-    &:hover {
-        background-color: var(--color-tertiary-hover);
-        border-color: var(--color-tertiary-hover);
-        color: var(--color-tertiary-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-tertiary) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-tertiary-hover) !important;
-        }
     }
 }
 
@@ -1268,20 +1164,9 @@ h6,
     border-color: var(--color-quaternary);
     color: var(--color-quaternary-lighter);
 
-    &:hover {
-        background-color: var(--color-quaternary-hover);
-        border-color: var(--color-quaternary-hover);
-        color: var(--color-quaternary-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-quaternary) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-quaternary-hover) !important;
-        }
     }
 }
 
@@ -1461,20 +1346,9 @@ h6,
     border-color: var(--color-danger);
     color: var(--color-danger-lighter);
 
-    &:hover {
-        background-color: var(--color-danger-hover);
-        border-color: var(--color-danger-hover);
-        color: var(--color-danger-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-danger) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-danger-hover) !important;
-        }
     }
 }
 
@@ -1485,20 +1359,9 @@ h6,
     border-color: var(--color-highlight);
     color: var(--color-highlight-darker);
 
-    &:hover {
-        background-color: var(--color-highlight-hover);
-        border-color: var(--color-highlight-hover);
-        color: var(--color-highlight-darker);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-highlight) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-highlight-hover) !important;
-        }
     }
 }
 
@@ -1509,20 +1372,9 @@ h6,
     border-color: var(--color-info);
     color: var(--color-info-lighter);
 
-    &:hover {
-        background-color: var(--color-info-hover);
-        border-color: var(--color-info-hover);
-        color: var(--color-info-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-info) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-info-hover) !important;
-        }
     }
 }
 
@@ -1533,20 +1385,9 @@ h6,
     border-color: var(--color-success);
     color: var(--color-success-lighter);
 
-    &:hover {
-        background-color: var(--color-success-hover);
-        border-color: var(--color-success-hover);
-        color: var(--color-success-lighter);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-success) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-success-hover) !important;
-        }
     }
 }
 
@@ -1557,20 +1398,9 @@ h6,
     border-color: var(--color-warning);
     color: var(--color-warning-darker);
 
-    &:hover {
-        background-color: var(--color-warning-hover);
-        border-color: var(--color-warning-hover);
-        color: var(--color-warning-darker);
-    }
-
     &.btn--outline {
         background-color: initial !important;
         color: var(--color-warning) !important;
-
-        &:hover {
-            background-color: initial !important;
-            color: var(--color-warning-hover) !important;
-        }
     }
 }
 
@@ -1579,7 +1409,7 @@ h6,
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-content);
+    gap: var(--space-content);
     width: 100%;
     z-index: var(--z-front);
 
@@ -1588,15 +1418,15 @@ h6,
         z-index: var(--z-front);
 
         & > * + * {
-            margin-top: var(--gap-content);
+            margin-top: var(--space-content);
         }
     }
 
     &--safe {
         @extend .block;
 
-        padding-left: var(--space-section-x);
-        padding-right: var(--space-section-x);
+        padding-left: var(--space-x);
+        padding-right: var(--space-x);
     }
 }
 
@@ -1604,7 +1434,7 @@ h6,
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-content);
+    gap: var(--space-grid);
     margin-left: auto;
     margin-right: auto;
     max-width: var(--width-website);
@@ -1614,16 +1444,16 @@ h6,
     &--safe {
         @extend .container;
 
-        padding-left: var(--space-section-x);
-        padding-right: var(--space-section-x);
+        padding-left: var(--space-x);
+        padding-right: var(--space-x);
     }
 }
 
 .section {
     display: flex;
     flex-direction: column;
-    padding: var(--space-section-y) var(--space-section-x);
-    row-gap: var(--gap-section);
+    padding: var(--space-section) var(--space-x);
+    row-gap: var(--space-section);
     width: 100%;
 }
 
@@ -1669,24 +1499,24 @@ h6,
 .float--left,
 .float--left-offset {
     float: left;
-    margin-bottom: var(--gap-content);
-    margin-right: var(--gap-content);
+    margin-bottom: var(--space-content);
+    margin-right: var(--space-content);
 }
 
 .float--left-offset {
-    margin-left: calc(var(--space-section-x) * -1);
+    margin-left: calc(var(--space-x) * -1);
 }
 
 .alignright,
 .float--right,
 .float--right-offset {
     float: right;
-    margin-bottom: var(--gap-content);
-    margin-left: var(--gap-content);
+    margin-bottom: var(--space-content);
+    margin-left: var(--space-content);
 }
 
 .float--right-offset {
-    margin-right: calc(var(--space-section-x) * -1);
+    margin-right: calc(var(--space-x) * -1);
 }
 
 @each $_key,
@@ -1701,9 +1531,9 @@ $_value in $breakpoint {
 
         .float--#{$_key}-left {
             float: left;
-            margin-bottom: var(--gap-content);
+            margin-bottom: var(--space-content);
             margin-left: 0;
-            margin-right: var(--gap-content);
+            margin-right: var(--space-content);
         }
 
         .float--#{$_key}-none {
@@ -1715,8 +1545,8 @@ $_value in $breakpoint {
 
         .float--#{$_key}-right {
             float: right;
-            margin-bottom: var(--gap-content);
-            margin-left: var(--gap-content);
+            margin-bottom: var(--space-content);
+            margin-left: var(--space-content);
             margin-right: 0;
         }
     }
@@ -1730,15 +1560,15 @@ $_value in $breakpoint {
 }
 
 .bg-blur--low {
-    backdrop-filter: blur(var(--space-4));
+    backdrop-filter: blur(var(--pixel-m));
 }
 
 .bg-blur--mid {
-    backdrop-filter: blur(var(--space-8));
+    backdrop-filter: blur(var(--pixel-l));
 }
 
 .bg-blur--high {
-    backdrop-filter: blur(var(--space-xs));
+    backdrop-filter: blur(var(--pixel-xl));
 }
 
 // Background Color
@@ -1839,6 +1669,7 @@ $_value in $breakpoint {
 }
 
 // Background Overlay
+// Add .relative to parent container
 .bg-overlay {
     bottom: 0;
     height: 100% !important;
@@ -1859,7 +1690,7 @@ $_value in $breakpoint {
     align-self: flex-start;
     margin-left: 50%;
     transform: translateX(-50%);
-    max-width: calc(100% + calc(var(--space-section-x) * 2));
+    max-width: calc(100% + calc(var(--space-x) * 2));
     width: 100vw;
 }
 
@@ -1868,14 +1699,6 @@ $_value in $breakpoint {
     margin-left: 50%;
     transform: translateX(-50%);
     max-width: var(--width-wide);
-    width: 100vw;
-}
-
-.breakout--wider {
-    align-self: flex-start;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    max-width: var(--width-wider);
     width: 100vw;
 }
 
@@ -2058,23 +1881,19 @@ $_value in $breakpoint {
 }
 
 .content-column-gap--xs {
-    column-gap: var(--space-4);
+    column-gap: var(--pixel-m);
 }
 
 .content-column-gap--s {
-    column-gap: var(--space-8);
+    column-gap: var(--pixel-l);
 }
 
 .content-column-gap--m {
-    column-gap: var(--space-xs);
+    column-gap: var(--pixel-xl);
 }
 
 .content-column-gap--l {
-    column-gap: var(--space-s);
-}
-
-.content-column-gap--xl {
-    column-gap: var(--space-m);
+    column-gap: var(--space-xs);
 }
 
 .content-column-rule--dashed {
@@ -2181,20 +2000,20 @@ $_value in $breakpoint {
     column-rule-color: var(--color-warning);
 }
 
-.content-column-rule-width--1 {
-    column-rule-width: var(--space-1);
+.content-column-rule-width--xs {
+    column-rule-width: var(--pixel-xs);
 }
 
-.content-column-rule-width--2 {
-    column-rule-width: var(--space-2);
+.content-column-rule-width--s {
+    column-rule-width: var(--pixel-s);
 }
 
-.content-column-rule-width--4 {
-    column-rule-width: var(--space-4);
+.content-column-rule-width--m {
+    column-rule-width: var(--pixel-m);
 }
 
-.content-column-rule-width--8 {
-    column-rule-width: var(--space-8);
+.content-column-rule-width--l {
+    column-rule-width: var(--pixel-l);
 }
 
 .content-column-span--all {
@@ -2232,55 +2051,68 @@ $_value in $breakpoint {
 }
 
 // Gap
-.gap--content {
-    gap: var(--gap-content);
+.gap--card {
+    gap: var(--space-card);
 
     &-column {
-        column-gap: var(--gap-content);
+        column-gap: var(--space-card);
     }
 
     &-row {
-        row-gap: var(--gap-content);
+        column-gap: var(--space-card);
+    }
+}
+
+.gap--content {
+    gap: var(--space-content);
+
+    &-column {
+        column-gap: var(--space-content);
+    }
+
+    &-row {
+        column-gap: var(--space-content);
     }
 }
 
 .gap--grid {
-    gap: var(--gap-grid);
+    gap: var(--space-grid);
 
     &-column {
-        column-gap: var(--gap-grid);
+        column-gap: var(--space-grid);
     }
 
     &-row {
-        row-gap: var(--gap-grid);
+        column-gap: var(--space-grid);
     }
 }
 
-.gap--icon {
-    gap: var(--gap-icon);
+.gap--layout {
+    gap: var(--space-layout);
 
     &-column {
-        column-gap: var(--gap-icon);
+        column-gap: var(--space-layout);
     }
 
     &-row {
-        row-gap: var(--gap-icon);
+        column-gap: var(--space-layout);
     }
 }
 
 .gap--section {
-    gap: var(--gap-section);
+    gap: var(--space-section);
 
     &-column {
-        column-gap: var(--gap-section);
+        column-gap: var(--space-section);
     }
 
     &-row {
-        row-gap: var(--gap-section);
+        column-gap: var(--space-section);
     }
 }
 
 // Header Overlay
+// Set header data attribute to use ACF header style option
 [data-header-style="overlay"] {
     left: 0;
     position: absolute;
@@ -2318,13 +2150,13 @@ $_value in $breakpoint {
 .hide--visually {
     border: 0;
     clip: rect(0, 0, 0, 0);
-    height: px-relative(1px);
-    margin: calc(px-relative(1px) * -1);
+    height: px-rel(1px);
+    margin: calc(#{px-rel(1px)} * -1);
     overflow: hidden;
     padding: 0;
     position: absolute;
     white-space: nowrap;
-    width: px-relative(1px);
+    width: px-rel(1px);
 
     &.focusable:active,
     &.focusable:focus {
@@ -2348,16 +2180,7 @@ $_value in $breakpoint {
     position: relative;
 
     &:focus-within {
-        @if $focus-style =="box-shadow" {
-            box-shadow: 0 0 0 var(--focus-outline-width) var(--focus-color);
-        }
-
-        @else {
-            outline-color: var(--focus-color);
-            outline-offset: var(--focus-outline-width);
-            outline-style: solid;
-            outline-width: var(--focus-outline-width);
-        }
+        box-shadow: var(--focus-shadow) var(--focus-width) var(--focus-color);
     }
 
     & :focus {
@@ -2369,7 +2192,7 @@ $_value in $breakpoint {
         position: static;
     }
 
-    & > a::after {
+    & a::after {
         bottom: 0;
         content: "";
         cursor: pointer;
@@ -2497,7 +2320,7 @@ ul.list--flat,
 }
 
 .sticky--offset {
-    top: var(--gap-content);
+    top: var(--space-m);
 }
 
 // Shadow
@@ -2575,7 +2398,6 @@ $_value in $breakpoint {
 .width--l,
 .width--xl,
 .width--wide,
-.width--wider,
 .width--max,
 .width--prose,
 .width--website,
@@ -2608,10 +2430,6 @@ $_value in $breakpoint {
     max-width: var(--width-wide);
 }
 
-.width--wider {
-    max-width: var(--width-wider);
-}
-
 .width--max {
     max-width: var(--width-max);
 }
@@ -2629,8 +2447,8 @@ $_value in $breakpoint {
 }
 
 .width--safe {
-    padding-left: var(--space-section-x);
-    padding-right: var(--space-section-x);
+    padding-left: var(--space-x);
+    padding-right: var(--space-x);
 }
 
 @if $fluent-forms {
@@ -2653,7 +2471,7 @@ $_value in $breakpoint {
 
     // Label Margin
     .form .fluentform .ff-el-input--label {
-        margin-bottom: var(--space-8);
+        margin-bottom: var(--pixel-l);
     }
 
     // Label
@@ -2679,22 +2497,12 @@ $_value in $breakpoint {
         &:focus-visible {
             background-color: var(--input-bg-color-focus);
             border-color: var(--input-border-color-focus);
-
-            @if $focus-style =="box-shadow" {
-                box-shadow: 0 0 0 var(--focus-outline-width) var(--focus-color);
-            }
-
-            @else {
-                outline-color: var(--focus-color);
-                outline-offset: var(--focus-outline-width);
-                outline-style: solid;
-                outline-width: var(--focus-outline-width);
-            }
+            box-shadow: var(--focus-shadow) var(--focus-width) var(--focus-color);
         }
 
         &::placeholder {
             color: var(--placeholder-color);
-            opacity: .5;
+            opacity: var(--placeholder-opacity);
         }
     }
 
@@ -2712,7 +2520,7 @@ $_value in $breakpoint {
     // Error Font Size
     .form .fluentform .ff-el-is-error .text-danger {
         font-size: var(--form-error-font-size);
-        margin-top: var(--space-4);
+        margin-top: var(--pixel-m);
     }
 
     // Input Error Border
@@ -2735,23 +2543,7 @@ $_value in $breakpoint {
         &:focus-visible {
             background-color: var(--submit-bg-color);
             border-color: var(--submit-bg-color);
-
-            @if $focus-style =="box-shadow" {
-                box-shadow: 0 0 0 var(--focus-outline-width) var(--focus-color);
-            }
-
-            @else {
-                outline-color: var(--focus-color);
-                outline-offset: var(--focus-outline-width);
-                outline-style: solid;
-                outline-width: var(--focus-outline-width);
-            }
-        }
-
-        &:hover {
-            background-color: var(--submit-bg-color-hover) !important;
-            border-color: var(--submit-bg-color-hover) !important;
-            color: var(--submit-color-hover) !important;
+            box-shadow: var(--focus-shadow) var(--focus-width) var(--focus-color);
         }
     }
 }
