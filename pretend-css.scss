@@ -25,10 +25,10 @@ $warning: hsl(38, 92%, 50%);
 // Option
 $root-font-size: 16; // 16 or 10
 
-// Plugins
+// Plugin
 $fluent-forms: true; // Activate Fluent Forms styles
 
-// Widths
+// Width
 $width-min: 320px;
 $width-s: 512px;
 $width-m: 768px;
@@ -894,7 +894,7 @@ html {
     }
 
     background-color: var(--html-bg-color);
-    height: 100%;
+    block-size: 100%;
     text-size-adjust: none;
 }
 
@@ -905,21 +905,20 @@ html:focus-within {
 // Body
 body {
     background-color: var(--body-bg-color);
+    block-size: 100%;
     color: var(--body-color);
     font-size: var(--body-font-size);
     -webkit-font-smoothing: auto;
     font-weight: var(--body-font-weight);
-    height: 100%;
+    inline-size: 100%;
     line-height: var(--body-line-height);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--width-max);
-    min-height: 100vh;
-    min-height: 100svh;
-    min-width: var(--width-min);
+    margin-inline: auto;
+    max-inline-size: var(--width-max);
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+    min-inline-size: var(--width-min);
     overflow-wrap: break-word;
     overflow-x: hidden;
-    width: 100%;
 }
 
 // Link
@@ -1011,7 +1010,7 @@ picture,
 svg,
 video {
     display: block;
-    max-width: 100%;
+    max-inline-size: 100%;
 }
 
 textarea {
@@ -1088,15 +1087,15 @@ h6,
     font-size: var(--btn-font-size);
     font-weight: var(--btn-font-weight);
     gap: var(--btn-gap);
+    inline-size: var(--btn-width);
+    justify-content: center;
     letter-spacing: var(--btn-letter-spacing);
     line-height: var(--btn-line-height);
-    justify-content: center;
     padding: var(--btn-padding-y) var(--btn-padding-x);
     text-align: center;
     text-decoration: none;
     text-transform: var(--btn-text-transform);
     transition: var(--btn-transition);
-    width: ver(--btn-width);
 }
 
 // Button Size
@@ -1112,7 +1111,7 @@ h6,
     --btn-padding-x: var(--space-m);
 }
 
-// Button Styles
+// Button Style
 .btn--border {
     border-radius: var(--btn-border-radius);
     border-style: var(--btn-border-style);
@@ -1441,7 +1440,7 @@ h6,
     display: flex;
     flex-direction: column;
     gap: var(--space-content);
-    width: 100%;
+    inline-size: 100%;
     z-index: var(--z-front);
 
     &--float {
@@ -1449,15 +1448,14 @@ h6,
         z-index: var(--z-front);
 
         & > * + * {
-            margin-top: var(--space-content);
+            margin-block-start: var(--space-content);
         }
     }
 
     &--safe {
         @extend .block;
 
-        padding-left: var(--space-x);
-        padding-right: var(--space-x);
+        padding-inline: var(--space-x);
     }
 }
 
@@ -1466,26 +1464,24 @@ h6,
     display: flex;
     flex-direction: column;
     gap: var(--space-grid);
-    margin-left: auto;
-    margin-right: auto;
-    max-width: var(--width-website);
-    width: 100%;
+    inline-size: 100%;
+    margin-inline: auto;
+    max-inline-size: var(--width-website);
     z-index: var(--z-front);
 
     &--safe {
         @extend .container;
 
-        padding-left: var(--space-x);
-        padding-right: var(--space-x);
+        padding-inline: var(--space-x);
     }
 }
 
 .section {
     display: flex;
     flex-direction: column;
+    inline-size: 100%;
     padding: var(--space-section) var(--space-x);
     row-gap: var(--space-section);
-    width: 100%;
 }
 
 
@@ -1522,32 +1518,31 @@ h6,
 
 .aligncenter,
 .center--self {
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
 }
 
 .alignleft,
-.float--left,
-.float--left-offset {
-    float: left;
-    margin-bottom: var(--space-content);
-    margin-right: var(--space-content);
+.float--start,
+.float--start-offset {
+    float: inline-start;
+    margin-block-end: var(--space-content);
+    margin-inline-end: var(--space-content);
 }
 
-.float--left-offset {
-    margin-left: calc(var(--space-x) * -1);
+.float--start-offset {
+    margin-inline-start: calc(var(--space-x) * -1);
 }
 
 .alignright,
-.float--right,
-.float--right-offset {
-    float: right;
-    margin-bottom: var(--space-content);
-    margin-left: var(--space-content);
+.float--end,
+.float--end-offset {
+    float: inline-end;
+    margin-block-end: var(--space-content);
+    margin-inline-start: var(--space-content);
 }
 
-.float--right-offset {
-    margin-right: calc(var(--space-x) * -1);
+.float--end-offset {
+    margin-inline-end: calc(var(--space-x) * -1);
 }
 
 @each $_key,
@@ -1555,30 +1550,28 @@ $_value in $breakpoint {
     @include breakpoint($_value) {
         .center--#{$_key}-self {
             float: none;
-            margin-bottom: 0;
-            margin-left: auto;
-            margin-right: auto;
+            margin-block-end: 0;
+            margin-inline: auto;
         }
 
-        .float--#{$_key}-left {
-            float: left;
-            margin-bottom: var(--space-content);
-            margin-left: 0;
-            margin-right: var(--space-content);
+        .float--#{$_key}-start {
+            float: inline-start;
+            margin-block-end: var(--space-content);
+            margin-inline-end: var(--space-content);
+            margin-inline-start: 0;
         }
 
         .float--#{$_key}-none {
             float: none;
-            margin-bottom: 0;
-            margin-left: 0;
-            margin-right: 0;
+            margin-block-end: 0;
+            margin-inline: 0;
         }
 
-        .float--#{$_key}-right {
-            float: right;
-            margin-bottom: var(--space-content);
-            margin-left: var(--space-content);
-            margin-right: 0;
+        .float--#{$_key}-end {
+            float: inline-end;
+            margin-block-end: var(--space-content);
+            margin-inline-end: 0;
+            margin-inline-start: var(--space-content);
         }
     }
 }
@@ -1702,51 +1695,47 @@ $_value in $breakpoint {
 // Background Overlay
 // Add .relative to parent container
 .bg-overlay {
-    bottom: 0;
-    height: 100% !important;
-    left: 0;
-    margin-top: 0;
+    block-size: 100% !important;
+    inline-size: 100%;
+    inset: 0;
+    margin-block-start: 0;
     object-fit: cover;
     object-position: 50%;
     overflow: hidden;
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
     z-index: var(--z-back);
 }
 
 // Breakout
 .breakout--offset {
     align-self: flex-start;
-    margin-left: 50%;
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    max-inline-size: calc(100% + calc(var(--space-x) * 2));
     transform: translateX(-50%);
-    max-width: calc(100% + calc(var(--space-x) * 2));
-    width: 100vw;
 }
 
 .breakout--wide {
     align-self: flex-start;
-    margin-left: 50%;
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    max-inline-size: var(--width-wide);
     transform: translateX(-50%);
-    max-width: var(--width-wide);
-    width: 100vw;
 }
 
 .breakout--max {
     align-self: flex-start;
-    margin-left: 50%;
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    max-inline-size: var(--width-max);
     transform: translateX(-50%);
-    max-width: var(--width-max);
-    width: 100vw;
 }
 
 .breakout--full {
     align-self: flex-start;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    max-width: 100vw;
-    width: 100vw;
+    inline-size: 100vw;
+    margin-inline: calc(50% - 50vw);
+    max-inline-size: 100vw;
 }
 
 // Clear
@@ -2083,7 +2072,7 @@ $_value in $breakpoint {
 
 // Form
 .form {
-    width: 100%;
+    inline-size: 100%;
 }
 
 // Gap
@@ -2168,7 +2157,7 @@ $_value in $breakpoint {
 .grid--3-1,
 .grid--3-2 {
     display: grid;
-    width: 100%;
+    inline-size: 100%;
 }
 
 .grid--1 {
@@ -2266,7 +2255,7 @@ $_value in $breakpoint {
         .grid--#{$_key}-3-1,
         .grid--#{$_key}-3-2 {
             display: grid;
-            width: 100%;
+            inline-size: 100%;
         }
 
         .grid--#{$_key}-1 {
@@ -2980,7 +2969,6 @@ $_value in $breakpoint {
 }
 
 // Grid Order
-
 .order--first {
     order: var(--z-back);
 }
@@ -3021,59 +3009,59 @@ $_value in $breakpoint {
 // Header Overlay
 // Set header data attribute to use ACF header style option
 [data-header-style="overlay"] {
-    left: 0;
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
     z-index: var(--z-mid);
 }
 
 // Height
 .height--auto {
-    min-height: auto;
+    min-block-size: auto;
 }
 
 .height--full {
-    min-height: 100vh;
-    min-height: 100svh;
+    min-block-size: 100vh;
+    min-block-size: 100svh;
 }
 
 @each $_key,
 $_value in $breakpoint {
     @include breakpoint($_value) {
         .height--#{$_key}-auto {
-            min-height: auto;
+            min-block-size: auto;
         }
 
         .height--#{$_key}-full {
-            min-height: 100vh;
-            min-height: 100svh;
+            min-block-size: 100vh;
+            min-block-size: 100svh;
         }
     }
 }
 
 // Hide Visually
 .hide--visually {
+    block-size: px-rel(1px);
     border: 0;
     clip: rect(0, 0, 0, 0);
-    height: px-rel(1px);
+    inline-size: px-rel(1px);
     margin: calc(#{px-rel(1px)} * -1);
     overflow: hidden;
     padding: 0;
     position: absolute;
     white-space: nowrap;
-    width: px-rel(1px);
 
     &.focusable:active,
     &.focusable:focus {
+        block-size: auto;
         clip: auto;
-        height: auto;
+        inline-size: auto;
         margin: 0;
         overflow: visible;
         position: static;
         white-space: inherit;
-        width: auto;
     }
 }
 
@@ -3100,14 +3088,11 @@ $_value in $breakpoint {
     }
 
     & a::after {
-        bottom: 0;
         content: "";
         cursor: pointer;
         display: flex;
-        left: 0;
+        inset: 0;
         position: absolute;
-        right: 0;
-        top: 0;
     }
 }
 
@@ -3118,9 +3103,8 @@ ul.list--flat,
 .list--flat > ul {
     list-style: none;
     list-style-type: none;
-    margin-block-end: 0;
-    margin-block-start: 0;
-    padding-left: 0;
+    margin-block: 0;
+    padding-inline-start: 0;
 }
 
 // List Marker
@@ -3222,12 +3206,12 @@ ul.list--flat,
 }
 
 .sticky {
+    inset-block-start: 0;
     position: sticky;
-    top: 0;
 }
 
 .sticky--offset {
-    top: var(--space-m);
+    inset-block-start: var(--space-grid);
 }
 
 // Radius
@@ -3337,16 +3321,16 @@ $_value in $breakpoint {
 }
 
 // Text Vertical
-.text--vertical-left,
-.text--vertical-right {
+.text--vertical-start,
+.text--vertical-end {
     writing-mode: vertical-lr;
 }
 
-.text--vertical-left {
+.text--vertical-start {
     transform: scale(-1);
 }
 
-.text--vertical-right {
+.text--vertical-end {
     transform: scale(1);
 }
 
@@ -3354,16 +3338,16 @@ $_value in $breakpoint {
 $_value in $breakpoint {
     @include breakpoint($_value) {
 
-        .text--#{$_key}-vertical-left,
-        .text--#{$_key}-vertical-right {
+        .text--#{$_key}-vertical-start,
+        .text--#{$_key}-vertical-end {
             writing-mode: vertical-lr;
         }
 
-        .text--#{$_key}-vertical-left {
+        .text--#{$_key}-vertical-start {
             transform: scale(-1);
         }
 
-        .text--#{$_key}-vertical-right {
+        .text--#{$_key}-vertical-end {
             transform: scale(1);
         }
 
@@ -3386,52 +3370,51 @@ $_value in $breakpoint {
 .width--website,
 .width--safe,
 .width--fill {
-    width: 100%;
+    inline-size: 100%;
 }
 
 .width--min {
-    max-width: var(--width-min);
+    max-inline-size: var(--width-min);
 }
 
 .width--s {
-    max-width: var(--width-s);
+    max-inline-size: var(--width-s);
 }
 
 .width--m {
-    max-width: var(--width-m);
+    max-inline-size: var(--width-m);
 }
 
 .width--l {
-    max-width: var(--width-l);
+    max-inline-size: var(--width-l);
 }
 
 .width--xl {
-    max-width: var(--width-xl);
+    max-inline-size: var(--width-xl);
 }
 
 .width--wide {
-    max-width: var(--width-wide);
+    max-inline-size: var(--width-wide);
 }
 
 .width--max {
-    max-width: var(--width-max);
+    max-inline-size: var(--width-max);
 }
 
 .width--fit {
-    max-width: fit-content;
+    max-inline-size: fit-content;
 }
 
 .width--prose {
-    max-width: var(--width-prose);
+    max-inline-size: var(--width-prose);
 }
 
 .width--website {
-    max-width: var(--width-website);
+    max-inline-size: var(--width-website);
 }
 
 .width--safe {
-    padding-left: var(--space-x);
-    padding-right: var(--space-x);
+    padding-inline: var(--space-x);
 }
 
 // Z-Index
@@ -3475,17 +3458,17 @@ $_value in $breakpoint {
 
     // Form Container Vertical Margin
     .form .fluentform .ff-el-group {
-        margin-bottom: var(--form-gap) !important;
+        margin-block-end: var(--form-gap) !important;
     }
 
     // Form Container Last Child Margin
     .form .fluentform fieldset > .ff-el-group:last-child {
-        margin-bottom: 0 !important;
+        margin-block-end: 0 !important;
     }
 
     // Label Margin
     .form .fluentform .ff-el-input--label {
-        margin-bottom: var(--pixel-l);
+        margin-block-end: var(--pixel-l);
     }
 
     // Label
@@ -3504,8 +3487,8 @@ $_value in $breakpoint {
         border-width: var(--input-border-width);
         color: var(--input-color);
         font-size: var(--input-font-size);
-        min-height: var(--input-height);
         line-height: var(--input-line-height);
+        min-block-size: var(--input-height);
         padding: var(--input-padding-y) var(--input-padding-x);
 
         &:focus-visible {
@@ -3534,7 +3517,7 @@ $_value in $breakpoint {
     // Error Font Size
     .form .fluentform .ff-el-is-error .text-danger {
         font-size: var(--form-error-font-size);
-        margin-top: var(--pixel-m);
+        margin-block-start: var(--pixel-m);
     }
 
     // Input Error Border
