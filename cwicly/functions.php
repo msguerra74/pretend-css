@@ -9,7 +9,7 @@ function pretend_css( $plugin_classes ) {
 		'name'    => 'PretendCSS', // Set the label.
 
 		// Specify a custom color palette for the class list view
-		'colors'  => array(
+        'colors'  => array(
 			'list' => array(
 				'light' => array(
 					'background' => 'hsl(359deg 80% 95%)',
