@@ -1,0 +1,236 @@
+{
+    "id": "300000",
+    "name": "Dark Theme",
+    "colors": [
+        {
+            "raw": "var(--action-lighter-darker)",
+            "id": "300100",
+            "name": "Action Lighter Darker"
+        },
+        {
+            "raw": "var(--action-light-dark)",
+            "id": "300101",
+            "name": "Action Light Dark"
+        },
+        {
+            "raw": "var(--action-dark-light)",
+            "id": "300102",
+            "name": "Action Dark Light"
+        },
+        {
+            "raw": "var(--action-darker-lighter)",
+            "id": "300103",
+            "name": "Action Darker Lighter"
+        },
+        {
+            "raw": "var(--primary-lighter-darker)",
+            "id": "300200",
+            "name": "Primary Lighter Darker"
+        },
+        {
+            "raw": "var(--primary-light-dark)",
+            "id": "300201",
+            "name": "Primary Light Dark"
+        },
+        {
+            "raw": "var(--primary-dark-light)",
+            "id": "300202",
+            "name": "Primary Dark Light"
+        },
+        {
+            "raw": "var(--primary-darker-lighter)",
+            "id": "300203",
+            "name": "Primary Darker Lighter"
+        },
+        {
+            "raw": "var(--secondary-lighter-darker)",
+            "id": "300300",
+            "name": "Secondary Lighter Darker"
+        },
+        {
+            "raw": "var(--secondary-light-dark)",
+            "id": "300301",
+            "name": "Secondary Light Dark"
+        },
+        {
+            "raw": "var(--secondary-dark-light)",
+            "id": "300302",
+            "name": "Secondary Dark Light"
+        },
+        {
+            "raw": "var(--secondary-darker-lighter)",
+            "id": "300303",
+            "name": "Secondary Darker Lighter"
+        },
+        {
+            "raw": "var(--tertiary-lighter-darker)",
+            "id": "300400",
+            "name": "Tertiary Lighter Darker"
+        },
+        {
+            "raw": "var(--tertiary-light-dark)",
+            "id": "300401",
+            "name": "Tertiary Light Dark"
+        },
+        {
+            "raw": "var(--tertiary-dark-light)",
+            "id": "300402",
+            "name": "Tertiary Dark Light"
+        },
+        {
+            "raw": "var(--tertiary-darker-lighter)",
+            "id": "300403",
+            "name": "Tertiary Darker Lighter"
+        },
+        {
+            "raw": "var(--quaternary-lighter-darker)",
+            "id": "300500",
+            "name": "Quaternary Lighter Darker"
+        },
+        {
+            "raw": "var(--quaternary-light-dark)",
+            "id": "300501",
+            "name": "Quaternary Light Dark"
+        },
+        {
+            "raw": "var(--quaternary-dark-light)",
+            "id": "300502",
+            "name": "Quaternary Dark Light"
+        },
+        {
+            "raw": "var(--quaternary-darker-lighter)",
+            "id": "300503",
+            "name": "Quaternary Darker Lighter"
+        },
+        {
+            "raw": "var(--base-lighter-darker)",
+            "id": "300600",
+            "name": "Base Lighter Darker"
+        },
+        {
+            "raw": "var(--base-light-dark)",
+            "id": "300601",
+            "name": "Base Light Dark"
+        },
+        {
+            "raw": "var(--base-dark-light)",
+            "id": "300602",
+            "name": "Base Dark Light"
+        },
+        {
+            "raw": "var(--base-darker-lighter)",
+            "id": "300603",
+            "name": "Base Darker Lighter"
+        },
+        {
+            "raw": "var(--danger-lighter-darker)",
+            "id": "300700",
+            "name": "Danger Lighter Darker"
+        },
+        {
+            "raw": "var(--danger-light-dark)",
+            "id": "300701",
+            "name": "Danger Light Dark"
+        },
+        {
+            "raw": "var(--danger-dark-light)",
+            "id": "300702",
+            "name": "Danger Dark Light"
+        },
+        {
+            "raw": "var(--danger-darker-lighter)",
+            "id": "300703",
+            "name": "Danger Darker Lighter"
+        },
+        {
+            "raw": "var(--highlight-lighter-darker)",
+            "id": "300800",
+            "name": "Highlight Lighter Darker"
+        },
+        {
+            "raw": "var(--highlight-light-dark)",
+            "id": "300801",
+            "name": "Highlight Light Dark"
+        },
+        {
+            "raw": "var(--highlight-dark-light)",
+            "id": "300802",
+            "name": "Highlight Dark Light"
+        },
+        {
+            "raw": "var(--highlight-darker-lighter)",
+            "id": "300803",
+            "name": "Highlight Darker Lighter"
+        },
+        {
+            "raw": "var(--info-lighter-darker)",
+            "id": "300900",
+            "name": "Info Lighter Darker"
+        },
+        {
+            "raw": "var(--info-light-dark)",
+            "id": "300901",
+            "name": "Info Light Dark"
+        },
+        {
+            "raw": "var(--info-dark-light)",
+            "id": "300902",
+            "name": "Info Dark Light"
+        },
+        {
+            "raw": "var(--info-darker-lighter)",
+            "id": "300903",
+            "name": "Info Darker Lighter"
+        },
+        {
+            "raw": "var(--success-lighter-darker)",
+            "id": "301100",
+            "name": "Success Lighter Darker"
+        },
+        {
+            "raw": "var(--success-light-dark)",
+            "id": "301101",
+            "name": "Success Light Dark"
+        },
+        {
+            "raw": "var(--success-dark-light)",
+            "id": "301102",
+            "name": "Success Dark Light"
+        },
+        {
+            "raw": "var(--success-darker-lighter)",
+            "id": "301103",
+            "name": "Success Darker Lighter"
+        },
+        {
+            "raw": "var(--warning-lighter-darker)",
+            "id": "301200",
+            "name": "Warning Lighter Darker"
+        },
+        {
+            "raw": "var(--warning-light-dark)",
+            "id": "301201",
+            "name": "Warning Light Dark"
+        },
+        {
+            "raw": "var(--warning-dark-light)",
+            "id": "301202",
+            "name": "Warning Dark Light"
+        },
+        {
+            "raw": "var(--warning-darker-lighter)",
+            "id": "301203",
+            "name": "Warning Darker Lighter"
+        },
+        {
+            "raw": "var(--white-black)",
+            "id": "301300",
+            "name": "White Black"
+        },
+        {
+            "raw": "var(--black-white)",
+            "id": "301301",
+            "name": "Black White"
+        }
+    ]
+}

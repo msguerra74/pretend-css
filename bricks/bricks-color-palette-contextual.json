@@ -1,0 +1,156 @@
+{
+    "id": "200000",
+    "name": "Contextual",
+    "colors": [
+        {
+            "raw": "var(--danger)",
+            "id": "200100",
+            "name": "Danger"
+        },
+        {
+            "raw": "var(--danger-lighter)",
+            "id": "200101",
+            "name": "Danger Lighter"
+        },
+        {
+            "raw": "var(--danger-light)",
+            "id": "200102",
+            "name": "Danger Light"
+        },
+        {
+            "raw": "var(--danger-mid)",
+            "id": "200103",
+            "name": "Danger Mid"
+        },
+        {
+            "raw": "var(--danger-dark)",
+            "id": "200104",
+            "name": "Danger Dark"
+        },
+        {
+            "raw": "var(--danger-darker)",
+            "id": "200105",
+            "name": "Danger Darker"
+        },
+        {
+            "raw": "var(--highlight)",
+            "id": "200200",
+            "name": "Highlight"
+        },
+        {
+            "raw": "var(--highlight-lighter)",
+            "id": "200201",
+            "name": "Highlight Lighter"
+        },
+        {
+            "raw": "var(--highlight-light)",
+            "id": "200202",
+            "name": "Highlight Light"
+        },
+        {
+            "raw": "var(--highlight-mid)",
+            "id": "200203",
+            "name": "Highlight Mid"
+        },
+        {
+            "raw": "var(--highlight-dark)",
+            "id": "200204",
+            "name": "Highlight Dark"
+        },
+        {
+            "raw": "var(--highlight-darker)",
+            "id": "200205",
+            "name": "Highlight Darker"
+        },
+        {
+            "raw": "var(--info)",
+            "id": "200300",
+            "name": "Info"
+        },
+        {
+            "raw": "var(--info-lighter)",
+            "id": "200301",
+            "name": "Info Lighter"
+        },
+        {
+            "raw": "var(--info-light)",
+            "id": "200302",
+            "name": "Info Light"
+        },
+        {
+            "raw": "var(--info-mid)",
+            "id": "200303",
+            "name": "Info Mid"
+        },
+        {
+            "raw": "var(--info-dark)",
+            "id": "200304",
+            "name": "Info Dark"
+        },
+        {
+            "raw": "var(--info-darker)",
+            "id": "200305",
+            "name": "Info Darker"
+        },
+        {
+            "raw": "var(--success)",
+            "id": "200400",
+            "name": "Success"
+        },
+        {
+            "raw": "var(--success-lighter)",
+            "id": "200401",
+            "name": "Success Lighter"
+        },
+        {
+            "raw": "var(--success-light)",
+            "id": "200402",
+            "name": "Success Light"
+        },
+        {
+            "raw": "var(--success-mid)",
+            "id": "200403",
+            "name": "Success Mid"
+        },
+        {
+            "raw": "var(--success-dark)",
+            "id": "200404",
+            "name": "Success Dark"
+        },
+        {
+            "raw": "var(--success-darker)",
+            "id": "200405",
+            "name": "Success Darker"
+        },
+        {
+            "raw": "var(--warning)",
+            "id": "200500",
+            "name": "Warning"
+        },
+        {
+            "raw": "var(--warning-lighter)",
+            "id": "200501",
+            "name": "Warning Lighter"
+        },
+        {
+            "raw": "var(--warning-light)",
+            "id": "200502",
+            "name": "Warning Light"
+        },
+        {
+            "raw": "var(--warning-mid)",
+            "id": "200503",
+            "name": "Warning Mid"
+        },
+        {
+            "raw": "var(--warning-dark)",
+            "id": "200504",
+            "name": "Warning Dark"
+        },
+        {
+            "raw": "var(--warning-darker)",
+            "id": "200505",
+            "name": "Warning Darker"
+        }
+    ]
+}

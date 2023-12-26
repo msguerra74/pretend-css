@@ -1,0 +1,196 @@
+{
+    "id": "100000",
+    "name": "Colors",
+    "colors": [
+        {
+            "raw": "var(--action)",
+            "id": "100100",
+            "name": "Action"
+        },
+        {
+            "raw": "var(--action-lighter)",
+            "id": "100101",
+            "name": "Action Lighter"
+        },
+        {
+            "raw": "var(--action-light)",
+            "id": "100102",
+            "name": "Action Light"
+        },
+        {
+            "raw": "var(--action-mid)",
+            "id": "100103",
+            "name": "Action Mid"
+        },
+        {
+            "raw": "var(--action-dark)",
+            "id": "100104",
+            "name": "Action Dark"
+        },
+        {
+            "raw": "var(--action-darker)",
+            "id": "100105",
+            "name": "Action Darker"
+        },
+        {
+            "raw": "var(--primary)",
+            "id": "100200",
+            "name": "Primary"
+        },
+        {
+            "raw": "var(--primary-lighter)",
+            "id": "100201",
+            "name": "Primary Lighter"
+        },
+        {
+            "raw": "var(--primary-light)",
+            "id": "100202",
+            "name": "Primary Light"
+        },
+        {
+            "raw": "var(--primary-mid)",
+            "id": "100203",
+            "name": "Primary Mid"
+        },
+        {
+            "raw": "var(--primary-dark)",
+            "id": "100204",
+            "name": "Primary Dark"
+        },
+        {
+            "raw": "var(--primary-darker)",
+            "id": "100205",
+            "name": "Primary Darker"
+        },
+        {
+            "raw": "var(--secondary)",
+            "id": "100300",
+            "name": "Secondary"
+        },
+        {
+            "raw": "var(--secondary-lighter)",
+            "id": "100301",
+            "name": "Secondary Lighter"
+        },
+        {
+            "raw": "var(--secondary-light)",
+            "id": "100302",
+            "name": "Secondary Light"
+        },
+        {
+            "raw": "var(--secondary-mid)",
+            "id": "100303",
+            "name": "Secondary Mid"
+        },
+        {
+            "raw": "var(--secondary-dark)",
+            "id": "100304",
+            "name": "Secondary Dark"
+        },
+        {
+            "raw": "var(--secondary-darker)",
+            "id": "100305",
+            "name": "Secondary Darker"
+        },
+        {
+            "raw": "var(--tertiary)",
+            "id": "100400",
+            "name": "Tertiary"
+        },
+        {
+            "raw": "var(--tertiary-lighter)",
+            "id": "100401",
+            "name": "Tertiary Lighter"
+        },
+        {
+            "raw": "var(--tertiary-light)",
+            "id": "100402",
+            "name": "Tertiary Light"
+        },
+        {
+            "raw": "var(--tertiary-mid)",
+            "id": "100403",
+            "name": "Tertiary Mid"
+        },
+        {
+            "raw": "var(--tertiary-dark)",
+            "id": "100404",
+            "name": "Tertiary Dark"
+        },
+        {
+            "raw": "var(--tertiary-darker)",
+            "id": "100405",
+            "name": "Tertiary Darker"
+        },
+        {
+            "raw": "var(--quaternary)",
+            "id": "100500",
+            "name": "Quaternary"
+        },
+        {
+            "raw": "var(--quaternary-lighter)",
+            "id": "100501",
+            "name": "Quaternary Lighter"
+        },
+        {
+            "raw": "var(--quaternary-light)",
+            "id": "100502",
+            "name": "Quaternary Light"
+        },
+        {
+            "raw": "var(--quaternary-mid)",
+            "id": "100503",
+            "name": "Quaternary Mid"
+        },
+        {
+            "raw": "var(--quaternary-dark)",
+            "id": "100504",
+            "name": "Quaternary Dark"
+        },
+        {
+            "raw": "var(--quaternary-darker)",
+            "id": "100505",
+            "name": "Quaternary Darker"
+        },
+        {
+            "raw": "var(--base)",
+            "id": "100600",
+            "name": "Base"
+        },
+        {
+            "raw": "var(--base-lighter)",
+            "id": "100601",
+            "name": "Base Lighter"
+        },
+        {
+            "raw": "var(--base-light)",
+            "id": "100602",
+            "name": "Base Light"
+        },
+        {
+            "raw": "var(--base-mid)",
+            "id": "100603",
+            "name": "Base Mid"
+        },
+        {
+            "raw": "var(--base-dark)",
+            "id": "100604",
+            "name": "Base Dark"
+        },
+        {
+            "raw": "var(--base-darker)",
+            "id": "100605",
+            "name": "Base Darker"
+        },
+        {
+            "raw": "var(--white)",
+            "id": "100700",
+            "name": "White"
+        },
+        {
+            "raw": "var(--black)",
+            "id": "100701",
+            "name": "Black"
+        }
+    ]
+}
