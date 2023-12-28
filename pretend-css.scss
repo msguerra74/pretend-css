@@ -1,8 +1,7 @@
 /**
  * Pretend CSS
- * --
- * Made by Pretend
- * https://pretend.studio
+ *
+ * Made by [Pretend](https://pretend.studio)
  **/
 
 
@@ -242,6 +241,11 @@ $breakpoint: (
     --text-height-s: 1.2;
     --text-height-m: 1.4;
     --text-height-l: 1.6;
+
+    // Transition
+    --transition-fast: .2s;
+    --transition-normal: .4s;
+    --transition-slow: .6s;
 
     // Width
     --width-min: #{px-rel($width-min)};
@@ -635,7 +639,7 @@ textarea {
     --btn-padding-x: var(--space-xl);
     --btn-padding-y: var(--space-m);
     --btn-text-transform: uppercase;
-    --btn-transition: 0.4s;
+    --btn-transition: var(--transition-normal);
     --btn-width: fit-content;
 
     align-items: center;
@@ -1133,7 +1137,7 @@ $_value in $breakpoint {
     inset: 0;
     margin-block-start: 0;
     object-fit: cover;
-    object-position: 50%;
+    object-position: var(--object-center);
     overflow: hidden;
     position: absolute;
     z-index: var(--z-back);
@@ -1266,6 +1270,15 @@ $_value in $breakpoint {
 
 .content-column-span--all {
     column-span: all;
+}
+
+// Cursor
+.cursor--default {
+    cursor: default;
+}
+
+.cursor--pointer {
+    cursor: pointer;
 }
 
 // Display
@@ -3607,6 +3620,19 @@ $_value in $breakpoint {
 
 .text--900 {
     font-weight: 900;
+}
+
+// Transition
+.transition--fast {
+    transition: var(--transition-fast);
+}
+
+.transition--normal {
+    transition: var(--transition-normal);
+}
+
+.transition--slow {
+    transition: var(--transition-slow);
 }
 
 // Width
