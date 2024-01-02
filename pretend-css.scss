@@ -35,6 +35,11 @@ $width-wide: 1536px;
 $width-max: 1920px;
 $width-website: $width-xl;
 
+// WordPress
+$bricks: true;
+$cwicly: true;
+$fluentforms: true;
+
 
 
 // --- SCSS Loop --- //
@@ -3725,217 +3730,225 @@ $_value in $breakpoint {
 
 
 
-// --- Bricks --- //
+@if $bricks {
+    // --- Bricks --- //
 
-// Button
-.brxe-button {
-    @extend .btn;
-}
-
-// Container
-.brxe-container {
-    @extend .container;
-}
-
-// Section
-.brxe-section {
-    @extend .section;
-}
-
-
-
-// --- Cwicly --- //
-
-// Button
-.cc-btn {
-    @extend .btn;
-}
-
-// Container
-.cc-cntr {
-    @extend .container;
-}
-
-// Section
-.cc-sct {
-    @extend .section;
-}
-
-// Before After
-// Add from Cwicly cloud library
-// Activate Cwicly Before After JS in WPCodeBox
-before-after {
-    --divider-color: var(--white);
-    --divider-shadow: none;
-    --divider-width: var(--space-xs);
-    --default-handle-color: var(--white);
-    --default-handle-opacity: 1;
-    --default-handle-shadow: none;
-    --default-handle-width: var(--space-2xl);
-    --handle-position-start: 50%;
-
-    visibility: hidden;
-
-    & [slot="second"] {
-        display: none;
+    // Button
+    .brxe-button {
+        @extend .btn;
     }
 
-    &.rendered {
-        visibility: inherit;
+    // Container
+    .brxe-container {
+        @extend .container;
     }
 
-    &.rendered [slot="second"] {
-        display: unset;
-    }
-}
-
-// Slider Crawl
-// Set duration to -1
-// Set transition to around 10000
-.slider--crawl {
-    & .swiper-wrapper {
-        transition-timing-function: linear;
-    }
-}
-
-// Tab Accordion
-// Add from Cwicly cloud library
-// Activate Cwicly Tab Accordion JS in WPCodeBox
-// .tab-accordion > .tabs > .tab
-// .tab-accordion > .tab-contents > .tab-content
-@include breakpoint($width-m) {
-    .tab-accordion {
-        align-items: stretch;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .tab-accordion .tabs,
-    .tab-accordion .tab-contents {
-        display: contents;
-    }
-
-    .tab-accordion .tab {
-        text-align: left;
+    // Section
+    .brxe-section {
+        @extend .section;
     }
 }
 
 
 
-// --- Fluent Forms --- //
+@if $cwicly {
+    // --- Cwicly --- //
 
-// Form Container Horizontal Gap
-[class*="form"] .ff-t-container {
-    gap: var(--form-gap) !important;
-}
-
-// Form Container Vertical Margin
-[class*="form"] .ff-el-group {
-    margin-block-end: var(--form-gap) !important;
-}
-
-// Form Container Last Child Margin
-[class*="form"] fieldset > .ff-el-group:last-child {
-    margin-block-end: 0 !important;
-}
-
-// Label
-[class*="form"] label {
-    color: var(--label-color);
-    font-size: var(--label-font-size);
-    font-weight: var(--label-font-weight);
-}
-
-// Label Margin
-[class*="form"] .ff-el-input--label {
-    margin-block-end: var(--space-s);
-}
-
-// Input
-[class*="form"] input,
-[class*="form"] select,
-[class*="form"] textarea {
-    background-color: var(--input-bg-color);
-    border-color: var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    border-style: var(--input-border-style);
-    border-width: var(--input-border-width);
-    color: var(--input-color);
-    font-size: var(--input-font-size);
-    line-height: var(--input-line-height);
-    min-block-size: var(--input-height);
-    padding: var(--input-padding-y) var(--input-padding-x);
-
-    &:focus-visible {
-        background-color: var(--input-bg-color-focus);
-        box-shadow: inset var(--focus-shadow) var(--focus-width) var(--focus-color);
+    // Button
+    .cc-btn {
+        @extend .btn;
     }
 
-    &::placeholder {
-        color: var(--placeholder-color);
-        opacity: var(--placeholder-opacity);
+    // Container
+    .cc-cntr {
+        @extend .container;
     }
-}
 
-// Checkbox, Radio
-[class*="form"] [type="checkbox"],
-[class*="form"] [type="radio"] {
-    appearance: none !important;
-    block-size: var(--checkbox-size);
-    inline-size: var(--checkbox-size);
-    min-block-size: initial;
-    padding: initial;
+    // Section
+    .cc-sct {
+        @extend .section;
+    }
 
-    &:checked {
-        background-color: var(--checkbox-checked-bg-color);
-        box-shadow: inset 0 0 0 calc(var(--space-2px) * 2) var(--checkbox-checked-box-shadow);
+    // Before After
+    // Add from Cwicly cloud library
+    // Activate Cwicly Before After JS in WPCodeBox
+    before-after {
+        --divider-color: var(--white);
+        --divider-shadow: none;
+        --divider-width: var(--space-xs);
+        --default-handle-color: var(--white);
+        --default-handle-opacity: 1;
+        --default-handle-shadow: none;
+        --default-handle-width: var(--space-2xl);
+        --handle-position-start: 50%;
 
-        &:focus-visible {
-            border-color: var(--input-border-color-focus);
+        visibility: hidden;
+
+        & [slot="second"] {
+            display: none;
+        }
+
+        &.rendered {
+            visibility: inherit;
+        }
+
+        &.rendered [slot="second"] {
+            display: unset;
+        }
+    }
+
+    // Slider Crawl
+    // Set duration to -1
+    // Set transition to around 10000
+    // Add .slider--crawl to Cwicly class list in functions.php
+    .slider--crawl {
+        & .swiper-wrapper {
+            transition-timing-function: linear;
+        }
+    }
+
+    // Tab Accordion
+    // Add from Cwicly cloud library
+    // Activate Cwicly Tab Accordion JS in WPCodeBox
+    // Add .tab-accordion, .tab, .tabs, .tab-content, .tab-contents to Cwicly class list in functions.php
+    // .tab-accordion > .tabs > .tab
+    // .tab-accordion > .tab-contents > .tab-content
+    @include breakpoint($width-m) {
+        .tab-accordion {
+            align-items: stretch;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-accordion .tabs,
+        .tab-accordion .tab-contents {
+            display: contents;
+        }
+
+        .tab-accordion .tab {
+            text-align: left;
         }
     }
 }
 
-// Checkbox
-[class*="form"] [type="checkbox"] {
-    border-radius: var(--checkbox-border-radius);
-}
 
-// Radio
-[class*="form"] [type="radio"] {
-    border-radius: var(--radius-round);
-}
 
-// Select
-[class*="form"] select {
-    appearance: none !important;
-}
+@if $fluentforms {
+    // --- Fluent Forms --- //
 
-// Asterisk
-[class*="form"] .asterisk-left label:before,
-[class*="form"] .asterisk-right label:after {
-    color: var(--form-attention-color);
-}
+    // Form Container Horizontal Gap
+    [class*="form"] .ff-t-container {
+        gap: var(--form-gap) !important;
+    }
 
-// Error Border
-[class*="form"] .ff-el-is-error .ff-el-form-control {
-    border-color: var(--form-error-color) !important;
-}
+    // Form Container Vertical Margin
+    [class*="form"] .ff-el-group {
+        margin-block-end: var(--form-gap) !important;
+    }
 
-// Error Color
-[class*="form"] .ff-el-is-error .ff-el-form-check-label,
-[class*="form"] .ff-el-is-error .ff-el-form-check-label a,
-[class*="form"] .text-danger {
-    color: var(--form-error-color);
-}
+    // Form Container Last Child Margin
+    [class*="form"] fieldset > .ff-el-group:last-child {
+        margin-block-end: 0 !important;
+    }
 
-// Error Font Size
-[class*="form"] .text-danger {
-    font-size: var(--form-error-font-size);
-    margin-block-start: var(--space-xs);
-}
+    // Label
+    [class*="form"] label {
+        color: var(--label-color);
+        font-size: var(--label-font-size);
+        font-weight: var(--label-font-weight);
+    }
 
-// Submit Button Color
-[class*="form"] [type="submit"] {
-    @extend .btn;
+    // Label Margin
+    [class*="form"] .ff-el-input--label {
+        margin-block-end: var(--space-s);
+    }
+
+    // Input
+    [class*="form"] input,
+    [class*="form"] select,
+    [class*="form"] textarea {
+        background-color: var(--input-bg-color);
+        border-color: var(--input-border-color);
+        border-radius: var(--input-border-radius);
+        border-style: var(--input-border-style);
+        border-width: var(--input-border-width);
+        color: var(--input-color);
+        font-size: var(--input-font-size);
+        line-height: var(--input-line-height);
+        min-block-size: var(--input-height);
+        padding: var(--input-padding-y) var(--input-padding-x);
+
+        &:focus-visible {
+            background-color: var(--input-bg-color-focus);
+            box-shadow: inset var(--focus-shadow) var(--focus-width) var(--focus-color);
+        }
+
+        &::placeholder {
+            color: var(--placeholder-color);
+            opacity: var(--placeholder-opacity);
+        }
+    }
+
+    // Checkbox, Radio
+    [class*="form"] [type="checkbox"],
+    [class*="form"] [type="radio"] {
+        appearance: none !important;
+        block-size: var(--checkbox-size);
+        inline-size: var(--checkbox-size);
+        min-block-size: initial;
+        padding: initial;
+
+        &:checked {
+            background-color: var(--checkbox-checked-bg-color);
+            box-shadow: inset 0 0 0 calc(var(--space-2px) * 2) var(--checkbox-checked-box-shadow);
+
+            &:focus-visible {
+                border-color: var(--input-border-color-focus);
+            }
+        }
+    }
+
+    // Checkbox
+    [class*="form"] [type="checkbox"] {
+        border-radius: var(--checkbox-border-radius);
+    }
+
+    // Radio
+    [class*="form"] [type="radio"] {
+        border-radius: var(--radius-round);
+    }
+
+    // Select
+    [class*="form"] select {
+        appearance: none !important;
+    }
+
+    // Asterisk
+    [class*="form"] .asterisk-left label:before,
+    [class*="form"] .asterisk-right label:after {
+        color: var(--form-attention-color);
+    }
+
+    // Error Border
+    [class*="form"] .ff-el-is-error .ff-el-form-control {
+        border-color: var(--form-error-color) !important;
+    }
+
+    // Error Color
+    [class*="form"] .ff-el-is-error .ff-el-form-check-label,
+    [class*="form"] .ff-el-is-error .ff-el-form-check-label a,
+    [class*="form"] .text-danger {
+        color: var(--form-error-color);
+    }
+
+    // Error Font Size
+    [class*="form"] .text-danger {
+        font-size: var(--form-error-font-size);
+        margin-block-start: var(--space-xs);
+    }
+
+    // Submit Button Color
+    [class*="form"] [type="submit"] {
+        @extend .btn;
+    }
 }
