@@ -35,11 +35,6 @@ $width-wide: 1536px;
 $width-max: 1920px;
 $width-website: $width-xl;
 
-// WordPress
-$bricks: true;
-$cwicly: true;
-$fluentforms: true;
-
 
 
 // --- SCSS Loop --- //
@@ -447,14 +442,12 @@ body {
 
 // Link
 a {
-    main & {
+    --a-color: var(--action);
+
+    color: var(--a-color);
+
+    &:hover {
         --a-color: var(--action);
-
-        color: var(--a-color);
-
-        &:hover {
-            --a-color: var(--action);
-        }
     }
 }
 
@@ -3344,6 +3337,7 @@ $_value in $breakpoint {
         --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
         --ribbon-transform-origin: bottom right;
         --ribbon-width: var(--width-s);
+
         background-color: var(--ribbon-bg-color);
         color: var(--ribbon-color);
         display: block;
@@ -3730,225 +3724,219 @@ $_value in $breakpoint {
 
 
 
-@if $bricks {
-    // --- Bricks --- //
+// --- Bricks --- //
 
-    // Button
-    .brxe-button {
-        @extend .btn;
+// Button
+.brxe-button {
+    @extend .btn;
+}
+
+// Container
+.brxe-container {
+    @extend .container;
+}
+
+// Section
+.brxe-section {
+    @extend .section;
+}
+
+
+
+// --- Cwicly --- //
+
+// Button
+.cc-btn {
+    @extend .btn;
+}
+
+// Container
+.cc-cntr {
+    @extend .container;
+}
+
+// Section
+.cc-sct {
+    @extend .section;
+}
+
+// Before After
+// Add from Cwicly cloud library
+// Activate Cwicly Before After JS in WPCodeBox
+before-after {
+    --divider-color: var(--white);
+    --divider-shadow: none;
+    --divider-width: var(--space-xs);
+    --default-handle-color: var(--white);
+    --default-handle-opacity: 1;
+    --default-handle-shadow: none;
+    --default-handle-width: var(--space-2xl);
+    --handle-position-start: 50%;
+
+    visibility: hidden;
+
+    & [slot="second"] {
+        display: none;
     }
 
-    // Container
-    .brxe-container {
-        @extend .container;
+    &.rendered {
+        visibility: inherit;
     }
 
-    // Section
-    .brxe-section {
-        @extend .section;
+    &.rendered [slot="second"] {
+        display: unset;
+    }
+}
+
+// Slider Crawl
+// Set duration to -1
+// Set transition to around 10000
+// Add .slider--crawl to Cwicly class list in functions.php
+.slider--crawl {
+    & .swiper-wrapper {
+        transition-timing-function: linear;
+    }
+}
+
+// Tab Accordion
+// Add from Cwicly cloud library
+// Activate Cwicly Tab Accordion JS in WPCodeBox
+// Add .tab-accordion, .tab, .tabs, .tab-content, .tab-contents to Cwicly class list in functions.php
+// .tab-accordion > .tabs > .tab
+// .tab-accordion > .tab-contents > .tab-content
+@include breakpoint($width-m) {
+    .tab-accordion {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab-accordion .tabs,
+    .tab-accordion .tab-contents {
+        display: contents;
+    }
+
+    .tab-accordion .tab {
+        text-align: left;
     }
 }
 
 
 
-@if $cwicly {
-    // --- Cwicly --- //
+// --- Fluent Forms --- //
 
-    // Button
-    .cc-btn {
-        @extend .btn;
+// Form Container Horizontal Gap
+[class*="form"] .ff-t-container {
+    gap: var(--form-gap) !important;
+}
+
+// Form Container Vertical Margin
+[class*="form"] .ff-el-group {
+    margin-block-end: var(--form-gap) !important;
+}
+
+// Form Container Last Child Margin
+[class*="form"] fieldset > .ff-el-group:last-child {
+    margin-block-end: 0 !important;
+}
+
+// Label
+[class*="form"] label {
+    color: var(--label-color);
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+}
+
+// Label Margin
+[class*="form"] .ff-el-input--label {
+    margin-block-end: var(--space-s);
+}
+
+// Input
+[class*="form"] input,
+[class*="form"] select,
+[class*="form"] textarea {
+    background-color: var(--input-bg-color);
+    border-color: var(--input-border-color);
+    border-radius: var(--input-border-radius);
+    border-style: var(--input-border-style);
+    border-width: var(--input-border-width);
+    color: var(--input-color);
+    font-size: var(--input-font-size);
+    line-height: var(--input-line-height);
+    min-block-size: var(--input-height);
+    padding: var(--input-padding-y) var(--input-padding-x);
+
+    &:focus-visible {
+        background-color: var(--input-bg-color-focus);
+        box-shadow: inset var(--focus-shadow) var(--focus-width) var(--focus-color);
     }
 
-    // Container
-    .cc-cntr {
-        @extend .container;
-    }
-
-    // Section
-    .cc-sct {
-        @extend .section;
-    }
-
-    // Before After
-    // Add from Cwicly cloud library
-    // Activate Cwicly Before After JS in WPCodeBox
-    before-after {
-        --divider-color: var(--white);
-        --divider-shadow: none;
-        --divider-width: var(--space-xs);
-        --default-handle-color: var(--white);
-        --default-handle-opacity: 1;
-        --default-handle-shadow: none;
-        --default-handle-width: var(--space-2xl);
-        --handle-position-start: 50%;
-
-        visibility: hidden;
-
-        & [slot="second"] {
-            display: none;
-        }
-
-        &.rendered {
-            visibility: inherit;
-        }
-
-        &.rendered [slot="second"] {
-            display: unset;
-        }
-    }
-
-    // Slider Crawl
-    // Set duration to -1
-    // Set transition to around 10000
-    // Add .slider--crawl to Cwicly class list in functions.php
-    .slider--crawl {
-        & .swiper-wrapper {
-            transition-timing-function: linear;
-        }
-    }
-
-    // Tab Accordion
-    // Add from Cwicly cloud library
-    // Activate Cwicly Tab Accordion JS in WPCodeBox
-    // Add .tab-accordion, .tab, .tabs, .tab-content, .tab-contents to Cwicly class list in functions.php
-    // .tab-accordion > .tabs > .tab
-    // .tab-accordion > .tab-contents > .tab-content
-    @include breakpoint($width-m) {
-        .tab-accordion {
-            align-items: stretch;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tab-accordion .tabs,
-        .tab-accordion .tab-contents {
-            display: contents;
-        }
-
-        .tab-accordion .tab {
-            text-align: left;
-        }
+    &::placeholder {
+        color: var(--placeholder-color);
+        opacity: var(--placeholder-opacity);
     }
 }
 
+// Checkbox, Radio
+[class*="form"] [type="checkbox"],
+[class*="form"] [type="radio"] {
+    appearance: none !important;
+    block-size: var(--checkbox-size);
+    inline-size: var(--checkbox-size);
+    min-block-size: initial;
+    padding: initial;
 
-
-@if $fluentforms {
-    // --- Fluent Forms --- //
-
-    // Form Container Horizontal Gap
-    [class*="form"] .ff-t-container {
-        gap: var(--form-gap) !important;
-    }
-
-    // Form Container Vertical Margin
-    [class*="form"] .ff-el-group {
-        margin-block-end: var(--form-gap) !important;
-    }
-
-    // Form Container Last Child Margin
-    [class*="form"] fieldset > .ff-el-group:last-child {
-        margin-block-end: 0 !important;
-    }
-
-    // Label
-    [class*="form"] label {
-        color: var(--label-color);
-        font-size: var(--label-font-size);
-        font-weight: var(--label-font-weight);
-    }
-
-    // Label Margin
-    [class*="form"] .ff-el-input--label {
-        margin-block-end: var(--space-s);
-    }
-
-    // Input
-    [class*="form"] input,
-    [class*="form"] select,
-    [class*="form"] textarea {
-        background-color: var(--input-bg-color);
-        border-color: var(--input-border-color);
-        border-radius: var(--input-border-radius);
-        border-style: var(--input-border-style);
-        border-width: var(--input-border-width);
-        color: var(--input-color);
-        font-size: var(--input-font-size);
-        line-height: var(--input-line-height);
-        min-block-size: var(--input-height);
-        padding: var(--input-padding-y) var(--input-padding-x);
+    &:checked {
+        background-color: var(--checkbox-checked-bg-color);
+        box-shadow: inset 0 0 0 calc(var(--space-2px) * 2) var(--checkbox-checked-box-shadow);
 
         &:focus-visible {
-            background-color: var(--input-bg-color-focus);
-            box-shadow: inset var(--focus-shadow) var(--focus-width) var(--focus-color);
-        }
-
-        &::placeholder {
-            color: var(--placeholder-color);
-            opacity: var(--placeholder-opacity);
+            border-color: var(--input-border-color-focus);
         }
     }
+}
 
-    // Checkbox, Radio
-    [class*="form"] [type="checkbox"],
-    [class*="form"] [type="radio"] {
-        appearance: none !important;
-        block-size: var(--checkbox-size);
-        inline-size: var(--checkbox-size);
-        min-block-size: initial;
-        padding: initial;
+// Checkbox
+[class*="form"] [type="checkbox"] {
+    border-radius: var(--checkbox-border-radius);
+}
 
-        &:checked {
-            background-color: var(--checkbox-checked-bg-color);
-            box-shadow: inset 0 0 0 calc(var(--space-2px) * 2) var(--checkbox-checked-box-shadow);
+// Radio
+[class*="form"] [type="radio"] {
+    border-radius: var(--radius-round);
+}
 
-            &:focus-visible {
-                border-color: var(--input-border-color-focus);
-            }
-        }
-    }
+// Select
+[class*="form"] select {
+    appearance: none !important;
+}
 
-    // Checkbox
-    [class*="form"] [type="checkbox"] {
-        border-radius: var(--checkbox-border-radius);
-    }
+// Asterisk
+[class*="form"] .asterisk-left label:before,
+[class*="form"] .asterisk-right label:after {
+    color: var(--form-attention-color);
+}
 
-    // Radio
-    [class*="form"] [type="radio"] {
-        border-radius: var(--radius-round);
-    }
+// Error Border
+[class*="form"] .ff-el-is-error .ff-el-form-control {
+    border-color: var(--form-error-color) !important;
+}
 
-    // Select
-    [class*="form"] select {
-        appearance: none !important;
-    }
+// Error Color
+[class*="form"] .ff-el-is-error .ff-el-form-check-label,
+[class*="form"] .ff-el-is-error .ff-el-form-check-label a,
+[class*="form"] .text-danger {
+    color: var(--form-error-color);
+}
 
-    // Asterisk
-    [class*="form"] .asterisk-left label:before,
-    [class*="form"] .asterisk-right label:after {
-        color: var(--form-attention-color);
-    }
+// Error Font Size
+[class*="form"] .text-danger {
+    font-size: var(--form-error-font-size);
+    margin-block-start: var(--space-xs);
+}
 
-    // Error Border
-    [class*="form"] .ff-el-is-error .ff-el-form-control {
-        border-color: var(--form-error-color) !important;
-    }
-
-    // Error Color
-    [class*="form"] .ff-el-is-error .ff-el-form-check-label,
-    [class*="form"] .ff-el-is-error .ff-el-form-check-label a,
-    [class*="form"] .text-danger {
-        color: var(--form-error-color);
-    }
-
-    // Error Font Size
-    [class*="form"] .text-danger {
-        font-size: var(--form-error-font-size);
-        margin-block-start: var(--space-xs);
-    }
-
-    // Submit Button Color
-    [class*="form"] [type="submit"] {
-        @extend .btn;
-    }
+// Submit Button Color
+[class*="form"] [type="submit"] {
+    @extend .btn;
 }
