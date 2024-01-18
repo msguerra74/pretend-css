@@ -159,12 +159,9 @@ $breakpoint: (
     --space-px: #{px-rel(1px)};
     --space-2px: #{px-rel(2px)};
     --space-base: #{fluid(24px, 48px)};
-    --space-card: var(--spacer-xl);
-    --space-container: var(--spacer-2xl);
-    --space-content: var(--space-xl);
-    --space-grid: var(--space-base);
+    --space-block: var(--spacer-xl);
+    --space-container: var(--spacer-3xl);
     --space-icon: var(--space-s);
-    --space-layout: var(--spacer-3xl);
     --space-section: var(--spacer-5xl);
 
     // Grid
@@ -740,7 +737,7 @@ textarea {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: var(--space-content);
+    gap: var(--space-block);
     inline-size: 100%;
     z-index: var(--z-front);
 
@@ -749,11 +746,11 @@ textarea {
         z-index: var(--z-front);
 
         & > * + * {
-            margin-block-start: var(--space-content);
+            margin-block-start: var(--space-block);
         }
     }
 
-    &--safe {
+    &--section {
         @extend .block;
 
         padding-inline: var(--space-base);
@@ -771,8 +768,20 @@ textarea {
     max-inline-size: var(--width-website);
     z-index: var(--z-front);
 
-    &--safe {
+    &--section {
         @extend .container;
+
+        padding-inline: var(--space-base);
+    }
+}
+
+// Grid
+.grid {
+    display: grid;
+    inline-size: 100%;
+
+    &--section {
+        @extend .grid;
 
         padding-inline: var(--space-base);
     }
@@ -964,8 +973,8 @@ $_value in $color {
 .float--left,
 .float--left-offset {
     float: inline-start;
-    margin-block-end: var(--space-content);
-    margin-inline-end: var(--space-content);
+    margin-block-end: var(--space-block);
+    margin-inline-end: var(--space-block);
 }
 
 .float--left-offset {
@@ -976,8 +985,8 @@ $_value in $color {
 .float--right,
 .float--right-offset {
     float: inline-end;
-    margin-block-end: var(--space-content);
-    margin-inline-start: var(--space-content);
+    margin-block-end: var(--space-block);
+    margin-inline-start: var(--space-block);
 }
 
 .float--right-offset {
@@ -994,8 +1003,8 @@ $_value in $color {
 
         .float--#{$_key}-left {
             float: inline-start;
-            margin-block-end: var(--space-content);
-            margin-inline-end: var(--space-content);
+            margin-block-end: var(--space-block);
+            margin-inline-end: var(--space-block);
             margin-inline-start: 0;
         }
 
@@ -1007,9 +1016,9 @@ $_value in $color {
 
         .float--#{$_key}-right {
             float: inline-end;
-            margin-block-end: var(--space-content);
+            margin-block-end: var(--space-block);
             margin-inline-end: 0;
-            margin-inline-start: var(--space-content);
+            margin-inline-start: var(--space-block);
         }
     }
 }
@@ -1179,14 +1188,17 @@ $_value in $breakpoint {
 }
 
 // Clear
-.clear::before,
-.clear::after {
-    content: "";
-    display: table;
-}
+.clear {
 
-.clear::after {
-    clear: both;
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
 }
 
 // Content Column
@@ -1766,15 +1778,15 @@ $_value in $breakpoint {
     }
 }
 
-.gap--card {
-    gap: var(--space-card);
+.gap--block {
+    gap: var(--space-block);
 
     &-column {
-        column-gap: var(--space-card);
+        column-gap: var(--space-block);
     }
 
     &-row {
-        row-gap: var(--space-card);
+        row-gap: var(--space-block);
     }
 }
 
@@ -1790,30 +1802,6 @@ $_value in $breakpoint {
     }
 }
 
-.gap--content {
-    gap: var(--space-content);
-
-    &-column {
-        column-gap: var(--space-content);
-    }
-
-    &-row {
-        row-gap: var(--space-content);
-    }
-}
-
-.gap--grid {
-    gap: var(--space-grid);
-
-    &-column {
-        column-gap: var(--space-grid);
-    }
-
-    &-row {
-        row-gap: var(--space-grid);
-    }
-}
-
 .gap--icon {
     gap: var(--space-icon);
 
@@ -1823,18 +1811,6 @@ $_value in $breakpoint {
 
     &-row {
         row-gap: var(--space-icon);
-    }
-}
-
-.gap--layout {
-    gap: var(--space-layout);
-
-    &-column {
-        column-gap: var(--space-layout);
-    }
-
-    &-row {
-        row-gap: var(--space-layout);
     }
 }
 
@@ -2731,20 +2707,34 @@ $_value in $breakpoint {
     }
 }
 
-// Header Overlay
-// Set header data attribute to use ACF header style option (standard, overlay)
+// Header Style
+// Set header data attribute to use ACF header style option (default, fixed, overlay)
+[data-header-style="fixed"],
 [data-header-style="overlay"] {
     inline-size: 100%;
     inset-block-start: 0;
     inset-inline-end: 0;
     inset-inline-start: 0;
+    z-index: 100;
+}
+
+[data-header-style="fixed"] {
+    position: fixed;
+}
+
+[data-header-style="overlay"] {
     position: absolute;
-    z-index: var(--z-mid);
 }
 
 // Height
-.height--fill {
-    min-block-size: 100%;
+.height--half {
+    min-block-size: 50vh;
+    min-block-size: 50svh;
+}
+
+.height--partial {
+    min-block-size: 75vh;
+    min-block-size: 75svh;
 }
 
 .height--full {
@@ -2752,10 +2742,24 @@ $_value in $breakpoint {
     min-block-size: 100svh;
 }
 
+.height--fill {
+    min-block-size: 100%;
+}
+
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
         .height--#{$_key}-auto {
             min-block-size: auto;
+        }
+
+        .height--#{$_key}-half {
+            min-block-size: 50vh;
+            min-block-size: 50svh;
+        }
+
+        .height--#{$_key}-partial {
+            min-block-size: 75vh;
+            min-block-size: 75svh;
         }
 
         .height--#{$_key}-full {
@@ -3218,8 +3222,8 @@ $_value in $breakpoint {
     padding: var(--space-base);
 }
 
-.padding--card {
-    padding: var(--space-card);
+.padding--block {
+    padding: var(--space-block);
 }
 
 .padding--icon {
@@ -3644,7 +3648,6 @@ $_value in $breakpoint {
 .width--max,
 .width--prose,
 .width--website,
-.width--safe,
 .width--fill {
     inline-size: 100%;
 }
@@ -3687,10 +3690,6 @@ $_value in $breakpoint {
 
 .width--website {
     max-inline-size: var(--width-website);
-}
-
-.width--safe {
-    padding-inline: var(--space-base);
 }
 
 // Z-Index

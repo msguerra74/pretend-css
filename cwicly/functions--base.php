@@ -47,10 +47,12 @@ function pretend_css( $plugin_classes ) {
             'btn--small',
             'btn--large',
             'block',
-            'block--safe',
+            'block--section',
             'block--float',
             'container',
-            'container--safe',
+            'container--section',
+            'grid',
+            'grid--section',
             'section',
             'section--flat',
             'center--all',
@@ -124,15 +126,25 @@ function pretend_css( $plugin_classes ) {
             'content-column-span--all',
             'form',
             'form--alt',
-            'height--fill',
+            'height--half',
+            'height--partial',
             'height--full',
+            'height--fill',
             'height--xl-auto',
+            'height--xl-half',
+            'height--xl-partial',
             'height--xl-full',
             'height--l-auto',
+            'height--l-half',
+            'height--l-partial',
             'height--l-full',
             'height--m-auto',
+            'height--m-half',
+            'height--m-partial',
             'height--m-full',
             'height--s-auto',
+            'height--s-half',
+            'height--s-partial',
             'height--s-full',
             'hide',
             'show',
@@ -216,11 +228,32 @@ function pretend_css_colors( $global_colors ) {
     // Define the slug ('colors') color scheme and specify a name and colors.
     $global_colors['colors'] = array(
         'name' => 'Colors',
+        'colors'   => array(
+            array(
+                'name'  => 'Action',
+                'color' => 'var(--action)',
+            ),
+            array(
+                'name'  => 'Primary',
+                'color' => 'var(--primary)',
+            ),
+            array(
+                'name'  => 'Secondary',
+                'color' => 'var(--secondary)',
+            ),
+            array(
+                'name'  => 'Tertiary',
+                'color' => 'var(--tertiary)',
+            ),
+            array(
+                'name'  => 'Quaternary',
+                'color' => 'var(--quaternary)',
+            ),
+        ),
         'palettes' => array(
             array(
                 'name' => 'Action',
                 'colors' => array(
-                    'var(--action)',
                     'var(--action-lighter)',
                     'var(--action-lighter-darker)',
                     'var(--action-light)',
@@ -235,7 +268,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Primary',
                 'colors' => array(
-                    'var(--primary)',
                     'var(--primary-lighter)',
                     'var(--primary-lighter-darker)',
                     'var(--primary-light)',
@@ -250,7 +282,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Secondary',
                 'colors' => array(
-                    'var(--secondary)',
                     'var(--secondary-lighter)',
                     'var(--secondary-lighter-darker)',
                     'var(--secondary-light)',
@@ -265,7 +296,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Tertiary',
                 'colors' => array(
-                    'var(--tertiary)',
                     'var(--tertiary-lighter)',
                     'var(--tertiary-lighter-darker)',
                     'var(--tertiary-light)',
@@ -280,7 +310,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Quaternary',
                 'colors' => array(
-                    'var(--quaternary)',
                     'var(--quaternary-lighter)',
                     'var(--quaternary-lighter-darker)',
                     'var(--quaternary-light)',
@@ -298,11 +327,24 @@ function pretend_css_colors( $global_colors ) {
     // Define the slug ('base') color scheme and specify a name and colors.
     $global_colors['base'] = array(
         'name' => 'Base',
+        'colors'   => array(
+            array(
+                'name'  => 'Base',
+                'color' => 'var(--base)',
+            ),
+            array(
+                'name'  => 'White',
+                'color' => 'var(--white)',
+            ),
+            array(
+                'name'  => 'Black',
+                'color' => 'var(--black)',
+            ),
+        ),
         'palettes' => array(
             array(
                 'name' => 'Base',
                 'colors' => array(
-                    'var(--base)',
                     'var(--base-lighter)',
                     'var(--base-lighter-darker)',
                     'var(--base-light)',
@@ -317,14 +359,12 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'White',
                 'colors' => array(
-                    'var(--white)',
                     'var(--white-black)',
                 ),
             ),
             array(
                 'name' => 'Black',
                 'colors' => array(
-                    'var(--black)',
                     'var(--black-white)',
                 ),
             ),
@@ -334,11 +374,32 @@ function pretend_css_colors( $global_colors ) {
     // Define the slug ('contextual') color scheme and specify a name and colors.
     $global_colors['contextual'] = array(
         'name' => 'Contextual',
+        'colors'   => array(
+            array(
+                'name'  => 'Danger',
+                'color' => 'var(--danger)',
+            ),
+            array(
+                'name'  => 'Highlight',
+                'color' => 'var(--highlight)',
+            ),
+            array(
+                'name'  => 'Info',
+                'color' => 'var(--info)',
+            ),
+            array(
+                'name'  => 'Success',
+                'color' => 'var(--success)',
+            ),
+            array(
+                'name'  => 'Warning',
+                'color' => 'var(--warning)',
+            ),
+        ),
         'palettes' => array(
             array(
                 'name' => 'Danger',
                 'colors' => array(
-                    'var(--danger)',
                     'var(--danger-lighter)',
                     'var(--danger-lighter-darker)',
                     'var(--danger-light)',
@@ -353,7 +414,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Highlight',
                 'colors' => array(
-                    'var(--highlight)',
                     'var(--highlight-lighter)',
                     'var(--highlight-lighter-darker)',
                     'var(--highlight-light)',
@@ -368,7 +428,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Info',
                 'colors' => array(
-                    'var(--info)',
                     'var(--info-lighter)',
                     'var(--info-lighter-darker)',
                     'var(--info-light)',
@@ -383,7 +442,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Success',
                 'colors' => array(
-                    'var(--success)',
                     'var(--success-lighter)',
                     'var(--success-lighter-darker)',
                     'var(--success-light)',
@@ -398,7 +456,6 @@ function pretend_css_colors( $global_colors ) {
             array(
                 'name' => 'Warning',
                 'colors' => array(
-                    'var(--warning)',
                     'var(--warning-lighter)',
                     'var(--warning-lighter-darker)',
                     'var(--warning-light)',
