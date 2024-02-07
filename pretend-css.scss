@@ -117,7 +117,8 @@ $breakpoint: (
 :root,
 :root.light,
 :root.dark .light,
-.light {
+.light,
+[data-mode="light"] {
 
     // Color
     @each $_key,
@@ -149,7 +150,8 @@ $breakpoint: (
 // Dark Mode Color
 :root.dark,
 :root.light .dark,
-.dark {
+.dark,
+[data-mode="dark"] {
 
     // Color
     @each $_key,
@@ -180,8 +182,6 @@ $breakpoint: (
     --aspect-wide: 2 / 1;
 
     // Contextual
-    --bg-color-base: var(--base-lighter);
-    --color-base: var(--base-darker);
     --space-px: #{px-rel(1)};
     --space-2px: #{px-rel(2)};
     --space-base: #{fluid(24, 48)};
@@ -333,14 +333,16 @@ $breakpoint: (
     :root,
     :root.light,
     :root.dark .light,
-    .light {
+    .light,
+    [data-mode="light"] {
         // Contextual
         --blur-bg-color: hsl(var(--base-h) var(--base-s) 95% / .2);
     }
 
     :root.dark,
     :root.light .dark,
-    .dark {
+    .dark,
+    [data-mode="dark"] {
         // Contextual
         --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / .2);
     }
@@ -430,7 +432,7 @@ $breakpoint: (
 
 // HTML
 html {
-    background-color: var(-bg-color-base);
+    background-color: var(--base-lighter);
     block-size: 100%;
     font-size: 100%;
     text-size-adjust: none;
@@ -442,9 +444,9 @@ html {
 
 // Body
 body {
-    background-color: var(--bg-color-base);
+    background-color: var(--base-lighter);
     block-size: 100%;
-    color: var(--color-base);
+    color: var(--base-darker);
     font-size: var(--text-base);
     -webkit-font-smoothing: auto;
     font-weight: 400;
@@ -1977,6 +1979,7 @@ $_value in $breakpoint {
     column-gap: 0;
     display: grid;
     grid-template-columns: var(--grid-area--layout);
+    padding-inline: 0;
 
     & > * {
         inline-size: 100%;
@@ -2380,6 +2383,10 @@ $_value in $breakpoint {
 
 .relative {
     position: relative;
+}
+
+.static {
+    position: static;
 }
 
 .sticky {

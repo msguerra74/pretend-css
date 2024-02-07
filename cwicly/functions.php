@@ -676,6 +676,7 @@ function pretend_css( $plugin_classes ) {
             'absolute--right-flat',
             'absolute--top-flat',
             'relative',
+            'static',
             'sticky',
             'sticky--offset',
             'radius--xs',
