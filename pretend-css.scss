@@ -414,8 +414,8 @@ $breakpoint: (
 
 // Selection
 ::selection {
-    background-color: var(--action);
-    color: var(--action-lighter);
+    background-color: var(--action-light);
+    color: var(--action-dark);
     text-shadow: none;
 }
 
@@ -1565,15 +1565,15 @@ $_value in $breakpoint {
 .form {
     --checkbox-border-radius: 0;
     --checkbox-checked-bg-color: var(--action);
-    --checkbox-checked-box-shadow: var(--white-black);
+    --checkbox-checked-box-shadow: var(--white);
     --checkbox-size: var(--space-l);
     --form-attention-color: var(--action);
     --form-error-color: var(--danger);
     --form-error-font-size: var(--text-s);
-    --form-gap: var(--grid-gap);
+    --form-gap: var(--space-grid);
     --form-success-bg-color: var(--success);
     --form-success-color: var(--success-lighter);
-    --input-bg-color-focus: var(--white-black);
+    --input-bg-color-focus: var(--white);
     --input-bg-color: var(--base-lighter);
     --input-border-color-focus: var(--action);
     --input-border-color: var(--base-mid);
@@ -1598,15 +1598,15 @@ $_value in $breakpoint {
 .form--alt {
     --checkbox-border-radius: 0;
     --checkbox-checked-bg-color: var(--action);
-    --checkbox-checked-box-shadow: var(--white-black);
+    --checkbox-checked-box-shadow: var(--white);
     --checkbox-size: var(--space-l);
     --form-attention-color: var(--action);
     --form-error-color: var(--danger);
     --form-error-font-size: var(--text-s);
-    --form-gap: var(--grid-gap);
+    --form-gap: var(--space-grid);
     --form-success-bg-color: var(--success);
     --form-success-color: var(--success-lighter);
-    --input-bg-color-focus: var(--white-black);
+    --input-bg-color-focus: var(--white);
     --input-bg-color: var(--base-lighter);
     --input-border-color-focus: var(--action);
     --input-border-color: var(--base-mid);
@@ -1727,9 +1727,7 @@ $_value in $breakpoint {
 .grid--3-1,
 .grid--3-2,
 .grid--4-1 {
-    display: grid;
-    gap: var(--space-grid);
-    inline-size: 100%;
+    @extend .grid;
 }
 
 .grid--1 {
@@ -1802,7 +1800,6 @@ $_value in $breakpoint {
         .grid--#{$_key}-3-2,
         .grid--#{$_key}-4-1 {
             display: grid;
-            gap: var(--space-grid);
             inline-size: 100%;
         }
 
@@ -2381,6 +2378,30 @@ $_value in $breakpoint {
     }
 }
 
+.fixed {
+    position: fixed;
+
+    &--flat {
+        inset: 0
+    }
+
+    &--bottom-flat {
+        inset-block-end: 0;
+    }
+
+    &--left-flat {
+        inset-inline-start: 0;
+    }
+
+    &--right-flat {
+        inset-inline-end: 0;
+    }
+
+    &--top-flat {
+        inset-block-start: 0;
+    }
+}
+
 .relative {
     position: relative;
 }
@@ -2392,12 +2413,12 @@ $_value in $breakpoint {
 .sticky {
     inset-block-start: 0;
     position: sticky;
-}
 
-.sticky--offset {
-    --sticky-offset: var(--space-base);
+    &--offset {
+        --sticky-offset: var(--space-base);
 
-    inset-block-start: var(--sticky-offset);
+        inset-block-start: var(--sticky-offset);
+    }
 }
 
 // Radius
@@ -3002,8 +3023,7 @@ before-after {
 
 // Error Border
 [class*="form"] .ff-el-is-error .ff-el-form-control {
-    border-color: var(--form-error-color) !important;
-}
+    border-color: var(--form-error-color) !important;}
 
 // Error Color
 [class*="form"] .ff-el-is-error .ff-el-form-check-label,
