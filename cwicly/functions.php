@@ -24,8 +24,8 @@ function pretend_css( $plugin_classes ) {
 
         // Define an array of CSS classes under the 'classes' key.
         'classes' => array(
-            'light',
-            'dark',
+            'color-scheme--light',
+            'color-scheme--dark',
             'focus--light',
             'focus--dark',
             'link--dark',
@@ -801,11 +801,6 @@ function pretend_css( $plugin_classes ) {
             'z--mid',
             'z--high',
             'z--top',
-            'slider--crawl',
-            'tab-accordion',
-            'tabs',
-            'tab-contents',
-            'tab',
         ),
     );
 
