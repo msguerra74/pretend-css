@@ -38,7 +38,7 @@ $width-website: $width-xl;
 // Plugins
 $bricks: true;
 $cwicly: false;
-$fluent-forms: false;
+$fluent-forms: true;
 
 
 
@@ -2359,70 +2359,102 @@ $_value in $breakpoint {
 }
 
 // Position
-.absolute {
+.position--absolute {
     position: absolute;
-
-    &--flat {
-        inset: 0
-    }
-
-    &--bottom-flat {
-        inset-block-end: 0;
-    }
-
-    &--left-flat {
-        inset-inline-start: 0;
-    }
-
-    &--right-flat {
-        inset-inline-end: 0;
-    }
-
-    &--top-flat {
-        inset-block-start: 0;
-    }
 }
 
-.fixed {
+.position--fixed {
     position: fixed;
-
-    &--flat {
-        inset: 0
-    }
-
-    &--bottom-flat {
-        inset-block-end: 0;
-    }
-
-    &--left-flat {
-        inset-inline-start: 0;
-    }
-
-    &--right-flat {
-        inset-inline-end: 0;
-    }
-
-    &--top-flat {
-        inset-block-start: 0;
-    }
 }
 
-.relative {
+.position--relative {
     position: relative;
 }
 
-.static {
+.position--static {
     position: static;
 }
 
-.sticky {
+.position--sticky {
     inset-block-start: 0;
     position: sticky;
+}
 
-    &--offset {
-        --sticky-offset: var(--space-base);
+.position--sticky-offset {
+    --sticky-offset: var(--space-base);
 
-        inset-block-start: var(--sticky-offset);
+    inset-block-start: var(--sticky-offset);
+}
+
+// Position - Flat
+.position--flat {
+    inset: 0
+}
+
+.position--bottom-flat {
+    inset-block-end: 0;
+}
+
+.position--left-flat {
+    inset-inline-start: 0;
+}
+
+.position--right-flat {
+    inset-inline-end: 0;
+}
+
+.position--top-flat {
+    inset-block-start: 0;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .position--#{$_key}-absolute {
+            position: absolute;
+        }
+
+        .position--#{$_key}-fixed {
+            position: fixed;
+        }
+
+        .position--#{$_key}-relative {
+            position: relative;
+        }
+
+        .position--#{$_key}-static {
+            position: static;
+        }
+
+        .position--#{$_key}-sticky {
+            inset-block-start: 0;
+            position: sticky;
+        }
+
+        .position--#{$_key}-sticky-offset {
+            --sticky-offset: var(--space-base);
+
+            inset-block-start: var(--sticky-offset);
+        }
+
+        .position--#{$_key}-flat {
+            inset: 0
+        }
+
+        .position--#{$_key}-bottom-flat {
+            inset-block-end: 0;
+        }
+
+        .position--#{$_key}-left-flat {
+            inset-inline-start: 0;
+        }
+
+        .position--#{$_key}-right-flat {
+            inset-inline-end: 0;
+        }
+
+        .position--#{$_key}-top-flat {
+            inset-block-start: 0;
+        }
     }
 }
 
@@ -3033,7 +3065,8 @@ $_value in $breakpoint {
 
     // Error Border
     [class*="form"] .ff-el-is-error .ff-el-form-control {
-        border-color: var(--form-error-color) !important;}
+        border-color: var(--form-error-color) !important;
+    }
 
     // Error Color
     [class*="form"] .ff-el-is-error .ff-el-form-check-label,
