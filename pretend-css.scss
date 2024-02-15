@@ -37,7 +37,7 @@ $width-website: $width-xl;
 
 // Plugins
 $bricks: true;
-$cwicly: false;
+$cwicly: true;
 $fluent-forms: true;
 
 
@@ -154,32 +154,6 @@ $breakpoint: (
 
     // Contextual
     --blur-bg-color: hsl(var(--base-h) var(--base-s) 95% / .9);
-}
-
-// Dark Mode Color
-:root.color-scheme--dark,
-:root.color-scheme--light .color-scheme--dark,
-.color-scheme--dark,
-[data-color-scheme="dark"] {
-
-    // Color
-    @each $_key,
-    $_value in $color {
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-    }
-
-    --white-h: 0deg;
-    --white-s: 0%;
-    --white-l: 0%;
-    --black-h: 0deg;
-    --black-s: 0%;
-    --black-l: 100%;
-
-    // Contextual
-    --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / .9);
 }
 
 :root {
@@ -305,6 +279,32 @@ $breakpoint: (
 
 
 // --- Dark Theme --- //
+
+// Dark Mode Color
+:root.color-scheme--dark,
+:root.color-scheme--light .color-scheme--dark,
+.color-scheme--dark,
+[data-color-scheme="dark"] {
+
+    // Color
+    @each $_key,
+    $_value in $color {
+        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+    }
+
+    --white-h: 0deg;
+    --white-s: 0%;
+    --white-l: 0%;
+    --black-h: 0deg;
+    --black-s: 0%;
+    --black-l: 100%;
+
+    // Contextual
+    --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / .9);
+}
 
 @media(prefers-color-scheme: dark) {
     :root {
@@ -535,12 +535,18 @@ a.link--dark {
 }
 
 // Heading
-h1, .h--1,
-h2, .h--2,
-h3, .h--3,
-h4, .h--4,
-h5, .h--5,
-h6, .h--6 {
+h1,
+.h--1,
+h2,
+.h--2,
+h3,
+.h--3,
+h4,
+.h--4,
+h5,
+.h--5,
+h6,
+.h--6 {
     color: var(--h-color);
     font-size: var(--h-font-size);
     font-weight: var(--h-font-weight);
@@ -548,7 +554,8 @@ h6, .h--6 {
     text-transform: var(--h-text-transform);
 }
 
-h1, .h--1 {
+h1,
+.h--1 {
     --h-color: inherit;
     --h-font-size: var(--text-4xl);
     --h-font-weight: 700;
@@ -556,7 +563,8 @@ h1, .h--1 {
     --h-text-transform: uppercase;
 }
 
-h2, .h--2 {
+h2,
+.h--2 {
     --h-color: inherit;
     --h-font-size: var(--text-3xl);
     --h-font-weight: 700;
@@ -564,7 +572,8 @@ h2, .h--2 {
     --h-text-transform: uppercase;
 }
 
-h3, .h--3 {
+h3,
+.h--3 {
     --h-color: inherit;
     --h-font-size: var(--text-2xl);
     --h-font-weight: 700;
@@ -572,7 +581,8 @@ h3, .h--3 {
     --h-text-transform: none;
 }
 
-h4, .h--4 {
+h4,
+.h--4 {
     --h-color: inherit;
     --h-font-size: var(--text-xl);
     --h-font-weight: 700;
@@ -580,7 +590,8 @@ h4, .h--4 {
     --h-text-transform: none;
 }
 
-h5, .h--5 {
+h5,
+.h--5 {
     --h-color: inherit;
     --h-font-size: var(--text-l);
     --h-font-weight: 700;
@@ -588,7 +599,8 @@ h5, .h--5 {
     --h-text-transform: none;
 }
 
-h6, .h--6 {
+h6,
+.h--6 {
     --h-color: inherit;
     --h-font-size: var(--text-m);
     --h-font-weight: 700;
@@ -1115,7 +1127,7 @@ $_value in $breakpoint {
 }
 
 // Background Overlay
-// Add .relative to parent container
+// Add .position--relative to parent container
 // Add .bg-isolate to parent container if needed
 .bg-overlay {
     block-size: 100% !important;
@@ -1732,7 +1744,9 @@ $_value in $breakpoint {
 .grid--3-1,
 .grid--3-2,
 .grid--4-1 {
-    @extend .grid;
+    display: grid;
+    gap: var(--space-grid);
+    inline-size: 100%;
 }
 
 .grid--1 {
@@ -1805,6 +1819,7 @@ $_value in $breakpoint {
         .grid--#{$_key}-3-2,
         .grid--#{$_key}-4-1 {
             display: grid;
+            gap: var(--space-grid);
             inline-size: 100%;
         }
 
@@ -1963,12 +1978,12 @@ $_value in $breakpoint {
 }
 
 // Grid - Auto
-// Locally scope var(--grid-min) value to the ideal size of the grid items.
-// Example: .class { --grid-min: var(--width-min); }
+// Locally scope var(--column-min) value to the ideal size of the grid items.
+// Example: .class { --column-min: var(--width-min); }
 .grid--auto {
     @extend .grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, var(--width-min)), 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
     grid-template-rows: var(--grid-1);
 }
 
@@ -2378,19 +2393,15 @@ $_value in $breakpoint {
 .position--sticky {
     inset-block-start: 0;
     position: sticky;
-}
 
-.position--sticky-offset {
-    --sticky-offset: var(--space-base);
+    &-offset {
+        --sticky-offset: var(--space-base);
 
-    inset-block-start: var(--sticky-offset);
+        inset-block-start: var(--sticky-offset);
+    }
 }
 
 // Position - Flat
-.position--flat {
-    inset: 0
-}
-
 .position--bottom-flat {
     inset-block-end: 0;
 }
@@ -2405,6 +2416,10 @@ $_value in $breakpoint {
 
 .position--top-flat {
     inset-block-start: 0;
+}
+
+.position--flat {
+    inset: 0
 }
 
 @each $_key, $_value in $breakpoint {
@@ -2436,10 +2451,6 @@ $_value in $breakpoint {
             inset-block-start: var(--sticky-offset);
         }
 
-        .position--#{$_key}-flat {
-            inset: 0
-        }
-
         .position--#{$_key}-bottom-flat {
             inset-block-end: 0;
         }
@@ -2454,6 +2465,10 @@ $_value in $breakpoint {
 
         .position--#{$_key}-top-flat {
             inset-block-start: 0;
+        }
+
+        .position--#{$_key}-flat {
+            inset: 0
         }
     }
 }
@@ -2573,6 +2588,26 @@ $_value in $breakpoint {
     }
 }
 
+// Text
+.text--base {
+    font-size: var(--text-base);
+}
+
+.text--fine {
+    font-size: var(--text-fine);
+    line-height: var(--text-height-m);
+}
+
+.text--hero {
+    font-size: var(--text-hero);
+    line-height: var(--text-height-s);
+}
+
+.text--lede {
+    font-size: var(--text-lede);
+    line-height: var(--text-height-m);
+}
+
 // Text - Align
 .text-align--center {
     text-align: center;
@@ -2639,26 +2674,6 @@ $_value in $breakpoint {
 
 .text-height--l {
     line-height: var(--text-height-l);
-}
-
-// Text - Size
-.text-size--base {
-    font-size: var(--text-base);
-}
-
-.text-size--fine {
-    font-size: var(--text-fine);
-    line-height: var(--text-height-m);
-}
-
-.text-size--hero {
-    font-size: var(--text-hero);
-    line-height: var(--text-height-s);
-}
-
-.text-size--lede {
-    font-size: var(--text-lede);
-    line-height: var(--text-height-m);
 }
 
 // Text - Spaced
@@ -2901,67 +2916,6 @@ $_value in $breakpoint {
     // Section
     .cc-sct {
         @extend .section;
-    }
-
-    // Before After
-    // Add from Cwicly cloud library
-    // Activate Cwicly Before After JS in WPCodeBox
-    before-after {
-        --divider-color: var(--white);
-        --divider-shadow: none;
-        --divider-width: var(--space-xs);
-        --default-handle-color: var(--white);
-        --default-handle-opacity: 1;
-        --default-handle-shadow: none;
-        --default-handle-width: var(--space-2xl);
-        --handle-position-start: 50%;
-
-        visibility: hidden;
-
-        & [slot="second"] {
-            display: none;
-        }
-
-        &.rendered {
-            visibility: inherit;
-        }
-
-        &.rendered [slot="second"] {
-            display: unset;
-        }
-    }
-
-    // Slider Crawl
-    // Set duration to -1
-    // Set transition to around 10000
-    // Add .slider--crawl to Cwicly class list in functions.php
-    .slider--crawl {
-        & .swiper-wrapper {
-            transition-timing-function: linear;
-        }
-    }
-
-    // Tab Accordion
-    // Add from Cwicly cloud library
-    // Activate Cwicly Tab Accordion JS in WPCodeBox
-    // Add .tab-accordion, .tab, .tabs, .tab-content, .tab-contents to Cwicly class list in functions.php
-    // .tab-accordion > .tabs > .tab
-    // .tab-accordion > .tab-contents > .tab-content
-    @include breakpoint($width-m) {
-        .tab-accordion {
-            align-items: stretch;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tab-accordion .tabs,
-        .tab-accordion .tab-contents {
-            display: contents;
-        }
-
-        .tab-accordion .tab {
-            text-align: left;
-        }
     }
 }
 
