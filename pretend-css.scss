@@ -33,15 +33,6 @@ $width-website: $width-xl;
 
 
 
-// --- SCSS Options --- //
-
-// Plugins
-$bricks: true;
-$cwicly: true;
-$fluent-forms: true;
-
-
-
 // --- SCSS Loop --- //
 
 $color: (
@@ -2867,196 +2858,19 @@ $_value in $breakpoint {
 
 
 
-@if $bricks {
-    // --- Bricks --- //
+// --- Bricks --- //
 
-    // Button
-    .brxe-button {
-        @extend .btn;
-    }
-
-    // Container
-    .brxe-container {
-        @extend .container;
-    }
-
-    // Section
-    .brxe-section {
-        @extend .section;
-    }
+// Button
+.brxe-button {
+    @extend .btn;
 }
 
-
-
-@if $cwicly {
-    // --- Cwicly --- //
-
-    // Button
-    .cc-btn {
-        @extend .btn;
-    }
-
-    // Container
-    .cc-cntr {
-        @extend .container;
-    }
-
-    // Section
-    .cc-sct {
-        @extend .section;
-    }
+// Container
+.brxe-container {
+    @extend .container;
 }
 
-
-
-@if $fluent-forms {
-    // --- Fluent Forms --- //
-
-    // Form Container Horizontal Gap
-    [class*="form"] .ff-t-container {
-        gap: var(--form-gap) !important;
-    }
-
-    // Form Container Vertical Margin
-    [class*="form"] .ff-el-group {
-        margin-block-end: var(--form-gap) !important;
-    }
-
-    // Form Container Last Child Margin
-    [class*="form"] fieldset > .ff-el-group:last-child {
-        margin-block-end: 0 !important;
-    }
-
-    // Label
-    [class*="form"] label {
-        color: var(--label-color) !important;
-        font-size: var(--label-font-size) !important;
-        font-weight: var(--label-font-weight) !important;
-    }
-
-    // Label Margin
-    [class*="form"] .ff-el-input--label {
-        margin-block-end: var(--space-s) !important;
-    }
-
-    // Input
-    [class*="form"] input,
-    [class*="form"] select,
-    [class*="form"] textarea {
-        background-color: var(--input-bg-color) !important;
-        border-color: var(--input-border-color) !important;
-        border-radius: var(--input-border-radius) !important;
-        border-style: var(--input-border-style) !important;
-        border-width: var(--input-border-width) !important;
-        color: var(--input-color) !important;
-        font-size: var(--input-font-size) !important;
-        line-height: var(--input-line-height) !important;
-        min-block-size: var(--input-height) !important;
-        padding: var(--input-padding-y) var(--input-padding-x) !important;
-
-        &:focus-visible {
-            background-color: var(--input-bg-color-focus) !important;
-            box-shadow: inset var(--focus-shadow) var(--focus-width) var(--focus-color) !important;
-        }
-
-        &::placeholder {
-            color: var(--placeholder-color) !important;
-            opacity: var(--placeholder-opacity) !important;
-        }
-    }
-
-    // Checkbox, Radio
-    [class*="form"] [type="checkbox"],
-    [class*="form"] [type="radio"] {
-        appearance: none !important;
-        block-size: var(--checkbox-size) !important;
-        inline-size: var(--checkbox-size) !important;
-        min-block-size: initial !important;
-        padding: initial !important;
-
-        &:checked {
-            background-color: var(--checkbox-checked-bg-color) !important;
-            box-shadow: inset 0 0 0 calc(var(--space-2px) * 2) var(--checkbox-checked-box-shadow) !important;
-
-            &:focus-visible {
-                border-color: var(--input-border-color-focus) !important;
-            }
-        }
-    }
-
-    // Checkbox
-    [class*="form"] [type="checkbox"] {
-        border-radius: var(--checkbox-border-radius) !important;
-    }
-
-    // Radio
-    [class*="form"] [type="radio"] {
-        border-radius: var(--radius-round) !important;
-    }
-
-    // Select
-    [class*="form"] select {
-        appearance: none !important;
-    }
-
-    // Asterisk
-    [class*="form"] .asterisk-left label:before,
-    [class*="form"] .asterisk-right label:after {
-        color: var(--form-attention-color) !important;
-    }
-
-    // Error Border
-    [class*="form"] .ff-el-is-error .ff-el-form-control {
-        border-color: var(--form-error-color) !important;
-    }
-
-    // Error Color
-    [class*="form"] .ff-el-is-error .ff-el-form-check-label,
-    [class*="form"] .ff-el-is-error .ff-el-form-check-label a,
-    [class*="form"] .text-danger {
-        color: var(--form-error-color) !important;
-    }
-
-    // Error Font Size
-    [class*="form"] .text-danger {
-        font-size: var(--form-error-font-size) !important;
-        margin-block-start: var(--space-xs) !important;
-    }
-
-    // Submit Button Color
-    [class*="form"] [type="submit"] {
-        @extend .btn;
-
-        background-color: var(--submit-bg-color) !important;
-        color: var(--submit-color) !important;
-    }
-
-    [class*="form"] [type="submit"] {
-        @extend .btn;
-
-        --btn-bg-color: var(--submit-bg-color) !important;
-        --btn-border-color: var(--submit-bg-color) !important;
-        --btn-color: var(--submit-color) !important;
-
-        &:focus-visible {
-            --focus-color: var(--input-border-color-focus);
-        }
-
-        &.btn--outline {
-            --btn-color: var(--submit-bg-color) !important;
-        }
-    }
-
-    // Success Message
-    [class*="form"] .ff-message-success {
-        background-color: var(--form-success-bg-color) !important;
-        border: none !important;
-        border-radius: var(--input-border-radius) !important;
-        box-shadow: none !important;
-        color: var(--form-success-color) !important;
-        margin: 0 auto !important;
-        padding: var(--input-padding-y) var(--input-padding-x) !important;
-        text-align: center !important;
-        width: fit-content !important;
-    }
+// Section
+.brxe-section {
+    @extend .section;
 }
