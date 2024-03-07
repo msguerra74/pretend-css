@@ -776,15 +776,277 @@ textarea {
 }
 
 // Grid
-.grid {
+.grid,
+.grid--1,
+.grid--2,
+.grid--3,
+.grid--4,
+.grid--5,
+.grid--1-2,
+.grid--1-3,
+.grid--1-4,
+.grid--2-1,
+.grid--2-3,
+.grid--3-1,
+.grid--3-2,
+.grid--4-1 {
     display: grid;
     gap: var(--space-grid);
     inline-size: 100%;
+}
 
-    &--offset {
-        @extend .grid;
+.grid--1 {
+    grid-template-columns: var(--grid-1);
+}
 
-        padding-inline: var(--space-offset);
+.grid--2 {
+    grid-template-columns: var(--grid-2);
+}
+
+.grid--3 {
+    grid-template-columns: var(--grid-3);
+}
+
+.grid--4 {
+    grid-template-columns: var(--grid-4);
+}
+
+.grid--5 {
+    grid-template-columns: var(--grid-5);
+}
+
+.grid--1-2 {
+    grid-template-columns: var(--grid-1-2);
+}
+
+.grid--1-3 {
+    grid-template-columns: var(--grid-1-3)
+}
+
+.grid--1-4 {
+    grid-template-columns: var(--grid-1-4)
+}
+
+.grid--2-1 {
+    grid-template-columns: var(--grid-2-1)
+}
+
+.grid--2-3 {
+    grid-template-columns: var(--grid-2-3)
+}
+
+.grid--3-1 {
+    grid-template-columns: var(--grid-3-1)
+}
+
+.grid--3-2 {
+    grid-template-columns: var(--grid-3-2)
+}
+
+.grid--4-1 {
+    grid-template-columns: var(--grid-4-1)
+}
+
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .grid--#{$_key}-1,
+        .grid--#{$_key}-2,
+        .grid--#{$_key}-3,
+        .grid--#{$_key}-4,
+        .grid--#{$_key}-5,
+        .grid--#{$_key}-1-2,
+        .grid--#{$_key}-1-3,
+        .grid--#{$_key}-1-4,
+        .grid--#{$_key}-2-1,
+        .grid--#{$_key}-2-3,
+        .grid--#{$_key}-3-1,
+        .grid--#{$_key}-3-2,
+        .grid--#{$_key}-4-1 {
+            display: grid;
+            gap: var(--space-grid);
+            inline-size: 100%;
+        }
+
+        .grid--#{$_key}-1 {
+            grid-template-columns: var(--grid-1);
+        }
+
+        .grid--#{$_key}-1 > * {
+            grid-column: 1 !important;
+        }
+
+        .grid--#{$_key}-2 {
+            grid-template-columns: var(--grid-2);
+        }
+
+        .grid--#{$_key}-3 {
+            grid-template-columns: var(--grid-3);
+        }
+
+        .grid--#{$_key}-4 {
+            grid-template-columns: var(--grid-4);
+        }
+
+        .grid--#{$_key}-5 {
+            grid-template-columns: var(--grid-5);
+        }
+
+        .grid--#{$_key}-1-2 {
+            grid-template-columns: var(--grid-1-2);
+        }
+
+        .grid--#{$_key}-1-3 {
+            grid-template-columns: var(--grid-1-3);
+        }
+
+        .grid--#{$_key}-1-4 {
+            grid-template-columns: var(--grid-1-4);
+        }
+
+        .grid--#{$_key}-2-1 {
+            grid-template-columns: var(--grid-2-1);
+        }
+
+        .grid--#{$_key}-2-3 {
+            grid-template-columns: var(--grid-2-3);
+        }
+
+        .grid--#{$_key}-3-1 {
+            grid-template-columns: var(--grid-3-1);
+        }
+
+        .grid--#{$_key}-3-2 {
+            grid-template-columns: var(--grid-3-2);
+        }
+
+        .grid--#{$_key}-4-1 {
+            grid-template-columns: var(--grid-4-1);
+        }
+    }
+}
+
+// Grid Alternate
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value, min) {
+        .grid--#{$_key}-alternate > .grid--2:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) {
+            grid-template-columns: var(--grid-2-1);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) {
+            grid-template-columns: var(--grid-3-1);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) {
+            grid-template-columns: var(--grid-4-1);
+        }
+
+        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-2);
+        }
+
+        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) {
+            grid-template-columns: var(--grid-3-2);
+        }
+
+        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-3);
+        }
+
+        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) {
+            grid-template-columns: var(--grid-2-3);
+        }
+
+        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+
+        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-4);
+        }
+
+        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) > *:last-child {
+            order: var(--z-back);
+        }
+    }
+}
+
+// Grid Order
+.order--first {
+    order: var(--z-back);
+}
+
+.order--last {
+    order: var(--z-high);
+}
+
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value) {
+        .order--#{$_key}-first {
+            order: var(--z-back);
+        }
+
+        .order--#{$_key}-last {
+            order: var(--z-high);
+        }
+    }
+}
+
+// Grid - Auto
+// Locally scope var(--column-min) value to the ideal size of the grid items.
+// Example: .class { --column-min: var(--width-min); }
+.grid--auto {
+    @extend .grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
+    grid-template-rows: var(--grid-1);
+}
+
+// Grid - Layout
+// Locally scope var(--content-width) value to the ideal width of the grid items.
+// Example: .class { --content-width: var(--width-website); }
+.grid--layout {
+    --grid-area--layout: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+
+    column-gap: 0;
+    display: grid;
+    grid-template-columns: var(--grid-area--layout);
+    padding-inline: 0;
+
+    & > * {
+        inline-size: 100%;
+        grid-column: content;
     }
 }
 
@@ -1727,280 +1989,6 @@ $_value in $breakpoint {
 
     &-row {
         row-gap: 0;
-    }
-}
-
-// Grid
-.grid--1,
-.grid--2,
-.grid--3,
-.grid--4,
-.grid--5,
-.grid--1-2,
-.grid--1-3,
-.grid--1-4,
-.grid--2-1,
-.grid--2-3,
-.grid--3-1,
-.grid--3-2,
-.grid--4-1 {
-    display: grid;
-    gap: var(--space-grid);
-    inline-size: 100%;
-}
-
-.grid--1 {
-    grid-template-columns: var(--grid-1);
-}
-
-.grid--2 {
-    grid-template-columns: var(--grid-2);
-}
-
-.grid--3 {
-    grid-template-columns: var(--grid-3);
-}
-
-.grid--4 {
-    grid-template-columns: var(--grid-4);
-}
-
-.grid--5 {
-    grid-template-columns: var(--grid-5);
-}
-
-.grid--1-2 {
-    grid-template-columns: var(--grid-1-2);
-}
-
-.grid--1-3 {
-    grid-template-columns: var(--grid-1-3)
-}
-
-.grid--1-4 {
-    grid-template-columns: var(--grid-1-4)
-}
-
-.grid--2-1 {
-    grid-template-columns: var(--grid-2-1)
-}
-
-.grid--2-3 {
-    grid-template-columns: var(--grid-2-3)
-}
-
-.grid--3-1 {
-    grid-template-columns: var(--grid-3-1)
-}
-
-.grid--3-2 {
-    grid-template-columns: var(--grid-3-2)
-}
-
-.grid--4-1 {
-    grid-template-columns: var(--grid-4-1)
-}
-
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value) {
-
-        .grid--#{$_key}-1,
-        .grid--#{$_key}-2,
-        .grid--#{$_key}-3,
-        .grid--#{$_key}-4,
-        .grid--#{$_key}-5,
-        .grid--#{$_key}-1-2,
-        .grid--#{$_key}-1-3,
-        .grid--#{$_key}-1-4,
-        .grid--#{$_key}-2-1,
-        .grid--#{$_key}-2-3,
-        .grid--#{$_key}-3-1,
-        .grid--#{$_key}-3-2,
-        .grid--#{$_key}-4-1 {
-            display: grid;
-            gap: var(--space-grid);
-            inline-size: 100%;
-        }
-
-        .grid--#{$_key}-1 {
-            grid-template-columns: var(--grid-1);
-        }
-
-        .grid--#{$_key}-1 > * {
-            grid-column: 1 !important;
-        }
-
-        .grid--#{$_key}-2 {
-            grid-template-columns: var(--grid-2);
-        }
-
-        .grid--#{$_key}-3 {
-            grid-template-columns: var(--grid-3);
-        }
-
-        .grid--#{$_key}-4 {
-            grid-template-columns: var(--grid-4);
-        }
-
-        .grid--#{$_key}-5 {
-            grid-template-columns: var(--grid-5);
-        }
-
-        .grid--#{$_key}-1-2 {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid--#{$_key}-1-3 {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid--#{$_key}-1-4 {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid--#{$_key}-2-1 {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid--#{$_key}-2-3 {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid--#{$_key}-3-1 {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid--#{$_key}-3-2 {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid--#{$_key}-4-1 {
-            grid-template-columns: var(--grid-4-1);
-        }
-    }
-}
-
-// Grid Alternate
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value, min) {
-        .grid--#{$_key}-alternate > .grid--2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) {
-            grid-template-columns: var(--grid-4-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-    }
-}
-
-// Grid Order
-.order--first {
-    order: var(--z-back);
-}
-
-.order--last {
-    order: var(--z-high);
-}
-
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value) {
-        .order--#{$_key}-first {
-            order: var(--z-back);
-        }
-
-        .order--#{$_key}-last {
-            order: var(--z-high);
-        }
-    }
-}
-
-// Grid - Auto
-// Locally scope var(--column-min) value to the ideal size of the grid items.
-// Example: .class { --column-min: var(--width-min); }
-.grid--auto {
-    @extend .grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
-    grid-template-rows: var(--grid-1);
-}
-
-// Grid - Layout
-// Locally scope var(--content-width) value to the ideal width of the grid items.
-// Example: .class { --content-width: var(--width-website); }
-.grid--layout {
-    --grid-area--layout: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
-
-    column-gap: 0;
-    display: grid;
-    grid-template-columns: var(--grid-area--layout);
-    padding-inline: 0;
-
-    & > * {
-        inline-size: 100%;
-        grid-column: content;
     }
 }
 
@@ -3049,6 +3037,10 @@ $_value in $breakpoint {
         --btn-bg-color: var(--submit-bg-color) !important;
         --btn-border-color: var(--submit-bg-color) !important;
         --btn-color: var(--submit-color) !important;
+
+        &:focus-visible {
+            --focus-color: var(--input-border-color-focus);
+        }
 
         &.btn--outline {
             --btn-color: var(--submit-bg-color) !important;
