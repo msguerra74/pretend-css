@@ -1,6 +1,6 @@
 /*! Pretend CSS — Made by Pretend @ https://pretend.studio */
 
-
+@use 'sass:math';
 
 // --- SCSS Variable --- //
 
@@ -62,13 +62,13 @@ $breakpoint: (
 
 // Fluid Sizing
 // --
-// Usage: fluid(16, 18, 320, 1280)
+// Usage: fluid(16, 18, 512, 1280)
 // @param: $_min-size // Minimum Size
 // @param: $_max-size // Maximum Size
 // @param: $_min-width // Minimum Breakpoint
 // @param: $_max-width // Maximum Breakpoint
 @function fluid($_min-size, $_max-size, $_min-width: $width-s, $_max-width: $width-website) {
-    $_slope: ($_max-size - $_min-size) / ($_max-width - $_min-width);
+    $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
     $_intercept: px-rel($_min-size - $_slope * $_min-width);
     $_slope-vw: $_slope * 100vw;
     $_min-size-rem: px-rel($_min-size);
@@ -83,15 +83,7 @@ $breakpoint: (
 // @param: $_unit // Unit type: em, rem
 // @param: $_root // Root font size: 16
 @function px-rel($_px, $_unit: rem, $_root: 16) {
-    @if type-of($_px)=="number" and not unitless($_px) {
-        @return ((($_px / ($_px * 0 + 1)) / $_root) + $_unit);
-    }
-
-    @else {
-        @return (($_px / $_root) + $_unit);
-    }
-
-    @return $_rem;
+    @return (math.div($_px, $_root) + $_unit);
 }
 
 
@@ -1147,7 +1139,7 @@ $_value in $color {
 // --- Utility --- //
 
 // Alignment
-.center--all {
+.align--center-all {
     align-content: center;
     align-items: center;
     display: flex;
@@ -1157,7 +1149,7 @@ $_value in $color {
     text-align: center;
 }
 
-.center--x {
+.align--center-x {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -1166,7 +1158,7 @@ $_value in $color {
     text-align: center;
 }
 
-.center--y {
+.align--center-y {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -1174,7 +1166,7 @@ $_value in $color {
     justify-items: center;
 }
 
-.end--x {
+.align--end-x {
     align-items: flex-end;
     display: flex;
     flex-direction: column;
@@ -1183,7 +1175,7 @@ $_value in $color {
     text-align: right;
 }
 
-.end--y {
+.align--end-y {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -1191,7 +1183,7 @@ $_value in $color {
     justify-items: flex-end;
 }
 
-.start--x {
+.align--start-x {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -1200,7 +1192,7 @@ $_value in $color {
     text-align: left;
 }
 
-.start--y {
+.align--start-y {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -2859,6 +2851,11 @@ $_value in $breakpoint {
 
 
 // --- Bricks --- //
+
+// Block
+.brxe-block {
+    @extend .block;
+}
 
 // Button
 .brxe-button {
