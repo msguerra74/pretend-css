@@ -96,7 +96,7 @@ $breakpoint: (
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
 // @param: $_unit // em, px, rem
-@mixin breakpoint($_width, $_minmax: max, $_unit: em) {
+@mixin breakpoint($_width, $_minmax: min, $_unit: px) {
     @if $_unit =="px" {
         @media (#{$_minmax}-width: (#{$_width} + px)) {
             @content;
