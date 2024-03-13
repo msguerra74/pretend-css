@@ -83,7 +83,7 @@ $breakpoint: (
 // @param: $_unit // Unit type: em, rem
 // @param: $_root // Root font size: 16
 @function px-rel($_px, $_unit: rem, $_root: 16) {
-    @return (math.div($_px, $_root) + $_unit);
+    @return math.div($_px, $_root) + $_unit;
 }
 
 
@@ -92,12 +92,21 @@ $breakpoint: (
 
 // Breakpoint Generator
 // --
-// Usage: @include breakpoint(768, max) {}
+// Usage: @include breakpoint(768, max, em) {}
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
+// @param: $_unit // em, px, rem
 @mixin breakpoint($_width, $_minmax: max, $_unit: em) {
-    @media (#{$_minmax}-width: #{px-rel($_width, $_unit)}) {
-        @content;
+    @if $_unit =="px" {
+        @media (#{$_minmax}-width: (#{$_width} + px)) {
+            @content;
+        }
+    }
+
+    @else {
+        @media (#{$_minmax}-width: #{px-rel($_width, $_unit)}) {
+            @content;
+        }
     }
 }
 
@@ -148,6 +157,7 @@ $breakpoint: (
     --aspect-wide: 2 / 1;
 
     // Contextual
+    --font-fallback: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
     --space-px: #{px-rel(1)};
     --space-2px: #{px-rel(2)};
     --space-base: #{fluid(24, 48)};
@@ -438,6 +448,7 @@ html {
 body {
     --body-bg-color: var(--base-lighter);
     --body-color: var(--base-darker);
+    --body-font-family: sans-serif;
     --body-font-size: var(--text-base);
     --body-font-weight: 400;
     --body-line-height: var(--text-height-l);
@@ -447,6 +458,7 @@ body {
     background-color: var(--body-bg-color);
     block-size: 100%;
     color: var(--body-color);
+    font-family: var(--body-font-family), var(--font-fallback);
     font-size: var(--body-font-size);
     -webkit-font-smoothing: auto;
     font-weight: var(--body-font-weight);
