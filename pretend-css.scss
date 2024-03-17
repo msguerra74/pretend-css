@@ -625,6 +625,7 @@ img,
 picture,
 svg,
 video {
+    block-size: auto;
     display: block;
     max-inline-size: 100%;
 }
