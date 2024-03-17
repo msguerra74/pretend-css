@@ -2094,7 +2094,7 @@ $_value in $breakpoint {
 .hide--visually {
     block-size: var(--space-px);
     border: 0;
-    clip: rect(0, 0, 0, 0);
+    clip-path: rect(0, 0, 0, 0);
     inline-size: var(--space-px);
     margin: calc(var(--space-px) * -1);
     overflow: hidden;
@@ -2107,7 +2107,7 @@ $_value in $breakpoint {
         &:active,
         &:focus {
             block-size: auto;
-            clip: auto;
+            clip-path: auto;
             inline-size: auto;
             margin: 0;
             overflow: visible;
