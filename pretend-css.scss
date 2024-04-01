@@ -245,6 +245,8 @@ $bricks-builder: false;
     --text-9xl: #{fluid(48, 128)};
 
     // Text - Contextual
+    --body-font-family: Verdana;
+    --heading-font-family: var(--body-font-family);
     --text-base: var(--text-m);
     --text-fine: var(--text-s);
     --text-hero: var(--text-6xl);
@@ -404,13 +406,8 @@ $bricks-builder: false;
 
 :focus-visible,
 .link-overlay:focus-within {
-    --focus-color: var(--action);
-    --focus-style: solid;
-    --focus-offset: var(--space-2px);
-    --focus-width: var(--space-2px);
-
-    outline: var(--focus-width) var(--focus-style) var(--focus-color);
-    outline-offset: var(--focus-offset);
+    outline: var(--focus-width, var(--spcae-2px)) var(--focus-style, solid) var(--focus-color, var(--action));
+    outline-offset: var(--focus-offset, var(--space-2px));
 }
 
 // Focus Color
@@ -448,9 +445,7 @@ $bricks-builder: false;
 
 // HTML
 html {
-    --html-bg-color: var(--base-lighter);
-
-    background-color: var(--html-bg-color);
+    background-color: var(--base-lighter);
     block-size: 100%;
     font-size: 100%;
     text-size-adjust: none;
@@ -462,37 +457,26 @@ html {
 
 // Body
 body {
-    --body-bg-color: var(--base-lighter);
-    --body-color: var(--base-darker);
-    --body-font-family: Verdana;
-    --body-font-size: var(--text-base);
-    --body-font-weight: 400;
-    --body-line-height: var(--text-height-l);
-    --body-max-width: var(--width-max);
-    --body-min-width: var(--width-min);
-
-    background-color: var(--body-bg-color);
+    background-color: var(--base-lighter);
     block-size: 100%;
-    color: var(--body-color);
+    color: var(--base-darker);
     font-family: var(--body-font-family), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
-    font-size: var(--body-font-size);
+    font-size: var(--text-base);
     -webkit-font-smoothing: auto;
-    font-weight: var(--body-font-weight);
+    font-weight: 400;
     inline-size: 100%;
-    line-height: var(--body-line-height);
+    line-height: var(--text-height-l);
     margin-inline: auto;
-    max-inline-size: var(--body-max-width);
+    max-inline-size: var(--width-max);
     min-block-size: 100svh;
-    min-inline-size: var(--body-min-width);
+    min-inline-size: var(--width-min);
     overflow-wrap: break-word;
     overflow-x: hidden;
 }
 
 // Anchor
 a {
-    --a-color: var(--action);
-
-    color: var(--a-color);
+    color: var(--a-color, var(--action));
 
     &:hover {
         --a-color: var(--action-mid);
@@ -502,17 +486,11 @@ a {
 // Link
 main a:not([class]),
 a.link {
-    --link-color: inherit;
-    --link-decoration: underline;
-    --link-decoration-color: var(--action);
-    --link-decoration-thickness: var(--space-2px);
-    --link-underline-offset: var(--space-2px);
-
-    color: var(--link-color);
-    text-decoration: var(--link-decoration);
-    text-decoration-color: var(--link-decoration-color);
-    text-decoration-thickness: var(--link-decoration-thickness);
-    text-underline-offset: var(--link-underline-offset);
+    color: var(--link-color, inherit);
+    text-decoration: underline;
+    text-decoration-color: var(--link-decoration-color, var(--action));
+    text-decoration-thickness: var(--space-2px);
+    text-underline-offset: var(--space-2px);
 
     &:hover {
         --link-color: var(--action);
@@ -559,6 +537,7 @@ h5,
 h6,
 .h--6 {
     color: var(--h-color);
+    font-family: var(--heading-font-family);
     font-size: var(--h-font-size);
     font-weight: var(--h-font-weight);
     line-height: var(--h-line-height);
@@ -648,44 +627,27 @@ textarea {
 
 // Button
 .btn {
-    --btn-bg-color: var(--action);
-    --btn-border-color: var(--action);
-    --btn-border-radius: 0;
-    --btn-border-style: solid;
-    --btn-border-width: var(--space-2px);
-    --btn-color: var(--action-lighter);
-    --btn-font-size: var(--text-s);
-    --btn-font-weight: 400;
-    --btn-gap: var(--space-icon);
-    --btn-letter-spacing: normal;
-    --btn-line-height: 1;
-    --btn-padding-x: var(--space-xl);
-    --btn-padding-y: var(--space-m);
-    --btn-text-transform: uppercase;
-    --btn-transition: var(--transition-normal);
-    --btn-width: fit-content;
-
     align-items: center;
-    background-color: var(--btn-bg-color);
-    border-color: var(--btn-border-color);
-    border-radius: var(--btn-border-radius);
-    border-style: var(--btn-border-style);
-    border-width: var(--btn-border-width);
-    color: var(--btn-color);
+    background-color: var(--btn-bg-color, var(--action));
+    border-color: var(--btn-border-color, var(--action));
+    border-radius: var(--btn-border-radius, 0);
+    border-style: var(--btn-border-style, solid);
+    border-width: var(--btn-border-width, var(--space-2px));
+    color: var(--btn-color, var(--action-lighter));
     display: inline-flex;
-    font-size: var(--btn-font-size);
-    font-weight: var(--btn-font-weight);
-    gap: var(--btn-gap);
-    inline-size: var(--btn-width);
+    font-size: var(--btn-font-size, var(--text-s));
+    font-weight: var(--btn-font-weight, 400);
+    gap: var(--btn-gap, var(--space-icon));
+    inline-size: var(--btn-width, fit-content);
     justify-content: center;
-    letter-spacing: var(--btn-letter-spacing);
-    line-height: var(--btn-line-height);
-    padding-block: var(--btn-padding-y);
-    padding-inline: var(--btn-padding-x);
+    letter-spacing: var(--btn-letter-spacing, normal);
+    line-height: var(--btn-line-height, 1);
+    padding-block: var(--btn-padding-y, var(--space-m));
+    padding-inline: var(--btn-padding-x, var(--space-xl));
     text-align: center;
     text-decoration: none;
-    text-transform: var(--btn-text-transform);
-    transition: var(--btn-transition);
+    text-transform: var(--btn-text-transform, uppercase);
+    transition: var(--btn-transition, var(--transition-normal));
 
     &:focus-visible {
         --focus-color: var(--action-darker);
@@ -751,7 +713,6 @@ textarea {
     flex-direction: column;
     gap: var(--space-block);
     inline-size: 100%;
-    z-index: var(--z-front);
 
     &--offset {
         @extend .block;
@@ -778,12 +739,29 @@ textarea {
     inline-size: 100%;
     margin-inline: auto;
     max-inline-size: var(--width-website);
-    z-index: var(--z-front);
 
     &--offset {
         @extend .container;
 
         padding-inline: var(--space-offset);
+    }
+}
+
+// Footer, Header
+.footer,
+.header {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    padding: var(--space-base) var(--space-offset);
+    row-gap: var(--space-base);
+
+    &--offset {
+        padding-inline: var(--space-offset);
+    }
+
+    &--flat {
+        padding: 0;
     }
 }
 
@@ -1049,11 +1027,9 @@ $_value in $breakpoint {
 // Locally scope var(--content-width) value to the ideal width of the grid items.
 // Example: .class { --content-width: var(--width-website); }
 .grid--layout {
-    --grid-area--layout: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
-
     column-gap: 0;
     display: grid;
-    grid-template-columns: var(--grid-area--layout);
+    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
     padding-inline: 0;
 
     & > * {
@@ -1436,6 +1412,11 @@ $_value in $breakpoint {
     isolation: isolate;
 }
 
+// Border -  Flat
+.border--flat {
+    border: none;
+}
+
 // Breakout
 .breakout--offset {
     align-self: flex-start;
@@ -1528,27 +1509,19 @@ $_value in $breakpoint {
 }
 
 .content-column-gap {
-    --content-column-gap: var(--space-l);
-
-    column-gap: var(--content-column-gap);
+    column-gap: var(--content-column-gap, var(--space-l));
 }
 
 .content-column-rule {
-    --content-column-rule: solid;
-
-    column-rule: var(--content-column-rule);
+    column-rule: var(--content-column-rule, solid);
 }
 
 .content-column-rule--color {
-    --content-column-rule-color: var(--base-mid);
-
-    column-rule-color: var(--content-column-rule-color);
+    column-rule-color: var(--content-column-rule-color, var(--base-mid));
 }
 
 .content-column-rule--width {
-    --content-column-rule-width: var(--space-2px);
-
-    column-rule-width: var(--content-column-rule-width);
+    column-rule-width: var(--content-column-rule-width, var(--space-2px));
 }
 
 .content-column-span--all {
@@ -1920,7 +1893,7 @@ $_value in $breakpoint {
     }
 
     // Honeypot
-    label:has([name="_pretend-input"]) {
+    label:has([name="_pretend-check"]) {
         left: #{px-rel(10000 * -1)};
         position: absolute;
     }
@@ -2079,21 +2052,25 @@ $_value in $breakpoint {
     }
 }
 
-// Header Style
+// Header - Style
 // Set header data attribute to use ACF header style option (default, fixed, overlay)
+.header--fixed,
+.header--overlay,
 [data-header-style="fixed"],
 [data-header-style="overlay"] {
     inline-size: 100%;
     inset-block-start: 0;
     inset-inline-end: 0;
     inset-inline-start: 0;
-    z-index: var(--z-mid);
+    z-index: var(--z-high);
 }
 
+.header--fixed,
 [data-header-style="fixed"] {
     position: fixed;
 }
 
+.header--overlay,
 [data-header-style="overlay"] {
     position: absolute;
 }
@@ -2225,9 +2202,7 @@ ul.list--flat,
 
 // List Marker
 .list-marker--color li::marker {
-    --list-marker-color: var(--primary);
-
-    color: var(--list-marker-color);
+    color: var(--list-marker-color, var(--primary));
 }
 
 // Margin - Bottom
@@ -2517,6 +2492,11 @@ $_value in $breakpoint {
     padding: var(--space-container);
 }
 
+.padding--footer,
+.padding--header {
+    padding: var(--space-base) var(--space-offset);
+}
+
 .padding--grid {
     padding: var(--space-grid);
 }
@@ -2572,9 +2552,7 @@ $_value in $breakpoint {
     position: sticky;
 
     &-offset {
-        --sticky-offset: var(--space-base);
-
-        inset-block-start: var(--sticky-offset);
+        inset-block-start: var(--sticky-offset, var(--space-base));
     }
 }
 
@@ -2686,31 +2664,20 @@ $_value in $breakpoint {
 
     // Add .ribbon to parent container
     & > .ribbon--right {
-        --ribbon-bg-color: var(--action);
-        --ribbon-color: var(--action-lighter);
-        --ribbon-font-size: var(--text-s);
-        --ribbon-line-height: var(--text-height-s);
-        --ribbon-offset: calc(var(--space-4xl) * -1);
-        --ribbon-padding: var(--space-s) var(--space-m);
-        --ribbon-text-transform: uppercase;
-        --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
-        --ribbon-transform-origin: bottom right;
-        --ribbon-width: var(--width-s);
-
-        background-color: var(--ribbon-bg-color);
-        color: var(--ribbon-color);
+        background-color: var(--ribbon-bg-color, var(--action));
+        color: var(--ribbon-color, var(--action-lighter));
         display: block;
-        font-size: var(--ribbon-font-size);
-        inline-size: var(--ribbon-width);
+        font-size: var(--ribbon-font-size, var(--text-s));
+        inline-size: var(--ribbon-width, var(--width-s));
         inset-block-start: var(--ribbon-offset);
-        inset-inline-end: var(--ribbon-offset);
-        line-height: var(--ribbon-line-height);
-        padding: var(--ribbon-padding);
+        inset-inline-end: var(--ribbon-offset, calc(var(--space-4xl) * -1));
+        line-height: var(--ribbon-line-height, var(--text-height-s));
+        padding: var(--ribbon-padding, var(--space-s) var(--space-m));
         position: absolute;
         text-align: center;
-        text-transform: var(--ribbon-text-transform);
-        transform: var(--ribbon-transform);
-        transform-origin: var(--ribbon-transform-origin);
+        text-transform: var(--ribbon-text-transform, uppercase);
+        transform: var(--ribbon-transform, translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg));
+        transform-origin: var(--ribbon-transform-origin, bottom right);
     }
 
     & > .ribbon--left {
