@@ -62,10 +62,9 @@ $breakpoint: (
 
 // Components
 $components: true;
+$bricks-builder: false;
 // Utilities
 $utilities: true;
-// Plugins
-$bricks-builder: false;
 
 
 
@@ -1475,6 +1474,32 @@ textarea {
 
         &--flat {
             padding: 0;
+        }
+    }
+
+
+
+    @if $bricks-builder {
+        // --- Bricks Builder --- //
+
+        // Block
+        .brxe-block {
+            @extend .block;
+        }
+
+        // Button
+        .brxe-button {
+            @extend .btn;
+        }
+
+        // Container
+        .brxe-container {
+            @extend .container;
+        }
+
+        // Section
+        .brxe-section {
+            @extend .section;
         }
     }
 }
@@ -3305,31 +3330,5 @@ textarea {
 
     .z--top {
         z-index: var(--z-top);
-    }
-}
-
-
-
-@if $bricks-builder {
-    /*! --- Bricks Builder --- */
-
-    // Block
-    .brxe-block {
-        @extend .block;
-    }
-
-    // Button
-    .brxe-button {
-        @extend .btn;
-    }
-
-    // Container
-    .brxe-container {
-        @extend .container;
-    }
-
-    // Section
-    .brxe-section {
-        @extend .section;
     }
 }
