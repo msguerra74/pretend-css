@@ -2,7 +2,7 @@
 
 @use 'sass:math';
 
-// --- SCSS Variable --- //
+// --- SCSS Variables --- //
 
 // Color
 $action: hsl(0, 84%, 60%);
@@ -33,7 +33,7 @@ $width-website: $width-xl;
 
 
 
-// --- SCSS Loop --- //
+// --- SCSS Loops --- //
 
 $color: (
     action: $action,
@@ -60,12 +60,16 @@ $breakpoint: (
 
 // --- SCSS Options --- //
 
-// WordPress Plugins
+// Components
+$components: true;
+// Utilities
+$utilities: true;
+// Plugins
 $bricks-builder: false;
 
 
 
-// --- SCSS Function --- //
+// --- SCSS Functions --- //
 
 // Fluid Sizing
 // --
@@ -95,7 +99,7 @@ $bricks-builder: false;
 
 
 
-// --- SCSS Mixin --- //
+// --- SCSS Mixins --- //
 
 // Breakpoint Generator
 // --
@@ -119,7 +123,7 @@ $bricks-builder: false;
 
 
 
-// --- CSS Variable --- //
+// --- CSS Variables --- //
 
 // Light Mode Color
 :root,
@@ -623,1106 +627,2691 @@ textarea {
 
 
 
-// --- Component --- //
-
-// Button
-.btn {
-    align-items: center;
-    background-color: var(--btn-bg-color, var(--action));
-    border-color: var(--btn-border-color, var(--action));
-    border-radius: var(--btn-border-radius, 0);
-    border-style: var(--btn-border-style, solid);
-    border-width: var(--btn-border-width, var(--space-2px));
-    color: var(--btn-color, var(--action-lighter));
-    display: inline-flex;
-    font-size: var(--btn-font-size, var(--text-s));
-    font-weight: var(--btn-font-weight, 400);
-    gap: var(--btn-gap, var(--space-icon));
-    inline-size: var(--btn-width, fit-content);
-    justify-content: center;
-    letter-spacing: var(--btn-letter-spacing, normal);
-    line-height: var(--btn-line-height, 1);
-    padding-block: var(--btn-padding-y, var(--space-m));
-    padding-inline: var(--btn-padding-x, var(--space-xl));
-    text-align: center;
-    text-decoration: none;
-    text-transform: var(--btn-text-transform, uppercase);
-    transition: var(--btn-transition, var(--transition-normal));
-
-    &:focus-visible {
-        --focus-color: var(--action-darker);
-    }
-
-    &--outline {
-        --btn-color: var(--action);
-
-        background-color: initial !important;
-    }
-}
-
-// Button Size
-.btn--small {
-    --btn-font-size: var(--text-xs);
-    --btn-padding-x: var(--space-m);
-    --btn-padding-y: var(--space-s);
-}
-
-.btn--large {
-    --btn-font-size: var(--text-m);
-    --btn-padding-x: var(--space-2xl);
-    --btn-padding-y: var(--space-l);
-}
-
-// Button Color
-.btn--light {
-    @extend .btn;
-
-    --btn-bg-color: var(--base-lighter);
-    --btn-border-color: var(--base-lighter);
-    --btn-color: var(--base-darker);
-
-    &:focus-visible {
-        --focus-color: var(--action-darker);
-    }
-
-    &.btn--outline {
-        --btn-color: var(--base-lighter);
-    }
-}
-
-.btn--dark {
-    @extend .btn;
-
-    --btn-bg-color: var(--base-darker);
-    --btn-border-color: var(--base-darker);
-    --btn-color: var(--base-lighter);
-
-    &:focus-visible {
-        --focus-color: var(--action-lighter);
-    }
-
-    &.btn--outline {
-        --btn-color: var(--base-darker);
-    }
-}
-
-// Block
-.block {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-block);
-    inline-size: 100%;
-
-    &--offset {
-        @extend .block;
-
-        padding-inline: var(--space-offset);
-    }
-
-    &--float {
-        display: block;
-
-        & > * + * {
-            margin-block-start: var(--space-block);
-        }
-    }
-}
-
-// Container
-.container {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-container);
-    inline-size: 100%;
-    margin-inline: auto;
-    max-inline-size: var(--width-website);
-
-    &--offset {
-        @extend .container;
-
-        padding-inline: var(--space-offset);
-    }
-}
-
-// Grid
-.grid,
-.grid--1,
-.grid--2,
-.grid--3,
-.grid--4,
-.grid--5,
-.grid--1-2,
-.grid--1-3,
-.grid--1-4,
-.grid--2-1,
-.grid--2-3,
-.grid--3-1,
-.grid--3-2,
-.grid--4-1 {
-    display: grid;
-    gap: var(--space-grid);
-    inline-size: 100%;
-}
-
-.grid--1 {
-    grid-template-columns: var(--grid-1);
-}
-
-.grid--2 {
-    grid-template-columns: var(--grid-2);
-}
-
-.grid--3 {
-    grid-template-columns: var(--grid-3);
-}
-
-.grid--4 {
-    grid-template-columns: var(--grid-4);
-}
-
-.grid--5 {
-    grid-template-columns: var(--grid-5);
-}
-
-.grid--1-2 {
-    grid-template-columns: var(--grid-1-2);
-}
-
-.grid--1-3 {
-    grid-template-columns: var(--grid-1-3)
-}
-
-.grid--1-4 {
-    grid-template-columns: var(--grid-1-4)
-}
-
-.grid--2-1 {
-    grid-template-columns: var(--grid-2-1)
-}
-
-.grid--2-3 {
-    grid-template-columns: var(--grid-2-3)
-}
-
-.grid--3-1 {
-    grid-template-columns: var(--grid-3-1)
-}
-
-.grid--3-2 {
-    grid-template-columns: var(--grid-3-2)
-}
-
-.grid--4-1 {
-    grid-template-columns: var(--grid-4-1)
-}
-
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value) {
-
-        .grid--#{$_key}-1,
-        .grid--#{$_key}-2,
-        .grid--#{$_key}-3,
-        .grid--#{$_key}-4,
-        .grid--#{$_key}-5,
-        .grid--#{$_key}-1-2,
-        .grid--#{$_key}-1-3,
-        .grid--#{$_key}-1-4,
-        .grid--#{$_key}-2-1,
-        .grid--#{$_key}-2-3,
-        .grid--#{$_key}-3-1,
-        .grid--#{$_key}-3-2,
-        .grid--#{$_key}-4-1 {
-            display: grid;
-            gap: var(--space-grid);
-            inline-size: 100%;
-        }
-
-        .grid--#{$_key}-1 {
-            grid-template-columns: var(--grid-1);
-        }
-
-        .grid--#{$_key}-1 > * {
-            grid-column: 1 !important;
-        }
-
-        .grid--#{$_key}-2 {
-            grid-template-columns: var(--grid-2);
-        }
-
-        .grid--#{$_key}-3 {
-            grid-template-columns: var(--grid-3);
-        }
-
-        .grid--#{$_key}-4 {
-            grid-template-columns: var(--grid-4);
-        }
-
-        .grid--#{$_key}-5 {
-            grid-template-columns: var(--grid-5);
-        }
-
-        .grid--#{$_key}-1-2 {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid--#{$_key}-1-3 {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid--#{$_key}-1-4 {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid--#{$_key}-2-1 {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid--#{$_key}-2-3 {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid--#{$_key}-3-1 {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid--#{$_key}-3-2 {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid--#{$_key}-4-1 {
-            grid-template-columns: var(--grid-4-1);
-        }
-    }
-}
-
-// Grid Alternate
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value, min) {
-        .grid--#{$_key}-alternate > .grid--2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) {
-            grid-template-columns: var(--grid-4-1);
-        }
-
-        .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-
-        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
-        }
-    }
-}
-
-// Grid Order
-.order--first {
-    order: var(--z-back);
-}
-
-.order--last {
-    order: var(--z-high);
-}
-
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value) {
-        .order--#{$_key}-first {
-            order: var(--z-back);
-        }
-
-        .order--#{$_key}-last {
-            order: var(--z-high);
-        }
-    }
-}
-
-// Grid - Auto
-// Locally scope var(--column-min) value to the ideal size of the grid items.
-// Example: .class { --column-min: var(--width-min); }
-.grid--auto {
-    @extend .grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
-    grid-template-rows: var(--grid-1);
-}
-
-// Grid - Layout
-// Locally scope var(--content-width) value to the ideal width of the grid items.
-// Example: .class { --content-width: var(--width-website); }
-.grid--layout {
-    column-gap: 0;
-    display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
-    padding-inline: 0;
-
-    & > * {
+@if $components {
+    /*! --- Components --- */
+
+    // Background Overlay
+    // Add to div, img, and video elements to create an overlay that fills the section background.
+    /* HTML Example:
+    <section class="bg-isolate position--relative section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+        <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element </div>
+    </section>
+    */
+    .bg-overlay {
+        block-size: 100% !important;
         inline-size: 100%;
-        grid-column: content;
-    }
-}
-
-// Section
-.section {
-    display: flex;
-    flex-direction: column;
-    inline-size: 100%;
-    padding-block: var(--space-section);
-    padding-inline: var(--space-offset);
-    row-gap: var(--space-section);
-
-    &--alt {
-        padding-block: var(--space-base);
+        inset: 0;
+        margin-block-start: 0;
+        object-fit: cover;
+        object-position: 50%;
+        overflow: hidden;
+        position: absolute;
+        z-index: var(--z-back);
     }
 
-    &--flat {
-        padding: 0;
-    }
-}
-
-
-
-// --- Color --- //
-
-// Background Color
-@each $_key,
-$_value in $color {
-    .bg--#{$_key} {
-        background-color: var(--#{$_key});
-    }
-
-    .bg--#{$_key}-lighter {
-        background-color: var(--#{$_key}-lighter);
-    }
-
-    .bg--#{$_key}-light {
-        background-color: var(--#{$_key}-light);
-    }
-
-    .bg--#{$_key}-mid {
-        background-color: var(--#{$_key}-mid);
-    }
-
-    .bg--#{$_key}-dark {
-        background-color: var(--#{$_key}-dark);
-    }
-
-    .bg--#{$_key}-darker {
-        background-color: var(--#{$_key}-darker);
-    }
-}
-
-.bg--white {
-    background-color: var(--white);
-}
-
-.bg--white-off {
-    background-color: var(--white-off);
-}
-
-.bg--black {
-    background-color: var(--black);
-}
-
-.bg--black-off {
-    background-color: var(--black-off);
-}
-
-.bg--transparent {
-    background-color: transparent;
-}
-
-// Color
-@each $_key,
-$_value in $color {
-    .color--#{$_key} {
-        color: var(--#{$_key});
-    }
-
-    .color--#{$_key}-lighter {
-        color: var(--#{$_key}-lighter);
-    }
-
-    .color--#{$_key}-light {
-        color: var(--#{$_key}-light);
-    }
-
-    .color--#{$_key}-mid {
-        color: var(--#{$_key}-mid);
-    }
-
-    .color--#{$_key}-dark {
-        color: var(--#{$_key}-dark);
-    }
-
-    .color--#{$_key}-darker {
-        color: var(--#{$_key}-darker);
-    }
-}
-
-.color--white {
-    color: var(--white);
-}
-
-.color--white-off {
-    color: var(--white-off);
-}
-
-.color--black {
-    color: var(--black);
-}
-
-.color--black-off {
-    color: var(--black-off);
-}
-
-.color--transparent {
-    color: transparent;
-}
-
-
-
-// --- Utility --- //
-
-// Alignment
-.align--center-all {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    text-align: center;
-}
-
-.align--center-x {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    text-align: center;
-}
-
-.align--center-y {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-}
-
-.align--end-x {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    justify-items: flex-end;
-    text-align: right;
-}
-
-.align--end-y {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    justify-items: flex-end;
-}
-
-.align--start-x {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    justify-items: flex-start;
-    text-align: left;
-}
-
-.align--start-y {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    justify-items: flex-start;
-}
-
-.aligncenter,
-.center--self {
-    margin-inline: auto;
-}
-
-.alignleft,
-.float--left,
-.float--left-offset {
-    float: inline-start;
-    margin-block-end: var(--space-block);
-    margin-inline-end: var(--space-block);
-}
-
-.alignright,
-.float--right,
-.float--right-offset {
-    float: inline-end;
-    margin-block-end: var(--space-block);
-    margin-inline-start: var(--space-block);
-}
-
-.float--left-offset {
-    margin-inline-start: calc(var(--space-offset) * -1);
-}
-
-.float--right-offset {
-    margin-inline-end: calc(var(--space-offset) * -1);
-}
-
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        .center--#{$_key}-self {
-            float: none;
-            margin-block-end: 0;
-            margin-inline: auto;
-        }
-
-        .float--#{$_key}-left {
-            float: inline-start;
-            margin-block-end: var(--space-block);
-            margin-inline-end: var(--space-block);
-            margin-inline-start: 0;
-        }
-
-        .float--#{$_key}-none {
-            float: none;
-            margin-block-end: 0;
-            margin-inline: 0;
-        }
-
-        .float--#{$_key}-right {
-            float: inline-end;
-            margin-block-end: var(--space-block);
-            margin-inline-end: 0;
-            margin-inline-start: var(--space-block);
-        }
-    }
-}
-
-// Background Blur
-.bg-blur--low,
-.bg-blur--mid,
-.bg-blur--high {
-    background-color: var(--blur-bg-color);
-}
-
-.bg-blur--low {
-    backdrop-filter: blur(var(--space-xs));
-}
-
-.bg-blur--mid {
-    backdrop-filter: blur(var(--space-s));
-}
-
-.bg-blur--high {
-    backdrop-filter: blur(var(--space-m));
-}
-
-// Background Overlay
-// Add .position--relative to parent container
-// Add .bg-isolate to parent container if needed
-.bg-overlay {
-    block-size: 100% !important;
-    inline-size: 100%;
-    inset: 0;
-    margin-block-start: 0;
-    object-fit: cover;
-    object-position: 50%;
-    overflow: hidden;
-    position: absolute;
-    z-index: var(--z-back);
-}
-
-// Background Isolate
-.bg-isolate {
-    isolation: isolate;
-}
-
-// Breakout
-.breakout--offset {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline-start: 50%;
-    max-inline-size: calc(100% + calc(var(--space-offset) * 2));
-    transform: translateX(-50%);
-}
-
-.breakout--wide {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline-start: 50%;
-    max-inline-size: var(--width-wide);
-    transform: translateX(-50%);
-}
-
-.breakout--max {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline-start: 50%;
-    max-inline-size: var(--width-max);
-    transform: translateX(-50%);
-}
-
-.breakout--full {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline: calc(50% - 50vw);
-    max-inline-size: 100vw;
-}
-
-// Clear
-.clear {
-
-    &::before,
-    &::after {
-        content: "";
-        display: table;
-    }
-
-    &::after {
-        clear: both;
-    }
-}
-
-// Form
-.form,
-.form form,
-.form--alt,
-.form--alt form {
-    inline-size: 100%;
-
-    // Inputs
-    input,
-    textarea {
-        background-color: var(--input-bg-color);
-        border-color: var(--input-border-color);
-        border-radius: var(--input-border-radius);
-        border-style: var(--input-border-style);
-        border-width: var(--input-border-width);
-        color: var(--input-color);
-        display: block;
-        font-size: var(--input-font-size);
-        inline-size: 100%;
-        line-height: var(--input-line-height);
-        margin-block-start: var(--space-s);
-        min-block-size: var(--input-height);
-        padding: var(--input-padding-y) var(--input-padding-x);
+    // Button
+    // Add to anchor links and buttons.
+    /* HTML Example:
+    <a class="btn" href="#">Anchor Link</a>
+    <button class="btn">Button</button>
+    */
+    .btn {
+        align-items: center;
+        background-color: var(--btn-bg-color, var(--action));
+        border-color: var(--btn-border-color, var(--action));
+        border-radius: var(--btn-border-radius, 0);
+        border-style: var(--btn-border-style, solid);
+        border-width: var(--btn-border-width, var(--space-2px));
+        color: var(--btn-color, var(--action-lighter));
+        display: inline-flex;
+        font-size: var(--btn-font-size, var(--text-s));
+        font-weight: var(--btn-font-weight, 400);
+        gap: var(--btn-gap, var(--space-icon));
+        inline-size: var(--btn-width, fit-content);
+        justify-content: center;
+        letter-spacing: var(--btn-letter-spacing, normal);
+        line-height: var(--btn-line-height, 1);
+        padding-block: var(--btn-padding-y, var(--space-m));
+        padding-inline: var(--btn-padding-x, var(--space-xl));
+        text-align: center;
+        text-decoration: none;
+        text-transform: var(--btn-text-transform, uppercase);
+        transition: var(--btn-transition, var(--transition-normal));
 
         &:focus-visible {
-            --focus-color: var(--input-border-color-focus);
+            --focus-color: var(--action-darker);
+        }
+
+        &--outline {
+            --btn-color: var(--action);
+
+            background-color: initial !important;
         }
     }
 
-    textarea {
-        min-height: var(--space-7xl);
+    // Button Size
+    .btn--small {
+        --btn-font-size: var(--text-xs);
+        --btn-padding-x: var(--space-m);
+        --btn-padding-y: var(--space-s);
     }
 
-    // Submit Button
-    button[type="submit"] {
+    .btn--large {
+        --btn-font-size: var(--text-m);
+        --btn-padding-x: var(--space-2xl);
+        --btn-padding-y: var(--space-l);
+    }
+
+    // Button Color
+    .btn--light {
         @extend .btn;
 
-        --btn-bg-color: var(--submit-bg-color);
-        --btn-border-color: var(--submit-bg-color);
-        --btn-color: var(--submit-color);
+        --btn-bg-color: var(--base-lighter);
+        --btn-border-color: var(--base-lighter);
+        --btn-color: var(--base-darker);
 
         &:focus-visible {
-            --focus-color: var(--input-border-color-focus);
+            --focus-color: var(--action-darker);
         }
 
         &.btn--outline {
-            --btn-color: var(--submit-bg-color);
+            --btn-color: var(--base-lighter);
         }
     }
 
-    // Honeypot
-    label:has([name="_pretend-check"]) {
-        left: #{px-rel(10000 * -1)};
+    .btn--dark {
+        @extend .btn;
+
+        --btn-bg-color: var(--base-darker);
+        --btn-border-color: var(--base-darker);
+        --btn-color: var(--base-lighter);
+
+        &:focus-visible {
+            --focus-color: var(--action-lighter);
+        }
+
+        &.btn--outline {
+            --btn-color: var(--base-darker);
+        }
+    }
+
+    // Block
+    // Add to divs that contain content.
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+    </section>
+    */
+    .block {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-block);
+        inline-size: 100%;
+
+        &--offset {
+            @extend .block;
+
+            padding-inline: var(--space-offset);
+        }
+
+        &--float {
+            display: block;
+
+            & > * + * {
+                margin-block-start: var(--space-block);
+            }
+        }
+    }
+
+    // Container
+    // Add to divs inside section elements that need to be centered with the website width.
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+    </section>
+    */
+    .container {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-container);
+        inline-size: 100%;
+        margin-inline: auto;
+        max-inline-size: var(--width-website);
+
+        &--offset {
+            @extend .container;
+
+            padding-inline: var(--space-offset);
+        }
+    }
+
+    // Form
+    // Add to forms or divs that contain form elements.
+    /* HTML Example:
+    <!-- This example form uses Formspark and Botpoison -->
+    <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+        <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
+        <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
+        <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
+        <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
+        <fieldset>
+            <label for="company">Company Name</label>
+            <input aria-label="Company Name" id="company" name="company" type="text">
+        </fieldset>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="first-name">First Name</label>
+                <input aria-label="First Name" id="first-name" name="first-name" required type="text">
+            </fieldset>
+            <fieldset>
+                <label for="last-name">Last Name</label>
+                <input aria-label="Last Name" id="last-name" name="last-name" type="text">
+            </fieldset>
+        </div>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="email">Email Address</label>
+                <input aria-label="Email Address" id="email" name="email" required type="email">
+            </fieldset>
+            <fieldset>
+                <label for="phone">Phone Number</label>
+                <input aria-label="Phone Number" id="phone" name="phone" type="tel">
+            </fieldset>
+        </div>
+        <fieldset>
+            <label for="message">Message</label>
+            <textarea aria-label="Message" id="message" name="message" required></textarea>
+        </fieldset>
+        <fieldset>
+            <label for="pretend-check">Pretend Check</label>
+            <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
+        </fieldset>
+        <button type="submit">Send Message</button>
+    </form>
+    */
+    .form,
+    .form form,
+    .form--alt,
+    .form--alt form {
+        inline-size: 100%;
+
+        // Input
+        input,
+        textarea {
+            background-color: var(--input-bg-color);
+            border-color: var(--input-border-color);
+            border-radius: var(--input-border-radius);
+            border-style: var(--input-border-style);
+            border-width: var(--input-border-width);
+            color: var(--input-color);
+            display: block;
+            font-size: var(--input-font-size);
+            inline-size: 100%;
+            line-height: var(--input-line-height);
+            margin-block-start: var(--space-s);
+            min-block-size: var(--input-height);
+            padding: var(--input-padding-y) var(--input-padding-x);
+
+            &:focus-visible {
+                --focus-color: var(--input-border-color-focus);
+            }
+        }
+
+        textarea {
+            min-height: var(--space-7xl);
+        }
+
+        // Submit Button
+        button[type="submit"] {
+            @extend .btn;
+
+            --btn-bg-color: var(--submit-bg-color);
+            --btn-border-color: var(--submit-bg-color);
+            --btn-color: var(--submit-color);
+
+            &:focus-visible {
+                --focus-color: var(--input-border-color-focus);
+            }
+
+            &.btn--outline {
+                --btn-color: var(--submit-bg-color);
+            }
+        }
+
+        // Honeypot
+        label:has([name="_pretend-check"]) {
+            left: #{px-rel(10000 * -1)};
+            position: absolute;
+        }
+    }
+
+    .form {
+        --checkbox-border-radius: 0;
+        --checkbox-checked-bg-color: var(--action);
+        --checkbox-checked-box-shadow: var(--white);
+        --checkbox-size: var(--space-l);
+        --form-error-bg-color: var(--danger);
+        --form-error-color: var(--danger-lighter);
+        --form-error-font-size: var(--text-s);
+        --form-gap: var(--space-grid);
+        --form-success-bg-color: var(--success);
+        --form-success-color: var(--success-lighter);
+        --form-success-font-size: var(--text-base);
+        --input-bg-color-focus: var(--white);
+        --input-bg-color: var(--base-lighter);
+        --input-border-color-focus: var(--action);
+        --input-border-color: var(--base-mid);
+        --input-border-radius: 0;
+        --input-border-style: solid;
+        --input-border-width: var(--space-2px);
+        --input-color: var(--base-darker);
+        --input-font-size: var(--text-m);
+        --input-height: var(--space-2xl);
+        --input-line-height: var(--text-height-s);
+        --input-padding-x: var(--space-m);
+        --input-padding-y: var(--space-s);
+        --label-color: inherit;
+        --label-font-size: var(--text-m);
+        --label-font-weight: 400;
+        --placeholder-color: var(--base-mid);
+        --placeholder-opacity: 1;
+        --submit-bg-color: var(--action);
+        --submit-color: var(--action-lighter);
+    }
+
+    .form--alt {
+        --checkbox-border-radius: 0;
+        --checkbox-checked-bg-color: var(--action);
+        --checkbox-checked-box-shadow: var(--white);
+        --checkbox-size: var(--space-l);
+        --form-error-bg-color: var(--danger);
+        --form-error-color: var(--danger-lighter);
+        --form-error-font-size: var(--text-s);
+        --form-gap: var(--space-grid);
+        --form-success-bg-color: var(--success);
+        --form-success-color: var(--success-lighter);
+        --form-success-font-size: var(--text-base);
+        --input-bg-color-focus: var(--white);
+        --input-bg-color: var(--base-lighter);
+        --input-border-color-focus: var(--action);
+        --input-border-color: var(--base-mid);
+        --input-border-radius: 0;
+        --input-border-style: solid;
+        --input-border-width: var(--space-2px);
+        --input-color: var(--base-darker);
+        --input-font-size: var(--text-m);
+        --input-height: var(--space-2xl);
+        --input-line-height: var(--text-height-s);
+        --input-padding-x: var(--space-m);
+        --input-padding-y: var(--space-s);
+        --label-color: inherit;
+        --label-font-size: var(--text-m);
+        --label-font-weight: 400;
+        --placeholder-color: var(--base-mid);
+        --placeholder-opacity: 1;
+        --submit-bg-color: var(--action);
+        --submit-color: var(--action-lighter);
+    }
+
+    // Grid
+    // Add to divs that contain grid items.
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    .grid,
+    .grid--1,
+    .grid--2,
+    .grid--3,
+    .grid--4,
+    .grid--5,
+    .grid--1-2,
+    .grid--1-3,
+    .grid--1-4,
+    .grid--2-1,
+    .grid--2-3,
+    .grid--3-1,
+    .grid--3-2,
+    .grid--4-1 {
+        display: grid;
+        gap: var(--space-grid);
+        inline-size: 100%;
+    }
+
+    .grid--1 {
+        grid-template-columns: var(--grid-1);
+    }
+
+    .grid--2 {
+        grid-template-columns: var(--grid-2);
+    }
+
+    .grid--3 {
+        grid-template-columns: var(--grid-3);
+    }
+
+    .grid--4 {
+        grid-template-columns: var(--grid-4);
+    }
+
+    .grid--5 {
+        grid-template-columns: var(--grid-5);
+    }
+
+    .grid--1-2 {
+        grid-template-columns: var(--grid-1-2);
+    }
+
+    .grid--1-3 {
+        grid-template-columns: var(--grid-1-3)
+    }
+
+    .grid--1-4 {
+        grid-template-columns: var(--grid-1-4)
+    }
+
+    .grid--2-1 {
+        grid-template-columns: var(--grid-2-1)
+    }
+
+    .grid--2-3 {
+        grid-template-columns: var(--grid-2-3)
+    }
+
+    .grid--3-1 {
+        grid-template-columns: var(--grid-3-1)
+    }
+
+    .grid--3-2 {
+        grid-template-columns: var(--grid-3-2)
+    }
+
+    .grid--4-1 {
+        grid-template-columns: var(--grid-4-1)
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+
+            .grid--#{$_key}-1,
+            .grid--#{$_key}-2,
+            .grid--#{$_key}-3,
+            .grid--#{$_key}-4,
+            .grid--#{$_key}-5,
+            .grid--#{$_key}-1-2,
+            .grid--#{$_key}-1-3,
+            .grid--#{$_key}-1-4,
+            .grid--#{$_key}-2-1,
+            .grid--#{$_key}-2-3,
+            .grid--#{$_key}-3-1,
+            .grid--#{$_key}-3-2,
+            .grid--#{$_key}-4-1 {
+                display: grid;
+                gap: var(--space-grid);
+                inline-size: 100%;
+            }
+
+            .grid--#{$_key}-1 {
+                grid-template-columns: var(--grid-1);
+            }
+
+            .grid--#{$_key}-1 > * {
+                grid-column: 1 !important;
+            }
+
+            .grid--#{$_key}-2 {
+                grid-template-columns: var(--grid-2);
+            }
+
+            .grid--#{$_key}-3 {
+                grid-template-columns: var(--grid-3);
+            }
+
+            .grid--#{$_key}-4 {
+                grid-template-columns: var(--grid-4);
+            }
+
+            .grid--#{$_key}-5 {
+                grid-template-columns: var(--grid-5);
+            }
+
+            .grid--#{$_key}-1-2 {
+                grid-template-columns: var(--grid-1-2);
+            }
+
+            .grid--#{$_key}-1-3 {
+                grid-template-columns: var(--grid-1-3);
+            }
+
+            .grid--#{$_key}-1-4 {
+                grid-template-columns: var(--grid-1-4);
+            }
+
+            .grid--#{$_key}-2-1 {
+                grid-template-columns: var(--grid-2-1);
+            }
+
+            .grid--#{$_key}-2-3 {
+                grid-template-columns: var(--grid-2-3);
+            }
+
+            .grid--#{$_key}-3-1 {
+                grid-template-columns: var(--grid-3-1);
+            }
+
+            .grid--#{$_key}-3-2 {
+                grid-template-columns: var(--grid-3-2);
+            }
+
+            .grid--#{$_key}-4-1 {
+                grid-template-columns: var(--grid-4-1);
+            }
+        }
+    }
+
+    // Grid Alternate
+    // Add to divs that contain even grids that need to alternate.
+    /* HTML Example:
+    <section class="section">
+        <div class="container grid--m-alternate">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+            </div>
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value, min) {
+            .grid--#{$_key}-alternate > .grid--2 grid--m-1:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) {
+                grid-template-columns: var(--grid-2-1);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-2:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) {
+                grid-template-columns: var(--grid-3-1);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-3:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) {
+                grid-template-columns: var(--grid-4-1);
+            }
+
+            .grid--#{$_key}-alternate > .grid--1-4:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) {
+                grid-template-columns: var(--grid-1-2);
+            }
+
+            .grid--#{$_key}-alternate > .grid--2-1:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) {
+                grid-template-columns: var(--grid-3-2);
+            }
+
+            .grid--#{$_key}-alternate > .grid--2-3:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) {
+                grid-template-columns: var(--grid-1-3);
+            }
+
+            .grid--#{$_key}-alternate > .grid--3-1:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) {
+                grid-template-columns: var(--grid-2-3);
+            }
+
+            .grid--#{$_key}-alternate > .grid--3-2:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+
+            .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) {
+                grid-template-columns: var(--grid-1-4);
+            }
+
+            .grid--#{$_key}-alternate > .grid--4-1:nth-of-type(even) > *:last-child {
+                order: var(--z-back);
+            }
+        }
+    }
+
+    // Grid Order
+    // Add to grid blocks that need to be ordered first or last visually.
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block order--first order--m-last">
+                    <!-- Grid block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    .order--first {
+        order: var(--z-back);
+    }
+
+    .order--last {
+        order: var(--z-high);
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .order--#{$_key}-first {
+                order: var(--z-back);
+            }
+
+            .order--#{$_key}-last {
+                order: var(--z-high);
+            }
+        }
+    }
+
+    // Grid - Auto
+    // Add to grids that need to auto-size as the screen size changes.
+    // Locally scope var(--column-min) value to the ideal size of the grid items.
+    /* CSS Example:
+    .custom-grid {
+        --column-min: var(--width-min);
+    }
+    */
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="custom-grid grid--auto">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    .grid--auto {
+        @extend .grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
+        grid-template-rows: var(--grid-1);
+    }
+
+    // Grid - Layout
+    // Add to content layouts that need to have optional elements that need to expand beyond the content area.
+    // Locally scope var(--content-width) value to the ideal width of the grid items.
+    /* CSS Example:
+    .custom-layout {
+        --content-width: var(--width-website);;
+    }
+    .custom-layout--full {
+        grid-column: full;
+    }
+    .custom-layout--offset {
+        grid-column: offset;
+    }
+    */
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block custom-layout grid--layout">
+                <div class="custom-layout--full block">
+                    <!-- Full width content block -->
+                </div>
+                <div class="custom-layout--offset block">
+                    <!-- Offset content block -->
+                </div>
+                <div class="block">
+                    <!-- Default width content block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    .grid--layout {
+        column-gap: 0;
+        display: grid;
+        grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+        padding-inline: 0;
+
+        & > * {
+            inline-size: 100%;
+            grid-column: content;
+        }
+    }
+
+    // Header - Style
+    // Add to header elements that need to be fixed or overlayed to the top of the screen.
+    // Set header data attribute to use ACF header style option (default, fixed, overlay)
+    /* HTML Example:
+    <header class="header--fixed">
+        <!-- Fixed header content -->
+    </header>
+    <header data-header-style="overlay">
+        <!-- Overlay header content -->
+    </header>
+    */
+    .header--fixed,
+    .header--overlay,
+    [data-header-style="fixed"],
+    [data-header-style="overlay"] {
+        inline-size: 100%;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        inset-inline-start: 0;
+        z-index: var(--z-high);
+    }
+
+    .header--fixed,
+    [data-header-style="fixed"] {
+        position: fixed;
+    }
+
+    .header--overlay,
+    [data-header-style="overlay"] {
         position: absolute;
     }
-}
 
-.form {
-    --checkbox-border-radius: 0;
-    --checkbox-checked-bg-color: var(--action);
-    --checkbox-checked-box-shadow: var(--white);
-    --checkbox-size: var(--space-l);
-    --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lighter);
-    --form-error-font-size: var(--text-s);
-    --form-gap: var(--space-grid);
-    --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lighter);
-    --form-success-font-size: var(--text-base);
-    --input-bg-color-focus: var(--white);
-    --input-bg-color: var(--base-lighter);
-    --input-border-color-focus: var(--action);
-    --input-border-color: var(--base-mid);
-    --input-border-radius: 0;
-    --input-border-style: solid;
-    --input-border-width: var(--space-2px);
-    --input-color: var(--base-darker);
-    --input-font-size: var(--text-m);
-    --input-height: var(--space-2xl);
-    --input-line-height: var(--text-height-s);
-    --input-padding-x: var(--space-m);
-    --input-padding-y: var(--space-s);
-    --label-color: inherit;
-    --label-font-size: var(--text-m);
-    --label-font-weight: 400;
-    --placeholder-color: var(--base-mid);
-    --placeholder-opacity: 1;
-    --submit-bg-color: var(--action);
-    --submit-color: var(--action-lighter);
-}
+    // Link Overlay
+    // Add to anchor links that need link to expand to fill the parent container.
+    /* HTML Example:
+    <div class="link-overlay">
+        <a href="#">Link</a>
+    </div>
+    */
+    .link-overlay {
+        position: relative;
 
-.form--alt {
-    --checkbox-border-radius: 0;
-    --checkbox-checked-bg-color: var(--action);
-    --checkbox-checked-box-shadow: var(--white);
-    --checkbox-size: var(--space-l);
-    --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lighter);
-    --form-error-font-size: var(--text-s);
-    --form-gap: var(--space-grid);
-    --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lighter);
-    --form-success-font-size: var(--text-base);
-    --input-bg-color-focus: var(--white);
-    --input-bg-color: var(--base-lighter);
-    --input-border-color-focus: var(--action);
-    --input-border-color: var(--base-mid);
-    --input-border-radius: 0;
-    --input-border-style: solid;
-    --input-border-width: var(--space-2px);
-    --input-color: var(--base-darker);
-    --input-font-size: var(--text-m);
-    --input-height: var(--space-2xl);
-    --input-line-height: var(--text-height-s);
-    --input-padding-x: var(--space-m);
-    --input-padding-y: var(--space-s);
-    --label-color: inherit;
-    --label-font-size: var(--text-m);
-    --label-font-weight: 400;
-    --placeholder-color: var(--base-mid);
-    --placeholder-opacity: 1;
-    --submit-bg-color: var(--action);
-    --submit-color: var(--action-lighter);
-}
-
-// Header - Style
-// Set header data attribute to use ACF header style option (default, fixed, overlay)
-.header--fixed,
-.header--overlay,
-[data-header-style="fixed"],
-[data-header-style="overlay"] {
-    inline-size: 100%;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    inset-inline-start: 0;
-    z-index: var(--z-high);
-}
-
-.header--fixed,
-[data-header-style="fixed"] {
-    position: fixed;
-}
-
-.header--overlay,
-[data-header-style="overlay"] {
-    position: absolute;
-}
-
-// Hide, Show
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
-}
-
-.show--flex {
-    display: flex;
-}
-
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        .hide--#{$_key} {
-            display: none;
+        & :focus {
+            outline: none !important;
         }
 
-        .show--#{$_key} {
-            display: block;
-        }
-
-        .show--#{$_key}-flex {
-            display: flex;
-        }
-    }
-}
-
-// Hide Visually
-.hide--visually {
-    block-size: var(--space-px);
-    border: 0;
-    clip-path: rect(0, 0, 0, 0);
-    inline-size: var(--space-px);
-    margin: calc(var(--space-px) * -1);
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-
-    &.focusable {
-
-        &:active,
-        &:focus {
-            block-size: auto;
-            clip-path: auto;
-            inline-size: auto;
-            margin: 0;
-            overflow: visible;
+        & a {
             position: static;
-            white-space: inherit;
+        }
+
+        & a::after {
+            content: "";
+            cursor: pointer;
+            display: flex;
+            inset: 0;
+            position: absolute;
+        }
+    }
+
+    // Ribbon
+    // Add `ribbon--right` or `ribbon--left` to a div that needs to be displayed as a ribbon inside a `.ribbon` parent div.
+    /* HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block ribbon">
+                <div class="ribbon--right">
+                    <!-- Right ribbon content -->
+                </div>
+                <!-- Ribbon parent content -->
+            </div>
+        </div>
+    </section>
+    */
+    .ribbon {
+        overflow: hidden;
+        position: relative;
+
+        // Add .ribbon to parent container
+        & > .ribbon--right {
+            background-color: var(--ribbon-bg-color, var(--action));
+            color: var(--ribbon-color, var(--action-lighter));
+            display: block;
+            font-size: var(--ribbon-font-size, var(--text-s));
+            inline-size: var(--ribbon-width, var(--width-s));
+            inset-block-start: var(--ribbon-offset);
+            inset-inline-end: var(--ribbon-offset, calc(var(--space-4xl) * -1));
+            line-height: var(--ribbon-line-height, var(--text-height-s));
+            padding: var(--ribbon-padding, var(--space-s) var(--space-m));
+            position: absolute;
+            text-align: center;
+            text-transform: var(--ribbon-text-transform, uppercase);
+            transform: var(--ribbon-transform, translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg));
+            transform-origin: var(--ribbon-transform-origin, bottom right);
+        }
+
+        & > .ribbon--left {
+            @extend .ribbon--right;
+
+            --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-135deg);
+            --ribbon-transform-origin: bottom left;
+
+            inset-inline-end: auto;
+            inset-inline-start: var(--ribbon-offset);
+        }
+    }
+
+    // Section
+    // Add to section elements.
+    /* Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+    </section>
+    */
+    .section {
+        display: flex;
+        flex-direction: column;
+        inline-size: 100%;
+        padding-block: var(--space-section);
+        padding-inline: var(--space-offset);
+        row-gap: var(--space-section);
+
+        &--alt {
+            padding-block: var(--space-base);
+        }
+
+        &--flat {
+            padding: 0;
         }
     }
 }
 
-// Link Overlay
-.link-overlay {
-    position: relative;
 
-    & :focus {
-        outline: none !important;
+@if $utilities {
+    /*! --- Utilities --- */
+
+    // Alignment
+    .align--center-all {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
     }
 
-    & a {
+    .align--center-x {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .align--center-y {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .align--end-x {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        justify-items: flex-end;
+        text-align: right;
+    }
+
+    .align--end-y {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        justify-items: flex-end;
+    }
+
+    .align--start-x {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        justify-items: flex-start;
+        text-align: left;
+    }
+
+    .align--start-y {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        justify-items: flex-start;
+    }
+
+    .align--stretch-all {
+        align-content: stretch;
+        align-items: stretch;
+        justify-content: stretch;
+        justify-items: stretch;
+    }
+
+    .aligncenter,
+    .center--self {
+        margin-inline: auto;
+    }
+
+    .alignleft,
+    .float--left,
+    .float--left-offset {
+        float: inline-start;
+        margin-block-end: var(--space-block);
+        margin-inline-end: var(--space-block);
+    }
+
+    .alignright,
+    .float--right,
+    .float--right-offset {
+        float: inline-end;
+        margin-block-end: var(--space-block);
+        margin-inline-start: var(--space-block);
+    }
+
+    .float--left-offset {
+        margin-inline-start: calc(var(--space-offset) * -1);
+    }
+
+    .float--right-offset {
+        margin-inline-end: calc(var(--space-offset) * -1);
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .center--#{$_key}-self {
+                float: none;
+                margin-block-end: 0;
+                margin-inline: auto;
+            }
+
+            .float--#{$_key}-left {
+                float: inline-start;
+                margin-block-end: var(--space-block);
+                margin-inline-end: var(--space-block);
+                margin-inline-start: 0;
+            }
+
+            .float--#{$_key}-none {
+                float: none;
+                margin-block-end: 0;
+                margin-inline: 0;
+            }
+
+            .float--#{$_key}-right {
+                float: inline-end;
+                margin-block-end: var(--space-block);
+                margin-inline-end: 0;
+                margin-inline-start: var(--space-block);
+            }
+        }
+    }
+
+    // Aspect Ratio
+    img.aspect--square,
+    img.aspect--landscape,
+    img.aspect--portrait,
+    img.aspect--cinema,
+    img.aspect--wide {
+        object-fit: cover;
+        inline-size: 100%;
+    }
+
+    .aspect--square iframe,
+    .aspect--landscape iframe,
+    .aspect--portrait iframe,
+    .aspect--cinema iframe,
+    .aspect--wide iframe {
+        block-size: 100%;
+        inline-size: 100%;
+    }
+
+    .aspect--square,
+    .aspect--square iframe {
+        aspect-ratio: var(--aspect-square);
+    }
+
+    .aspect--landscape,
+    .aspect--landscape iframe {
+        aspect-ratio: var(--aspect-landscape);
+    }
+
+    .aspect--portrait,
+    .aspect--portrait iframe {
+        aspect-ratio: var(--aspect-portrait);
+    }
+
+    .aspect--cinema,
+    .aspect--cinema iframe {
+        aspect-ratio: var(--aspect-cinema);
+    }
+
+    .aspect--wide,
+    .aspect--wide iframe {
+        aspect-ratio: var(--aspect-wide);
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+
+            img.aspect--#{$_key}-square,
+            img.aspect--#{$_key}-landscape,
+            img.aspect--#{$_key}-portrait,
+            img.aspect--#{$_key}-cinema,
+            img.aspect--#{$_key}-wide {
+                object-fit: cover;
+                inline-size: 100%;
+            }
+
+            .aspect--#{$_key}-square iframe,
+            .aspect--#{$_key}-landscape iframe,
+            .aspect--#{$_key}-portrait iframe,
+            .aspect--#{$_key}-cinema iframe,
+            .aspect--#{$_key}-wide iframe {
+                block-size: 100%;
+                inline-size: 100%;
+            }
+
+            .aspect--#{$_key}-square,
+            .aspect--#{$_key}-square iframe {
+                aspect-ratio: var(--aspect-square);
+            }
+
+            .aspect--#{$_key}-landscape,
+            .aspect--#{$_key}-landscape iframe {
+                aspect-ratio: var(--aspect-landscape);
+            }
+
+            .aspect--#{$_key}-portrait,
+            .aspect--#{$_key}-portrait iframe {
+                aspect-ratio: var(--aspect-portrait);
+            }
+
+            .aspect--#{$_key}-cinema,
+            .aspect--#{$_key}-cinema iframe {
+                aspect-ratio: var(--aspect-cinema);
+            }
+
+            .aspect--#{$_key}-wide,
+            .aspect--#{$_key}-wide iframe {
+                aspect-ratio: var(--aspect-wide);
+            }
+        }
+    }
+
+    // Background Blur
+    .bg-blur--low,
+    .bg-blur--mid,
+    .bg-blur--high {
+        background-color: var(--blur-bg-color);
+    }
+
+    .bg-blur--low {
+        backdrop-filter: blur(var(--space-xs));
+    }
+
+    .bg-blur--mid {
+        backdrop-filter: blur(var(--space-s));
+    }
+
+    .bg-blur--high {
+        backdrop-filter: blur(var(--space-m));
+    }
+
+    // Background Color
+    @each $_key,
+    $_value in $color {
+        .bg--#{$_key} {
+            background-color: var(--#{$_key});
+        }
+
+        .bg--#{$_key}-lighter {
+            background-color: var(--#{$_key}-lighter);
+        }
+
+        .bg--#{$_key}-light {
+            background-color: var(--#{$_key}-light);
+        }
+
+        .bg--#{$_key}-mid {
+            background-color: var(--#{$_key}-mid);
+        }
+
+        .bg--#{$_key}-dark {
+            background-color: var(--#{$_key}-dark);
+        }
+
+        .bg--#{$_key}-darker {
+            background-color: var(--#{$_key}-darker);
+        }
+    }
+
+    .bg--white {
+        background-color: var(--white);
+    }
+
+    .bg--white-off {
+        background-color: var(--white-off);
+    }
+
+    .bg--black {
+        background-color: var(--black);
+    }
+
+    .bg--black-off {
+        background-color: var(--black-off);
+    }
+
+    .bg--transparent {
+        background-color: transparent;
+    }
+
+    // Background Isolate
+    .bg-isolate {
+        isolation: isolate;
+    }
+
+    // Border -  Flat
+    .border--flat {
+        border: none;
+    }
+
+    // Breakout
+    .breakout--offset {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline-start: 50%;
+        max-inline-size: calc(100% + calc(var(--space-offset) * 2));
+        transform: translateX(-50%);
+    }
+
+    .breakout--wide {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline-start: 50%;
+        max-inline-size: var(--width-wide);
+        transform: translateX(-50%);
+    }
+
+    .breakout--max {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline-start: 50%;
+        max-inline-size: var(--width-max);
+        transform: translateX(-50%);
+    }
+
+    .breakout--full {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline: calc(50% - 50vw);
+        max-inline-size: 100vw;
+    }
+
+    // Clear
+    .clear {
+
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+
+        &::after {
+            clear: both;
+        }
+    }
+
+    // Color
+    @each $_key,
+    $_value in $color {
+        .color--#{$_key} {
+            color: var(--#{$_key});
+        }
+
+        .color--#{$_key}-lighter {
+            color: var(--#{$_key}-lighter);
+        }
+
+        .color--#{$_key}-light {
+            color: var(--#{$_key}-light);
+        }
+
+        .color--#{$_key}-mid {
+            color: var(--#{$_key}-mid);
+        }
+
+        .color--#{$_key}-dark {
+            color: var(--#{$_key}-dark);
+        }
+
+        .color--#{$_key}-darker {
+            color: var(--#{$_key}-darker);
+        }
+    }
+
+    .color--white {
+        color: var(--white);
+    }
+
+    .color--white-off {
+        color: var(--white-off);
+    }
+
+    .color--black {
+        color: var(--black);
+    }
+
+    .color--black-off {
+        color: var(--black-off);
+    }
+
+    .color--transparent {
+        color: transparent;
+    }
+
+    // Content Column
+    .content-column--1 {
+        column-count: 1;
+    }
+
+    .content-column--2 {
+        column-count: 2;
+    }
+
+    .content-column--3 {
+        column-count: 3;
+    }
+
+    .content-column--4 {
+        column-count: 4;
+    }
+
+    .content-column--5 {
+        column-count: 5;
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .content-column--#{$_key}-1 {
+                column-count: 1;
+            }
+
+            .content-column--#{$_key}-2 {
+                column-count: 2;
+            }
+
+            .content-column--#{$_key}-3 {
+                column-count: 3;
+            }
+
+            .content-column--#{$_key}-4 {
+                column-count: 4;
+            }
+
+            .content-column--#{$_key}-5 {
+                column-count: 5;
+            }
+        }
+    }
+
+    .content-column-gap {
+        column-gap: var(--content-column-gap, var(--space-l));
+    }
+
+    .content-column-rule {
+        column-rule: var(--content-column-rule, solid);
+    }
+
+    .content-column-rule--color {
+        column-rule-color: var(--content-column-rule-color, var(--base-mid));
+    }
+
+    .content-column-rule--width {
+        column-rule-width: var(--content-column-rule-width, var(--space-2px));
+    }
+
+    .content-column-span--all {
+        column-span: all;
+    }
+
+    // Cursor
+    .cursor--default {
+        cursor: default;
+    }
+
+    .cursor--pointer {
+        cursor: pointer;
+    }
+
+    // Display
+    .display--block {
+        display: block;
+    }
+
+    .display--flex {
+        display: flex;
+    }
+
+    .display--grid {
+        display: grid;
+    }
+
+    .display--inline {
+        display: inline;
+    }
+
+    .display--inline-block {
+        display: inline-block;
+    }
+
+    .display--inline-flex {
+        display: inline-flex;
+    }
+
+    .display--none {
+        display: none;
+    }
+
+    // Flex - Align
+    .align-content--start {
+        align-content: flex-start;
+    }
+
+    .align-content--center {
+        align-content: center;
+    }
+
+    .align-content--end {
+        align-content: flex-end;
+    }
+
+    .align-content--around {
+        align-content: space-around;
+    }
+
+    .align-content--baseline {
+        align-content: baseline;
+    }
+
+    .align-content--between {
+        align-content: space-between;
+    }
+
+    .align-content--evenly {
+        align-content: space-evenly;
+    }
+
+    .align-content--stretch {
+        align-content: stretch;
+    }
+
+    .align-items--start {
+        align-items: flex-start;
+    }
+
+    .align-items--center {
+        align-items: center;
+    }
+
+    .align-items--end {
+        align-items: flex-end;
+    }
+
+    .align-items--baseline {
+        align-items: baseline;
+    }
+
+    .align-items--stretch {
+        align-items: stretch;
+    }
+
+    .align-self--start {
+        align-self: flex-start;
+    }
+
+    .align-self--center {
+        align-self: center;
+    }
+
+    .align-self--end {
+        align-self: flex-end;
+    }
+
+    .align-self--baseline {
+        align-self: baseline;
+    }
+
+    .align-self--stretch {
+        align-self: stretch;
+    }
+
+    .justify-content--start {
+        justify-content: flex-start;
+    }
+
+    .justify-content--center {
+        justify-content: center;
+    }
+
+    .justify-content--end {
+        justify-content: flex-end;
+    }
+
+    .justify-content--evenly {
+        justify-content: space-evenly;
+    }
+
+    .justify-content--around {
+        justify-content: space-around;
+    }
+
+    .justify-content--between {
+        justify-content: space-between;
+    }
+
+    .justify-content--stretch {
+        justify-content: stretch;
+    }
+
+    .justify-items--start {
+        justify-items: flex-start;
+    }
+
+    .justify-items--center {
+        justify-items: center;
+    }
+
+    .justify-items--end {
+        justify-items: flex-end;
+    }
+
+    .justify-items--stretch {
+        justify-items: stretch;
+    }
+
+    .justify-self--start {
+        justify-self: flex-start;
+    }
+
+    .justify-self--center {
+        justify-self: center;
+    }
+
+    .justify-self--end {
+        justify-self: flex-end;
+    }
+
+    .justify-self--stretch {
+        justify-self: stretch;
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .align-content--#{$_key}-start {
+                align-content: flex-start;
+            }
+
+            .align-content--#{$_key}-center {
+                align-content: center;
+            }
+
+            .align-content--#{$_key}-end {
+                align-content: flex-end;
+            }
+
+            .align-content--#{$_key}-around {
+                align-content: space-around;
+            }
+
+            .align-content--#{$_key}-baseline {
+                align-content: baseline;
+            }
+
+            .align-content--#{$_key}-between {
+                align-content: space-between;
+            }
+
+            .align-content--#{$_key}-evenly {
+                align-content: space-evenly;
+            }
+
+            .align-content--#{$_key}-stretch {
+                align-content: stretch;
+            }
+
+            .align-items--#{$_key}-start {
+                align-items: flex-start;
+            }
+
+            .align-items--#{$_key}-center {
+                align-items: center;
+            }
+
+            .align-items--#{$_key}-end {
+                align-items: flex-end;
+            }
+
+            .align-items--#{$_key}-baseline {
+                align-items: baseline;
+            }
+
+            .align-items--#{$_key}-stretch {
+                align-items: stretch;
+            }
+
+            .align-self--#{$_key}-start {
+                align-self: flex-start;
+            }
+
+            .align-self--#{$_key}-center {
+                align-self: center;
+            }
+
+            .align-self--#{$_key}-end {
+                align-self: flex-end;
+            }
+
+            .align-self--#{$_key}-baseline {
+                align-self: baseline;
+            }
+
+            .align-self--#{$_key}-stretch {
+                align-self: stretch;
+            }
+
+            .justify-content--#{$_key}-start {
+                justify-content: flex-start;
+            }
+
+            .justify-content--#{$_key}-center {
+                justify-content: center;
+            }
+
+            .justify-content--#{$_key}-end {
+                justify-content: flex-end;
+            }
+
+            .justify-content--#{$_key}-evenly {
+                justify-content: space-evenly;
+            }
+
+            .justify-content--#{$_key}-around {
+                justify-content: space-around;
+            }
+
+            .justify-content--#{$_key}-between {
+                justify-content: space-between;
+            }
+
+            .justify-content--#{$_key}-stretch {
+                justify-content: stretch;
+            }
+
+            .justify-items--#{$_key}-start {
+                justify-items: flex-start;
+            }
+
+            .justify-items--#{$_key}-center {
+                justify-items: center;
+            }
+
+            .justify-items--#{$_key}-end {
+                justify-items: flex-end;
+            }
+
+            .justify-items--#{$_key}-stretch {
+                justify-items: stretch;
+            }
+
+            .justify-self--#{$_key}-start {
+                justify-self: flex-start;
+            }
+
+            .justify-self--#{$_key}-center {
+                justify-self: center;
+            }
+
+            .justify-self--#{$_key}-end {
+                justify-self: flex-end;
+            }
+
+            .justify-self--#{$_key}-stretch {
+                justify-self: stretch;
+            }
+        }
+    }
+
+    // Flex - Direction
+    .flex--column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .flex--column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    .flex--row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flex--row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .flex--#{$_key}-column {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .flex--#{$_key}-column-reverse {
+                flex-direction: column-reverse;
+            }
+
+            .flex--#{$_key}-row {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .flex--#{$_key}-row-reverse {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    // Flex - Grow
+    .flex-grow {
+        flex-grow: 1;
+    }
+
+    .flex-grow--flat {
+        flex-grow: 0;
+    }
+
+    // Flex - Shrink
+    .flex-shrink {
+        flex-shrink: 1;
+    }
+
+    .flex-shrink--flat {
+        flex-shrink: 0;
+    }
+
+    // Flex - Wrap
+    .flex--nowrap {
+        flex-wrap: nowrap;
+    }
+
+    .flex--wrap {
+        flex-wrap: wrap;
+    }
+
+    .flex--wrap-reverse {
+        flex-wrap: wrap-reverse;
+    }
+
+    // Flip
+    .flip--x {
+        transform: scaleX(-1);
+    }
+
+    .flip--y {
+        transform: scaleY(-1);
+    }
+
+    .flip--xy {
+        transform: scale(-1, -1);
+    }
+
+    // Gap - Contextual
+    .gap--base {
+        gap: var(--space-base);
+
+        &-column {
+            column-gap: var(--space-base);
+        }
+
+        &-row {
+            row-gap: var(--space-base);
+        }
+    }
+
+    .gap--block {
+        gap: var(--space-block);
+
+        &-column {
+            column-gap: var(--space-block);
+        }
+
+        &-row {
+            row-gap: var(--space-block);
+        }
+    }
+
+    .gap--container {
+        gap: var(--space-container);
+
+        &-column {
+            column-gap: var(--space-container);
+        }
+
+        &-row {
+            row-gap: var(--space-container);
+        }
+    }
+
+    .gap--grid {
+        gap: var(--space-grid);
+
+        &-column {
+            column-gap: var(--space-grid);
+        }
+
+        &-row {
+            row-gap: var(--space-grid);
+        }
+    }
+
+    .gap--icon {
+        gap: var(--space-icon);
+
+        &-column {
+            column-gap: var(--space-icon);
+        }
+
+        &-row {
+            row-gap: var(--space-icon);
+        }
+    }
+
+    .gap--section {
+        gap: var(--space-section);
+
+        &-column {
+            column-gap: var(--space-section);
+        }
+
+        &-row {
+            row-gap: var(--space-section);
+        }
+    }
+
+    .gap--flat {
+        gap: 0;
+
+        &-column {
+            column-gap: 0;
+        }
+
+        &-row {
+            row-gap: 0;
+        }
+    }
+
+    // Height
+    .height--half {
+        min-block-size: 50svh;
+    }
+
+    .height--partial {
+        min-block-size: 75svh;
+    }
+
+    .height--full {
+        min-block-size: 100svh;
+    }
+
+    .height--fill {
+        min-block-size: 100%;
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .height--#{$_key}-auto {
+                min-block-size: auto;
+            }
+
+            .height--#{$_key}-half {
+                min-block-size: 50svh;
+            }
+
+            .height--#{$_key}-partial {
+                min-block-size: 75svh;
+            }
+
+            .height--#{$_key}-full {
+                min-block-size: 100svh;
+            }
+        }
+    }
+
+    // Hide, Show
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .show--flex {
+        display: flex;
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .hide--#{$_key} {
+                display: none;
+            }
+
+            .show--#{$_key} {
+                display: block;
+            }
+
+            .show--#{$_key}-flex {
+                display: flex;
+            }
+        }
+    }
+
+    // Hide Visually
+    .hide--visually {
+        block-size: var(--space-px);
+        border: 0;
+        clip-path: rect(0, 0, 0, 0);
+        inline-size: var(--space-px);
+        margin: calc(var(--space-px) * -1);
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        white-space: nowrap;
+
+        &.focusable {
+
+            &:active,
+            &:focus {
+                block-size: auto;
+                clip-path: auto;
+                inline-size: auto;
+                margin: 0;
+                overflow: visible;
+                position: static;
+                white-space: inherit;
+            }
+        }
+    }
+
+    // List Flat
+    ol.list--flat,
+    ul.list--flat,
+    .list--flat > ol,
+    .list--flat > ul {
+        list-style: none;
+        list-style-type: none;
+        margin-block: 0;
+        padding-inline-start: 0;
+    }
+
+    // List Marker
+    .list-marker--color li::marker {
+        color: var(--list-marker-color, var(--primary));
+    }
+
+    // Margin - Bottom
+    .margin-bottom--base {
+        margin-block-end: var(--space-base);
+    }
+
+    .margin-bottom--block {
+        margin-block-end: var(--space-block);
+    }
+
+    .margin-bottom--container {
+        margin-block-end: var(--space-container);
+    }
+
+    .margin-bottom--grid {
+        margin-block-end: var(--space-grid);
+    }
+
+    .margin-bottom--icon {
+        margin-block-end: var(--space-icon);
+    }
+
+    .margin-bottom--section {
+        margin-block-end: var(--space-section);
+    }
+
+    // Margin - Left
+    .margin-left--base {
+        margin-inline-start: var(--space-base);
+    }
+
+    .margin-left--block {
+        margin-inline-start: var(--space-block);
+    }
+
+    .margin-left--container {
+        margin-inline-start: var(--space-container);
+    }
+
+    .margin-left--grid {
+        margin-inline-start: var(--space-grid);
+    }
+
+    .margin-left--icon {
+        margin-inline-start: var(--space-icon);
+    }
+
+    .margin-left--section {
+        margin-inline-start: var(--space-section);
+    }
+
+    // Margin - Right
+    .margin-right--base {
+        margin-inline-end: var(--space-base);
+    }
+
+    .margin-right--block {
+        margin-inline-end: var(--space-block);
+    }
+
+    .margin-right--container {
+        margin-inline-end: var(--space-container);
+    }
+
+    .margin-right--grid {
+        margin-inline-end: var(--space-grid);
+    }
+
+    .margin-right--icon {
+        margin-inline-end: var(--space-icon);
+    }
+
+    .margin-right--section {
+        margin-inline-end: var(--space-section);
+    }
+
+    // Margin - Top
+    .margin-top--base {
+        margin-block-start: var(--space-base);
+    }
+
+    .margin-top--block {
+        margin-block-start: var(--space-block);
+    }
+
+    .margin-top--container {
+        margin-block-start: var(--space-container);
+    }
+
+    .margin-top--grid {
+        margin-block-start: var(--space-grid);
+    }
+
+    .margin-top--icon {
+        margin-block-start: var(--space-icon);
+    }
+
+    .margin-top--section {
+        margin-block-start: var(--space-section);
+    }
+
+    // Margin - Flat
+    .margin-bottom--flat {
+        margin-block-end: 0;
+    }
+
+    .margin-left--flat {
+        margin-inline-start: 0;
+    }
+
+    .margin-right--flat {
+        margin-inline-end: 0;
+    }
+
+    .margin-top--flat {
+        margin-block-start: 0;
+    }
+
+    .margin--flat {
+        margin: 0;
+    }
+
+    // Object Fit
+    .object--contain {
+        object-fit: contain;
+    }
+
+    .object--cover {
+        object-fit: cover;
+    }
+
+    // Object Position
+    .object--bottom-center {
+        object-position: var(--object-center) var(--object-end);
+    }
+
+    .object--bottom-left {
+        object-position: var(--object-start) var(--object-end);
+    }
+
+    .object--bottom-right {
+        object-position: var(--object-end);
+    }
+
+    .object--center {
+        object-position: var(--object-center);
+    }
+
+    .object--center-left {
+        object-position: var(--object-start) var(--object-center);
+    }
+
+    .object--center-right {
+        object-position: var(--object-end) var(--object-center);
+    }
+
+    .object--top-center {
+        object-position: var(--object-center) var(--object-start);
+    }
+
+    .object--top-left {
+        object-position: var(--object-start);
+    }
+
+    .object--top-right {
+        object-position: var(--object-end) var(--object-start);
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .object--#{$-key}-bottom-center {
+                object-position: var(--object-center) var(--object-end);
+            }
+
+            .object--#{$-key}-bottom-left {
+                object-position: var(--object-start) var(--object-end);
+            }
+
+            .object--#{$-key}-bottom-right {
+                object-position: var(--object-end);
+            }
+
+            .object--#{$-key}-center {
+                object-position: var(--object-center);
+            }
+
+            .object--#{$-key}-center-left {
+                object-position: var(--object-start) var(--object-center);
+            }
+
+            .object--#{$-key}-center-right {
+                object-position: var(--object-end) var(--object-center);
+            }
+
+            .object--#{$-key}-top-center {
+                object-position: var(--object-center) var(--object-start);
+            }
+
+            .object--#{$-key}-top-left {
+                object-position: var(--object-start);
+            }
+
+            .object--#{$-key}-top-right {
+                object-position: var(--object-end) var(--object-start);
+            }
+        }
+    }
+
+    // Opacity
+    .opacity--5 {
+        opacity: .05;
+    }
+
+    .opacity--10 {
+        opacity: .1;
+    }
+
+    .opacity--20 {
+        opacity: .2;
+    }
+
+    .opacity--30 {
+        opacity: .3;
+    }
+
+    .opacity--40 {
+        opacity: .4;
+    }
+
+    .opacity--50 {
+        opacity: .5;
+    }
+
+    .opacity--60 {
+        opacity: .6;
+    }
+
+    .opacity--70 {
+        opacity: .7;
+    }
+
+    .opacity--80 {
+        opacity: .8;
+    }
+
+    .opacity--90 {
+        opacity: .9;
+    }
+
+    .opacity--95 {
+        opacity: .95;
+    }
+
+    // Overflow
+    .overflow--auto {
+        overflow: auto;
+    }
+
+    .overflow--clip {
+        overflow: clip;
+    }
+
+    .overflow--hidden {
+        overflow: hidden;
+    }
+
+    .overflow--scroll-x {
+        overflow-x: scroll;
+    }
+
+    .overflow--scroll-y {
+        overflow-y: scroll;
+    }
+
+    // Padding - Contextual
+    .padding--base {
+        padding: var(--space-base);
+    }
+
+    .padding--block {
+        padding: var(--space-block);
+    }
+
+    .padding--container {
+        padding: var(--space-container);
+    }
+
+    .padding--grid {
+        padding: var(--space-grid);
+    }
+
+    .padding--icon {
+        padding: var(--space-icon);
+    }
+
+    .padding--section {
+        padding: var(--space-section) var(--space-offset);
+    }
+
+    .padding--section-alt {
+        padding: var(--space-base) var(--space-offset);
+    }
+
+    // Padding - Flat
+    .padding-bottom--flat {
+        padding-block-end: 0;
+    }
+
+    .padding-left--flat {
+        padding-inline-start: 0;
+    }
+
+    .padding-right--flat {
+        padding-inline-end: 0;
+    }
+
+    .padding-top--flat {
+        padding-block-start: 0;
+    }
+
+    .padding--flat {
+        padding: 0;
+    }
+
+    // Position
+    .position--absolute {
+        position: absolute;
+    }
+
+    .position--fixed {
+        position: fixed;
+    }
+
+    .position--relative {
+        position: relative;
+    }
+
+    .position--static {
         position: static;
     }
 
-    & a::after {
-        content: "";
-        cursor: pointer;
-        display: flex;
-        inset: 0;
-        position: absolute;
-    }
-}
+    .position--sticky {
+        inset-block-start: 0;
+        position: sticky;
 
-// List Flat
-ol.list--flat,
-ul.list--flat,
-.list--flat > ol,
-.list--flat > ul {
-    list-style: none;
-    list-style-type: none;
-    margin-block: 0;
-    padding-inline-start: 0;
-}
-
-// Position
-.position--relative {
-    position: relative;
-}
-
-.position--static {
-    position: static;
-}
-
-.position--sticky {
-    inset-block-start: 0;
-    position: sticky;
-
-    &-offset {
-        inset-block-start: var(--sticky-offset, var(--space-base));
-    }
-}
-
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        .position--#{$_key}-relative {
-            position: relative;
-        }
-
-        .position--#{$_key}-static {
-            position: static;
-        }
-
-        .position--#{$_key}-sticky {
-            inset-block-start: 0;
-            position: sticky;
-        }
-
-        .position--#{$_key}-sticky-offset {
-            --sticky-offset: var(--space-base);
-
-            inset-block-start: var(--sticky-offset);
+        &-offset {
+            inset-block-start: var(--sticky-offset, var(--space-base));
         }
     }
-}
 
-// Shadow
-.shadow--s {
-    filter: var(--shadow-s);
-}
+    // Position - Flat
+    .position--bottom-flat {
+        inset-block-end: 0;
+    }
 
-.shadow--m {
-    filter: var(--shadow-m);
-}
+    .position--left-flat {
+        inset-inline-start: 0;
+    }
 
-.shadow--l {
-    filter: var(--shadow-l);
-}
+    .position--right-flat {
+        inset-inline-end: 0;
+    }
 
-.shadow--xl {
-    filter: var(--shadow-xl);
-}
+    .position--top-flat {
+        inset-block-start: 0;
+    }
 
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        .shadow--#{$_key}-s {
-            filter: var(--shadow-s);
-        }
+    .position--flat {
+        inset: 0
+    }
 
-        .shadow--#{$_key}-m {
-            filter: var(--shadow-m);
-        }
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .position--#{$_key}-absolute {
+                position: absolute;
+            }
 
-        .shadow--#{$_key}-l {
-            filter: var(--shadow-l);
-        }
+            .position--#{$_key}-fixed {
+                position: fixed;
+            }
 
-        .shadow--#{$_key}-xl {
-            filter: var(--shadow-xl);
-        }
+            .position--#{$_key}-relative {
+                position: relative;
+            }
 
-        .shadow--#{$_key}-none {
-            filter: var(--shadow-none);
+            .position--#{$_key}-static {
+                position: static;
+            }
+
+            .position--#{$_key}-sticky {
+                inset-block-start: 0;
+                position: sticky;
+            }
+
+            .position--#{$_key}-sticky-offset {
+                inset-block-start: var(--sticky-offset, var(--space-base));
+            }
+
+            .position--#{$_key}-bottom-flat {
+                inset-block-end: 0;
+            }
+
+            .position--#{$_key}-left-flat {
+                inset-inline-start: 0;
+            }
+
+            .position--#{$_key}-right-flat {
+                inset-inline-end: 0;
+            }
+
+            .position--#{$_key}-top-flat {
+                inset-block-start: 0;
+            }
+
+            .position--#{$_key}-flat {
+                inset: 0
+            }
         }
     }
-}
 
-// Width
-.width--min,
-.width--s,
-.width--m,
-.width--l,
-.width--xl,
-.width--wide,
-.width--max,
-.width--prose,
-.width--website,
-.width--fill {
-    inline-size: 100%;
-}
+    // Radius
+    .radius--xs {
+        border-radius: var(--radius-xs);
+    }
 
-.width--min {
-    max-inline-size: var(--width-min);
-}
+    .radius--s {
+        border-radius: var(--radius-s);
+    }
 
-.width--s {
-    max-inline-size: var(--width-s);
-}
+    .radius--m {
+        border-radius: var(--radius-m);
+    }
 
-.width--m {
-    max-inline-size: var(--width-m);
-}
+    .radius--l {
+        border-radius: var(--radius-l);
+    }
 
-.width--l {
-    max-inline-size: var(--width-l);
-}
+    .radius--xl {
+        border-radius: var(--radius-xl);
+    }
 
-.width--xl {
-    max-inline-size: var(--width-xl);
-}
+    .radius--oval {
+        border-radius: var(--radius-oval);
+    }
 
-.width--wide {
-    max-inline-size: var(--width-wide);
-}
+    .radius--round {
+        border-radius: var(--radius-round);
+    }
 
-.width--max {
-    max-inline-size: var(--width-max);
-}
+    // Shadow
+    .shadow--s {
+        filter: var(--shadow-s);
+    }
 
-.width--fit {
-    max-inline-size: fit-content;
-}
+    .shadow--m {
+        filter: var(--shadow-m);
+    }
 
-.width--prose {
-    max-inline-size: var(--width-prose);
-}
+    .shadow--l {
+        filter: var(--shadow-l);
+    }
 
-.width--website {
-    max-inline-size: var(--width-website);
+    .shadow--xl {
+        filter: var(--shadow-xl);
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .shadow--#{$_key}-s {
+                filter: var(--shadow-s);
+            }
+
+            .shadow--#{$_key}-m {
+                filter: var(--shadow-m);
+            }
+
+            .shadow--#{$_key}-l {
+                filter: var(--shadow-l);
+            }
+
+            .shadow--#{$_key}-xl {
+                filter: var(--shadow-xl);
+            }
+
+            .shadow--#{$_key}-none {
+                filter: var(--shadow-none);
+            }
+        }
+    }
+
+    // Text
+    .text--base {
+        font-size: var(--text-base);
+    }
+
+    .text--fine {
+        font-size: var(--text-fine);
+        line-height: var(--text-height-m);
+    }
+
+    .text--hero {
+        font-size: var(--text-hero);
+        line-height: var(--text-height-s);
+    }
+
+    .text--lede {
+        font-size: var(--text-lede);
+        line-height: var(--text-height-m);
+    }
+
+    // Text - Align
+    .text-align--center {
+        text-align: center;
+    }
+
+    .text-align--justify {
+        text-align: justify;
+    }
+
+    .text-align--left {
+        text-align: start;
+    }
+
+    .text-align--right {
+        text-align: end;
+    }
+
+    @each $_key,
+    $_value in $breakpoint {
+        @include breakpoint($_value) {
+            .text-align--#{$-key}-center {
+                text-align: center;
+            }
+
+            .text-align--#{$-key}-justify {
+                text-align: justify;
+            }
+
+            .text-align--#{$-key}-left {
+                text-align: start;
+            }
+
+            .text-align--#{$-key}-right {
+                text-align: end;
+            }
+        }
+    }
+
+    // Text - Decoration
+    .text-decoration--flat {
+        text-decoration: none;
+    }
+
+    .text-decoration--overline {
+        text-decoration: overline;
+    }
+
+    .text-decoration--strike {
+        text-decoration: line-through;
+    }
+
+    .text-decoration--underline {
+        text-decoration: underline;
+    }
+
+    // Text - Height
+    .text-height--s {
+        line-height: var(--text-height-s);
+    }
+
+    .text-height--m {
+        line-height: var(--text-height-m);
+    }
+
+    .text-height--l {
+        line-height: var(--text-height-l);
+    }
+
+    // Text - Spaced
+    .text-spaced {
+        letter-spacing: var(--space-px);
+    }
+
+    // Text - Style
+    .text-style--italic {
+        font-style: italic;
+    }
+
+    .text-style--normal {
+        font-style: normal;
+    }
+
+    // Text - Transform
+    .text-transform--capitalize {
+        text-transform: capitalize;
+    }
+
+    .text-transform--lowercase {
+        text-transform: lowercase;
+    }
+
+    .text-transform--none {
+        text-transform: none;
+    }
+
+    .text-transform--uppercase {
+        text-transform: uppercase;
+    }
+
+    // Text - Weight
+    .text-weight--100 {
+        font-weight: 100;
+    }
+
+    .text-weight--200 {
+        font-weight: 200;
+    }
+
+    .text-weight--300 {
+        font-weight: 300;
+    }
+
+    .text-weight--400 {
+        font-weight: 400;
+    }
+
+    .text-weight--500 {
+        font-weight: 500;
+    }
+
+    .text-weight--600 {
+        font-weight: 600;
+    }
+
+    .text-weight--700 {
+        font-weight: 700;
+    }
+
+    .text-weight--800 {
+        font-weight: 800;
+    }
+
+    .text-weight--900 {
+        font-weight: 900;
+    }
+
+    // Transition
+    .transition--fast {
+        transition: var(--transition-fast);
+    }
+
+    .transition--normal {
+        transition: var(--transition-normal);
+    }
+
+    .transition--slow {
+        transition: var(--transition-slow);
+    }
+
+    // Vertical Text
+    .vertical--text-left,
+    .vertical--text-right {
+        writing-mode: vertical-lr;
+    }
+
+    .vertical--text-left {
+        transform: scale(-1);
+    }
+
+    .vertical--text-right {
+        transform: scale(1);
+    }
+
+    @each $_key, $_value in $breakpoint {
+        @include breakpoint($_value) {
+
+            .vertical--#{$_key}-text-left,
+            .vertical--#{$_key}-text-right {
+                writing-mode: vertical-lr;
+            }
+
+            .vertical--#{$_key}-text-left {
+                transform: scale(-1);
+            }
+
+            .vertical--#{$_key}-text-right {
+                transform: scale(1);
+            }
+
+            .vertical--#{$_key}-text-unset {
+                transform: scale(1);
+                writing-mode: unset;
+            }
+        }
+    }
+
+    // Width
+    .width--min,
+    .width--s,
+    .width--m,
+    .width--l,
+    .width--xl,
+    .width--wide,
+    .width--max,
+    .width--prose,
+    .width--website,
+    .width--fill {
+        inline-size: 100%;
+    }
+
+    .width--min {
+        max-inline-size: var(--width-min);
+    }
+
+    .width--s {
+        max-inline-size: var(--width-s);
+    }
+
+    .width--m {
+        max-inline-size: var(--width-m);
+    }
+
+    .width--l {
+        max-inline-size: var(--width-l);
+    }
+
+    .width--xl {
+        max-inline-size: var(--width-xl);
+    }
+
+    .width--wide {
+        max-inline-size: var(--width-wide);
+    }
+
+    .width--max {
+        max-inline-size: var(--width-max);
+    }
+
+    .width--fit {
+        max-inline-size: fit-content;
+    }
+
+    .width--prose {
+        max-inline-size: var(--width-prose);
+    }
+
+    .width--website {
+        max-inline-size: var(--width-website);
+    }
+
+    // Z-Index
+    .z--back {
+        z-index: var(--z-back);
+    }
+
+    .z--flat {
+        z-index: var(--z-flat);
+    }
+
+    .z--front {
+        z-index: var(--z-front);
+    }
+
+    .z--low {
+        z-index: var(--z-low);
+    }
+
+    .z--mid {
+        z-index: var(--z-mid);
+    }
+
+    .z--high {
+        z-index: var(--z-high);
+    }
+
+    .z--top {
+        z-index: var(--z-top);
+    }
 }
 
 
 
 @if $bricks-builder {
-    // --- Bricks Builder --- //
+    /*! --- Bricks Builder --- */
 
     // Block
     .brxe-block {
