@@ -683,7 +683,9 @@ textarea {
         transition: var(--btn-transition, var(--transition-normal));
 
         &:focus-visible {
-            --focus-color: var(--action-darker);
+            --focus-color: var(--action);
+
+            transition: none;
         }
 
         &--outline {
@@ -1469,7 +1471,7 @@ textarea {
         row-gap: var(--space-section);
 
         &--alt {
-            padding-block: var(--space-base);
+            padding-block: var(--space-l);
         }
 
         &--flat {
@@ -2853,7 +2855,7 @@ textarea {
     }
 
     .padding--section-alt {
-        padding: var(--space-base) var(--space-offset);
+        padding: var(--space-l) var(--space-offset);
     }
 
     // Padding - Flat
