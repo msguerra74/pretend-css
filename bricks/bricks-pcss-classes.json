@@ -5214,6 +5214,30 @@
         "category": "pcss"
     },
     {
+        "id": "pcss-text-wrap",
+        "name": "text-wrap",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-text-wrap--balance",
+        "name": "text-wrap--balance",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-text-wrap--none",
+        "name": "text-wrap--none",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-text-wrap--pretty",
+        "name": "text-wrap--pretty",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
         "id": "pcss-transition--fast",
         "name": "transition--fast",
         "settings": [],
