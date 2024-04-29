@@ -4650,6 +4650,12 @@
         "category": "pcss"
     },
     {
+        "id": "pcss-radius",
+        "name": "radius",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
         "id": "pcss-radius--l",
         "name": "radius--l",
         "settings": [],

@@ -173,6 +173,7 @@ $utilities: true;
     // Border
     --border-style: solid;
     --border-color: var(--base-mid);
+    --border-radius: var(--radius);
     --border-width: var(--space-2px);
 
     // Grid
@@ -196,6 +197,7 @@ $utilities: true;
     --object-end: 85%;
 
     // Radius
+    --radius: var(--radius-m);
     --radius-xs: var(--space-xs);
     --radius-s: var(--space-s);
     --radius-m: var(--space-m);
@@ -626,8 +628,8 @@ video {
 }
 
 img {
+    border-radius: var(--radius);
     object-fit: cover;
-    object-position: var(--object-center);
 }
 
 p {
@@ -678,7 +680,7 @@ textarea {
         align-items: center;
         background-color: var(--btn-bg-color, var(--action));
         border-color: var(--btn-border-color, var(--action));
-        border-radius: var(--btn-border-radius, 0);
+        border-radius: var(--btn-border-radius, var(--radius));
         border-style: var(--btn-border-style, solid);
         border-width: var(--btn-border-width, var(--space-2px));
         color: var(--btn-color, var(--action-lighter));
@@ -932,7 +934,7 @@ textarea {
         --input-bg-color: var(--base-lighter);
         --input-border-color-focus: var(--action);
         --input-border-color: var(--base-mid);
-        --input-border-radius: 0;
+        --input-border-radius: var(--radius);
         --input-border-style: solid;
         --input-border-width: var(--space-2px);
         --input-color: var(--base-darker);
@@ -966,7 +968,7 @@ textarea {
         --input-bg-color: var(--base-lighter);
         --input-border-color-focus: var(--action);
         --input-border-color: var(--base-mid);
-        --input-border-radius: 0;
+        --input-border-radius: var(--radius);
         --input-border-style: solid;
         --input-border-width: var(--space-2px);
         --input-color: var(--base-darker);
@@ -1823,6 +1825,7 @@ textarea {
         & {
             border-style: var(--border-style);
             border-color: var(--border-color);
+            border-radius: var(--border-radius);
             border-width: var(--border-width);
         }
 
@@ -3028,6 +3031,10 @@ textarea {
     }
 
     // Radius
+    .radius {
+        border-radius: var(--radius);
+    }
+
     .radius--xs {
         border-radius: var(--radius-xs);
     }
