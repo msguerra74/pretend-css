@@ -1212,6 +1212,36 @@
         "category": "pcss"
     },
     {
+        "id": "pcss-border",
+        "name": "border",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-border--bottom",
+        "name": "border--bottom",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-border--left",
+        "name": "border--left",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-border--right",
+        "name": "border--right",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-border--top",
+        "name": "border--top",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
         "id": "pcss-border--flat",
         "name": "border--flat",
         "settings": [],
@@ -3818,6 +3848,12 @@
     {
         "id": "pcss-object--cover",
         "name": "object--cover",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-object--none",
+        "name": "object--none",
         "settings": [],
         "category": "pcss"
     },

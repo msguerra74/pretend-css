@@ -62,7 +62,7 @@ $breakpoint: (
 
 // Components
 $components: true;
-$bricks-builder: false;
+$bricks-builder: true;
 // Utilities
 $utilities: true;
 
@@ -169,6 +169,11 @@ $utilities: true;
     --aspect-portrait: 3 / 4;
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
+
+    // Border
+    --border-style: solid;
+    --border-color: var(--base-mid);
+    --border-width: var(--space-2px);
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -617,6 +622,11 @@ video {
     block-size: auto;
     display: block;
     max-inline-size: 100%;
+}
+
+img {
+    object-fit: cover;
+    object-position: var(--object-center);
 }
 
 textarea {
@@ -1803,6 +1813,39 @@ textarea {
         isolation: isolate;
     }
 
+    // Border
+    .border {
+        & {
+            border-style: var(--border-style);
+            border-color: var(--border-color);
+            border-width: var(--border-width);
+        }
+
+        &--bottom {
+            border-bottom-style: var(--border-style);
+            border-bottom-color: var(--border-color);
+            border-bottom-width: var(--border-width);
+        }
+
+        &--left {
+            border-left-style: var(--border-style);
+            border-left-color: var(--border-color);
+            border-left-width: var(--border-width);
+        }
+
+        &--right {
+            border-right-style: var(--border-style);
+            border-right-color: var(--border-color);
+            border-right-width: var(--border-width);
+        }
+
+        &--top {
+            border-top-style: var(--border-style);
+            border-top-color: var(--border-color);
+            border-top-width: var(--border-width);
+        }
+    }
+
     // Border -  Flat
     .border--flat {
         border: none;
@@ -2683,6 +2726,10 @@ textarea {
 
     .object--cover {
         object-fit: cover;
+    }
+
+    .object--none {
+        object-fit: none;
     }
 
     // Object Position
