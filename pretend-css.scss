@@ -1656,15 +1656,6 @@ textarea {
     }
 
     // Aspect Ratio
-    img.aspect--square,
-    img.aspect--landscape,
-    img.aspect--portrait,
-    img.aspect--cinema,
-    img.aspect--wide {
-        object-fit: cover;
-        inline-size: 100%;
-    }
-
     .aspect--square iframe,
     .aspect--landscape iframe,
     .aspect--portrait iframe,
@@ -1702,15 +1693,6 @@ textarea {
     @each $_key,
     $_value in $breakpoint {
         @include breakpoint($_value) {
-
-            img.aspect--#{$_key}-square,
-            img.aspect--#{$_key}-landscape,
-            img.aspect--#{$_key}-portrait,
-            img.aspect--#{$_key}-cinema,
-            img.aspect--#{$_key}-wide {
-                object-fit: cover;
-                inline-size: 100%;
-            }
 
             .aspect--#{$_key}-square iframe,
             .aspect--#{$_key}-landscape iframe,
