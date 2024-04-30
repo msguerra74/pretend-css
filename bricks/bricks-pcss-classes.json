@@ -1296,6 +1296,12 @@
         "category": "pcss"
     },
     {
+        "id": "pcss-btn--icon",
+        "name": "btn--icon",
+        "settings": [],
+        "category": "pcss"
+    },
+    {
         "id": "pcss-btn--outline",
         "name": "btn--outline",
         "settings": [],
@@ -2324,12 +2330,6 @@
     {
         "id": "pcss-form",
         "name": "form",
-        "settings": [],
-        "category": "pcss"
-    },
-    {
-        "id": "pcss-form--alt",
-        "name": "form--alt",
         "settings": [],
         "category": "pcss"
     },

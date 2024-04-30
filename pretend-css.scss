@@ -163,6 +163,14 @@ $utilities: true;
 }
 
 :root {
+    // Anchor, Link
+    --a-color: var(--action);
+    --link-color: inherit;
+    --link-decoraton: underline;
+    --link-decoration-color: var(--action);
+    --link-decoration-thickness: var(--space-2px);
+    --link-underline-offset: var(--space-2px);
+
     // Aspect Ratio
     --aspect-square: 1;
     --aspect-landscape: 4 / 3;
@@ -170,11 +178,84 @@ $utilities: true;
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
 
+    // Body, HTML
+    --body-bg-color: var(--base-lighter);
+    --body-color: var(--base-darker);
+    --body-font-family: Verdana;
+    --body-font-size: var(--text-base);
+    --body-line-height: var(--text-height-l);
+    --html-bg-color: var(--body-bg-color);
+
     // Border
+    --border: var(--border-width) var(--border-style) var(--border-color);
     --border-style: solid;
     --border-color: var(--base-mid);
     --border-radius: var(--radius);
     --border-width: var(--space-2px);
+
+    // Button
+    --btn-bg-color: var(--action);
+    --btn-border-color: var(--action);
+    --btn-border-radius: var(--radius);
+    --btn-border-style: solid;
+    --btn-border-width: var(--space-2px);
+    --btn-color: var(--action-lighter);
+    --btn-font-size: var(--text-s);
+    --btn-font-weight: 400;
+    --btn-gap: var(--space-icon);
+    --btn-letter-spacing: normal;
+    --btn-line-height: 1;
+    --btn-padding-x: var(--space-xl);
+    --btn-padding-y: var(--space-m);
+    --btn-text-transform: uppercase;
+    --btn-transition: var(--transition-normal);
+    --btn-width: fit-content;
+
+    // Content Column
+    --content-column-gap: var(--space-l);
+    --content-column-rule: solid;
+    --content-column-rule-color: var(--base-mid);
+    --content-column-rule-width: var(--space-2px);
+
+    // Focus
+    --focus-color: var(--action);
+    --focus-offset: var(--space-2px);
+    --focus-style: solid;
+    --focus-width: var(--space-2px);
+
+    // Form
+    --checkbox-border-radius: 0;
+    --checkbox-checked-bg-color: var(--action);
+    --checkbox-checked-box-shadow: var(--white);
+    --checkbox-size: var(--space-l);
+    --form-error-bg-color: var(--danger);
+    --form-error-color: var(--danger-lighter);
+    --form-error-font-size: var(--text-s);
+    --form-gap: var(--space-grid);
+    --form-success-bg-color: var(--success);
+    --form-success-color: var(--success-lighter);
+    --form-success-font-size: var(--text-base);
+    --input-bg-color-focus: var(--white);
+    --input-bg-color: var(--base-lighter);
+    --input-border-color-focus: var(--action);
+    --input-border-color: var(--base-mid);
+    --input-border-radius: var(--radius);
+    --input-border-style: solid;
+    --input-border-width: var(--space-2px);
+    --input-color: var(--base-darker);
+    --input-font-size: var(--text-m);
+    --input-height: var(--space-2xl);
+    --input-line-height: var(--text-height-s);
+    --input-padding-x: var(--space-m);
+    --input-padding-y: var(--space-s);
+    --label-color: inherit;
+    --label-font-size: var(--text-m);
+    --label-font-weight: 400;
+    --placeholder-color: var(--base-mid);
+    --placeholder-opacity: 1;
+    --submit-bg-color: var(--action);
+    --submit-color: var(--action-lighter);
+    --textarea-height: var(--space-7xl);
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -191,13 +272,63 @@ $utilities: true;
     --grid-3-2: 3fr 2fr;
     --grid-4-1: 4fr 1fr;
 
-    // Object
+    // Heading
+    --heading-font-family: var(--body-font-family);
+    --heading-wrap: balance;
+
+    // Heading 1
+    --h1-color: inherit;
+    --h1-font-size: var(--text-4xl);
+    --h1-font-weight: 700;
+    --h1-line-height: var(--text-height-s);
+    --h1-text-transform: uppercase;
+
+    // Heading 2
+    --h2-color: inherit;
+    --h2-font-size: var(--text-3xl);
+    --h2-font-weight: 700;
+    --h2-line-height: var(--text-height-s);
+    --h2-text-transform: uppercase;
+
+    // Heading 3
+    --h3-color: inherit;
+    --h3-font-size: var(--text-2xl);
+    --h3-font-weight: 700;
+    --h3-line-height: var(--text-height-m);
+    --h3-text-transform: none;
+
+    // Heading 4
+    --h4-color: inherit;
+    --h4-font-size: var(--text-xl);
+    --h4-font-weight: 700;
+    --h4-line-height: var(--text-height-m);
+    --h4-text-transform: none;
+
+    // Heading 5
+    --h5-color: inherit;
+    --h5-font-size: var(--text-l);
+    --h5-font-weight: 700;
+    --h5-line-height: var(--text-height-l);
+    --h5-text-transform: none;
+
+    // Heading 6
+    --h6-color: inherit;
+    --h6-font-size: var(--text-m);
+    --h6-font-weight: 700;
+    --h6-line-height: var(--text-height-l);
+    --h6-text-transform: none;
+
+    // Misc
+    --list-marker-color: var(--primary);
+    --sticky-offset: var(--space-base);
+
+    // Object - Position
     --object-start: 15%;
     --object-center: 50%;
     --object-end: 85%;
 
     // Radius
-    --radius: var(--radius-m);
+    --radius: 0;
     --radius-xs: var(--space-xs);
     --radius-s: var(--space-s);
     --radius-m: var(--space-m);
@@ -205,6 +336,23 @@ $utilities: true;
     --radius-xl: var(--space-xl);
     --radius-oval: 10rem;
     --radius-round: 50%;
+
+    // Ribbon
+    --ribbon-bg-color: var(--action);
+    --ribbon-color: var(--action-lighter);
+    --ribbon-font-size: var(--text-s);
+    --ribbon-line-height: var(--text-height-s);
+    --ribbon-offset: calc(var(--space-4xl) * -1);
+    --ribbon-padding-x: var(--space-m);
+    --ribbon-padding-y: var(--space-s);
+    --ribbon-text-transform: uppercase;
+    --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
+    --ribbon-transform-origin: bottom right;
+    --ribbon-width: var(--width-s);
+
+    // Selection
+    --selection-bg-color: var(--action-light);
+    --selection-color: var(--action-dark);
 
     // Shadow
     --shadow-s: drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.07)) drop-shadow(0 #{px-rel(2)} #{px-rel(2)} hsl(0deg 0% 0% / 0.06));
@@ -255,8 +403,6 @@ $utilities: true;
     --text-9xl: #{fluid(48, 128)};
 
     // Text - Contextual
-    --body-font-family: Verdana;
-    --heading-font-family: var(--body-font-family);
     --text-base: var(--text-m);
     --text-fine: var(--text-s);
     --text-hero: var(--text-6xl);
@@ -266,6 +412,10 @@ $utilities: true;
     --text-height-s: 1.2;
     --text-height-m: 1.4;
     --text-height-l: 1.6;
+
+    // Text - Misc
+    --text-spaced: var(--space-px);
+    --text-wrap: pretty;
 
     // Transition
     --transition-fast: .2s;
@@ -416,8 +566,8 @@ $utilities: true;
 
 :focus-visible,
 .link-overlay:focus-within {
-    outline: var(--focus-width, var(--space-2px)) var(--focus-style, solid) var(--focus-color, var(--action));
-    outline-offset: var(--focus-offset, var(--space-2px));
+    outline: var(--focus-width) var(--focus-style) var(--focus-color);
+    outline-offset: var(--focus-offset);
 }
 
 // Focus Color
@@ -437,8 +587,8 @@ $utilities: true;
 
 // Selection
 ::selection {
-    background-color: var(--action-light);
-    color: var(--action-dark);
+    background-color: var(--selection-bg-color);
+    color: var(--selection-color);
     text-shadow: none;
 }
 
@@ -455,7 +605,7 @@ $utilities: true;
 
 // HTML
 html {
-    background-color: var(--base-lighter);
+    background-color: var(--html-bg-color);
     block-size: 100%;
     font-size: 100%;
     text-size-adjust: none;
@@ -467,15 +617,15 @@ html {
 
 // Body
 body {
-    background-color: var(--base-lighter);
+    background-color: var(--body-bg-color);
     block-size: 100%;
-    color: var(--base-darker);
+    color: var(--body-color);
     font-family: var(--body-font-family), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
-    font-size: var(--text-base);
+    font-size: var(--body-font-size);
     -webkit-font-smoothing: auto;
     font-weight: 400;
     inline-size: 100%;
-    line-height: var(--text-height-l);
+    line-height: var(--body-line-height);
     margin-inline: auto;
     max-inline-size: var(--width-max);
     min-block-size: 100svh;
@@ -486,7 +636,7 @@ body {
 
 // Anchor
 a {
-    color: var(--a-color, var(--action));
+    color: var(--a-color);
 
     &:hover {
         --a-color: var(--action-mid);
@@ -496,11 +646,11 @@ a {
 // Link
 main a:not([class]),
 a.link {
-    color: var(--link-color, inherit);
-    text-decoration: underline;
-    text-decoration-color: var(--link-decoration-color, var(--action));
-    text-decoration-thickness: var(--space-2px);
-    text-underline-offset: var(--space-2px);
+    color: var(--link-color);
+    text-decoration: var(--link-decoration);
+    text-decoration-color: var(--link-decoration-color);
+    text-decoration-thickness: var(--link-decoration-thickness);
+    text-underline-offset: var(--link-underline-offset);
 
     &:hover {
         --link-color: var(--action);
@@ -546,67 +696,62 @@ h5,
 .h--5,
 h6,
 .h--6 {
-    color: var(--h-color);
     font-family: var(--heading-font-family);
-    font-size: var(--h-font-size);
-    font-weight: var(--h-font-weight);
-    line-height: var(--h-line-height);
-    text-transform: var(--h-text-transform);
-    text-wrap: balance;
+    text-wrap: var(--heading-wrap);
 }
 
 h1,
 .h--1 {
-    --h-color: inherit;
-    --h-font-size: var(--text-4xl);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-s);
-    --h-text-transform: uppercase;
+    color: var(--h1-color);
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+    line-height: var(--h1-line-height);
+    text-transform: var(--h1-text-transform);
 }
 
 h2,
 .h--2 {
-    --h-color: inherit;
-    --h-font-size: var(--text-3xl);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-s);
-    --h-text-transform: uppercase;
+    color: var(--h2-color);
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+    line-height: var(--h2-line-height);
+    text-transform: var(--h2-text-transform);
 }
 
 h3,
 .h--3 {
-    --h-color: inherit;
-    --h-font-size: var(--text-2xl);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-m);
-    --h-text-transform: none;
+    color: var(--h3-color);
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    line-height: var(--h3-line-height);
+    text-transform: var(--h3-text-transform);
 }
 
 h4,
 .h--4 {
-    --h-color: inherit;
-    --h-font-size: var(--text-xl);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-m);
-    --h-text-transform: none;
+    color: var(--h4-color);
+    font-size: var(--h4-font-size);
+    font-weight: var(--h4-font-weight);
+    line-height: var(--h4-line-height);
+    text-transform: var(--h4-text-transform);
 }
 
 h5,
 .h--5 {
-    --h-color: inherit;
-    --h-font-size: var(--text-l);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-l);
-    --h-text-transform: none;
+    color: var(--h5-color);
+    font-size: var(--h5-font-size);
+    font-weight: var(--h5-font-weight);
+    line-height: var(--h5-line-height);
+    text-transform: var(--h5-text-transform);
 }
 
 h6,
 .h--6 {
-    --h-color: inherit;
-    --h-font-size: var(--text-m);
-    --h-font-weight: 700;
-    --h-line-height: var(--text-height-l);
-    --h-text-transform: none;
+    color: var(--h6-color);
+    font-size: var(--h6-font-size);
+    font-weight: var(--h6-font-weight);
+    line-height: var(--h6-line-height);
+    text-transform: var(--h6-text-transform);
 }
 
 // Misc
@@ -633,7 +778,7 @@ img {
 }
 
 p {
-    text-wrap: pretty;
+    text-wrap: var(--text-wrap);
 }
 
 textarea {
@@ -664,7 +809,7 @@ textarea {
         inset: 0;
         margin-block-start: 0;
         object-fit: cover;
-        object-position: 50%;
+        object-position: var(--object-center);
         overflow: hidden;
         position: absolute;
         z-index: var(--z-back);
@@ -678,31 +823,37 @@ textarea {
     */
     .btn {
         align-items: center;
-        background-color: var(--btn-bg-color, var(--action));
-        border-color: var(--btn-border-color, var(--action));
-        border-radius: var(--btn-border-radius, var(--radius));
-        border-style: var(--btn-border-style, solid);
-        border-width: var(--btn-border-width, var(--space-2px));
-        color: var(--btn-color, var(--action-lighter));
+        background-color: var(--btn-bg-color);
+        border-color: var(--btn-border-color);
+        border-radius: var(--btn-border-radius);
+        border-style: var(--btn-border-style);
+        border-width: var(--btn-border-width);
+        color: var(--btn-color);
+        cursor: pointer;
         display: inline-flex;
-        font-size: var(--btn-font-size, var(--text-s));
-        font-weight: var(--btn-font-weight, 400);
-        gap: var(--btn-gap, var(--space-icon));
-        inline-size: var(--btn-width, fit-content);
+        font-size: var(--btn-font-size);
+        font-weight: var(--btn-font-weight);
+        gap: var(--btn-gap);
+        inline-size: var(--btn-width);
         justify-content: center;
-        letter-spacing: var(--btn-letter-spacing, normal);
-        line-height: var(--btn-line-height, 1);
-        padding-block: var(--btn-padding-y, var(--space-m));
-        padding-inline: var(--btn-padding-x, var(--space-xl));
+        letter-spacing: var(--btn-letter-spacing);
+        line-height: var(--btn-line-height);
+        padding-block: var(--btn-padding-y);
+        padding-inline: var(--btn-padding-x);
         text-align: center;
         text-decoration: none;
-        text-transform: var(--btn-text-transform, uppercase);
-        transition: var(--btn-transition, var(--transition-normal));
+        text-transform: var(--btn-text-transform);
+        transition: var(--btn-transition);
 
         &:focus-visible {
             --focus-color: var(--action);
 
             transition: none;
+        }
+
+        &--icon {
+            --btn-padding-x: var(--space-icon);
+            --btn-padding-y: var(--space-icon);
         }
 
         &--outline {
@@ -863,9 +1014,7 @@ textarea {
     </form>
     */
     .form,
-    .form form,
-    .form--alt,
-    .form--alt form {
+    .form form {
         inline-size: 100%;
 
         // Input
@@ -891,7 +1040,7 @@ textarea {
         }
 
         textarea {
-            min-height: var(--space-7xl);
+            min-height: var(--textarea-height);
         }
 
         // Submit Button
@@ -916,74 +1065,6 @@ textarea {
             left: #{px-rel(10000 * -1)};
             position: absolute;
         }
-    }
-
-    .form {
-        --checkbox-border-radius: 0;
-        --checkbox-checked-bg-color: var(--action);
-        --checkbox-checked-box-shadow: var(--white);
-        --checkbox-size: var(--space-l);
-        --form-error-bg-color: var(--danger);
-        --form-error-color: var(--danger-lighter);
-        --form-error-font-size: var(--text-s);
-        --form-gap: var(--space-grid);
-        --form-success-bg-color: var(--success);
-        --form-success-color: var(--success-lighter);
-        --form-success-font-size: var(--text-base);
-        --input-bg-color-focus: var(--white);
-        --input-bg-color: var(--base-lighter);
-        --input-border-color-focus: var(--action);
-        --input-border-color: var(--base-mid);
-        --input-border-radius: var(--radius);
-        --input-border-style: solid;
-        --input-border-width: var(--space-2px);
-        --input-color: var(--base-darker);
-        --input-font-size: var(--text-m);
-        --input-height: var(--space-2xl);
-        --input-line-height: var(--text-height-s);
-        --input-padding-x: var(--space-m);
-        --input-padding-y: var(--space-s);
-        --label-color: inherit;
-        --label-font-size: var(--text-m);
-        --label-font-weight: 400;
-        --placeholder-color: var(--base-mid);
-        --placeholder-opacity: 1;
-        --submit-bg-color: var(--action);
-        --submit-color: var(--action-lighter);
-    }
-
-    .form--alt {
-        --checkbox-border-radius: 0;
-        --checkbox-checked-bg-color: var(--action);
-        --checkbox-checked-box-shadow: var(--white);
-        --checkbox-size: var(--space-l);
-        --form-error-bg-color: var(--danger);
-        --form-error-color: var(--danger-lighter);
-        --form-error-font-size: var(--text-s);
-        --form-gap: var(--space-grid);
-        --form-success-bg-color: var(--success);
-        --form-success-color: var(--success-lighter);
-        --form-success-font-size: var(--text-base);
-        --input-bg-color-focus: var(--white);
-        --input-bg-color: var(--base-lighter);
-        --input-border-color-focus: var(--action);
-        --input-border-color: var(--base-mid);
-        --input-border-radius: var(--radius);
-        --input-border-style: solid;
-        --input-border-width: var(--space-2px);
-        --input-color: var(--base-darker);
-        --input-font-size: var(--text-m);
-        --input-height: var(--space-2xl);
-        --input-line-height: var(--text-height-s);
-        --input-padding-x: var(--space-m);
-        --input-padding-y: var(--space-s);
-        --label-color: inherit;
-        --label-font-size: var(--text-m);
-        --label-font-weight: 400;
-        --placeholder-color: var(--base-mid);
-        --placeholder-opacity: 1;
-        --submit-bg-color: var(--action);
-        --submit-color: var(--action-lighter);
     }
 
     // Grid
@@ -1441,20 +1522,20 @@ textarea {
 
         // Add .ribbon to parent container
         & > .ribbon--right {
-            background-color: var(--ribbon-bg-color, var(--action));
-            color: var(--ribbon-color, var(--action-lighter));
+            background-color: var(--ribbon-bg-color);
+            color: var(--ribbon-color);
             display: block;
-            font-size: var(--ribbon-font-size, var(--text-s));
-            inline-size: var(--ribbon-width, var(--width-s));
+            font-size: var(--ribbon-font-size);
+            inline-size: var(--ribbon-width);
             inset-block-start: var(--ribbon-offset);
-            inset-inline-end: var(--ribbon-offset, calc(var(--space-4xl) * -1));
-            line-height: var(--ribbon-line-height, var(--text-height-s));
-            padding: var(--ribbon-padding, var(--space-s) var(--space-m));
+            inset-inline-end: var(--ribbon-offset);
+            line-height: var(--ribbon-line-height);
+            padding: var(--ribbon-padding-y) var(--ribbon-padding-x);
             position: absolute;
             text-align: center;
-            text-transform: var(--ribbon-text-transform, uppercase);
-            transform: var(--ribbon-transform, translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg));
-            transform-origin: var(--ribbon-transform-origin, bottom right);
+            text-transform: var(--ribbon-text-transform);
+            transform: var(--ribbon-transform);
+            transform-origin: var(--ribbon-transform-origin);
         }
 
         & > .ribbon--left {
@@ -1805,10 +1886,8 @@ textarea {
     // Border
     .border {
         & {
-            border-style: var(--border-style);
-            border-color: var(--border-color);
+            border: var(--border);
             border-radius: var(--border-radius);
-            border-width: var(--border-width);
         }
 
         &--bottom {
@@ -1981,19 +2060,19 @@ textarea {
     }
 
     .content-column-gap {
-        column-gap: var(--content-column-gap, var(--space-l));
+        column-gap: var(--content-column-gap);
     }
 
     .content-column-rule {
-        column-rule: var(--content-column-rule, solid);
+        column-rule: var(--content-column-rule);
     }
 
     .content-column-rule--color {
-        column-rule-color: var(--content-column-rule-color, var(--base-mid));
+        column-rule-color: var(--content-column-rule-color);
     }
 
     .content-column-rule--width {
-        column-rule-width: var(--content-column-rule-width, var(--space-2px));
+        column-rule-width: var(--content-column-rule-width);
     }
 
     .content-column-span--all {
@@ -2585,7 +2664,7 @@ textarea {
 
     // List Marker
     .list-marker--color li::marker {
-        color: var(--list-marker-color, var(--primary));
+        color: var(--list-marker-color);
     }
 
     // Margin - Bottom
@@ -2938,7 +3017,7 @@ textarea {
         position: sticky;
 
         &-offset {
-            inset-block-start: var(--sticky-offset, var(--space-base));
+            inset-block-start: var(--sticky-offset);
         }
     }
 
@@ -2987,7 +3066,7 @@ textarea {
             }
 
             .position--#{$_key}-sticky-offset {
-                inset-block-start: var(--sticky-offset, var(--space-base));
+                inset-block-start: var(--sticky-offset);
             }
 
             .position--#{$_key}-bottom-flat {
@@ -3176,7 +3255,7 @@ textarea {
 
     // Text - Spaced
     .text-spaced {
-        letter-spacing: var(--space-px);
+        letter-spacing: var(--text-spaced);
     }
 
     // Text - Style
