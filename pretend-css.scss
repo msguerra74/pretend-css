@@ -5,11 +5,9 @@
 // --- SCSS Variables --- //
 
 // Color
-$action: hsl(0, 84%, 60%);
-$primary: $action;
+$primary: hsl(0, 84%, 60%);
 $secondary: hsl(84, 81%, 44%);
 $tertiary: hsl(199, 88%, 49%);
-$quaternary: hsl(258, 90%, 66%);
 
 // Base Color
 $base: hsl(0, 0%, 9%);
@@ -36,11 +34,9 @@ $width-website: $width-xl;
 // --- SCSS Loops --- //
 
 $color: (
-    action: $action,
     primary: $primary,
     secondary: $secondary,
     tertiary: $tertiary,
-    quaternary: $quaternary,
     base: $base,
     danger: $danger,
     highlight: $highlight,
@@ -60,11 +56,14 @@ $breakpoint: (
 
 // --- SCSS Options --- //
 
+// Layout
+$layout: true;
 // Components
 $components: true;
-$bricks-builder: true;
 // Utilities
 $utilities: true;
+// Misc
+$bricks-builder: true;
 
 
 
@@ -124,12 +123,10 @@ $utilities: true;
 
 // --- CSS Variables --- //
 
-// Light Mode Color
-:root,
-:root.color-scheme--light,
-:root.color-scheme--dark .color-scheme--light,
+// Light Color Scheme
+[data-color-scheme="light"],
 .color-scheme--light,
-[data-color-scheme="light"] {
+:root:not([data-color-scheme="dark"], .color-scheme--dark) {
 
     // Color
     @each $_key,
@@ -163,14 +160,6 @@ $utilities: true;
 }
 
 :root {
-    // Anchor, Link
-    --a-color: var(--action);
-    --link-color: inherit;
-    --link-decoraton: underline;
-    --link-decoration-color: var(--action);
-    --link-decoration-thickness: var(--space-2px);
-    --link-underline-offset: var(--space-2px);
-
     // Aspect Ratio
     --aspect-square: 1;
     --aspect-landscape: 4 / 3;
@@ -178,84 +167,11 @@ $utilities: true;
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
 
-    // Body, HTML
-    --body-bg-color: var(--base-lighter);
-    --body-color: var(--base-darker);
-    --body-font-family: Verdana;
-    --body-font-size: var(--text-base);
-    --body-line-height: var(--text-height-l);
-    --html-bg-color: var(--body-bg-color);
-
     // Border
-    --border: var(--border-width) var(--border-style) var(--border-color);
     --border-style: solid;
     --border-color: var(--base-mid);
     --border-radius: var(--radius);
     --border-width: var(--space-2px);
-
-    // Button
-    --btn-bg-color: var(--action);
-    --btn-border-color: var(--action);
-    --btn-border-radius: var(--radius);
-    --btn-border-style: solid;
-    --btn-border-width: var(--space-2px);
-    --btn-color: var(--action-lighter);
-    --btn-font-size: var(--text-s);
-    --btn-font-weight: 400;
-    --btn-gap: var(--space-icon);
-    --btn-letter-spacing: normal;
-    --btn-line-height: 1;
-    --btn-padding-x: var(--space-xl);
-    --btn-padding-y: var(--space-m);
-    --btn-text-transform: uppercase;
-    --btn-transition: var(--transition-normal);
-    --btn-width: fit-content;
-
-    // Content Column
-    --content-column-gap: var(--space-l);
-    --content-column-rule: solid;
-    --content-column-rule-color: var(--base-mid);
-    --content-column-rule-width: var(--space-2px);
-
-    // Focus
-    --focus-color: var(--action);
-    --focus-offset: var(--space-2px);
-    --focus-style: solid;
-    --focus-width: var(--space-2px);
-
-    // Form
-    --checkbox-border-radius: 0;
-    --checkbox-checked-bg-color: var(--action);
-    --checkbox-checked-box-shadow: var(--white);
-    --checkbox-size: var(--space-l);
-    --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lighter);
-    --form-error-font-size: var(--text-s);
-    --form-gap: var(--space-grid);
-    --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lighter);
-    --form-success-font-size: var(--text-base);
-    --input-bg-color-focus: var(--white);
-    --input-bg-color: var(--base-lighter);
-    --input-border-color-focus: var(--action);
-    --input-border-color: var(--base-mid);
-    --input-border-radius: var(--radius);
-    --input-border-style: solid;
-    --input-border-width: var(--space-2px);
-    --input-color: var(--base-darker);
-    --input-font-size: var(--text-m);
-    --input-height: var(--space-2xl);
-    --input-line-height: var(--text-height-s);
-    --input-padding-x: var(--space-m);
-    --input-padding-y: var(--space-s);
-    --label-color: inherit;
-    --label-font-size: var(--text-m);
-    --label-font-weight: 400;
-    --placeholder-color: var(--base-mid);
-    --placeholder-opacity: 1;
-    --submit-bg-color: var(--action);
-    --submit-color: var(--action-lighter);
-    --textarea-height: var(--space-7xl);
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -272,63 +188,13 @@ $utilities: true;
     --grid-3-2: 3fr 2fr;
     --grid-4-1: 4fr 1fr;
 
-    // Heading
-    --heading-font-family: var(--body-font-family);
-    --heading-wrap: balance;
-
-    // Heading 1
-    --h1-color: inherit;
-    --h1-font-size: var(--text-4xl);
-    --h1-font-weight: 700;
-    --h1-line-height: var(--text-height-s);
-    --h1-text-transform: uppercase;
-
-    // Heading 2
-    --h2-color: inherit;
-    --h2-font-size: var(--text-3xl);
-    --h2-font-weight: 700;
-    --h2-line-height: var(--text-height-s);
-    --h2-text-transform: uppercase;
-
-    // Heading 3
-    --h3-color: inherit;
-    --h3-font-size: var(--text-2xl);
-    --h3-font-weight: 700;
-    --h3-line-height: var(--text-height-m);
-    --h3-text-transform: none;
-
-    // Heading 4
-    --h4-color: inherit;
-    --h4-font-size: var(--text-xl);
-    --h4-font-weight: 700;
-    --h4-line-height: var(--text-height-m);
-    --h4-text-transform: none;
-
-    // Heading 5
-    --h5-color: inherit;
-    --h5-font-size: var(--text-l);
-    --h5-font-weight: 700;
-    --h5-line-height: var(--text-height-l);
-    --h5-text-transform: none;
-
-    // Heading 6
-    --h6-color: inherit;
-    --h6-font-size: var(--text-m);
-    --h6-font-weight: 700;
-    --h6-line-height: var(--text-height-l);
-    --h6-text-transform: none;
-
-    // Misc
-    --list-marker-color: var(--primary);
-    --sticky-offset: var(--space-base);
-
     // Object - Position
     --object-start: 15%;
     --object-center: 50%;
     --object-end: 85%;
 
     // Radius
-    --radius: 0;
+    --radius: var(--radius-xs);
     --radius-xs: var(--space-xs);
     --radius-s: var(--space-s);
     --radius-m: var(--space-m);
@@ -336,23 +202,6 @@ $utilities: true;
     --radius-xl: var(--space-xl);
     --radius-oval: 10rem;
     --radius-round: 50%;
-
-    // Ribbon
-    --ribbon-bg-color: var(--action);
-    --ribbon-color: var(--action-lighter);
-    --ribbon-font-size: var(--text-s);
-    --ribbon-line-height: var(--text-height-s);
-    --ribbon-offset: calc(var(--space-4xl) * -1);
-    --ribbon-padding-x: var(--space-m);
-    --ribbon-padding-y: var(--space-s);
-    --ribbon-text-transform: uppercase;
-    --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
-    --ribbon-transform-origin: bottom right;
-    --ribbon-width: var(--width-s);
-
-    // Selection
-    --selection-bg-color: var(--action-light);
-    --selection-color: var(--action-dark);
 
     // Shadow
     --shadow-s: drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.07)) drop-shadow(0 #{px-rel(2)} #{px-rel(2)} hsl(0deg 0% 0% / 0.06));
@@ -408,14 +257,14 @@ $utilities: true;
     --text-hero: var(--text-6xl);
     --text-lede: var(--text-xl);
 
+    // Text - Font
+    --text-font-body: Verdana;
+    --text-font-heading: var(--text-font-body);
+
     // Text - Height
     --text-height-s: 1.2;
     --text-height-m: 1.4;
     --text-height-l: 1.6;
-
-    // Text - Misc
-    --text-spaced: var(--space-px);
-    --text-wrap: pretty;
 
     // Transition
     --transition-fast: .2s;
@@ -447,11 +296,9 @@ $utilities: true;
 
 // --- Dark Theme --- //
 
-// Dark Mode Color
-:root.color-scheme--dark,
-:root.color-scheme--light .color-scheme--dark,
-.color-scheme--dark,
-[data-color-scheme="dark"] {
+// Dark Color Scheme
+[data-color-scheme="dark"],
+.color-scheme--dark {
 
     // Color
     @each $_key,
@@ -476,7 +323,7 @@ $utilities: true;
 }
 
 @media(prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-color-scheme]) {
 
         // Color
         @each $_key,
@@ -508,25 +355,21 @@ $utilities: true;
 // Check for CSS Backdrop Filter Support
 @supports ((backdrop-filter: blur())) {
 
-    :root,
-    :root.color-scheme--light,
-    :root.color-scheme--dark .color-scheme--light,
+    [data-color-scheme="light"],
     .color-scheme--light,
-    [data-color-scheme="light"] {
+    :root:not([data-color-scheme="dark"], .color-scheme--dark) {
         // Contextual
         --blur-bg-color: hsl(var(--base-h) var(--base-s) 95% / .2);
     }
 
-    :root.color-scheme--dark,
-    :root.color-scheme--light .color-scheme--dark,
-    .color-scheme--dark,
-    [data-color-scheme="dark"] {
+    [data-color-scheme="dark"],
+    .color-scheme--dark {
         // Contextual
         --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / .2);
     }
 
     @media(prefers-color-scheme: dark) {
-        :root {
+        :root:not([data-color-scheme]) {
             // Contextual
             --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / .2);
         }
@@ -566,6 +409,11 @@ $utilities: true;
 
 :focus-visible,
 .link-overlay:focus-within {
+    --focus-color: var(--primary);
+    --focus-offset: var(--border-width);
+    --focus-style: var(--border-style);
+    --focus-width: var(--border-width);
+
     outline: var(--focus-width) var(--focus-style) var(--focus-color);
     outline-offset: var(--focus-offset);
 }
@@ -576,17 +424,20 @@ $utilities: true;
 
     &.focus--light,
     .focus--light & {
-        --focus-color: var(--action-lighter);
+        --focus-color: var(--primary-lighter);
     }
 
     &.focus--dark,
     .focus--dark & {
-        --focus-color: var(--action-darker);
+        --focus-color: var(--primary-darker);
     }
 }
 
 // Selection
 ::selection {
+    --selection-bg-color: var(--primary-light);
+    --selection-color: var(--primary-dark);
+
     background-color: var(--selection-bg-color);
     color: var(--selection-color);
     text-shadow: none;
@@ -605,6 +456,8 @@ $utilities: true;
 
 // HTML
 html {
+    --html-bg-color: var(--base-lighter);
+
     background-color: var(--html-bg-color);
     block-size: 100%;
     font-size: 100%;
@@ -617,10 +470,15 @@ html {
 
 // Body
 body {
+    --body-bg-color: var(--base-lighter);
+    --body-color: var(--base-darker);
+    --body-font-size: var(--text-base);
+    --body-line-height: var(--text-height-l);
+
     background-color: var(--body-bg-color);
     block-size: 100%;
     color: var(--body-color);
-    font-family: var(--body-font-family), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
+    font-family: var(--text-font-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
     font-size: var(--body-font-size);
     -webkit-font-smoothing: auto;
     font-weight: 400;
@@ -636,16 +494,24 @@ body {
 
 // Anchor
 a {
+    --a-color: var(--primary);
+
     color: var(--a-color);
 
     &:hover {
-        --a-color: var(--action-mid);
+        --a-color: var(--primary-mid);
     }
 }
 
 // Link
 main a:not([class]),
 a.link {
+    --link-color: inherit;
+    --link-decoration-color: var(--primary);
+    --link-decoration-thickness: var(--border-width);
+    --link-decoraton: underline;
+    --link-underline-offset: var(--border-width);
+
     color: var(--link-color);
     text-decoration: var(--link-decoration);
     text-decoration-color: var(--link-decoration-color);
@@ -653,7 +519,7 @@ a.link {
     text-underline-offset: var(--link-underline-offset);
 
     &:hover {
-        --link-color: var(--action);
+        --link-color: var(--primary);
         --link-decoration-color: var(--base-mid);
     }
 }
@@ -663,11 +529,11 @@ main .link--light > a:not([class]),
 a.link--light {
     @extend .link;
 
-    --link-decoration-color: var(--action-lighter);
+    --link-decoration-color: var(--primary-lighter);
 
     &:hover {
-        --link-color: var(--action-lighter);
-        --link-decoration-color: var(--action-lighter);
+        --link-color: var(--primary-lighter);
+        --link-decoration-color: var(--primary-lighter);
     }
 }
 
@@ -675,11 +541,11 @@ main .link--dark > a:not([class]),
 a.link--dark {
     @extend .link;
 
-    --link-decoration-color: var(--action-darker);
+    --link-decoration-color: var(--primary-darker);
 
     &:hover {
-        --link-color: var(--action-darker);
-        --link-decoration-color: var(--action-darker);
+        --link-color: var(--primary-darker);
+        --link-decoration-color: var(--primary-darker);
     }
 }
 
@@ -696,62 +562,67 @@ h5,
 .h--5,
 h6,
 .h--6 {
-    font-family: var(--heading-font-family);
-    text-wrap: var(--heading-wrap);
+    color: var(--h-color);
+    font-size: var(--h-font-size);
+    font-family: var(var(--text-font-heading));
+    font-weight: var(--h-font-weight);
+    line-height: var(--h-line-height);
+    text-transform: var(--h-text-transform);
+    text-wrap: balance;
 }
 
 h1,
 .h--1 {
-    color: var(--h1-color);
-    font-size: var(--h1-font-size);
-    font-weight: var(--h1-font-weight);
-    line-height: var(--h1-line-height);
-    text-transform: var(--h1-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-4xl);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-s);
+    --h-text-transform: uppercase;
 }
 
 h2,
 .h--2 {
-    color: var(--h2-color);
-    font-size: var(--h2-font-size);
-    font-weight: var(--h2-font-weight);
-    line-height: var(--h2-line-height);
-    text-transform: var(--h2-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-3xl);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-s);
+    --h-text-transform: uppercase;
 }
 
 h3,
 .h--3 {
-    color: var(--h3-color);
-    font-size: var(--h3-font-size);
-    font-weight: var(--h3-font-weight);
-    line-height: var(--h3-line-height);
-    text-transform: var(--h3-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-2xl);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-m);
+    --h-text-transform: none;
 }
 
 h4,
 .h--4 {
-    color: var(--h4-color);
-    font-size: var(--h4-font-size);
-    font-weight: var(--h4-font-weight);
-    line-height: var(--h4-line-height);
-    text-transform: var(--h4-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-xl);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-m);
+    --h-text-transform: none;
 }
 
 h5,
 .h--5 {
-    color: var(--h5-color);
-    font-size: var(--h5-font-size);
-    font-weight: var(--h5-font-weight);
-    line-height: var(--h5-line-height);
-    text-transform: var(--h5-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-l);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-l);
+    --h-text-transform: none;
 }
 
 h6,
 .h--6 {
-    color: var(--h6-color);
-    font-size: var(--h6-font-size);
-    font-weight: var(--h6-font-weight);
-    line-height: var(--h6-line-height);
-    text-transform: var(--h6-text-transform);
+    --h-color: inherit;
+    --h-font-size: var(--text-m);
+    --h-font-weight: 700;
+    --h-line-height: var(--text-height-l);
+    --h-text-transform: none;
 }
 
 // Misc
@@ -778,7 +649,9 @@ img {
 }
 
 p {
-    text-wrap: var(--text-wrap);
+    main & {
+        text-wrap: pretty;
+    }
 }
 
 textarea {
@@ -788,126 +661,8 @@ textarea {
 
 
 
-@if $components {
-    /*! --- Components --- */
-
-    // Background Overlay
-    // Add to div, img, and video elements to create an overlay that fills the section background.
-    /* HTML Example:
-    <section class="bg-isolate position--relative section">
-        <div class="container">
-            <div class="block">
-                <!-- Content -->
-            </div>
-        </div>
-        <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element </div>
-    </section>
-    */
-    .bg-overlay {
-        block-size: 100% !important;
-        inline-size: 100%;
-        inset: 0;
-        margin-block-start: 0;
-        object-fit: cover;
-        object-position: var(--object-center);
-        overflow: hidden;
-        position: absolute;
-        z-index: var(--z-back);
-    }
-
-    // Button
-    // Add to anchor links and buttons.
-    /* HTML Example:
-    <a class="btn" href="#">Anchor Link</a>
-    <button class="btn">Button</button>
-    */
-    .btn {
-        align-items: center;
-        background-color: var(--btn-bg-color);
-        border-color: var(--btn-border-color);
-        border-radius: var(--btn-border-radius);
-        border-style: var(--btn-border-style);
-        border-width: var(--btn-border-width);
-        color: var(--btn-color);
-        cursor: pointer;
-        display: inline-flex;
-        font-size: var(--btn-font-size);
-        font-weight: var(--btn-font-weight);
-        gap: var(--btn-gap);
-        inline-size: var(--btn-width);
-        justify-content: center;
-        letter-spacing: var(--btn-letter-spacing);
-        line-height: var(--btn-line-height);
-        padding-block: var(--btn-padding-y);
-        padding-inline: var(--btn-padding-x);
-        text-align: center;
-        text-decoration: none;
-        text-transform: var(--btn-text-transform);
-        transition: var(--btn-transition);
-
-        &:focus-visible {
-            --focus-color: var(--action);
-
-            transition: none;
-        }
-
-        &--icon {
-            --btn-padding-x: var(--space-icon);
-            --btn-padding-y: var(--space-icon);
-        }
-
-        &--outline {
-            --btn-color: var(--action);
-
-            background-color: initial !important;
-        }
-    }
-
-    // Button Size
-    .btn--small {
-        --btn-font-size: var(--text-xs);
-        --btn-padding-x: var(--space-m);
-        --btn-padding-y: var(--space-s);
-    }
-
-    .btn--large {
-        --btn-font-size: var(--text-m);
-        --btn-padding-x: var(--space-2xl);
-        --btn-padding-y: var(--space-l);
-    }
-
-    // Button Color
-    .btn--light {
-        @extend .btn;
-
-        --btn-bg-color: var(--base-lighter);
-        --btn-border-color: var(--base-lighter);
-        --btn-color: var(--base-darker);
-
-        &:focus-visible {
-            --focus-color: var(--action-darker);
-        }
-
-        &.btn--outline {
-            --btn-color: var(--base-lighter);
-        }
-    }
-
-    .btn--dark {
-        @extend .btn;
-
-        --btn-bg-color: var(--base-darker);
-        --btn-border-color: var(--base-darker);
-        --btn-color: var(--base-lighter);
-
-        &:focus-visible {
-            --focus-color: var(--action-lighter);
-        }
-
-        &.btn--outline {
-            --btn-color: var(--base-darker);
-        }
-    }
+@if $layout {
+    /*! --- Layout --- */
 
     // Block
     // Add to divs that contain content.
@@ -966,104 +721,6 @@ textarea {
             @extend .container;
 
             padding-inline: var(--space-offset);
-        }
-    }
-
-    // Form
-    // Add to forms or divs that contain form elements.
-    /* HTML Example:
-    <!-- This example form uses Formspark and Botpoison -->
-    <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
-        <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
-        <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
-        <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
-        <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
-        <fieldset>
-            <label for="company">Company Name</label>
-            <input aria-label="Company Name" id="company" name="company" type="text">
-        </fieldset>
-        <div class="grid--1 grid--l-2">
-            <fieldset>
-                <label for="first-name">First Name</label>
-                <input aria-label="First Name" id="first-name" name="first-name" required type="text">
-            </fieldset>
-            <fieldset>
-                <label for="last-name">Last Name</label>
-                <input aria-label="Last Name" id="last-name" name="last-name" type="text">
-            </fieldset>
-        </div>
-        <div class="grid--1 grid--l-2">
-            <fieldset>
-                <label for="email">Email Address</label>
-                <input aria-label="Email Address" id="email" name="email" required type="email">
-            </fieldset>
-            <fieldset>
-                <label for="phone">Phone Number</label>
-                <input aria-label="Phone Number" id="phone" name="phone" type="tel">
-            </fieldset>
-        </div>
-        <fieldset>
-            <label for="message">Message</label>
-            <textarea aria-label="Message" id="message" name="message" required></textarea>
-        </fieldset>
-        <fieldset>
-            <label for="pretend-check">Pretend Check</label>
-            <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
-        </fieldset>
-        <button type="submit">Send Message</button>
-    </form>
-    */
-    .form,
-    .form form {
-        inline-size: 100%;
-
-        // Input
-        input,
-        textarea {
-            background-color: var(--input-bg-color);
-            border-color: var(--input-border-color);
-            border-radius: var(--input-border-radius);
-            border-style: var(--input-border-style);
-            border-width: var(--input-border-width);
-            color: var(--input-color);
-            display: block;
-            font-size: var(--input-font-size);
-            inline-size: 100%;
-            line-height: var(--input-line-height);
-            margin-block-start: var(--space-s);
-            min-block-size: var(--input-height);
-            padding: var(--input-padding-y) var(--input-padding-x);
-
-            &:focus-visible {
-                --focus-color: var(--input-border-color-focus);
-            }
-        }
-
-        textarea {
-            min-height: var(--textarea-height);
-        }
-
-        // Submit Button
-        button[type="submit"] {
-            @extend .btn;
-
-            --btn-bg-color: var(--submit-bg-color);
-            --btn-border-color: var(--submit-bg-color);
-            --btn-color: var(--submit-color);
-
-            &:focus-visible {
-                --focus-color: var(--input-border-color-focus);
-            }
-
-            &.btn--outline {
-                --btn-color: var(--submit-bg-color);
-            }
-        }
-
-        // Honeypot
-        label:has([name="_pretend-check"]) {
-            left: #{px-rel(10000 * -1)};
-            position: absolute;
         }
     }
 
@@ -1443,7 +1100,7 @@ textarea {
         }
     }
 
-    // Header - Style
+    // Header
     // Add to header elements that need to be fixed or overlayed to the top of the screen.
     // Set header data attribute to use ACF header style option (default, fixed, overlay)
     /* HTML Example:
@@ -1473,6 +1130,345 @@ textarea {
     .header--overlay,
     [data-header-style="overlay"] {
         position: absolute;
+    }
+
+    // Section
+    // Add to section elements.
+    /* Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+    </section>
+    */
+    .section {
+        display: flex;
+        flex-direction: column;
+        inline-size: 100%;
+        padding-block: var(--space-section);
+        padding-inline: var(--space-offset);
+        row-gap: var(--space-section);
+
+        &--alt {
+            padding-block: var(--space-l);
+        }
+
+        &--flat {
+            padding: 0;
+        }
+    }
+}
+
+
+
+@if $components {
+    /*! --- Components --- */
+
+    // Background Overlay
+    // Add to div, img, and video elements to create an overlay that fills the section background.
+    /* HTML Example:
+    <section class="bg-isolate position--relative section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+        <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element </div>
+    </section>
+    */
+    .bg-overlay {
+        block-size: 100% !important;
+        inline-size: 100%;
+        inset: 0;
+        margin-block-start: 0;
+        object-fit: cover;
+        object-position: var(--object-center);
+        overflow: hidden;
+        position: absolute;
+        z-index: var(--z-back);
+    }
+
+    // Button
+    // Add to anchor links and buttons.
+    /* HTML Example:
+    <a class="btn" href="#">Anchor Link</a>
+    <button class="btn">Button</button>
+    */
+    .btn {
+        --btn-bg-color: var(--primary);
+        --btn-border-color: var(--primary);
+        --btn-border-radius: var(--border-radius);
+        --btn-border-style: var(--border-style);
+        --btn-border-width: var(--border-width);
+        --btn-color: var(--primary-lighter);
+        --btn-font-size: var(--text-s);
+        --btn-font-weight: 400;
+        --btn-gap: var(--space-icon);
+        --btn-letter-spacing: normal;
+        --btn-line-height: 1;
+        --btn-padding-x: var(--space-xl);
+        --btn-padding-y: var(--space-m);
+        --btn-text-transform: uppercase;
+        --btn-transition: var(--transition-normal);
+        --btn-width: fit-content;
+
+        align-items: center;
+        background-color: var(--btn-bg-color);
+        border-color: var(--btn-border-color);
+        border-radius: var(--btn-border-radius);
+        border-style: var(--btn-border-style);
+        border-width: var(--btn-border-width);
+        color: var(--btn-color);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: var(--btn-font-size);
+        font-weight: var(--btn-font-weight);
+        gap: var(--btn-gap);
+        inline-size: var(--btn-width);
+        justify-content: center;
+        letter-spacing: var(--btn-letter-spacing);
+        line-height: var(--btn-line-height);
+        padding-block: var(--btn-padding-y);
+        padding-inline: var(--btn-padding-x);
+        text-align: center;
+        text-decoration: none;
+        text-transform: var(--btn-text-transform);
+        transition: var(--btn-transition);
+
+        &:focus-visible {
+            --focus-color: var(--btn-border-color);
+
+            transition: none;
+        }
+
+        &--icon {
+            --btn-padding-x: var(--space-icon);
+            --btn-padding-y: var(--space-icon);
+        }
+
+        &--outline {
+            --btn-color: var(--btn-border-color);
+
+            background-color: initial !important;
+        }
+    }
+
+    // Button Size
+    .btn--small {
+        --btn-font-size: var(--text-xs);
+        --btn-padding-x: var(--space-m);
+        --btn-padding-y: var(--space-s);
+    }
+
+    .btn--large {
+        --btn-font-size: var(--text-m);
+        --btn-padding-x: var(--space-2xl);
+        --btn-padding-y: var(--space-l);
+    }
+
+    // Button Color
+    .btn--light {
+        @extend .btn;
+
+        --btn-bg-color: var(--base-lighter);
+        --btn-border-color: var(--base-lighter);
+        --btn-color: var(--base-darker);
+
+        &:focus-visible {
+            --focus-color: var(--base-lighter);
+        }
+
+        &.btn--outline {
+            --btn-color: var(--base-lighter);
+        }
+    }
+
+    .btn--dark {
+        @extend .btn;
+
+        --btn-bg-color: var(--base-darker);
+        --btn-border-color: var(--base-darker);
+        --btn-color: var(--base-lighter);
+
+        &:focus-visible {
+            --focus-color: var(--base-darker);
+        }
+
+        &.btn--outline {
+            --btn-color: var(--base-darker);
+        }
+    }
+
+    // Form
+    // Add to forms or divs that contain form elements.
+    /* HTML Example:
+    <!-- This example form uses Formspark and Botpoison -->
+    <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+        <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
+        <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
+        <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
+        <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
+        <fieldset>
+            <label for="company">Company Name</label>
+            <input aria-label="Company Name" id="company" name="company" type="text">
+        </fieldset>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="first-name">First Name</label>
+                <input aria-label="First Name" id="first-name" name="first-name" required type="text">
+            </fieldset>
+            <fieldset>
+                <label for="last-name">Last Name</label>
+                <input aria-label="Last Name" id="last-name" name="last-name" type="text">
+            </fieldset>
+        </div>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="email">Email Address</label>
+                <input aria-label="Email Address" id="email" name="email" required type="email">
+            </fieldset>
+            <fieldset>
+                <label for="phone">Phone Number</label>
+                <input aria-label="Phone Number" id="phone" name="phone" type="tel">
+            </fieldset>
+        </div>
+        <fieldset>
+            <label for="message">Message</label>
+            <textarea aria-label="Message" id="message" name="message" required></textarea>
+        </fieldset>
+        <fieldset>
+            <label for="pretend-check">Pretend Check</label>
+            <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
+        </fieldset>
+        <button type="submit">Send Message</button>
+    </form>
+    */
+    .form,
+    .form--alt,
+    .form form,
+    .form--alt form {
+        inline-size: 100%;
+
+        // Input
+        input,
+        textarea {
+            background-color: var(--input-bg-color);
+            border-color: var(--input-border-color);
+            border-radius: var(--input-border-radius);
+            border-style: var(--input-border-style);
+            border-width: var(--input-border-width);
+            color: var(--input-color);
+            display: block;
+            font-size: var(--input-font-size);
+            inline-size: 100%;
+            line-height: var(--input-line-height);
+            margin-block-start: var(--space-s);
+            min-block-size: var(--input-height);
+            padding: var(--input-padding-y) var(--input-padding-x);
+
+            &:focus-visible {
+                --focus-color: var(--input-border-color-focus);
+            }
+        }
+
+        textarea {
+            min-height: var(--textarea-height);
+        }
+
+        // Submit Button
+        button[type="submit"] {
+            @extend .btn;
+
+            --btn-bg-color: var(--submit-bg-color);
+            --btn-border-color: var(--submit-bg-color);
+            --btn-color: var(--submit-color);
+
+            &:focus-visible {
+                --focus-color: var(--input-border-color-focus);
+            }
+
+            &.btn--outline {
+                --btn-color: var(--submit-bg-color);
+            }
+        }
+
+        // Honeypot
+        label:has([name="_pretend-check"]) {
+            left: #{px-rel(10000 * -1)};
+            position: absolute;
+        }
+    }
+
+    .form {
+        --checkbox-border-radius: 0;
+        --checkbox-checked-bg-color: var(--primary);
+        --checkbox-checked-box-shadow: var(--white);
+        --checkbox-size: var(--space-l);
+        --form-error-bg-color: var(--danger);
+        --form-error-color: var(--danger-lighter);
+        --form-error-font-size: var(--text-s);
+        --form-gap: var(--space-grid);
+        --form-success-bg-color: var(--success);
+        --form-success-color: var(--success-lighter);
+        --form-success-font-size: var(--text-base);
+        --input-bg-color: var(--base-lighter);
+        --input-bg-color-focus: var(--white);
+        --input-border-color: var(--border-color);
+        --input-border-color-focus: var(--primary);
+        --input-border-radius: var(--border-radius);
+        --input-border-style: var(--border-style);
+        --input-border-width: var(--border-width);
+        --input-color: var(--base-darker);
+        --input-font-size: var(--text-m);
+        --input-height: var(--space-2xl);
+        --input-line-height: var(--text-height-s);
+        --input-padding-x: var(--space-m);
+        --input-padding-y: var(--space-s);
+        --label-color: inherit;
+        --label-font-size: var(--text-m);
+        --label-font-weight: 400;
+        --placeholder-color: var(--base-mid);
+        --placeholder-opacity: 1;
+        --submit-bg-color: var(--primary);
+        --submit-color: var(--primary-lighter);
+        --textarea-height: var(--space-7xl);
+    }
+
+    .form--alt {
+        --checkbox-border-radius: 0;
+        --checkbox-checked-bg-color: var(--primary);
+        --checkbox-checked-box-shadow: var(--white);
+        --checkbox-size: var(--space-l);
+        --form-error-bg-color: var(--danger);
+        --form-error-color: var(--danger-lighter);
+        --form-error-font-size: var(--text-s);
+        --form-gap: var(--space-grid);
+        --form-success-bg-color: var(--success);
+        --form-success-color: var(--success-lighter);
+        --form-success-font-size: var(--text-base);
+        --input-bg-color: var(--base-lighter);
+        --input-bg-color-focus: var(--white);
+        --input-border-color: var(--border-color);
+        --input-border-color-focus: var(--primary);
+        --input-border-radius: var(--border-radius);
+        --input-border-style: var(--border-style);
+        --input-border-width: var(--border-width);
+        --input-color: var(--base-darker);
+        --input-font-size: var(--text-m);
+        --input-height: var(--space-2xl);
+        --input-line-height: var(--text-height-s);
+        --input-padding-x: var(--space-m);
+        --input-padding-y: var(--space-s);
+        --label-color: inherit;
+        --label-font-size: var(--text-m);
+        --label-font-weight: 400;
+        --placeholder-color: var(--base-mid);
+        --placeholder-opacity: 1;
+        --submit-bg-color: var(--primary);
+        --submit-color: var(--primary-lighter);
+        --textarea-height: var(--space-7xl);
     }
 
     // Link Overlay
@@ -1517,6 +1513,18 @@ textarea {
     </section>
     */
     .ribbon {
+        --ribbon-bg-color: var(--primary);
+        --ribbon-color: var(--primary-lighter);
+        --ribbon-font-size: var(--text-s);
+        --ribbon-line-height: var(--text-height-s);
+        --ribbon-offset: calc(var(--space-4xl) * -1);
+        --ribbon-padding-x: var(--space-m);
+        --ribbon-padding-y: var(--space-s);
+        --ribbon-text-transform: uppercase;
+        --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
+        --ribbon-transform-origin: bottom right;
+        --ribbon-width: var(--width-s);
+
         overflow: hidden;
         position: relative;
 
@@ -1546,60 +1554,6 @@ textarea {
 
             inset-inline-end: auto;
             inset-inline-start: var(--ribbon-offset);
-        }
-    }
-
-    // Section
-    // Add to section elements.
-    /* Example:
-    <section class="section">
-        <div class="container">
-            <div class="block">
-                <!-- Content -->
-            </div>
-        </div>
-    </section>
-    */
-    .section {
-        display: flex;
-        flex-direction: column;
-        inline-size: 100%;
-        padding-block: var(--space-section);
-        padding-inline: var(--space-offset);
-        row-gap: var(--space-section);
-
-        &--alt {
-            padding-block: var(--space-l);
-        }
-
-        &--flat {
-            padding: 0;
-        }
-    }
-
-
-
-    @if $bricks-builder {
-        // --- Bricks Builder --- //
-
-        // Block
-        .brxe-block {
-            @extend .block;
-        }
-
-        // Button
-        .brxe-button {
-            @extend .btn;
-        }
-
-        // Container
-        .brxe-container {
-            @extend .container;
-        }
-
-        // Section
-        .brxe-section {
-            @extend .section;
         }
     }
 }
@@ -1708,6 +1662,74 @@ textarea {
 
     @each $_key, $_value in $breakpoint {
         @include breakpoint($_value) {
+            .align--#{$_key}-center-all {
+                align-content: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .align--#{$_key}-center-x {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .align--#{$_key}-center-y {
+                align-items: flex-start;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                justify-items: center;
+            }
+
+            .align--#{$_key}-end-x {
+                align-items: flex-end;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                justify-items: flex-end;
+                text-align: right;
+            }
+
+            .align--#{$_key}-end-y {
+                align-items: flex-start;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                justify-items: flex-end;
+            }
+
+            .align--#{$_key}-start-x {
+                align-items: flex-start;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                justify-items: flex-start;
+                text-align: left;
+            }
+
+            .align--#{$_key}-start-y {
+                align-items: flex-start;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                justify-items: flex-start;
+            }
+
+            .align--#{$_key}-stretch-all {
+                align-content: stretch;
+                align-items: stretch;
+                justify-content: stretch;
+                justify-items: stretch;
+            }
+
             .center--#{$_key}-self {
                 float: none;
                 margin-block-end: 0;
@@ -1885,10 +1907,8 @@ textarea {
 
     // Border
     .border {
-        & {
-            border: var(--border);
-            border-radius: var(--border-radius);
-        }
+        border: var(--border-width) var(--border-style) var(--border-color);
+        border-radius: var(--border-radius);
 
         &--bottom {
             border-bottom-style: var(--border-style);
@@ -2060,18 +2080,26 @@ textarea {
     }
 
     .content-column-gap {
+        --content-column-gap: var(--space-l);
+
         column-gap: var(--content-column-gap);
     }
 
     .content-column-rule {
+        --content-column-rule: solid;
+
         column-rule: var(--content-column-rule);
     }
 
     .content-column-rule--color {
+        --content-column-rule-color: var(--base-mid);
+
         column-rule-color: var(--content-column-rule-color);
     }
 
     .content-column-rule--width {
+        --content-column-rule-width: var(--space-2px);
+
         column-rule-width: var(--content-column-rule-width);
     }
 
@@ -2559,14 +2587,6 @@ textarea {
     }
 
     // Height
-    .height--half {
-        min-block-size: 50svh;
-    }
-
-    .height--partial {
-        min-block-size: 75svh;
-    }
-
     .height--full {
         min-block-size: 100svh;
     }
@@ -2579,14 +2599,6 @@ textarea {
         @include breakpoint($_value) {
             .height--#{$_key}-auto {
                 min-block-size: auto;
-            }
-
-            .height--#{$_key}-half {
-                min-block-size: 50svh;
-            }
-
-            .height--#{$_key}-partial {
-                min-block-size: 75svh;
             }
 
             .height--#{$_key}-full {
@@ -2664,6 +2676,8 @@ textarea {
 
     // List Marker
     .list-marker--color li::marker {
+        --list-marker-color: var(--primary);
+
         color: var(--list-marker-color);
     }
 
@@ -3017,7 +3031,7 @@ textarea {
         position: sticky;
 
         &-offset {
-            inset-block-start: var(--sticky-offset);
+            inset-block-start: var(--space-base);
         }
     }
 
@@ -3063,10 +3077,10 @@ textarea {
             .position--#{$_key}-sticky {
                 inset-block-start: 0;
                 position: sticky;
-            }
 
-            .position--#{$_key}-sticky-offset {
-                inset-block-start: var(--sticky-offset);
+                &-offset {
+                    inset-block-start: var(--space-base);
+                }
             }
 
             .position--#{$_key}-bottom-flat {
@@ -3255,6 +3269,8 @@ textarea {
 
     // Text - Spaced
     .text-spaced {
+        --text-spaced: var(--space-px);
+
         letter-spacing: var(--text-spaced);
     }
 
@@ -3469,5 +3485,31 @@ textarea {
 
     .z--top {
         z-index: var(--z-top);
+    }
+}
+
+
+
+@if $bricks-builder {
+    // --- Bricks Builder --- //
+
+    // Block
+    .brxe-block {
+        @extend .block;
+    }
+
+    // Button
+    .brxe-button {
+        @extend .btn;
+    }
+
+    // Container
+    .brxe-container {
+        @extend .container;
+    }
+
+    // Section
+    .brxe-section {
+        @extend .section;
     }
 }
