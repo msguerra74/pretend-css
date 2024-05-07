@@ -3,194 +3,174 @@
     "name": "Colors",
     "colors": [
         {
-            "raw": "var(--action)",
-            "id": "100100",
-            "name": "Action"
-        },
-        {
-            "raw": "var(--action-lighter)",
-            "id": "100101",
-            "name": "Action Lighter"
-        },
-        {
-            "raw": "var(--action-light)",
-            "id": "100102",
-            "name": "Action Light"
-        },
-        {
-            "raw": "var(--action-mid)",
-            "id": "100103",
-            "name": "Action Mid"
-        },
-        {
-            "raw": "var(--action-dark)",
-            "id": "100104",
-            "name": "Action Dark"
-        },
-        {
-            "raw": "var(--action-darker)",
-            "id": "100105",
-            "name": "Action Darker"
-        },
-        {
             "raw": "var(--primary)",
-            "id": "100200",
+            "id": "100100",
             "name": "Primary"
         },
         {
             "raw": "var(--primary-lighter)",
-            "id": "100201",
+            "id": "100101",
             "name": "Primary Lighter"
         },
         {
             "raw": "var(--primary-light)",
-            "id": "100202",
+            "id": "100102",
             "name": "Primary Light"
         },
         {
             "raw": "var(--primary-mid)",
-            "id": "100203",
+            "id": "100103",
             "name": "Primary Mid"
         },
         {
             "raw": "var(--primary-dark)",
-            "id": "100204",
+            "id": "100104",
             "name": "Primary Dark"
         },
         {
             "raw": "var(--primary-darker)",
-            "id": "100205",
+            "id": "100105",
             "name": "Primary Darker"
         },
         {
             "raw": "var(--secondary)",
-            "id": "100300",
+            "id": "100200",
             "name": "Secondary"
         },
         {
             "raw": "var(--secondary-lighter)",
-            "id": "100301",
+            "id": "100201",
             "name": "Secondary Lighter"
         },
         {
             "raw": "var(--secondary-light)",
-            "id": "100302",
+            "id": "100202",
             "name": "Secondary Light"
         },
         {
             "raw": "var(--secondary-mid)",
-            "id": "100303",
+            "id": "100203",
             "name": "Secondary Mid"
         },
         {
             "raw": "var(--secondary-dark)",
-            "id": "100304",
+            "id": "100204",
             "name": "Secondary Dark"
         },
         {
             "raw": "var(--secondary-darker)",
-            "id": "100305",
+            "id": "100205",
             "name": "Secondary Darker"
         },
         {
             "raw": "var(--tertiary)",
-            "id": "100400",
+            "id": "100300",
             "name": "Tertiary"
         },
         {
             "raw": "var(--tertiary-lighter)",
-            "id": "100401",
+            "id": "100301",
             "name": "Tertiary Lighter"
         },
         {
             "raw": "var(--tertiary-light)",
-            "id": "100402",
+            "id": "100302",
             "name": "Tertiary Light"
         },
         {
             "raw": "var(--tertiary-mid)",
-            "id": "100403",
+            "id": "100303",
             "name": "Tertiary Mid"
         },
         {
             "raw": "var(--tertiary-dark)",
-            "id": "100404",
+            "id": "100304",
             "name": "Tertiary Dark"
         },
         {
             "raw": "var(--tertiary-darker)",
-            "id": "100405",
+            "id": "100305",
             "name": "Tertiary Darker"
         },
         {
             "raw": "var(--quaternary)",
-            "id": "100500",
+            "id": "100400",
             "name": "Quaternary"
         },
         {
             "raw": "var(--quaternary-lighter)",
-            "id": "100501",
+            "id": "100401",
             "name": "Quaternary Lighter"
         },
         {
             "raw": "var(--quaternary-light)",
-            "id": "100502",
+            "id": "100402",
             "name": "Quaternary Light"
         },
         {
             "raw": "var(--quaternary-mid)",
-            "id": "100503",
+            "id": "100403",
             "name": "Quaternary Mid"
         },
         {
             "raw": "var(--quaternary-dark)",
-            "id": "100504",
+            "id": "100404",
             "name": "Quaternary Dark"
         },
         {
             "raw": "var(--quaternary-darker)",
-            "id": "100505",
+            "id": "100405",
             "name": "Quaternary Darker"
         },
         {
             "raw": "var(--base)",
-            "id": "100600",
+            "id": "100500",
             "name": "Base"
         },
         {
             "raw": "var(--base-lighter)",
-            "id": "100601",
+            "id": "100501",
             "name": "Base Lighter"
         },
         {
             "raw": "var(--base-light)",
-            "id": "100602",
+            "id": "100502",
             "name": "Base Light"
         },
         {
             "raw": "var(--base-mid)",
-            "id": "100603",
+            "id": "100503",
             "name": "Base Mid"
         },
         {
             "raw": "var(--base-dark)",
-            "id": "100604",
+            "id": "100504",
             "name": "Base Dark"
         },
         {
             "raw": "var(--base-darker)",
-            "id": "100605",
+            "id": "100505",
             "name": "Base Darker"
         },
         {
             "raw": "var(--white)",
-            "id": "100700",
+            "id": "100600",
             "name": "White"
         },
         {
+            "raw": "var(--white-off)",
+            "id": "100601",
+            "name": "Off White"
+        },
+        {
             "raw": "var(--black)",
-            "id": "100701",
+            "id": "100602",
             "name": "Black"
+        },
+        {
+            "raw": "var(--black-off)",
+            "id": "100603",
+            "name": "Off Black"
         }
     ]
 }

@@ -8,6 +8,7 @@
 $primary: hsl(0, 84%, 60%);
 $secondary: hsl(84, 81%, 44%);
 $tertiary: hsl(199, 88%, 49%);
+$quaternary: hsl(38, 92%, 50%);
 
 // Base Color
 $base: hsl(0, 0%, 9%);
@@ -37,6 +38,7 @@ $color: (
     primary: $primary,
     secondary: $secondary,
     tertiary: $tertiary,
+    quaternary: $quaternary,
     base: $base,
     danger: $danger,
     highlight: $highlight,
@@ -168,9 +170,10 @@ $bricks-builder: true;
     --aspect-wide: 2 / 1;
 
     // Border
-    --border-style: solid;
+    --border: var(--border-width) var(--border-style) var(--border-color);
     --border-color: var(--base-mid);
     --border-radius: var(--radius);
+    --border-style: solid;
     --border-width: var(--space-2px);
 
     // Grid
@@ -1907,7 +1910,7 @@ textarea {
 
     // Border
     .border {
-        border: var(--border-width) var(--border-style) var(--border-color);
+        border: var(--border);
         border-radius: var(--border-radius);
 
         &--bottom {
