@@ -3970,26 +3970,6 @@
         "category": "pcss"
     },
     {
-        "id": "pcss-shadow--s",
-        "name": "shadow--s",
-        "category": "pcss"
-    },
-    {
-        "id": "pcss-shadow--m",
-        "name": "shadow--m",
-        "category": "pcss"
-    },
-    {
-        "id": "pcss-shadow--l",
-        "name": "shadow--l",
-        "category": "pcss"
-    },
-    {
-        "id": "pcss-shadow--xl",
-        "name": "shadow--xl",
-        "category": "pcss"
-    },
-    {
         "id": "pcss-shadow--s-s",
         "name": "shadow--s-s",
         "category": "pcss"
