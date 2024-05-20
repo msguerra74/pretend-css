@@ -3945,6 +3945,11 @@
         "category": "pcss"
     },
     {
+        "id": "pcss-shadow",
+        "name": "shadow",
+        "category": "pcss"
+    },
+    {
         "id": "pcss-shadow--s",
         "name": "shadow--s",
         "category": "pcss"

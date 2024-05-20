@@ -142,6 +142,7 @@
     --radius-xl: var(--space-xl);
     --radius-oval: 10rem;
     --radius-round: 50%;
+    --shadow: var(--shadow-m);
     --shadow-s: drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.07)) drop-shadow(0 0.125rem 0.125rem hsl(0deg 0% 0% / 0.06));
     --shadow-m: drop-shadow(0 0.625rem 0.5rem hsl(0deg 0% 0% / 0.04)) drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.1));
     --shadow-l: drop-shadow(0 1.25rem 0.8125rem hsl(0deg 0% 0% / 0.03)) drop-shadow(0 0.5rem 0.3125rem hsl(0deg 0% 0% / 0.08));
@@ -623,16 +624,16 @@ textarea {
     inline-size: 100%
 }
 
-.block--offset {
-    padding-inline: var(--space-offset)
-}
-
 .block--float {
     display: block
 }
 
 .block--float > * + * {
     margin-block-start: var(--space-block)
+}
+
+.block--offset {
+    padding-inline: var(--space-offset)
 }
 
 .container,
@@ -1448,7 +1449,7 @@ textarea {
     --btn-font-size: var(--text-s);
     --btn-font-weight: 400;
     --btn-gap: var(--space-icon);
-    --btn-letter-spacing: normal;
+    --btn-letter-spacing: var(--space-px);
     --btn-line-height: 1;
     --btn-padding-x: var(--space-xl);
     --btn-padding-y: var(--space-m);
@@ -1764,13 +1765,10 @@ textarea {
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    justify-items: center;
     text-align: center
 }
 
 .align--center-y {
-    align-items: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1781,13 +1779,10 @@ textarea {
     align-items: flex-end;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    justify-items: flex-end;
     text-align: right
 }
 
 .align--end-y {
-    align-items: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1798,13 +1793,10 @@ textarea {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    justify-items: flex-start;
     text-align: left
 }
 
 .align--start-y {
-    align-items: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1862,13 +1854,10 @@ textarea {
         align-items: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        justify-items: center;
         text-align: center
     }
 
     .align--s-center-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1879,13 +1868,10 @@ textarea {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
         text-align: right
     }
 
     .align--s-end-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -1896,13 +1882,10 @@ textarea {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
         text-align: left
     }
 
     .align--s-start-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -1958,13 +1941,10 @@ textarea {
         align-items: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        justify-items: center;
         text-align: center
     }
 
     .align--m-center-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1975,13 +1955,10 @@ textarea {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
         text-align: right
     }
 
     .align--m-end-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -1992,13 +1969,10 @@ textarea {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
         text-align: left
     }
 
     .align--m-start-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -2054,13 +2028,10 @@ textarea {
         align-items: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        justify-items: center;
         text-align: center
     }
 
     .align--l-center-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2071,13 +2042,10 @@ textarea {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
         text-align: right
     }
 
     .align--l-end-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -2088,13 +2056,10 @@ textarea {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
         text-align: left
     }
 
     .align--l-start-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -2150,13 +2115,10 @@ textarea {
         align-items: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        justify-items: center;
         text-align: center
     }
 
     .align--xl-center-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2167,13 +2129,10 @@ textarea {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
         text-align: right
     }
 
     .align--xl-end-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -2184,13 +2143,10 @@ textarea {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
         text-align: left
     }
 
     .align--xl-start-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -5022,6 +4978,10 @@ ul.list--flat,
 
 .radius--round {
     border-radius: var(--radius-round)
+}
+
+.shadow {
+    filter: var(--shadow)
 }
 
 .shadow--s {

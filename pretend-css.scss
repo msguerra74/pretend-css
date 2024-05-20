@@ -207,6 +207,7 @@ $bricks-builder: true;
     --radius-round: 50%;
 
     // Shadow
+    --shadow: var(--shadow-m);
     --shadow-s: drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.07)) drop-shadow(0 #{px-rel(2)} #{px-rel(2)} hsl(0deg 0% 0% / 0.06));
     --shadow-m: drop-shadow(0 #{px-rel(10)} #{px-rel(8)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.1));
     --shadow-l: drop-shadow(0 #{px-rel(20)} #{px-rel(13)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rel(8)} #{px-rel(5)} hsl(0deg 0% 0% / 0.08));
@@ -685,12 +686,6 @@ textarea {
         gap: var(--space-block);
         inline-size: 100%;
 
-        &--offset {
-            @extend .block;
-
-            padding-inline: var(--space-offset);
-        }
-
         &--float {
             display: block;
 
@@ -698,6 +693,13 @@ textarea {
                 margin-block-start: var(--space-block);
             }
         }
+
+        &--offset {
+            @extend .block;
+
+            padding-inline: var(--space-offset);
+        }
+
     }
 
     // Container
@@ -1209,7 +1211,7 @@ textarea {
         --btn-font-size: var(--text-s);
         --btn-font-weight: 400;
         --btn-gap: var(--space-icon);
-        --btn-letter-spacing: normal;
+        --btn-letter-spacing: var(--space-px);
         --btn-line-height: 1;
         --btn-padding-x: var(--space-xl);
         --btn-padding-y: var(--space-m);
@@ -1580,13 +1582,10 @@ textarea {
         align-items: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        justify-items: center;
         text-align: center;
     }
 
     .align--center-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1597,13 +1596,10 @@ textarea {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
         text-align: right;
     }
 
     .align--end-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -1614,13 +1610,10 @@ textarea {
         align-items: flex-start;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
         text-align: left;
     }
 
     .align--start-y {
-        align-items: flex-start;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -1679,13 +1672,10 @@ textarea {
                 align-items: center;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                justify-items: center;
                 text-align: center;
             }
 
             .align--#{$_key}-center-y {
-                align-items: flex-start;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -1696,13 +1686,10 @@ textarea {
                 align-items: flex-end;
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
-                justify-items: flex-end;
                 text-align: right;
             }
 
             .align--#{$_key}-end-y {
-                align-items: flex-start;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
@@ -1713,13 +1700,10 @@ textarea {
                 align-items: flex-start;
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-start;
-                justify-items: flex-start;
                 text-align: left;
             }
 
             .align--#{$_key}-start-y {
-                align-items: flex-start;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -3142,6 +3126,10 @@ textarea {
     }
 
     // Shadow
+    .shadow {
+        filter: var(--shadow);
+    }
+
     .shadow--s {
         filter: var(--shadow-s);
     }
