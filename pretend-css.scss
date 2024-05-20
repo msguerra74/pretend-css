@@ -3148,6 +3148,10 @@ textarea {
 
     @each $_key, $_value in $breakpoint {
         @include breakpoint($_value) {
+            .shadow--#{$_key} {
+                filter: var(--shadow);
+            }
+
             .shadow--#{$_key}-s {
                 filter: var(--shadow-s);
             }

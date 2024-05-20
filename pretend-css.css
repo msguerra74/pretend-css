@@ -5001,6 +5001,10 @@ ul.list--flat,
 }
 
 @media(min-width: 512px) {
+    .shadow--s {
+        filter: var(--shadow)
+    }
+
     .shadow--s-s {
         filter: var(--shadow-s)
     }
@@ -5023,6 +5027,10 @@ ul.list--flat,
 }
 
 @media(min-width: 768px) {
+    .shadow--m {
+        filter: var(--shadow)
+    }
+
     .shadow--m-s {
         filter: var(--shadow-s)
     }
@@ -5045,6 +5053,10 @@ ul.list--flat,
 }
 
 @media(min-width: 1024px) {
+    .shadow--l {
+        filter: var(--shadow)
+    }
+
     .shadow--l-s {
         filter: var(--shadow-s)
     }
@@ -5067,6 +5079,10 @@ ul.list--flat,
 }
 
 @media(min-width: 1280px) {
+    .shadow--xl {
+        filter: var(--shadow)
+    }
+
     .shadow--xl-s {
         filter: var(--shadow-s)
     }
