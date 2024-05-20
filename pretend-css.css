@@ -185,8 +185,8 @@
     --text-9xl: clamp(3rem, 10.4166666667vw + -0.3333333333rem, 8rem);
     --text-base: var(--text-m);
     --text-fine: var(--text-s);
-    --text-hero: var(--text-6xl);
-    --text-lede: var(--text-xl);
+    --text-hero: var(--text-5xl);
+    --text-lede: var(--text-l);
     --text-font-body: Verdana;
     --text-font-heading: var(--text-font-body);
     --text-height-s: 1.2;
