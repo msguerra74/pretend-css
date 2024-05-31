@@ -3125,6 +3125,10 @@ textarea {
         border-radius: var(--radius-round);
     }
 
+    .radius--flat {
+        border-radius: 0;
+    }
+
     // Shadow
     .shadow {
         filter: var(--shadow);
