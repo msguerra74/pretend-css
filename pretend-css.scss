@@ -633,6 +633,7 @@ video {
 }
 
 img {
+    border-radius: var(--border-radius);
     object-fit: cover;
 }
 
@@ -1338,7 +1339,8 @@ $_value in $breakpoint {
     inline-size: 100%;
 
     // Input
-    input,
+    input:not([type="checkbox"], [type="radio"]),
+    select,
     textarea {
         background-color: var(--input-bg-color);
         border-color: var(--input-border-color);

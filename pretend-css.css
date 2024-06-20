@@ -599,6 +599,7 @@ video {
 }
 
 img {
+    border-radius: var(--border-radius);
     -o-object-fit: cover;
     object-fit: cover;
 }
@@ -1737,13 +1738,17 @@ textarea {
     inline-size: 100%;
 }
 
-.form input,
+.form input:not([type=checkbox], [type=radio]),
+.form select,
 .form textarea,
-.form--alt input,
+.form--alt input:not([type=checkbox], [type=radio]),
+.form--alt select,
 .form--alt textarea,
-.form form input,
+.form form input:not([type=checkbox], [type=radio]),
+.form form select,
 .form form textarea,
-.form--alt form input,
+.form--alt form input:not([type=checkbox], [type=radio]),
+.form--alt form select,
 .form--alt form textarea {
     background-color: var(--input-bg-color);
     border-color: var(--input-border-color);
@@ -1760,13 +1765,17 @@ textarea {
     padding: var(--input-padding-y) var(--input-padding-x);
 }
 
-.form input:focus-visible,
+.form input:not([type=checkbox], [type=radio]):focus-visible,
+.form select:focus-visible,
 .form textarea:focus-visible,
-.form--alt input:focus-visible,
+.form--alt input:not([type=checkbox], [type=radio]):focus-visible,
+.form--alt select:focus-visible,
 .form--alt textarea:focus-visible,
-.form form input:focus-visible,
+.form form input:not([type=checkbox], [type=radio]):focus-visible,
+.form form select:focus-visible,
 .form form textarea:focus-visible,
-.form--alt form input:focus-visible,
+.form--alt form input:not([type=checkbox], [type=radio]):focus-visible,
+.form--alt form select:focus-visible,
 .form--alt form textarea:focus-visible {
     --focus-color: var(--input-border-color-focus);
 }
