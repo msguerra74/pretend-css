@@ -115,9 +115,8 @@
     --aspect-portrait: 3 / 4;
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
-    --border: var(--border-width) var(--border-style) var(--border-color);
     --border-color: var(--base-mid);
-    --border-radius: var(--radius);
+    --border-radius: var(--radius-xs);
     --border-style: solid;
     --border-width: var(--space-2px);
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -136,7 +135,6 @@
     --object-start: 15%;
     --object-center: 50%;
     --object-end: 85%;
-    --radius: var(--radius-xs);
     --radius-xs: var(--space-xs);
     --radius-s: var(--space-s);
     --radius-m: var(--space-m);
@@ -144,7 +142,6 @@
     --radius-xl: var(--space-xl);
     --radius-oval: 10rem;
     --radius-round: 50%;
-    --shadow: var(--shadow-m);
     --shadow-s: drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.07)) drop-shadow(0 0.125rem 0.125rem hsl(0deg 0% 0% / 0.06));
     --shadow-m: drop-shadow(0 0.625rem 0.5rem hsl(0deg 0% 0% / 0.04)) drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.1));
     --shadow-l: drop-shadow(0 1.25rem 0.8125rem hsl(0deg 0% 0% / 0.03)) drop-shadow(0 0.5rem 0.3125rem hsl(0deg 0% 0% / 0.08));
@@ -188,6 +185,7 @@
     --text-base: var(--text-m);
     --text-fine: var(--text-s);
     --text-hero: var(--text-5xl);
+    --text-intro: var(--text-xl);
     --text-lede: var(--text-l);
     --text-font-body: Verdana;
     --text-font-heading: var(--text-font-body);
@@ -601,7 +599,6 @@ video {
 }
 
 img {
-    border-radius: var(--radius);
     -o-object-fit: cover;
     object-fit: cover;
 }
@@ -617,14 +614,14 @@ textarea {
 
 /*! --- Layout --- */
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .block,
 .brxe-block,
 .block--offset {
@@ -648,14 +645,14 @@ textarea {
 }
 
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .container,
 .brxe-container,
 .container--offset {
@@ -673,19 +670,19 @@ textarea {
 }
 
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="grid--1 grid--m-2">
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-            <div class="block">
-                <!-- Grid block -->
+    <section class="section">
+        <div class="container">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
             </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .grid,
 .grid--auto,
 .grid--1,
@@ -1067,27 +1064,27 @@ textarea {
 }
 
 /* HTML Example:
-<section class="section">
-    <div class="container grid--m-alternate">
-        <div class="grid--1 grid--m-2">
-            <div class="block">
-                <!-- Grid block -->
+    <section class="section">
+        <div class="container grid--m-alternate">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
             </div>
-            <div class="block">
-                <!-- Grid block -->
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
             </div>
         </div>
-        <div class="grid--1 grid--m-2">
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-        </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 @media (min-width: 512px) {
     .grid--s-alternate > .grid--2 grid--m-1:nth-of-type(even) > *:last-child {
         order: var(--z-back);
@@ -1369,19 +1366,19 @@ textarea {
 }
 
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="grid--1 grid--m-2">
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-            <div class="block order--first order--m-last">
-                <!-- Grid block -->
+    <section class="section">
+        <div class="container">
+            <div class="grid--1 grid--m-2">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block order--first order--m-last">
+                    <!-- Grid block -->
+                </div>
             </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .order--first {
     order: var(--z-back);
 }
@@ -1431,60 +1428,60 @@ textarea {
 }
 
 /* CSS Example:
-.custom-grid {
-    --column-min: var(--width-min);
-}
-*/
+    .custom-grid {
+        --column-min: var(--width-min);
+    }
+    */
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="custom-grid grid--auto">
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-            <div class="block">
-                <!-- Grid block -->
-            </div>
-            <div class="block">
-                <!-- Grid block -->
+    <section class="section">
+        <div class="container">
+            <div class="custom-grid grid--auto">
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
+                <div class="block">
+                    <!-- Grid block -->
+                </div>
             </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .grid--auto {
     grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
     grid-template-rows: var(--grid-1);
 }
 
 /* CSS Example:
-.custom-layout {
-    --content-width: var(--width-website);;
-}
-.custom-layout--full {
-    grid-column: full;
-}
-.custom-layout--offset {
-    grid-column: offset;
-}
-*/
+    .custom-layout {
+        --content-width: var(--width-website);;
+    }
+    .custom-layout--full {
+        grid-column: full;
+    }
+    .custom-layout--offset {
+        grid-column: offset;
+    }
+    */
 /* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block custom-layout grid--layout">
-            <div class="custom-layout--full block">
-                <!-- Full width content block -->
-            </div>
-            <div class="custom-layout--offset block">
-                <!-- Offset content block -->
-            </div>
-            <div class="block">
-                <!-- Default width content block -->
+    <section class="section">
+        <div class="container">
+            <div class="block custom-layout grid--layout">
+                <div class="custom-layout--full block">
+                    <!-- Full width content block -->
+                </div>
+                <div class="custom-layout--offset block">
+                    <!-- Offset content block -->
+                </div>
+                <div class="block">
+                    <!-- Default width content block -->
+                </div>
             </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .grid--layout {
     -moz-column-gap: 0;
     column-gap: 0;
@@ -1499,13 +1496,13 @@ textarea {
 }
 
 /* HTML Example:
-<header class="header--fixed">
-    <!-- Fixed header content -->
-</header>
-<header data-header-style="overlay">
-    <!-- Overlay header content -->
-</header>
-*/
+    <header class="header--fixed">
+        <!-- Fixed header content -->
+    </header>
+    <header data-header-style="overlay">
+        <!-- Overlay header content -->
+    </header>
+    */
 .header--fixed,
 .header--overlay,
 [data-header-style=fixed],
@@ -1528,14 +1525,14 @@ textarea {
 }
 
 /* Example:
-<section class="section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
         </div>
-    </div>
-</section>
-*/
+    </section>
+    */
 .section,
 .brxe-section {
     display: flex;
@@ -1556,15 +1553,15 @@ textarea {
 
 /*! --- Components --- */
 /* HTML Example:
-<section class="bg-isolate position--relative section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
+    <section class="bg-isolate position--relative section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
         </div>
-    </div>
-    <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element </div>
-</section>
-*/
+        <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element </div>
+    </section>
+    */
 .bg-overlay {
     block-size: 100% !important;
     inline-size: 100%;
@@ -1580,9 +1577,9 @@ textarea {
 }
 
 /* HTML Example:
-<a class="btn" href="#">Anchor Link</a>
-<button class="btn">Button</button>
-*/
+    <a class="btn" href="#">Anchor Link</a>
+    <button class="btn">Button</button>
+    */
 .btn,
 .brxe-button,
 .form button[type=submit],
@@ -1692,47 +1689,47 @@ textarea {
 }
 
 /* HTML Example:
-<!-- This example form uses Formspark and Botpoison -->
-<form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
-    <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
-    <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
-    <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
-    <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
-    <fieldset>
-        <label for="company">Company Name</label>
-        <input aria-label="Company Name" id="company" name="company" type="text">
-    </fieldset>
-    <div class="grid--1 grid--l-2">
+    <!-- This example form uses Formspark and Botpoison -->
+    <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+        <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
+        <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
+        <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
+        <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
         <fieldset>
-            <label for="first-name">First Name</label>
-            <input aria-label="First Name" id="first-name" name="first-name" required type="text">
+            <label for="company">Company Name</label>
+            <input aria-label="Company Name" id="company" name="company" type="text">
+        </fieldset>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="first-name">First Name</label>
+                <input aria-label="First Name" id="first-name" name="first-name" required type="text">
+            </fieldset>
+            <fieldset>
+                <label for="last-name">Last Name</label>
+                <input aria-label="Last Name" id="last-name" name="last-name" type="text">
+            </fieldset>
+        </div>
+        <div class="grid--1 grid--l-2">
+            <fieldset>
+                <label for="email">Email Address</label>
+                <input aria-label="Email Address" id="email" name="email" required type="email">
+            </fieldset>
+            <fieldset>
+                <label for="phone">Phone Number</label>
+                <input aria-label="Phone Number" id="phone" name="phone" type="tel">
+            </fieldset>
+        </div>
+        <fieldset>
+            <label for="message">Message</label>
+            <textarea aria-label="Message" id="message" name="message" required></textarea>
         </fieldset>
         <fieldset>
-            <label for="last-name">Last Name</label>
-            <input aria-label="Last Name" id="last-name" name="last-name" type="text">
+            <label for="pretend-check">Pretend Check</label>
+            <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
         </fieldset>
-    </div>
-    <div class="grid--1 grid--l-2">
-        <fieldset>
-            <label for="email">Email Address</label>
-            <input aria-label="Email Address" id="email" name="email" required type="email">
-        </fieldset>
-        <fieldset>
-            <label for="phone">Phone Number</label>
-            <input aria-label="Phone Number" id="phone" name="phone" type="tel">
-        </fieldset>
-    </div>
-    <fieldset>
-        <label for="message">Message</label>
-        <textarea aria-label="Message" id="message" name="message" required></textarea>
-    </fieldset>
-    <fieldset>
-        <label for="pretend-check">Pretend Check</label>
-        <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
-    </fieldset>
-    <button type="submit">Send Message</button>
-</form>
-*/
+        <button type="submit">Send Message</button>
+    </form>
+    */
 .form,
 .form--alt,
 .form form,
@@ -1883,10 +1880,10 @@ textarea {
 }
 
 /* HTML Example:
-<div class="link-overlay">
-    <a href="#">Link</a>
-</div>
-*/
+    <div class="link-overlay">
+        <a href="#">Link</a>
+    </div>
+    */
 .link-overlay {
     position: relative;
 }
@@ -1905,59 +1902,6 @@ textarea {
     display: flex;
     inset: 0;
     position: absolute;
-}
-
-/* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block ribbon">
-            <div class="ribbon--right">
-                <!-- Right ribbon content -->
-            </div>
-            <!-- Ribbon parent content -->
-        </div>
-    </div>
-</section>
-*/
-.ribbon {
-    --ribbon-bg-color: var(--primary);
-    --ribbon-color: var(--primary-lighter);
-    --ribbon-font-size: var(--text-s);
-    --ribbon-line-height: var(--text-height-s);
-    --ribbon-offset: calc(var(--space-4xl) * -1);
-    --ribbon-padding-x: var(--space-m);
-    --ribbon-padding-y: var(--space-s);
-    --ribbon-text-transform: uppercase;
-    --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
-    --ribbon-transform-origin: bottom right;
-    --ribbon-width: var(--width-s);
-    overflow: hidden;
-    position: relative;
-}
-
-.ribbon > .ribbon--right,
-.ribbon > .ribbon--left {
-    background-color: var(--ribbon-bg-color);
-    color: var(--ribbon-color);
-    display: block;
-    font-size: var(--ribbon-font-size);
-    inline-size: var(--ribbon-width);
-    inset-block-start: var(--ribbon-offset);
-    inset-inline-end: var(--ribbon-offset);
-    line-height: var(--ribbon-line-height);
-    padding: var(--ribbon-padding-y) var(--ribbon-padding-x);
-    position: absolute;
-    text-align: center;
-    text-transform: var(--ribbon-text-transform);
-    transform: var(--ribbon-transform);
-    transform-origin: var(--ribbon-transform-origin);
-}
-
-.ribbon > .ribbon--left {
-    --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-135deg);
-    --ribbon-transform-origin: bottom left;
-    inset-inline-end: auto;
-    inset-inline-start: var(--ribbon-offset);
 }
 
 /*! --- Utilities --- */
@@ -2397,188 +2341,6 @@ textarea {
     }
 }
 
-.aspect--square iframe,
-.aspect--landscape iframe,
-.aspect--portrait iframe,
-.aspect--cinema iframe,
-.aspect--wide iframe {
-    block-size: 100%;
-    inline-size: 100%;
-}
-
-.aspect--square,
-.aspect--square iframe {
-    aspect-ratio: var(--aspect-square);
-}
-
-.aspect--landscape,
-.aspect--landscape iframe {
-    aspect-ratio: var(--aspect-landscape);
-}
-
-.aspect--portrait,
-.aspect--portrait iframe {
-    aspect-ratio: var(--aspect-portrait);
-}
-
-.aspect--cinema,
-.aspect--cinema iframe {
-    aspect-ratio: var(--aspect-cinema);
-}
-
-.aspect--wide,
-.aspect--wide iframe {
-    aspect-ratio: var(--aspect-wide);
-}
-
-@media (min-width: 512px) {
-
-    .aspect--s-square iframe,
-    .aspect--s-landscape iframe,
-    .aspect--s-portrait iframe,
-    .aspect--s-cinema iframe,
-    .aspect--s-wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--s-square,
-    .aspect--s-square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--s-landscape,
-    .aspect--s-landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--s-portrait,
-    .aspect--s-portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--s-cinema,
-    .aspect--s-cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--s-wide,
-    .aspect--s-wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-}
-
-@media (min-width: 768px) {
-
-    .aspect--m-square iframe,
-    .aspect--m-landscape iframe,
-    .aspect--m-portrait iframe,
-    .aspect--m-cinema iframe,
-    .aspect--m-wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--m-square,
-    .aspect--m-square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--m-landscape,
-    .aspect--m-landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--m-portrait,
-    .aspect--m-portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--m-cinema,
-    .aspect--m-cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--m-wide,
-    .aspect--m-wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-}
-
-@media (min-width: 1024px) {
-
-    .aspect--l-square iframe,
-    .aspect--l-landscape iframe,
-    .aspect--l-portrait iframe,
-    .aspect--l-cinema iframe,
-    .aspect--l-wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--l-square,
-    .aspect--l-square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--l-landscape,
-    .aspect--l-landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--l-portrait,
-    .aspect--l-portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--l-cinema,
-    .aspect--l-cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--l-wide,
-    .aspect--l-wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-}
-
-@media (min-width: 1280px) {
-
-    .aspect--xl-square iframe,
-    .aspect--xl-landscape iframe,
-    .aspect--xl-portrait iframe,
-    .aspect--xl-cinema iframe,
-    .aspect--xl-wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--xl-square,
-    .aspect--xl-square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--xl-landscape,
-    .aspect--xl-landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--xl-portrait,
-    .aspect--xl-portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--xl-cinema,
-    .aspect--xl-cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--xl-wide,
-    .aspect--xl-wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-}
-
 .bg-blur--low,
 .bg-blur--mid,
 .bg-blur--high {
@@ -2862,39 +2624,6 @@ textarea {
 
 .bg-isolate {
     isolation: isolate;
-}
-
-.border {
-    border: var(--border);
-    border-radius: var(--border-radius);
-}
-
-.border--bottom {
-    border-bottom-style: var(--border-style);
-    border-bottom-color: var(--border-color);
-    border-bottom-width: var(--border-width);
-}
-
-.border--left {
-    border-left-style: var(--border-style);
-    border-left-color: var(--border-color);
-    border-left-width: var(--border-width);
-}
-
-.border--right {
-    border-right-style: var(--border-style);
-    border-right-color: var(--border-color);
-    border-right-width: var(--border-width);
-}
-
-.border--top {
-    border-top-style: var(--border-style);
-    border-top-color: var(--border-color);
-    border-top-width: var(--border-width);
-}
-
-.border--flat {
-    border: none;
 }
 
 .breakout--offset {
@@ -3360,836 +3089,6 @@ textarea {
     column-span: all;
 }
 
-.cursor--default {
-    cursor: default;
-}
-
-.cursor--pointer {
-    cursor: pointer;
-}
-
-.display--block {
-    display: block;
-}
-
-.display--flex {
-    display: flex;
-}
-
-.display--grid {
-    display: grid;
-}
-
-.display--inline {
-    display: inline;
-}
-
-.display--inline-block {
-    display: inline-block;
-}
-
-.display--inline-flex {
-    display: inline-flex;
-}
-
-.display--none {
-    display: none;
-}
-
-.align-content--start {
-    align-content: flex-start;
-}
-
-.align-content--center {
-    align-content: center;
-}
-
-.align-content--end {
-    align-content: flex-end;
-}
-
-.align-content--around {
-    align-content: space-around;
-}
-
-.align-content--baseline {
-    align-content: baseline;
-}
-
-.align-content--between {
-    align-content: space-between;
-}
-
-.align-content--evenly {
-    align-content: space-evenly;
-}
-
-.align-content--stretch {
-    align-content: stretch;
-}
-
-.align-items--start {
-    align-items: flex-start;
-}
-
-.align-items--center {
-    align-items: center;
-}
-
-.align-items--end {
-    align-items: flex-end;
-}
-
-.align-items--baseline {
-    align-items: baseline;
-}
-
-.align-items--stretch {
-    align-items: stretch;
-}
-
-.align-self--start {
-    align-self: flex-start;
-}
-
-.align-self--center {
-    align-self: center;
-}
-
-.align-self--end {
-    align-self: flex-end;
-}
-
-.align-self--baseline {
-    align-self: baseline;
-}
-
-.align-self--stretch {
-    align-self: stretch;
-}
-
-.justify-content--start {
-    justify-content: flex-start;
-}
-
-.justify-content--center {
-    justify-content: center;
-}
-
-.justify-content--end {
-    justify-content: flex-end;
-}
-
-.justify-content--evenly {
-    justify-content: space-evenly;
-}
-
-.justify-content--around {
-    justify-content: space-around;
-}
-
-.justify-content--between {
-    justify-content: space-between;
-}
-
-.justify-content--stretch {
-    justify-content: stretch;
-}
-
-.justify-items--start {
-    justify-items: flex-start;
-}
-
-.justify-items--center {
-    justify-items: center;
-}
-
-.justify-items--end {
-    justify-items: flex-end;
-}
-
-.justify-items--stretch {
-    justify-items: stretch;
-}
-
-.justify-self--start {
-    justify-self: flex-start;
-}
-
-.justify-self--center {
-    justify-self: center;
-}
-
-.justify-self--end {
-    justify-self: flex-end;
-}
-
-.justify-self--stretch {
-    justify-self: stretch;
-}
-
-@media (min-width: 512px) {
-    .align-content--s-start {
-        align-content: flex-start;
-    }
-
-    .align-content--s-center {
-        align-content: center;
-    }
-
-    .align-content--s-end {
-        align-content: flex-end;
-    }
-
-    .align-content--s-around {
-        align-content: space-around;
-    }
-
-    .align-content--s-baseline {
-        align-content: baseline;
-    }
-
-    .align-content--s-between {
-        align-content: space-between;
-    }
-
-    .align-content--s-evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--s-stretch {
-        align-content: stretch;
-    }
-
-    .align-items--s-start {
-        align-items: flex-start;
-    }
-
-    .align-items--s-center {
-        align-items: center;
-    }
-
-    .align-items--s-end {
-        align-items: flex-end;
-    }
-
-    .align-items--s-baseline {
-        align-items: baseline;
-    }
-
-    .align-items--s-stretch {
-        align-items: stretch;
-    }
-
-    .align-self--s-start {
-        align-self: flex-start;
-    }
-
-    .align-self--s-center {
-        align-self: center;
-    }
-
-    .align-self--s-end {
-        align-self: flex-end;
-    }
-
-    .align-self--s-baseline {
-        align-self: baseline;
-    }
-
-    .align-self--s-stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--s-start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--s-center {
-        justify-content: center;
-    }
-
-    .justify-content--s-end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--s-evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--s-around {
-        justify-content: space-around;
-    }
-
-    .justify-content--s-between {
-        justify-content: space-between;
-    }
-
-    .justify-content--s-stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--s-start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--s-center {
-        justify-items: center;
-    }
-
-    .justify-items--s-end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--s-stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--s-start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--s-center {
-        justify-self: center;
-    }
-
-    .justify-self--s-end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--s-stretch {
-        justify-self: stretch;
-    }
-}
-
-@media (min-width: 768px) {
-    .align-content--m-start {
-        align-content: flex-start;
-    }
-
-    .align-content--m-center {
-        align-content: center;
-    }
-
-    .align-content--m-end {
-        align-content: flex-end;
-    }
-
-    .align-content--m-around {
-        align-content: space-around;
-    }
-
-    .align-content--m-baseline {
-        align-content: baseline;
-    }
-
-    .align-content--m-between {
-        align-content: space-between;
-    }
-
-    .align-content--m-evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--m-stretch {
-        align-content: stretch;
-    }
-
-    .align-items--m-start {
-        align-items: flex-start;
-    }
-
-    .align-items--m-center {
-        align-items: center;
-    }
-
-    .align-items--m-end {
-        align-items: flex-end;
-    }
-
-    .align-items--m-baseline {
-        align-items: baseline;
-    }
-
-    .align-items--m-stretch {
-        align-items: stretch;
-    }
-
-    .align-self--m-start {
-        align-self: flex-start;
-    }
-
-    .align-self--m-center {
-        align-self: center;
-    }
-
-    .align-self--m-end {
-        align-self: flex-end;
-    }
-
-    .align-self--m-baseline {
-        align-self: baseline;
-    }
-
-    .align-self--m-stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--m-start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--m-center {
-        justify-content: center;
-    }
-
-    .justify-content--m-end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--m-evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--m-around {
-        justify-content: space-around;
-    }
-
-    .justify-content--m-between {
-        justify-content: space-between;
-    }
-
-    .justify-content--m-stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--m-start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--m-center {
-        justify-items: center;
-    }
-
-    .justify-items--m-end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--m-stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--m-start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--m-center {
-        justify-self: center;
-    }
-
-    .justify-self--m-end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--m-stretch {
-        justify-self: stretch;
-    }
-}
-
-@media (min-width: 1024px) {
-    .align-content--l-start {
-        align-content: flex-start;
-    }
-
-    .align-content--l-center {
-        align-content: center;
-    }
-
-    .align-content--l-end {
-        align-content: flex-end;
-    }
-
-    .align-content--l-around {
-        align-content: space-around;
-    }
-
-    .align-content--l-baseline {
-        align-content: baseline;
-    }
-
-    .align-content--l-between {
-        align-content: space-between;
-    }
-
-    .align-content--l-evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--l-stretch {
-        align-content: stretch;
-    }
-
-    .align-items--l-start {
-        align-items: flex-start;
-    }
-
-    .align-items--l-center {
-        align-items: center;
-    }
-
-    .align-items--l-end {
-        align-items: flex-end;
-    }
-
-    .align-items--l-baseline {
-        align-items: baseline;
-    }
-
-    .align-items--l-stretch {
-        align-items: stretch;
-    }
-
-    .align-self--l-start {
-        align-self: flex-start;
-    }
-
-    .align-self--l-center {
-        align-self: center;
-    }
-
-    .align-self--l-end {
-        align-self: flex-end;
-    }
-
-    .align-self--l-baseline {
-        align-self: baseline;
-    }
-
-    .align-self--l-stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--l-start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--l-center {
-        justify-content: center;
-    }
-
-    .justify-content--l-end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--l-evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--l-around {
-        justify-content: space-around;
-    }
-
-    .justify-content--l-between {
-        justify-content: space-between;
-    }
-
-    .justify-content--l-stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--l-start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--l-center {
-        justify-items: center;
-    }
-
-    .justify-items--l-end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--l-stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--l-start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--l-center {
-        justify-self: center;
-    }
-
-    .justify-self--l-end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--l-stretch {
-        justify-self: stretch;
-    }
-}
-
-@media (min-width: 1280px) {
-    .align-content--xl-start {
-        align-content: flex-start;
-    }
-
-    .align-content--xl-center {
-        align-content: center;
-    }
-
-    .align-content--xl-end {
-        align-content: flex-end;
-    }
-
-    .align-content--xl-around {
-        align-content: space-around;
-    }
-
-    .align-content--xl-baseline {
-        align-content: baseline;
-    }
-
-    .align-content--xl-between {
-        align-content: space-between;
-    }
-
-    .align-content--xl-evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--xl-stretch {
-        align-content: stretch;
-    }
-
-    .align-items--xl-start {
-        align-items: flex-start;
-    }
-
-    .align-items--xl-center {
-        align-items: center;
-    }
-
-    .align-items--xl-end {
-        align-items: flex-end;
-    }
-
-    .align-items--xl-baseline {
-        align-items: baseline;
-    }
-
-    .align-items--xl-stretch {
-        align-items: stretch;
-    }
-
-    .align-self--xl-start {
-        align-self: flex-start;
-    }
-
-    .align-self--xl-center {
-        align-self: center;
-    }
-
-    .align-self--xl-end {
-        align-self: flex-end;
-    }
-
-    .align-self--xl-baseline {
-        align-self: baseline;
-    }
-
-    .align-self--xl-stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--xl-start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--xl-center {
-        justify-content: center;
-    }
-
-    .justify-content--xl-end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--xl-evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--xl-around {
-        justify-content: space-around;
-    }
-
-    .justify-content--xl-between {
-        justify-content: space-between;
-    }
-
-    .justify-content--xl-stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--xl-start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--xl-center {
-        justify-items: center;
-    }
-
-    .justify-items--xl-end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--xl-stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--xl-start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--xl-center {
-        justify-self: center;
-    }
-
-    .justify-self--xl-end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--xl-stretch {
-        justify-self: stretch;
-    }
-}
-
-.flex--column {
-    display: flex;
-    flex-direction: column;
-}
-
-.flex--column-reverse {
-    flex-direction: column-reverse;
-}
-
-.flex--row {
-    display: flex;
-    flex-direction: row;
-}
-
-.flex--row-reverse {
-    flex-direction: row-reverse;
-}
-
-@media (min-width: 512px) {
-    .flex--s-column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--s-column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--s-row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--s-row-reverse {
-        flex-direction: row-reverse;
-    }
-}
-
-@media (min-width: 768px) {
-    .flex--m-column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--m-column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--m-row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--m-row-reverse {
-        flex-direction: row-reverse;
-    }
-}
-
-@media (min-width: 1024px) {
-    .flex--l-column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--l-column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--l-row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--l-row-reverse {
-        flex-direction: row-reverse;
-    }
-}
-
-@media (min-width: 1280px) {
-    .flex--xl-column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--xl-column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--xl-row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--xl-row-reverse {
-        flex-direction: row-reverse;
-    }
-}
-
-.flex-grow {
-    flex-grow: 1;
-}
-
-.flex-grow--flat {
-    flex-grow: 0;
-}
-
-.flex-shrink {
-    flex-shrink: 1;
-}
-
-.flex-shrink--flat {
-    flex-shrink: 0;
-}
-
-.flex--nowrap {
-    flex-wrap: nowrap;
-}
-
-.flex--wrap {
-    flex-wrap: wrap;
-}
-
-.flex--wrap-reverse {
-    flex-wrap: wrap-reverse;
-}
-
 .flip--x {
     transform: scaleX(-1);
 }
@@ -4200,145 +3099,6 @@ textarea {
 
 .flip--xy {
     transform: scale(-1, -1);
-}
-
-.gap--base {
-    gap: var(--space-base);
-}
-
-.gap--base-column {
-    -moz-column-gap: var(--space-base);
-    column-gap: var(--space-base);
-}
-
-.gap--base-row {
-    row-gap: var(--space-base);
-}
-
-.gap--block {
-    gap: var(--space-block);
-}
-
-.gap--block-column {
-    -moz-column-gap: var(--space-block);
-    column-gap: var(--space-block);
-}
-
-.gap--block-row {
-    row-gap: var(--space-block);
-}
-
-.gap--container {
-    gap: var(--space-container);
-}
-
-.gap--container-column {
-    -moz-column-gap: var(--space-container);
-    column-gap: var(--space-container);
-}
-
-.gap--container-row {
-    row-gap: var(--space-container);
-}
-
-.gap--grid {
-    gap: var(--space-grid);
-}
-
-.gap--grid-column {
-    -moz-column-gap: var(--space-grid);
-    column-gap: var(--space-grid);
-}
-
-.gap--grid-row {
-    row-gap: var(--space-grid);
-}
-
-.gap--icon {
-    gap: var(--space-icon);
-}
-
-.gap--icon-column {
-    -moz-column-gap: var(--space-icon);
-    column-gap: var(--space-icon);
-}
-
-.gap--icon-row {
-    row-gap: var(--space-icon);
-}
-
-.gap--section {
-    gap: var(--space-section);
-}
-
-.gap--section-column {
-    -moz-column-gap: var(--space-section);
-    column-gap: var(--space-section);
-}
-
-.gap--section-row {
-    row-gap: var(--space-section);
-}
-
-.gap--flat {
-    gap: 0;
-}
-
-.gap--flat-column {
-    -moz-column-gap: 0;
-    column-gap: 0;
-}
-
-.gap--flat-row {
-    row-gap: 0;
-}
-
-.height--full {
-    min-block-size: 100svh;
-}
-
-.height--fill {
-    min-block-size: 100%;
-}
-
-@media (min-width: 512px) {
-    .height--s-auto {
-        min-block-size: auto;
-    }
-
-    .height--s-full {
-        min-block-size: 100svh;
-    }
-}
-
-@media (min-width: 768px) {
-    .height--m-auto {
-        min-block-size: auto;
-    }
-
-    .height--m-full {
-        min-block-size: 100svh;
-    }
-}
-
-@media (min-width: 1024px) {
-    .height--l-auto {
-        min-block-size: auto;
-    }
-
-    .height--l-full {
-        min-block-size: 100svh;
-    }
-}
-
-@media (min-width: 1280px) {
-    .height--xl-auto {
-        min-block-size: auto;
-    }
-
-    .height--xl-full {
-        min-block-size: 100svh;
-    }
 }
 
 .hide {
@@ -4449,753 +3209,8 @@ ul.list--flat,
     color: var(--list-marker-color);
 }
 
-.margin-bottom--base {
-    margin-block-end: var(--space-base);
-}
-
-.margin-bottom--block {
-    margin-block-end: var(--space-block);
-}
-
-.margin-bottom--container {
-    margin-block-end: var(--space-container);
-}
-
-.margin-bottom--grid {
-    margin-block-end: var(--space-grid);
-}
-
-.margin-bottom--icon {
-    margin-block-end: var(--space-icon);
-}
-
-.margin-bottom--section {
-    margin-block-end: var(--space-section);
-}
-
-.margin-left--base {
-    margin-inline-start: var(--space-base);
-}
-
-.margin-left--block {
-    margin-inline-start: var(--space-block);
-}
-
-.margin-left--container {
-    margin-inline-start: var(--space-container);
-}
-
-.margin-left--grid {
-    margin-inline-start: var(--space-grid);
-}
-
-.margin-left--icon {
-    margin-inline-start: var(--space-icon);
-}
-
-.margin-left--section {
-    margin-inline-start: var(--space-section);
-}
-
-.margin-right--base {
-    margin-inline-end: var(--space-base);
-}
-
-.margin-right--block {
-    margin-inline-end: var(--space-block);
-}
-
-.margin-right--container {
-    margin-inline-end: var(--space-container);
-}
-
-.margin-right--grid {
-    margin-inline-end: var(--space-grid);
-}
-
-.margin-right--icon {
-    margin-inline-end: var(--space-icon);
-}
-
-.margin-right--section {
-    margin-inline-end: var(--space-section);
-}
-
-.margin-top--base {
-    margin-block-start: var(--space-base);
-}
-
-.margin-top--block {
-    margin-block-start: var(--space-block);
-}
-
-.margin-top--container {
-    margin-block-start: var(--space-container);
-}
-
-.margin-top--grid {
-    margin-block-start: var(--space-grid);
-}
-
-.margin-top--icon {
-    margin-block-start: var(--space-icon);
-}
-
-.margin-top--section {
-    margin-block-start: var(--space-section);
-}
-
-.margin-bottom--flat {
-    margin-block-end: 0;
-}
-
-.margin-left--flat {
-    margin-inline-start: 0;
-}
-
-.margin-right--flat {
-    margin-inline-end: 0;
-}
-
-.margin-top--flat {
-    margin-block-start: 0;
-}
-
-.margin--flat {
-    margin: 0;
-}
-
-.object--contain {
-    -o-object-fit: contain;
-    object-fit: contain;
-}
-
-.object--cover {
-    -o-object-fit: cover;
-    object-fit: cover;
-}
-
-.object--none {
-    -o-object-fit: none;
-    object-fit: none;
-}
-
-.object--bottom-center {
-    -o-object-position: var(--object-center) var(--object-end);
-    object-position: var(--object-center) var(--object-end);
-}
-
-.object--bottom-left {
-    -o-object-position: var(--object-start) var(--object-end);
-    object-position: var(--object-start) var(--object-end);
-}
-
-.object--bottom-right {
-    -o-object-position: var(--object-end);
-    object-position: var(--object-end);
-}
-
-.object--center {
-    -o-object-position: var(--object-center);
-    object-position: var(--object-center);
-}
-
-.object--center-left {
-    -o-object-position: var(--object-start) var(--object-center);
-    object-position: var(--object-start) var(--object-center);
-}
-
-.object--center-right {
-    -o-object-position: var(--object-end) var(--object-center);
-    object-position: var(--object-end) var(--object-center);
-}
-
-.object--top-center {
-    -o-object-position: var(--object-center) var(--object-start);
-    object-position: var(--object-center) var(--object-start);
-}
-
-.object--top-left {
-    -o-object-position: var(--object-start);
-    object-position: var(--object-start);
-}
-
-.object--top-right {
-    -o-object-position: var(--object-end) var(--object-start);
-    object-position: var(--object-end) var(--object-start);
-}
-
-@media (min-width: 512px) {
-    .object--s-bottom-center {
-        -o-object-position: var(--object-center) var(--object-end);
-        object-position: var(--object-center) var(--object-end);
-    }
-
-    .object--s-bottom-left {
-        -o-object-position: var(--object-start) var(--object-end);
-        object-position: var(--object-start) var(--object-end);
-    }
-
-    .object--s-bottom-right {
-        -o-object-position: var(--object-end);
-        object-position: var(--object-end);
-    }
-
-    .object--s-center {
-        -o-object-position: var(--object-center);
-        object-position: var(--object-center);
-    }
-
-    .object--s-center-left {
-        -o-object-position: var(--object-start) var(--object-center);
-        object-position: var(--object-start) var(--object-center);
-    }
-
-    .object--s-center-right {
-        -o-object-position: var(--object-end) var(--object-center);
-        object-position: var(--object-end) var(--object-center);
-    }
-
-    .object--s-top-center {
-        -o-object-position: var(--object-center) var(--object-start);
-        object-position: var(--object-center) var(--object-start);
-    }
-
-    .object--s-top-left {
-        -o-object-position: var(--object-start);
-        object-position: var(--object-start);
-    }
-
-    .object--s-top-right {
-        -o-object-position: var(--object-end) var(--object-start);
-        object-position: var(--object-end) var(--object-start);
-    }
-}
-
-@media (min-width: 768px) {
-    .object--m-bottom-center {
-        -o-object-position: var(--object-center) var(--object-end);
-        object-position: var(--object-center) var(--object-end);
-    }
-
-    .object--m-bottom-left {
-        -o-object-position: var(--object-start) var(--object-end);
-        object-position: var(--object-start) var(--object-end);
-    }
-
-    .object--m-bottom-right {
-        -o-object-position: var(--object-end);
-        object-position: var(--object-end);
-    }
-
-    .object--m-center {
-        -o-object-position: var(--object-center);
-        object-position: var(--object-center);
-    }
-
-    .object--m-center-left {
-        -o-object-position: var(--object-start) var(--object-center);
-        object-position: var(--object-start) var(--object-center);
-    }
-
-    .object--m-center-right {
-        -o-object-position: var(--object-end) var(--object-center);
-        object-position: var(--object-end) var(--object-center);
-    }
-
-    .object--m-top-center {
-        -o-object-position: var(--object-center) var(--object-start);
-        object-position: var(--object-center) var(--object-start);
-    }
-
-    .object--m-top-left {
-        -o-object-position: var(--object-start);
-        object-position: var(--object-start);
-    }
-
-    .object--m-top-right {
-        -o-object-position: var(--object-end) var(--object-start);
-        object-position: var(--object-end) var(--object-start);
-    }
-}
-
-@media (min-width: 1024px) {
-    .object--l-bottom-center {
-        -o-object-position: var(--object-center) var(--object-end);
-        object-position: var(--object-center) var(--object-end);
-    }
-
-    .object--l-bottom-left {
-        -o-object-position: var(--object-start) var(--object-end);
-        object-position: var(--object-start) var(--object-end);
-    }
-
-    .object--l-bottom-right {
-        -o-object-position: var(--object-end);
-        object-position: var(--object-end);
-    }
-
-    .object--l-center {
-        -o-object-position: var(--object-center);
-        object-position: var(--object-center);
-    }
-
-    .object--l-center-left {
-        -o-object-position: var(--object-start) var(--object-center);
-        object-position: var(--object-start) var(--object-center);
-    }
-
-    .object--l-center-right {
-        -o-object-position: var(--object-end) var(--object-center);
-        object-position: var(--object-end) var(--object-center);
-    }
-
-    .object--l-top-center {
-        -o-object-position: var(--object-center) var(--object-start);
-        object-position: var(--object-center) var(--object-start);
-    }
-
-    .object--l-top-left {
-        -o-object-position: var(--object-start);
-        object-position: var(--object-start);
-    }
-
-    .object--l-top-right {
-        -o-object-position: var(--object-end) var(--object-start);
-        object-position: var(--object-end) var(--object-start);
-    }
-}
-
-@media (min-width: 1280px) {
-    .object--xl-bottom-center {
-        -o-object-position: var(--object-center) var(--object-end);
-        object-position: var(--object-center) var(--object-end);
-    }
-
-    .object--xl-bottom-left {
-        -o-object-position: var(--object-start) var(--object-end);
-        object-position: var(--object-start) var(--object-end);
-    }
-
-    .object--xl-bottom-right {
-        -o-object-position: var(--object-end);
-        object-position: var(--object-end);
-    }
-
-    .object--xl-center {
-        -o-object-position: var(--object-center);
-        object-position: var(--object-center);
-    }
-
-    .object--xl-center-left {
-        -o-object-position: var(--object-start) var(--object-center);
-        object-position: var(--object-start) var(--object-center);
-    }
-
-    .object--xl-center-right {
-        -o-object-position: var(--object-end) var(--object-center);
-        object-position: var(--object-end) var(--object-center);
-    }
-
-    .object--xl-top-center {
-        -o-object-position: var(--object-center) var(--object-start);
-        object-position: var(--object-center) var(--object-start);
-    }
-
-    .object--xl-top-left {
-        -o-object-position: var(--object-start);
-        object-position: var(--object-start);
-    }
-
-    .object--xl-top-right {
-        -o-object-position: var(--object-end) var(--object-start);
-        object-position: var(--object-end) var(--object-start);
-    }
-}
-
-.opacity--5 {
-    opacity: 0.05;
-}
-
-.opacity--10 {
-    opacity: 0.1;
-}
-
-.opacity--20 {
-    opacity: 0.2;
-}
-
-.opacity--30 {
-    opacity: 0.3;
-}
-
-.opacity--40 {
-    opacity: 0.4;
-}
-
-.opacity--50 {
-    opacity: 0.5;
-}
-
-.opacity--60 {
-    opacity: 0.6;
-}
-
-.opacity--70 {
-    opacity: 0.7;
-}
-
-.opacity--80 {
-    opacity: 0.8;
-}
-
-.opacity--90 {
-    opacity: 0.9;
-}
-
-.opacity--95 {
-    opacity: 0.95;
-}
-
-.overflow--auto {
-    overflow: auto;
-}
-
-.overflow--clip {
-    overflow: clip;
-}
-
-.overflow--hidden {
-    overflow: hidden;
-}
-
-.overflow--scroll-x {
-    overflow-x: scroll;
-}
-
-.overflow--scroll-y {
-    overflow-y: scroll;
-}
-
-.padding--base {
-    padding: var(--space-base);
-}
-
-.padding--block {
-    padding: var(--space-block);
-}
-
-.padding--container {
-    padding: var(--space-container);
-}
-
-.padding--grid {
-    padding: var(--space-grid);
-}
-
-.padding--icon {
-    padding: var(--space-icon);
-}
-
-.padding--section {
-    padding: var(--space-section) var(--space-offset);
-}
-
-.padding--section-alt {
-    padding: var(--space-l) var(--space-offset);
-}
-
-.padding-bottom--flat {
-    padding-block-end: 0;
-}
-
-.padding-left--flat {
-    padding-inline-start: 0;
-}
-
-.padding-right--flat {
-    padding-inline-end: 0;
-}
-
-.padding-top--flat {
-    padding-block-start: 0;
-}
-
-.padding--flat {
-    padding: 0;
-}
-
-.position--absolute {
-    position: absolute;
-}
-
-.position--fixed {
-    position: fixed;
-}
-
 .position--relative {
     position: relative;
-}
-
-.position--static {
-    position: static;
-}
-
-.position--sticky {
-    inset-block-start: 0;
-    position: sticky;
-}
-
-.position--sticky-offset {
-    inset-block-start: var(--space-base);
-}
-
-.position--bottom-flat {
-    inset-block-end: 0;
-}
-
-.position--left-flat {
-    inset-inline-start: 0;
-}
-
-.position--right-flat {
-    inset-inline-end: 0;
-}
-
-.position--top-flat {
-    inset-block-start: 0;
-}
-
-.position--flat {
-    inset: 0;
-}
-
-@media (min-width: 512px) {
-    .position--s-absolute {
-        position: absolute;
-    }
-
-    .position--s-fixed {
-        position: fixed;
-    }
-
-    .position--s-relative {
-        position: relative;
-    }
-
-    .position--s-static {
-        position: static;
-    }
-
-    .position--s-sticky {
-        inset-block-start: 0;
-        position: sticky;
-    }
-
-    .position--s-sticky-offset {
-        inset-block-start: var(--space-base);
-    }
-
-    .position--s-bottom-flat {
-        inset-block-end: 0;
-    }
-
-    .position--s-left-flat {
-        inset-inline-start: 0;
-    }
-
-    .position--s-right-flat {
-        inset-inline-end: 0;
-    }
-
-    .position--s-top-flat {
-        inset-block-start: 0;
-    }
-
-    .position--s-flat {
-        inset: 0;
-    }
-}
-
-@media (min-width: 768px) {
-    .position--m-absolute {
-        position: absolute;
-    }
-
-    .position--m-fixed {
-        position: fixed;
-    }
-
-    .position--m-relative {
-        position: relative;
-    }
-
-    .position--m-static {
-        position: static;
-    }
-
-    .position--m-sticky {
-        inset-block-start: 0;
-        position: sticky;
-    }
-
-    .position--m-sticky-offset {
-        inset-block-start: var(--space-base);
-    }
-
-    .position--m-bottom-flat {
-        inset-block-end: 0;
-    }
-
-    .position--m-left-flat {
-        inset-inline-start: 0;
-    }
-
-    .position--m-right-flat {
-        inset-inline-end: 0;
-    }
-
-    .position--m-top-flat {
-        inset-block-start: 0;
-    }
-
-    .position--m-flat {
-        inset: 0;
-    }
-}
-
-@media (min-width: 1024px) {
-    .position--l-absolute {
-        position: absolute;
-    }
-
-    .position--l-fixed {
-        position: fixed;
-    }
-
-    .position--l-relative {
-        position: relative;
-    }
-
-    .position--l-static {
-        position: static;
-    }
-
-    .position--l-sticky {
-        inset-block-start: 0;
-        position: sticky;
-    }
-
-    .position--l-sticky-offset {
-        inset-block-start: var(--space-base);
-    }
-
-    .position--l-bottom-flat {
-        inset-block-end: 0;
-    }
-
-    .position--l-left-flat {
-        inset-inline-start: 0;
-    }
-
-    .position--l-right-flat {
-        inset-inline-end: 0;
-    }
-
-    .position--l-top-flat {
-        inset-block-start: 0;
-    }
-
-    .position--l-flat {
-        inset: 0;
-    }
-}
-
-@media (min-width: 1280px) {
-    .position--xl-absolute {
-        position: absolute;
-    }
-
-    .position--xl-fixed {
-        position: fixed;
-    }
-
-    .position--xl-relative {
-        position: relative;
-    }
-
-    .position--xl-static {
-        position: static;
-    }
-
-    .position--xl-sticky {
-        inset-block-start: 0;
-        position: sticky;
-    }
-
-    .position--xl-sticky-offset {
-        inset-block-start: var(--space-base);
-    }
-
-    .position--xl-bottom-flat {
-        inset-block-end: 0;
-    }
-
-    .position--xl-left-flat {
-        inset-inline-start: 0;
-    }
-
-    .position--xl-right-flat {
-        inset-inline-end: 0;
-    }
-
-    .position--xl-top-flat {
-        inset-block-start: 0;
-    }
-
-    .position--xl-flat {
-        inset: 0;
-    }
-}
-
-.radius {
-    border-radius: var(--radius);
-}
-
-.radius--xs {
-    border-radius: var(--radius-xs);
-}
-
-.radius--s {
-    border-radius: var(--radius-s);
-}
-
-.radius--m {
-    border-radius: var(--radius-m);
-}
-
-.radius--l {
-    border-radius: var(--radius-l);
-}
-
-.radius--xl {
-    border-radius: var(--radius-xl);
-}
-
-.radius--oval {
-    border-radius: var(--radius-oval);
-}
-
-.radius--round {
-    border-radius: var(--radius-round);
-}
-
-.radius--flat {
-    border-radius: 0;
-}
-
-.shadow {
-    filter: var(--shadow);
 }
 
 .shadow--s {
@@ -5215,10 +3230,6 @@ ul.list--flat,
 }
 
 @media (min-width: 512px) {
-    .shadow--s {
-        filter: var(--shadow);
-    }
-
     .shadow--s-s {
         filter: var(--shadow-s);
     }
@@ -5241,10 +3252,6 @@ ul.list--flat,
 }
 
 @media (min-width: 768px) {
-    .shadow--m {
-        filter: var(--shadow);
-    }
-
     .shadow--m-s {
         filter: var(--shadow-s);
     }
@@ -5267,10 +3274,6 @@ ul.list--flat,
 }
 
 @media (min-width: 1024px) {
-    .shadow--l {
-        filter: var(--shadow);
-    }
-
     .shadow--l-s {
         filter: var(--shadow-s);
     }
@@ -5293,10 +3296,6 @@ ul.list--flat,
 }
 
 @media (min-width: 1280px) {
-    .shadow--xl {
-        filter: var(--shadow);
-    }
-
     .shadow--xl-s {
         filter: var(--shadow-s);
     }
@@ -5332,218 +3331,14 @@ ul.list--flat,
     line-height: var(--text-height-s);
 }
 
+.text--intro {
+    font-size: var(--text-intro);
+    line-height: var(--text-height-m);
+}
+
 .text--lede {
     font-size: var(--text-lede);
     line-height: var(--text-height-m);
-}
-
-.text-align--center {
-    text-align: center;
-}
-
-.text-align--justify {
-    text-align: justify;
-}
-
-.text-align--left {
-    text-align: start;
-}
-
-.text-align--right {
-    text-align: end;
-}
-
-@media (min-width: 512px) {
-    .text-align--s-center {
-        text-align: center;
-    }
-
-    .text-align--s-justify {
-        text-align: justify;
-    }
-
-    .text-align--s-left {
-        text-align: start;
-    }
-
-    .text-align--s-right {
-        text-align: end;
-    }
-}
-
-@media (min-width: 768px) {
-    .text-align--m-center {
-        text-align: center;
-    }
-
-    .text-align--m-justify {
-        text-align: justify;
-    }
-
-    .text-align--m-left {
-        text-align: start;
-    }
-
-    .text-align--m-right {
-        text-align: end;
-    }
-}
-
-@media (min-width: 1024px) {
-    .text-align--l-center {
-        text-align: center;
-    }
-
-    .text-align--l-justify {
-        text-align: justify;
-    }
-
-    .text-align--l-left {
-        text-align: start;
-    }
-
-    .text-align--l-right {
-        text-align: end;
-    }
-}
-
-@media (min-width: 1280px) {
-    .text-align--xl-center {
-        text-align: center;
-    }
-
-    .text-align--xl-justify {
-        text-align: justify;
-    }
-
-    .text-align--xl-left {
-        text-align: start;
-    }
-
-    .text-align--xl-right {
-        text-align: end;
-    }
-}
-
-.text-decoration--flat {
-    text-decoration: none;
-}
-
-.text-decoration--overline {
-    text-decoration: overline;
-}
-
-.text-decoration--strike {
-    text-decoration: line-through;
-}
-
-.text-decoration--underline {
-    text-decoration: underline;
-}
-
-.text-height--s {
-    line-height: var(--text-height-s);
-}
-
-.text-height--m {
-    line-height: var(--text-height-m);
-}
-
-.text-height--l {
-    line-height: var(--text-height-l);
-}
-
-.text-spaced {
-    --text-spaced: var(--space-px);
-    letter-spacing: var(--text-spaced);
-}
-
-.text-style--italic {
-    font-style: italic;
-}
-
-.text-style--normal {
-    font-style: normal;
-}
-
-.text-transform--capitalize {
-    text-transform: capitalize;
-}
-
-.text-transform--lowercase {
-    text-transform: lowercase;
-}
-
-.text-transform--none {
-    text-transform: none;
-}
-
-.text-transform--uppercase {
-    text-transform: uppercase;
-}
-
-.text-weight--100 {
-    font-weight: 100;
-}
-
-.text-weight--200 {
-    font-weight: 200;
-}
-
-.text-weight--300 {
-    font-weight: 300;
-}
-
-.text-weight--400 {
-    font-weight: 400;
-}
-
-.text-weight--500 {
-    font-weight: 500;
-}
-
-.text-weight--600 {
-    font-weight: 600;
-}
-
-.text-weight--700 {
-    font-weight: 700;
-}
-
-.text-weight--800 {
-    font-weight: 800;
-}
-
-.text-weight--900 {
-    font-weight: 900;
-}
-
-.text-wrap {
-    text-wrap: wrap;
-}
-
-.text-wrap--balance {
-    text-wrap: balance;
-}
-
-.text-wrap--none {
-    text-wrap: nowrap;
-}
-
-.text-wrap--pretty {
-    text-wrap: pretty;
-}
-
-.transition--fast {
-    transition: var(--transition-fast);
-}
-
-.transition--normal {
-    transition: var(--transition-normal);
-}
-
-.transition--slow {
-    transition: var(--transition-slow);
 }
 
 .vertical--text-left,
@@ -5695,32 +3490,4 @@ ul.list--flat,
 
 .width--website {
     max-inline-size: var(--width-website);
-}
-
-.z--back {
-    z-index: var(--z-back);
-}
-
-.z--flat {
-    z-index: var(--z-flat);
-}
-
-.z--front {
-    z-index: var(--z-front);
-}
-
-.z--low {
-    z-index: var(--z-low);
-}
-
-.z--mid {
-    z-index: var(--z-mid);
-}
-
-.z--high {
-    z-index: var(--z-high);
-}
-
-.z--top {
-    z-index: var(--z-top);
 }
