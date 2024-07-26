@@ -1,6 +1,8 @@
-@charset "UTF-8";
-
-/*! Pretend CSS — Made by Pretend @ https://pretend.studio */
+/*!
+Pretend CSS
+Made by Pretend
+https://pretend.studio
+*/
 [data-color-scheme=light],
 .color-scheme--light,
 :root:not([data-color-scheme=dark], .color-scheme--dark) {
@@ -116,7 +118,7 @@
     --aspect-cinema: 16 / 9;
     --aspect-wide: 2 / 1;
     --border-color: var(--base-mid);
-    --border-radius: var(--radius-xs);
+    --border-radius: var(--radius-s);
     --border-style: solid;
     --border-width: var(--space-2px);
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -364,7 +366,7 @@
 
 :focus-visible,
 .link-overlay:focus-within {
-    --focus-color: var(--primary);
+    --focus-color: var(--primary-mid);
     --focus-offset: var(--border-width);
     --focus-style: var(--border-style);
     --focus-width: var(--border-width);

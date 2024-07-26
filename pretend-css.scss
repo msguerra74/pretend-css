@@ -1,4 +1,8 @@
-/*! Pretend CSS — Made by Pretend @ https://pretend.studio */
+/*!
+Pretend CSS
+Made by Pretend
+https://pretend.studio
+*/
 
 @use 'sass:math';
 
@@ -90,7 +94,7 @@ $breakpoint: (
 
 // Breakpoint Generator
 // --
-// Usage: @include breakpoint(768, max, em) {}
+// Usage: @include breakpoint(768, min, em) {}
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
 // @param: $_unit // em, px, rem
@@ -158,7 +162,7 @@ $breakpoint: (
 
     // Border
     --border-color: var(--base-mid);
-    --border-radius: var(--radius-xs);
+    --border-radius: var(--radius-s);
     --border-style: solid;
     --border-width: var(--space-2px);
 
@@ -398,7 +402,7 @@ $breakpoint: (
 
 :focus-visible,
 .link-overlay:focus-within {
-    --focus-color: var(--primary);
+    --focus-color: var(--primary-mid);
     --focus-offset: var(--border-width);
     --focus-style: var(--border-style);
     --focus-width: var(--border-width);
