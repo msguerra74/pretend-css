@@ -520,8 +520,6 @@ a.link {
 // Link - Color
 main .link--light > a:not([class]),
 a.link--light {
-    @extend .link;
-
     --link-decoration-color: var(--primary-lighter);
 
     &:hover {
@@ -532,8 +530,6 @@ a.link--light {
 
 main .link--dark > a:not([class]),
 a.link--dark {
-    @extend .link;
-
     --link-decoration-color: var(--primary-darker);
 
     &:hover {
@@ -544,17 +540,17 @@ a.link--dark {
 
 // Heading
 h1,
-.h--1,
+.h1,
 h2,
-.h--2,
+.h2,
 h3,
-.h--3,
+.h3,
 h4,
-.h--4,
+.h4,
 h5,
-.h--5,
+.h5,
 h6,
-.h--6 {
+.h6 {
     color: var(--h-color);
     font-size: var(--h-font-size);
     font-family: var(var(--text-font-heading));
@@ -565,7 +561,7 @@ h6,
 }
 
 h1,
-.h--1 {
+.h1 {
     --h-color: inherit;
     --h-font-size: var(--text-4xl);
     --h-font-weight: 700;
@@ -574,7 +570,7 @@ h1,
 }
 
 h2,
-.h--2 {
+.h2 {
     --h-color: inherit;
     --h-font-size: var(--text-3xl);
     --h-font-weight: 700;
@@ -583,7 +579,7 @@ h2,
 }
 
 h3,
-.h--3 {
+.h3 {
     --h-color: inherit;
     --h-font-size: var(--text-2xl);
     --h-font-weight: 700;
@@ -592,7 +588,7 @@ h3,
 }
 
 h4,
-.h--4 {
+.h4 {
     --h-color: inherit;
     --h-font-size: var(--text-xl);
     --h-font-weight: 700;
@@ -601,7 +597,7 @@ h4,
 }
 
 h5,
-.h--5 {
+.h5 {
     --h-color: inherit;
     --h-font-size: var(--text-l);
     --h-font-weight: 700;
@@ -610,7 +606,7 @@ h5,
 }
 
 h6,
-.h--6 {
+.h6 {
     --h-color: inherit;
     --h-font-size: var(--text-m);
     --h-font-weight: 700;
@@ -674,20 +670,17 @@ textarea {
     gap: var(--space-block);
     inline-size: 100%;
 
-    &--float {
+    &--offset {
+        padding-inline: var(--space-offset);
+    }
+
+    &-float {
         display: block;
 
         & > * + * {
             margin-block-start: var(--space-block);
         }
     }
-
-    &--offset {
-        @extend .block;
-
-        padding-inline: var(--space-offset);
-    }
-
 }
 
 // Container
@@ -711,8 +704,6 @@ textarea {
     max-inline-size: var(--width-website);
 
     &--offset {
-        @extend .container;
-
         padding-inline: var(--space-offset);
     }
 }
@@ -1067,7 +1058,7 @@ $_value in $breakpoint {
 /* HTML Example:
     <section class="section">
         <div class="container">
-            <div class="block custom-layout grid--layout">
+            <div class="custom-layout grid--layout">
                 <div class="custom-layout--full block">
                     <!-- Full width content block -->
                 </div>
@@ -1085,10 +1076,11 @@ $_value in $breakpoint {
     column-gap: 0;
     display: grid;
     grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    inline-size: 100%;
     padding-inline: 0;
+    row-gap: var(--space-block);
 
     & > * {
-        inline-size: 100%;
         grid-column: content;
     }
 }
@@ -1150,6 +1142,13 @@ $_value in $breakpoint {
 
     &--flat {
         padding: 0;
+    }
+
+    &-grid {
+        @extend .grid--layout;
+
+        padding-block: var(--space-section);
+        row-gap: var(--space-section);
     }
 }
 
@@ -1261,8 +1260,6 @@ $_value in $breakpoint {
 
 // Button Color
 .btn--light {
-    @extend .btn;
-
     --btn-bg-color: var(--base-lighter);
     --btn-border-color: var(--base-lighter);
     --btn-color: var(--base-darker);
@@ -1277,8 +1274,6 @@ $_value in $breakpoint {
 }
 
 .btn--dark {
-    @extend .btn;
-
     --btn-bg-color: var(--base-darker);
     --btn-border-color: var(--base-darker);
     --btn-color: var(--base-lighter);

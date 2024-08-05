@@ -25,43 +25,43 @@
         "category": "pcss"
     },
     {
-        "id": "pcss-link--dark",
-        "name": "link--dark",
+        "id": "pcss-link-dark",
+        "name": "link-dark",
         "category": "pcss"
     },
     {
-        "id": "pcss-link--light",
-        "name": "link--light",
+        "id": "pcss-link-light",
+        "name": "link-light",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--1",
-        "name": "h--1",
+        "id": "pcss-h1",
+        "name": "h1",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--2",
-        "name": "h--2",
+        "id": "pcss-h2",
+        "name": "h2",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--3",
-        "name": "h--3",
+        "id": "pcss-h3",
+        "name": "h3",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--4",
-        "name": "h--4",
+        "id": "pcss-h4",
+        "name": "h4",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--5",
-        "name": "h--5",
+        "id": "pcss-h5",
+        "name": "h5",
         "category": "pcss"
     },
     {
-        "id": "pcss-h--6",
-        "name": "h--6",
+        "id": "pcss-h6",
+        "name": "h6",
         "category": "pcss"
     },
     {
@@ -75,8 +75,8 @@
         "category": "pcss"
     },
     {
-        "id": "pcss-block--float",
-        "name": "block--float",
+        "id": "pcss-block-float",
+        "name": "block-float",
         "category": "pcss"
     },
     {
@@ -522,6 +522,11 @@
     {
         "id": "pcss-section--flat",
         "name": "section--flat",
+        "category": "pcss"
+    },
+    {
+        "id": "pcss-section-grid",
+        "name": "section-grid",
         "category": "pcss"
     },
     {

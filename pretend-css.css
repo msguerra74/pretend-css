@@ -460,11 +460,7 @@ a:hover {
 }
 
 main a:not([class]),
-a.link,
-main .link--dark > a:not([class]),
-a.link--dark,
-main .link--light > a:not([class]),
-a.link--light {
+a.link {
     --link-color: inherit;
     --link-decoration-color: var(--primary);
     --link-decoration-thickness: var(--border-width);
@@ -479,9 +475,7 @@ a.link--light {
 }
 
 main a:not([class]):hover,
-a.link:hover,
-a.link--dark:hover,
-a.link--light:hover {
+a.link:hover {
     --link-color: var(--primary);
     --link-decoration-color: var(--base-mid);
 }
@@ -509,17 +503,17 @@ a.link--dark:hover {
 }
 
 h1,
-.h--1,
+.h1,
 h2,
-.h--2,
+.h2,
 h3,
-.h--3,
+.h3,
 h4,
-.h--4,
+.h4,
 h5,
-.h--5,
+.h5,
 h6,
-.h--6 {
+.h6 {
     color: var(--h-color);
     font-size: var(--h-font-size);
     font-family: var(var(--text-font-heading));
@@ -530,7 +524,7 @@ h6,
 }
 
 h1,
-.h--1 {
+.h1 {
     --h-color: inherit;
     --h-font-size: var(--text-4xl);
     --h-font-weight: 700;
@@ -539,7 +533,7 @@ h1,
 }
 
 h2,
-.h--2 {
+.h2 {
     --h-color: inherit;
     --h-font-size: var(--text-3xl);
     --h-font-weight: 700;
@@ -548,7 +542,7 @@ h2,
 }
 
 h3,
-.h--3 {
+.h3 {
     --h-color: inherit;
     --h-font-size: var(--text-2xl);
     --h-font-weight: 700;
@@ -557,7 +551,7 @@ h3,
 }
 
 h4,
-.h--4 {
+.h4 {
     --h-color: inherit;
     --h-font-size: var(--text-xl);
     --h-font-weight: 700;
@@ -566,7 +560,7 @@ h4,
 }
 
 h5,
-.h--5 {
+.h5 {
     --h-color: inherit;
     --h-font-size: var(--text-l);
     --h-font-weight: 700;
@@ -575,7 +569,7 @@ h5,
 }
 
 h6,
-.h--6 {
+.h6 {
     --h-color: inherit;
     --h-font-size: var(--text-m);
     --h-font-weight: 700;
@@ -626,8 +620,7 @@ textarea {
     </section>
     */
 .block,
-.brxe-block,
-.block--offset {
+.brxe-block {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -635,16 +628,16 @@ textarea {
     inline-size: 100%;
 }
 
-.block--float {
+.block--offset {
+    padding-inline: var(--space-offset);
+}
+
+.block-float {
     display: block;
 }
 
-.block--float > * + * {
+.block-float > * + * {
     margin-block-start: var(--space-block);
-}
-
-.block--offset {
-    padding-inline: var(--space-offset);
 }
 
 /* HTML Example:
@@ -657,8 +650,7 @@ textarea {
     </section>
     */
 .container,
-.brxe-container,
-.container--offset {
+.brxe-container {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -1471,7 +1463,7 @@ textarea {
 /* HTML Example:
     <section class="section">
         <div class="container">
-            <div class="block custom-layout grid--layout">
+            <div class="custom-layout grid--layout">
                 <div class="custom-layout--full block">
                     <!-- Full width content block -->
                 </div>
@@ -1485,16 +1477,19 @@ textarea {
         </div>
     </section>
     */
-.grid--layout {
+.grid--layout,
+.section-grid {
     -moz-column-gap: 0;
     column-gap: 0;
     display: grid;
     grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    inline-size: 100%;
     padding-inline: 0;
+    row-gap: var(--space-block);
 }
 
-.grid--layout > * {
-    inline-size: 100%;
+.grid--layout > *,
+.section-grid > * {
     grid-column: content;
 }
 
@@ -1554,6 +1549,11 @@ textarea {
     padding: 0;
 }
 
+.section-grid {
+    padding-block: var(--space-section);
+    row-gap: var(--space-section);
+}
+
 /*! --- Components --- */
 /* HTML Example:
     <section class="bg-isolate position--relative section">
@@ -1588,9 +1588,7 @@ textarea {
 .form button[type=submit],
 .form--alt button[type=submit],
 .form form button[type=submit],
-.form--alt form button[type=submit],
-.btn--dark,
-.btn--light {
+.form--alt form button[type=submit] {
     --btn-bg-color: var(--primary);
     --btn-border-color: var(--primary);
     --btn-border-radius: var(--border-radius);
@@ -1634,9 +1632,7 @@ textarea {
 .btn:focus-visible,
 .brxe-button:focus-visible,
 .form button[type=submit]:focus-visible,
-.form--alt button[type=submit]:focus-visible,
-.btn--dark:focus-visible,
-.btn--light:focus-visible {
+.form--alt button[type=submit]:focus-visible {
     --focus-color: var(--btn-border-color);
     transition: none;
 }
