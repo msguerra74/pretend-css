@@ -7,42 +7,31 @@ https://madebypretend.com
 @use "sass:math";
 
 // --- SCSS Variables --- //
-// These are SCSS variables that can be used throughout the project.
 
-// Color
-$primary: hsl(0, 84%, 60%);
-$secondary: hsl(84, 81%, 44%);
-$tertiary: hsl(199, 88%, 49%);
-$quaternary: hsl(38, 92%, 50%);
+// Colors
+$primary: hsl(0deg 84% 60%);
+$danger: hsl(1deg 99% 68%);
+$highlight: hsl(42deg 98% 57%);
+$info: hsl(198deg 90% 48%);
+$success: hsl(131deg 69% 46%);
+$warning: hsl(25deg 100% 61%);
 
 // Color - Base
-$base: hsl(0, 0%, 9%);
+$base: hsl(0deg 0% 9%);
 
-// Color - Contextual
-$danger: hsl(0, 84%, 60%);
-$highlight: hsl(46, 96%, 64%);
-$info: hsl(199, 88%, 49%);
-$success: hsl(84, 81%, 44%);
-$warning: hsl(38, 92%, 50%);
-
-// Width
+// Width (px)
 $width-min: 320;
-$width-s: 512;
-$width-m: 768;
-$width-l: 1024;
+$width-sm: 512;
+$width-md: 768;
+$width-lg: 1024;
 $width-xl: 1280;
 $width-wide: 1536;
 $width-max: 1920;
-$width-website: $width-xl;
 
 // --- SCSS Loops --- //
-// These are SCSS loops that can be used throughout the project.
 
 $color: (
     primary: $primary,
-    secondary: $secondary,
-    tertiary: $tertiary,
-    quaternary: $quaternary,
     danger: $danger,
     highlight: $highlight,
     info: $info,
@@ -55,31 +44,27 @@ $color-base: (
 );
 
 $breakpoint: (
-    s: $width-s,
-    m: $width-m,
-    l: $width-l,
+    sm: $width-sm,
+    md: $width-md,
+    lg: $width-lg,
     xl: $width-xl,
 );
 
 // --- SCSS Functions --- //
-// These are SCSS functions that can be used throughout the project.
 
 // Fluid Sizing
 // --
 // Usage: fluid(16, 18, 512, 1280)
-// @param: $_min-size // Minimum Size
-// @param: $_max-size // Maximum Size
-// @param: $_min-width // Minimum Breakpoint
-// @param: $_max-width // Maximum Breakpoint
-@function fluid($_min-size,
-    $_max-size,
-    $_min-width: $width-s,
-    $_max-width: $width-website) {
-    $_slope: math.div(($_max-size - $_min-size), ($_max-width - $_min-width));
-    $_intercept: px-rel($_min-size - $_slope * $_min-width);
-    $_slope-vw: $_slope * 100vw;
+// @param: $min-size // Minimum Size
+// @param: $max-size // Maximum Size
+// @param: $min-width // Minimum Breakpoint
+// @param: $max-width // Maximum Breakpoint
+@function fluid($_min-size, $_max-size, $_min-width: $width-sm, $_max-width: $width-xl) {
     $_min-size-rem: px-rel($_min-size);
     $_max-size-rem: px-rel($_max-size);
+    $_slope: math.div($_max-size - $_min-size, $_max-width - $_min-width);
+    $_slope-vw: $_slope * 100vw;
+    $_intercept: px-rel($_min-size - $_slope * $_min-width);
     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 }
 
@@ -94,7 +79,6 @@ $breakpoint: (
 }
 
 // --- SCSS Mixins --- //
-// These are SCSS mixins that can be used throughout the project.
 
 // Breakpoint Generator
 // --
@@ -117,7 +101,6 @@ $breakpoint: (
 }
 
 // --- CSS Variables --- //
-// These are CSS variables that can be used throughout the project.
 
 // Light Color Scheme
 [data-color-scheme="light"],
@@ -130,11 +113,12 @@ $breakpoint: (
         --#{$_key}-s: #{saturation($_value)};
         --#{$_key}-l: #{lightness($_value)};
         --#{$_key}: hsl(var(--#{$_key}-h) var(--#{$_key}-s) var(--#{$_key}-l));
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-mid: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 50%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
     }
 
     // Color - Base
@@ -143,11 +127,12 @@ $breakpoint: (
         --#{$_key}-s: #{saturation($_value)};
         --#{$_key}-l: #{lightness($_value)};
         --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-mid: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 50%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
         --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
     }
 
@@ -164,8 +149,8 @@ $breakpoint: (
     --aspect-wide: 2 / 1;
 
     // Border
-    --border-color: var(--base-mid);
-    --border-radius: var(--radius-xs);
+    --border-color: var(--base-dark);
+    --border-radius: var(--radius-sm);
     --border-style: solid;
     --border-width: var(--space-2px);
 
@@ -190,30 +175,28 @@ $breakpoint: (
     --object-end: 85%;
 
     // Radius
-    --radius-xs: var(--space-xs);
-    --radius-s: var(--space-s);
-    --radius-m: var(--space-m);
-    --radius-l: var(--space-l);
-    --radius-xl: var(--space-xl);
+    --radius-sm: var(--space-xs);
+    --radius-md: var(--space-sm);
+    --radius-lg: var(--space-md);
     --radius-oval: 10rem;
     --radius-round: 50%;
 
     // Shadow - Box
-    --box-shadow-low: 0 0 #{px-rel(12)} hsl(0deg 0% 0% / 0.1);
-    --box-shadow-mid: 0 0 #{px-rel(24)} hsl(0deg 0% 0% / 0.15);
-    --box-shadow-high: 0 0 #{px-rel(48)} hsl(0deg 0% 0% / 0.2);
+    --box-shadow-sm: 0 0 var(--space-12px) hsl(0deg 0% 0% / 0.1);
+    --box-shadow-md: 0 0 #{px-rel(24)} hsl(0deg 0% 0% / 0.15);
+    --box-shadow-lg: 0 0 #{px-rel(48)} hsl(0deg 0% 0% / 0.2);
 
     // Shadow - Drop
-    --drop-shadow-low: drop-shadow(0 #{px-rel(10)} #{px-rel(8)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.1));
-    --drop-shadow-mid: drop-shadow(0 #{px-rel(20)} #{px-rel(13)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rel(8)} #{px-rel(5)} hsl(0deg 0% 0% / 0.08));
-    --drop-shadow-high: drop-shadow(0 #{px-rel(25)} #{px-rel(25)} hsl(0deg 0% 0% / 0.15));
+    --drop-shadow-sm: drop-shadow(0 #{px-rel(10)} #{px-rel(8)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.1));
+    --drop-shadow-md: drop-shadow(0 #{px-rel(20)} #{px-rel(13)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rel(8)} #{px-rel(5)} hsl(0deg 0% 0% / 0.08));
+    --drop-shadow-lg: drop-shadow(0 #{px-rel(25)} #{px-rel(25)} hsl(0deg 0% 0% / 0.15));
     --drop-shadow-flat: drop-shadow(0 0 transparent);
 
     // Space
     --space-xs: #{px-rel(4)};
-    --space-s: #{px-rel(8)};
-    --space-m: #{px-rel(16)};
-    --space-l: #{px-rel(24)};
+    --space-sm: #{px-rel(8)};
+    --space-md: #{px-rel(16)};
+    --space-lg: #{px-rel(24)};
     --space-xl: #{px-rel(32)};
     --space-2xl: #{px-rel(48)};
     --space-3xl: #{fluid(48, 64)};
@@ -231,15 +214,15 @@ $breakpoint: (
     --space-block: #{fluid(24, 32)};
     --space-container: var(--space-3xl);
     --space-grid: var(--space-base);
-    --space-icon: var(--space-s);
+    --space-icon: var(--space-sm);
     --space-offset: #{fluid(24, 128)};
     --space-section: var(--space-5xl);
 
     // Text
     --text-xs: #{fluid(12, 14)};
-    --text-s: #{fluid(14, 16)};
-    --text-m: #{fluid(16, 18)};
-    --text-l: #{fluid(18, 20)};
+    --text-sm: #{fluid(14, 16)};
+    --text-md: #{fluid(16, 18)};
+    --text-lg: #{fluid(18, 20)};
     --text-xl: #{fluid(20, 24)};
     --text-2xl: #{fluid(24, 30)};
     --text-3xl: #{fluid(30, 38)};
@@ -251,11 +234,10 @@ $breakpoint: (
     --text-9xl: #{fluid(48, 128)};
 
     // Text - Contextual
-    --text-base: var(--text-m);
-    --text-fine: var(--text-s);
+    --text-fine: var(--text-sm);
+    --text-base: var(--text-md);
+    --text-lede: var(--text-lg);
     --text-hero: var(--text-5xl);
-    --text-intro: var(--text-xl);
-    --text-lede: var(--text-l);
 
     // Text - Font
     --text-font-body: Verdana;
@@ -273,14 +255,13 @@ $breakpoint: (
 
     // Width
     --width-min: #{px-rel($width-min)};
-    --width-s: #{px-rel($width-s)};
-    --width-m: #{px-rel($width-m)};
-    --width-l: #{px-rel($width-l)};
+    --width-sm: #{px-rel($width-sm)};
+    --width-md: #{px-rel($width-md)};
+    --width-lg: #{px-rel($width-lg)};
     --width-xl: #{px-rel($width-xl)};
     --width-wide: #{px-rel($width-wide)};
     --width-max: #{px-rel($width-max)};
     --width-prose: 65ch;
-    --width-website: #{px-rel($width-website)};
 
     // Z-Index
     --z-back: -1;
@@ -298,19 +279,23 @@ $breakpoint: (
 
     // Color
     @each $_key, $_value in $color {
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
     }
 
     // Color - Base
     @each $_key, $_value in $color-base {
         --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
         --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
     }
 
@@ -323,19 +308,23 @@ $breakpoint: (
 
         // Color
         @each $_key, $_value in $color {
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
         }
 
         // Color - Base
         @each $_key, $_value in $color-base {
             --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
             --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
         }
 
@@ -345,7 +334,6 @@ $breakpoint: (
 }
 
 // --- CSS Support --- //
-// These are CSS feature support checks.
 
 // Check for CSS Backdrop Filter Support
 @supports ((backdrop-filter: blur())) {
@@ -372,7 +360,6 @@ $breakpoint: (
 }
 
 // --- Reduced Motion --- //
-// These remove animations for users with reduced motion.
 
 @media (prefers-reduced-motion: reduce) {
     html:focus-within {
@@ -393,7 +380,6 @@ $breakpoint: (
 }
 
 // --- Base --- //
-// These are the base styles for the project.
 
 // Focus
 :focus:not(:focus-visible) {
@@ -402,37 +388,24 @@ $breakpoint: (
 
 :focus-visible,
 .link-overlay:focus-within {
-    --focus-color: var(--primary-mid);
-    --focus-offset: var(--border-width);
-    --focus-style: var(--border-style);
-    --focus-width: var(--border-width);
-
-    outline: var(--focus-width) var(--focus-style) var(--focus-color);
-    outline-offset: var(--focus-offset);
-}
-
-// Focus - Color
-:focus-visible,
-.link-overlay:focus-within {
+    outline: var(--focus-width, var(--border-width)) var(--focus-style, var(--border-style)) var(--focus-color, var(--primary-dark));
+    outline-offset: var(--focus-offset, var(--border-width));
 
     &.focus--light,
     .focus--light & {
-        --focus-color: var(--primary-lighter);
+        --focus-color: var(--primary-lightest);
     }
 
     &.focus--dark,
     .focus--dark & {
-        --focus-color: var(--primary-darker);
+        --focus-color: var(--primary-darkest);
     }
 }
 
 // Selection
 ::selection {
-    --selection-bg-color: var(--primary-light);
-    --selection-color: var(--primary-dark);
-
-    background-color: var(--selection-bg-color);
-    color: var(--selection-color);
+    background-color: var(--primary-lighter);
+    color: var(--primary-darker);
     text-shadow: none;
 }
 
@@ -445,13 +418,12 @@ $breakpoint: (
 
 * {
     margin: 0;
+    padding: 0;
 }
 
 // HTML
 html {
-    --html-bg-color: var(--base-white);
-
-    background-color: var(--html-bg-color);
+    background-color: var(--base-white);
     block-size: 100%;
     font-size: 100%;
     text-size-adjust: none;
@@ -463,20 +435,15 @@ html {
 
 // Body
 body {
-    --body-bg-color: var(--base-lighter);
-    --body-color: var(--base-darker);
-    --body-font-size: var(--text-base);
-    --body-line-height: var(--text-height-body);
-
-    background-color: var(--body-bg-color);
+    background-color: var(--base-lightest);
     block-size: 100%;
-    color: var(--body-color);
+    color: var(--base-darkest);
     font-family: var(--text-font-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
-    font-size: var(--body-font-size);
+    font-size: var(--text-base);
     -webkit-font-smoothing: auto;
     font-weight: 400;
     inline-size: 100%;
-    line-height: var(--body-line-height);
+    line-height: var(--text-height-body);
     margin-inline: auto;
     max-inline-size: var(--width-max);
     min-block-size: 100svh;
@@ -487,54 +454,48 @@ body {
 
 // Anchor
 a {
-    --a-color: var(--primary);
-
-    color: var(--a-color);
+    color: var(--primary);
+    transition: color var(--transition-normal);
 
     &:hover {
-        --a-color: var(--primary-mid);
+        color: var(--primary-dark);
     }
 }
 
 // Link
 main a:not([class]),
 a.link {
-    --link-color: inherit;
-    --link-decoration-color: var(--primary);
-    --link-decoration-line: underline;
-    --link-decoration-thickness: var(--border-width);
-    --link-underline-offset: var(--border-width);
-
-    color: var(--link-color);
-    text-decoration-color: var(--link-decoration-color);
-    text-decoration-line: var(--link-decoration-line);
-    text-decoration-thickness: var(--link-decoration-thickness);
-    text-underline-offset: var(--link-underline-offset);
+    color: var(--link-color, inherit);
+    text-decoration-color: var(--link-decoration-color, var(--primary));
+    text-decoration-line: var(--link-decoration-line, underline);
+    text-decoration-thickness: var(--link-decoration-thickness, var(--border-width));
+    text-underline-offset: var(--link-underline-offset, var(--border-width));
+    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 
     &:hover {
         --link-color: var(--primary);
-        --link-decoration-color: var(--base-mid);
+        --link-decoration-color: var(--base-dark);
     }
 }
 
 // Link - Color
 main .link--light > a:not([class]),
 a.link--light {
-    --link-decoration-color: var(--primary-lighter);
+    --link-decoration-color: var(--primary-lightest);
 
     &:hover {
-        --link-color: var(--primary-lighter);
-        --link-decoration-color: var(--primary-lighter);
+        --link-color: var(--primary-lightest);
+        --link-decoration-color: var(--primary-lightest);
     }
 }
 
 main .link--dark > a:not([class]),
 a.link--dark {
-    --link-decoration-color: var(--primary-darker);
+    --link-decoration-color: var(--primary-darkest);
 
     &:hover {
-        --link-color: var(--primary-darker);
-        --link-decoration-color: var(--primary-darker);
+        --link-color: var(--primary-darkest);
+        --link-decoration-color: var(--primary-darkest);
     }
 }
 
@@ -552,8 +513,8 @@ h5,
 h6,
 .h6 {
     color: var(--h-color);
-    font-size: var(--h-font-size);
     font-family: var(--text-font-heading);
+    font-size: var(--h-font-size);
     font-weight: var(--h-font-weight);
     line-height: var(--text-height-heading);
     text-transform: var(--h-text-transform);
@@ -595,7 +556,7 @@ h4,
 h5,
 .h5 {
     --h-color: inherit;
-    --h-font-size: var(--text-l);
+    --h-font-size: var(--text-lede);
     --h-font-weight: 700;
     --h-text-transform: none;
 }
@@ -603,24 +564,18 @@ h5,
 h6,
 .h6 {
     --h-color: inherit;
-    --h-font-size: var(--text-m);
+    --h-font-size: var(--text-base);
     --h-font-weight: 700;
     --h-text-transform: none;
 }
 
 // Horizontal Rule
 hr {
-    --hr-align: auto;
-    --hr-color: var(--border-color);
-    --hr-height: var(--border-width);
-    --hr-style: var(--border-style);
-    --hr-width: 100%;
-
-    block-size: var(--hr-height);
+    block-size: var(--border-width);
     border: 0;
-    border-block-start: var(--hr-height) var(--hr-style) var(--hr-color);
-    inline-size: var(--hr-width);
-    margin-inline: var(--hr-align);
+    border-block-start: var(--border-width) var(--border-style) var(--border-color);
+    inline-size: 100%;
+    margin-inline: auto;
     padding: 0;
 }
 
@@ -634,13 +589,6 @@ video {
     vertical-align: middle;
 }
 
-button,
-input,
-select {
-    font: inherit;
-    line-height: 1;
-}
-
 canvas,
 img,
 picture,
@@ -649,12 +597,6 @@ video {
     block-size: auto;
     display: block;
     max-inline-size: 100%;
-}
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
 }
 
 img {
@@ -668,14 +610,7 @@ p {
     }
 }
 
-textarea {
-    font: inherit;
-    line-height: var(--text-height-body);
-    resize: vertical;
-}
-
 /*! --- Layout --- */
-// These are layout classes for the project.
 
 // Block
 // Add to divs that contain content.
@@ -726,7 +661,7 @@ textarea {
     gap: var(--space-container);
     inline-size: 100%;
     margin-inline: auto;
-    max-inline-size: var(--width-website);
+    max-inline-size: var(--width-xl);
 
     &--edge {
         padding-inline: var(--space-base);
@@ -823,6 +758,7 @@ textarea {
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
 
+        .grid--#{$_key},
         .grid--#{$_key}-1,
         .grid--#{$_key}-2,
         .grid--#{$_key}-3,
@@ -843,10 +779,6 @@ textarea {
 
         .grid--#{$_key}-1 {
             grid-template-columns: var(--grid-1);
-        }
-
-        .grid--#{$_key}-1 > * {
-            grid-column: 1 !important;
         }
 
         .grid--#{$_key}-2 {
@@ -1069,7 +1001,7 @@ $_value in $breakpoint {
 // Locally scope var(--content-width) value to the ideal width of the grid items.
 /* CSS Example:
 .custom-layout {
-    --content-width: var(--width-website);;
+    --content-width: var(--width-xl);;
 }
 */
 /* HTML Example:
@@ -1088,7 +1020,7 @@ $_value in $breakpoint {
 .grid-layout {
     column-gap: 0;
     display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-website)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
     inline-size: 100%;
     padding-inline: 0;
     row-gap: var(--space-block);
@@ -1139,7 +1071,7 @@ $_value in $breakpoint {
         inline-size: 100%;
         justify-content: space-between;
         margin-inline: auto;
-        max-inline-size: var(--width-website);
+        max-inline-size: var(--width-xl);
     }
 }
 
@@ -1185,7 +1117,6 @@ $_value in $breakpoint {
 }
 
 /*! --- Components --- */
-// These are component classes for the project.
 
 // Background Overlay
 // Add to div, img, and video elements to create an overlay that fills the section background.
@@ -1223,17 +1154,16 @@ $_value in $breakpoint {
     --btn-border-radius: var(--border-radius);
     --btn-border-style: var(--border-style);
     --btn-border-width: var(--border-width);
-    --btn-color: var(--primary-lighter);
-    --btn-font-size: var(--text-s);
+    --btn-color: var(--primary-lightest);
+    --btn-font-size: var(--text-fine);
     --btn-font-weight: 400;
     --btn-gap: var(--space-icon);
     --btn-letter-spacing: var(--space-px);
     --btn-line-height: 1;
     --btn-padding-x: var(--space-xl);
-    --btn-padding-y: var(--space-m);
+    --btn-padding-y: var(--space-md);
     --btn-text-transform: uppercase;
     --btn-transition-duration: var(--transition-normal);
-    --btn-transition-timing-function: var(--transition-easing);
     --btn-width: fit-content;
 
     align-items: center;
@@ -1257,8 +1187,7 @@ $_value in $breakpoint {
     text-align: center;
     text-decoration: none;
     text-transform: var(--btn-text-transform);
-    transition-duration: var(--btn-transition-duration);
-    transition-timing-function: var(--btn-transition-timing-function);
+    transition: background-color var(--btn-transition-duration), border-color var(--btn-transition-duration), color var(--btn-transition-duration);
 
     &:focus-visible {
         --focus-color: var(--btn-border-color);
@@ -1281,42 +1210,42 @@ $_value in $breakpoint {
 // Button - Size
 .btn--small {
     --btn-font-size: var(--text-xs);
-    --btn-padding-x: var(--space-m);
-    --btn-padding-y: var(--space-s);
+    --btn-padding-x: var(--space-md);
+    --btn-padding-y: var(--space-sm);
 }
 
 .btn--large {
-    --btn-font-size: var(--text-m);
+    --btn-font-size: var(--text-base);
     --btn-padding-x: var(--space-2xl);
-    --btn-padding-y: var(--space-l);
+    --btn-padding-y: var(--space-lg);
 }
 
 // Button - Color
 .btn--light {
-    --btn-bg-color: var(--base-lighter);
-    --btn-border-color: var(--base-lighter);
-    --btn-color: var(--base-darker);
+    --btn-bg-color: var(--base-lightest);
+    --btn-border-color: var(--base-lightest);
+    --btn-color: var(--base-darkest);
 
     &:focus-visible {
-        --focus-color: var(--base-lighter);
+        --focus-color: var(--base-lightest);
     }
 
     &.btn--outline {
-        --btn-color: var(--base-lighter);
+        --btn-color: var(--base-lightest);
     }
 }
 
 .btn--dark {
-    --btn-bg-color: var(--base-darker);
-    --btn-border-color: var(--base-darker);
-    --btn-color: var(--base-lighter);
+    --btn-bg-color: var(--base-darkest);
+    --btn-border-color: var(--base-darkest);
+    --btn-color: var(--base-lightest);
 
     &:focus-visible {
-        --focus-color: var(--base-darker);
+        --focus-color: var(--base-darkest);
     }
 
     &.btn--outline {
-        --btn-color: var(--base-darker);
+        --btn-color: var(--base-darkest);
     }
 }
 
@@ -1333,24 +1262,14 @@ $_value in $breakpoint {
 </div>
 */
 .card {
-    --card-align: flex-start;
-    --card-bg-color: inherit;
-    --card-border-color: var(--border-color);
-    --card-border-radius: var(--border-radius);
-    --card-border-style: var(--border-style);
-    --card-border-width: var(--border-width);
-    --card-color: inherit;
-    --card-gap: var(--space-block);
-    --card-padding: var(--space-block);
-    --card-text-align: start;
 
     &,
     &__head,
     &__body {
         align-items: var(--card-align);
         background-color: var(--card-bg-color);
-        border-radius: var(--card-border-radius);
         border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+        border-radius: var(--card-border-radius);
         color: var(--card-color);
         display: flex;
         flex-direction: column;
@@ -1360,6 +1279,19 @@ $_value in $breakpoint {
         overflow: clip;
         padding: var(--card-padding);
         text-align: var(--card-text-align);
+    }
+
+    & {
+        --card-align: flex-start;
+        --card-bg-color: inherit;
+        --card-border-color: var(--border-color);
+        --card-border-radius: var(--border-radius);
+        --card-border-style: var(--border-style);
+        --card-border-width: var(--border-width);
+        --card-color: inherit;
+        --card-gap: var(--space-block);
+        --card-padding: var(--space-block);
+        --card-text-align: left;
     }
 
     &__head {
@@ -1392,7 +1324,7 @@ $_value in $breakpoint {
 // Form
 // Add to forms or divs that contain form elements.
 /* HTML Example:
-<!-- This example form uses Formspark and Botpoison -->
+<!-- Formspark form with Botpoison -->
 <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
     <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
     <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
@@ -1402,7 +1334,7 @@ $_value in $breakpoint {
         <label for="company">Company Name</label>
         <input aria-label="Company Name" id="company" name="company" type="text">
     </fieldset>
-    <div class="grid--1 grid--l-2">
+    <div class="grid--1 grid--lg-2">
         <fieldset>
             <label for="first-name">First Name</label>
             <input aria-label="First Name" id="first-name" name="first-name" required type="text">
@@ -1412,7 +1344,7 @@ $_value in $breakpoint {
             <input aria-label="Last Name" id="last-name" name="last-name" type="text">
         </fieldset>
     </div>
-    <div class="grid--1 grid--l-2">
+    <div class="grid--1 grid--lg-2">
         <fieldset>
             <label for="email">Email Address</label>
             <input aria-label="Email Address" id="email" name="email" required type="email">
@@ -1432,210 +1364,351 @@ $_value in $breakpoint {
     </fieldset>
     <button type="submit">Send Message</button>
 </form>
+
+<!-- Generic form with various input types -->
+<form class="form">
+    <div>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Pretend Person" required>
+    </div>
+    <div>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+    </div>
+    <div>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+    </div>
+    <div>
+        <label for="url">Website</label>
+        <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
+    </div>
+    <div>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date">
+    </div>
+    <div>
+        <label for="time">Time</label>
+        <input type="time" id="time" name="time">
+    </div>
+    <div>
+        <label for="number">Number</label>
+        <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
+    </div>
+    <div>
+        <label for="search">Search</label>
+        <input type="search" id="search" name="search" placeholder="Search...">
+    </div>
+    <div>
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+            <option value="">Select a country</option>
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="mx">Mexico</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+    <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
+    </div>
+    <fieldset>
+        <legend>Preferences</legend>
+        <div>
+            <label>
+                <input type="checkbox" name="option1" value="yes">
+                Option One
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="option2" value="accepted" required>
+                Option Two
+            </label>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>More Preference</legend>
+
+        <div>
+            <label>
+                <input type="radio" name="contact" value="option3" required>
+                Option Three
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <input type="radio" name="contact" value="option4">
+                Option Four
+            </label>
+        </div>
+    </fieldset>
+    <div class="form-error">
+        <p>This is what an error message looks like.</p>
+    </div>
+    <div class="form-success">
+        <p>This is what a success message looks like.</p>
+    </div>
+    <div>
+        <button type="submit">Submit Form</button>
+    </div>
+</form>
 */
 .form,
-.form--alt,
 .form form,
+.form--alt,
 .form--alt form {
-    display: grid;
-    gap: var(--space-grid);
-    inline-size: 100%;
-
-    // Fieldset
-    fieldset {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-s);
-    }
-
-    // Input
-    input:not([type="checkbox"], [type="radio"]),
-    select,
-    textarea {
-        background-color: var(--input-bg-color);
-        border-color: var(--input-border-color);
-        border-radius: var(--input-border-radius);
-        border-style: var(--input-border-style);
-        border-width: var(--input-border-width);
-        color: var(--input-color);
-        display: block;
-        font-size: var(--input-font-size);
-        inline-size: 100%;
-        line-height: var(--input-line-height);
-        // margin-block-start: var(--space-s);
-        min-block-size: var(--input-height);
-        padding: var(--input-padding-y) var(--input-padding-x);
-
-        &:focus-visible {
-            --focus-color: var(--input-border-color-focus);
-        }
-    }
-
-    input[type="checkbox"] {
-        appearance: none;
-        block-size: var(--checkbox-size);
-        border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
-        border-radius: var(--checkbox-border-radius);
-        display: grid;
-        inline-size: var(--checkbox-size);
-        // margin-block-start: var(--space-s);
-        place-content: center;
-
-        &::before {
-            content: "";
-            width: calc(var(--checkbox-size) * .75);
-            height: calc(var(--checkbox-size) * .75);
-            box-shadow: inset var(--space-m) var(--space-m) var(--checkbox-checked-box-shadow);
-            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-            transform: scale(0);
-            transition: transform var(--transition-normal);
-        }
-
-        &:checked {
-            background-color: var(--checkbox-checked-bg-color);
-            // border-color: var(--primary);
-        }
-
-        &:checked:before {
-            transform: scale(0.75);
-        }
-    }
-
-    .radio {
-        appearance: none;
-        display: grid;
-        place-content: center;
-        border: var(--border-width) var(--border-style) var(--dark-40);
-        border-radius: var(--radius-full);
-        width: clamp(1.13rem, calc(-0.42vw + 1.46rem), 1.38rem);
-        height: clamp(1.13rem, calc(-0.42vw + 1.46rem), 1.38rem);
-    }
-
-    .radio:checked:before {
-        transform: scale(1);
-    }
-
-    .radio::before {
-        content: "";
-        width: 1em;
-        height: 1em;
-        border-radius: 100%;
-        transform: scale(0);
-        transition: transform 0.2s;
-        background: var(--primary);
-    }
-
-    @media (hover: hover) {
-        .radio:hover {
-            border-color: var(--primary);
-        }
-    }
-
-    .radio:focus {
-        outline: 3px solid var(--primary-l-3);
-        outline-offset: 2px;
-    }
-
-    .radio:checked {
-        border-color: var(--primary);
-    }
-
-    textarea {
-        min-height: var(--textarea-height);
-    }
-
-    // Submit Button
-    button[type="submit"] {
-        @extend .btn;
-
-        --btn-bg-color: var(--submit-bg-color);
-        --btn-border-color: var(--submit-bg-color);
-        --btn-color: var(--submit-color);
-
-        &:focus-visible {
-            --focus-color: var(--input-border-color-focus);
-        }
-
-        &.btn--outline {
-            --btn-color: var(--submit-bg-color);
-        }
-    }
-
-    // Honeypot
-    label:has([name="_pretend-check"]) {
-        left: #{px-rel(10000 * -1)};
-        position: absolute;
-    }
+    @extend .grid;
 }
 
 .form {
-    --checkbox-border-radius: var(--space-xs);
+    --checkbox-border-radius: var(--radius-sm);
     --checkbox-checked-bg-color: var(--primary);
-    --checkbox-checked-box-shadow: var(--base-white);
-    --checkbox-size: var(--space-l);
+    --checkbox-checked-box-shadow: inset var(--space-md) var(--space-md) var(--base-white);
+    --checkbox-size: var(--space-lg);
     --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lighter);
-    --form-error-font-size: var(--text-s);
+    --form-error-color: var(--danger-lightest);
+    --form-error-font-size: var(--text-fine);
     --form-gap: var(--space-grid);
     --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lighter);
-    --form-success-font-size: var(--text-base);
-    --input-bg-color: var(--base-lighter);
+    --form-success-color: var(--success-lightest);
+    --form-success-font-size: var(--text-fine);
+    --input-bg-color-disabled: var(--base-lighter);
     --input-bg-color-focus: var(--base-white);
-    --input-border-color: var(--border-color);
+    --input-bg-color: var(--base-lightest);
     --input-border-color-focus: var(--primary);
+    --input-border-color: var(--border-color);
     --input-border-radius: var(--border-radius);
     --input-border-style: var(--border-style);
     --input-border-width: var(--border-width);
-    --input-color: var(--base-darker);
-    --input-font-size: var(--text-m);
+    --input-color: var(--base-darkest);
+    --input-font-size: var(--text-base);
     --input-height: var(--space-2xl);
     --input-line-height: var(--text-height-heading);
-    --input-padding-x: var(--space-m);
-    --input-padding-y: var(--space-s);
+    --input-padding-x: var(--space-md);
+    --input-padding-y: var(--space-sm);
     --label-color: inherit;
-    --label-font-size: var(--text-m);
+    --label-font-size: var(--text-base);
     --label-font-weight: 400;
-    --placeholder-color: var(--base-mid);
-    --placeholder-opacity: 1;
+    --label-spacing: var(--space-icon);
+    --placeholder-color: var(--base-darkest);
+    --placeholder-opacity: .5;
+    --radio-border-radius: var(--radius-round);
     --submit-bg-color: var(--primary);
-    --submit-color: var(--primary-lighter);
+    --submit-color: var(--primary-lightest);
     --textarea-height: var(--space-7xl);
 }
 
-.form--alt {
-    --checkbox-border-radius: 0;
-    --checkbox-checked-bg-color: var(--primary);
-    --checkbox-checked-box-shadow: var(--base-white);
-    --checkbox-size: var(--space-l);
-    --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lighter);
-    --form-error-font-size: var(--text-s);
-    --form-gap: var(--space-grid);
-    --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lighter);
-    --form-success-font-size: var(--text-base);
-    --input-bg-color: var(--base-lighter);
-    --input-bg-color-focus: var(--base-white);
-    --input-border-color: var(--border-color);
-    --input-border-color-focus: var(--primary);
-    --input-border-radius: var(--border-radius);
-    --input-border-style: var(--border-style);
-    --input-border-width: var(--border-width);
-    --input-color: var(--base-darker);
-    --input-font-size: var(--text-m);
-    --input-height: var(--space-2xl);
-    --input-line-height: var(--text-height-heading);
-    --input-padding-x: var(--space-m);
-    --input-padding-y: var(--space-s);
-    --label-color: inherit;
-    --label-font-size: var(--text-m);
-    --label-font-weight: 400;
-    --placeholder-color: var(--base-mid);
-    --placeholder-opacity: 1;
-    --submit-bg-color: var(--primary);
-    --submit-color: var(--primary-lighter);
-    --textarea-height: var(--space-7xl);
+// Checkbox and Radio
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--checkbox-checked-bg-color);
+    appearance: none;
+    block-size: var(--checkbox-size);
+    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
+    cursor: pointer;
+    display: grid;
+    inline-size: var(--checkbox-size);
+    place-content: center;
+
+    &::before {
+        box-shadow: var(--checkbox-checked-box-shadow);
+        content: "";
+        height: calc(var(--checkbox-size) * .75);
+        transform: scale(0);
+        transition: transform var(--transition-normal);
+        width: calc(var(--checkbox-size) * .75);
+    }
+
+    &:checked {
+        background-color: var(--checkbox-checked-bg-color);
+        border-color: var(--checkbox-checked-bg-color);
+    }
+
+    &:checked:before {
+        transform: scale(0.75);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+input[type="checkbox"] {
+    border-radius: var(--checkbox-border-radius);
+
+    &::before {
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+}
+
+input[type="radio"] {
+    border-radius: var(--radio-border-radius);
+
+    &::before {
+        border-radius: var(--radio-border-radius);
+    }
+}
+
+// Fieldset
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+// Input and Textarea
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+textarea {
+    background-color: var(--input-bg-color);
+    border-radius: var(--input-border-radius);
+    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
+    color: var(--input-color);
+    font-family: inherit;
+    font-size: var(--input-font-size);
+    inline-size: 100%;
+    line-height: var(--input-line-height);
+    min-block-size: var(--input-height);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    transition: border-color var(--transition-normal) var(--transition-easing), background-color var(--transition-normal) var(--transition-easing);
+
+    &::placeholder {
+        color: var(--placeholder-color);
+        opacity: var(--placeholder-opacity);
+    }
+
+    &:disabled {
+        background-color: var(--base-lightest);
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+
+    &:focus {
+        background-color: var(--input-bg-color-focus);
+        border-color: var(--input-border-color-focus);
+        outline: none;
+    }
+}
+
+// Label and Legend
+label,
+legend {
+    align-items: center;
+    color: var(--label-color);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--label-font-size);
+    font-weight: var(--label-font-weight);
+    gap: var(--label-spacing);
+    margin-block-end: var(--label-spacing);
+
+    &:has(+ input:disabled),
+    &:has(+ select:disabled),
+    &:has(+ textarea:disabled) {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Select
+select {
+    appearance: none;
+    background-color: var(--input-bg-color);
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - var(--input-padding-x) - 5px) calc(50% + 1px), calc(100% - var(--input-padding-x)) calc(50% + 1px);
+    background-repeat: no-repeat;
+    background-size: 5px 5px, 5px 5px;
+    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
+    border-radius: var(--input-border-radius);
+    color: var(--input-color);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--input-font-size);
+    inline-size: 100%;
+    line-height: var(--input-line-height);
+    min-block-size: var(--input-height);
+    padding: var(--input-padding-y) var(--space-xl) var(--input-padding-y) var(--input-padding-x);
+    transition: border-color var(--transition-normal) var(--transition-easing), background-color var(--transition-normal) var(--transition-easing);
+
+    &:focus {
+        background-color: var(--input-bg-color-focus);
+        border-color: var(--input-border-color-focus);
+        outline: none;
+    }
+
+    &:disabled {
+        background-color: var(--input-bg-color-disabled);
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Submit
+input[type="submit"],
+button[type="submit"] {
+    @extend .btn;
+
+    --btn-bg-color: var(--submit-bg-color);
+    --btn-border-color: var(--submit-bg-color);
+    --btn-color: var(--submit-color);
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Textarea
+textarea {
+    min-block-size: var(--textarea-height);
+    resize: vertical;
+}
+
+// Honeypot
+fieldset:has([name="_pretend-check"]) {
+    left: #{px-rel(10000 * -1)};
+    position: absolute;
+}
+
+.form-error,
+.form-success {
+    align-items: center;
+    border-radius: var(--input-border-radius);
+    display: flex;
+    min-block-size: var(--input-height);
+    padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-error {
+    background-color: var(--form-error-bg-color);
+    border: var(--input-border-width) var(--input-border-style) var(--form-error-bg-color);
+    color: var(--form-error-color);
+    font-size: var(--form-error-font-size);
+}
+
+.form-success {
+    background-color: var(--form-success-bg-color);
+    border: var(--input-border-width) var(--input-border-style) var(--form-success-bg-color);
+    color: var(--form-success-color);
+    font-size: var(--form-success-font-size);
 }
 
 // Link Overlay
@@ -1666,14 +1739,14 @@ $_value in $breakpoint {
 }
 
 // Ribbon
-// Add `ribbon--right` or `ribbon--left` to a div that needs to be displayed as a ribbon inside a `.ribbon` parent div.
+// Add `ribbon--right` or `ribbon--left` to an element that needs to be displayed as a ribbon inside a `.ribbon` parent container.
 /* HTML Example:
 <section class="section">
     <div class="container">
         <div class="block ribbon">
-            <div class="ribbon--right">
+            <p class="ribbon--right">
                 <!-- Right ribbon content -->
-            </div>
+            </p>
             <!-- Ribbon parent content -->
         </div>
     </div>
@@ -1683,42 +1756,37 @@ $_value in $breakpoint {
     overflow: hidden;
     position: relative;
 
-    // Add .ribbon to parent container
-    & > .ribbon--right,
-    & > .ribbon--left {
-        background-color: var(--ribbon-bg-color, var(--primary));
-        color: var(--ribbon-color, var(--primary-lighter));
+    & > .ribbon--left,
+    & > .ribbon--right {
+        background-color: var(--primary);
+        color: var(--primary-lightest);
         display: block;
-        font-size: var(--ribbon-font-size, var(--text-s));
-        inline-size: var(--ribbon-width, var(--width-s));
-        inset-block-start: var(--ribbon-offset);
-        line-height: var(--ribbon-line-height, var(--text-height-heading));
-        padding: var(--ribbon-padding, var(--space-s) var(--space-m));
+        font-size: var(--text-sm);
+        inline-size: var(--width-sm);
+        inset-block-start: calc(var(--space-4xl) * -1);
+        line-height: var(--text-height-heading);
+        padding: var(--space-sm) var(--space-md);
         position: absolute;
         text-align: center;
-        text-transform: var(--ribbon-text-transform, uppercase);
-        transform: var(--ribbon-transform);
-        transform-origin: var(--ribbon-transform-origin);
+        text-transform: uppercase;
     }
 
     & > .ribbon--right {
-        --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
-        --ribbon-transform-origin: bottom right;
-
-        inset-inline-end: var(--ribbon-offset, calc(var(--space-4xl) * -1));
+        inset-inline-end: calc(var(--space-4xl) * -1);
+        transform-origin: bottom right;
+        transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
     }
 
     & > .ribbon--left {
-        --ribbon-transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-135deg);
-        --ribbon-transform-origin: bottom left;
-
         inset-inline-end: auto;
-        inset-inline-start: var(--ribbon-offset);
+        inset-inline-start: calc(var(--space-4xl) * -1);
+        transform-origin: bottom left;
+        transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-135deg);
+
     }
 }
 
 /*! --- Utilities --- */
-// These are utility classes for the project.
 
 // Alignment
 .align--center-all {
@@ -1780,12 +1848,10 @@ $_value in $breakpoint {
     justify-items: stretch;
 }
 
-.aligncenter,
 .center--self {
     margin-inline: auto;
 }
 
-.alignleft,
 .float--left,
 .float--left-offset {
     float: inline-start;
@@ -1793,16 +1859,21 @@ $_value in $breakpoint {
     margin-inline-end: var(--space-block);
 }
 
-.alignright,
+.float--left-offset {
+    margin-inline-start: calc(var(--space-offset) * -1);
+}
+
+.float--none {
+    float: none;
+    margin-block-end: 0;
+    margin-inline: 0;
+}
+
 .float--right,
 .float--right-offset {
     float: inline-end;
     margin-block-end: var(--space-block);
     margin-inline-start: var(--space-block);
-}
-
-.float--left-offset {
-    margin-inline-start: calc(var(--space-offset) * -1);
 }
 
 .float--right-offset {
@@ -1876,11 +1947,16 @@ $_value in $breakpoint {
             margin-inline: auto;
         }
 
-        .float--#{$_key}-left {
+        .float--#{$_key}-left,
+        .float--#{$_key}-left-offset {
             float: inline-start;
             margin-block-end: var(--space-block);
             margin-inline-end: var(--space-block);
             margin-inline-start: 0;
+        }
+
+        .float--#{$_key}-left-offset {
+            margin-inline-start: calc(var(--space-offset) * -1);
         }
 
         .float--#{$_key}-none {
@@ -1889,11 +1965,16 @@ $_value in $breakpoint {
             margin-inline: 0;
         }
 
-        .float--#{$_key}-right {
+        .float--#{$_key}-right,
+        .float--#{$_key}-right-offset {
             float: inline-end;
             margin-block-end: var(--space-block);
             margin-inline-end: 0;
             margin-inline-start: var(--space-block);
+        }
+
+        .float--#{$_key}-right-offset {
+            margin-inline-end: calc(var(--space-offset) * -1);
         }
     }
 }
@@ -1933,8 +2014,7 @@ $_value in $breakpoint {
     aspect-ratio: var(--aspect-wide);
 }
 
-@each $_key,
-$_value in $breakpoint {
+@each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
 
         .aspect--#{$_key}-square iframe,
@@ -1974,22 +2054,22 @@ $_value in $breakpoint {
 }
 
 // Background Blur
-.bg-blur--low,
-.bg-blur--mid,
-.bg-blur--high {
+.bg-blur--sm,
+.bg-blur--md,
+.bg-blur--lg {
     background-color: var(--blur-bg-color);
 }
 
-.bg-blur--low {
-    backdrop-filter: blur(var(--space-xs));
+.bg-blur--sm {
+    backdrop-filter: blur(var(--radius-sm));
 }
 
-.bg-blur--mid {
-    backdrop-filter: blur(var(--space-s));
+.bg-blur--md {
+    backdrop-filter: blur(var(--radius-md));
 }
 
-.bg-blur--high {
-    backdrop-filter: blur(var(--space-m));
+.bg-blur--lg {
+    backdrop-filter: blur(var(--radius-lg));
 }
 
 // Background Color
@@ -1998,6 +2078,10 @@ $_value in $breakpoint {
         background-color: var(--#{$_key});
     }
 
+    .bg--#{$_key}-lightest {
+        background-color: var(--#{$_key}-lightest);
+    }
+
     .bg--#{$_key}-lighter {
         background-color: var(--#{$_key}-lighter);
     }
@@ -2006,16 +2090,16 @@ $_value in $breakpoint {
         background-color: var(--#{$_key}-light);
     }
 
-    .bg--#{$_key}-mid {
-        background-color: var(--#{$_key}-mid);
-    }
-
     .bg--#{$_key}-dark {
         background-color: var(--#{$_key}-dark);
     }
 
     .bg--#{$_key}-darker {
         background-color: var(--#{$_key}-darker);
+    }
+
+    .bg--#{$_key}-darkest {
+        background-color: var(--#{$_key}-darkest);
     }
 }
 
@@ -2024,6 +2108,10 @@ $_value in $breakpoint {
         background-color: var(--#{$_key}-white);
     }
 
+    .bg--#{$_key}-lightest {
+        background-color: var(--#{$_key}-lightest);
+    }
+
     .bg--#{$_key}-lighter {
         background-color: var(--#{$_key}-lighter);
     }
@@ -2032,16 +2120,16 @@ $_value in $breakpoint {
         background-color: var(--#{$_key}-light);
     }
 
-    .bg--#{$_key}-mid {
-        background-color: var(--#{$_key}-mid);
-    }
-
     .bg--#{$_key}-dark {
         background-color: var(--#{$_key}-dark);
     }
 
     .bg--#{$_key}-darker {
         background-color: var(--#{$_key}-darker);
+    }
+
+    .bg--#{$_key}-darkest {
+        background-color: var(--#{$_key}-darkest);
     }
 
     .bg--#{$_key}-black {
@@ -2051,37 +2139,6 @@ $_value in $breakpoint {
 
 .bg--transparent {
     background-color: transparent;
-}
-
-// Background Color - Relational
-.bg--lightest {
-    background-color: var(--base-white);
-    color: var(--base-darker);
-}
-
-.bg--lighter {
-    background-color: var(--base-lighter);
-    color: var(--base-darker);
-}
-
-.bg--light {
-    background-color: var(--base-light);
-    color: var(--base-dark);
-}
-
-.bg--dark {
-    background-color: var(--base-dark);
-    color: var(--base-light);
-}
-
-.bg--darker {
-    background-color: var(--base-darker);
-    color: var(--base-lighter);
-}
-
-.bg--darkest {
-    background-color: var(--base-black);
-    color: var(--base-lighter);
 }
 
 // Background Isolate
@@ -2096,6 +2153,10 @@ $_value in $breakpoint {
         border-color: var(--border-color);
         border-radius: var(--border-radius);
         border-width: var(--border-width);
+    }
+
+    &-radius {
+        border-radius: var(--border-radius);
     }
 
     &--bottom {
@@ -2179,16 +2240,16 @@ $_value in $breakpoint {
         color: var(--#{$_key});
     }
 
-    .color--#{$_key}-lighter {
+    .color--#{$_key}-lightest {
         color: var(--#{$_key}-lighter);
+    }
+
+    .color--#{$_key}-lighter {
+        color: var(--#{$_key}-light);
     }
 
     .color--#{$_key}-light {
         color: var(--#{$_key}-light);
-    }
-
-    .color--#{$_key}-mid {
-        color: var(--#{$_key}-mid);
     }
 
     .color--#{$_key}-dark {
@@ -2196,6 +2257,10 @@ $_value in $breakpoint {
     }
 
     .color--#{$_key}-darker {
+        color: var(--#{$_key}-dark);
+    }
+
+    .color--#{$_key}-darkest {
         color: var(--#{$_key}-darker);
     }
 }
@@ -2205,6 +2270,10 @@ $_value in $breakpoint {
         color: var(--#{$_key}-white);
     }
 
+    .color--#{$_key}-lightest {
+        color: var(--#{$_key}-lightest);
+    }
+
     .color--#{$_key}-lighter {
         color: var(--#{$_key}-lighter);
     }
@@ -2213,16 +2282,16 @@ $_value in $breakpoint {
         color: var(--#{$_key}-light);
     }
 
-    .color--#{$_key}-mid {
-        color: var(--#{$_key}-mid);
-    }
-
     .color--#{$_key}-dark {
         color: var(--#{$_key}-dark);
     }
 
     .color--#{$_key}-darker {
         color: var(--#{$_key}-darker);
+    }
+
+    .color--#{$_key}-darkest {
+        color: var(--#{$_key}-darkest);
     }
 
     .color--#{$_key}-black {
@@ -2235,6 +2304,15 @@ $_value in $breakpoint {
 }
 
 // Content Column
+.content-column--1,
+.content-column--2,
+.content-column--3,
+.content-column--4,
+.content-column--5 {
+    column-gap: var(--space-block);
+    column-rule: var(--border-width) var(--border-style) var(--border-color);
+}
+
 .content-column--1 {
     column-count: 1;
 }
@@ -2279,30 +2357,6 @@ $_value in $breakpoint {
     }
 }
 
-.content-column-gap {
-    --content-column-gap: var(--space-l);
-
-    column-gap: var(--content-column-gap);
-}
-
-.content-column-rule {
-    --content-column-rule: solid;
-
-    column-rule: var(--content-column-rule);
-}
-
-.content-column-rule--color {
-    --content-column-rule-color: var(--base-mid);
-
-    column-rule-color: var(--content-column-rule-color);
-}
-
-.content-column-rule--width {
-    --content-column-rule-width: var(--space-2px);
-
-    column-rule-width: var(--content-column-rule-width);
-}
-
 .content-column-span--all {
     column-span: all;
 }
@@ -2314,35 +2368,6 @@ $_value in $breakpoint {
 
 .cursor--pointer {
     cursor: pointer;
-}
-
-// Display
-.display--block {
-    display: block;
-}
-
-.display--flex {
-    display: flex;
-}
-
-.display--grid {
-    display: grid;
-}
-
-.display--inline {
-    display: inline;
-}
-
-.display--inline-block {
-    display: inline-block;
-}
-
-.display--inline-flex {
-    display: inline-flex;
-}
-
-.display--none {
-    display: none;
 }
 
 // Flex - Align
@@ -2787,20 +2812,16 @@ $_value in $breakpoint {
 }
 
 // Height
-.height--half {
-    min-block-size: 50svh;
-}
-
-.height--partial {
-    min-block-size: 75svh;
-}
-
-.height--full {
-    min-block-size: 100svh;
+.height--auto {
+    min-block-size: auto;
 }
 
 .height--fill {
     min-block-size: 100%;
+}
+
+.height--full {
+    min-block-size: 100svh;
 }
 
 @each $_key, $_value in $breakpoint {
@@ -2809,12 +2830,8 @@ $_value in $breakpoint {
             min-block-size: auto;
         }
 
-        .height--#{$_key}-half {
-            min-block-size: 50svh;
-        }
-
-        .height--#{$_key}-partial {
-            min-block-size: 75svh;
+        .height--#{$_key}-fill {
+            min-block-size: 100%;
         }
 
         .height--#{$_key}-full {
@@ -2853,30 +2870,16 @@ $_value in $breakpoint {
 }
 
 // Hide - Visually
-.hide--visually {
-    block-size: var(--space-px);
-    border: 0;
-    clip-path: rect(0, 0, 0, 0);
-    inline-size: var(--space-px);
-    margin: calc(var(--space-px) * -1);
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-
-    &.focusable {
-
-        &:active,
-        &:focus {
-            block-size: auto;
-            clip-path: auto;
-            inline-size: auto;
-            margin: 0;
-            overflow: visible;
-            position: static;
-            white-space: inherit;
-        }
-    }
+.hide--visually:not(:focus):not(:active) {
+    block-size: var(--space-px) !important;
+    border: 0 !important;
+    clip-path: inset(50%) !important;
+    inline-size: var(--space-px) !important;
+    margin: calc(var(--space-px) * -1) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
 }
 
 // List - Flat
@@ -2892,9 +2895,7 @@ ul.list--flat,
 
 // List - Marker
 .list-marker--color li::marker {
-    --list-marker-color: var(--primary);
-
-    color: var(--list-marker-color);
+    color: var(--primary);
 }
 
 // Margin - Bottom
@@ -3068,9 +3069,9 @@ ul.list--flat,
     object-position: var(--object-end) var(--object-start);
 }
 
-@each $_key,
-$_value in $breakpoint {
+@each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
+
         .object--#{$-key}-bottom-center {
             object-position: var(--object-center) var(--object-end);
         }
@@ -3174,6 +3175,10 @@ $_value in $breakpoint {
 
 .padding--grid {
     padding: var(--space-grid);
+}
+
+.padding--header {
+    padding: var(--space-block) var(--space-offset);
 }
 
 .padding--icon {
@@ -3306,8 +3311,16 @@ $_value in $breakpoint {
 }
 
 // Radius
-.radius {
-    border-radius: var(--border-radius);
+.radius--sm {
+    border-radius: var(--radius-sm);
+}
+
+.radius--md {
+    border-radius: var(--radius-md);
+}
+
+.radius--lg {
+    border-radius: var(--radius-lg);
 }
 
 .radius--oval {
@@ -3323,16 +3336,16 @@ $_value in $breakpoint {
 }
 
 // Shadow - Box
-.box-shadow--low {
-    box-shadow: var(--box-shadow-low);
+.box-shadow--sm {
+    box-shadow: var(--box-shadow-sm);
 }
 
-.box-shadow--mid {
-    box-shadow: var(--box-shadow-mid);
+.box-shadow--md {
+    box-shadow: var(--box-shadow-md);
 }
 
-.box-shadow--high {
-    box-shadow: var(--box-shadow-high);
+.box-shadow--lg {
+    box-shadow: var(--box-shadow-lg);
 }
 
 .box-shadow--flat {
@@ -3341,16 +3354,16 @@ $_value in $breakpoint {
 
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
-        .box-shadow--#{$_key}-low {
-            box-shadow: var(--box-shadow-low);
+        .box-shadow--#{$_key}-sm {
+            box-shadow: var(--box-shadow-sm);
         }
 
-        .box-shadow--#{$_key}-mid {
-            box-shadow: var(--box-shadow-mid);
+        .box-shadow--#{$_key}-md {
+            box-shadow: var(--box-shadow-md);
         }
 
-        .box-shadow--#{$_key}-high {
-            box-shadow: var(--box-shadow-high);
+        .box-shadow--#{$_key}-lg {
+            box-shadow: var(--box-shadow-lg);
         }
 
         .box-shadow--#{$_key}-flat {
@@ -3360,16 +3373,16 @@ $_value in $breakpoint {
 }
 
 // Shadow - Drop
-.drop-shadow--low {
-    filter: var(--drop-shadow-low);
+.drop-shadow--sm {
+    filter: var(--drop-shadow-sm);
 }
 
-.drop-shadow--mid {
-    filter: var(--drop-shadow-mid);
+.drop-shadow--md {
+    filter: var(--drop-shadow-md);
 }
 
-.drop-shadow--high {
-    filter: var(--drop-shadow-high);
+.drop-shadow--lg {
+    filter: var(--drop-shadow-lg);
 }
 
 .drop-shadow--flat {
@@ -3378,16 +3391,16 @@ $_value in $breakpoint {
 
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
-        .drop-shadow--#{$_key}-low {
-            filter: var(--drop-shadow-low);
+        .drop-shadow--#{$_key}-sm {
+            filter: var(--drop-shadow-sm);
         }
 
-        .drop-shadow--#{$_key}-mid {
-            filter: var(--drop-shadow-mid);
+        .drop-shadow--#{$_key}-md {
+            filter: var(--drop-shadow-md);
         }
 
-        .drop-shadow--#{$_key}-high {
-            filter: var(--drop-shadow-high);
+        .drop-shadow--#{$_key}-lg {
+            filter: var(--drop-shadow-lg);
         }
 
         .drop-shadow--#{$_key}-flat {
@@ -3397,29 +3410,24 @@ $_value in $breakpoint {
 }
 
 // Text
-.text--base {
-    font-size: var(--text-base);
-    line-height: var(--text-height-body);
-}
-
 .text--fine {
     font-size: var(--text-fine);
     line-height: var(--text-height-body);
 }
 
-.text--hero {
-    font-size: var(--text-hero);
-    line-height: var(--text-height-heading);
-}
-
-.text--intro {
-    font-size: var(--text-intro);
+.text--base {
+    font-size: var(--text-base);
     line-height: var(--text-height-body);
 }
 
 .text--lede {
     font-size: var(--text-lede);
     line-height: var(--text-height-body);
+}
+
+.text--hero {
+    font-size: var(--text-hero);
+    line-height: var(--text-height-heading);
 }
 
 // Text - Align
@@ -3439,9 +3447,9 @@ $_value in $breakpoint {
     text-align: end;
 }
 
-@each $_key,
-$_value in $breakpoint {
+@each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
+
         .text-align--#{$-key}-center {
             text-align: center;
         }
@@ -3544,19 +3552,26 @@ $_value in $breakpoint {
 }
 
 // Transition
+.transition--fast,
+.transition--normal,
+.transition--slow {
+    transition-timing-function: var(--transition-easing);
+}
+
 .transition--fast {
     transition-duration: var(--transition-fast);
-    transition-timing-function: var(--transition-easing);
 }
 
 .transition--normal {
     transition-duration: var(--transition-normal);
-    transition-timing-function: var(--transition-easing);
 }
 
 .transition--slow {
     transition-duration: var(--transition-slow);
-    transition-timing-function: var(--transition-easing);
+}
+
+.transition--flat {
+    transition: none;
 }
 
 // Vertical Text
@@ -3571,6 +3586,11 @@ $_value in $breakpoint {
 
 .vertical-text--right {
     transform: scale(1);
+}
+
+.vertical-text--unset {
+    transform: scale(1);
+    writing-mode: unset;
 }
 
 @each $_key, $_value in $breakpoint {
@@ -3598,14 +3618,13 @@ $_value in $breakpoint {
 
 // Width
 .width--min,
-.width--s,
-.width--m,
-.width--l,
+.width--sm,
+.width--md,
+.width--lg,
 .width--xl,
 .width--wide,
 .width--max,
 .width--prose,
-.width--website,
 .width--fill {
     inline-size: 100%;
 }
@@ -3614,16 +3633,16 @@ $_value in $breakpoint {
     max-inline-size: var(--width-min);
 }
 
-.width--s {
-    max-inline-size: var(--width-s);
+.width--sm {
+    max-inline-size: var(--width-sm);
 }
 
-.width--m {
-    max-inline-size: var(--width-m);
+.width--md {
+    max-inline-size: var(--width-md);
 }
 
-.width--l {
-    max-inline-size: var(--width-l);
+.width--lg {
+    max-inline-size: var(--width-lg);
 }
 
 .width--xl {
@@ -3644,10 +3663,6 @@ $_value in $breakpoint {
 
 .width--prose {
     max-inline-size: var(--width-prose);
-}
-
-.width--website {
-    max-inline-size: var(--width-website);
 }
 
 // Z-Index
@@ -3680,7 +3695,6 @@ $_value in $breakpoint {
 }
 
 // --- Print Styles --- //
-// Print styles for printing in black and white.
 
 @media print {
 
