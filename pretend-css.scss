@@ -182,7 +182,7 @@ $breakpoint: (
     --radius-round: 50%;
 
     // Shadow - Box
-    --box-shadow-sm: 0 0 var(--space-12px) hsl(0deg 0% 0% / 0.1);
+    --box-shadow-sm: 0 0 #{px-rel(12)} hsl(0deg 0% 0% / 0.1);
     --box-shadow-md: 0 0 #{px-rel(24)} hsl(0deg 0% 0% / 0.15);
     --box-shadow-lg: 0 0 #{px-rel(48)} hsl(0deg 0% 0% / 0.2);
 
