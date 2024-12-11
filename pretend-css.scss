@@ -11,9 +11,9 @@ https://madebypretend.com
 
 // Colors (HSL)
 $primary: hsl(0deg 84% 60%);
-// $secondary: hsl(198deg 90% 48%);
-// $tertiary: hsl(131deg 69% 46%);
-// $quaternary: hsl(25deg 100% 61%);
+$secondary: hsl(198deg 90% 48%);
+$tertiary: hsl(131deg 69% 46%);
+$quaternary: hsl(25deg 100% 61%);
 $danger: hsl(1deg 99% 68%);
 $highlight: hsl(42deg 98% 57%);
 $info: hsl(198deg 90% 48%);
@@ -26,9 +26,9 @@ $base: hsl(0deg 0% 9%);
 // Color Lists
 $color: (
     primary: $primary,
-    // secondary: $secondary,
-    // tertiary: $tertiary,
-    // quaternary: $quaternary,
+    secondary: $secondary,
+    tertiary: $tertiary,
+    quaternary: $quaternary,
     danger: $danger,
     highlight: $highlight,
     info: $info,
@@ -988,20 +988,20 @@ $_value in $breakpoint {
 .grid-layout {
     column-gap: 0;
     display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-base)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-base)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    grid-template-columns: [full-start] minmax(var(--space-base), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-base) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-base), 1fr) [full-end];
     inline-size: 100%;
     padding-inline: 0;
     row-gap: var(--space-block);
 
-    & > * {
+    & > :not(&__full, &__offset) {
         grid-column: content;
     }
 
-    &__full {
+    & > &__full {
         grid-column: full;
     }
 
-    &__offset {
+    & > &__offset {
         grid-column: offset;
     }
 }

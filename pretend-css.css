@@ -16,6 +16,36 @@ https://madebypretend.com
     --primary-dark: hsl(var(--primary-h) var(--primary-s) 40%);
     --primary-darker: hsl(var(--primary-h) var(--primary-s) 25%);
     --primary-darkest: hsl(var(--primary-h) var(--primary-s) 10%);
+    --secondary-h: 198deg;
+    --secondary-s: 90%;
+    --secondary-l: 48%;
+    --secondary: hsl(var(--secondary-h) var(--secondary-s) var(--secondary-l));
+    --secondary-lightest: hsl(var(--secondary-h) var(--secondary-s) 95%);
+    --secondary-lighter: hsl(var(--secondary-h) var(--secondary-s) 85%);
+    --secondary-light: hsl(var(--secondary-h) var(--secondary-s) 60%);
+    --secondary-dark: hsl(var(--secondary-h) var(--secondary-s) 40%);
+    --secondary-darker: hsl(var(--secondary-h) var(--secondary-s) 25%);
+    --secondary-darkest: hsl(var(--secondary-h) var(--secondary-s) 10%);
+    --tertiary-h: 131deg;
+    --tertiary-s: 69%;
+    --tertiary-l: 46%;
+    --tertiary: hsl(var(--tertiary-h) var(--tertiary-s) var(--tertiary-l));
+    --tertiary-lightest: hsl(var(--tertiary-h) var(--tertiary-s) 95%);
+    --tertiary-lighter: hsl(var(--tertiary-h) var(--tertiary-s) 85%);
+    --tertiary-light: hsl(var(--tertiary-h) var(--tertiary-s) 60%);
+    --tertiary-dark: hsl(var(--tertiary-h) var(--tertiary-s) 40%);
+    --tertiary-darker: hsl(var(--tertiary-h) var(--tertiary-s) 25%);
+    --tertiary-darkest: hsl(var(--tertiary-h) var(--tertiary-s) 10%);
+    --quaternary-h: 25deg;
+    --quaternary-s: 100%;
+    --quaternary-l: 61%;
+    --quaternary: hsl(var(--quaternary-h) var(--quaternary-s) var(--quaternary-l));
+    --quaternary-lightest: hsl(var(--quaternary-h) var(--quaternary-s) 95%);
+    --quaternary-lighter: hsl(var(--quaternary-h) var(--quaternary-s) 85%);
+    --quaternary-light: hsl(var(--quaternary-h) var(--quaternary-s) 60%);
+    --quaternary-dark: hsl(var(--quaternary-h) var(--quaternary-s) 40%);
+    --quaternary-darker: hsl(var(--quaternary-h) var(--quaternary-s) 25%);
+    --quaternary-darkest: hsl(var(--quaternary-h) var(--quaternary-s) 10%);
     --danger-h: 1deg;
     --danger-s: 99%;
     --danger-l: 68%;
@@ -190,6 +220,24 @@ https://madebypretend.com
         --primary-dark: hsl(var(--primary-h) var(--primary-s) 60%);
         --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
         --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
+        --secondary-lightest: hsl(var(--secondary-h) var(--secondary-s) 10%);
+        --secondary-lighter: hsl(var(--secondary-h) var(--secondary-s) 25%);
+        --secondary-light: hsl(var(--secondary-h) var(--secondary-s) 40%);
+        --secondary-dark: hsl(var(--secondary-h) var(--secondary-s) 60%);
+        --secondary-darker: hsl(var(--secondary-h) var(--secondary-s) 85%);
+        --secondary-darkest: hsl(var(--secondary-h) var(--secondary-s) 95%);
+        --tertiary-lightest: hsl(var(--tertiary-h) var(--tertiary-s) 10%);
+        --tertiary-lighter: hsl(var(--tertiary-h) var(--tertiary-s) 25%);
+        --tertiary-light: hsl(var(--tertiary-h) var(--tertiary-s) 40%);
+        --tertiary-dark: hsl(var(--tertiary-h) var(--tertiary-s) 60%);
+        --tertiary-darker: hsl(var(--tertiary-h) var(--tertiary-s) 85%);
+        --tertiary-darkest: hsl(var(--tertiary-h) var(--tertiary-s) 95%);
+        --quaternary-lightest: hsl(var(--quaternary-h) var(--quaternary-s) 10%);
+        --quaternary-lighter: hsl(var(--quaternary-h) var(--quaternary-s) 25%);
+        --quaternary-light: hsl(var(--quaternary-h) var(--quaternary-s) 40%);
+        --quaternary-dark: hsl(var(--quaternary-h) var(--quaternary-s) 60%);
+        --quaternary-darker: hsl(var(--quaternary-h) var(--quaternary-s) 85%);
+        --quaternary-darkest: hsl(var(--quaternary-h) var(--quaternary-s) 95%);
         --danger-lightest: hsl(var(--danger-h) var(--danger-s) 10%);
         --danger-lighter: hsl(var(--danger-h) var(--danger-s) 25%);
         --danger-light: hsl(var(--danger-h) var(--danger-s) 40%);
@@ -240,6 +288,24 @@ https://madebypretend.com
     --primary-dark: hsl(var(--primary-h) var(--primary-s) 60%);
     --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
     --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
+    --secondary-lightest: hsl(var(--secondary-h) var(--secondary-s) 10%);
+    --secondary-lighter: hsl(var(--secondary-h) var(--secondary-s) 25%);
+    --secondary-light: hsl(var(--secondary-h) var(--secondary-s) 40%);
+    --secondary-dark: hsl(var(--secondary-h) var(--secondary-s) 60%);
+    --secondary-darker: hsl(var(--secondary-h) var(--secondary-s) 85%);
+    --secondary-darkest: hsl(var(--secondary-h) var(--secondary-s) 95%);
+    --tertiary-lightest: hsl(var(--tertiary-h) var(--tertiary-s) 10%);
+    --tertiary-lighter: hsl(var(--tertiary-h) var(--tertiary-s) 25%);
+    --tertiary-light: hsl(var(--tertiary-h) var(--tertiary-s) 40%);
+    --tertiary-dark: hsl(var(--tertiary-h) var(--tertiary-s) 60%);
+    --tertiary-darker: hsl(var(--tertiary-h) var(--tertiary-s) 85%);
+    --tertiary-darkest: hsl(var(--tertiary-h) var(--tertiary-s) 95%);
+    --quaternary-lightest: hsl(var(--quaternary-h) var(--quaternary-s) 10%);
+    --quaternary-lighter: hsl(var(--quaternary-h) var(--quaternary-s) 25%);
+    --quaternary-light: hsl(var(--quaternary-h) var(--quaternary-s) 40%);
+    --quaternary-dark: hsl(var(--quaternary-h) var(--quaternary-s) 60%);
+    --quaternary-darker: hsl(var(--quaternary-h) var(--quaternary-s) 85%);
+    --quaternary-darkest: hsl(var(--quaternary-h) var(--quaternary-s) 95%);
     --danger-lightest: hsl(var(--danger-h) var(--danger-s) 10%);
     --danger-lighter: hsl(var(--danger-h) var(--danger-s) 25%);
     --danger-light: hsl(var(--danger-h) var(--danger-s) 40%);
@@ -1331,21 +1397,21 @@ main p {
     -moz-column-gap: 0;
     column-gap: 0;
     display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-base)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-base)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    grid-template-columns: [full-start] minmax(var(--space-base), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-base) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-base), 1fr) [full-end];
     inline-size: 100%;
     padding-inline: 0;
     row-gap: var(--space-block);
 }
 
-.grid-layout > * {
+.grid-layout > :not(.grid-layout__full, .grid-layout__offset) {
     grid-column: content;
 }
 
-.grid-layout__full {
+.grid-layout > .grid-layout__full {
     grid-column: full;
 }
 
-.grid-layout__offset {
+.grid-layout > .grid-layout__offset {
     grid-column: offset;
 }
 
@@ -2831,6 +2897,90 @@ fieldset:has([name=_pretend-check]) {
     background-color: var(--primary-darkest);
 }
 
+.bg--secondary {
+    background-color: var(--secondary);
+}
+
+.bg--secondary-lightest {
+    background-color: var(--secondary-lightest);
+}
+
+.bg--secondary-lighter {
+    background-color: var(--secondary-lighter);
+}
+
+.bg--secondary-light {
+    background-color: var(--secondary-light);
+}
+
+.bg--secondary-dark {
+    background-color: var(--secondary-dark);
+}
+
+.bg--secondary-darker {
+    background-color: var(--secondary-darker);
+}
+
+.bg--secondary-darkest {
+    background-color: var(--secondary-darkest);
+}
+
+.bg--tertiary {
+    background-color: var(--tertiary);
+}
+
+.bg--tertiary-lightest {
+    background-color: var(--tertiary-lightest);
+}
+
+.bg--tertiary-lighter {
+    background-color: var(--tertiary-lighter);
+}
+
+.bg--tertiary-light {
+    background-color: var(--tertiary-light);
+}
+
+.bg--tertiary-dark {
+    background-color: var(--tertiary-dark);
+}
+
+.bg--tertiary-darker {
+    background-color: var(--tertiary-darker);
+}
+
+.bg--tertiary-darkest {
+    background-color: var(--tertiary-darkest);
+}
+
+.bg--quaternary {
+    background-color: var(--quaternary);
+}
+
+.bg--quaternary-lightest {
+    background-color: var(--quaternary-lightest);
+}
+
+.bg--quaternary-lighter {
+    background-color: var(--quaternary-lighter);
+}
+
+.bg--quaternary-light {
+    background-color: var(--quaternary-light);
+}
+
+.bg--quaternary-dark {
+    background-color: var(--quaternary-dark);
+}
+
+.bg--quaternary-darker {
+    background-color: var(--quaternary-darker);
+}
+
+.bg--quaternary-darkest {
+    background-color: var(--quaternary-darkest);
+}
+
 .bg--danger {
     background-color: var(--danger);
 }
@@ -3117,6 +3267,90 @@ fieldset:has([name=_pretend-check]) {
 
 .color--primary-darkest {
     color: var(--primary-darker);
+}
+
+.color--secondary {
+    color: var(--secondary);
+}
+
+.color--secondary-lightest {
+    color: var(--secondary-lighter);
+}
+
+.color--secondary-lighter {
+    color: var(--secondary-light);
+}
+
+.color--secondary-light {
+    color: var(--secondary-light);
+}
+
+.color--secondary-dark {
+    color: var(--secondary-dark);
+}
+
+.color--secondary-darker {
+    color: var(--secondary-dark);
+}
+
+.color--secondary-darkest {
+    color: var(--secondary-darker);
+}
+
+.color--tertiary {
+    color: var(--tertiary);
+}
+
+.color--tertiary-lightest {
+    color: var(--tertiary-lighter);
+}
+
+.color--tertiary-lighter {
+    color: var(--tertiary-light);
+}
+
+.color--tertiary-light {
+    color: var(--tertiary-light);
+}
+
+.color--tertiary-dark {
+    color: var(--tertiary-dark);
+}
+
+.color--tertiary-darker {
+    color: var(--tertiary-dark);
+}
+
+.color--tertiary-darkest {
+    color: var(--tertiary-darker);
+}
+
+.color--quaternary {
+    color: var(--quaternary);
+}
+
+.color--quaternary-lightest {
+    color: var(--quaternary-lighter);
+}
+
+.color--quaternary-lighter {
+    color: var(--quaternary-light);
+}
+
+.color--quaternary-light {
+    color: var(--quaternary-light);
+}
+
+.color--quaternary-dark {
+    color: var(--quaternary-dark);
+}
+
+.color--quaternary-darker {
+    color: var(--quaternary-dark);
+}
+
+.color--quaternary-darkest {
+    color: var(--quaternary-darker);
 }
 
 .color--danger {
