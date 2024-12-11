@@ -642,10 +642,6 @@ p {
     gap: var(--space-block);
     inline-size: 100%;
 
-    &--edge {
-        padding-inline: var(--space-base);
-    }
-
     &-float {
         display: block;
 
@@ -674,10 +670,6 @@ p {
     inline-size: 100%;
     margin-inline: auto;
     max-inline-size: var(--width-xl);
-
-    &--edge {
-        padding-inline: var(--space-base);
-    }
 }
 
 // Grid
@@ -996,7 +988,7 @@ $_value in $breakpoint {
 .grid-layout {
     column-gap: 0;
     display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
+    grid-template-columns: [full-start] minmax(var(--space-offset), 1fr) [offset-start] minmax(0, var(--space-base)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-offset) * 2) [content-end] minmax(0, var(--space-base)) [offset-end] minmax(var(--space-offset), 1fr) [full-end];
     inline-size: 100%;
     padding-inline: 0;
     row-gap: var(--space-block);
@@ -1005,17 +997,8 @@ $_value in $breakpoint {
         grid-column: content;
     }
 
-    &--section {
-        padding-block: var(--space-section);
-        row-gap: var(--space-section);
-    }
-
     &__full {
         grid-column: full;
-    }
-
-    &__full--edge {
-        padding-inline: var(--space-base);
     }
 
     &__offset {
@@ -1091,10 +1074,6 @@ $_value in $breakpoint {
     padding-block: var(--space-section);
     padding-inline: var(--space-offset);
     row-gap: var(--space-section);
-
-    &--flat {
-        padding-block: 0;
-    }
 }
 
 /*! --- Components --- */
@@ -2997,6 +2976,14 @@ ul.list--flat,
     margin-block-start: 0;
 }
 
+.margin-x--flat {
+    margin-inline: 0;
+}
+
+.margin-y--flat {
+    margin-block: 0;
+}
+
 .margin--flat {
     margin: 0;
 }
@@ -3166,30 +3153,86 @@ ul.list--flat,
 // Padding
 .padding--base {
     padding: var(--space-base);
+
+    &-x {
+        padding-inline: var(--space-base);
+    }
+
+    &-y {
+        padding-block: var(--space-base);
+    }
 }
 
 .padding--block {
     padding: var(--space-block);
+
+    &-x {
+        padding-inline: var(--space-block);
+    }
+
+    &-y {
+        padding-block: var(--space-block);
+    }
 }
 
 .padding--container {
     padding: var(--space-container);
+
+    &-x {
+        padding-inline: var(--space-container);
+    }
+
+    &-y {
+        padding-block: var(--space-container);
+    }
 }
 
 .padding--grid {
     padding: var(--space-grid);
+
+    &-x {
+        padding-inline: var(--space-grid);
+    }
+
+    &-y {
+        padding-block: var(--space-grid);
+    }
 }
 
 .padding--header {
     padding: var(--space-block) var(--space-offset);
+
+    &-x {
+        padding-inline: var(--space-offset);
+    }
+
+    &-y {
+        padding-block: var(--space-block);
+    }
 }
 
 .padding--icon {
     padding: var(--space-icon);
+
+    &-x {
+        padding-inline: var(--space-icon);
+    }
+
+    &-y {
+        padding-block: var(--space-icon);
+    }
 }
 
 .padding--section {
     padding: var(--space-section) var(--space-offset);
+
+    &-x {
+        padding-inline: var(--space-offset);
+    }
+
+    &-y {
+        padding-block: var(--space-section);
+    }
 }
 
 // Padding - Flat
@@ -3207,6 +3250,14 @@ ul.list--flat,
 
 .padding-top--flat {
     padding-block-start: 0;
+}
+
+.padding-x--flat {
+    padding-inline: 0;
+}
+
+.padding-y--flat {
+    padding-block: 0;
 }
 
 .padding--flat {
@@ -3285,6 +3336,14 @@ ul.list--flat,
     inset-block-start: 0;
 }
 
+.position-x--flat {
+    inset-inline: 0;
+}
+
+.position-y--flat {
+    inset-block: 0;
+}
+
 .position--flat {
     inset: 0
 }
@@ -3305,6 +3364,14 @@ ul.list--flat,
 
         .position--#{$_key}-top-flat {
             inset-block-start: 0;
+        }
+
+        .position-x--#{$_key}-flat {
+            inset-inline: 0;
+        }
+
+        .position-y--#{$_key}-flat {
+            inset-block: 0;
         }
 
         .position--#{$_key}-flat {
