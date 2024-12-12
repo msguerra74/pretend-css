@@ -183,14 +183,14 @@ https://madebypretend.com
     --text-7xl: clamp(3rem, 5.46875vw + 1.25rem, 5.625rem);
     --text-8xl: clamp(3rem, 7.8125vw + 0.5rem, 6.75rem);
     --text-9xl: clamp(3rem, 10.4166666667vw + -0.3333333333rem, 8rem);
-    --text-fine: var(--text-sm);
+    --text-fine: var(--text-xs);
     --text-base: var(--text-md);
     --text-lede: var(--text-lg);
     --text-hero: var(--text-5xl);
     --text-font-body: Verdana;
     --text-font-heading: var(--text-font-body);
-    --text-height-body: 6px + 2ex;
-    --text-height-heading: 4px + 2ex;
+    --text-height-body: 1.4;
+    --text-height-heading: 1.2;
     --transition-easing: ease-in-out;
     --transition-fast: 0.2s;
     --transition-normal: 0.3s;
@@ -434,7 +434,6 @@ https://madebypretend.com
 
 html {
     background-color: var(--base-white);
-    block-size: 100%;
     font-size: 100%;
     -webkit-text-size-adjust: none;
     -moz-text-size-adjust: none;
@@ -463,12 +462,15 @@ body {
     overflow-x: hidden;
 }
 
-a {
+a:not(.btn, input[type=submit],
+    button[type=submit], .link) {
     color: var(--primary);
     transition: color var(--transition-normal);
 }
 
-a:hover {
+a:not(.btn, input[type=submit],
+    button[type=submit], .link):not(.btn, input[type=submit],
+    button[type=submit], .link):hover {
     color: var(--primary-dark);
 }
 
@@ -615,6 +617,10 @@ img {
 
 main p {
     text-wrap: pretty;
+}
+
+small {
+    font-size: var(--text-fine);
 }
 
 /*! --- Layout --- */

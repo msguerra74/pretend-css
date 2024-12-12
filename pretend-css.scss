@@ -245,7 +245,7 @@ $breakpoint: (
     --text-9xl: #{fluid(48, 128)};
 
     // Text - Contextual
-    --text-fine: var(--text-sm);
+    --text-fine: var(--text-xs);
     --text-base: var(--text-md);
     --text-lede: var(--text-lg);
     --text-hero: var(--text-5xl);
@@ -255,8 +255,8 @@ $breakpoint: (
     --text-font-heading: var(--text-font-body);
 
     // Text - Height
-    --text-height-body: 6px + 2ex;
-    --text-height-heading: 4px + 2ex;
+    --text-height-body: 1.4;
+    --text-height-heading: 1.2;
 
     // Transition
     --transition-easing: ease-in-out;
@@ -436,7 +436,6 @@ $breakpoint: (
 // HTML
 html {
     background-color: var(--base-white);
-    block-size: 100%;
     font-size: 100%;
     text-size-adjust: none;
 
@@ -465,11 +464,11 @@ body {
 }
 
 // Anchor
-a {
+a:not(.btn, .link) {
     color: var(--primary);
     transition: color var(--transition-normal);
 
-    &:hover {
+    &:not(.btn, .link):hover {
         color: var(--primary-dark);
     }
 }
@@ -620,6 +619,10 @@ p {
     main & {
         text-wrap: pretty;
     }
+}
+
+small {
+    font-size: var(--text-fine);
 }
 
 /*! --- Layout --- */
