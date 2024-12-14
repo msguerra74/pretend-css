@@ -7,9 +7,8 @@ https://madebypretend.com
 @use "sass:math";
 
 // --- SCSS Options --- //
-// Uncomment and modify as needed
 
-// Colors (HSL)
+// Color
 $primary: hsl(0deg 84% 60%);
 $secondary: hsl(198deg 90% 48%);
 $tertiary: hsl(131deg 69% 46%);
@@ -20,10 +19,6 @@ $info: hsl(198deg 90% 48%);
 $success: hsl(131deg 69% 46%);
 $warning: hsl(25deg 100% 61%);
 
-// Color - Base (HSL)
-$base: hsl(0deg 0% 9%);
-
-// Color Lists
 $color: (
     primary: $primary,
     secondary: $secondary,
@@ -33,90 +28,78 @@ $color: (
     highlight: $highlight,
     info: $info,
     success: $success,
-    warning: $warning,
+    warning: $warning
 );
+
+// Color - Base
+$base: hsl(0deg 0% 0%);
 
 $color-base: (
-    base: $base,
+    base: $base
 );
 
-// Width (px)
-$width-min: 320;
-$width-sm: 512;
-$width-md: 768;
-$width-lg: 1024;
-$width-xl: 1280;
-$width-wide: 1536;
-$width-max: 1920;
+// Width
+$width-min: 320px;
+$width-sm: 512px;
+$width-md: 768px;
+$width-lg: 1024px;
+$width-xl: 1280px;
+$width-wide: 1536px;
+$width-max: 1920px;
+$width-layout: $width-xl;
 
-// Breakpoints (min/max)
-$breakpoint-minmax: "min";
-
-// Breakpoints - Mobile First (min)
-// Reverse $breakpoint order for Desktop First (max)
+// Breakpoint
+$minmax: min;
 $breakpoint: (
     sm: $width-sm,
     md: $width-md,
     lg: $width-lg,
-    xl: $width-xl,
+    xl: $width-xl
 );
 
-// --- SCSS Functions --- //
-
-// Fluid Sizing
+// Convert PX to REM
 // --
-// Usage: fluid(16, 18, 512, 1280)
+// Usage: px-rem(24px, 16px)
+// @param: $_px // Pixel value
+// @param: $_root // Root font size: 16px
+@function px-rem($_px, $_root: 16px) {
+    @return math.div($_px, $_root) * 1rem;
+}
+
+// Convert PX values to fluid values
+// --
+// Usage: fluid(16px, 18px, 512px, 1280px)
 // @param: $min-size // Minimum Size
 // @param: $max-size // Maximum Size
 // @param: $min-width // Minimum Breakpoint
 // @param: $max-width // Maximum Breakpoint
-@function fluid($_min-size, $_max-size, $_min-width: $width-sm, $_max-width: $width-xl) {
-    $_min-size-rem: px-rel($_min-size);
-    $_max-size-rem: px-rel($_max-size);
+@function fluid($_min-size, $_max-size, $_min-width: $width-min, $_max-width: $width-layout) {
+    $_min-size-rem: px-rem($_min-size);
+    $_max-size-rem: px-rem($_max-size);
     $_slope: math.div($_max-size - $_min-size, $_max-width - $_min-width);
     $_slope-vw: $_slope * 100vw;
-    $_intercept: px-rel($_min-size - $_slope * $_min-width);
+    $_intercept: px-rem($_min-size - $_slope * $_min-width);
+
     @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
 }
 
-// PX to Relative Unit Conversion
+// Breakpoint Mixin
 // --
-// Usage: px-rel(16, rem)
-// @param: $_px // Pixel value
-// @param: $_unit // Unit type: em, rem
-// @param: $_root // Root font size: 16
-@function px-rel($_px, $_unit: rem, $_root: 16) {
-    @return math.div($_px, $_root) + $_unit;
-}
-
-// --- SCSS Mixins --- //
-
-// Breakpoint Generator
-// --
-// Usage: @include breakpoint(768, min, em) {}
+// Usage: @include breakpoint(768px, min) {}
 // @param: $_width // Breakpoint width
 // @param: $_minmax // min-width vs max-width
-// @param: $_unit // em, px, rem
-@mixin breakpoint($_width, $_minmax: $breakpoint-minmax, $_unit: px) {
-    @if $_unit =="px" {
-        @media (#{$_minmax}-width: (#{$_width} + $_unit)) {
-            @content;
-        }
-    }
-
-    @else {
-        @media (#{$_minmax}-width: #{px-rel($_width, $_unit)}) {
-            @content;
-        }
+@mixin breakpoint($_width, $_minmax: $minmax) {
+    @media (#{$_minmax}-width: (#{$_width})) {
+        @content;
     }
 }
 
-// --- CSS Variables --- //
+// --- CSS Options --- //
 
 // Light Color Scheme
-[data-color-scheme="light"],
 .color-scheme--light,
-:root:not([data-color-scheme="dark"], .color-scheme--dark) {
+[data-color-scheme="light"],
+:root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
 
     // Color
     @each $_key, $_value in $color {
@@ -126,7 +109,7 @@ $breakpoint: (
         --#{$_key}: hsl(var(--#{$_key}-h) var(--#{$_key}-s) var(--#{$_key}-l));
         --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
         --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
         --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
         --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
         --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
@@ -147,8 +130,8 @@ $breakpoint: (
         --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
     }
 
-    // Color - Misc
-    --blur-bg-color: hsl(var(--base-h) var(--base-s) 95% / 0.9);
+    // Color - Background Blur
+    --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.9);
 }
 
 :root {
@@ -161,9 +144,12 @@ $breakpoint: (
 
     // Border
     --border-color: var(--base-dark);
-    --border-radius: var(--radius-sm);
+    --border-radius: var(--space-xs);
+    --border-radius-alt: var(--space-md);
+    --border-radius-oval: 10rem;
+    --border-radius-round: 50%;
     --border-style: solid;
-    --border-width: var(--space-2px);
+    --border-width: var(--space-2xs);
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -185,94 +171,89 @@ $breakpoint: (
     --object-center: 50%;
     --object-end: 85%;
 
-    // Radius
-    --radius-sm: var(--space-xs);
-    --radius-md: var(--space-sm);
-    --radius-lg: var(--space-md);
-    --radius-oval: 10rem;
-    --radius-round: 50%;
-
     // Shadow - Box
-    --box-shadow-sm: 0 0 #{px-rel(12)} hsl(0deg 0% 0% / 0.1);
-    --box-shadow-md: 0 0 #{px-rel(24)} hsl(0deg 0% 0% / 0.15);
-    --box-shadow-lg: 0 0 #{px-rel(48)} hsl(0deg 0% 0% / 0.2);
+    --box-shadow-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
+    --box-shadow-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
+    --box-shadow-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
 
     // Shadow - Drop
-    --drop-shadow-sm: drop-shadow(0 #{px-rel(10)} #{px-rel(8)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rel(4)} #{px-rel(3)} hsl(0deg 0% 0% / 0.1));
-    --drop-shadow-md: drop-shadow(0 #{px-rel(20)} #{px-rel(13)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rel(8)} #{px-rel(5)} hsl(0deg 0% 0% / 0.08));
-    --drop-shadow-lg: drop-shadow(0 #{px-rel(25)} #{px-rel(25)} hsl(0deg 0% 0% / 0.15));
+    --drop-shadow-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
+    --drop-shadow-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
+    --drop-shadow-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
     --drop-shadow-flat: drop-shadow(0 0 transparent);
 
-    // Space
-    --space-xs: #{px-rel(4)};
-    --space-sm: #{px-rel(8)};
-    --space-md: #{px-rel(16)};
-    --space-lg: #{px-rel(24)};
-    --space-xl: #{px-rel(32)};
-    --space-2xl: #{px-rel(48)};
-    --space-3xl: #{fluid(48, 64)};
-    --space-4xl: #{fluid(64, 96)};
-    --space-5xl: #{fluid(96, 128)};
-    --space-6xl: #{fluid(128, 160)};
-    --space-7xl: #{fluid(160, 192)};
-    --space-8xl: #{fluid(192, 224)};
-    --space-9xl: #{fluid(224, 256)};
+    // Spacing
+    --space-px: #{px-rem(1px)};
+    --space-2xs: #{px-rem(2px)};
+    --space-xs: #{px-rem(4px)};
+    --space-sm: #{px-rem(8px)};
+    --space-md: #{px-rem(16px)};
+    --space-lg: #{px-rem(24px)};
+    --space-xl: #{px-rem(32px)};
+    --space-2xl: #{px-rem(48px)};
+    --space-3xl: #{fluid(48px, 64px)};
+    --space-4xl: #{fluid(64px, 96px)};
+    --space-5xl: #{fluid(96px, 128px)};
+    --space-6xl: #{fluid(128px, 160px)};
+    --space-7xl: #{fluid(160px, 192px)};
+    --space-8xl: #{fluid(192px, 224px)};
+    --space-9xl: #{fluid(224px, 256px)};
 
-    // Space - Contextual
-    --space-px: #{px-rel(1)};
-    --space-2px: #{px-rel(2)};
-    --space-base: #{fluid(24, 48)};
-    --space-block: #{fluid(24, 32)};
-    --space-container: var(--space-3xl);
-    --space-grid: var(--space-base);
+    // Spacing - Custom
     --space-icon: var(--space-sm);
-    --space-offset: #{fluid(24, 128)};
-    --space-section: var(--space-5xl);
+    --space-block: #{fluid(24px, 32px)};
+    --space-edge: #{fluid(24px, 48px)};
+    --space-grid: #{fluid(24px, 48px)};
+    --space-container: var(--space-3xl);
+    --space-section: var(--space-4xl);
 
     // Text
-    --text-xs: #{fluid(12, 14)};
-    --text-sm: #{fluid(14, 16)};
-    --text-md: #{fluid(16, 18)};
-    --text-lg: #{fluid(18, 20)};
-    --text-xl: #{fluid(20, 24)};
-    --text-2xl: #{fluid(24, 30)};
-    --text-3xl: #{fluid(30, 38)};
-    --text-4xl: #{fluid(38, 48)};
-    --text-5xl: #{fluid(48, 60)};
-    --text-6xl: #{fluid(48, 74)};
-    --text-7xl: #{fluid(48, 90)};
-    --text-8xl: #{fluid(48, 108)};
-    --text-9xl: #{fluid(48, 128)};
+    --font-family-body: Verdana;
+    --font-family-heading: var(--font-family-body);
+    --line-height-body: 1.4;
+    --line-height-heading: 1.2;
 
-    // Text - Contextual
-    --text-fine: var(--text-xs);
-    --text-base: var(--text-md);
-    --text-lede: var(--text-lg);
-    --text-hero: var(--text-5xl);
+    // Text - Sizing
+    --font-size-xs: #{fluid(12px, 14px)};
+    --font-size-sm: #{fluid(14px, 16px)};
+    --font-size-md: #{fluid(16px, 18px)};
+    --font-size-lg: #{fluid(18px, 20px)};
+    --font-size-xl: #{fluid(20px, 24px)};
+    --font-size-2xl: #{fluid(24px, 30px)};
+    --font-size-3xl: #{fluid(30px, 38px)};
+    --font-size-4xl: #{fluid(38px, 48px)};
+    --font-size-5xl: #{fluid(38px, 60px)};
+    --font-size-6xl: #{fluid(38px, 74px)};
+    --font-size-7xl: #{fluid(38px, 90px)};
+    --font-size-8xl: #{fluid(38px, 108px)};
+    --font-size-9xl: #{fluid(38px, 128px)};
 
-    // Text - Font
-    --text-font-body: Verdana;
-    --text-font-heading: var(--text-font-body);
-
-    // Text - Height
-    --text-height-body: 1.4;
-    --text-height-heading: 1.2;
+    // Text - Custom Sizing
+    --font-size-fine: var(--font-size-xs);
+    --font-size-body: var(--font-size-md);
+    --font-size-lede: var(--font-size-lg);
+    --font-size-h4: var(--font-size-xl);
+    --font-size-h3: var(--font-size-2xl);
+    --font-size-h2: var(--font-size-3xl);
+    --font-size-h1: var(--font-size-4xl);
+    --font-size-hero: var(--font-size-5xl);
 
     // Transition
+    --transition: .3s;
+    --transition-fast: .2s;
+    --transition-slow: .4s;
     --transition-easing: ease-in-out;
-    --transition-fast: 0.2s;
-    --transition-normal: 0.3s;
-    --transition-slow: 0.4s;
 
     // Width
-    --width-min: #{px-rel($width-min)};
-    --width-sm: #{px-rel($width-sm)};
-    --width-md: #{px-rel($width-md)};
-    --width-lg: #{px-rel($width-lg)};
-    --width-xl: #{px-rel($width-xl)};
-    --width-wide: #{px-rel($width-wide)};
-    --width-max: #{px-rel($width-max)};
+    --width-min: #{px-rem($width-min)};
+    --width-sm: #{px-rem($width-sm)};
+    --width-md: #{px-rem($width-md)};
+    --width-lg: #{px-rem($width-lg)};
+    --width-xl: #{px-rem($width-xl)};
+    --width-wide: #{px-rem($width-wide)};
+    --width-max: #{px-rem($width-max)};
     --width-prose: 65ch;
+    --width-layout: #{px-rem($width-layout)};
 
     // Z-Index
     --z-back: -1;
@@ -284,47 +265,16 @@ $breakpoint: (
     --z-top: 10000;
 }
 
-// Dark Color Scheme - Automatic
-@media (prefers-color-scheme: dark) {
-    :root:not([data-color-scheme]) {
-
-        // Color
-        @each $_key, $_value in $color {
-            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        }
-
-        // Color - Base
-        @each $_key, $_value in $color-base {
-            --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-            --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
-        }
-
-        // Color - Misc
-        --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / 0.9);
-    }
-}
-
 // Dark Color Scheme - Toggle
-[data-color-scheme="dark"],
-.color-scheme--dark {
+.color-scheme--dark,
+[data-color-scheme="dark"] {
 
     // Color
     @each $_key, $_value in $color {
         --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
         --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
         --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
         --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
         --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
     }
@@ -335,38 +285,72 @@ $breakpoint: (
         --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
         --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
         --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
+        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
         --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
         --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
         --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
     }
 
-    // Color - Misc
-    --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+    // Color - Background Blur
+    --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
 }
 
-// --- CSS Support --- //
+// Dark Color Scheme - Automatic
+@media (prefers-color-scheme: dark) {
+    :root:not([data-color-scheme]) {
+
+        // Color
+        @each $_key, $_value in $color {
+            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
+            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+        }
+
+        // Color - Base
+        @each $_key, $_value in $color-base {
+            --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
+            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
+            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
+            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
+            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
+            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
+            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+            --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
+        }
+
+        // Color - Background Blur
+        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+    }
+}
+
+// --- CSS Supports --- //
 
 // Check for CSS Backdrop Filter Support
 @supports ((backdrop-filter: blur())) {
 
-    [data-color-scheme="light"],
+    // Light Color Scheme
     .color-scheme--light,
-    :root:not([data-color-scheme="dark"], .color-scheme--dark) {
-        // Color - Misc
-        --blur-bg-color: hsl(var(--base-h) var(--base-s) 95% / 0.2);
+    [data-color-scheme="light"],
+    :root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
+        // Color - Background Blur
+        --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.2);
     }
 
-    [data-color-scheme="dark"],
-    .color-scheme--dark {
-        // Color - Misc
-        --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / 0.2);
+    // Dark Color Scheme - Toggle
+    .color-scheme--dark,
+    [data-color-scheme="dark"] {
+        // Color - Background Blur
+        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.2);
     }
 
+    // Dark Color Scheme - Automatic
     @media (prefers-color-scheme: dark) {
         :root:not([data-color-scheme]) {
-            // Color - Misc
-            --blur-bg-color: hsl(var(--base-h) var(--base-s) 10% / 0.2);
+            // Color - Background Blur
+            --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.2);
         }
     }
 }
@@ -386,12 +370,12 @@ $breakpoint: (
         animation-iteration-count: 1 !important;
         background-attachment: initial !important;
         scroll-behavior: auto !important;
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
+        transition-duration: 1ms !important;
+        transition-delay: -1ms !important;
     }
 }
 
-// --- Base --- //
+/*! --- Base --- */
 
 // Focus
 :focus:not(:focus-visible) {
@@ -400,24 +384,32 @@ $breakpoint: (
 
 :focus-visible,
 .link-overlay:focus-within {
-    outline: var(--focus-width, var(--border-width)) var(--focus-style, var(--border-style)) var(--focus-color, var(--primary-dark));
-    outline-offset: var(--focus-offset, var(--border-width));
+    --color-focus: var(--primary);
+    --offset-focus: var(--border-width);
+    --outline-focus: var(--border-style);
+    --width-focus: var(--border-width);
+
+    outline: var(--width-focus) var(--outline-focus) var(--color-focus);
+    outline-offset: var(--offset-focus);
 
     &.focus--light,
     .focus--light & {
-        --focus-color: var(--primary-lightest);
+        --color-focus: var(--primary-lightest);
     }
 
     &.focus--dark,
     .focus--dark & {
-        --focus-color: var(--primary-darkest);
+        --color-focus: var(--primary-darkest);
     }
 }
 
 // Selection
 ::selection {
-    background-color: var(--primary-lighter);
-    color: var(--primary-darker);
+    --bg-color-selection: var(--primary-lighter);
+    --color-selection: var(--primary-darker);
+
+    background-color: var(--bg-color-selection);
+    color: var(--color-selection);
     text-shadow: none;
 }
 
@@ -428,6 +420,7 @@ $breakpoint: (
     box-sizing: border-box;
 }
 
+// Reset
 * {
     margin: 0;
     padding: 0;
@@ -435,7 +428,9 @@ $breakpoint: (
 
 // HTML
 html {
-    background-color: var(--base-white);
+    --bg-color-html: var(--base-white);
+
+    background-color: var(--bg-color-html);
     font-size: 100%;
     text-size-adjust: none;
 
@@ -446,15 +441,18 @@ html {
 
 // Body
 body {
-    background-color: var(--base-lightest);
+    --bg-color-body: var(--base-lightest);
+    --color-body: var(--base-darkest);
+
+    background-color: var(--bg-color-body);
     block-size: 100%;
-    color: var(--base-darkest);
-    font-family: var(--text-font-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
-    font-size: var(--text-base);
+    color: var(--color-body);
+    font-family: var(--font-family-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
+    font-size: var(--font-size-body);
     -webkit-font-smoothing: auto;
     font-weight: 400;
     inline-size: 100%;
-    line-height: var(--text-height-body);
+    line-height: var(--line-height-body);
     margin-inline: auto;
     max-inline-size: var(--width-max);
     min-block-size: 100svh;
@@ -465,48 +463,60 @@ body {
 
 // Anchor
 a:not(.btn, .link) {
-    color: var(--primary);
-    transition: color var(--transition-normal);
+    --color-anchor: var(--primary);
+
+    color: var(--color-anchor);
+    transition: color var(--transition) var(--transition-easing);
 
     &:not(.btn, .link):hover {
-        color: var(--primary-dark);
+        --color-anchor: var(--primary-dark);
     }
 }
 
 // Link
 main a:not([class]),
 a.link {
-    color: var(--link-color, inherit);
-    text-decoration-color: var(--link-decoration-color, var(--primary));
-    text-decoration-line: var(--link-decoration-line, underline);
-    text-decoration-thickness: var(--link-decoration-thickness, var(--border-width));
-    text-underline-offset: var(--link-underline-offset, var(--border-width));
-    transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+    --color-link: inherit;
+    --decoration-color-link: var(--primary);
+    --decoration-line-link: underline;
+    --decoration-style-link: solid;
+    --decoration-thickness-link: var(--border-width);
+    --underline-offset-link: var(--border-width);
+
+    color: var(--color-link);
+    text-decoration-color: var(--decoration-color-link);
+    text-decoration-line: var(--decoration-line-link);
+    text-decoration-style: var(--decoration-style-link);
+    text-decoration-thickness: var(--decoration-thickness-link);
+    text-underline-offset: var(--underline-offset-link);
+    transition: color var(--transition), text-decoration-color var(--transition);
 
     &:hover {
-        --link-color: var(--primary);
-        --link-decoration-color: var(--base-dark);
+        --color-link: var(--primary);
+        --decoration-color-link: var(--base-dark);
     }
 }
 
 // Link - Color
 main .link--light > a:not([class]),
 a.link--light {
-    --link-decoration-color: var(--primary-lightest);
+    --color-link: var(--primary-lightest);
+    --decoration-color-link: var(--primary-lightest);
 
     &:hover {
-        --link-color: var(--primary-lightest);
-        --link-decoration-color: var(--primary-lightest);
+        --color-link: var(--primary-lightest);
+        --decoration-color-link: var(--primary-lightest);
     }
 }
 
 main .link--dark > a:not([class]),
 a.link--dark {
-    --link-decoration-color: var(--primary-darkest);
+    --color-link: var(--primary-darkest);
+    --decoration-color-link: var(--primary-darkest);
 
     &:hover {
-        --link-color: var(--primary-darkest);
-        --link-decoration-color: var(--primary-darkest);
+        --color-link: var(--primary-darkest);
+        --decoration-color-link: var(--primary-darkest);
     }
 }
 
@@ -523,61 +533,61 @@ h5,
 .h5,
 h6,
 .h6 {
-    color: var(--h-color);
-    font-family: var(--text-font-heading);
-    font-size: var(--h-font-size);
-    font-weight: var(--h-font-weight);
-    line-height: var(--text-height-heading);
-    text-transform: var(--h-text-transform);
+    color: var(--color-heading);
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-heading);
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+    text-transform: var(--text-transform-heading);
     text-wrap: balance;
 }
 
 h1,
 .h1 {
-    --h-color: inherit;
-    --h-font-size: var(--text-4xl);
-    --h-font-weight: 700;
-    --h-text-transform: uppercase;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-h1);
+    --font-weight-heading: 700;
+    --text-transform-heading: uppercase;
 }
 
 h2,
 .h2 {
-    --h-color: inherit;
-    --h-font-size: var(--text-3xl);
-    --h-font-weight: 700;
-    --h-text-transform: uppercase;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-h2);
+    --font-weight-heading: 700;
+    --text-transform-heading: uppercase;
 }
 
 h3,
 .h3 {
-    --h-color: inherit;
-    --h-font-size: var(--text-2xl);
-    --h-font-weight: 700;
-    --h-text-transform: none;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-h3);
+    --font-weight-heading: 700;
+    --text-transform-heading: none;
 }
 
 h4,
 .h4 {
-    --h-color: inherit;
-    --h-font-size: var(--text-xl);
-    --h-font-weight: 700;
-    --h-text-transform: none;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-h4);
+    --font-weight-heading: 700;
+    --text-transform-heading: none;
 }
 
 h5,
 .h5 {
-    --h-color: inherit;
-    --h-font-size: var(--text-lede);
-    --h-font-weight: 700;
-    --h-text-transform: none;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-lede);
+    --font-weight-heading: 700;
+    --text-transform-heading: none;
 }
 
 h6,
 .h6 {
-    --h-color: inherit;
-    --h-font-size: var(--text-base);
-    --h-font-weight: 700;
-    --h-text-transform: none;
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-body);
+    --font-weight-heading: 700;
+    --text-transform-heading: none;
 }
 
 // Horizontal Rule
@@ -622,14 +632,14 @@ p {
 }
 
 small {
-    font-size: var(--text-fine);
+    font-size: var(--font-size-fine);
 }
 
 /*! --- Layout --- */
 
 // Block
-// Add to divs that contain content.
-/* HTML Example:
+// Add to content blocks.
+/* Block HTML Example:
 <section class="section">
     <div class="container">
         <div class="block">
@@ -645,6 +655,7 @@ small {
     gap: var(--space-block);
     inline-size: 100%;
 
+    // Block with block and float options, rather than flex.
     &-float {
         display: block;
 
@@ -655,8 +666,8 @@ small {
 }
 
 // Container
-// Add to divs inside section elements that need to be centered with the website width.
-/* HTML Example:
+// Add inside sections to contain blocks and grids.
+/* Container HTML Example:
 <section class="section">
     <div class="container">
         <div class="block">
@@ -672,20 +683,20 @@ small {
     gap: var(--space-container);
     inline-size: 100%;
     margin-inline: auto;
-    max-inline-size: var(--width-xl);
+    max-inline-size: var(--width-layout);
 }
 
 // Grid
-// Add to divs that contain grid items.
-/* HTML Example:
+// Add to layouts containing grid items.
+/* Grid HTML Example:
 <section class="section">
     <div class="container">
-        <div class="grid--1 grid--m-2">
+        <div class="grid grid--md-2">
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
         </div>
     </div>
@@ -838,25 +849,25 @@ small {
     }
 }
 
-// Grid Alternate
-// Add to divs that contain even grids that need to alternate.
-/* HTML Example:
+// Grid - Alternate
+// Add to grid parent containers to alternate grid items.
+/* Grid Alternate HTML Example:
 <section class="section">
-    <div class="container grid--m-alternate">
-        <div class="grid--1 grid--m-2">
+    <div class="container grid--md-alternate">
+        <div class="grid grid--md-2">
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
         </div>
-        <div class="grid--1 grid--m-2">
+        <div class="grid grid--md-2">
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
         </div>
     </div>
@@ -865,96 +876,90 @@ small {
 @each $_key,
 $_value in $breakpoint {
     @include breakpoint($_value, min) {
-        .grid--#{$_key}-alternate > .grid--#{$_key}-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-2:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) {
             grid-template-columns: var(--grid-2-1);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-3:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) {
             grid-template-columns: var(--grid-3-1);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-4:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) {
             grid-template-columns: var(--grid-4-1);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-1-4:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-2-1:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) {
             grid-template-columns: var(--grid-1-2);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-2-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-2-3:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) {
             grid-template-columns: var(--grid-3-2);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-2-3:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-3-1:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) {
             grid-template-columns: var(--grid-1-3);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-3-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-3-2:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) {
             grid-template-columns: var(--grid-2-3);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-3-2:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) > *:last-child {
+            order: -1;
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-4-1:nth-of-type(even) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) {
             grid-template-columns: var(--grid-1-4);
         }
 
-        .grid--#{$_key}-alternate > .grid--#{$_key}-4-1:nth-of-type(even) > *:last-child {
-            order: var(--z-back);
+        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) > *:last-child {
+            order: -1;
         }
     }
 }
 
 // Grid - Auto
-// Add to grids that need to auto-size as the screen size changes.
-// Locally scope var(--column-min) value to the ideal width of the grid items.
-/* CSS Example:
-.custom-grid {
-    --column-min: var(--width-min);
-}
-*/
-/* HTML Example:
+// Add to layouts containing grid items that need to auto-size as the screen size changes.
+/* Grid Auto HTML Example:
 <section class="section">
     <div class="container">
-        <div class="custom-grid grid--auto">
+        <div class="grid-auto">
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
             <div class="block">
-                <!-- Grid block -->
+                <!-- Grid Block -->
             </div>
         </div>
     </div>
@@ -963,105 +968,100 @@ $_value in $breakpoint {
 .grid-auto {
     @extend .grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--column-min, var(--width-min)), 100%), 1fr));
+    --grid-auto-column-min: var(--width-min);
+
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-auto-column-min), 100%), 1fr));
     grid-template-rows: var(--grid-1);
 }
 
 // Grid - Layout
-// Add to content layouts that need to have optional elements that need to expand beyond the content area.
-// Locally scope var(--content-width) value to the ideal width of the grid items.
-/* CSS Example:
-.custom-layout {
-    --content-width: var(--width-xl);;
-}
-*/
-/* HTML Example:
-<div class="custom-layout grid-layout">
-    <div class="grid-layout__full block">
-        <!-- Full width content block -->
-    </div>
-    <div class="grid-layout__offset block">
-        <!-- Offset content block -->
-    </div>
+// Add to layouts containing grid items that need to expand beyond the layout width.
+/* Grid Layout HTML Example:
+<div class="grid-layout">
     <div class="block">
-        <!-- Default width content block -->
+        <!-- Default Layout Width -->
+    </div>
+    <div class="block grid-layout__wide">
+        <!-- Wide Layout Width -->
+    </div>
+    <div class="block grid-layout__full">
+        <!-- Full Layout Width -->
     </div>
 </div>
 */
 .grid-layout {
+    --grid-layout-width: var(--width-layout);
+    --grid-layout-wide: calc((var(--width-wide) - var(--grid-layout-width)) / 2);
+
     column-gap: 0;
     display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-base), 1fr) [offset-start] minmax(0, var(--space-offset)) [content-start] min(var(--content-width, var(--width-xl)), 100% - var(--space-base) * 2) [content-end] minmax(0, var(--space-offset)) [offset-end] minmax(var(--space-base), 1fr) [full-end];
+    grid-template-columns: [full-start] minmax(var(--space-edge), 1fr) [wide-start] minmax(0, var(--grid-layout-wide)) [content-start] min(var(--grid-layout-width), 100% - var(--space-edge) * 2) [content-end] minmax(0, var(--grid-layout-wide)) [wide-end] minmax(var(--space-edge), 1fr) [full-end];
     inline-size: 100%;
     padding-inline: 0;
     row-gap: var(--space-block);
 
-    & > :not(&__full, &__offset) {
+    & > :not(&__full, &__wide) {
         grid-column: content;
+    }
+
+    & > &__wide {
+        grid-column: wide;
     }
 
     & > &__full {
         grid-column: full;
     }
-
-    & > &__offset {
-        grid-column: offset;
-    }
 }
 
 // Header
-// Add to header elements that need to be fixed or overlayed to the top of the screen.
-// Set header data attribute to use ACF header style option (default, fixed, overlay)
-/* HTML Example:
+// Add to header elements.
+/* Header HTML Example:
 <header class="header" data-header-style="fixed">
     <div class="header__container">
-        <!-- Header content -->
-    </div>
-</header>
-<header class="header" data-header-style="overlay">
-    <div class="header__container">
-        <!-- Header content -->
+        <!-- Header Content -->
     </div>
 </header>
 */
 .header {
+    --spacing-header: var(--space-block);
+
     display: flex;
     flex-direction: column;
     inline-size: 100%;
-    padding-block: var(--space-block);
-    padding-inline: var(--space-offset);
-    row-gap: var(--space-block);
+    padding: var(--spacing-header) var(--space-edge);
+    row-gap: var(--spacing-header);
 
     &__container {
         display: flex;
-        gap: var(--space-block);
+        flex-direction: row;
+        gap: var(--spacing-header);
         inline-size: 100%;
         justify-content: space-between;
         margin-inline: auto;
-        max-inline-size: var(--width-xl);
+        max-inline-size: var(--width-layout);
     }
-}
 
-[data-header-style="fixed"],
-[data-header-style="overlay"] {
-    inline-size: 100%;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    inset-inline-start: 0;
-    z-index: var(--z-high);
-}
+    &[data-header-type="fixed"],
+    &[data-header-type="overlay"] {
+        inline-size: 100%;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        inset-inline-start: 0;
+        z-index: var(--z-high);
+    }
 
-[data-header-style="fixed"] {
-    position: fixed;
-}
+    &[data-header-type="fixed"] {
+        position: fixed;
+    }
 
-[data-header-style="overlay"] {
-    position: absolute;
+    &[data-header-type="overlay"] {
+        position: absolute;
+    }
 }
 
 // Section
 // Add to section elements.
-/* Example:
+/* Section HTML Example:
 <section class="section">
     <div class="container">
         <div class="block">
@@ -1074,23 +1074,23 @@ $_value in $breakpoint {
     display: flex;
     flex-direction: column;
     inline-size: 100%;
-    padding-block: var(--space-section);
-    padding-inline: var(--space-offset);
+    padding: var(--space-section) var(--space-edge);
     row-gap: var(--space-section);
 }
 
 /*! --- Components --- */
 
 // Background Overlay
-// Add to div, img, and video elements to create an overlay that fills the section background.
-/* HTML Example:
+// Add to elements inside sections that need to overlay the section background.
+// Add .bg--isolate and .position--relative to the parent container.
+/* Background Overlay HTML Example:
 <section class="bg-isolate position--relative section">
     <div class="container">
         <div class="block">
             <!-- Content -->
         </div>
     </div>
-    <div class="bg-overlay bg--primary"><!-- Can be used on div, img, and video element --></div>
+    <div class="bg-overlay bg--primary"><!-- div, img, and video elements --></div>
 </section>
 */
 .bg-overlay {
@@ -1107,120 +1107,120 @@ $_value in $breakpoint {
 
 // Button
 // Add to anchor links and buttons.
-/* HTML Example:
+/* Button HTML Example:
 <a class="btn" href="#">Anchor Link</a>
 <button class="btn">Button</button>
 */
 .btn {
-    --btn-bg-color: var(--primary);
-    --btn-border-color: var(--primary);
-    --btn-border-radius: var(--border-radius);
-    --btn-border-style: var(--border-style);
-    --btn-border-width: var(--border-width);
-    --btn-color: var(--primary-lightest);
-    --btn-font-size: var(--text-fine);
-    --btn-font-weight: 400;
-    --btn-gap: var(--space-icon);
-    --btn-letter-spacing: var(--space-px);
-    --btn-line-height: 1;
-    --btn-padding-x: var(--space-xl);
-    --btn-padding-y: var(--space-md);
-    --btn-text-transform: uppercase;
-    --btn-transition-duration: var(--transition-normal);
-    --btn-width: fit-content;
+    --bg-color-btn: var(--primary);
+    --border-color-btn: var(--primary);
+    --border-radius-btn: var(--border-radius);
+    --border-style-btn: var(--border-style);
+    --border-width-btn: var(--border-width);
+    --color-btn: var(--primary-lightest);
+    --font-size-btn: var(--font-size-body);
+    --font-weight-btn: 400;
+    --gap-btn: var(--space-icon);
+    --line-height-btn: 1;
+    --padding-x-btn: var(--space-xl);
+    --padding-y-btn: var(--space-md);
+    --text-spaced-btn: var(--space-px);
+    --text-transform-btn: none;
+    --transition-btn: var(--transition);
+    --width-btn: fit-content;
 
     align-items: center;
-    background-color: var(--btn-bg-color);
-    border-color: var(--btn-border-color);
-    border-radius: var(--btn-border-radius);
-    border-style: var(--btn-border-style);
-    border-width: var(--btn-border-width);
-    color: var(--btn-color);
+    background-color: var(--bg-color-btn);
+    border-color: var(--border-color-btn);
+    border-radius: var(--border-radius-btn);
+    border-style: var(--border-style-btn);
+    border-width: var(--border-width-btn);
+    color: var(--color-btn);
     cursor: pointer;
     display: inline-flex;
-    font-size: var(--btn-font-size);
-    font-weight: var(--btn-font-weight);
-    gap: var(--btn-gap);
-    inline-size: var(--btn-width);
+    font-size: var(--font-size-btn);
+    font-weight: var(--font-weight-btn);
+    gap: var(--gap-btn);
+    inline-size: var(--width-btn);
     justify-content: center;
-    letter-spacing: var(--btn-letter-spacing);
-    line-height: var(--btn-line-height);
-    padding-block: var(--btn-padding-y);
-    padding-inline: var(--btn-padding-x);
+    letter-spacing: var(--text-spaced-btn);
+    line-height: var(--line-height-btn);
+    padding-block: var(--padding-y-btn);
+    padding-inline: var(--padding-x-btn);
     text-align: center;
     text-decoration: none;
-    text-transform: var(--btn-text-transform);
-    transition: background-color var(--btn-transition-duration), border-color var(--btn-transition-duration), color var(--btn-transition-duration);
+    text-transform: var(--text-transform-btn);
+    transition: background-color var(--transition-btn) var(--transition-easing), border-color var(--transition-btn) var(--transition-easing), color var(--transition-btn) var(--transition-easing);
 
     &:focus-visible {
-        --focus-color: var(--btn-border-color);
+        --color-focus: var(--border-color-btn);
 
         transition: none;
     }
 
     &--icon {
-        --btn-padding-x: var(--space-icon);
-        --btn-padding-y: var(--space-icon);
+        --padding-x-btn: var(--space-icon);
+        --padding-y-btn: var(--space-icon);
     }
 
     &--outline {
-        --btn-color: var(--btn-border-color);
+        --color-btn: var(--border-color-btn);
 
         background-color: initial !important;
     }
 }
 
-// Button - Size
+// Button - Sizing
 .btn--small {
-    --btn-font-size: var(--text-xs);
-    --btn-padding-x: var(--space-md);
-    --btn-padding-y: var(--space-sm);
+    --font-size-btn: var(--font-size-fine);
+    --padding-x-btn: var(--space-md);
+    --padding-y-btn: var(--space-sm);
 }
 
 .btn--large {
-    --btn-font-size: var(--text-base);
-    --btn-padding-x: var(--space-2xl);
-    --btn-padding-y: var(--space-lg);
+    --font-size-btn: var(--font-size-body);
+    --padding-x-btn: var(--space-2xl);
+    --padding-y-btn: var(--space-lg);
 }
 
 // Button - Color
 .btn--light {
-    --btn-bg-color: var(--base-lightest);
-    --btn-border-color: var(--base-lightest);
-    --btn-color: var(--base-darkest);
+    --bg-color-btn: var(--base-lightest);
+    --border-color-btn: var(--base-lightest);
+    --color-btn: var(--base-darkest);
 
     &:focus-visible {
-        --focus-color: var(--base-lightest);
+        --color-focus: var(--base-lightest);
     }
 
     &.btn--outline {
-        --btn-color: var(--base-lightest);
+        --color-btn: var(--base-lightest);
     }
 }
 
 .btn--dark {
-    --btn-bg-color: var(--base-darkest);
-    --btn-border-color: var(--base-darkest);
-    --btn-color: var(--base-lightest);
+    --bg-color-btn: var(--base-darkest);
+    --border-color-btn: var(--base-darkest);
+    --color-btn: var(--base-lightest);
 
     &:focus-visible {
-        --focus-color: var(--base-darkest);
+        --color-focus: var(--base-darkest);
     }
 
     &.btn--outline {
-        --btn-color: var(--base-darkest);
+        --color-btn: var(--base-darkest);
     }
 }
 
 // Card
-// Add to divs that are cards.
-/* HTML Example:
+// Add to card elements.
+/* Card HTML Example:
 <div class="card">
     <div class="card__head">
-        <!-- card head -->
+        <!-- Card Head -->
     </div>
     <div class="card__body">
-        <!-- card body -->
+        <!-- Card Body -->
     </div>
 </div>
 */
@@ -1229,64 +1229,64 @@ $_value in $breakpoint {
     &,
     &__head,
     &__body {
-        align-items: var(--card-align);
-        background-color: var(--card-bg-color);
-        border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
-        border-radius: var(--card-border-radius);
-        color: var(--card-color);
+        align-items: var(--align-card);
+        background-color: var(--bg-color-card);
+        border-radius: var(--border-radius-card);
+        border: var(--border-width-card) var(--border-style-card) var(--border-color-card);
+        color: var(--color-card);
         display: flex;
         flex-direction: column;
-        gap: var(--card-gap);
+        gap: var(--gap-card);
         inline-size: 100%;
         justify-content: space-between;
         overflow: clip;
-        padding: var(--card-padding);
-        text-align: var(--card-text-align);
+        padding: var(--padding-card);
+        text-align: var(--text-align-card);
     }
 
     & {
-        --card-align: flex-start;
-        --card-bg-color: inherit;
-        --card-border-color: var(--border-color);
-        --card-border-radius: var(--border-radius);
-        --card-border-style: var(--border-style);
-        --card-border-width: var(--border-width);
-        --card-color: inherit;
-        --card-gap: var(--space-block);
-        --card-padding: var(--space-block);
-        --card-text-align: left;
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: var(--border-style);
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: var(--space-block);
+        --text-align-card: left;
     }
 
     &__head {
-        --card-align: flex-start;
-        --card-bg-color: inherit;
-        --card-border-color: var(--border-color);
-        --card-border-radius: var(--border-radius);
-        --card-border-style: none;
-        --card-border-width: var(--border-width);
-        --card-color: inherit;
-        --card-gap: var(--space-block);
-        --card-padding: 0;
-        --card-text-align: left;
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: none;
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: 0;
+        --text-align-card: left;
     }
 
     &__body {
-        --card-align: flex-start;
-        --card-bg-color: inherit;
-        --card-border-color: var(--border-color);
-        --card-border-radius: var(--border-radius);
-        --card-border-style: none;
-        --card-border-width: var(--border-width);
-        --card-color: inherit;
-        --card-gap: var(--space-block);
-        --card-padding: 0;
-        --card-text-align: left;
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: none;
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: 0;
+        --text-align-card: left;
     }
 }
 
 // Form
-// Add to forms or divs that contain form elements.
-/* HTML Example:
+// Add to forms or containers that contain form elements.
+/* Form HTML Example:
 <!-- Formspark form with Botpoison -->
 <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
     <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
@@ -1297,7 +1297,7 @@ $_value in $breakpoint {
         <label for="company">Company Name</label>
         <input aria-label="Company Name" id="company" name="company" type="text">
     </fieldset>
-    <div class="grid--1 grid--lg-2">
+    <div class="grid grid--lg-2">
         <fieldset>
             <label for="first-name">First Name</label>
             <input aria-label="First Name" id="first-name" name="first-name" required type="text">
@@ -1307,7 +1307,7 @@ $_value in $breakpoint {
             <input aria-label="Last Name" id="last-name" name="last-name" type="text">
         </fieldset>
     </div>
-    <div class="grid--1 grid--lg-2">
+    <div class="grid grid--lg-2">
         <fieldset>
             <label for="email">Email Address</label>
             <input aria-label="Email Address" id="email" name="email" required type="email">
@@ -1429,67 +1429,68 @@ $_value in $breakpoint {
 }
 
 .form {
-    --checkbox-border-radius: var(--radius-sm);
-    --checkbox-checked-bg-color: var(--primary);
-    --checkbox-checked-box-shadow: inset var(--space-md) var(--space-md) var(--base-white);
-    --checkbox-size: var(--space-lg);
-    --form-error-bg-color: var(--danger);
-    --form-error-color: var(--danger-lightest);
-    --form-error-font-size: var(--text-fine);
-    --form-gap: var(--space-grid);
-    --form-success-bg-color: var(--success);
-    --form-success-color: var(--success-lightest);
-    --form-success-font-size: var(--text-fine);
-    --input-bg-color-disabled: var(--base-lighter);
-    --input-bg-color-focus: var(--base-white);
-    --input-bg-color: var(--base-lightest);
-    --input-border-color-focus: var(--primary);
-    --input-border-color: var(--border-color);
-    --input-border-radius: var(--border-radius);
-    --input-border-style: var(--border-style);
-    --input-border-width: var(--border-width);
-    --input-color: var(--base-darkest);
-    --input-font-size: var(--text-base);
-    --input-height: var(--space-2xl);
-    --input-line-height: var(--text-height-heading);
-    --input-padding-x: var(--space-md);
-    --input-padding-y: var(--space-sm);
-    --label-color: inherit;
-    --label-font-size: var(--text-base);
-    --label-font-weight: 400;
-    --label-spacing: var(--space-icon);
-    --placeholder-color: var(--base-darkest);
-    --placeholder-opacity: .5;
-    --radio-border-radius: var(--radius-round);
-    --submit-bg-color: var(--primary);
-    --submit-color: var(--primary-lightest);
-    --textarea-height: var(--space-7xl);
+    --bg-color-checkbox-checked: var(--primary);
+    --bg-color-checkbox: var(--bg-color-input);
+    --bg-color-form-error: var(--danger);
+    --bg-color-form-success: var(--success);
+    --bg-color-input-disabled: var(--base-lighter);
+    --bg-color-input-focus: var(--base-white);
+    --bg-color-input: var(--base-lightest);
+    --bg-color-submit: var(--primary);
+    --border-color-input-focus: var(--primary);
+    --border-color-input: var(--border-color);
+    --border-radius-checkbox: var(--border-radius);
+    --border-radius-input: var(--border-radius);
+    --border-radius-radio: var(--border-radius-round);
+    --border-style-input: var(--border-style);
+    --border-width-input: var(--border-width);
+    --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
+    --color-form-error: var(--danger-lightest);
+    --color-form-success: var(--success-lightest);
+    --color-input: var(--base-darkest);
+    --color-label: inherit;
+    --color-placeholder: var(--base-darkest);
+    --color-submit: var(--primary-lightest);
+    --font-size-form-error: var(--font-size-body);
+    --font-size-form-success: var(--font-size-body);
+    --font-size-input: var(--font-size-body);
+    --font-size-label: var(--font-size-body);
+    --font-weight-label: 400;
+    --gap-form: var(--space-grid);
+    --gap-label: var(--space-sm);
+    --height-input: var(--space-2xl);
+    --height-textarea: calc(var(--space-2xl) * 5);
+    --line-height-input: var(--line-height-heading);
+    --opacity-placeholder: .5;
+    --padding-x-input: var(--space-md);
+    --padding-y-input: var(--space-sm);
+    --size-checkbox: var(--space-lg);
 }
 
-// Checkbox and Radio
+// Checkbox, Radio
 input[type="checkbox"],
 input[type="radio"] {
-    accent-color: var(--checkbox-checked-bg-color);
     appearance: none;
-    block-size: var(--checkbox-size);
-    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
+    background-color: var(--bg-color-checkbox);
+    block-size: var(--size-checkbox);
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
     cursor: pointer;
     display: grid;
-    inline-size: var(--checkbox-size);
+    inline-size: var(--size-checkbox);
     place-content: center;
 
     &::before {
-        box-shadow: var(--checkbox-checked-box-shadow);
+        box-shadow: var(--box-shadow-checkbox-checked);
         content: "";
-        height: calc(var(--checkbox-size) * .75);
+        height: calc(var(--size-checkbox) * .75);
         transform: scale(0);
-        transition: transform var(--transition-normal);
-        width: calc(var(--checkbox-size) * .75);
+        transition: transform var(--transition);
+        width: calc(var(--size-checkbox) * .75);
     }
 
     &:checked {
-        background-color: var(--checkbox-checked-bg-color);
-        border-color: var(--checkbox-checked-bg-color);
+        background-color: var(--bg-color-checkbox-checked);
+        border-color: var(--bg-color-checkbox-checked);
     }
 
     &:checked:before {
@@ -1503,7 +1504,7 @@ input[type="radio"] {
 }
 
 input[type="checkbox"] {
-    border-radius: var(--checkbox-border-radius);
+    border-radius: var(--border-radius-checkbox);
 
     &::before {
         clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
@@ -1511,10 +1512,10 @@ input[type="checkbox"] {
 }
 
 input[type="radio"] {
-    border-radius: var(--radio-border-radius);
+    border-radius: var(--border-radius-radio);
 
     &::before {
-        border-radius: var(--radio-border-radius);
+        border-radius: var(--border-radius-radio);
     }
 }
 
@@ -1525,7 +1526,7 @@ fieldset {
     padding: 0;
 }
 
-// Input and Textarea
+// Input, Textarea
 input[type="date"],
 input[type="datetime-local"],
 input[type="email"],
@@ -1539,47 +1540,47 @@ input[type="time"],
 input[type="url"],
 input[type="week"],
 textarea {
-    background-color: var(--input-bg-color);
-    border-radius: var(--input-border-radius);
-    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
-    color: var(--input-color);
+    background-color: var(--bg-color-input);
+    border-radius: var(--border-radius-input);
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
+    color: var(--color-input);
     font-family: inherit;
-    font-size: var(--input-font-size);
+    font-size: var(--font-size-input);
     inline-size: 100%;
-    line-height: var(--input-line-height);
-    min-block-size: var(--input-height);
-    padding: var(--input-padding-y) var(--input-padding-x);
-    transition: border-color var(--transition-normal) var(--transition-easing), background-color var(--transition-normal) var(--transition-easing);
+    line-height: var(--line-height-input);
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
+    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
 
     &::placeholder {
-        color: var(--placeholder-color);
-        opacity: var(--placeholder-opacity);
+        color: var(--color-placeholder);
+        opacity: var(--opacity-placeholder);
     }
 
     &:disabled {
-        background-color: var(--base-lightest);
+        background-color: var(--bg-color-input-disabled);
         cursor: not-allowed;
         opacity: 0.75;
     }
 
     &:focus {
-        background-color: var(--input-bg-color-focus);
-        border-color: var(--input-border-color-focus);
+        background-color: var(--bg-color-input-focus);
+        border-color: var(--border-color-input-focus);
         outline: none;
     }
 }
 
-// Label and Legend
+// Label, Legend
 label,
 legend {
     align-items: center;
-    color: var(--label-color);
+    color: var(--color-label);
     cursor: pointer;
     display: flex;
-    font-size: var(--label-font-size);
-    font-weight: var(--label-font-weight);
-    gap: var(--label-spacing);
-    margin-block-end: var(--label-spacing);
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-label);
+    gap: var(--gap-label);
+    margin-block-end: var(--gap-label);
 
     &:has(+ input:disabled),
     &:has(+ select:disabled),
@@ -1592,31 +1593,31 @@ legend {
 // Select
 select {
     appearance: none;
-    background-color: var(--input-bg-color);
+    background-color: var(--bg-color-input);
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: calc(100% - var(--input-padding-x) - 5px) calc(50% + 1px), calc(100% - var(--input-padding-x)) calc(50% + 1px);
+    background-position: calc(100% - var(--padding-x-input) - 5px) calc(50% + 1px), calc(100% - var(--padding-x-input)) calc(50% + 1px);
     background-repeat: no-repeat;
     background-size: 5px 5px, 5px 5px;
-    border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
-    border-radius: var(--input-border-radius);
-    color: var(--input-color);
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
+    border-radius: var(--border-radius-input);
+    color: var(--color-input);
     cursor: pointer;
     font-family: inherit;
-    font-size: var(--input-font-size);
+    font-size: var(--font-size-input);
     inline-size: 100%;
-    line-height: var(--input-line-height);
-    min-block-size: var(--input-height);
-    padding: var(--input-padding-y) var(--space-xl) var(--input-padding-y) var(--input-padding-x);
-    transition: border-color var(--transition-normal) var(--transition-easing), background-color var(--transition-normal) var(--transition-easing);
+    line-height: var(--line-height-input);
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
+    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
 
     &:focus {
-        background-color: var(--input-bg-color-focus);
-        border-color: var(--input-border-color-focus);
+        background-color: var(--bg-color-input-focus);
+        border-color: var(--border-color-input-focus);
         outline: none;
     }
 
     &:disabled {
-        background-color: var(--input-bg-color-disabled);
+        background-color: var(--bg-color-input-disabled);
         cursor: not-allowed;
         opacity: 0.75;
     }
@@ -1627,9 +1628,9 @@ input[type="submit"],
 button[type="submit"] {
     @extend .btn;
 
-    --btn-bg-color: var(--submit-bg-color);
-    --btn-border-color: var(--submit-bg-color);
-    --btn-color: var(--submit-color);
+    --bg-color-btn: var(--bg-color-submit);
+    --border-color-btn: var(--bg-color-submit);
+    --color-btn: var(--color-submit);
 
     &:disabled {
         cursor: not-allowed;
@@ -1639,42 +1640,43 @@ button[type="submit"] {
 
 // Textarea
 textarea {
-    min-block-size: var(--textarea-height);
+    min-block-size: var(--height-textarea);
     resize: vertical;
 }
 
 // Honeypot
 fieldset:has([name="_pretend-check"]) {
-    left: #{px-rel(10000 * -1)};
+    left: -625rem;
     position: absolute;
 }
 
+// Messages
 .form-error,
 .form-success {
-    align-items: center;
-    border-radius: var(--input-border-radius);
+    justify-content: center;
+    border-radius: var(--border-radius-input);
     display: flex;
-    min-block-size: var(--input-height);
-    padding: var(--input-padding-y) var(--input-padding-x);
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
 }
 
 .form-error {
-    background-color: var(--form-error-bg-color);
-    border: var(--input-border-width) var(--input-border-style) var(--form-error-bg-color);
-    color: var(--form-error-color);
-    font-size: var(--form-error-font-size);
+    background-color: var(--bg-color-form-error);
+    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-error);
+    color: var(--color-form-error);
+    font-size: var(--font-size-form-error);
 }
 
 .form-success {
-    background-color: var(--form-success-bg-color);
-    border: var(--input-border-width) var(--input-border-style) var(--form-success-bg-color);
-    color: var(--form-success-color);
-    font-size: var(--form-success-font-size);
+    background-color: var(--bg-color-form-success);
+    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-success);
+    color: var(--color-form-success);
+    font-size: var(--font-size-form-success);
 }
 
 // Link Overlay
-// Add to anchor links that need link to expand to fill the parent container.
-/* HTML Example:
+// Add to an anchor link that need to expand to fill the parent container.
+/* Link Overlay HTML Example:
 <div class="link-overlay">
     <a href="#">Link</a>
 </div>
@@ -1696,54 +1698,6 @@ fieldset:has([name="_pretend-check"]) {
         display: flex;
         inset: 0;
         position: absolute;
-    }
-}
-
-// Ribbon
-// Add `ribbon--right` or `ribbon--left` to an element that needs to be displayed as a ribbon inside a `.ribbon` parent container.
-/* HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block ribbon">
-            <p class="ribbon--right">
-                <!-- Right ribbon content -->
-            </p>
-            <!-- Ribbon parent content -->
-        </div>
-    </div>
-</section>
-*/
-.ribbon {
-    overflow: hidden;
-    position: relative;
-
-    & > .ribbon--left,
-    & > .ribbon--right {
-        background-color: var(--primary);
-        color: var(--primary-lightest);
-        display: block;
-        font-size: var(--text-sm);
-        inline-size: var(--width-sm);
-        inset-block-start: calc(var(--space-4xl) * -1);
-        line-height: var(--text-height-heading);
-        padding: var(--space-sm) var(--space-md);
-        position: absolute;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    & > .ribbon--right {
-        inset-inline-end: calc(var(--space-4xl) * -1);
-        transform-origin: bottom right;
-        transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-45deg);
-    }
-
-    & > .ribbon--left {
-        inset-inline-end: auto;
-        inset-inline-start: calc(var(--space-4xl) * -1);
-        transform-origin: bottom left;
-        transform: translateY(-100%) rotate(90deg) translateX(70%) rotate(-135deg);
-
     }
 }
 
@@ -1823,7 +1777,7 @@ fieldset:has([name="_pretend-check"]) {
 }
 
 .float--left-offset {
-    margin-inline-start: calc(var(--space-offset) * -1);
+    margin-inline-start: calc(var(--space-edge) * -1);
 }
 
 .float--none {
@@ -1841,7 +1795,7 @@ fieldset:has([name="_pretend-check"]) {
 }
 
 .float--right-offset {
-    margin-inline-end: calc(var(--space-offset) * -1);
+    margin-inline-end: calc(var(--space-edge) * -1);
 }
 
 @each $_key, $_value in $breakpoint {
@@ -1920,7 +1874,7 @@ fieldset:has([name="_pretend-check"]) {
         }
 
         .float--#{$_key}-left-offset {
-            margin-inline-start: calc(var(--space-offset) * -1);
+            margin-inline-start: calc(var(--space-edge) * -1);
         }
 
         .float--#{$_key}-none {
@@ -1938,7 +1892,7 @@ fieldset:has([name="_pretend-check"]) {
         }
 
         .float--#{$_key}-right-offset {
-            margin-inline-end: calc(var(--space-offset) * -1);
+            margin-inline-end: calc(var(--space-edge) * -1);
         }
     }
 }
@@ -2021,19 +1975,23 @@ fieldset:has([name="_pretend-check"]) {
 .bg-blur--sm,
 .bg-blur--md,
 .bg-blur--lg {
-    background-color: var(--blur-bg-color);
+    --blur-sm: var(--space-xs);
+    --blur-md: var(--space-sm);
+    --blur-lg: var(--space-md);
+
+    background-color: var(--bg-color-blur);
 }
 
 .bg-blur--sm {
-    backdrop-filter: blur(var(--radius-sm));
+    backdrop-filter: blur(var(--space-xs));
 }
 
 .bg-blur--md {
-    backdrop-filter: blur(var(--radius-md));
+    backdrop-filter: blur(var(--space-sm));
 }
 
 .bg-blur--lg {
-    backdrop-filter: blur(var(--radius-lg));
+    backdrop-filter: blur(var(--space-md));
 }
 
 // Background Color
@@ -2110,57 +2068,55 @@ fieldset:has([name="_pretend-check"]) {
     isolation: isolate;
 }
 
-// Border
+// Borders, Radius
 .border {
     & {
-        border-style: var(--border-style);
-        border-color: var(--border-color);
+        border: var(--border-width) var(--border-style) var(--border-color);
         border-radius: var(--border-radius);
-        border-width: var(--border-width);
+    }
+
+    &--top {
+        border-top: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--right {
+        border-right: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--bottom {
+        border-bottom: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--left {
+        border-left: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--flat {
+        border: none;
     }
 
     &-radius {
         border-radius: var(--border-radius);
     }
 
-    &--bottom {
-        border-bottom-style: var(--border-style);
-        border-bottom-color: var(--border-color);
-        border-bottom-width: var(--border-width);
+    &-radius--alt {
+        border-radius: var(--border-radius-alt);
     }
 
-    &--left {
-        border-left-style: var(--border-style);
-        border-left-color: var(--border-color);
-        border-left-width: var(--border-width);
+    &-radius--oval {
+        border-radius: var(--border-radius-oval);
     }
 
-    &--right {
-        border-right-style: var(--border-style);
-        border-right-color: var(--border-color);
-        border-right-width: var(--border-width);
+    &-radius--round {
+        border-radius: var(--border-radius-round);
     }
 
-    &--top {
-        border-top-style: var(--border-style);
-        border-top-color: var(--border-color);
-        border-top-width: var(--border-width);
+    &-radius--flat {
+        border-radius: 0;
     }
-}
-
-.border--flat {
-    border: none;
 }
 
 // Breakout
-.breakout--offset {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline-start: 50%;
-    max-inline-size: calc(100% + calc(var(--space-offset) * 2));
-    transform: translateX(-50%);
-}
-
 .breakout--wide {
     align-self: flex-start;
     inline-size: 100vw;
@@ -2175,13 +2131,6 @@ fieldset:has([name="_pretend-check"]) {
     margin-inline-start: 50%;
     max-inline-size: var(--width-max);
     transform: translateX(-50%);
-}
-
-.breakout--full {
-    align-self: flex-start;
-    inline-size: 100vw;
-    margin-inline: calc(50% - 50vw);
-    max-inline-size: 100vw;
 }
 
 // Clear
@@ -2205,11 +2154,11 @@ fieldset:has([name="_pretend-check"]) {
     }
 
     .color--#{$_key}-lightest {
-        color: var(--#{$_key}-lighter);
+        color: var(--#{$_key}-lightest);
     }
 
     .color--#{$_key}-lighter {
-        color: var(--#{$_key}-light);
+        color: var(--#{$_key}-lighter);
     }
 
     .color--#{$_key}-light {
@@ -2221,11 +2170,11 @@ fieldset:has([name="_pretend-check"]) {
     }
 
     .color--#{$_key}-darker {
-        color: var(--#{$_key}-dark);
+        color: var(--#{$_key}-darker);
     }
 
     .color--#{$_key}-darkest {
-        color: var(--#{$_key}-darker);
+        color: var(--#{$_key}-darkest);
     }
 }
 
@@ -2273,8 +2222,11 @@ fieldset:has([name="_pretend-check"]) {
 .content-column--3,
 .content-column--4,
 .content-column--5 {
-    column-gap: var(--space-block);
-    column-rule: var(--border-width) var(--border-style) var(--border-color);
+    --gap-content-column: var(--space-block);
+    --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
+
+    column-gap: var(--gap-content-column);
+    column-rule: var(--rule-content-column);
 }
 
 .content-column--1 {
@@ -2691,87 +2643,77 @@ $_value in $breakpoint {
 }
 
 // Gap
-.gap--base {
-    gap: var(--space-base);
+.gap {
+    &--icon {
+        gap: var(--space-icon);
 
-    &-column {
-        column-gap: var(--space-base);
+        &-column {
+            column-gap: var(--space-icon);
+        }
+
+        &-row {
+            row-gap: var(--space-icon);
+        }
     }
 
-    &-row {
-        row-gap: var(--space-base);
-    }
-}
+    &--block {
+        gap: var(--space-block);
 
-.gap--block {
-    gap: var(--space-block);
+        &-column {
+            column-gap: var(--space-block);
+        }
 
-    &-column {
-        column-gap: var(--space-block);
-    }
-
-    &-row {
-        row-gap: var(--space-block);
-    }
-}
-
-.gap--container {
-    gap: var(--space-container);
-
-    &-column {
-        column-gap: var(--space-container);
+        &-row {
+            row-gap: var(--space-block);
+        }
     }
 
-    &-row {
-        row-gap: var(--space-container);
-    }
-}
+    &--grid {
+        gap: var(--space-grid);
 
-.gap--grid {
-    gap: var(--space-grid);
+        &-column {
+            column-gap: var(--space-grid);
+        }
 
-    &-column {
-        column-gap: var(--space-grid);
-    }
-
-    &-row {
-        row-gap: var(--space-grid);
-    }
-}
-
-.gap--icon {
-    gap: var(--space-icon);
-
-    &-column {
-        column-gap: var(--space-icon);
+        &-row {
+            row-gap: var(--space-grid);
+        }
     }
 
-    &-row {
-        row-gap: var(--space-icon);
-    }
-}
+    &--container {
+        gap: var(--space-container);
 
-.gap--section {
-    gap: var(--space-section);
+        &-column {
+            column-gap: var(--space-container);
+        }
 
-    &-column {
-        column-gap: var(--space-section);
-    }
-
-    &-row {
-        row-gap: var(--space-section);
-    }
-}
-
-.gap--flat {
-    gap: 0;
-
-    &-column {
-        column-gap: 0;
+        &-row {
+            row-gap: var(--space-container);
+        }
     }
 
-    &-row {
-        row-gap: 0;
+    &--section {
+        gap: var(--space-section);
+
+        &-column {
+            column-gap: var(--space-section);
+        }
+
+        &-row {
+            row-gap: var(--space-section);
+        }
+    }
+
+    &--flat {
+        gap: 0;
+
+        &-column {
+            column-gap: 0;
+        }
+
+        &-row {
+            row-gap: 0;
+        }
     }
 }
 
@@ -2835,11 +2777,11 @@ $_value in $breakpoint {
 
 // Hide - Visually
 .hide--visually:not(:focus):not(:active) {
-    block-size: var(--space-px) !important;
+    block-size: 1px !important;
     border: 0 !important;
     clip-path: inset(50%) !important;
-    inline-size: var(--space-px) !important;
-    margin: calc(var(--space-px) * -1) !important;
+    inline-size: 1px !important;
+    margin: -1px !important;
     overflow: hidden !important;
     padding: 0 !important;
     position: absolute !important;
@@ -2859,136 +2801,120 @@ ul.list--flat,
 
 // List - Marker
 .list-marker--color li::marker {
-    color: var(--primary);
+    --color-marker: var(--primary);
+
+    color: var(--color-marker);
 }
 
-// Margin - Bottom
-.margin-bottom--base {
-    margin-block-end: var(--space-base);
-}
+// Margin
+.margin {
+    &-top--icon {
+        margin-block-start: var(--space-icon);
+    }
 
-.margin-bottom--block {
-    margin-block-end: var(--space-block);
-}
+    &-top--block {
+        margin-block-start: var(--space-block);
+    }
 
-.margin-bottom--container {
-    margin-block-end: var(--space-container);
-}
+    &-top--grid {
+        margin-block-start: var(--space-grid);
+    }
 
-.margin-bottom--grid {
-    margin-block-end: var(--space-grid);
-}
+    &-top--container {
+        margin-block-start: var(--space-container);
+    }
 
-.margin-bottom--icon {
-    margin-block-end: var(--space-icon);
-}
+    &-top--section {
+        margin-block-start: var(--space-section);
+    }
 
-.margin-bottom--section {
-    margin-block-end: var(--space-section);
-}
+    &-top--flat {
+        margin-block-start: 0;
+    }
 
-// Margin - Left
-.margin-left--base {
-    margin-inline-start: var(--space-base);
-}
+    &-right--icon {
+        margin-inline-end: var(--space-icon);
+    }
 
-.margin-left--block {
-    margin-inline-start: var(--space-block);
-}
+    &-right--block {
+        margin-inline-end: var(--space-block);
+    }
 
-.margin-left--container {
-    margin-inline-start: var(--space-container);
-}
+    &-right--grid {
+        margin-inline-end: var(--space-grid);
+    }
 
-.margin-left--grid {
-    margin-inline-start: var(--space-grid);
-}
+    &-right--container {
+        margin-inline-end: var(--space-container);
+    }
 
-.margin-left--icon {
-    margin-inline-start: var(--space-icon);
-}
+    &-right--section {
+        margin-inline-end: var(--space-section);
+    }
 
-.margin-left--section {
-    margin-inline-start: var(--space-section);
-}
+    &-right--flat {
+        margin-inline-end: 0;
+    }
 
-// Margin - Right
-.margin-right--base {
-    margin-inline-end: var(--space-base);
-}
+    &-bottom--icon {
+        margin-block-end: var(--space-icon);
+    }
 
-.margin-right--block {
-    margin-inline-end: var(--space-block);
-}
+    &-bottom--block {
+        margin-block-end: var(--space-block);
+    }
 
-.margin-right--container {
-    margin-inline-end: var(--space-container);
-}
+    &-bottom--grid {
+        margin-block-end: var(--space-grid);
+    }
 
-.margin-right--grid {
-    margin-inline-end: var(--space-grid);
-}
+    &-bottom--container {
+        margin-block-end: var(--space-container);
+    }
 
-.margin-right--icon {
-    margin-inline-end: var(--space-icon);
-}
+    &-bottom--section {
+        margin-block-end: var(--space-section);
+    }
 
-.margin-right--section {
-    margin-inline-end: var(--space-section);
-}
+    &-bottom--flat {
+        margin-block-end: 0;
+    }
 
-// Margin - Top
-.margin-top--base {
-    margin-block-start: var(--space-base);
-}
+    &-left--icon {
+        margin-inline-start: var(--space-icon);
+    }
 
-.margin-top--block {
-    margin-block-start: var(--space-block);
-}
+    &-left--block {
+        margin-inline-start: var(--space-block);
+    }
 
-.margin-top--container {
-    margin-block-start: var(--space-container);
-}
+    &-left--grid {
+        margin-inline-start: var(--space-grid);
+    }
 
-.margin-top--grid {
-    margin-block-start: var(--space-grid);
-}
+    &-left--container {
+        margin-inline-start: var(--space-container);
+    }
 
-.margin-top--icon {
-    margin-block-start: var(--space-icon);
-}
+    &-left--section {
+        margin-inline-start: var(--space-section);
+    }
 
-.margin-top--section {
-    margin-block-start: var(--space-section);
-}
+    &-left--flat {
+        margin-inline-start: 0;
+    }
 
-// Margin - Flat
-.margin-bottom--flat {
-    margin-block-end: 0;
-}
+    &-y--flat {
+        margin-block: 0;
+    }
 
-.margin-left--flat {
-    margin-inline-start: 0;
-}
+    &-x--flat {
+        margin-inline: 0;
+    }
 
-.margin-right--flat {
-    margin-inline-end: 0;
-}
-
-.margin-top--flat {
-    margin-block-start: 0;
-}
-
-.margin-x--flat {
-    margin-inline: 0;
-}
-
-.margin-y--flat {
-    margin-block: 0;
-}
-
-.margin--flat {
-    margin: 0;
+    &--flat {
+        margin: 0;
+    }
 }
 
 // Object - Fit
@@ -3004,7 +2930,7 @@ ul.list--flat,
     object-fit: none;
 }
 
-// Object - Position
+// Object Position
 .object--bottom-center {
     object-position: var(--object-center) var(--object-end);
 }
@@ -3113,21 +3039,21 @@ ul.list--flat,
 
 // Order
 .order--first {
-    order: var(--z-back);
+    order: -1;
 }
 
 .order--last {
-    order: var(--z-high);
+    order: 1000;
 }
 
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
         .order--#{$_key}-first {
-            order: var(--z-back);
+            order: -1;
         }
 
         .order--#{$_key}-last {
-            order: var(--z-high);
+            order: 1000;
         }
     }
 }
@@ -3154,261 +3080,216 @@ ul.list--flat,
 }
 
 // Padding
-.padding--base {
-    padding: var(--space-base);
-
-    &-x {
-        padding-inline: var(--space-base);
+.padding {
+    &--icon {
+        padding: var(--space-icon);
     }
 
-    &-y {
-        padding-block: var(--space-base);
-    }
-}
-
-.padding--block {
-    padding: var(--space-block);
-
-    &-x {
-        padding-inline: var(--space-block);
+    &-y--icon {
+        padding-block: var(--space-icon);
     }
 
-    &-y {
-        padding-block: var(--space-block);
-    }
-}
-
-.padding--container {
-    padding: var(--space-container);
-
-    &-x {
-        padding-inline: var(--space-container);
-    }
-
-    &-y {
-        padding-block: var(--space-container);
-    }
-}
-
-.padding--grid {
-    padding: var(--space-grid);
-
-    &-x {
-        padding-inline: var(--space-grid);
-    }
-
-    &-y {
-        padding-block: var(--space-grid);
-    }
-}
-
-.padding--header {
-    padding: var(--space-block) var(--space-offset);
-
-    &-x {
-        padding-inline: var(--space-offset);
-    }
-
-    &-y {
-        padding-block: var(--space-block);
-    }
-}
-
-.padding--icon {
-    padding: var(--space-icon);
-
-    &-x {
+    &-x--icon {
         padding-inline: var(--space-icon);
     }
 
-    &-y {
-        padding-block: var(--space-icon);
-    }
-}
-
-.padding--section {
-    padding: var(--space-section) var(--space-offset);
-
-    &-x {
-        padding-inline: var(--space-offset);
+    &--block {
+        padding: var(--space-block);
     }
 
-    &-y {
+    &-y--block {
+        padding-block: var(--space-block);
+    }
+
+    &-x--block {
+        padding-inline: var(--space-block);
+    }
+
+    &-x--edge {
+        padding-inline: var(--space-edge);
+    }
+
+    &--grid {
+        padding: var(--space-grid);
+    }
+
+    &-y--grid {
+        padding-block: var(--space-grid);
+    }
+
+    &-x--grid {
+        padding-inline: var(--space-grid);
+    }
+
+    &--container {
+        padding: var(--space-container);
+    }
+
+    &-y--container {
+        padding-block: var(--space-container);
+    }
+
+    &-x--container {
+        padding-inline: var(--space-container);
+    }
+
+    &--section {
+        padding: var(--space-section) var(--space-edge);
+    }
+
+    &-y--section {
         padding-block: var(--space-section);
     }
-}
 
-// Padding - Flat
-.padding-bottom--flat {
-    padding-block-end: 0;
-}
+    &-x--section {
+        padding-inline: var(--space-edge);
+    }
 
-.padding-left--flat {
-    padding-inline-start: 0;
-}
+    &-top--flat {
+        padding-block-start: 0;
+    }
 
-.padding-right--flat {
-    padding-inline-end: 0;
-}
+    &-right--flat {
+        padding-inline-end: 0;
+    }
 
-.padding-top--flat {
-    padding-block-start: 0;
-}
+    &-bottom--flat {
+        padding-block-end: 0;
+    }
 
-.padding-x--flat {
-    padding-inline: 0;
-}
+    &-left--flat {
+        padding-inline-start: 0;
+    }
 
-.padding-y--flat {
-    padding-block: 0;
-}
+    &-y--flat {
+        padding-block: 0;
+    }
 
-.padding--flat {
-    padding: 0;
+    &-x--flat {
+        padding-inline: 0;
+    }
+
+    &--flat {
+        padding: 0;
+    }
 }
 
 // Position
-.position--absolute {
-    position: absolute;
-}
-
-.position--fixed {
-    position: fixed;
-}
-
-.position--relative {
-    position: relative;
-}
-
-.position--static {
-    position: static;
-}
-
-.position--sticky {
-    inset-block-start: 0;
-    position: sticky;
-
-    &-offset {
-        inset-block-start: var(--space-base);
+.position {
+    &--absolute {
+        position: absolute;
     }
-}
 
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        .position--#{$_key}-absolute {
-            position: absolute;
-        }
+    &--fixed {
+        position: fixed;
+    }
 
-        .position--#{$_key}-fixed {
-            position: fixed;
-        }
+    &--relative {
+        position: relative;
+    }
 
-        .position--#{$_key}-relative {
-            position: relative;
-        }
+    &--static {
+        position: static;
+    }
 
-        .position--#{$_key}-static {
-            position: static;
-        }
+    &--sticky {
+        inset-block-start: 0;
+        position: sticky;
 
-        .position--#{$_key}-sticky {
-            inset-block-start: 0;
-            position: sticky;
-        }
-
-        .position--#{$_key}-sticky-offset {
+        &-offset {
             inset-block-start: var(--space-base);
         }
     }
-}
 
-// Position - Flat
-.position--bottom-flat {
-    inset-block-end: 0;
-}
+    &-inset--top {
+        inset-block-start: 0;
+    }
 
-.position--left-flat {
-    inset-inline-start: 0;
-}
+    &-inset--right {
+        inset-inline-end: 0;
+    }
 
-.position--right-flat {
-    inset-inline-end: 0;
-}
+    &-inset--bottom {
+        inset-block-end: 0;
+    }
 
-.position--top-flat {
-    inset-block-start: 0;
-}
+    &-inset--left {
+        inset-inline-start: 0;
+    }
 
-.position-x--flat {
-    inset-inline: 0;
-}
+    &-inset--y {
+        inset-block: 0;
+    }
 
-.position-y--flat {
-    inset-block: 0;
-}
+    &-inset--x {
+        inset-inline: 0;
+    }
 
-.position--flat {
-    inset: 0
+    &-inset {
+        inset: 0;
+    }
 }
 
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
-        .position--#{$_key}-bottom-flat {
-            inset-block-end: 0;
-        }
+        .position {
+            &--#{$_key}-absolute {
+                position: absolute;
+            }
 
-        .position--#{$_key}-left-flat {
-            inset-inline-start: 0;
-        }
+            &--#{$_key}-fixed {
+                position: fixed;
+            }
 
-        .position--#{$_key}-right-flat {
-            inset-inline-end: 0;
-        }
+            &--#{$_key}-relative {
+                position: relative;
+            }
 
-        .position--#{$_key}-top-flat {
-            inset-block-start: 0;
-        }
+            &--#{$_key}-static {
+                position: static;
+            }
 
-        .position-x--#{$_key}-flat {
-            inset-inline: 0;
-        }
+            &--#{$_key}-sticky {
+                inset-block-start: 0;
+                position: sticky;
 
-        .position-y--#{$_key}-flat {
-            inset-block: 0;
-        }
+                &-offset {
+                    inset-block-start: var(--space-base);
+                }
+            }
 
-        .position--#{$_key}-flat {
-            inset: 0
+            &-inset--#{$_key}-top {
+                inset-block-start: 0;
+            }
+
+            &-inset--#{$_key}-right {
+                inset-inline-end: 0;
+            }
+
+            &-inset--#{$_key}-bottom {
+                inset-block-end: 0;
+            }
+
+            &-inset--#{$_key}-left {
+                inset-inline-start: 0;
+            }
+
+            &-inset--#{$_key}-y {
+                inset-block: 0;
+            }
+
+            &-inset--#{$_key}-x {
+                inset-inline: 0;
+            }
+
+            &-inset-#{$_key} {
+                inset: 0;
+            }
         }
     }
 }
 
-// Radius
-.radius--sm {
-    border-radius: var(--radius-sm);
-}
-
-.radius--md {
-    border-radius: var(--radius-md);
-}
-
-.radius--lg {
-    border-radius: var(--radius-lg);
-}
-
-.radius--oval {
-    border-radius: var(--radius-oval);
-}
-
-.radius--round {
-    border-radius: var(--radius-round);
-}
-
-.radius--flat {
-    border-radius: 0;
-}
-
-// Shadow - Box
+// Box Shadows
 .box-shadow--sm {
     box-shadow: var(--box-shadow-sm);
 }
@@ -3445,7 +3326,7 @@ ul.list--flat,
     }
 }
 
-// Shadow - Drop
+// Shadow - Drops
 .drop-shadow--sm {
     filter: var(--drop-shadow-sm);
 }
@@ -3484,23 +3365,38 @@ ul.list--flat,
 
 // Text
 .text--fine {
-    font-size: var(--text-fine);
-    line-height: var(--text-height-body);
+    font-size: var(--font-size-fine);
 }
 
 .text--base {
-    font-size: var(--text-base);
-    line-height: var(--text-height-body);
+    font-size: var(--font-size-body);
 }
 
 .text--lede {
-    font-size: var(--text-lede);
-    line-height: var(--text-height-body);
+    font-size: var(--font-size-lede);
+}
+
+.text--h4 {
+    font-size: var(--font-size-h4);
+}
+
+.text--h3 {
+    font-size: var(--font-size-h3);
+}
+
+.text--h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-heading)
+}
+
+.text--h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-heading)
 }
 
 .text--hero {
-    font-size: var(--text-hero);
-    line-height: var(--text-height-heading);
+    font-size: var(--font-size-hero);
+    line-height: var(--line-height-heading)
 }
 
 // Text - Align
@@ -3560,11 +3456,11 @@ ul.list--flat,
 
 // Text - Height
 .text-height--body {
-    line-height: var(--text-height-body);
+    line-height: var(--line-height-body);
 }
 
 .text-height--heading {
-    line-height: var(--text-height-heading);
+    line-height: var(--line-height-heading);
 }
 
 // Text - Spaced
@@ -3625,26 +3521,22 @@ ul.list--flat,
 }
 
 // Transition
-.transition--fast,
-.transition--normal,
-.transition--slow {
-    transition-timing-function: var(--transition-easing);
-}
+.transition {
+    transition-duration: var(--transition);
 
-.transition--fast {
-    transition-duration: var(--transition-fast);
-}
+    &--fast {
+        transition-duration: var(--transition-fast);
+    }
 
-.transition--normal {
-    transition-duration: var(--transition-normal);
-}
+    &--slow {
+        transition-duration: var(--transition-slow);
+    }
 
-.transition--slow {
-    transition-duration: var(--transition-slow);
-}
-
-.transition--flat {
-    transition: none;
+    &,
+    &--fast,
+    &--slow {
+        transition-timing-function: var(--transition-easing);
+    }
 }
 
 // Vertical Text
@@ -3751,15 +3643,15 @@ ul.list--flat,
     z-index: var(--z-front);
 }
 
-.z--low {
+.z-low {
     z-index: var(--z-low);
 }
 
-.z--mid {
+.z-mid {
     z-index: var(--z-mid);
 }
 
-.z--high {
+.z-high {
     z-index: var(--z-high);
 }
 
