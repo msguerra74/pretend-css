@@ -236,7 +236,7 @@ $breakpoint: (
     --font-size-9xl: #{fluid(38px, 128px)};
 
     // Text - Custom Sizing
-    --font-size-fine: var(--font-size-xs);
+    --font-size-small: var(--font-size-xs);
     --font-size-body: var(--font-size-md);
     --font-size-lede: var(--font-size-lg);
     --font-size-h4: var(--font-size-xl);
@@ -454,18 +454,22 @@ body {
     background-color: var(--bg-color-body);
     block-size: 100%;
     color: var(--color-body);
-    font-family: var(--font-family-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
-    font-size: var(--font-size-body);
     -webkit-font-smoothing: auto;
-    font-weight: 400;
     inline-size: 100%;
-    line-height: var(--line-height-body);
     margin-inline: auto;
     max-inline-size: var(--width-max);
     min-block-size: 100svh;
     min-inline-size: var(--width-min);
     overflow-wrap: break-word;
     overflow-x: hidden;
+}
+
+body,
+.text--body {
+    font-family: var(--font-family-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: var(--line-height-body);
 }
 
 // Anchor
@@ -528,18 +532,19 @@ a.link--dark {
 }
 
 // Heading
+.text--hero,
 h1,
-.h1,
+.h--1,
 h2,
-.h2,
+.h--2,
 h3,
-.h3,
+.h--3,
 h4,
-.h4,
+.h--4,
 h5,
-.h5,
+.h--5,
 h6,
-.h6 {
+.h--6 {
     color: var(--color-heading);
     font-family: var(--font-family-heading);
     font-size: var(--font-size-heading);
@@ -549,8 +554,15 @@ h6,
     text-wrap: balance;
 }
 
+.text--hero {
+    --color-heading: inherit;
+    --font-size-heading: var(--font-size-hero);
+    --font-weight-heading: 700;
+    --text-transform-heading: uppercase;
+}
+
 h1,
-.h1 {
+.h--1 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-h1);
     --font-weight-heading: 700;
@@ -558,7 +570,7 @@ h1,
 }
 
 h2,
-.h2 {
+.h--2 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-h2);
     --font-weight-heading: 700;
@@ -566,7 +578,7 @@ h2,
 }
 
 h3,
-.h3 {
+.h--3 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-h3);
     --font-weight-heading: 700;
@@ -574,7 +586,7 @@ h3,
 }
 
 h4,
-.h4 {
+.h--4 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-h4);
     --font-weight-heading: 700;
@@ -582,7 +594,7 @@ h4,
 }
 
 h5,
-.h5 {
+.h--5 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-lede);
     --font-weight-heading: 700;
@@ -590,7 +602,7 @@ h5,
 }
 
 h6,
-.h6 {
+.h--6 {
     --color-heading: inherit;
     --font-size-heading: var(--font-size-body);
     --font-weight-heading: 700;
@@ -638,8 +650,13 @@ p {
     }
 }
 
-small {
-    font-size: var(--font-size-fine);
+small,
+.text--small {
+    font-size: var(--font-size-small);
+}
+
+.text--lede {
+    font-size: var(--font-size-lede);
 }
 
 @if $layout-classes {
@@ -1186,7 +1203,7 @@ small {
 
     // Button - Sizing
     .btn--small {
-        --font-size-btn: var(--font-size-fine);
+        --font-size-btn: var(--font-size-small);
         --padding-x-btn: var(--space-md);
         --padding-y-btn: var(--space-sm);
     }
@@ -2397,55 +2414,6 @@ small {
             }
         }
     }
-
-    // Width
-    .width--min,
-    .width--sm,
-    .width--md,
-    .width--lg,
-    .width--xl,
-    .width--wide,
-    .width--max,
-    .width--prose,
-    .width--fill {
-        inline-size: 100%;
-    }
-
-    .width--min {
-        max-inline-size: var(--width-min);
-    }
-
-    .width--sm {
-        max-inline-size: var(--width-sm);
-    }
-
-    .width--md {
-        max-inline-size: var(--width-md);
-    }
-
-    .width--lg {
-        max-inline-size: var(--width-lg);
-    }
-
-    .width--xl {
-        max-inline-size: var(--width-xl);
-    }
-
-    .width--wide {
-        max-inline-size: var(--width-wide);
-    }
-
-    .width--max {
-        max-inline-size: var(--width-max);
-    }
-
-    .width--fit {
-        max-inline-size: fit-content;
-    }
-
-    .width--prose {
-        max-inline-size: var(--width-prose);
-    }
 }
 
 @if $optional-classes {
@@ -3474,42 +3442,6 @@ small {
         }
     }
 
-    // Text
-    .text--fine {
-        font-size: var(--font-size-fine);
-    }
-
-    .text--base {
-        font-size: var(--font-size-body);
-    }
-
-    .text--lede {
-        font-size: var(--font-size-lede);
-    }
-
-    .text--h4 {
-        font-size: var(--font-size-h4);
-    }
-
-    .text--h3 {
-        font-size: var(--font-size-h3);
-    }
-
-    .text--h2 {
-        font-size: var(--font-size-h2);
-        line-height: var(--line-height-heading)
-    }
-
-    .text--h1 {
-        font-size: var(--font-size-h1);
-        line-height: var(--line-height-heading)
-    }
-
-    .text--hero {
-        font-size: var(--font-size-hero);
-        line-height: var(--line-height-heading)
-    }
-
     // Text - Align
     .text-align--center {
         text-align: center;
@@ -3648,6 +3580,55 @@ small {
         &--slow {
             transition-timing-function: var(--transition-easing);
         }
+    }
+
+    // Width
+    .width--min,
+    .width--sm,
+    .width--md,
+    .width--lg,
+    .width--xl,
+    .width--wide,
+    .width--max,
+    .width--prose,
+    .width--fill {
+        inline-size: 100%;
+    }
+
+    .width--min {
+        max-inline-size: var(--width-min);
+    }
+
+    .width--sm {
+        max-inline-size: var(--width-sm);
+    }
+
+    .width--md {
+        max-inline-size: var(--width-md);
+    }
+
+    .width--lg {
+        max-inline-size: var(--width-lg);
+    }
+
+    .width--xl {
+        max-inline-size: var(--width-xl);
+    }
+
+    .width--wide {
+        max-inline-size: var(--width-wide);
+    }
+
+    .width--max {
+        max-inline-size: var(--width-max);
+    }
+
+    .width--fit {
+        max-inline-size: fit-content;
+    }
+
+    .width--prose {
+        max-inline-size: var(--width-prose);
     }
 
     // Z-Index
