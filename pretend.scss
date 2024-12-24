@@ -16,26 +16,27 @@ $print-classes: true;
 // --- SCSS Options --- //
 
 // Color
+// Comment or uncomment to enable or disable colors.
 $primary: hsl(0deg 84% 60%);
-$secondary: hsl(198deg 90% 48%);
-$tertiary: hsl(131deg 69% 46%);
-$quaternary: hsl(25deg 100% 61%);
+// $secondary: hsl(198deg 90% 48%);
+// $tertiary: hsl(131deg 69% 46%);
+// $quaternary: hsl(25deg 100% 61%);
 $danger: hsl(1deg 99% 68%);
-$highlight: hsl(42deg 98% 57%);
-$info: hsl(198deg 90% 48%);
+// $highlight: hsl(42deg 98% 57%);
+// $info: hsl(198deg 90% 48%);
 $success: hsl(131deg 69% 46%);
-$warning: hsl(25deg 100% 61%);
+// $warning: hsl(25deg 100% 61%);
 
 $color: (
     primary: $primary,
-    secondary: $secondary,
-    tertiary: $tertiary,
-    quaternary: $quaternary,
+    // secondary: $secondary,
+    // tertiary: $tertiary,
+    // quaternary: $quaternary,
     danger: $danger,
-    highlight: $highlight,
-    info: $info,
+    // highlight: $highlight,
+    // info: $info,
     success: $success,
-    warning: $warning
+    // warning: $warning
 );
 
 // Color - Base
@@ -2039,20 +2040,6 @@ small,
         transform: translateX(-50%);
     }
 
-    // Clear
-    .clear {
-
-        &::before,
-        &::after {
-            content: "";
-            display: table;
-        }
-
-        &::after {
-            clear: both;
-        }
-    }
-
     // Color
     @each $_key, $_value in $color {
         .color--#{$_key} {
@@ -2543,6 +2530,20 @@ small,
 
         &-radius--flat {
             border-radius: 0;
+        }
+    }
+
+    // Clear
+    .clear {
+
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+
+        &::after {
+            clear: both;
         }
     }
 
