@@ -17,22 +17,22 @@ $print-classes: true;
 
 // Color
 // Comment or uncomment to enable or disable colors.
-$primary: hsl(0deg 84% 60%);
-// $secondary: hsl(198deg 90% 48%);
-// $tertiary: hsl(131deg 69% 46%);
-// $quaternary: hsl(25deg 100% 61%);
-$danger: hsl(1deg 99% 68%);
-// $highlight: hsl(42deg 98% 57%);
-// $info: hsl(198deg 90% 48%);
-$success: hsl(131deg 69% 46%);
-// $warning: hsl(25deg 100% 61%);
+$primary: hsl(258deg 90% 66%);
+// $secondary: hsl(199deg 88% 49%);
+// $tertiary: hsl(160deg 82% 40%);
+// $quaternary: hsl(25deg 95% 53%);
+$error: hsl(360deg 85% 60%);
+// $highlight: hsl(48deg 96% 77%);
+// $info: hsl(199deg 88% 49%);
+$success: hsl(160deg 82% 40%);
+// $warning: hsl(25deg 95% 53%);
 
 $color: (
     primary: $primary,
     // secondary: $secondary,
     // tertiary: $tertiary,
     // quaternary: $quaternary,
-    danger: $danger,
+    error: $error,
     // highlight: $highlight,
     // info: $info,
     success: $success,
@@ -40,7 +40,7 @@ $color: (
 );
 
 // Color - Base
-$base: hsl(0deg 0% 0%);
+$base: hsl(24deg 11% 4%);
 
 $color-base: (
     base: $base
@@ -216,10 +216,31 @@ $breakpoint: (
     --space-section: var(--space-4xl);
 
     // Text
-    --font-family-body: Verdana;
-    --font-family-heading: var(--font-family-body);
+    --font-family-body: var(--font-family-humanist);
+    --font-family-heading: var(--font-family-humanist);
+    --font-family-code: var(--font-family-monospace-code);
+    --font-family-fallback: var(--font-family-system), var(--font-family-emoji);
     --line-height-body: 1.4;
     --line-height-heading: 1.2;
+
+    // Text - Family
+    // https://github.com/system-fonts/modern-font-stacks
+    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
+    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
+    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
+    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
+    --font-family-system: system-ui, sans-serif;
+    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
 
     // Text - Sizing
     --font-size-xs: #{fluid(12px, 14px)};
@@ -467,7 +488,7 @@ body {
 
 body,
 .text--body {
-    font-family: var(--font-family-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
+    font-family: var(--font-family-body), var(--font-family-fallback);
     font-size: var(--font-size-body);
     font-weight: 400;
     line-height: var(--line-height-body);
@@ -638,6 +659,11 @@ video {
     block-size: auto;
     display: block;
     max-inline-size: 100%;
+}
+
+code,
+pre {
+    font-family: var(--font-family-code);
 }
 
 img {
@@ -1111,7 +1137,7 @@ small,
     // Background Overlay
     // Add to elements inside sections that need to overlay the section background.
     /* Background Overlay HTML Example:
-    <section class="bg-overlay--wrapper section">
+    <section class="bg-overlay-wrapper section">
         <div class="container">
             <div class="block">
                 <!-- Content -->
@@ -1131,7 +1157,7 @@ small,
         position: absolute;
         z-index: var(--z-back);
 
-        &--wrapper {
+        &-wrapper {
             isolation: isolate;
             position: relative;
         }
@@ -1185,8 +1211,6 @@ small,
         transition: background-color var(--transition-btn) var(--transition-easing), border-color var(--transition-btn) var(--transition-easing), color var(--transition-btn) var(--transition-easing);
 
         &:focus-visible {
-            --color-focus: var(--border-color-btn);
-
             transition: none;
         }
 
@@ -1222,7 +1246,7 @@ small,
         --color-btn: var(--base-darkest);
 
         &:focus-visible {
-            --color-focus: var(--base-lightest);
+            @extend .focus--light;
         }
 
         &.btn--outline {
@@ -1236,7 +1260,7 @@ small,
         --color-btn: var(--base-lightest);
 
         &:focus-visible {
-            --color-focus: var(--base-darkest);
+            @extend .focus--dark;
         }
 
         &.btn--outline {
@@ -1362,43 +1386,49 @@ small,
 
     <!-- Generic form with various input types -->
     <form class="form">
-        <div>
+        <fieldset>
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" placeholder="Pretend Person" required>
+        </fieldset>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+            </fieldset>
+            <fieldset>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+            </fieldset>
         </div>
-        <div>
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </fieldset>
+            <fieldset>
+                <label for="url">Website</label>
+                <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
+            </fieldset>
         </div>
-        <div>
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date">
+            </fieldset>
+            <fieldset>
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time">
+            </fieldset>
         </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-        <div>
-            <label for="url">Website</label>
-            <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
-        </div>
-        <div>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date">
-        </div>
-        <div>
-            <label for="time">Time</label>
-            <input type="time" id="time" name="time">
-        </div>
-        <div>
+        <fieldset>
             <label for="number">Number</label>
             <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
-        </div>
-        <div>
+        </fieldset>
+        <fieldset>
             <label for="search">Search</label>
             <input type="search" id="search" name="search" placeholder="Search...">
-        </div>
-        <div>
+        </fieldset>
+        <fieldset>
             <label for="country">Country</label>
             <select id="country" name="country" required>
                 <option value="">Select a country</option>
@@ -1407,69 +1437,60 @@ small,
                 <option value="mx">Mexico</option>
                 <option value="other">Other</option>
             </select>
-        </div>
-        <div>
+        </fieldset>
+        <fieldset>
             <label for="message">Message</label>
             <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
-        </div>
-        <fieldset>
-            <legend>Preferences</legend>
-            <div>
+        </fieldset>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <legend>Preferences</legend>
                 <label>
                     <input type="checkbox" name="option1" value="yes">
                     Option One
                 </label>
-            </div>
-            <div>
                 <label>
                     <input type="checkbox" name="option2" value="accepted" required>
                     Option Two
                 </label>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>More Preference</legend>
-
-            <div>
+            </fieldset>
+            <fieldset>
+                <legend>More Preference</legend>
                 <label>
                     <input type="radio" name="contact" value="option3" required>
                     Option Three
                 </label>
-            </div>
-
-            <div>
                 <label>
                     <input type="radio" name="contact" value="option4">
                     Option Four
                 </label>
-            </div>
-        </fieldset>
+            </fieldset>
+        </div>
         <div class="form-error">
             <p>This is what an error message looks like.</p>
         </div>
         <div class="form-success">
             <p>This is what a success message looks like.</p>
         </div>
-        <div>
-            <button type="submit">Submit Form</button>
-        </div>
+        <button type="submit">Submit Form</button>
     </form>
     */
     .form,
     .form form {
-        @extend .grid;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-grid);
+        inline-size: 100%;
     }
 
     .form {
         --bg-color-checkbox-checked: var(--primary);
         --bg-color-checkbox: var(--bg-color-input);
-        --bg-color-form-error: var(--danger);
+        --bg-color-form-error: var(--error);
         --bg-color-form-success: var(--success);
         --bg-color-input-disabled: var(--base-lighter);
-        --bg-color-input-focus: var(--base-white);
         --bg-color-input: var(--base-lightest);
         --bg-color-submit: var(--primary);
-        --border-color-input-focus: var(--primary);
         --border-color-input: var(--border-color);
         --border-radius-checkbox: var(--border-radius);
         --border-radius-input: var(--border-radius);
@@ -1477,7 +1498,7 @@ small,
         --border-style-input: var(--border-style);
         --border-width-input: var(--border-width);
         --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
-        --color-form-error: var(--danger-lightest);
+        --color-form-error: var(--error-lightest);
         --color-form-success: var(--success-lightest);
         --color-input: var(--base-darkest);
         --color-label: inherit;
@@ -1594,12 +1615,6 @@ small,
             cursor: not-allowed;
             opacity: 0.75;
         }
-
-        &:focus {
-            background-color: var(--bg-color-input-focus);
-            border-color: var(--border-color-input-focus);
-            outline: none;
-        }
     }
 
     // Label, Legend
@@ -1641,12 +1656,6 @@ small,
         min-block-size: var(--height-input);
         padding: var(--padding-y-input) var(--padding-x-input);
         transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-
-        &:focus {
-            background-color: var(--bg-color-input-focus);
-            border-color: var(--border-color-input-focus);
-            outline: none;
-        }
 
         &:disabled {
             background-color: var(--bg-color-input-disabled);
@@ -1943,15 +1952,15 @@ small,
     }
 
     .bg-blur--sm {
-        backdrop-filter: blur(var(--space-xs));
+        backdrop-filter: blur(var(--blur-sm));
     }
 
     .bg-blur--md {
-        backdrop-filter: blur(var(--space-sm));
+        backdrop-filter: blur(var(--blur-md));
     }
 
     .bg-blur--lg {
-        backdrop-filter: blur(var(--space-md));
+        backdrop-filter: blur(var(--blur-lg));
     }
 
     // Background Color

@@ -6,9 +6,9 @@ https://madebypretend.com
 .color-scheme--light,
 [data-color-scheme=light],
 :root:not(.color-scheme--dark, [data-color-scheme=dark]) {
-    --primary-h: 0deg;
-    --primary-s: 84%;
-    --primary-l: 60%;
+    --primary-h: 258deg;
+    --primary-s: 90%;
+    --primary-l: 66%;
     --primary: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
     --primary-lightest: hsl(var(--primary-h) var(--primary-s) 95%);
     --primary-lighter: hsl(var(--primary-h) var(--primary-s) 85%);
@@ -16,19 +16,19 @@ https://madebypretend.com
     --primary-dark: hsl(var(--primary-h) var(--primary-s) 40%);
     --primary-darker: hsl(var(--primary-h) var(--primary-s) 25%);
     --primary-darkest: hsl(var(--primary-h) var(--primary-s) 10%);
-    --danger-h: 1deg;
-    --danger-s: 99%;
-    --danger-l: 68%;
-    --danger: hsl(var(--danger-h) var(--danger-s) var(--danger-l));
-    --danger-lightest: hsl(var(--danger-h) var(--danger-s) 95%);
-    --danger-lighter: hsl(var(--danger-h) var(--danger-s) 85%);
-    --danger-light: hsl(var(--danger-h) var(--danger-s) 75%);
-    --danger-dark: hsl(var(--danger-h) var(--danger-s) 40%);
-    --danger-darker: hsl(var(--danger-h) var(--danger-s) 25%);
-    --danger-darkest: hsl(var(--danger-h) var(--danger-s) 10%);
-    --success-h: 131deg;
-    --success-s: 69%;
-    --success-l: 46%;
+    --error-h: 0deg;
+    --error-s: 85%;
+    --error-l: 60%;
+    --error: hsl(var(--error-h) var(--error-s) var(--error-l));
+    --error-lightest: hsl(var(--error-h) var(--error-s) 95%);
+    --error-lighter: hsl(var(--error-h) var(--error-s) 85%);
+    --error-light: hsl(var(--error-h) var(--error-s) 75%);
+    --error-dark: hsl(var(--error-h) var(--error-s) 40%);
+    --error-darker: hsl(var(--error-h) var(--error-s) 25%);
+    --error-darkest: hsl(var(--error-h) var(--error-s) 10%);
+    --success-h: 160deg;
+    --success-s: 82%;
+    --success-l: 40%;
     --success: hsl(var(--success-h) var(--success-s) var(--success-l));
     --success-lightest: hsl(var(--success-h) var(--success-s) 95%);
     --success-lighter: hsl(var(--success-h) var(--success-s) 85%);
@@ -36,9 +36,9 @@ https://madebypretend.com
     --success-dark: hsl(var(--success-h) var(--success-s) 40%);
     --success-darker: hsl(var(--success-h) var(--success-s) 25%);
     --success-darkest: hsl(var(--success-h) var(--success-s) 10%);
-    --base-h: 0deg;
-    --base-s: 0%;
-    --base-l: 0%;
+    --base-h: 24deg;
+    --base-s: 11%;
+    --base-l: 4%;
     --base-white: hsl(var(--base-h) var(--base-s) 100%);
     --base-lightest: hsl(var(--base-h) var(--base-s) 95%);
     --base-lighter: hsl(var(--base-h) var(--base-s) 85%);
@@ -107,10 +107,28 @@ https://madebypretend.com
     --space-grid: clamp(1.5rem, 2.5vw + 1rem, 3rem);
     --space-container: var(--space-3xl);
     --space-section: var(--space-4xl);
-    --font-family-body: Verdana;
-    --font-family-heading: var(--font-family-body);
+    --font-family-body: var(--font-family-humanist);
+    --font-family-heading: var(--font-family-humanist);
+    --font-family-code: var(--font-family-monospace-code);
+    --font-family-fallback: var(--font-family-system), var(--font-family-emoji);
     --line-height-body: 1.4;
     --line-height-heading: 1.2;
+    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
+    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
+    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
+    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
+    --font-family-system: system-ui, sans-serif;
+    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
     --font-size-xs: clamp(0.75rem, 0.2083333333vw + 0.7083333333rem, 0.875rem);
     --font-size-sm: clamp(0.875rem, 0.2083333333vw + 0.8333333333rem, 1rem);
     --font-size-md: clamp(1rem, 0.2083333333vw + 0.9583333333rem, 1.125rem);
@@ -162,12 +180,12 @@ https://madebypretend.com
     --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
     --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
     --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
-    --danger-lightest: hsl(var(--danger-h) var(--danger-s) 10%);
-    --danger-lighter: hsl(var(--danger-h) var(--danger-s) 25%);
-    --danger-light: hsl(var(--danger-h) var(--danger-s) 40%);
-    --danger-dark: hsl(var(--danger-h) var(--danger-s) 75%);
-    --danger-darker: hsl(var(--danger-h) var(--danger-s) 85%);
-    --danger-darkest: hsl(var(--danger-h) var(--danger-s) 95%);
+    --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
+    --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
+    --error-light: hsl(var(--error-h) var(--error-s) 40%);
+    --error-dark: hsl(var(--error-h) var(--error-s) 75%);
+    --error-darker: hsl(var(--error-h) var(--error-s) 85%);
+    --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
     --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
     --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
     --success-light: hsl(var(--success-h) var(--success-s) 40%);
@@ -193,12 +211,12 @@ https://madebypretend.com
         --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
         --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
         --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
-        --danger-lightest: hsl(var(--danger-h) var(--danger-s) 10%);
-        --danger-lighter: hsl(var(--danger-h) var(--danger-s) 25%);
-        --danger-light: hsl(var(--danger-h) var(--danger-s) 40%);
-        --danger-dark: hsl(var(--danger-h) var(--danger-s) 75%);
-        --danger-darker: hsl(var(--danger-h) var(--danger-s) 85%);
-        --danger-darkest: hsl(var(--danger-h) var(--danger-s) 95%);
+        --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
+        --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
+        --error-light: hsl(var(--error-h) var(--error-s) 40%);
+        --error-dark: hsl(var(--error-h) var(--error-s) 75%);
+        --error-darker: hsl(var(--error-h) var(--error-s) 85%);
+        --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
         --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
         --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
         --success-light: hsl(var(--success-h) var(--success-s) 40%);
@@ -271,16 +289,22 @@ https://madebypretend.com
 }
 
 :focus-visible.focus--light,
+.btn--light:focus-visible,
 .focus--light :focus-visible,
+.btn--light:focus-visible :focus-visible,
 .link-overlay:focus-within.focus--light,
-.focus--light .link-overlay:focus-within {
+.focus--light .link-overlay:focus-within,
+.btn--light:focus-visible .link-overlay:focus-within {
     --color-focus: var(--primary-lightest);
 }
 
 :focus-visible.focus--dark,
+.btn--dark:focus-visible,
 .focus--dark :focus-visible,
+.btn--dark:focus-visible :focus-visible,
 .link-overlay:focus-within.focus--dark,
-.focus--dark .link-overlay:focus-within {
+.focus--dark .link-overlay:focus-within,
+.btn--dark:focus-visible .link-overlay:focus-within {
     --color-focus: var(--primary-darkest);
 }
 
@@ -342,7 +366,7 @@ body {
 
 body,
 .text--body {
-    font-family: var(--font-family-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Verdana, Geneva, sans-serif;
+    font-family: var(--font-family-body), var(--font-family-fallback);
     font-size: var(--font-size-body);
     font-weight: 400;
     line-height: var(--line-height-body);
@@ -513,6 +537,11 @@ video {
     max-inline-size: 100%;
 }
 
+code,
+pre {
+    font-family: var(--font-family-code);
+}
+
 img {
     border-radius: var(--border-radius);
     -o-object-fit: cover;
@@ -592,8 +621,6 @@ small,
 </section>
 */
 .grid,
-.form,
-.form form,
 .grid-auto,
 .grid--1,
 .grid--2,
@@ -1385,7 +1412,7 @@ small,
 
 /*! --- Component --- */
 /* Background Overlay HTML Example:
-<section class="bg-overlay--wrapper section">
+<section class="bg-overlay-wrapper section">
     <div class="container">
         <div class="block">
             <!-- Content -->
@@ -1408,7 +1435,7 @@ small,
     z-index: var(--z-back);
 }
 
-.bg-overlay--wrapper {
+.bg-overlay-wrapper {
     isolation: isolate;
     position: relative;
 }
@@ -1463,7 +1490,6 @@ button[type=submit] {
 .btn:focus-visible,
 input[type=submit]:focus-visible,
 button[type=submit]:focus-visible {
-    --color-focus: var(--border-color-btn);
     transition: none;
 }
 
@@ -1495,10 +1521,6 @@ button[type=submit]:focus-visible {
     --color-btn: var(--base-darkest);
 }
 
-.btn--light:focus-visible {
-    --color-focus: var(--base-lightest);
-}
-
 .btn--light.btn--outline {
     --color-btn: var(--base-lightest);
 }
@@ -1507,10 +1529,6 @@ button[type=submit]:focus-visible {
     --bg-color-btn: var(--base-darkest);
     --border-color-btn: var(--base-darkest);
     --color-btn: var(--base-lightest);
-}
-
-.btn--dark:focus-visible {
-    --color-focus: var(--base-darkest);
 }
 
 .btn--dark.btn--outline {
@@ -1628,43 +1646,49 @@ button[type=submit]:focus-visible {
 
 <!-- Generic form with various input types -->
 <form class="form">
-    <div>
+    <fieldset>
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" placeholder="Pretend Person" required>
+    </fieldset>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+        </fieldset>
+        <fieldset>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+        </fieldset>
     </div>
-    <div>
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </fieldset>
+        <fieldset>
+            <label for="url">Website</label>
+            <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
+        </fieldset>
     </div>
-    <div>
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+        </fieldset>
+        <fieldset>
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time">
+        </fieldset>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-    </div>
-    <div>
-        <label for="url">Website</label>
-        <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
-    </div>
-    <div>
-        <label for="date">Date</label>
-        <input type="date" id="date" name="date">
-    </div>
-    <div>
-        <label for="time">Time</label>
-        <input type="time" id="time" name="time">
-    </div>
-    <div>
+    <fieldset>
         <label for="number">Number</label>
         <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
-    </div>
-    <div>
+    </fieldset>
+    <fieldset>
         <label for="search">Search</label>
         <input type="search" id="search" name="search" placeholder="Search...">
-    </div>
-    <div>
+    </fieldset>
+    <fieldset>
         <label for="country">Country</label>
         <select id="country" name="country" required>
             <option value="">Select a country</option>
@@ -1673,64 +1697,60 @@ button[type=submit]:focus-visible {
             <option value="mx">Mexico</option>
             <option value="other">Other</option>
         </select>
-    </div>
-    <div>
+    </fieldset>
+    <fieldset>
         <label for="message">Message</label>
         <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
-    </div>
-    <fieldset>
-        <legend>Preferences</legend>
-        <div>
+    </fieldset>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <legend>Preferences</legend>
             <label>
                 <input type="checkbox" name="option1" value="yes">
                 Option One
             </label>
-        </div>
-        <div>
             <label>
                 <input type="checkbox" name="option2" value="accepted" required>
                 Option Two
             </label>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>More Preference</legend>
-
-        <div>
+        </fieldset>
+        <fieldset>
+            <legend>More Preference</legend>
             <label>
                 <input type="radio" name="contact" value="option3" required>
                 Option Three
             </label>
-        </div>
-
-        <div>
             <label>
                 <input type="radio" name="contact" value="option4">
                 Option Four
             </label>
-        </div>
-    </fieldset>
+        </fieldset>
+    </div>
     <div class="form-error">
         <p>This is what an error message looks like.</p>
     </div>
     <div class="form-success">
         <p>This is what a success message looks like.</p>
     </div>
-    <div>
-        <button type="submit">Submit Form</button>
-    </div>
+    <button type="submit">Submit Form</button>
 </form>
 */
+.form,
+.form form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-grid);
+    inline-size: 100%;
+}
+
 .form {
     --bg-color-checkbox-checked: var(--primary);
     --bg-color-checkbox: var(--bg-color-input);
-    --bg-color-form-error: var(--danger);
+    --bg-color-form-error: var(--error);
     --bg-color-form-success: var(--success);
     --bg-color-input-disabled: var(--base-lighter);
-    --bg-color-input-focus: var(--base-white);
     --bg-color-input: var(--base-lightest);
     --bg-color-submit: var(--primary);
-    --border-color-input-focus: var(--primary);
     --border-color-input: var(--border-color);
     --border-radius-checkbox: var(--border-radius);
     --border-radius-input: var(--border-radius);
@@ -1738,7 +1758,7 @@ button[type=submit]:focus-visible {
     --border-style-input: var(--border-style);
     --border-width-input: var(--border-width);
     --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
-    --color-form-error: var(--danger-lightest);
+    --color-form-error: var(--error-lightest);
     --color-form-success: var(--success-lightest);
     --color-input: var(--base-darkest);
     --color-label: inherit;
@@ -1902,24 +1922,6 @@ textarea:disabled {
     opacity: 0.75;
 }
 
-input[type=date]:focus,
-input[type=datetime-local]:focus,
-input[type=email]:focus,
-input[type=month]:focus,
-input[type=number]:focus,
-input[type=password]:focus,
-input[type=search]:focus,
-input[type=tel]:focus,
-input[type=text]:focus,
-input[type=time]:focus,
-input[type=url]:focus,
-input[type=week]:focus,
-textarea:focus {
-    background-color: var(--bg-color-input-focus);
-    border-color: var(--border-color-input-focus);
-    outline: none;
-}
-
 label,
 legend {
     align-items: center;
@@ -1962,12 +1964,6 @@ select {
     min-block-size: var(--height-input);
     padding: var(--padding-y-input) var(--padding-x-input);
     transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-}
-
-select:focus {
-    background-color: var(--bg-color-input-focus);
-    border-color: var(--border-color-input-focus);
-    outline: none;
 }
 
 select:disabled {
@@ -2540,18 +2536,18 @@ fieldset:has([name=_pretend-check]) {
 }
 
 .bg-blur--sm {
-    -webkit-backdrop-filter: blur(var(--space-xs));
-    backdrop-filter: blur(var(--space-xs));
+    -webkit-backdrop-filter: blur(var(--blur-sm));
+    backdrop-filter: blur(var(--blur-sm));
 }
 
 .bg-blur--md {
-    -webkit-backdrop-filter: blur(var(--space-sm));
-    backdrop-filter: blur(var(--space-sm));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    backdrop-filter: blur(var(--blur-md));
 }
 
 .bg-blur--lg {
-    -webkit-backdrop-filter: blur(var(--space-md));
-    backdrop-filter: blur(var(--space-md));
+    -webkit-backdrop-filter: blur(var(--blur-lg));
+    backdrop-filter: blur(var(--blur-lg));
 }
 
 .bg--primary {
@@ -2582,32 +2578,32 @@ fieldset:has([name=_pretend-check]) {
     background-color: var(--primary-darkest);
 }
 
-.bg--danger {
-    background-color: var(--danger);
+.bg--error {
+    background-color: var(--error);
 }
 
-.bg--danger-lightest {
-    background-color: var(--danger-lightest);
+.bg--error-lightest {
+    background-color: var(--error-lightest);
 }
 
-.bg--danger-lighter {
-    background-color: var(--danger-lighter);
+.bg--error-lighter {
+    background-color: var(--error-lighter);
 }
 
-.bg--danger-light {
-    background-color: var(--danger-light);
+.bg--error-light {
+    background-color: var(--error-light);
 }
 
-.bg--danger-dark {
-    background-color: var(--danger-dark);
+.bg--error-dark {
+    background-color: var(--error-dark);
 }
 
-.bg--danger-darker {
-    background-color: var(--danger-darker);
+.bg--error-darker {
+    background-color: var(--error-darker);
 }
 
-.bg--danger-darkest {
-    background-color: var(--danger-darkest);
+.bg--error-darkest {
+    background-color: var(--error-darkest);
 }
 
 .bg--success {
@@ -2718,32 +2714,32 @@ fieldset:has([name=_pretend-check]) {
     color: var(--primary-darkest);
 }
 
-.color--danger {
-    color: var(--danger);
+.color--error {
+    color: var(--error);
 }
 
-.color--danger-lightest {
-    color: var(--danger-lightest);
+.color--error-lightest {
+    color: var(--error-lightest);
 }
 
-.color--danger-lighter {
-    color: var(--danger-lighter);
+.color--error-lighter {
+    color: var(--error-lighter);
 }
 
-.color--danger-light {
-    color: var(--danger-light);
+.color--error-light {
+    color: var(--error-light);
 }
 
-.color--danger-dark {
-    color: var(--danger-dark);
+.color--error-dark {
+    color: var(--error-dark);
 }
 
-.color--danger-darker {
-    color: var(--danger-darker);
+.color--error-darker {
+    color: var(--error-darker);
 }
 
-.color--danger-darkest {
-    color: var(--danger-darkest);
+.color--error-darkest {
+    color: var(--error-darkest);
 }
 
 .color--success {
