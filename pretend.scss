@@ -22,10 +22,10 @@ $primary: hsl(258deg 90% 66%);
 // $tertiary: hsl(160deg 82% 40%);
 // $quaternary: hsl(25deg 95% 53%);
 $error: hsl(360deg 85% 60%);
-// $highlight: hsl(48deg 96% 77%);
-// $info: hsl(199deg 88% 49%);
+$highlight: hsl(48deg 96% 77%);
+$info: hsl(199deg 88% 49%);
 $success: hsl(160deg 82% 40%);
-// $warning: hsl(25deg 95% 53%);
+$warning: hsl(25deg 95% 53%);
 
 $color: (
     primary: $primary,
@@ -33,10 +33,10 @@ $color: (
     // tertiary: $tertiary,
     // quaternary: $quaternary,
     error: $error,
-    // highlight: $highlight,
-    // info: $info,
+    highlight: $highlight,
+    info: $info,
     success: $success,
-    // warning: $warning
+    warning: $warning
 );
 
 // Color - Base
@@ -81,7 +81,7 @@ $breakpoint: (
 // @param: $max-size // Maximum Size
 // @param: $min-width // Minimum Breakpoint
 // @param: $max-width // Maximum Breakpoint
-@function fluid($_min-size, $_max-size, $_min-width: $width-min, $_max-width: $width-layout) {
+@function fluid($_min-size, $_max-size, $_min-width: $width-sm, $_max-width: $width-layout) {
     $_min-size-rem: px-rem($_min-size);
     $_max-size-rem: px-rem($_max-size);
     $_slope: math.div($_max-size - $_min-size, $_max-width - $_min-width);
@@ -102,7 +102,7 @@ $breakpoint: (
     }
 }
 
-// --- CSS Options --- //
+// --- Color Schemes --- //
 
 // Light Color Scheme
 .color-scheme--light,
@@ -140,158 +140,6 @@ $breakpoint: (
 
     // Color - Background Blur
     --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.9);
-}
-
-:root {
-    // Aspect Ratio
-    --aspect-square: 1;
-    --aspect-landscape: 4 / 3;
-    --aspect-portrait: 3 / 4;
-    --aspect-cinema: 16 / 9;
-    --aspect-wide: 2 / 1;
-
-    // Border
-    --border-color: var(--base-dark);
-    --border-radius: var(--space-xs);
-    --border-radius-alt: var(--space-md);
-    --border-radius-oval: 10rem;
-    --border-radius-round: 50%;
-    --border-style: solid;
-    --border-width: var(--space-2xs);
-
-    // Grid
-    --grid-1: repeat(1, minmax(0, 1fr));
-    --grid-2: repeat(2, minmax(0, 1fr));
-    --grid-3: repeat(3, minmax(0, 1fr));
-    --grid-4: repeat(4, minmax(0, 1fr));
-    --grid-5: repeat(5, minmax(0, 1fr));
-    --grid-1-2: 1fr 2fr;
-    --grid-1-3: 1fr 3fr;
-    --grid-1-4: 1fr 4fr;
-    --grid-2-1: 2fr 1fr;
-    --grid-2-3: 2fr 3fr;
-    --grid-3-1: 3fr 1fr;
-    --grid-3-2: 3fr 2fr;
-    --grid-4-1: 4fr 1fr;
-
-    // Object - Position
-    --object-start: 15%;
-    --object-center: 50%;
-    --object-end: 85%;
-
-    // Shadow - Box
-    --box-shadow-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
-    --box-shadow-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
-    --box-shadow-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
-
-    // Shadow - Drop
-    --drop-shadow-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
-    --drop-shadow-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
-    --drop-shadow-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
-    --drop-shadow-flat: drop-shadow(0 0 transparent);
-
-    // Spacing
-    --space-px: #{px-rem(1px)};
-    --space-2xs: #{px-rem(2px)};
-    --space-xs: #{px-rem(4px)};
-    --space-sm: #{px-rem(8px)};
-    --space-md: #{px-rem(16px)};
-    --space-lg: #{px-rem(24px)};
-    --space-xl: #{px-rem(32px)};
-    --space-2xl: #{px-rem(48px)};
-    --space-3xl: #{fluid(48px, 64px)};
-    --space-4xl: #{fluid(64px, 96px)};
-    --space-5xl: #{fluid(96px, 128px)};
-    --space-6xl: #{fluid(128px, 160px)};
-    --space-7xl: #{fluid(160px, 192px)};
-    --space-8xl: #{fluid(192px, 224px)};
-    --space-9xl: #{fluid(224px, 256px)};
-
-    // Spacing - Custom
-    --space-icon: var(--space-sm);
-    --space-block: #{fluid(24px, 32px)};
-    --space-edge: #{fluid(24px, 48px)};
-    --space-grid: #{fluid(24px, 48px)};
-    --space-container: var(--space-3xl);
-    --space-section: var(--space-4xl);
-
-    // Text
-    --font-family-body: var(--font-family-humanist);
-    --font-family-heading: var(--font-family-humanist);
-    --font-family-code: var(--font-family-monospace-code);
-    --font-family-fallback: var(--font-family-system), var(--font-family-emoji);
-    --line-height-body: 1.4;
-    --line-height-heading: 1.2;
-
-    // Text - Family
-    // https://github.com/system-fonts/modern-font-stacks
-    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
-    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
-    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
-    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
-    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
-    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
-    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
-    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
-    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
-    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
-    --font-family-system: system-ui, sans-serif;
-    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
-
-    // Text - Sizing
-    --font-size-xs: #{fluid(12px, 14px)};
-    --font-size-sm: #{fluid(14px, 16px)};
-    --font-size-md: #{fluid(16px, 18px)};
-    --font-size-lg: #{fluid(18px, 20px)};
-    --font-size-xl: #{fluid(20px, 24px)};
-    --font-size-2xl: #{fluid(24px, 30px)};
-    --font-size-3xl: #{fluid(30px, 38px)};
-    --font-size-4xl: #{fluid(38px, 48px)};
-    --font-size-5xl: #{fluid(38px, 60px)};
-    --font-size-6xl: #{fluid(38px, 74px)};
-    --font-size-7xl: #{fluid(38px, 90px)};
-    --font-size-8xl: #{fluid(38px, 108px)};
-    --font-size-9xl: #{fluid(38px, 128px)};
-
-    // Text - Custom Sizing
-    --font-size-small: var(--font-size-xs);
-    --font-size-body: var(--font-size-md);
-    --font-size-lede: var(--font-size-lg);
-    --font-size-h4: var(--font-size-xl);
-    --font-size-h3: var(--font-size-2xl);
-    --font-size-h2: var(--font-size-3xl);
-    --font-size-h1: var(--font-size-4xl);
-    --font-size-hero: var(--font-size-5xl);
-
-    // Transition
-    --transition: .3s;
-    --transition-fast: .2s;
-    --transition-slow: .4s;
-    --transition-easing: ease-in-out;
-
-    // Width
-    --width-min: #{px-rem($width-min)};
-    --width-sm: #{px-rem($width-sm)};
-    --width-md: #{px-rem($width-md)};
-    --width-lg: #{px-rem($width-lg)};
-    --width-xl: #{px-rem($width-xl)};
-    --width-wide: #{px-rem($width-wide)};
-    --width-max: #{px-rem($width-max)};
-    --width-prose: 65ch;
-    --width-layout: #{px-rem($width-layout)};
-
-    // Z-Index
-    --z-back: -1;
-    --z-flat: 0;
-    --z-front: 1;
-    --z-low: 10;
-    --z-mid: 100;
-    --z-high: 1000;
-    --z-top: 10000;
 }
 
 // Dark Color Scheme - Toggle
@@ -353,6 +201,159 @@ $breakpoint: (
         // Color - Background Blur
         --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
     }
+}
+
+// --- CSS Options --- //
+
+:root {
+    // Aspect Ratio
+    --aspect-square: 1;
+    --aspect-landscape: 4 / 3;
+    --aspect-portrait: 3 / 4;
+    --aspect-cinema: 16 / 9;
+    --aspect-wide: 2 / 1;
+
+    // Border
+    --border-color: var(--base-dark);
+    --border-radius: var(--space-xs);
+    --border-radius-alt: var(--space-md);
+    --border-radius-oval: 10rem;
+    --border-radius-round: 50%;
+    --border-style: solid;
+    --border-width: var(--space-2xs);
+
+    // Font
+    --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
+    --font-family-heading: var(--font-family-humanist);
+    --font-family-code: var(--font-family-monospace-code);
+    --line-height-body: calc(4px + 2ex);
+    --line-height-heading: calc(6px + 2ex);
+
+    // Font - Family
+    // https://github.com/system-fonts/modern-font-stacks
+    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
+    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
+    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
+    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
+    --font-family-system: system-ui, sans-serif;
+    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+
+    // Font - Sizing
+    --font-size-xs: #{fluid(12px, 14px)};
+    --font-size-sm: #{fluid(14px, 16px)};
+    --font-size-md: #{fluid(16px, 18px)};
+    --font-size-lg: #{fluid(18px, 20px)};
+    --font-size-xl: #{fluid(20px, 24px)};
+    --font-size-2xl: #{fluid(24px, 30px)};
+    --font-size-3xl: #{fluid(30px, 38px)};
+    --font-size-4xl: #{fluid(38px, 48px)};
+    --font-size-5xl: #{fluid(38px, 60px)};
+    --font-size-6xl: #{fluid(38px, 74px)};
+    --font-size-7xl: #{fluid(38px, 90px)};
+    --font-size-8xl: #{fluid(38px, 108px)};
+    --font-size-9xl: #{fluid(38px, 128px)};
+
+    // Font - Custom Sizing
+    --font-size-small: var(--font-size-xs);
+    --font-size-body: var(--font-size-md);
+    --font-size-lede: var(--font-size-lg);
+    --font-size-h4: var(--font-size-xl);
+    --font-size-h3: var(--font-size-2xl);
+    --font-size-h2: var(--font-size-3xl);
+    --font-size-h1: var(--font-size-4xl);
+    --font-size-hero: var(--font-size-5xl);
+
+    // Grid
+    --grid-1: repeat(1, minmax(0, 1fr));
+    --grid-2: repeat(2, minmax(0, 1fr));
+    --grid-3: repeat(3, minmax(0, 1fr));
+    --grid-4: repeat(4, minmax(0, 1fr));
+    --grid-5: repeat(5, minmax(0, 1fr));
+    --grid-1-2: 1fr 2fr;
+    --grid-1-3: 1fr 3fr;
+    --grid-1-4: 1fr 4fr;
+    --grid-2-1: 2fr 1fr;
+    --grid-2-3: 2fr 3fr;
+    --grid-3-1: 3fr 1fr;
+    --grid-3-2: 3fr 2fr;
+    --grid-4-1: 4fr 1fr;
+
+    // Object - Position
+    --object-start: 15%;
+    --object-center: 50%;
+    --object-end: 85%;
+
+    // Shadow - Box
+    --box-shadow-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
+    --box-shadow-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
+    --box-shadow-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
+
+    // Shadow - Drop
+    --drop-shadow-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
+    --drop-shadow-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
+    --drop-shadow-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
+    --drop-shadow-flat: drop-shadow(0 0 transparent);
+
+    // Spacing
+    --space-px: #{px-rem(1px)};
+    --space-2xs: #{px-rem(2px)};
+    --space-xs: #{px-rem(4px)};
+    --space-sm: #{px-rem(8px)};
+    --space-md: #{px-rem(16px)};
+    --space-lg: #{px-rem(24px)};
+    --space-xl: #{px-rem(32px)};
+    --space-2xl: #{px-rem(48px)};
+    --space-3xl: #{fluid(48px, 64px)};
+    --space-4xl: #{fluid(64px, 96px)};
+    --space-5xl: #{fluid(96px, 128px)};
+    --space-6xl: #{fluid(128px, 160px)};
+    --space-7xl: #{fluid(160px, 192px)};
+    --space-8xl: #{fluid(192px, 224px)};
+    --space-9xl: #{fluid(224px, 256px)};
+
+    // Spacing - Custom
+    --space-icon: var(--space-sm);
+    --space-block: #{fluid(24px, 32px)};
+    --space-edge: #{fluid(24px, 48px)};
+    --space-grid: #{fluid(24px, 48px)};
+    --space-container: var(--space-3xl);
+    --space-section: var(--space-4xl);
+
+    // Transition
+    --transition: .3s;
+    --transition-fast: .2s;
+    --transition-slow: .4s;
+    --transition-easing: ease-in-out;
+
+    // Width
+    --width-min: #{px-rem($width-min)};
+    --width-sm: #{px-rem($width-sm)};
+    --width-md: #{px-rem($width-md)};
+    --width-lg: #{px-rem($width-lg)};
+    --width-xl: #{px-rem($width-xl)};
+    --width-wide: #{px-rem($width-wide)};
+    --width-max: #{px-rem($width-max)};
+    --width-prose: 65ch;
+    --width-layout: #{px-rem($width-layout)};
+
+    // Z-Index
+    --z-back: -1;
+    --z-flat: 0;
+    --z-front: 1;
+    --z-low: 10;
+    --z-mid: 100;
+    --z-high: 1000;
+    --z-top: 10000;
 }
 
 // --- CSS Supports --- //
@@ -488,7 +489,7 @@ body {
 
 body,
 .text--body {
-    font-family: var(--font-family-body), var(--font-family-fallback);
+    font-family: var(--font-family-body);
     font-size: var(--font-size-body);
     font-weight: 400;
     line-height: var(--line-height-body);
@@ -666,6 +667,14 @@ pre {
     font-family: var(--font-family-code);
 }
 
+figure {
+    display: block;
+
+    & > figcaption {
+        margin-block-start: var(--space-sm);
+    }
+}
+
 img {
     border-radius: var(--border-radius);
     object-fit: cover;
@@ -684,6 +693,68 @@ small,
 
 .text--lede {
     font-size: var(--font-size-lede);
+}
+
+.space-content {
+    & > * + * {
+        margin-block-start: var(--space-lg);
+    }
+
+    & > * + blockquote {
+        margin-block-start: var(--space-lg);
+    }
+
+    & > * + figure,
+    & > * + img,
+    & > * + picture,
+    & > * + video {
+        margin-block: var(--space-lg);
+    }
+
+    & figcaption {
+        margin-block-start: var(--space-sm);
+    }
+
+    & > * + h1 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + h2 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + h3 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + h4 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + h5 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + h6 {
+        margin-block-start: var(--space-xl);
+    }
+
+    & > * + p {
+        margin-block-start: var(--space-md);
+    }
+
+    & > * + ol,
+    & > * + ul,
+    & > ol ol,
+    & > ul ul {
+        margin-block-start: var(--space-md);
+        padding-inline-start: var(--space-md);
+    }
+
+    & > ol * + li,
+    & > ul * + li {
+        margin-block-start: var(--space-2xs);
+    }
 }
 
 @if $layout-classes {
@@ -1137,7 +1208,7 @@ small,
     // Background Overlay
     // Add to elements inside sections that need to overlay the section background.
     /* Background Overlay HTML Example:
-    <section class="bg-overlay-wrapper section">
+    <section class="bg-overlay-parent section">
         <div class="container">
             <div class="block">
                 <!-- Content -->
@@ -1157,7 +1228,7 @@ small,
         position: absolute;
         z-index: var(--z-back);
 
-        &-wrapper {
+        &-parent {
             isolation: isolate;
             position: relative;
         }

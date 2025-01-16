@@ -26,6 +26,26 @@ https://madebypretend.com
     --error-dark: hsl(var(--error-h) var(--error-s) 40%);
     --error-darker: hsl(var(--error-h) var(--error-s) 25%);
     --error-darkest: hsl(var(--error-h) var(--error-s) 10%);
+    --highlight-h: 48deg;
+    --highlight-s: 96%;
+    --highlight-l: 77%;
+    --highlight: hsl(var(--highlight-h) var(--highlight-s) var(--highlight-l));
+    --highlight-lightest: hsl(var(--highlight-h) var(--highlight-s) 95%);
+    --highlight-lighter: hsl(var(--highlight-h) var(--highlight-s) 85%);
+    --highlight-light: hsl(var(--highlight-h) var(--highlight-s) 75%);
+    --highlight-dark: hsl(var(--highlight-h) var(--highlight-s) 40%);
+    --highlight-darker: hsl(var(--highlight-h) var(--highlight-s) 25%);
+    --highlight-darkest: hsl(var(--highlight-h) var(--highlight-s) 10%);
+    --info-h: 199deg;
+    --info-s: 88%;
+    --info-l: 49%;
+    --info: hsl(var(--info-h) var(--info-s) var(--info-l));
+    --info-lightest: hsl(var(--info-h) var(--info-s) 95%);
+    --info-lighter: hsl(var(--info-h) var(--info-s) 85%);
+    --info-light: hsl(var(--info-h) var(--info-s) 75%);
+    --info-dark: hsl(var(--info-h) var(--info-s) 40%);
+    --info-darker: hsl(var(--info-h) var(--info-s) 25%);
+    --info-darkest: hsl(var(--info-h) var(--info-s) 10%);
     --success-h: 160deg;
     --success-s: 82%;
     --success-l: 40%;
@@ -36,6 +56,16 @@ https://madebypretend.com
     --success-dark: hsl(var(--success-h) var(--success-s) 40%);
     --success-darker: hsl(var(--success-h) var(--success-s) 25%);
     --success-darkest: hsl(var(--success-h) var(--success-s) 10%);
+    --warning-h: 25deg;
+    --warning-s: 95%;
+    --warning-l: 53%;
+    --warning: hsl(var(--warning-h) var(--warning-s) var(--warning-l));
+    --warning-lightest: hsl(var(--warning-h) var(--warning-s) 95%);
+    --warning-lighter: hsl(var(--warning-h) var(--warning-s) 85%);
+    --warning-light: hsl(var(--warning-h) var(--warning-s) 75%);
+    --warning-dark: hsl(var(--warning-h) var(--warning-s) 40%);
+    --warning-darker: hsl(var(--warning-h) var(--warning-s) 25%);
+    --warning-darkest: hsl(var(--warning-h) var(--warning-s) 10%);
     --base-h: 24deg;
     --base-s: 11%;
     --base-l: 4%;
@@ -48,6 +78,105 @@ https://madebypretend.com
     --base-darkest: hsl(var(--base-h) var(--base-s) 10%);
     --base-black: hsl(var(--base-h) var(--base-s) 0%);
     --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.9);
+}
+
+.color-scheme--dark,
+[data-color-scheme=dark] {
+    --primary-lightest: hsl(var(--primary-h) var(--primary-s) 10%);
+    --primary-lighter: hsl(var(--primary-h) var(--primary-s) 25%);
+    --primary-light: hsl(var(--primary-h) var(--primary-s) 40%);
+    --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
+    --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
+    --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
+    --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
+    --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
+    --error-light: hsl(var(--error-h) var(--error-s) 40%);
+    --error-dark: hsl(var(--error-h) var(--error-s) 75%);
+    --error-darker: hsl(var(--error-h) var(--error-s) 85%);
+    --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
+    --highlight-lightest: hsl(var(--highlight-h) var(--highlight-s) 10%);
+    --highlight-lighter: hsl(var(--highlight-h) var(--highlight-s) 25%);
+    --highlight-light: hsl(var(--highlight-h) var(--highlight-s) 40%);
+    --highlight-dark: hsl(var(--highlight-h) var(--highlight-s) 75%);
+    --highlight-darker: hsl(var(--highlight-h) var(--highlight-s) 85%);
+    --highlight-darkest: hsl(var(--highlight-h) var(--highlight-s) 95%);
+    --info-lightest: hsl(var(--info-h) var(--info-s) 10%);
+    --info-lighter: hsl(var(--info-h) var(--info-s) 25%);
+    --info-light: hsl(var(--info-h) var(--info-s) 40%);
+    --info-dark: hsl(var(--info-h) var(--info-s) 75%);
+    --info-darker: hsl(var(--info-h) var(--info-s) 85%);
+    --info-darkest: hsl(var(--info-h) var(--info-s) 95%);
+    --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
+    --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
+    --success-light: hsl(var(--success-h) var(--success-s) 40%);
+    --success-dark: hsl(var(--success-h) var(--success-s) 75%);
+    --success-darker: hsl(var(--success-h) var(--success-s) 85%);
+    --success-darkest: hsl(var(--success-h) var(--success-s) 95%);
+    --warning-lightest: hsl(var(--warning-h) var(--warning-s) 10%);
+    --warning-lighter: hsl(var(--warning-h) var(--warning-s) 25%);
+    --warning-light: hsl(var(--warning-h) var(--warning-s) 40%);
+    --warning-dark: hsl(var(--warning-h) var(--warning-s) 75%);
+    --warning-darker: hsl(var(--warning-h) var(--warning-s) 85%);
+    --warning-darkest: hsl(var(--warning-h) var(--warning-s) 95%);
+    --base-white: hsl(var(--base-h) var(--base-s) 0%);
+    --base-lightest: hsl(var(--base-h) var(--base-s) 10%);
+    --base-lighter: hsl(var(--base-h) var(--base-s) 25%);
+    --base-light: hsl(var(--base-h) var(--base-s) 40%);
+    --base-dark: hsl(var(--base-h) var(--base-s) 75%);
+    --base-darker: hsl(var(--base-h) var(--base-s) 85%);
+    --base-darkest: hsl(var(--base-h) var(--base-s) 95%);
+    --base-black: hsl(var(--base-h) var(--base-s) 100%);
+    --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-color-scheme]) {
+        --primary-lightest: hsl(var(--primary-h) var(--primary-s) 10%);
+        --primary-lighter: hsl(var(--primary-h) var(--primary-s) 25%);
+        --primary-light: hsl(var(--primary-h) var(--primary-s) 40%);
+        --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
+        --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
+        --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
+        --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
+        --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
+        --error-light: hsl(var(--error-h) var(--error-s) 40%);
+        --error-dark: hsl(var(--error-h) var(--error-s) 75%);
+        --error-darker: hsl(var(--error-h) var(--error-s) 85%);
+        --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
+        --highlight-lightest: hsl(var(--highlight-h) var(--highlight-s) 10%);
+        --highlight-lighter: hsl(var(--highlight-h) var(--highlight-s) 25%);
+        --highlight-light: hsl(var(--highlight-h) var(--highlight-s) 40%);
+        --highlight-dark: hsl(var(--highlight-h) var(--highlight-s) 75%);
+        --highlight-darker: hsl(var(--highlight-h) var(--highlight-s) 85%);
+        --highlight-darkest: hsl(var(--highlight-h) var(--highlight-s) 95%);
+        --info-lightest: hsl(var(--info-h) var(--info-s) 10%);
+        --info-lighter: hsl(var(--info-h) var(--info-s) 25%);
+        --info-light: hsl(var(--info-h) var(--info-s) 40%);
+        --info-dark: hsl(var(--info-h) var(--info-s) 75%);
+        --info-darker: hsl(var(--info-h) var(--info-s) 85%);
+        --info-darkest: hsl(var(--info-h) var(--info-s) 95%);
+        --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
+        --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
+        --success-light: hsl(var(--success-h) var(--success-s) 40%);
+        --success-dark: hsl(var(--success-h) var(--success-s) 75%);
+        --success-darker: hsl(var(--success-h) var(--success-s) 85%);
+        --success-darkest: hsl(var(--success-h) var(--success-s) 95%);
+        --warning-lightest: hsl(var(--warning-h) var(--warning-s) 10%);
+        --warning-lighter: hsl(var(--warning-h) var(--warning-s) 25%);
+        --warning-light: hsl(var(--warning-h) var(--warning-s) 40%);
+        --warning-dark: hsl(var(--warning-h) var(--warning-s) 75%);
+        --warning-darker: hsl(var(--warning-h) var(--warning-s) 85%);
+        --warning-darkest: hsl(var(--warning-h) var(--warning-s) 95%);
+        --base-white: hsl(var(--base-h) var(--base-s) 0%);
+        --base-lightest: hsl(var(--base-h) var(--base-s) 10%);
+        --base-lighter: hsl(var(--base-h) var(--base-s) 25%);
+        --base-light: hsl(var(--base-h) var(--base-s) 40%);
+        --base-dark: hsl(var(--base-h) var(--base-s) 75%);
+        --base-darker: hsl(var(--base-h) var(--base-s) 85%);
+        --base-darkest: hsl(var(--base-h) var(--base-s) 95%);
+        --base-black: hsl(var(--base-h) var(--base-s) 100%);
+        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+    }
 }
 
 :root {
@@ -63,6 +192,48 @@ https://madebypretend.com
     --border-radius-round: 50%;
     --border-style: solid;
     --border-width: var(--space-2xs);
+    --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
+    --font-family-heading: var(--font-family-humanist);
+    --font-family-code: var(--font-family-monospace-code);
+    --line-height-body: calc(4px + 2ex);
+    --line-height-heading: calc(6px + 2ex);
+    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
+    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
+    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
+    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
+    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
+    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
+    --font-family-system: system-ui, sans-serif;
+    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+    --font-size-xs: clamp(0.75rem, 0.2604166667vw + 0.6666666667rem, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 0.2604166667vw + 0.7916666667rem, 1rem);
+    --font-size-md: clamp(1rem, 0.2604166667vw + 0.9166666667rem, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 0.2604166667vw + 1.0416666667rem, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 0.5208333333vw + 1.0833333333rem, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 0.78125vw + 1.25rem, 1.875rem);
+    --font-size-3xl: clamp(1.875rem, 1.0416666667vw + 1.5416666667rem, 2.375rem);
+    --font-size-4xl: clamp(2.375rem, 1.3020833333vw + 1.9583333333rem, 3rem);
+    --font-size-5xl: clamp(2.375rem, 2.8645833333vw + 1.4583333333rem, 3.75rem);
+    --font-size-6xl: clamp(2.375rem, 4.6875vw + 0.875rem, 4.625rem);
+    --font-size-7xl: clamp(2.375rem, 6.7708333333vw + 0.2083333333rem, 5.625rem);
+    --font-size-8xl: clamp(2.375rem, 9.1145833333vw + -0.5416666667rem, 6.75rem);
+    --font-size-9xl: clamp(2.375rem, 11.71875vw + -1.375rem, 8rem);
+    --font-size-small: var(--font-size-xs);
+    --font-size-body: var(--font-size-md);
+    --font-size-lede: var(--font-size-lg);
+    --font-size-h4: var(--font-size-xl);
+    --font-size-h3: var(--font-size-2xl);
+    --font-size-h2: var(--font-size-3xl);
+    --font-size-h1: var(--font-size-4xl);
+    --font-size-hero: var(--font-size-5xl);
     --grid-1: repeat(1, minmax(0, 1fr));
     --grid-2: repeat(2, minmax(0, 1fr));
     --grid-3: repeat(3, minmax(0, 1fr));
@@ -94,62 +265,19 @@ https://madebypretend.com
     --space-lg: 1.5rem;
     --space-xl: 2rem;
     --space-2xl: 3rem;
-    --space-3xl: clamp(3rem, 1.6666666667vw + 2.6666666667rem, 4rem);
-    --space-4xl: clamp(4rem, 3.3333333333vw + 3.3333333333rem, 6rem);
-    --space-5xl: clamp(6rem, 3.3333333333vw + 5.3333333333rem, 8rem);
-    --space-6xl: clamp(8rem, 3.3333333333vw + 7.3333333333rem, 10rem);
-    --space-7xl: clamp(10rem, 3.3333333333vw + 9.3333333333rem, 12rem);
-    --space-8xl: clamp(12rem, 3.3333333333vw + 11.3333333333rem, 14rem);
-    --space-9xl: clamp(14rem, 3.3333333333vw + 13.3333333333rem, 16rem);
+    --space-3xl: clamp(3rem, 2.0833333333vw + 2.3333333333rem, 4rem);
+    --space-4xl: clamp(4rem, 4.1666666667vw + 2.6666666667rem, 6rem);
+    --space-5xl: clamp(6rem, 4.1666666667vw + 4.6666666667rem, 8rem);
+    --space-6xl: clamp(8rem, 4.1666666667vw + 6.6666666667rem, 10rem);
+    --space-7xl: clamp(10rem, 4.1666666667vw + 8.6666666667rem, 12rem);
+    --space-8xl: clamp(12rem, 4.1666666667vw + 10.6666666667rem, 14rem);
+    --space-9xl: clamp(14rem, 4.1666666667vw + 12.6666666667rem, 16rem);
     --space-icon: var(--space-sm);
-    --space-block: clamp(1.5rem, 0.8333333333vw + 1.3333333333rem, 2rem);
-    --space-edge: clamp(1.5rem, 2.5vw + 1rem, 3rem);
-    --space-grid: clamp(1.5rem, 2.5vw + 1rem, 3rem);
+    --space-block: clamp(1.5rem, 1.0416666667vw + 1.1666666667rem, 2rem);
+    --space-edge: clamp(1.5rem, 3.125vw + 0.5rem, 3rem);
+    --space-grid: clamp(1.5rem, 3.125vw + 0.5rem, 3rem);
     --space-container: var(--space-3xl);
     --space-section: var(--space-4xl);
-    --font-family-body: var(--font-family-humanist);
-    --font-family-heading: var(--font-family-humanist);
-    --font-family-code: var(--font-family-monospace-code);
-    --font-family-fallback: var(--font-family-system), var(--font-family-emoji);
-    --line-height-body: 1.4;
-    --line-height-heading: 1.2;
-    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
-    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
-    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
-    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
-    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
-    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
-    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
-    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
-    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
-    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
-    --font-family-system: system-ui, sans-serif;
-    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
-    --font-size-xs: clamp(0.75rem, 0.2083333333vw + 0.7083333333rem, 0.875rem);
-    --font-size-sm: clamp(0.875rem, 0.2083333333vw + 0.8333333333rem, 1rem);
-    --font-size-md: clamp(1rem, 0.2083333333vw + 0.9583333333rem, 1.125rem);
-    --font-size-lg: clamp(1.125rem, 0.2083333333vw + 1.0833333333rem, 1.25rem);
-    --font-size-xl: clamp(1.25rem, 0.4166666667vw + 1.1666666667rem, 1.5rem);
-    --font-size-2xl: clamp(1.5rem, 0.625vw + 1.375rem, 1.875rem);
-    --font-size-3xl: clamp(1.875rem, 0.8333333333vw + 1.7083333333rem, 2.375rem);
-    --font-size-4xl: clamp(2.375rem, 1.0416666667vw + 2.1666666667rem, 3rem);
-    --font-size-5xl: clamp(2.375rem, 2.2916666667vw + 1.9166666667rem, 3.75rem);
-    --font-size-6xl: clamp(2.375rem, 3.75vw + 1.625rem, 4.625rem);
-    --font-size-7xl: clamp(2.375rem, 5.4166666667vw + 1.2916666667rem, 5.625rem);
-    --font-size-8xl: clamp(2.375rem, 7.2916666667vw + 0.9166666667rem, 6.75rem);
-    --font-size-9xl: clamp(2.375rem, 9.375vw + 0.5rem, 8rem);
-    --font-size-small: var(--font-size-xs);
-    --font-size-body: var(--font-size-md);
-    --font-size-lede: var(--font-size-lg);
-    --font-size-h4: var(--font-size-xl);
-    --font-size-h3: var(--font-size-2xl);
-    --font-size-h2: var(--font-size-3xl);
-    --font-size-h1: var(--font-size-4xl);
-    --font-size-hero: var(--font-size-5xl);
     --transition: .3s;
     --transition-fast: .2s;
     --transition-slow: .4s;
@@ -170,69 +298,6 @@ https://madebypretend.com
     --z-mid: 100;
     --z-high: 1000;
     --z-top: 10000;
-}
-
-.color-scheme--dark,
-[data-color-scheme=dark] {
-    --primary-lightest: hsl(var(--primary-h) var(--primary-s) 10%);
-    --primary-lighter: hsl(var(--primary-h) var(--primary-s) 25%);
-    --primary-light: hsl(var(--primary-h) var(--primary-s) 40%);
-    --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
-    --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
-    --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
-    --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
-    --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
-    --error-light: hsl(var(--error-h) var(--error-s) 40%);
-    --error-dark: hsl(var(--error-h) var(--error-s) 75%);
-    --error-darker: hsl(var(--error-h) var(--error-s) 85%);
-    --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
-    --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
-    --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
-    --success-light: hsl(var(--success-h) var(--success-s) 40%);
-    --success-dark: hsl(var(--success-h) var(--success-s) 75%);
-    --success-darker: hsl(var(--success-h) var(--success-s) 85%);
-    --success-darkest: hsl(var(--success-h) var(--success-s) 95%);
-    --base-white: hsl(var(--base-h) var(--base-s) 0%);
-    --base-lightest: hsl(var(--base-h) var(--base-s) 10%);
-    --base-lighter: hsl(var(--base-h) var(--base-s) 25%);
-    --base-light: hsl(var(--base-h) var(--base-s) 40%);
-    --base-dark: hsl(var(--base-h) var(--base-s) 75%);
-    --base-darker: hsl(var(--base-h) var(--base-s) 85%);
-    --base-darkest: hsl(var(--base-h) var(--base-s) 95%);
-    --base-black: hsl(var(--base-h) var(--base-s) 100%);
-    --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root:not([data-color-scheme]) {
-        --primary-lightest: hsl(var(--primary-h) var(--primary-s) 10%);
-        --primary-lighter: hsl(var(--primary-h) var(--primary-s) 25%);
-        --primary-light: hsl(var(--primary-h) var(--primary-s) 40%);
-        --primary-dark: hsl(var(--primary-h) var(--primary-s) 75%);
-        --primary-darker: hsl(var(--primary-h) var(--primary-s) 85%);
-        --primary-darkest: hsl(var(--primary-h) var(--primary-s) 95%);
-        --error-lightest: hsl(var(--error-h) var(--error-s) 10%);
-        --error-lighter: hsl(var(--error-h) var(--error-s) 25%);
-        --error-light: hsl(var(--error-h) var(--error-s) 40%);
-        --error-dark: hsl(var(--error-h) var(--error-s) 75%);
-        --error-darker: hsl(var(--error-h) var(--error-s) 85%);
-        --error-darkest: hsl(var(--error-h) var(--error-s) 95%);
-        --success-lightest: hsl(var(--success-h) var(--success-s) 10%);
-        --success-lighter: hsl(var(--success-h) var(--success-s) 25%);
-        --success-light: hsl(var(--success-h) var(--success-s) 40%);
-        --success-dark: hsl(var(--success-h) var(--success-s) 75%);
-        --success-darker: hsl(var(--success-h) var(--success-s) 85%);
-        --success-darkest: hsl(var(--success-h) var(--success-s) 95%);
-        --base-white: hsl(var(--base-h) var(--base-s) 0%);
-        --base-lightest: hsl(var(--base-h) var(--base-s) 10%);
-        --base-lighter: hsl(var(--base-h) var(--base-s) 25%);
-        --base-light: hsl(var(--base-h) var(--base-s) 40%);
-        --base-dark: hsl(var(--base-h) var(--base-s) 75%);
-        --base-darker: hsl(var(--base-h) var(--base-s) 85%);
-        --base-darkest: hsl(var(--base-h) var(--base-s) 95%);
-        --base-black: hsl(var(--base-h) var(--base-s) 100%);
-        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
-    }
 }
 
 @supports ((-webkit-backdrop-filter: blur()) or (backdrop-filter: blur())) {
@@ -366,7 +431,7 @@ body {
 
 body,
 .text--body {
-    font-family: var(--font-family-body), var(--font-family-fallback);
+    font-family: var(--font-family-body);
     font-size: var(--font-size-body);
     font-weight: 400;
     line-height: var(--line-height-body);
@@ -542,6 +607,14 @@ pre {
     font-family: var(--font-family-code);
 }
 
+figure {
+    display: block;
+}
+
+figure > figcaption {
+    margin-block-start: var(--space-sm);
+}
+
 img {
     border-radius: var(--border-radius);
     -o-object-fit: cover;
@@ -559,6 +632,66 @@ small,
 
 .text--lede {
     font-size: var(--font-size-lede);
+}
+
+.space-content > * + * {
+    margin-block-start: var(--space-lg);
+}
+
+.space-content > * + blockquote {
+    margin-block-start: var(--space-lg);
+}
+
+.space-content > * + figure,
+.space-content > * + img,
+.space-content > * + picture,
+.space-content > * + video {
+    margin-block: var(--space-lg);
+}
+
+.space-content figcaption {
+    margin-block-start: var(--space-sm);
+}
+
+.space-content > * + h1 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + h2 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + h3 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + h4 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + h5 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + h6 {
+    margin-block-start: var(--space-xl);
+}
+
+.space-content > * + p {
+    margin-block-start: var(--space-md);
+}
+
+.space-content > * + ol,
+.space-content > * + ul,
+.space-content > ol ol,
+.space-content > ul ul {
+    margin-block-start: var(--space-md);
+    padding-inline-start: var(--space-md);
+}
+
+.space-content > ol * + li,
+.space-content > ul * + li {
+    margin-block-start: var(--space-2xs);
 }
 
 /*! --- Layout --- */
@@ -1412,7 +1545,7 @@ small,
 
 /*! --- Component --- */
 /* Background Overlay HTML Example:
-<section class="bg-overlay-wrapper section">
+<section class="bg-overlay-parent section">
     <div class="container">
         <div class="block">
             <!-- Content -->
@@ -1435,7 +1568,7 @@ small,
     z-index: var(--z-back);
 }
 
-.bg-overlay-wrapper {
+.bg-overlay-parent {
     isolation: isolate;
     position: relative;
 }
@@ -2606,6 +2739,62 @@ fieldset:has([name=_pretend-check]) {
     background-color: var(--error-darkest);
 }
 
+.bg--highlight {
+    background-color: var(--highlight);
+}
+
+.bg--highlight-lightest {
+    background-color: var(--highlight-lightest);
+}
+
+.bg--highlight-lighter {
+    background-color: var(--highlight-lighter);
+}
+
+.bg--highlight-light {
+    background-color: var(--highlight-light);
+}
+
+.bg--highlight-dark {
+    background-color: var(--highlight-dark);
+}
+
+.bg--highlight-darker {
+    background-color: var(--highlight-darker);
+}
+
+.bg--highlight-darkest {
+    background-color: var(--highlight-darkest);
+}
+
+.bg--info {
+    background-color: var(--info);
+}
+
+.bg--info-lightest {
+    background-color: var(--info-lightest);
+}
+
+.bg--info-lighter {
+    background-color: var(--info-lighter);
+}
+
+.bg--info-light {
+    background-color: var(--info-light);
+}
+
+.bg--info-dark {
+    background-color: var(--info-dark);
+}
+
+.bg--info-darker {
+    background-color: var(--info-darker);
+}
+
+.bg--info-darkest {
+    background-color: var(--info-darkest);
+}
+
 .bg--success {
     background-color: var(--success);
 }
@@ -2632,6 +2821,34 @@ fieldset:has([name=_pretend-check]) {
 
 .bg--success-darkest {
     background-color: var(--success-darkest);
+}
+
+.bg--warning {
+    background-color: var(--warning);
+}
+
+.bg--warning-lightest {
+    background-color: var(--warning-lightest);
+}
+
+.bg--warning-lighter {
+    background-color: var(--warning-lighter);
+}
+
+.bg--warning-light {
+    background-color: var(--warning-light);
+}
+
+.bg--warning-dark {
+    background-color: var(--warning-dark);
+}
+
+.bg--warning-darker {
+    background-color: var(--warning-darker);
+}
+
+.bg--warning-darkest {
+    background-color: var(--warning-darkest);
 }
 
 .bg--base-white {
@@ -2742,6 +2959,62 @@ fieldset:has([name=_pretend-check]) {
     color: var(--error-darkest);
 }
 
+.color--highlight {
+    color: var(--highlight);
+}
+
+.color--highlight-lightest {
+    color: var(--highlight-lightest);
+}
+
+.color--highlight-lighter {
+    color: var(--highlight-lighter);
+}
+
+.color--highlight-light {
+    color: var(--highlight-light);
+}
+
+.color--highlight-dark {
+    color: var(--highlight-dark);
+}
+
+.color--highlight-darker {
+    color: var(--highlight-darker);
+}
+
+.color--highlight-darkest {
+    color: var(--highlight-darkest);
+}
+
+.color--info {
+    color: var(--info);
+}
+
+.color--info-lightest {
+    color: var(--info-lightest);
+}
+
+.color--info-lighter {
+    color: var(--info-lighter);
+}
+
+.color--info-light {
+    color: var(--info-light);
+}
+
+.color--info-dark {
+    color: var(--info-dark);
+}
+
+.color--info-darker {
+    color: var(--info-darker);
+}
+
+.color--info-darkest {
+    color: var(--info-darkest);
+}
+
 .color--success {
     color: var(--success);
 }
@@ -2768,6 +3041,34 @@ fieldset:has([name=_pretend-check]) {
 
 .color--success-darkest {
     color: var(--success-darkest);
+}
+
+.color--warning {
+    color: var(--warning);
+}
+
+.color--warning-lightest {
+    color: var(--warning-lightest);
+}
+
+.color--warning-lighter {
+    color: var(--warning-lighter);
+}
+
+.color--warning-light {
+    color: var(--warning-light);
+}
+
+.color--warning-dark {
+    color: var(--warning-dark);
+}
+
+.color--warning-darker {
+    color: var(--warning-darker);
+}
+
+.color--warning-darkest {
+    color: var(--warning-darkest);
 }
 
 .color--base-white {
