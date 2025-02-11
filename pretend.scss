@@ -1,17 +1,6 @@
-/*!
-Pretend CSS
-Made by Pretend
-https://madebypretend.com
-*/
+/*! Pretend CSS [Made by Pretend](https://madebypretend.com) */
 
 @use "sass:math";
-
-// Enable Classes
-$layout-classes: true;
-$component-classes: true;
-$utility-classes: true;
-$optional-classes: false;
-$print-classes: true;
 
 // --- SCSS Options --- //
 
@@ -57,6 +46,7 @@ $width-max: 1920px;
 $width-layout: $width-xl;
 
 // Breakpoint
+// Comment or uncomment to enable or disable breakpoints.
 $minmax: min;
 $breakpoint: (
     sm: $width-sm,
@@ -216,7 +206,7 @@ $breakpoint: (
     // Border
     --border-color: var(--base-dark);
     --border-radius: var(--space-xs);
-    --border-radius-alt: var(--space-md);
+    --border-radius-alt: var(--space-sm);
     --border-radius-oval: 10rem;
     --border-radius-round: 50%;
     --border-style: solid;
@@ -226,8 +216,8 @@ $breakpoint: (
     --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
     --font-family-heading: var(--font-family-humanist);
     --font-family-code: var(--font-family-monospace-code);
-    --line-height-body: calc(4px + 2ex);
-    --line-height-heading: calc(6px + 2ex);
+    --line-height-body: calc(6px + 2ex);
+    --line-height-heading: calc(4px + 2ex);
 
     // Font - Family
     // https://github.com/system-fonts/modern-font-stacks
@@ -294,15 +284,15 @@ $breakpoint: (
     --object-end: 85%;
 
     // Shadow - Box
-    --box-shadow-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
-    --box-shadow-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
-    --box-shadow-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
+    --shadow-box-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
+    --shadow-box-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
+    --shadow-box-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
 
     // Shadow - Drop
-    --drop-shadow-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
-    --drop-shadow-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
-    --drop-shadow-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
-    --drop-shadow-flat: drop-shadow(0 0 transparent);
+    --shadow-drop-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
+    --shadow-drop-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
+    --shadow-drop-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
+    --shadow-drop-flat: drop-shadow(0 0 transparent);
 
     // Spacing
     --space-px: #{px-rem(1px)};
@@ -405,7 +395,7 @@ $breakpoint: (
     }
 }
 
-/*! --- Base --- */
+/* --- Base --- */
 
 // Focus
 :focus:not(:focus-visible) {
@@ -757,3030 +747,3058 @@ small,
     }
 }
 
-@if $layout-classes {
-    /*! --- Layout --- */
+/* --- Layout --- */
 
-    // Block
-    // Add to content blocks.
-    /* Block HTML Example:
-    <section class="section">
-        <div class="container">
-            <div class="block">
-                <!-- Content -->
-            </div>
+// Block
+// Add to content blocks.
+/* Block HTML Example:
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <!-- Content -->
         </div>
-    </section>
-    */
-    .block {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-block);
-        inline-size: 100%;
+    </div>
+</section>
+*/
+.block {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-block);
+    inline-size: 100%;
 
-        // Block with block and float options, rather than flex.
-        &-float {
-            display: block;
+    // Block with block and float options, rather than flex.
+    &-float {
+        display: block;
 
-            & > * + * {
-                margin-block-start: var(--space-block);
-            }
+        & > * + * {
+            margin-block-start: var(--space-block);
         }
     }
+}
 
-    // Container
-    // Add inside sections to contain blocks and grids.
-    /* Container HTML Example:
-    <section class="section">
-        <div class="container">
+// Container
+// Add inside sections to contain blocks and grids.
+/* Container HTML Example:
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <!-- Content -->
+        </div>
+    </div>
+</section>
+*/
+.container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-container);
+    inline-size: 100%;
+    margin-inline: auto;
+    max-inline-size: var(--width-layout);
+}
+
+// Grid
+// Add to layouts containing grid items.
+/* Grid HTML Example:
+<section class="section">
+    <div class="container">
+        <div class="grid grid--md-2">
             <div class="block">
-                <!-- Content -->
+                <!-- Grid Block -->
+            </div>
+            <div class="block">
+                <!-- Grid Block -->
             </div>
         </div>
-    </section>
-    */
-    .container {
-        align-items: flex-start;
+    </div>
+</section>
+*/
+.grid,
+.grid--1,
+.grid--2,
+.grid--3,
+.grid--4,
+.grid--5,
+.grid--1-2,
+.grid--1-3,
+.grid--1-4,
+.grid--2-1,
+.grid--2-3,
+.grid--3-1,
+.grid--3-2,
+.grid--4-1 {
+    display: grid;
+    gap: var(--space-grid);
+    inline-size: 100%;
+}
+
+.grid--1 {
+    grid-template-columns: var(--grid-1);
+}
+
+.grid--2 {
+    grid-template-columns: var(--grid-2);
+}
+
+.grid--3 {
+    grid-template-columns: var(--grid-3);
+}
+
+.grid--4 {
+    grid-template-columns: var(--grid-4);
+}
+
+.grid--5 {
+    grid-template-columns: var(--grid-5);
+}
+
+.grid--1-2 {
+    grid-template-columns: var(--grid-1-2);
+}
+
+.grid--1-3 {
+    grid-template-columns: var(--grid-1-3);
+}
+
+.grid--1-4 {
+    grid-template-columns: var(--grid-1-4);
+}
+
+.grid--2-1 {
+    grid-template-columns: var(--grid-2-1);
+}
+
+.grid--2-3 {
+    grid-template-columns: var(--grid-2-3);
+}
+
+.grid--3-1 {
+    grid-template-columns: var(--grid-3-1);
+}
+
+.grid--3-2 {
+    grid-template-columns: var(--grid-3-2);
+}
+
+.grid--4-1 {
+    grid-template-columns: var(--grid-4-1);
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .grid--#{$_key},
+        .grid--#{$_key}-1,
+        .grid--#{$_key}-2,
+        .grid--#{$_key}-3,
+        .grid--#{$_key}-4,
+        .grid--#{$_key}-5,
+        .grid--#{$_key}-1-2,
+        .grid--#{$_key}-1-3,
+        .grid--#{$_key}-1-4,
+        .grid--#{$_key}-2-1,
+        .grid--#{$_key}-2-3,
+        .grid--#{$_key}-3-1,
+        .grid--#{$_key}-3-2,
+        .grid--#{$_key}-4-1 {
+            display: grid;
+            gap: var(--space-grid);
+            inline-size: 100%;
+        }
+
+        .grid--#{$_key}-1 {
+            grid-template-columns: var(--grid-1);
+        }
+
+        .grid--#{$_key}-2 {
+            grid-template-columns: var(--grid-2);
+        }
+
+        .grid--#{$_key}-3 {
+            grid-template-columns: var(--grid-3);
+        }
+
+        .grid--#{$_key}-4 {
+            grid-template-columns: var(--grid-4);
+        }
+
+        .grid--#{$_key}-5 {
+            grid-template-columns: var(--grid-5);
+        }
+
+        .grid--#{$_key}-1-2 {
+            grid-template-columns: var(--grid-1-2);
+        }
+
+        .grid--#{$_key}-1-3 {
+            grid-template-columns: var(--grid-1-3);
+        }
+
+        .grid--#{$_key}-1-4 {
+            grid-template-columns: var(--grid-1-4);
+        }
+
+        .grid--#{$_key}-2-1 {
+            grid-template-columns: var(--grid-2-1);
+        }
+
+        .grid--#{$_key}-2-3 {
+            grid-template-columns: var(--grid-2-3);
+        }
+
+        .grid--#{$_key}-3-1 {
+            grid-template-columns: var(--grid-3-1);
+        }
+
+        .grid--#{$_key}-3-2 {
+            grid-template-columns: var(--grid-3-2);
+        }
+
+        .grid--#{$_key}-4-1 {
+            grid-template-columns: var(--grid-4-1);
+        }
+    }
+}
+
+// Grid - Alternate
+// Add to grid parent containers to alternate grid items.
+/* Grid Alternate HTML Example:
+<section class="section">
+    <div class="container grid--md-alternate">
+        <div class="grid grid--md-2">
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+        </div>
+        <div class="grid grid--md-2">
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+        </div>
+    </div>
+</section>
+*/
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value, min) {
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) {
+            grid-template-columns: var(--grid-2-1);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) {
+            grid-template-columns: var(--grid-3-1);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) {
+            grid-template-columns: var(--grid-4-1);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-2);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) {
+            grid-template-columns: var(--grid-3-2);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-3);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) {
+            grid-template-columns: var(--grid-2-3);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) {
+            grid-template-columns: var(--grid-1-4);
+        }
+
+        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) > *:last-child {
+            order: -1;
+        }
+    }
+}
+
+// Grid - Auto
+// Add to layouts containing grid items that need to auto-size as the screen size changes.
+/* Grid Auto HTML Example:
+<section class="section">
+    <div class="container">
+        <div class="grid-auto">
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+            <div class="block">
+                <!-- Grid Block -->
+            </div>
+        </div>
+    </div>
+</section>
+*/
+.grid-auto {
+    @extend .grid;
+
+    --grid-auto-column-min: var(--width-min);
+
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-auto-column-min), 100%), 1fr));
+    grid-template-rows: var(--grid-1);
+}
+
+// Grid - Layout
+// Add to layouts containing grid items that need to expand beyond the layout width.
+/* Grid Layout HTML Example:
+<div class="grid-layout">
+    <div class="block">
+        <!-- Default Layout Width -->
+    </div>
+    <div class="block grid-layout__wide">
+        <!-- Wide Layout Width -->
+    </div>
+    <div class="block grid-layout__full">
+        <!-- Full Layout Width -->
+    </div>
+</div>
+*/
+.grid-layout {
+    --grid-layout-width: var(--width-layout);
+    --grid-layout-wide: calc((var(--width-wide) - var(--grid-layout-width)) / 2);
+
+    column-gap: 0;
+    display: grid;
+    grid-template-columns: [full-start] minmax(var(--space-edge), 1fr) [wide-start] minmax(0, var(--grid-layout-wide)) [content-start] min(var(--grid-layout-width), 100% - var(--space-edge) * 2) [content-end] minmax(0, var(--grid-layout-wide)) [wide-end] minmax(var(--space-edge), 1fr) [full-end];
+    inline-size: 100%;
+    padding-inline: 0;
+    row-gap: var(--space-block);
+
+    & > :not(&__full, &__wide) {
+        grid-column: content;
+    }
+
+    & > &__wide {
+        grid-column: wide;
+    }
+
+    & > &__full {
+        grid-column: full;
+    }
+}
+
+// Header
+// Add to header elements.
+/* Header HTML Example:
+<header class="header" data-header-style="fixed">
+    <div class="header__container">
+        <!-- Header Content -->
+    </div>
+</header>
+*/
+.header {
+    --spacing-header: var(--space-block);
+
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    padding: var(--spacing-header) var(--space-edge);
+    row-gap: var(--spacing-header);
+
+    &__container {
         display: flex;
-        flex-direction: column;
-        gap: var(--space-container);
+        flex-direction: row;
+        gap: var(--spacing-header);
         inline-size: 100%;
+        justify-content: space-between;
         margin-inline: auto;
         max-inline-size: var(--width-layout);
     }
 
-    // Grid
-    // Add to layouts containing grid items.
-    /* Grid HTML Example:
-    <section class="section">
-        <div class="container">
-            <div class="grid grid--md-2">
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-            </div>
-        </div>
-    </section>
-    */
-    .grid,
-    .grid--1,
-    .grid--2,
-    .grid--3,
-    .grid--4,
-    .grid--5,
-    .grid--1-2,
-    .grid--1-3,
-    .grid--1-4,
-    .grid--2-1,
-    .grid--2-3,
-    .grid--3-1,
-    .grid--3-2,
-    .grid--4-1 {
-        display: grid;
-        gap: var(--space-grid);
+    &--fixed,
+    &--overlay {
         inline-size: 100%;
-    }
-
-    .grid--1 {
-        grid-template-columns: var(--grid-1);
-    }
-
-    .grid--2 {
-        grid-template-columns: var(--grid-2);
-    }
-
-    .grid--3 {
-        grid-template-columns: var(--grid-3);
-    }
-
-    .grid--4 {
-        grid-template-columns: var(--grid-4);
-    }
-
-    .grid--5 {
-        grid-template-columns: var(--grid-5);
-    }
-
-    .grid--1-2 {
-        grid-template-columns: var(--grid-1-2);
-    }
-
-    .grid--1-3 {
-        grid-template-columns: var(--grid-1-3);
-    }
-
-    .grid--1-4 {
-        grid-template-columns: var(--grid-1-4);
-    }
-
-    .grid--2-1 {
-        grid-template-columns: var(--grid-2-1);
-    }
-
-    .grid--2-3 {
-        grid-template-columns: var(--grid-2-3);
-    }
-
-    .grid--3-1 {
-        grid-template-columns: var(--grid-3-1);
-    }
-
-    .grid--3-2 {
-        grid-template-columns: var(--grid-3-2);
-    }
-
-    .grid--4-1 {
-        grid-template-columns: var(--grid-4-1);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .grid--#{$_key},
-            .grid--#{$_key}-1,
-            .grid--#{$_key}-2,
-            .grid--#{$_key}-3,
-            .grid--#{$_key}-4,
-            .grid--#{$_key}-5,
-            .grid--#{$_key}-1-2,
-            .grid--#{$_key}-1-3,
-            .grid--#{$_key}-1-4,
-            .grid--#{$_key}-2-1,
-            .grid--#{$_key}-2-3,
-            .grid--#{$_key}-3-1,
-            .grid--#{$_key}-3-2,
-            .grid--#{$_key}-4-1 {
-                display: grid;
-                gap: var(--space-grid);
-                inline-size: 100%;
-            }
-
-            .grid--#{$_key}-1 {
-                grid-template-columns: var(--grid-1);
-            }
-
-            .grid--#{$_key}-2 {
-                grid-template-columns: var(--grid-2);
-            }
-
-            .grid--#{$_key}-3 {
-                grid-template-columns: var(--grid-3);
-            }
-
-            .grid--#{$_key}-4 {
-                grid-template-columns: var(--grid-4);
-            }
-
-            .grid--#{$_key}-5 {
-                grid-template-columns: var(--grid-5);
-            }
-
-            .grid--#{$_key}-1-2 {
-                grid-template-columns: var(--grid-1-2);
-            }
-
-            .grid--#{$_key}-1-3 {
-                grid-template-columns: var(--grid-1-3);
-            }
-
-            .grid--#{$_key}-1-4 {
-                grid-template-columns: var(--grid-1-4);
-            }
-
-            .grid--#{$_key}-2-1 {
-                grid-template-columns: var(--grid-2-1);
-            }
-
-            .grid--#{$_key}-2-3 {
-                grid-template-columns: var(--grid-2-3);
-            }
-
-            .grid--#{$_key}-3-1 {
-                grid-template-columns: var(--grid-3-1);
-            }
-
-            .grid--#{$_key}-3-2 {
-                grid-template-columns: var(--grid-3-2);
-            }
-
-            .grid--#{$_key}-4-1 {
-                grid-template-columns: var(--grid-4-1);
-            }
-        }
-    }
-
-    // Grid - Alternate
-    // Add to grid parent containers to alternate grid items.
-    /* Grid Alternate HTML Example:
-    <section class="section">
-        <div class="container grid--md-alternate">
-            <div class="grid grid--md-2">
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-            </div>
-            <div class="grid grid--md-2">
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-            </div>
-        </div>
-    </section>
-    */
-    @each $_key,
-    $_value in $breakpoint {
-        @include breakpoint($_value, min) {
-            .grid-alternate--#{$_key} > .grid--#{$_key}-2:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) {
-                grid-template-columns: var(--grid-2-1);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) {
-                grid-template-columns: var(--grid-3-1);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) {
-                grid-template-columns: var(--grid-4-1);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) {
-                grid-template-columns: var(--grid-1-2);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) {
-                grid-template-columns: var(--grid-3-2);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) {
-                grid-template-columns: var(--grid-1-3);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) {
-                grid-template-columns: var(--grid-2-3);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) {
-                grid-template-columns: var(--grid-1-4);
-            }
-
-            .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) > *:last-child {
-                order: -1;
-            }
-        }
-    }
-
-    // Grid - Auto
-    // Add to layouts containing grid items that need to auto-size as the screen size changes.
-    /* Grid Auto HTML Example:
-    <section class="section">
-        <div class="container">
-            <div class="grid-auto">
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-                <div class="block">
-                    <!-- Grid Block -->
-                </div>
-            </div>
-        </div>
-    </section>
-    */
-    .grid-auto {
-        @extend .grid;
-
-        --grid-auto-column-min: var(--width-min);
-
-        grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-auto-column-min), 100%), 1fr));
-        grid-template-rows: var(--grid-1);
-    }
-
-    // Grid - Layout
-    // Add to layouts containing grid items that need to expand beyond the layout width.
-    /* Grid Layout HTML Example:
-    <div class="grid-layout">
-        <div class="block">
-            <!-- Default Layout Width -->
-        </div>
-        <div class="block grid-layout__wide">
-            <!-- Wide Layout Width -->
-        </div>
-        <div class="block grid-layout__full">
-            <!-- Full Layout Width -->
-        </div>
-    </div>
-    */
-    .grid-layout {
-        --grid-layout-width: var(--width-layout);
-        --grid-layout-wide: calc((var(--width-wide) - var(--grid-layout-width)) / 2);
-
-        column-gap: 0;
-        display: grid;
-        grid-template-columns: [full-start] minmax(var(--space-edge), 1fr) [wide-start] minmax(0, var(--grid-layout-wide)) [content-start] min(var(--grid-layout-width), 100% - var(--space-edge) * 2) [content-end] minmax(0, var(--grid-layout-wide)) [wide-end] minmax(var(--space-edge), 1fr) [full-end];
-        inline-size: 100%;
-        padding-inline: 0;
-        row-gap: var(--space-block);
-
-        & > :not(&__full, &__wide) {
-            grid-column: content;
-        }
-
-        & > &__wide {
-            grid-column: wide;
-        }
-
-        & > &__full {
-            grid-column: full;
-        }
-    }
-
-    // Header
-    // Add to header elements.
-    /* Header HTML Example:
-    <header class="header" data-header-style="fixed">
-        <div class="header__container">
-            <!-- Header Content -->
-        </div>
-    </header>
-    */
-    .header {
-        --spacing-header: var(--space-block);
-
-        display: flex;
-        flex-direction: column;
-        inline-size: 100%;
-        padding: var(--spacing-header) var(--space-edge);
-        row-gap: var(--spacing-header);
-
-        &__container {
-            display: flex;
-            flex-direction: row;
-            gap: var(--spacing-header);
-            inline-size: 100%;
-            justify-content: space-between;
-            margin-inline: auto;
-            max-inline-size: var(--width-layout);
-        }
-
-        &--fixed,
-        &--overlay {
-            inline-size: 100%;
-            inset-block-start: 0;
-            inset-inline-end: 0;
-            inset-inline-start: 0;
-            z-index: var(--z-high);
-        }
-
-        &--fixed {
-            position: fixed;
-        }
-
-        &--overlay {
-            position: absolute;
-        }
-    }
-
-    // Section
-    // Add to section elements.
-    /* Section HTML Example:
-    <section class="section">
-        <div class="container">
-            <div class="block">
-                <!-- Content -->
-            </div>
-        </div>
-    </section>
-    */
-    .section {
-        display: flex;
-        flex-direction: column;
-        inline-size: 100%;
-        padding: var(--space-section) var(--space-edge);
-        row-gap: var(--space-section);
-    }
-}
-
-@if $component-classes {
-    /*! --- Component --- */
-
-    // Background Overlay
-    // Add to elements inside sections that need to overlay the section background.
-    /* Background Overlay HTML Example:
-    <section class="bg-overlay-parent section">
-        <div class="container">
-            <div class="block">
-                <!-- Content -->
-            </div>
-        </div>
-        <div class="bg-overlay bg--primary"><!-- div, img, and video elements --></div>
-    </section>
-    */
-    .bg-overlay {
-        block-size: 100% !important;
-        inline-size: 100%;
-        inset: 0;
-        margin-block-start: 0;
-        object-fit: cover;
-        object-position: var(--object-center);
-        overflow: hidden;
-        position: absolute;
-        z-index: var(--z-back);
-
-        &-parent {
-            isolation: isolate;
-            position: relative;
-        }
-    }
-
-    // Button
-    // Add to anchor links and buttons.
-    /* Button HTML Example:
-    <a class="btn" href="#">Anchor Link</a>
-    <button class="btn">Button</button>
-    */
-    .btn {
-        --bg-color-btn: var(--primary);
-        --border-color-btn: var(--primary);
-        --border-radius-btn: var(--border-radius);
-        --border-style-btn: var(--border-style);
-        --border-width-btn: var(--border-width);
-        --color-btn: var(--primary-lightest);
-        --font-size-btn: var(--font-size-body);
-        --font-weight-btn: 400;
-        --gap-btn: var(--space-icon);
-        --line-height-btn: 1;
-        --padding-x-btn: var(--space-xl);
-        --padding-y-btn: var(--space-md);
-        --text-spaced-btn: var(--space-px);
-        --text-transform-btn: none;
-        --transition-btn: var(--transition);
-        --width-btn: fit-content;
-
-        align-items: center;
-        background-color: var(--bg-color-btn);
-        border-color: var(--border-color-btn);
-        border-radius: var(--border-radius-btn);
-        border-style: var(--border-style-btn);
-        border-width: var(--border-width-btn);
-        color: var(--color-btn);
-        cursor: pointer;
-        display: inline-flex;
-        font-size: var(--font-size-btn);
-        font-weight: var(--font-weight-btn);
-        gap: var(--gap-btn);
-        inline-size: var(--width-btn);
-        justify-content: center;
-        letter-spacing: var(--text-spaced-btn);
-        line-height: var(--line-height-btn);
-        padding-block: var(--padding-y-btn);
-        padding-inline: var(--padding-x-btn);
-        text-align: center;
-        text-decoration: none;
-        text-transform: var(--text-transform-btn);
-        transition: background-color var(--transition-btn) var(--transition-easing), border-color var(--transition-btn) var(--transition-easing), color var(--transition-btn) var(--transition-easing);
-
-        &:focus-visible {
-            transition: none;
-        }
-
-        &--icon {
-            --padding-x-btn: var(--space-icon);
-            --padding-y-btn: var(--space-icon);
-        }
-
-        &--outline {
-            --color-btn: var(--border-color-btn);
-
-            background-color: initial !important;
-        }
-    }
-
-    // Button - Sizing
-    .btn--small {
-        --font-size-btn: var(--font-size-small);
-        --padding-x-btn: var(--space-md);
-        --padding-y-btn: var(--space-sm);
-    }
-
-    .btn--large {
-        --font-size-btn: var(--font-size-body);
-        --padding-x-btn: var(--space-2xl);
-        --padding-y-btn: var(--space-lg);
-    }
-
-    // Button - Color
-    .btn--light {
-        --bg-color-btn: var(--base-lightest);
-        --border-color-btn: var(--base-lightest);
-        --color-btn: var(--base-darkest);
-
-        &:focus-visible {
-            @extend .focus--light;
-        }
-
-        &.btn--outline {
-            --color-btn: var(--base-lightest);
-        }
-    }
-
-    .btn--dark {
-        --bg-color-btn: var(--base-darkest);
-        --border-color-btn: var(--base-darkest);
-        --color-btn: var(--base-lightest);
-
-        &:focus-visible {
-            @extend .focus--dark;
-        }
-
-        &.btn--outline {
-            --color-btn: var(--base-darkest);
-        }
-    }
-
-    // Card
-    // Add to card elements.
-    /* Card HTML Example:
-    <div class="card">
-        <div class="card__head">
-            <!-- Card Head -->
-        </div>
-        <div class="card__body">
-            <!-- Card Body -->
-        </div>
-    </div>
-    */
-    .card {
-
-        &,
-        &__head,
-        &__body {
-            align-items: var(--align-card);
-            background-color: var(--bg-color-card);
-            border-radius: var(--border-radius-card);
-            border: var(--border-width-card) var(--border-style-card) var(--border-color-card);
-            color: var(--color-card);
-            display: flex;
-            flex-direction: column;
-            gap: var(--gap-card);
-            inline-size: 100%;
-            justify-content: space-between;
-            overflow: clip;
-            padding: var(--padding-card);
-            text-align: var(--text-align-card);
-        }
-
-        & {
-            --align-card: flex-start;
-            --bg-color-card: inherit;
-            --border-color-card: var(--border-color);
-            --border-radius-card: var(--border-radius);
-            --border-style-card: var(--border-style);
-            --border-width-card: var(--border-width);
-            --color-card: inherit;
-            --gap-card: var(--space-block);
-            --padding-card: var(--space-block);
-            --text-align-card: left;
-        }
-
-        &__head {
-            --align-card: flex-start;
-            --bg-color-card: inherit;
-            --border-color-card: var(--border-color);
-            --border-radius-card: var(--border-radius);
-            --border-style-card: none;
-            --border-width-card: var(--border-width);
-            --color-card: inherit;
-            --gap-card: var(--space-block);
-            --padding-card: 0;
-            --text-align-card: left;
-        }
-
-        &__body {
-            --align-card: flex-start;
-            --bg-color-card: inherit;
-            --border-color-card: var(--border-color);
-            --border-radius-card: var(--border-radius);
-            --border-style-card: none;
-            --border-width-card: var(--border-width);
-            --color-card: inherit;
-            --gap-card: var(--space-block);
-            --padding-card: 0;
-            --text-align-card: left;
-        }
-    }
-
-    // Form
-    // Add to forms or containers that contain form elements.
-    /* Form HTML Example:
-    <!-- Formspark form with Botpoison -->
-    <form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
-        <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
-        <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
-        <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
-        <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
-        <fieldset>
-            <label for="company">Company Name</label>
-            <input aria-label="Company Name" id="company" name="company" type="text">
-        </fieldset>
-        <div class="grid grid--lg-2">
-            <fieldset>
-                <label for="first-name">First Name</label>
-                <input aria-label="First Name" id="first-name" name="first-name" required type="text">
-            </fieldset>
-            <fieldset>
-                <label for="last-name">Last Name</label>
-                <input aria-label="Last Name" id="last-name" name="last-name" type="text">
-            </fieldset>
-        </div>
-        <div class="grid grid--lg-2">
-            <fieldset>
-                <label for="email">Email Address</label>
-                <input aria-label="Email Address" id="email" name="email" required type="email">
-            </fieldset>
-            <fieldset>
-                <label for="phone">Phone Number</label>
-                <input aria-label="Phone Number" id="phone" name="phone" type="tel">
-            </fieldset>
-        </div>
-        <fieldset>
-            <label for="message">Message</label>
-            <textarea aria-label="Message" id="message" name="message" required></textarea>
-        </fieldset>
-        <fieldset>
-            <label for="pretend-check">Pretend Check</label>
-            <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
-        </fieldset>
-        <button type="submit">Send Message</button>
-    </form>
-
-    <!-- Generic form with various input types -->
-    <form class="form">
-        <fieldset>
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="Pretend Person" required>
-        </fieldset>
-        <div class="grid grid--md-2">
-            <fieldset>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
-            </fieldset>
-            <fieldset>
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
-            </fieldset>
-        </div>
-        <div class="grid grid--md-2">
-            <fieldset>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </fieldset>
-            <fieldset>
-                <label for="url">Website</label>
-                <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
-            </fieldset>
-        </div>
-        <div class="grid grid--md-2">
-            <fieldset>
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date">
-            </fieldset>
-            <fieldset>
-                <label for="time">Time</label>
-                <input type="time" id="time" name="time">
-            </fieldset>
-        </div>
-        <fieldset>
-            <label for="number">Number</label>
-            <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
-        </fieldset>
-        <fieldset>
-            <label for="search">Search</label>
-            <input type="search" id="search" name="search" placeholder="Search...">
-        </fieldset>
-        <fieldset>
-            <label for="country">Country</label>
-            <select id="country" name="country" required>
-                <option value="">Select a country</option>
-                <option value="us">United States</option>
-                <option value="ca">Canada</option>
-                <option value="mx">Mexico</option>
-                <option value="other">Other</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
-        </fieldset>
-        <div class="grid grid--md-2">
-            <fieldset>
-                <legend>Preferences</legend>
-                <label>
-                    <input type="checkbox" name="option1" value="yes">
-                    Option One
-                </label>
-                <label>
-                    <input type="checkbox" name="option2" value="accepted" required>
-                    Option Two
-                </label>
-            </fieldset>
-            <fieldset>
-                <legend>More Preference</legend>
-                <label>
-                    <input type="radio" name="contact" value="option3" required>
-                    Option Three
-                </label>
-                <label>
-                    <input type="radio" name="contact" value="option4">
-                    Option Four
-                </label>
-            </fieldset>
-        </div>
-        <div class="form-error">
-            <p>This is what an error message looks like.</p>
-        </div>
-        <div class="form-success">
-            <p>This is what a success message looks like.</p>
-        </div>
-        <button type="submit">Submit Form</button>
-    </form>
-    */
-    .form,
-    .form form {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-grid);
-        inline-size: 100%;
-    }
-
-    .form {
-        --bg-color-checkbox-checked: var(--primary);
-        --bg-color-checkbox: var(--bg-color-input);
-        --bg-color-form-error: var(--error);
-        --bg-color-form-success: var(--success);
-        --bg-color-input-disabled: var(--base-lighter);
-        --bg-color-input: var(--base-lightest);
-        --bg-color-submit: var(--primary);
-        --border-color-input: var(--border-color);
-        --border-radius-checkbox: var(--border-radius);
-        --border-radius-input: var(--border-radius);
-        --border-radius-radio: var(--border-radius-round);
-        --border-style-input: var(--border-style);
-        --border-width-input: var(--border-width);
-        --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
-        --color-form-error: var(--error-lightest);
-        --color-form-success: var(--success-lightest);
-        --color-input: var(--base-darkest);
-        --color-label: inherit;
-        --color-placeholder: var(--base-darkest);
-        --color-submit: var(--primary-lightest);
-        --font-size-form-error: var(--font-size-body);
-        --font-size-form-success: var(--font-size-body);
-        --font-size-input: var(--font-size-body);
-        --font-size-label: var(--font-size-body);
-        --font-weight-label: 400;
-        --gap-form: var(--space-grid);
-        --gap-label: var(--space-sm);
-        --height-input: var(--space-2xl);
-        --height-textarea: calc(var(--space-2xl) * 5);
-        --line-height-input: var(--line-height-heading);
-        --opacity-placeholder: .5;
-        --padding-x-input: var(--space-md);
-        --padding-y-input: var(--space-sm);
-        --size-checkbox: var(--space-lg);
-    }
-
-    // Checkbox, Radio
-    input[type="checkbox"],
-    input[type="radio"] {
-        appearance: none;
-        background-color: var(--bg-color-checkbox);
-        block-size: var(--size-checkbox);
-        border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-        cursor: pointer;
-        display: grid;
-        inline-size: var(--size-checkbox);
-        place-content: center;
-
-        &::before {
-            box-shadow: var(--box-shadow-checkbox-checked);
-            content: "";
-            height: calc(var(--size-checkbox) * .75);
-            transform: scale(0);
-            transition: transform var(--transition);
-            width: calc(var(--size-checkbox) * .75);
-        }
-
-        &:checked {
-            background-color: var(--bg-color-checkbox-checked);
-            border-color: var(--bg-color-checkbox-checked);
-        }
-
-        &:checked:before {
-            transform: scale(0.75);
-        }
-
-        &:disabled {
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-    }
-
-    input[type="checkbox"] {
-        border-radius: var(--border-radius-checkbox);
-
-        &::before {
-            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-        }
-    }
-
-    input[type="radio"] {
-        border-radius: var(--border-radius-radio);
-
-        &::before {
-            border-radius: var(--border-radius-radio);
-        }
-    }
-
-    // Fieldset
-    fieldset {
-        border: 0;
-        margin: 0;
-        padding: 0;
-    }
-
-    // Input, Textarea
-    input[type="date"],
-    input[type="datetime-local"],
-    input[type="email"],
-    input[type="month"],
-    input[type="number"],
-    input[type="password"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="text"],
-    input[type="time"],
-    input[type="url"],
-    input[type="week"],
-    textarea {
-        background-color: var(--bg-color-input);
-        border-radius: var(--border-radius-input);
-        border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-        color: var(--color-input);
-        font-family: inherit;
-        font-size: var(--font-size-input);
-        inline-size: 100%;
-        line-height: var(--line-height-input);
-        min-block-size: var(--height-input);
-        padding: var(--padding-y-input) var(--padding-x-input);
-        transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-
-        &::placeholder {
-            color: var(--color-placeholder);
-            opacity: var(--opacity-placeholder);
-        }
-
-        &:disabled {
-            background-color: var(--bg-color-input-disabled);
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-    }
-
-    // Label, Legend
-    label,
-    legend {
-        align-items: center;
-        color: var(--color-label);
-        cursor: pointer;
-        display: flex;
-        font-size: var(--font-size-label);
-        font-weight: var(--font-weight-label);
-        gap: var(--gap-label);
-        margin-block-end: var(--gap-label);
-
-        &:has(+ input:disabled),
-        &:has(+ select:disabled),
-        &:has(+ textarea:disabled) {
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-    }
-
-    // Select
-    select {
-        appearance: none;
-        background-color: var(--bg-color-input);
-        background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-        background-position: calc(100% - var(--padding-x-input) - 5px) calc(50% + 1px), calc(100% - var(--padding-x-input)) calc(50% + 1px);
-        background-repeat: no-repeat;
-        background-size: 5px 5px, 5px 5px;
-        border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-        border-radius: var(--border-radius-input);
-        color: var(--color-input);
-        cursor: pointer;
-        font-family: inherit;
-        font-size: var(--font-size-input);
-        inline-size: 100%;
-        line-height: var(--line-height-input);
-        min-block-size: var(--height-input);
-        padding: var(--padding-y-input) var(--padding-x-input);
-        transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-
-        &:disabled {
-            background-color: var(--bg-color-input-disabled);
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-    }
-
-    // Submit
-    input[type="submit"],
-    button[type="submit"] {
-        @extend .btn;
-
-        --bg-color-btn: var(--bg-color-submit);
-        --border-color-btn: var(--bg-color-submit);
-        --color-btn: var(--color-submit);
-
-        &:disabled {
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-    }
-
-    // Textarea
-    textarea {
-        min-block-size: var(--height-textarea);
-        resize: vertical;
-    }
-
-    // Honeypot
-    fieldset:has([name="_pretend-check"]) {
-        left: -625rem;
-        position: absolute;
-    }
-
-    // Messages
-    .form-error,
-    .form-success {
-        justify-content: center;
-        border-radius: var(--border-radius-input);
-        display: flex;
-        min-block-size: var(--height-input);
-        padding: var(--padding-y-input) var(--padding-x-input);
-    }
-
-    .form-error {
-        background-color: var(--bg-color-form-error);
-        border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-error);
-        color: var(--color-form-error);
-        font-size: var(--font-size-form-error);
-    }
-
-    .form-success {
-        background-color: var(--bg-color-form-success);
-        border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-success);
-        color: var(--color-form-success);
-        font-size: var(--font-size-form-success);
-    }
-
-    // Link Overlay
-    // Add to an anchor link that need to expand to fill the parent container.
-    /* Link Overlay HTML Example:
-    <div class="link-overlay">
-        <a href="#">Link</a>
-    </div>
-    */
-    .link-overlay {
-        position: relative;
-
-        & :focus {
-            outline: none !important;
-        }
-
-        & a {
-            position: static;
-        }
-
-        & a::after {
-            content: "";
-            cursor: pointer;
-            display: flex;
-            inset: 0;
-            position: absolute;
-        }
-    }
-}
-
-@if $utility-classes {
-    /*! --- Utility --- */
-
-    // Alignment
-    .align--center-all {
-        align-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
-    }
-
-    .align--center-x {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .align--center-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-    }
-
-    .align--end-x {
-        align-items: flex-end;
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-    }
-
-    .align--end-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
-    }
-
-    .align--start-x {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-    }
-
-    .align--start-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
-    }
-
-    .align--stretch-all {
-        align-content: stretch;
-        align-items: stretch;
-        justify-content: stretch;
-        justify-items: stretch;
-    }
-
-    .aligncenter,
-    .center--self {
-        margin-inline: auto;
-    }
-
-    .alignleft,
-    .float--left,
-    .float--left-offset {
-        float: inline-start;
-        margin-block-end: var(--space-block);
-        margin-inline-end: var(--space-block);
-    }
-
-    .float--left-offset {
-        margin-inline-start: calc(var(--space-edge) * -1);
-    }
-
-    .float--none {
-        float: none;
-        margin-block-end: 0;
-        margin-inline: 0;
-    }
-
-    .alignright,
-    .float--right,
-    .float--right-offset {
-        float: inline-end;
-        margin-block-end: var(--space-block);
-        margin-inline-start: var(--space-block);
-    }
-
-    .float--right-offset {
-        margin-inline-end: calc(var(--space-edge) * -1);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .align--#{$_key}-center-all {
-                align-content: center;
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                justify-items: center;
-                text-align: center;
-            }
-
-            .align--#{$_key}-center-x {
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .align--#{$_key}-center-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                justify-items: center;
-            }
-
-            .align--#{$_key}-end-x {
-                align-items: flex-end;
-                display: flex;
-                flex-direction: column;
-                text-align: right;
-            }
-
-            .align--#{$_key}-end-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                justify-items: flex-end;
-            }
-
-            .align--#{$_key}-start-x {
-                align-items: flex-start;
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-            }
-
-            .align--#{$_key}-start-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                justify-items: flex-start;
-            }
-
-            .align--#{$_key}-stretch-all {
-                align-content: stretch;
-                align-items: stretch;
-                justify-content: stretch;
-                justify-items: stretch;
-            }
-
-            .center--#{$_key}-self {
-                float: none;
-                margin-block-end: 0;
-                margin-inline: auto;
-            }
-
-            .float--#{$_key}-left,
-            .float--#{$_key}-left-offset {
-                float: inline-start;
-                margin-block-end: var(--space-block);
-                margin-inline-end: var(--space-block);
-                margin-inline-start: 0;
-            }
-
-            .float--#{$_key}-left-offset {
-                margin-inline-start: calc(var(--space-edge) * -1);
-            }
-
-            .float--#{$_key}-none {
-                float: none;
-                margin-block-end: 0;
-                margin-inline: 0;
-            }
-
-            .float--#{$_key}-right,
-            .float--#{$_key}-right-offset {
-                float: inline-end;
-                margin-block-end: var(--space-block);
-                margin-inline-end: 0;
-                margin-inline-start: var(--space-block);
-            }
-
-            .float--#{$_key}-right-offset {
-                margin-inline-end: calc(var(--space-edge) * -1);
-            }
-        }
-    }
-
-    // Background Blur
-    .bg-blur--sm,
-    .bg-blur--md,
-    .bg-blur--lg {
-        --blur-sm: var(--space-xs);
-        --blur-md: var(--space-sm);
-        --blur-lg: var(--space-md);
-
-        background-color: var(--bg-color-blur);
-    }
-
-    .bg-blur--sm {
-        backdrop-filter: blur(var(--blur-sm));
-    }
-
-    .bg-blur--md {
-        backdrop-filter: blur(var(--blur-md));
-    }
-
-    .bg-blur--lg {
-        backdrop-filter: blur(var(--blur-lg));
-    }
-
-    // Background Color
-    @each $_key, $_value in $color {
-        .bg--#{$_key} {
-            background-color: var(--#{$_key});
-        }
-
-        .bg--#{$_key}-lightest {
-            background-color: var(--#{$_key}-lightest);
-        }
-
-        .bg--#{$_key}-lighter {
-            background-color: var(--#{$_key}-lighter);
-        }
-
-        .bg--#{$_key}-light {
-            background-color: var(--#{$_key}-light);
-        }
-
-        .bg--#{$_key}-dark {
-            background-color: var(--#{$_key}-dark);
-        }
-
-        .bg--#{$_key}-darker {
-            background-color: var(--#{$_key}-darker);
-        }
-
-        .bg--#{$_key}-darkest {
-            background-color: var(--#{$_key}-darkest);
-        }
-    }
-
-    @each $_key, $_value in $color-base {
-        .bg--#{$_key}-white {
-            background-color: var(--#{$_key}-white);
-        }
-
-        .bg--#{$_key}-lightest {
-            background-color: var(--#{$_key}-lightest);
-        }
-
-        .bg--#{$_key}-lighter {
-            background-color: var(--#{$_key}-lighter);
-        }
-
-        .bg--#{$_key}-light {
-            background-color: var(--#{$_key}-light);
-        }
-
-        .bg--#{$_key}-dark {
-            background-color: var(--#{$_key}-dark);
-        }
-
-        .bg--#{$_key}-darker {
-            background-color: var(--#{$_key}-darker);
-        }
-
-        .bg--#{$_key}-darkest {
-            background-color: var(--#{$_key}-darkest);
-        }
-
-        .bg--#{$_key}-black {
-            background-color: var(--#{$_key}-black);
-        }
-    }
-
-    .bg--transparent {
-        background-color: transparent;
-    }
-
-    // Breakout
-    .breakout--wide {
-        align-self: flex-start;
-        inline-size: 100vw;
-        margin-inline-start: 50%;
-        max-inline-size: var(--width-wide);
-        transform: translateX(-50%);
-    }
-
-    .breakout--max {
-        align-self: flex-start;
-        inline-size: 100vw;
-        margin-inline-start: 50%;
-        max-inline-size: var(--width-max);
-        transform: translateX(-50%);
-    }
-
-    // Color
-    @each $_key, $_value in $color {
-        .color--#{$_key} {
-            color: var(--#{$_key});
-        }
-
-        .color--#{$_key}-lightest {
-            color: var(--#{$_key}-lightest);
-        }
-
-        .color--#{$_key}-lighter {
-            color: var(--#{$_key}-lighter);
-        }
-
-        .color--#{$_key}-light {
-            color: var(--#{$_key}-light);
-        }
-
-        .color--#{$_key}-dark {
-            color: var(--#{$_key}-dark);
-        }
-
-        .color--#{$_key}-darker {
-            color: var(--#{$_key}-darker);
-        }
-
-        .color--#{$_key}-darkest {
-            color: var(--#{$_key}-darkest);
-        }
-    }
-
-    @each $_key, $_value in $color-base {
-        .color--#{$_key}-white {
-            color: var(--#{$_key}-white);
-        }
-
-        .color--#{$_key}-lightest {
-            color: var(--#{$_key}-lightest);
-        }
-
-        .color--#{$_key}-lighter {
-            color: var(--#{$_key}-lighter);
-        }
-
-        .color--#{$_key}-light {
-            color: var(--#{$_key}-light);
-        }
-
-        .color--#{$_key}-dark {
-            color: var(--#{$_key}-dark);
-        }
-
-        .color--#{$_key}-darker {
-            color: var(--#{$_key}-darker);
-        }
-
-        .color--#{$_key}-darkest {
-            color: var(--#{$_key}-darkest);
-        }
-
-        .color--#{$_key}-black {
-            color: var(--#{$_key}-black);
-        }
-    }
-
-    .color--transparent {
-        color: transparent;
-    }
-
-    // Content Column
-    .content-column--1,
-    .content-column--2,
-    .content-column--3,
-    .content-column--4,
-    .content-column--5 {
-        --gap-content-column: var(--space-block);
-        --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
-
-        column-gap: var(--gap-content-column);
-        column-rule: var(--rule-content-column);
-    }
-
-    .content-column--1 {
-        column-count: 1;
-    }
-
-    .content-column--2 {
-        column-count: 2;
-    }
-
-    .content-column--3 {
-        column-count: 3;
-    }
-
-    .content-column--4 {
-        column-count: 4;
-    }
-
-    .content-column--5 {
-        column-count: 5;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .content-column--#{$_key}-1 {
-                column-count: 1;
-            }
-
-            .content-column--#{$_key}-2 {
-                column-count: 2;
-            }
-
-            .content-column--#{$_key}-3 {
-                column-count: 3;
-            }
-
-            .content-column--#{$_key}-4 {
-                column-count: 4;
-            }
-
-            .content-column--#{$_key}-5 {
-                column-count: 5;
-            }
-        }
-    }
-
-    .content-column-span--all {
-        column-span: all;
-    }
-
-    // Flip
-    .flip--x {
-        transform: scaleX(-1);
-    }
-
-    .flip--y {
-        transform: scaleY(-1);
-    }
-
-    .flip--xy {
-        transform: scale(-1, -1);
-    }
-
-    // Height
-    .height--auto {
-        min-block-size: auto;
-    }
-
-    .height--fill {
-        min-block-size: 100%;
-    }
-
-    .height--full {
-        min-block-size: 100svh;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .height--#{$_key}-auto {
-                min-block-size: auto;
-            }
-
-            .height--#{$_key}-fill {
-                min-block-size: 100%;
-            }
-
-            .height--#{$_key}-full {
-                min-block-size: 100svh;
-            }
-        }
-    }
-
-    // Hide, Show
-    .hide {
-        display: none;
-    }
-
-    .show {
-        display: block;
-    }
-
-    .show--flex {
-        display: flex;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .hide--#{$_key} {
-                display: none;
-            }
-
-            .show--#{$_key} {
-                display: block;
-            }
-
-            .show--#{$_key}-flex {
-                display: flex;
-            }
-        }
-    }
-
-    // Hide - Visually
-    .hide--visually:not(:focus):not(:active) {
-        block-size: 1px !important;
-        border: 0 !important;
-        clip-path: inset(50%) !important;
-        inline-size: 1px !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        padding: 0 !important;
-        position: absolute !important;
-        white-space: nowrap !important;
-    }
-
-    // List - Flat
-    ol.list--flat,
-    ul.list--flat,
-    .list--flat > ol,
-    .list--flat > ul {
-        list-style: none;
-        list-style-type: none;
-        margin-block: 0;
-        padding-inline-start: 0;
-    }
-
-    // Order
-    .order--first {
-        order: -1;
-    }
-
-    .order--last {
-        order: 1000;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .order--#{$_key}-first {
-                order: -1;
-            }
-
-            .order--#{$_key}-last {
-                order: 1000;
-            }
-        }
-    }
-
-    // Box Shadows
-    .box-shadow--sm {
-        box-shadow: var(--box-shadow-sm);
-    }
-
-    .box-shadow--md {
-        box-shadow: var(--box-shadow-md);
-    }
-
-    .box-shadow--lg {
-        box-shadow: var(--box-shadow-lg);
-    }
-
-    .box-shadow--flat {
-        box-shadow: none;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .box-shadow--#{$_key}-sm {
-                box-shadow: var(--box-shadow-sm);
-            }
-
-            .box-shadow--#{$_key}-md {
-                box-shadow: var(--box-shadow-md);
-            }
-
-            .box-shadow--#{$_key}-lg {
-                box-shadow: var(--box-shadow-lg);
-            }
-
-            .box-shadow--#{$_key}-flat {
-                box-shadow: none;
-            }
-        }
-    }
-
-    // Shadow - Drops
-    .drop-shadow--sm {
-        filter: var(--drop-shadow-sm);
-    }
-
-    .drop-shadow--md {
-        filter: var(--drop-shadow-md);
-    }
-
-    .drop-shadow--lg {
-        filter: var(--drop-shadow-lg);
-    }
-
-    .drop-shadow--flat {
-        filter: var(--drop-shadow-flat);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .drop-shadow--#{$_key}-sm {
-                filter: var(--drop-shadow-sm);
-            }
-
-            .drop-shadow--#{$_key}-md {
-                filter: var(--drop-shadow-md);
-            }
-
-            .drop-shadow--#{$_key}-lg {
-                filter: var(--drop-shadow-lg);
-            }
-
-            .drop-shadow--#{$_key}-flat {
-                filter: var(--drop-shadow-flat);
-            }
-        }
-    }
-
-    // Vertical Text
-    .vertical-text--left,
-    .vertical-text--right {
-        writing-mode: vertical-lr;
-    }
-
-    .vertical-text--left {
-        transform: scale(-1);
-    }
-
-    .vertical-text--right {
-        transform: scale(1);
-    }
-
-    .vertical-text--unset {
-        transform: scale(1);
-        writing-mode: unset;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .vertical-text--#{$_key}-left,
-            .vertical-text--#{$_key}-right {
-                writing-mode: vertical-lr;
-            }
-
-            .vertical-text--#{$_key}-left {
-                transform: scale(-1);
-            }
-
-            .vertical-text--#{$_key}-right {
-                transform: scale(1);
-            }
-
-            .vertical-text--#{$_key}-unset {
-                transform: scale(1);
-                writing-mode: unset;
-            }
-        }
-    }
-}
-
-@if $optional-classes {
-    // --- Optional --- //
-
-    // Aspect Ratio
-    .aspect--square iframe,
-    .aspect--landscape iframe,
-    .aspect--portrait iframe,
-    .aspect--cinema iframe,
-    .aspect--wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--square,
-    .aspect--square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--landscape,
-    .aspect--landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--portrait,
-    .aspect--portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--cinema,
-    .aspect--cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--wide,
-    .aspect--wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .aspect--#{$_key}-square iframe,
-            .aspect--#{$_key}-landscape iframe,
-            .aspect--#{$_key}-portrait iframe,
-            .aspect--#{$_key}-cinema iframe,
-            .aspect--#{$_key}-wide iframe {
-                block-size: 100%;
-                inline-size: 100%;
-            }
-
-            .aspect--#{$_key}-square,
-            .aspect--#{$_key}-square iframe {
-                aspect-ratio: var(--aspect-square);
-            }
-
-            .aspect--#{$_key}-landscape,
-            .aspect--#{$_key}-landscape iframe {
-                aspect-ratio: var(--aspect-landscape);
-            }
-
-            .aspect--#{$_key}-portrait,
-            .aspect--#{$_key}-portrait iframe {
-                aspect-ratio: var(--aspect-portrait);
-            }
-
-            .aspect--#{$_key}-cinema,
-            .aspect--#{$_key}-cinema iframe {
-                aspect-ratio: var(--aspect-cinema);
-            }
-
-            .aspect--#{$_key}-wide,
-            .aspect--#{$_key}-wide iframe {
-                aspect-ratio: var(--aspect-wide);
-            }
-        }
-    }
-
-    // Background Isolate
-    .bg-isolate {
-        isolation: isolate;
-    }
-
-    // Borders, Radius
-    .border {
-        & {
-            border: var(--border-width) var(--border-style) var(--border-color);
-            border-radius: var(--border-radius);
-        }
-
-        &--top {
-            border-top: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--right {
-            border-right: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--bottom {
-            border-bottom: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--left {
-            border-left: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--flat {
-            border: none;
-        }
-
-        &-radius {
-            border-radius: var(--border-radius);
-        }
-
-        &-radius--alt {
-            border-radius: var(--border-radius-alt);
-        }
-
-        &-radius--oval {
-            border-radius: var(--border-radius-oval);
-        }
-
-        &-radius--round {
-            border-radius: var(--border-radius-round);
-        }
-
-        &-radius--flat {
-            border-radius: 0;
-        }
-    }
-
-    // Clear
-    .clear {
-
-        &::before,
-        &::after {
-            content: "";
-            display: table;
-        }
-
-        &::after {
-            clear: both;
-        }
-    }
-
-    // Cursor
-    .cursor--default {
-        cursor: default;
-    }
-
-    .cursor--pointer {
-        cursor: pointer;
-    }
-
-    // Flex - Align
-    .align-content--start {
-        align-content: flex-start;
-    }
-
-    .align-content--center {
-        align-content: center;
-    }
-
-    .align-content--end {
-        align-content: flex-end;
-    }
-
-    .align-content--around {
-        align-content: space-around;
-    }
-
-    .align-content--baseline {
-        align-content: baseline;
-    }
-
-    .align-content--between {
-        align-content: space-between;
-    }
-
-    .align-content--evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--stretch {
-        align-content: stretch;
-    }
-
-    .align-items--start {
-        align-items: flex-start;
-    }
-
-    .align-items--center {
-        align-items: center;
-    }
-
-    .align-items--end {
-        align-items: flex-end;
-    }
-
-    .align-items--baseline {
-        align-items: baseline;
-    }
-
-    .align-items--stretch {
-        align-items: stretch;
-    }
-
-    .align-self--start {
-        align-self: flex-start;
-    }
-
-    .align-self--center {
-        align-self: center;
-    }
-
-    .align-self--end {
-        align-self: flex-end;
-    }
-
-    .align-self--baseline {
-        align-self: baseline;
-    }
-
-    .align-self--stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--center {
-        justify-content: center;
-    }
-
-    .justify-content--end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--around {
-        justify-content: space-around;
-    }
-
-    .justify-content--between {
-        justify-content: space-between;
-    }
-
-    .justify-content--stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--center {
-        justify-items: center;
-    }
-
-    .justify-items--end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--center {
-        justify-self: center;
-    }
-
-    .justify-self--end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--stretch {
-        justify-self: stretch;
-    }
-
-    @each $_key,
-    $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .align-content--#{$_key}-start {
-                align-content: flex-start;
-            }
-
-            .align-content--#{$_key}-center {
-                align-content: center;
-            }
-
-            .align-content--#{$_key}-end {
-                align-content: flex-end;
-            }
-
-            .align-content--#{$_key}-around {
-                align-content: space-around;
-            }
-
-            .align-content--#{$_key}-baseline {
-                align-content: baseline;
-            }
-
-            .align-content--#{$_key}-between {
-                align-content: space-between;
-            }
-
-            .align-content--#{$_key}-evenly {
-                align-content: space-evenly;
-            }
-
-            .align-content--#{$_key}-stretch {
-                align-content: stretch;
-            }
-
-            .align-items--#{$_key}-start {
-                align-items: flex-start;
-            }
-
-            .align-items--#{$_key}-center {
-                align-items: center;
-            }
-
-            .align-items--#{$_key}-end {
-                align-items: flex-end;
-            }
-
-            .align-items--#{$_key}-baseline {
-                align-items: baseline;
-            }
-
-            .align-items--#{$_key}-stretch {
-                align-items: stretch;
-            }
-
-            .align-self--#{$_key}-start {
-                align-self: flex-start;
-            }
-
-            .align-self--#{$_key}-center {
-                align-self: center;
-            }
-
-            .align-self--#{$_key}-end {
-                align-self: flex-end;
-            }
-
-            .align-self--#{$_key}-baseline {
-                align-self: baseline;
-            }
-
-            .align-self--#{$_key}-stretch {
-                align-self: stretch;
-            }
-
-            .justify-content--#{$_key}-start {
-                justify-content: flex-start;
-            }
-
-            .justify-content--#{$_key}-center {
-                justify-content: center;
-            }
-
-            .justify-content--#{$_key}-end {
-                justify-content: flex-end;
-            }
-
-            .justify-content--#{$_key}-evenly {
-                justify-content: space-evenly;
-            }
-
-            .justify-content--#{$_key}-around {
-                justify-content: space-around;
-            }
-
-            .justify-content--#{$_key}-between {
-                justify-content: space-between;
-            }
-
-            .justify-content--#{$_key}-stretch {
-                justify-content: stretch;
-            }
-
-            .justify-items--#{$_key}-start {
-                justify-items: flex-start;
-            }
-
-            .justify-items--#{$_key}-center {
-                justify-items: center;
-            }
-
-            .justify-items--#{$_key}-end {
-                justify-items: flex-end;
-            }
-
-            .justify-items--#{$_key}-stretch {
-                justify-items: stretch;
-            }
-
-            .justify-self--#{$_key}-start {
-                justify-self: flex-start;
-            }
-
-            .justify-self--#{$_key}-center {
-                justify-self: center;
-            }
-
-            .justify-self--#{$_key}-end {
-                justify-self: flex-end;
-            }
-
-            .justify-self--#{$_key}-stretch {
-                justify-self: stretch;
-            }
-        }
-    }
-
-    // Flex - Direction
-    .flex--column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--row-reverse {
-        flex-direction: row-reverse;
-    }
-
-    @each $_key,
-    $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .flex--#{$_key}-column {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .flex--#{$_key}-column-reverse {
-                flex-direction: column-reverse;
-            }
-
-            .flex--#{$_key}-row {
-                display: flex;
-                flex-direction: row;
-            }
-
-            .flex--#{$_key}-row-reverse {
-                flex-direction: row-reverse;
-            }
-        }
-    }
-
-    // Flex - Grow
-    .flex-grow {
-        flex-grow: 1;
-    }
-
-    .flex-grow--flat {
-        flex-grow: 0;
-    }
-
-    // Flex - Shrink
-    .flex-shrink {
-        flex-shrink: 1;
-    }
-
-    .flex-shrink--flat {
-        flex-shrink: 0;
-    }
-
-    // Flex - Wrap
-    .flex--nowrap {
-        flex-wrap: nowrap;
-    }
-
-    .flex--wrap {
-        flex-wrap: wrap;
-    }
-
-    .flex--wrap-reverse {
-        flex-wrap: wrap-reverse;
-    }
-
-    // Gap
-    .gap {
-        &--icon {
-            gap: var(--space-icon);
-
-            &-column {
-                column-gap: var(--space-icon);
-            }
-
-            &-row {
-                row-gap: var(--space-icon);
-            }
-        }
-
-        &--block {
-            gap: var(--space-block);
-
-            &-column {
-                column-gap: var(--space-block);
-            }
-
-            &-row {
-                row-gap: var(--space-block);
-            }
-        }
-
-        &--grid {
-            gap: var(--space-grid);
-
-            &-column {
-                column-gap: var(--space-grid);
-            }
-
-            &-row {
-                row-gap: var(--space-grid);
-            }
-        }
-
-        &--container {
-            gap: var(--space-container);
-
-            &-column {
-                column-gap: var(--space-container);
-            }
-
-            &-row {
-                row-gap: var(--space-container);
-            }
-        }
-
-        &--section {
-            gap: var(--space-section);
-
-            &-column {
-                column-gap: var(--space-section);
-            }
-
-            &-row {
-                row-gap: var(--space-section);
-            }
-        }
-
-        &--flat {
-            gap: 0;
-
-            &-column {
-                column-gap: 0;
-            }
-
-            &-row {
-                row-gap: 0;
-            }
-        }
-    }
-
-    // List - Marker
-    .list-marker--color li::marker {
-        --color-marker: var(--primary);
-
-        color: var(--color-marker);
-    }
-
-    // Margin
-    .margin {
-        &-top--icon {
-            margin-block-start: var(--space-icon);
-        }
-
-        &-top--block {
-            margin-block-start: var(--space-block);
-        }
-
-        &-top--grid {
-            margin-block-start: var(--space-grid);
-        }
-
-        &-top--container {
-            margin-block-start: var(--space-container);
-        }
-
-        &-top--section {
-            margin-block-start: var(--space-section);
-        }
-
-        &-top--flat {
-            margin-block-start: 0;
-        }
-
-        &-right--icon {
-            margin-inline-end: var(--space-icon);
-        }
-
-        &-right--block {
-            margin-inline-end: var(--space-block);
-        }
-
-        &-right--grid {
-            margin-inline-end: var(--space-grid);
-        }
-
-        &-right--container {
-            margin-inline-end: var(--space-container);
-        }
-
-        &-right--section {
-            margin-inline-end: var(--space-section);
-        }
-
-        &-right--flat {
-            margin-inline-end: 0;
-        }
-
-        &-bottom--icon {
-            margin-block-end: var(--space-icon);
-        }
-
-        &-bottom--block {
-            margin-block-end: var(--space-block);
-        }
-
-        &-bottom--grid {
-            margin-block-end: var(--space-grid);
-        }
-
-        &-bottom--container {
-            margin-block-end: var(--space-container);
-        }
-
-        &-bottom--section {
-            margin-block-end: var(--space-section);
-        }
-
-        &-bottom--flat {
-            margin-block-end: 0;
-        }
-
-        &-left--icon {
-            margin-inline-start: var(--space-icon);
-        }
-
-        &-left--block {
-            margin-inline-start: var(--space-block);
-        }
-
-        &-left--grid {
-            margin-inline-start: var(--space-grid);
-        }
-
-        &-left--container {
-            margin-inline-start: var(--space-container);
-        }
-
-        &-left--section {
-            margin-inline-start: var(--space-section);
-        }
-
-        &-left--flat {
-            margin-inline-start: 0;
-        }
-
-        &-y--flat {
-            margin-block: 0;
-        }
-
-        &-x--flat {
-            margin-inline: 0;
-        }
-
-        &--flat {
-            margin: 0;
-        }
-    }
-
-    // Object - Fit
-    .object--contain {
-        object-fit: contain;
-    }
-
-    .object--cover {
-        object-fit: cover;
-    }
-
-    .object--none {
-        object-fit: none;
-    }
-
-    // Object Position
-    .object--bottom-center {
-        object-position: var(--object-center) var(--object-end);
-    }
-
-    .object--bottom-left {
-        object-position: var(--object-start) var(--object-end);
-    }
-
-    .object--bottom-right {
-        object-position: var(--object-end);
-    }
-
-    .object--center {
-        object-position: var(--object-center);
-    }
-
-    .object--center-left {
-        object-position: var(--object-start) var(--object-center);
-    }
-
-    .object--center-right {
-        object-position: var(--object-end) var(--object-center);
-    }
-
-    .object--top-center {
-        object-position: var(--object-center) var(--object-start);
-    }
-
-    .object--top-left {
-        object-position: var(--object-start);
-    }
-
-    .object--top-right {
-        object-position: var(--object-end) var(--object-start);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .object--#{$-key}-bottom-center {
-                object-position: var(--object-center) var(--object-end);
-            }
-
-            .object--#{$-key}-bottom-left {
-                object-position: var(--object-start) var(--object-end);
-            }
-
-            .object--#{$-key}-bottom-right {
-                object-position: var(--object-end);
-            }
-
-            .object--#{$-key}-center {
-                object-position: var(--object-center);
-            }
-
-            .object--#{$-key}-center-left {
-                object-position: var(--object-start) var(--object-center);
-            }
-
-            .object--#{$-key}-center-right {
-                object-position: var(--object-end) var(--object-center);
-            }
-
-            .object--#{$-key}-top-center {
-                object-position: var(--object-center) var(--object-start);
-            }
-
-            .object--#{$-key}-top-left {
-                object-position: var(--object-start);
-            }
-
-            .object--#{$-key}-top-right {
-                object-position: var(--object-end) var(--object-start);
-            }
-        }
-    }
-
-    // Opacity
-    .opacity--5 {
-        opacity: .05;
-    }
-
-    .opacity--10 {
-        opacity: .1;
-    }
-
-    .opacity--25 {
-        opacity: .25;
-    }
-
-    .opacity--50 {
-        opacity: .5;
-    }
-
-    .opacity--75 {
-        opacity: .75;
-    }
-
-    .opacity--90 {
-        opacity: .9;
-    }
-
-    .opacity--95 {
-        opacity: .95;
-    }
-
-    // Overflow
-    .overflow--auto {
-        overflow: auto;
-    }
-
-    .overflow--clip {
-        overflow: clip;
-    }
-
-    .overflow--hidden {
-        overflow: hidden;
-    }
-
-    .overflow--scroll-x {
-        overflow-x: scroll;
-    }
-
-    .overflow--scroll-y {
-        overflow-y: scroll;
-    }
-
-    // Padding
-    .padding {
-        &--icon {
-            padding: var(--space-icon);
-        }
-
-        &-y--icon {
-            padding-block: var(--space-icon);
-        }
-
-        &-x--icon {
-            padding-inline: var(--space-icon);
-        }
-
-        &--block {
-            padding: var(--space-block);
-        }
-
-        &-y--block {
-            padding-block: var(--space-block);
-        }
-
-        &-x--block {
-            padding-inline: var(--space-block);
-        }
-
-        &-x--edge {
-            padding-inline: var(--space-edge);
-        }
-
-        &--grid {
-            padding: var(--space-grid);
-        }
-
-        &-y--grid {
-            padding-block: var(--space-grid);
-        }
-
-        &-x--grid {
-            padding-inline: var(--space-grid);
-        }
-
-        &--container {
-            padding: var(--space-container);
-        }
-
-        &-y--container {
-            padding-block: var(--space-container);
-        }
-
-        &-x--container {
-            padding-inline: var(--space-container);
-        }
-
-        &--section {
-            padding: var(--space-section) var(--space-edge);
-        }
-
-        &-y--section {
-            padding-block: var(--space-section);
-        }
-
-        &-x--section {
-            padding-inline: var(--space-edge);
-        }
-
-        &-top--flat {
-            padding-block-start: 0;
-        }
-
-        &-right--flat {
-            padding-inline-end: 0;
-        }
-
-        &-bottom--flat {
-            padding-block-end: 0;
-        }
-
-        &-left--flat {
-            padding-inline-start: 0;
-        }
-
-        &-y--flat {
-            padding-block: 0;
-        }
-
-        &-x--flat {
-            padding-inline: 0;
-        }
-
-        &--flat {
-            padding: 0;
-        }
-    }
-
-    // Position
-    .position {
-        &--absolute {
-            position: absolute;
-        }
-
-        &--fixed {
-            position: fixed;
-        }
-
-        &--relative {
-            position: relative;
-        }
-
-        &--static {
-            position: static;
-        }
-
-        &--sticky {
-            inset-block-start: 0;
-            position: sticky;
-
-            &-offset {
-                inset-block-start: var(--space-base);
-            }
-        }
-
-        &-inset--top {
-            inset-block-start: 0;
-        }
-
-        &-inset--right {
-            inset-inline-end: 0;
-        }
-
-        &-inset--bottom {
-            inset-block-end: 0;
-        }
-
-        &-inset--left {
-            inset-inline-start: 0;
-        }
-
-        &-inset--y {
-            inset-block: 0;
-        }
-
-        &-inset--x {
-            inset-inline: 0;
-        }
-
-        &-inset {
-            inset: 0;
-        }
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .position {
-                &--#{$_key}-absolute {
-                    position: absolute;
-                }
-
-                &--#{$_key}-fixed {
-                    position: fixed;
-                }
-
-                &--#{$_key}-relative {
-                    position: relative;
-                }
-
-                &--#{$_key}-static {
-                    position: static;
-                }
-
-                &--#{$_key}-sticky {
-                    inset-block-start: 0;
-                    position: sticky;
-
-                    &-offset {
-                        inset-block-start: var(--space-base);
-                    }
-                }
-
-                &-inset--#{$_key}-top {
-                    inset-block-start: 0;
-                }
-
-                &-inset--#{$_key}-right {
-                    inset-inline-end: 0;
-                }
-
-                &-inset--#{$_key}-bottom {
-                    inset-block-end: 0;
-                }
-
-                &-inset--#{$_key}-left {
-                    inset-inline-start: 0;
-                }
-
-                &-inset--#{$_key}-y {
-                    inset-block: 0;
-                }
-
-                &-inset--#{$_key}-x {
-                    inset-inline: 0;
-                }
-
-                &-inset-#{$_key} {
-                    inset: 0;
-                }
-            }
-        }
-    }
-
-    // Text - Align
-    .text-align--center {
-        text-align: center;
-    }
-
-    .text-align--justify {
-        text-align: justify;
-    }
-
-    .text-align--left {
-        text-align: start;
-    }
-
-    .text-align--right {
-        text-align: end;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .text-align--#{$-key}-center {
-                text-align: center;
-            }
-
-            .text-align--#{$-key}-justify {
-                text-align: justify;
-            }
-
-            .text-align--#{$-key}-left {
-                text-align: start;
-            }
-
-            .text-align--#{$-key}-right {
-                text-align: end;
-            }
-        }
-    }
-
-    // Text - Decoration
-    .text-decoration--flat {
-        text-decoration: none;
-    }
-
-    .text-decoration--overline {
-        text-decoration: overline;
-    }
-
-    .text-decoration--strike {
-        text-decoration: line-through;
-    }
-
-    .text-decoration--underline {
-        text-decoration: underline;
-    }
-
-    // Text - Height
-    .text-height--body {
-        line-height: var(--line-height-body);
-    }
-
-    .text-height--heading {
-        line-height: var(--line-height-heading);
-    }
-
-    // Text - Spaced
-    .text-spaced {
-        letter-spacing: var(--space-px);
-    }
-
-    // Text - Style
-    .text-style--italic {
-        font-style: italic;
-    }
-
-    .text-style--normal {
-        font-style: normal;
-    }
-
-    // Text - Transform
-    .text-transform--capitalize {
-        text-transform: capitalize;
-    }
-
-    .text-transform--lowercase {
-        text-transform: lowercase;
-    }
-
-    .text-transform--none {
-        text-transform: none;
-    }
-
-    .text-transform--uppercase {
-        text-transform: uppercase;
-    }
-
-    // Text - Weight
-    .text-weight--normal {
-        font-weight: 400;
-    }
-
-    .text-weight--bold {
-        font-weight: 700;
-    }
-
-    // Text - Wrap
-    .text-wrap {
-        text-wrap: wrap;
-    }
-
-    .text-wrap--balance {
-        text-wrap: balance;
-    }
-
-    .text-wrap--none {
-        text-wrap: nowrap;
-    }
-
-    .text-wrap--pretty {
-        text-wrap: pretty;
-    }
-
-    // Transition
-    .transition {
-        transition-duration: var(--transition);
-
-        &--fast {
-            transition-duration: var(--transition-fast);
-        }
-
-        &--slow {
-            transition-duration: var(--transition-slow);
-        }
-
-        &,
-        &--fast,
-        &--slow {
-            transition-timing-function: var(--transition-easing);
-        }
-    }
-
-    // Width
-    .width--min,
-    .width--sm,
-    .width--md,
-    .width--lg,
-    .width--xl,
-    .width--wide,
-    .width--max,
-    .width--prose,
-    .width--fill {
-        inline-size: 100%;
-    }
-
-    .width--min {
-        max-inline-size: var(--width-min);
-    }
-
-    .width--sm {
-        max-inline-size: var(--width-sm);
-    }
-
-    .width--md {
-        max-inline-size: var(--width-md);
-    }
-
-    .width--lg {
-        max-inline-size: var(--width-lg);
-    }
-
-    .width--xl {
-        max-inline-size: var(--width-xl);
-    }
-
-    .width--wide {
-        max-inline-size: var(--width-wide);
-    }
-
-    .width--max {
-        max-inline-size: var(--width-max);
-    }
-
-    .width--fit {
-        max-inline-size: fit-content;
-    }
-
-    .width--prose {
-        max-inline-size: var(--width-prose);
-    }
-
-    // Z-Index
-    .z--back {
-        z-index: var(--z-back);
-    }
-
-    .z--flat {
-        z-index: var(--z-flat);
-    }
-
-    .z--front {
-        z-index: var(--z-front);
-    }
-
-    .z-low {
-        z-index: var(--z-low);
-    }
-
-    .z-mid {
-        z-index: var(--z-mid);
-    }
-
-    .z-high {
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        inset-inline-start: 0;
         z-index: var(--z-high);
     }
 
-    .z--top {
-        z-index: var(--z-top);
+    &--fixed {
+        position: fixed;
+    }
+
+    &--overlay {
+        position: absolute;
     }
 }
 
-@if $print-classes {
-    // --- Print Styles --- //
+// Section
+// Add to section elements.
+/* Section HTML Example:
+<section class="section">
+    <div class="container">
+        <div class="block">
+            <!-- Content -->
+        </div>
+    </div>
+</section>
+*/
+.section {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+    padding: var(--space-section) var(--space-edge);
+    row-gap: var(--space-section);
+}
 
-    @media print {
+/* --- Component --- */
 
-        *,
-        ::before,
-        ::after {
-            background-color: var(--base-black) !important;
-            box-shadow: none !important;
-            color: var(--base-white) !important;
-            text-shadow: none !important;
+// Background Overlay
+// Add to elements inside sections that need to overlay the section background.
+/* Background Overlay HTML Example:
+<section class="bg-overlay-parent section">
+    <div class="container">
+        <div class="block">
+            <!-- Content -->
+        </div>
+    </div>
+    <div class="bg-overlay bg--primary"><!-- div, img, and video elements --></div>
+</section>
+*/
+.bg-overlay {
+    block-size: 100% !important;
+    inline-size: 100%;
+    inset: 0;
+    margin-block-start: 0;
+    object-fit: cover;
+    object-position: var(--object-center);
+    overflow: hidden;
+    position: absolute;
+    z-index: var(--z-back);
+
+    &-parent {
+        isolation: isolate;
+        position: relative;
+    }
+}
+
+// Button
+// Add to anchor links and buttons.
+/* Button HTML Example:
+<a class="btn" href="#">Anchor Link</a>
+<button class="btn">Button</button>
+*/
+.btn {
+    --bg-color-btn: var(--primary);
+    --border-color-btn: var(--primary);
+    --border-radius-btn: var(--border-radius);
+    --border-style-btn: var(--border-style);
+    --border-width-btn: var(--border-width);
+    --color-btn: var(--primary-lightest);
+    --font-size-btn: var(--font-size-body);
+    --font-weight-btn: 400;
+    --gap-btn: var(--space-icon);
+    --line-height-btn: 1;
+    --padding-x-btn: var(--space-xl);
+    --padding-y-btn: var(--space-md);
+    --text-spaced-btn: var(--space-px);
+    --text-transform-btn: none;
+    --transition-btn: var(--transition);
+    --width-btn: fit-content;
+
+    align-items: center;
+    background-color: var(--bg-color-btn);
+    border-color: var(--border-color-btn);
+    border-radius: var(--border-radius-btn);
+    border-style: var(--border-style-btn);
+    border-width: var(--border-width-btn);
+    color: var(--color-btn);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: var(--font-size-btn);
+    font-weight: var(--font-weight-btn);
+    gap: var(--gap-btn);
+    inline-size: var(--width-btn);
+    justify-content: center;
+    letter-spacing: var(--text-spaced-btn);
+    line-height: var(--line-height-btn);
+    padding-block: var(--padding-y-btn);
+    padding-inline: var(--padding-x-btn);
+    text-align: center;
+    text-decoration: none;
+    text-transform: var(--text-transform-btn);
+    transition: background-color var(--transition-btn) var(--transition-easing), border-color var(--transition-btn) var(--transition-easing), color var(--transition-btn) var(--transition-easing);
+
+    &:focus-visible {
+        transition: none;
+    }
+
+    &--icon {
+        --padding-x-btn: var(--space-icon);
+        --padding-y-btn: var(--space-icon);
+    }
+
+    &--outline {
+        --color-btn: var(--border-color-btn);
+
+        background-color: initial !important;
+    }
+}
+
+// Button - Sizing
+.btn--small {
+    --font-size-btn: var(--font-size-small);
+    --padding-x-btn: var(--space-md);
+    --padding-y-btn: var(--space-sm);
+}
+
+.btn--large {
+    --font-size-btn: var(--font-size-body);
+    --padding-x-btn: var(--space-2xl);
+    --padding-y-btn: var(--space-lg);
+}
+
+// Button - Color
+.btn--light {
+    --bg-color-btn: var(--base-lightest);
+    --border-color-btn: var(--base-lightest);
+    --color-btn: var(--base-darkest);
+
+    &:focus-visible {
+        @extend .focus--light;
+    }
+
+    &.btn--outline {
+        --color-btn: var(--base-lightest);
+    }
+}
+
+.btn--dark {
+    --bg-color-btn: var(--base-darkest);
+    --border-color-btn: var(--base-darkest);
+    --color-btn: var(--base-lightest);
+
+    &:focus-visible {
+        @extend .focus--dark;
+    }
+
+    &.btn--outline {
+        --color-btn: var(--base-darkest);
+    }
+}
+
+// Card
+// Add to card elements.
+/* Card HTML Example:
+<div class="card">
+    <div class="card__head">
+        <!-- Card Head -->
+    </div>
+    <div class="card__body">
+        <!-- Card Body -->
+    </div>
+</div>
+*/
+.card {
+
+    &,
+    &__head,
+    &__body {
+        align-items: var(--align-card);
+        background-color: var(--bg-color-card);
+        border-radius: var(--border-radius-card);
+        border: var(--border-width-card) var(--border-style-card) var(--border-color-card);
+        color: var(--color-card);
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-card);
+        inline-size: 100%;
+        justify-content: space-between;
+        overflow: clip;
+        padding: var(--padding-card);
+        text-align: var(--text-align-card);
+    }
+
+    & {
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: var(--border-style);
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: var(--space-block);
+        --text-align-card: left;
+    }
+
+    &__head {
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: none;
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: 0;
+        --text-align-card: left;
+    }
+
+    &__body {
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: none;
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: 0;
+        --text-align-card: left;
+    }
+}
+
+// Form
+// Add to forms or containers that contain form elements.
+/* Form HTML Example:
+<!-- Formspark form with Botpoison -->
+<form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+    <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
+    <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
+    <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
+    <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
+    <fieldset>
+        <label for="company">Company Name</label>
+        <input aria-label="Company Name" id="company" name="company" type="text">
+    </fieldset>
+    <div class="grid grid--lg-2">
+        <fieldset>
+            <label for="first-name">First Name</label>
+            <input aria-label="First Name" id="first-name" name="first-name" required type="text">
+        </fieldset>
+        <fieldset>
+            <label for="last-name">Last Name</label>
+            <input aria-label="Last Name" id="last-name" name="last-name" type="text">
+        </fieldset>
+    </div>
+    <div class="grid grid--lg-2">
+        <fieldset>
+            <label for="email">Email Address</label>
+            <input aria-label="Email Address" id="email" name="email" required type="email">
+        </fieldset>
+        <fieldset>
+            <label for="phone">Phone Number</label>
+            <input aria-label="Phone Number" id="phone" name="phone" type="tel">
+        </fieldset>
+    </div>
+    <fieldset>
+        <label for="message">Message</label>
+        <textarea aria-label="Message" id="message" name="message" required></textarea>
+    </fieldset>
+    <fieldset>
+        <label for="pretend-check">Pretend Check</label>
+        <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
+    </fieldset>
+    <button type="submit">Send Message</button>
+</form>
+
+<!-- Generic form with various input types -->
+<form class="form">
+    <fieldset>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Pretend Person" required>
+    </fieldset>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
+        </fieldset>
+        <fieldset>
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+        </fieldset>
+    </div>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </fieldset>
+        <fieldset>
+            <label for="url">Website</label>
+            <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
+        </fieldset>
+    </div>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+        </fieldset>
+        <fieldset>
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time">
+        </fieldset>
+    </div>
+    <fieldset>
+        <label for="number">Number</label>
+        <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
+    </fieldset>
+    <fieldset>
+        <label for="search">Search</label>
+        <input type="search" id="search" name="search" placeholder="Search...">
+    </fieldset>
+    <fieldset>
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+            <option value="">Select a country</option>
+            <option value="us">United States</option>
+            <option value="ca">Canada</option>
+            <option value="mx">Mexico</option>
+            <option value="other">Other</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
+    </fieldset>
+    <div class="grid grid--md-2">
+        <fieldset>
+            <legend>Preferences</legend>
+            <label>
+                <input type="checkbox" name="option1" value="yes">
+                Option One
+            </label>
+            <label>
+                <input type="checkbox" name="option2" value="accepted" required>
+                Option Two
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>More Preference</legend>
+            <label>
+                <input type="radio" name="contact" value="option3" required>
+                Option Three
+            </label>
+            <label>
+                <input type="radio" name="contact" value="option4">
+                Option Four
+            </label>
+        </fieldset>
+    </div>
+    <div class="form-error">
+        <p>This is what an error message looks like.</p>
+    </div>
+    <div class="form-success">
+        <p>This is what a success message looks like.</p>
+    </div>
+    <button type="submit">Submit Form</button>
+</form>
+*/
+.form,
+.form form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-grid);
+    inline-size: 100%;
+}
+
+.form {
+    --bg-color-checkbox-checked: var(--primary);
+    --bg-color-checkbox: var(--bg-color-input);
+    --bg-color-form-error: var(--error);
+    --bg-color-form-success: var(--success);
+    --bg-color-input-disabled: var(--base-lighter);
+    --bg-color-input: var(--base-lightest);
+    --bg-color-submit: var(--primary);
+    --border-color-input: var(--border-color);
+    --border-radius-checkbox: var(--border-radius);
+    --border-radius-input: var(--border-radius);
+    --border-radius-radio: var(--border-radius-round);
+    --border-style-input: var(--border-style);
+    --border-width-input: var(--border-width);
+    --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
+    --color-form-error: var(--error-lightest);
+    --color-form-success: var(--success-lightest);
+    --color-input: var(--base-darkest);
+    --color-label: inherit;
+    --color-placeholder: var(--base-darkest);
+    --color-submit: var(--primary-lightest);
+    --font-size-form-error: var(--font-size-body);
+    --font-size-form-success: var(--font-size-body);
+    --font-size-input: var(--font-size-body);
+    --font-size-label: var(--font-size-body);
+    --font-weight-label: 400;
+    --gap-form: var(--space-grid);
+    --gap-label: var(--space-sm);
+    --height-input: var(--space-2xl);
+    --height-textarea: calc(var(--space-2xl) * 5);
+    --line-height-input: var(--line-height-heading);
+    --opacity-placeholder: .5;
+    --padding-x-input: var(--space-md);
+    --padding-y-input: var(--space-sm);
+    --size-checkbox: var(--space-lg);
+}
+
+// Checkbox, Radio
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    background-color: var(--bg-color-checkbox);
+    block-size: var(--size-checkbox);
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
+    cursor: pointer;
+    display: grid;
+    inline-size: var(--size-checkbox);
+    place-content: center;
+
+    &::before {
+        box-shadow: var(--box-shadow-checkbox-checked);
+        content: "";
+        height: calc(var(--size-checkbox) * .75);
+        transform: scale(0);
+        transition: transform var(--transition);
+        width: calc(var(--size-checkbox) * .75);
+    }
+
+    &:checked {
+        background-color: var(--bg-color-checkbox-checked);
+        border-color: var(--bg-color-checkbox-checked);
+    }
+
+    &:checked:before {
+        transform: scale(0.75);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+input[type="checkbox"] {
+    border-radius: var(--border-radius-checkbox);
+
+    &::before {
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+}
+
+input[type="radio"] {
+    border-radius: var(--border-radius-radio);
+
+    &::before {
+        border-radius: var(--border-radius-radio);
+    }
+}
+
+// Fieldset
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+// Input, Textarea
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+textarea {
+    background-color: var(--bg-color-input);
+    border-radius: var(--border-radius-input);
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
+    color: var(--color-input);
+    font-family: inherit;
+    font-size: var(--font-size-input);
+    inline-size: 100%;
+    line-height: var(--line-height-input);
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
+    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
+
+    &::placeholder {
+        color: var(--color-placeholder);
+        opacity: var(--opacity-placeholder);
+    }
+
+    &:disabled {
+        background-color: var(--bg-color-input-disabled);
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Label, Legend
+label,
+legend {
+    align-items: center;
+    color: var(--color-label);
+    cursor: pointer;
+    display: flex;
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-label);
+    gap: var(--gap-label);
+    margin-block-end: var(--gap-label);
+
+    &:has(+ input:disabled),
+    &:has(+ select:disabled),
+    &:has(+ textarea:disabled) {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Select
+select {
+    appearance: none;
+    background-color: var(--bg-color-input);
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - var(--padding-x-input) - 5px) calc(50% + 1px), calc(100% - var(--padding-x-input)) calc(50% + 1px);
+    background-repeat: no-repeat;
+    background-size: 5px 5px, 5px 5px;
+    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
+    border-radius: var(--border-radius-input);
+    color: var(--color-input);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-input);
+    inline-size: 100%;
+    line-height: var(--line-height-input);
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
+    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
+
+    &:disabled {
+        background-color: var(--bg-color-input-disabled);
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Submit
+input[type="submit"],
+button[type="submit"] {
+    @extend .btn;
+
+    --bg-color-btn: var(--bg-color-submit);
+    --border-color-btn: var(--bg-color-submit);
+    --color-btn: var(--color-submit);
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+    }
+}
+
+// Textarea
+textarea {
+    min-block-size: var(--height-textarea);
+    resize: vertical;
+}
+
+// Honeypot
+fieldset:has([name="_pretend-check"]) {
+    left: -625rem;
+    position: absolute;
+}
+
+// Messages
+.form-error,
+.form-success {
+    justify-content: center;
+    border-radius: var(--border-radius-input);
+    display: flex;
+    min-block-size: var(--height-input);
+    padding: var(--padding-y-input) var(--padding-x-input);
+}
+
+.form-error {
+    background-color: var(--bg-color-form-error);
+    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-error);
+    color: var(--color-form-error);
+    font-size: var(--font-size-form-error);
+}
+
+.form-success {
+    background-color: var(--bg-color-form-success);
+    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-success);
+    color: var(--color-form-success);
+    font-size: var(--font-size-form-success);
+}
+
+// Link Overlay
+// Add to an anchor link that need to expand to fill the parent container.
+/* Link Overlay HTML Example:
+<div class="link-overlay">
+    <a href="#">Link</a>
+</div>
+*/
+.link-overlay {
+    position: relative;
+
+    & :focus {
+        outline: none !important;
+    }
+
+    & a {
+        position: static;
+    }
+
+    & a::after {
+        content: "";
+        cursor: pointer;
+        display: flex;
+        inset: 0;
+        position: absolute;
+    }
+}
+
+/* --- Utility --- */
+
+// Alignment
+.align--center-all {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.align--center-x {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.align--center-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+}
+
+.align--end-x {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.align--end-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    justify-items: flex-end;
+}
+
+.align--start-x {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.align--start-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-items: flex-start;
+}
+
+.align--stretch-all {
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: stretch;
+    justify-items: stretch;
+}
+
+.aligncenter,
+.center--self {
+    margin-inline: auto;
+}
+
+.alignleft,
+.float--left,
+.float--left-offset {
+    float: inline-start;
+    margin-block-end: var(--space-block);
+    margin-inline-end: var(--space-block);
+}
+
+.float--left-offset {
+    margin-inline-start: calc(var(--space-edge) * -1);
+}
+
+.float--none {
+    float: none;
+    margin-block-end: 0;
+    margin-inline: 0;
+}
+
+.alignright,
+.float--right,
+.float--right-offset {
+    float: inline-end;
+    margin-block-end: var(--space-block);
+    margin-inline-start: var(--space-block);
+}
+
+.float--right-offset {
+    margin-inline-end: calc(var(--space-edge) * -1);
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .align--#{$_key}-center-all {
+            align-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;
+            text-align: center;
         }
 
-        pre {
-            white-space: pre-wrap !important;
+        .align--#{$_key}-center-x {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
         }
 
-        pre,
-        blockquote {
-            border: var(--space-px) solid var(--base-black) !important;
-            page-break-inside: avoid;
+        .align--#{$_key}-center-y {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;
         }
 
-        tr,
-        img {
-            page-break-inside: avoid;
+        .align--#{$_key}-end-x {
+            align-items: flex-end;
+            display: flex;
+            flex-direction: column;
+            text-align: right;
         }
 
-        p,
-        h2,
-        h3 {
-            orphans: 3;
-            widows: 3;
+        .align--#{$_key}-end-y {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            justify-items: flex-end;
         }
 
-        h2,
-        h3 {
-            page-break-after: avoid;
+        .align--#{$_key}-start-x {
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
         }
+
+        .align--#{$_key}-start-y {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            justify-items: flex-start;
+        }
+
+        .align--#{$_key}-stretch-all {
+            align-content: stretch;
+            align-items: stretch;
+            justify-content: stretch;
+            justify-items: stretch;
+        }
+
+        .center--#{$_key}-self {
+            float: none;
+            margin-block-end: 0;
+            margin-inline: auto;
+        }
+
+        .float--#{$_key}-left,
+        .float--#{$_key}-left-offset {
+            float: inline-start;
+            margin-block-end: var(--space-block);
+            margin-inline-end: var(--space-block);
+            margin-inline-start: 0;
+        }
+
+        .float--#{$_key}-left-offset {
+            margin-inline-start: calc(var(--space-edge) * -1);
+        }
+
+        .float--#{$_key}-none {
+            float: none;
+            margin-block-end: 0;
+            margin-inline: 0;
+        }
+
+        .float--#{$_key}-right,
+        .float--#{$_key}-right-offset {
+            float: inline-end;
+            margin-block-end: var(--space-block);
+            margin-inline-end: 0;
+            margin-inline-start: var(--space-block);
+        }
+
+        .float--#{$_key}-right-offset {
+            margin-inline-end: calc(var(--space-edge) * -1);
+        }
+    }
+}
+
+// Aspect Ratio
+.aspect--square iframe,
+.aspect--landscape iframe,
+.aspect--portrait iframe,
+.aspect--cinema iframe,
+.aspect--wide iframe {
+    block-size: 100%;
+    inline-size: 100%;
+}
+
+.aspect--square,
+.aspect--square iframe {
+    aspect-ratio: var(--aspect-square);
+}
+
+.aspect--landscape,
+.aspect--landscape iframe {
+    aspect-ratio: var(--aspect-landscape);
+}
+
+.aspect--portrait,
+.aspect--portrait iframe {
+    aspect-ratio: var(--aspect-portrait);
+}
+
+.aspect--cinema,
+.aspect--cinema iframe {
+    aspect-ratio: var(--aspect-cinema);
+}
+
+.aspect--wide,
+.aspect--wide iframe {
+    aspect-ratio: var(--aspect-wide);
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .aspect--#{$_key}-square iframe,
+        .aspect--#{$_key}-landscape iframe,
+        .aspect--#{$_key}-portrait iframe,
+        .aspect--#{$_key}-cinema iframe,
+        .aspect--#{$_key}-wide iframe {
+            block-size: 100%;
+            inline-size: 100%;
+        }
+
+        .aspect--#{$_key}-square,
+        .aspect--#{$_key}-square iframe {
+            aspect-ratio: var(--aspect-square);
+        }
+
+        .aspect--#{$_key}-landscape,
+        .aspect--#{$_key}-landscape iframe {
+            aspect-ratio: var(--aspect-landscape);
+        }
+
+        .aspect--#{$_key}-portrait,
+        .aspect--#{$_key}-portrait iframe {
+            aspect-ratio: var(--aspect-portrait);
+        }
+
+        .aspect--#{$_key}-cinema,
+        .aspect--#{$_key}-cinema iframe {
+            aspect-ratio: var(--aspect-cinema);
+        }
+
+        .aspect--#{$_key}-wide,
+        .aspect--#{$_key}-wide iframe {
+            aspect-ratio: var(--aspect-wide);
+        }
+    }
+}
+
+// Background Blur
+.bg-blur--sm,
+.bg-blur--md,
+.bg-blur--lg {
+    --blur-sm: var(--space-xs);
+    --blur-md: var(--space-sm);
+    --blur-lg: var(--space-md);
+
+    background-color: var(--bg-color-blur);
+}
+
+.bg-blur--sm {
+    backdrop-filter: blur(var(--blur-sm));
+}
+
+.bg-blur--md {
+    backdrop-filter: blur(var(--blur-md));
+}
+
+.bg-blur--lg {
+    backdrop-filter: blur(var(--blur-lg));
+}
+
+// Background Color
+@each $_key, $_value in $color {
+    .bg--#{$_key} {
+        background-color: var(--#{$_key});
+    }
+
+    .bg--#{$_key}-lightest {
+        background-color: var(--#{$_key}-lightest);
+    }
+
+    .bg--#{$_key}-lighter {
+        background-color: var(--#{$_key}-lighter);
+    }
+
+    .bg--#{$_key}-light {
+        background-color: var(--#{$_key}-light);
+    }
+
+    .bg--#{$_key}-dark {
+        background-color: var(--#{$_key}-dark);
+    }
+
+    .bg--#{$_key}-darker {
+        background-color: var(--#{$_key}-darker);
+    }
+
+    .bg--#{$_key}-darkest {
+        background-color: var(--#{$_key}-darkest);
+    }
+}
+
+@each $_key, $_value in $color-base {
+    .bg--#{$_key}-white {
+        background-color: var(--#{$_key}-white);
+    }
+
+    .bg--#{$_key}-lightest {
+        background-color: var(--#{$_key}-lightest);
+    }
+
+    .bg--#{$_key}-lighter {
+        background-color: var(--#{$_key}-lighter);
+    }
+
+    .bg--#{$_key}-light {
+        background-color: var(--#{$_key}-light);
+    }
+
+    .bg--#{$_key}-dark {
+        background-color: var(--#{$_key}-dark);
+    }
+
+    .bg--#{$_key}-darker {
+        background-color: var(--#{$_key}-darker);
+    }
+
+    .bg--#{$_key}-darkest {
+        background-color: var(--#{$_key}-darkest);
+    }
+
+    .bg--#{$_key}-black {
+        background-color: var(--#{$_key}-black);
+    }
+}
+
+.bg--transparent {
+    background-color: transparent;
+}
+
+// Background Isolate
+.bg-isolate {
+    isolation: isolate;
+}
+
+// Borders, Radius
+.border {
+    & {
+        border: var(--border-width) var(--border-style) var(--border-color);
+        border-radius: var(--border-radius);
+    }
+
+    &--top {
+        border-top: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--right {
+        border-right: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--bottom {
+        border-bottom: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--left {
+        border-left: var(--border-width) var(--border-style) var(--border-color);
+    }
+
+    &--flat {
+        border: none;
+    }
+
+    &-radius {
+        border-radius: var(--border-radius);
+    }
+
+    &-radius--alt {
+        border-radius: var(--border-radius-alt);
+    }
+
+    &-radius--oval {
+        border-radius: var(--border-radius-oval);
+    }
+
+    &-radius--round {
+        border-radius: var(--border-radius-round);
+    }
+
+    &-radius--flat {
+        border-radius: 0;
+    }
+}
+
+// Breakout
+.breakout--wide {
+    align-self: flex-start;
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    max-inline-size: var(--width-wide);
+    transform: translateX(-50%);
+}
+
+.breakout--max {
+    align-self: flex-start;
+    inline-size: 100vw;
+    margin-inline-start: 50%;
+    max-inline-size: var(--width-max);
+    transform: translateX(-50%);
+}
+
+// Clear
+.clear {
+
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+// Color
+@each $_key, $_value in $color {
+    .color--#{$_key} {
+        color: var(--#{$_key});
+    }
+
+    .color--#{$_key}-lightest {
+        color: var(--#{$_key}-lightest);
+    }
+
+    .color--#{$_key}-lighter {
+        color: var(--#{$_key}-lighter);
+    }
+
+    .color--#{$_key}-light {
+        color: var(--#{$_key}-light);
+    }
+
+    .color--#{$_key}-dark {
+        color: var(--#{$_key}-dark);
+    }
+
+    .color--#{$_key}-darker {
+        color: var(--#{$_key}-darker);
+    }
+
+    .color--#{$_key}-darkest {
+        color: var(--#{$_key}-darkest);
+    }
+}
+
+@each $_key, $_value in $color-base {
+    .color--#{$_key}-white {
+        color: var(--#{$_key}-white);
+    }
+
+    .color--#{$_key}-lightest {
+        color: var(--#{$_key}-lightest);
+    }
+
+    .color--#{$_key}-lighter {
+        color: var(--#{$_key}-lighter);
+    }
+
+    .color--#{$_key}-light {
+        color: var(--#{$_key}-light);
+    }
+
+    .color--#{$_key}-dark {
+        color: var(--#{$_key}-dark);
+    }
+
+    .color--#{$_key}-darker {
+        color: var(--#{$_key}-darker);
+    }
+
+    .color--#{$_key}-darkest {
+        color: var(--#{$_key}-darkest);
+    }
+
+    .color--#{$_key}-black {
+        color: var(--#{$_key}-black);
+    }
+}
+
+.color--transparent {
+    color: transparent;
+}
+
+// Content Column
+.content-column--1,
+.content-column--2,
+.content-column--3,
+.content-column--4,
+.content-column--5 {
+    --gap-content-column: var(--space-block);
+    --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
+
+    column-gap: var(--gap-content-column);
+    column-rule: var(--rule-content-column);
+}
+
+.content-column--1 {
+    column-count: 1;
+}
+
+.content-column--2 {
+    column-count: 2;
+}
+
+.content-column--3 {
+    column-count: 3;
+}
+
+.content-column--4 {
+    column-count: 4;
+}
+
+.content-column--5 {
+    column-count: 5;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .content-column--#{$_key}-1 {
+            column-count: 1;
+        }
+
+        .content-column--#{$_key}-2 {
+            column-count: 2;
+        }
+
+        .content-column--#{$_key}-3 {
+            column-count: 3;
+        }
+
+        .content-column--#{$_key}-4 {
+            column-count: 4;
+        }
+
+        .content-column--#{$_key}-5 {
+            column-count: 5;
+        }
+    }
+}
+
+.content-column-span--all {
+    column-span: all;
+}
+
+// Cursor
+.cursor--default {
+    cursor: default;
+}
+
+.cursor--pointer {
+    cursor: pointer;
+}
+
+// Flex - Align
+.align-content--start {
+    align-content: flex-start;
+}
+
+.align-content--center {
+    align-content: center;
+}
+
+.align-content--end {
+    align-content: flex-end;
+}
+
+.align-content--around {
+    align-content: space-around;
+}
+
+.align-content--baseline {
+    align-content: baseline;
+}
+
+.align-content--between {
+    align-content: space-between;
+}
+
+.align-content--evenly {
+    align-content: space-evenly;
+}
+
+.align-content--stretch {
+    align-content: stretch;
+}
+
+.align-items--start {
+    align-items: flex-start;
+}
+
+.align-items--center {
+    align-items: center;
+}
+
+.align-items--end {
+    align-items: flex-end;
+}
+
+.align-items--baseline {
+    align-items: baseline;
+}
+
+.align-items--stretch {
+    align-items: stretch;
+}
+
+.align-self--start {
+    align-self: flex-start;
+}
+
+.align-self--center {
+    align-self: center;
+}
+
+.align-self--end {
+    align-self: flex-end;
+}
+
+.align-self--baseline {
+    align-self: baseline;
+}
+
+.align-self--stretch {
+    align-self: stretch;
+}
+
+.justify-content--start {
+    justify-content: flex-start;
+}
+
+.justify-content--center {
+    justify-content: center;
+}
+
+.justify-content--end {
+    justify-content: flex-end;
+}
+
+.justify-content--evenly {
+    justify-content: space-evenly;
+}
+
+.justify-content--around {
+    justify-content: space-around;
+}
+
+.justify-content--between {
+    justify-content: space-between;
+}
+
+.justify-content--stretch {
+    justify-content: stretch;
+}
+
+.justify-items--start {
+    justify-items: flex-start;
+}
+
+.justify-items--center {
+    justify-items: center;
+}
+
+.justify-items--end {
+    justify-items: flex-end;
+}
+
+.justify-items--stretch {
+    justify-items: stretch;
+}
+
+.justify-self--start {
+    justify-self: flex-start;
+}
+
+.justify-self--center {
+    justify-self: center;
+}
+
+.justify-self--end {
+    justify-self: flex-end;
+}
+
+.justify-self--stretch {
+    justify-self: stretch;
+}
+
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value) {
+        .align-content--#{$_key}-start {
+            align-content: flex-start;
+        }
+
+        .align-content--#{$_key}-center {
+            align-content: center;
+        }
+
+        .align-content--#{$_key}-end {
+            align-content: flex-end;
+        }
+
+        .align-content--#{$_key}-around {
+            align-content: space-around;
+        }
+
+        .align-content--#{$_key}-baseline {
+            align-content: baseline;
+        }
+
+        .align-content--#{$_key}-between {
+            align-content: space-between;
+        }
+
+        .align-content--#{$_key}-evenly {
+            align-content: space-evenly;
+        }
+
+        .align-content--#{$_key}-stretch {
+            align-content: stretch;
+        }
+
+        .align-items--#{$_key}-start {
+            align-items: flex-start;
+        }
+
+        .align-items--#{$_key}-center {
+            align-items: center;
+        }
+
+        .align-items--#{$_key}-end {
+            align-items: flex-end;
+        }
+
+        .align-items--#{$_key}-baseline {
+            align-items: baseline;
+        }
+
+        .align-items--#{$_key}-stretch {
+            align-items: stretch;
+        }
+
+        .align-self--#{$_key}-start {
+            align-self: flex-start;
+        }
+
+        .align-self--#{$_key}-center {
+            align-self: center;
+        }
+
+        .align-self--#{$_key}-end {
+            align-self: flex-end;
+        }
+
+        .align-self--#{$_key}-baseline {
+            align-self: baseline;
+        }
+
+        .align-self--#{$_key}-stretch {
+            align-self: stretch;
+        }
+
+        .justify-content--#{$_key}-start {
+            justify-content: flex-start;
+        }
+
+        .justify-content--#{$_key}-center {
+            justify-content: center;
+        }
+
+        .justify-content--#{$_key}-end {
+            justify-content: flex-end;
+        }
+
+        .justify-content--#{$_key}-evenly {
+            justify-content: space-evenly;
+        }
+
+        .justify-content--#{$_key}-around {
+            justify-content: space-around;
+        }
+
+        .justify-content--#{$_key}-between {
+            justify-content: space-between;
+        }
+
+        .justify-content--#{$_key}-stretch {
+            justify-content: stretch;
+        }
+
+        .justify-items--#{$_key}-start {
+            justify-items: flex-start;
+        }
+
+        .justify-items--#{$_key}-center {
+            justify-items: center;
+        }
+
+        .justify-items--#{$_key}-end {
+            justify-items: flex-end;
+        }
+
+        .justify-items--#{$_key}-stretch {
+            justify-items: stretch;
+        }
+
+        .justify-self--#{$_key}-start {
+            justify-self: flex-start;
+        }
+
+        .justify-self--#{$_key}-center {
+            justify-self: center;
+        }
+
+        .justify-self--#{$_key}-end {
+            justify-self: flex-end;
+        }
+
+        .justify-self--#{$_key}-stretch {
+            justify-self: stretch;
+        }
+    }
+}
+
+// Flex - Direction
+.flex--column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex--column-reverse {
+    flex-direction: column-reverse;
+}
+
+.flex--row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex--row-reverse {
+    flex-direction: row-reverse;
+}
+
+@each $_key,
+$_value in $breakpoint {
+    @include breakpoint($_value) {
+        .flex--#{$_key}-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flex--#{$_key}-column-reverse {
+            flex-direction: column-reverse;
+        }
+
+        .flex--#{$_key}-row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flex--#{$_key}-row-reverse {
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+// Flex - Grow
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex-grow--flat {
+    flex-grow: 0;
+}
+
+// Flex - Shrink
+.flex-shrink {
+    flex-shrink: 1;
+}
+
+.flex-shrink--flat {
+    flex-shrink: 0;
+}
+
+// Flex - Wrap
+.flex--nowrap {
+    flex-wrap: nowrap;
+}
+
+.flex--wrap {
+    flex-wrap: wrap;
+}
+
+.flex--wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+// Flip
+.flip--x {
+    transform: scaleX(-1);
+}
+
+.flip--y {
+    transform: scaleY(-1);
+}
+
+.flip--xy {
+    transform: scale(-1, -1);
+}
+
+// Gap
+.gap {
+    &--icon {
+        gap: var(--space-icon);
+
+        &-column {
+            column-gap: var(--space-icon);
+        }
+
+        &-row {
+            row-gap: var(--space-icon);
+        }
+    }
+
+    &--block {
+        gap: var(--space-block);
+
+        &-column {
+            column-gap: var(--space-block);
+        }
+
+        &-row {
+            row-gap: var(--space-block);
+        }
+    }
+
+    &--grid {
+        gap: var(--space-grid);
+
+        &-column {
+            column-gap: var(--space-grid);
+        }
+
+        &-row {
+            row-gap: var(--space-grid);
+        }
+    }
+
+    &--container {
+        gap: var(--space-container);
+
+        &-column {
+            column-gap: var(--space-container);
+        }
+
+        &-row {
+            row-gap: var(--space-container);
+        }
+    }
+
+    &--section {
+        gap: var(--space-section);
+
+        &-column {
+            column-gap: var(--space-section);
+        }
+
+        &-row {
+            row-gap: var(--space-section);
+        }
+    }
+
+    &--flat {
+        gap: 0;
+
+        &-column {
+            column-gap: 0;
+        }
+
+        &-row {
+            row-gap: 0;
+        }
+    }
+}
+
+// Height
+.height--auto {
+    min-block-size: auto;
+}
+
+.height--fill {
+    min-block-size: 100%;
+}
+
+.height--full {
+    min-block-size: 100svh;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .height--#{$_key}-auto {
+            min-block-size: auto;
+        }
+
+        .height--#{$_key}-fill {
+            min-block-size: 100%;
+        }
+
+        .height--#{$_key}-full {
+            min-block-size: 100svh;
+        }
+    }
+}
+
+// Hide, Show
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.show--flex {
+    display: flex;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .hide--#{$_key} {
+            display: none;
+        }
+
+        .show--#{$_key} {
+            display: block;
+        }
+
+        .show--#{$_key}-flex {
+            display: flex;
+        }
+    }
+}
+
+// Hide - Visually
+.hide--visually:not(:focus):not(:active) {
+    block-size: 1px !important;
+    border: 0 !important;
+    clip-path: inset(50%) !important;
+    inline-size: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+}
+
+// List - Flat
+ol.list--flat,
+ul.list--flat,
+.list--flat > ol,
+.list--flat > ul {
+    list-style: none;
+    list-style-type: none;
+    margin-block: 0;
+    padding-inline-start: 0;
+}
+
+// List - Marker
+.list-marker--color li::marker {
+    --color-marker: var(--primary);
+
+    color: var(--color-marker);
+}
+
+// Margin
+.margin {
+    &-top--icon {
+        margin-block-start: var(--space-icon);
+    }
+
+    &-top--block {
+        margin-block-start: var(--space-block);
+    }
+
+    &-top--grid {
+        margin-block-start: var(--space-grid);
+    }
+
+    &-top--container {
+        margin-block-start: var(--space-container);
+    }
+
+    &-top--section {
+        margin-block-start: var(--space-section);
+    }
+
+    &-top--flat {
+        margin-block-start: 0;
+    }
+
+    &-right--icon {
+        margin-inline-end: var(--space-icon);
+    }
+
+    &-right--block {
+        margin-inline-end: var(--space-block);
+    }
+
+    &-right--grid {
+        margin-inline-end: var(--space-grid);
+    }
+
+    &-right--container {
+        margin-inline-end: var(--space-container);
+    }
+
+    &-right--section {
+        margin-inline-end: var(--space-section);
+    }
+
+    &-right--flat {
+        margin-inline-end: 0;
+    }
+
+    &-bottom--icon {
+        margin-block-end: var(--space-icon);
+    }
+
+    &-bottom--block {
+        margin-block-end: var(--space-block);
+    }
+
+    &-bottom--grid {
+        margin-block-end: var(--space-grid);
+    }
+
+    &-bottom--container {
+        margin-block-end: var(--space-container);
+    }
+
+    &-bottom--section {
+        margin-block-end: var(--space-section);
+    }
+
+    &-bottom--flat {
+        margin-block-end: 0;
+    }
+
+    &-left--icon {
+        margin-inline-start: var(--space-icon);
+    }
+
+    &-left--block {
+        margin-inline-start: var(--space-block);
+    }
+
+    &-left--grid {
+        margin-inline-start: var(--space-grid);
+    }
+
+    &-left--container {
+        margin-inline-start: var(--space-container);
+    }
+
+    &-left--section {
+        margin-inline-start: var(--space-section);
+    }
+
+    &-left--flat {
+        margin-inline-start: 0;
+    }
+
+    &-x--icon {
+        margin-inline: var(--space-icon);
+    }
+
+    &-x--block {
+        margin-inline: var(--space-block);
+    }
+
+    &-x--grid {
+        margin-inline: var(--space-grid);
+    }
+
+    &-x--container {
+        margin-inline: var(--space-container);
+    }
+
+    &-x--section {
+        margin-inline: var(--space-section);
+    }
+
+    &-x--flat {
+        margin-inline: 0;
+    }
+
+    &-y--icon {
+        margin-block: var(--space-icon);
+    }
+
+    &-y--block {
+        margin-block: var(--space-block);
+    }
+
+    &-y--grid {
+        margin-block: var(--space-grid);
+    }
+
+    &-y--container {
+        margin-block: var(--space-container);
+    }
+
+    &-y--section {
+        margin-block: var(--space-section);
+    }
+
+    &-y--flat {
+        margin-block: 0;
+    }
+
+    &--flat {
+        margin: 0;
+    }
+}
+
+// Object - Fit
+.object--contain {
+    object-fit: contain;
+}
+
+.object--cover {
+    object-fit: cover;
+}
+
+.object--none {
+    object-fit: none;
+}
+
+// Object Position
+.object--bottom-center {
+    object-position: var(--object-center) var(--object-end);
+}
+
+.object--bottom-left {
+    object-position: var(--object-start) var(--object-end);
+}
+
+.object--bottom-right {
+    object-position: var(--object-end);
+}
+
+.object--center {
+    object-position: var(--object-center);
+}
+
+.object--center-left {
+    object-position: var(--object-start) var(--object-center);
+}
+
+.object--center-right {
+    object-position: var(--object-end) var(--object-center);
+}
+
+.object--top-center {
+    object-position: var(--object-center) var(--object-start);
+}
+
+.object--top-left {
+    object-position: var(--object-start);
+}
+
+.object--top-right {
+    object-position: var(--object-end) var(--object-start);
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .object--#{$-key}-bottom-center {
+            object-position: var(--object-center) var(--object-end);
+        }
+
+        .object--#{$-key}-bottom-left {
+            object-position: var(--object-start) var(--object-end);
+        }
+
+        .object--#{$-key}-bottom-right {
+            object-position: var(--object-end);
+        }
+
+        .object--#{$-key}-center {
+            object-position: var(--object-center);
+        }
+
+        .object--#{$-key}-center-left {
+            object-position: var(--object-start) var(--object-center);
+        }
+
+        .object--#{$-key}-center-right {
+            object-position: var(--object-end) var(--object-center);
+        }
+
+        .object--#{$-key}-top-center {
+            object-position: var(--object-center) var(--object-start);
+        }
+
+        .object--#{$-key}-top-left {
+            object-position: var(--object-start);
+        }
+
+        .object--#{$-key}-top-right {
+            object-position: var(--object-end) var(--object-start);
+        }
+    }
+}
+
+// Opacity
+.opacity--5 {
+    opacity: .05;
+}
+
+.opacity--10 {
+    opacity: .1;
+}
+
+.opacity--25 {
+    opacity: .25;
+}
+
+.opacity--50 {
+    opacity: .5;
+}
+
+.opacity--75 {
+    opacity: .75;
+}
+
+.opacity--90 {
+    opacity: .9;
+}
+
+.opacity--95 {
+    opacity: .95;
+}
+
+// Order
+.order--first {
+    order: -1;
+}
+
+.order--last {
+    order: 1000;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .order--#{$_key}-first {
+            order: -1;
+        }
+
+        .order--#{$_key}-last {
+            order: 1000;
+        }
+    }
+}
+
+// Overflow
+.overflow--auto {
+    overflow: auto;
+}
+
+.overflow--clip {
+    overflow: clip;
+}
+
+.overflow--hidden {
+    overflow: hidden;
+}
+
+.overflow--scroll-x {
+    overflow-x: scroll;
+}
+
+.overflow--scroll-y {
+    overflow-y: scroll;
+}
+
+// Padding
+.padding {
+    &--icon {
+        padding: var(--space-icon);
+    }
+
+    &-x--icon {
+        padding-inline: var(--space-icon);
+    }
+
+    &-y--icon {
+        padding-block: var(--space-icon);
+    }
+
+    &--block {
+        padding: var(--space-block);
+    }
+
+    &-x--block {
+        padding-inline: var(--space-block);
+    }
+
+    &-y--block {
+        padding-block: var(--space-block);
+    }
+
+    &-x--edge {
+        padding-inline: var(--space-edge);
+    }
+
+    &--grid {
+        padding: var(--space-grid);
+    }
+
+    &-x--grid {
+        padding-inline: var(--space-grid);
+    }
+
+    &-y--grid {
+        padding-block: var(--space-grid);
+    }
+
+    &--container {
+        padding: var(--space-container);
+    }
+
+    &-x--container {
+        padding-inline: var(--space-container);
+    }
+
+    &-y--container {
+        padding-block: var(--space-container);
+    }
+
+    &--section {
+        padding: var(--space-section) var(--space-edge);
+    }
+
+    &-x--section {
+        padding-inline: var(--space-edge);
+    }
+
+    &-y--section {
+        padding-block: var(--space-section);
+    }
+
+    &-top--flat {
+        padding-block-start: 0;
+    }
+
+    &-right--flat {
+        padding-inline-end: 0;
+    }
+
+    &-bottom--flat {
+        padding-block-end: 0;
+    }
+
+    &-left--flat {
+        padding-inline-start: 0;
+    }
+
+    &-x--flat {
+        padding-inline: 0;
+    }
+
+    &-y--flat {
+        padding-block: 0;
+    }
+
+    &--flat {
+        padding: 0;
+    }
+}
+
+// Position
+.position {
+    &--absolute {
+        position: absolute;
+    }
+
+    &--fixed {
+        position: fixed;
+    }
+
+    &--relative {
+        position: relative;
+    }
+
+    &--static {
+        position: static;
+    }
+
+    &--sticky {
+        inset-block-start: 0;
+        position: sticky;
+
+        &-offset {
+            inset-block-start: var(--space-base);
+        }
+    }
+
+    &-inset--top {
+        inset-block-start: 0;
+    }
+
+    &-inset--right {
+        inset-inline-end: 0;
+    }
+
+    &-inset--bottom {
+        inset-block-end: 0;
+    }
+
+    &-inset--left {
+        inset-inline-start: 0;
+    }
+
+    &-inset--x {
+        inset-inline: 0;
+    }
+
+    &-inset--y {
+        inset-block: 0;
+    }
+
+    &-inset {
+        inset: 0;
+    }
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .position {
+            &--#{$_key}-absolute {
+                position: absolute;
+            }
+
+            &--#{$_key}-fixed {
+                position: fixed;
+            }
+
+            &--#{$_key}-relative {
+                position: relative;
+            }
+
+            &--#{$_key}-static {
+                position: static;
+            }
+
+            &--#{$_key}-sticky {
+                inset-block-start: 0;
+                position: sticky;
+
+                &-offset {
+                    inset-block-start: var(--space-base);
+                }
+            }
+
+            &-inset--#{$_key}-top {
+                inset-block-start: 0;
+            }
+
+            &-inset--#{$_key}-right {
+                inset-inline-end: 0;
+            }
+
+            &-inset--#{$_key}-bottom {
+                inset-block-end: 0;
+            }
+
+            &-inset--#{$_key}-left {
+                inset-inline-start: 0;
+            }
+
+            &-inset--#{$_key}-x {
+                inset-inline: 0;
+            }
+
+            &-inset--#{$_key}-y {
+                inset-block: 0;
+            }
+
+            &-inset-#{$_key} {
+                inset: 0;
+            }
+        }
+    }
+}
+
+// Shadow - Box
+.shadow-box--sm {
+    box-shadow: var(--shadow-box-sm);
+}
+
+.shadow-box--md {
+    box-shadow: var(--shadow-box-md);
+}
+
+.shadow-box--lg {
+    box-shadow: var(--shadow-box-lg);
+}
+
+.shadow-box--flat {
+    box-shadow: none;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .shadow-box--#{$_key}-sm {
+            box-shadow: var(--shadow-box-sm);
+        }
+
+        .shadow-box--#{$_key}-md {
+            box-shadow: var(--shadow-box-md);
+        }
+
+        .shadow-box--#{$_key}-lg {
+            box-shadow: var(--shadow-box-lg);
+        }
+
+        .shadow-box--#{$_key}-flat {
+            box-shadow: none;
+        }
+    }
+}
+
+// Shadow - Drop
+.shadow-drop--sm {
+    filter: var(--shadow-drop-sm);
+}
+
+.shadow-drop--md {
+    filter: var(--shadow-drop-md);
+}
+
+.shadow-drop--lg {
+    filter: var(--shadow-drop-lg);
+}
+
+.shadow-drop--flat {
+    filter: var(--shadow-drop-flat);
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        .shadow-drop--#{$_key}-sm {
+            filter: var(--shadow-drop-sm);
+        }
+
+        .shadow-drop--#{$_key}-md {
+            filter: var(--shadow-drop-md);
+        }
+
+        .shadow-drop--#{$_key}-lg {
+            filter: var(--shadow-drop-lg);
+        }
+
+        .shadow-drop--#{$_key}-flat {
+            filter: var(--shadow-drop-flat);
+        }
+    }
+}
+
+// Text - Align
+.text-align--center {
+    text-align: center;
+}
+
+.text-align--justify {
+    text-align: justify;
+}
+
+.text-align--left {
+    text-align: start;
+}
+
+.text-align--right {
+    text-align: end;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .text-align--#{$-key}-center {
+            text-align: center;
+        }
+
+        .text-align--#{$-key}-justify {
+            text-align: justify;
+        }
+
+        .text-align--#{$-key}-left {
+            text-align: start;
+        }
+
+        .text-align--#{$-key}-right {
+            text-align: end;
+        }
+    }
+}
+
+// Text - Decoration
+.text-decoration--flat {
+    text-decoration: none;
+}
+
+.text-decoration--overline {
+    text-decoration: overline;
+}
+
+.text-decoration--strike {
+    text-decoration: line-through;
+}
+
+.text-decoration--underline {
+    text-decoration: underline;
+}
+
+// Text - Height
+.text-height--body {
+    line-height: var(--line-height-body);
+}
+
+.text-height--heading {
+    line-height: var(--line-height-heading);
+}
+
+// Text - Spaced
+.text-spaced {
+    letter-spacing: var(--space-px);
+}
+
+// Text - Style
+.text-style--italic {
+    font-style: italic;
+}
+
+.text-style--normal {
+    font-style: normal;
+}
+
+// Text - Transform
+.text-transform--capitalize {
+    text-transform: capitalize;
+}
+
+.text-transform--lowercase {
+    text-transform: lowercase;
+}
+
+.text-transform--none {
+    text-transform: none;
+}
+
+.text-transform--uppercase {
+    text-transform: uppercase;
+}
+
+// Text - Weight
+.text-weight--normal {
+    font-weight: 400;
+}
+
+.text-weight--bold {
+    font-weight: 700;
+}
+
+// Text - Wrap
+.text-wrap {
+    text-wrap: wrap;
+}
+
+.text-wrap--balance {
+    text-wrap: balance;
+}
+
+.text-wrap--none {
+    text-wrap: nowrap;
+}
+
+.text-wrap--pretty {
+    text-wrap: pretty;
+}
+
+// Transition
+.transition {
+    transition-duration: var(--transition);
+
+    &--fast {
+        transition-duration: var(--transition-fast);
+    }
+
+    &--slow {
+        transition-duration: var(--transition-slow);
+    }
+
+    &,
+    &--fast,
+    &--slow {
+        transition-timing-function: var(--transition-easing);
+    }
+}
+
+// Vertical Text
+.vertical-text--left,
+.vertical-text--right {
+    writing-mode: vertical-lr;
+}
+
+.vertical-text--left {
+    transform: scale(-1);
+}
+
+.vertical-text--right {
+    transform: scale(1);
+}
+
+.vertical-text--unset {
+    transform: scale(1);
+    writing-mode: unset;
+}
+
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+
+        .vertical-text--#{$_key}-left,
+        .vertical-text--#{$_key}-right {
+            writing-mode: vertical-lr;
+        }
+
+        .vertical-text--#{$_key}-left {
+            transform: scale(-1);
+        }
+
+        .vertical-text--#{$_key}-right {
+            transform: scale(1);
+        }
+
+        .vertical-text--#{$_key}-unset {
+            transform: scale(1);
+            writing-mode: unset;
+        }
+    }
+}
+
+// Width
+.width--min,
+.width--sm,
+.width--md,
+.width--lg,
+.width--xl,
+.width--wide,
+.width--max,
+.width--prose,
+.width--fill {
+    inline-size: 100%;
+}
+
+.width--min {
+    max-inline-size: var(--width-min);
+}
+
+.width--sm {
+    max-inline-size: var(--width-sm);
+}
+
+.width--md {
+    max-inline-size: var(--width-md);
+}
+
+.width--lg {
+    max-inline-size: var(--width-lg);
+}
+
+.width--xl {
+    max-inline-size: var(--width-xl);
+}
+
+.width--wide {
+    max-inline-size: var(--width-wide);
+}
+
+.width--max {
+    max-inline-size: var(--width-max);
+}
+
+.width--fit {
+    max-inline-size: fit-content;
+}
+
+.width--prose {
+    max-inline-size: var(--width-prose);
+}
+
+// Z-Index
+.z--back {
+    z-index: var(--z-back);
+}
+
+.z--flat {
+    z-index: var(--z-flat);
+}
+
+.z--front {
+    z-index: var(--z-front);
+}
+
+.z-low {
+    z-index: var(--z-low);
+}
+
+.z-mid {
+    z-index: var(--z-mid);
+}
+
+.z-high {
+    z-index: var(--z-high);
+}
+
+.z--top {
+    z-index: var(--z-top);
+}
+
+// --- Print Styles --- //
+
+@media print {
+
+    *,
+    ::before,
+    ::after {
+        background-color: var(--base-black) !important;
+        box-shadow: none !important;
+        color: var(--base-white) !important;
+        text-shadow: none !important;
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+
+    pre,
+    blockquote {
+        border: var(--space-px) solid var(--base-black) !important;
+        page-break-inside: avoid !important;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3 !important;
+        widows: 3 !important;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid !important;
     }
 }
