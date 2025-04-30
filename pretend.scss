@@ -8,20 +8,20 @@
 $alignment: false;
 $aspect-ratio: false;
 $bg-blur: false;
-$bg-color: true;
+$bg-color: true; // Default True
 $bg-isolate: false;
 $border: false;
 $breakout: false;
 $clear: false;
-$color: true;
+$color: true; // Default True
 $content-column: false;
 $cursor: false;
 $flex: false;
 $flip: false;
 $gap: false;
 $height: false;
-$hide-show: true;
-$hide-visually: true;
+$hide-show: true; // Default True
+$hide-visually: true; // Default True
 $list: false;
 $margin: false;
 $object: false;
@@ -244,7 +244,7 @@ $breakpoint: (
     --border-radius-oval: 10rem;
     --border-radius-round: 50%;
     --border-style: solid;
-    --border-width: var(--space-2xs);
+    --border-width: var(--space-2px);
 
     // Font
     --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
@@ -330,7 +330,7 @@ $breakpoint: (
 
     // Spacing
     --space-px: #{px-rem(1px)};
-    --space-2xs: #{px-rem(2px)};
+    --space-2px: #{px-rem(2px)};
     --space-xs: #{px-rem(4px)};
     --space-sm: #{px-rem(8px)};
     --space-md: #{px-rem(16px)};
@@ -777,7 +777,7 @@ small,
 
     & > ol * + li,
     & > ul * + li {
-        margin-block-start: var(--space-2xs);
+        margin-block-start: var(--space-2px);
     }
 }
 
