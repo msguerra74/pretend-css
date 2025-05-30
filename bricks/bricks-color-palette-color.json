@@ -8,19 +8,19 @@
             "name": "Primary"
         },
         {
-            "raw": "var(--primary-lighter)",
+            "raw": "var(--primary-lightest)",
             "id": "100101",
+            "name": "Primary Lightest"
+        },
+        {
+            "raw": "var(--primary-lighter)",
+            "id": "100102",
             "name": "Primary Lighter"
         },
         {
             "raw": "var(--primary-light)",
-            "id": "100102",
-            "name": "Primary Light"
-        },
-        {
-            "raw": "var(--primary-mid)",
             "id": "100103",
-            "name": "Primary Mid"
+            "name": "Primary Light"
         },
         {
             "raw": "var(--primary-dark)",
@@ -33,24 +33,29 @@
             "name": "Primary Darker"
         },
         {
+            "raw": "var(--primary-darkest)",
+            "id": "100106",
+            "name": "Primary Darkest"
+        },
+        {
             "raw": "var(--secondary)",
             "id": "100200",
             "name": "Secondary"
         },
         {
-            "raw": "var(--secondary-lighter)",
+            "raw": "var(--secondary-lightest)",
             "id": "100201",
+            "name": "Secondary Lightest"
+        },
+        {
+            "raw": "var(--secondary-lighter)",
+            "id": "100202",
             "name": "Secondary Lighter"
         },
         {
             "raw": "var(--secondary-light)",
-            "id": "100202",
-            "name": "Secondary Light"
-        },
-        {
-            "raw": "var(--secondary-mid)",
             "id": "100203",
-            "name": "Secondary Mid"
+            "name": "Secondary Light"
         },
         {
             "raw": "var(--secondary-dark)",
@@ -63,24 +68,29 @@
             "name": "Secondary Darker"
         },
         {
+            "raw": "var(--secondary-darkest)",
+            "id": "100206",
+            "name": "Secondary Darkest"
+        },
+        {
             "raw": "var(--tertiary)",
             "id": "100300",
             "name": "Tertiary"
         },
         {
-            "raw": "var(--tertiary-lighter)",
+            "raw": "var(--tertiary-lightest)",
             "id": "100301",
+            "name": "Tertiary Lightest"
+        },
+        {
+            "raw": "var(--tertiary-lighter)",
+            "id": "100302",
             "name": "Tertiary Lighter"
         },
         {
             "raw": "var(--tertiary-light)",
-            "id": "100302",
-            "name": "Tertiary Light"
-        },
-        {
-            "raw": "var(--tertiary-mid)",
             "id": "100303",
-            "name": "Tertiary Mid"
+            "name": "Tertiary Light"
         },
         {
             "raw": "var(--tertiary-dark)",
@@ -93,24 +103,29 @@
             "name": "Tertiary Darker"
         },
         {
+            "raw": "var(--tertiary-darkest)",
+            "id": "100306",
+            "name": "Tertiary Darkest"
+        },
+        {
             "raw": "var(--quaternary)",
             "id": "100400",
             "name": "Quaternary"
         },
         {
-            "raw": "var(--quaternary-lighter)",
+            "raw": "var(--quaternary-lightest)",
             "id": "100401",
+            "name": "Quaternary Lightest"
+        },
+        {
+            "raw": "var(--quaternary-lighter)",
+            "id": "100402",
             "name": "Quaternary Lighter"
         },
         {
             "raw": "var(--quaternary-light)",
-            "id": "100402",
-            "name": "Quaternary Light"
-        },
-        {
-            "raw": "var(--quaternary-mid)",
             "id": "100403",
-            "name": "Quaternary Mid"
+            "name": "Quaternary Light"
         },
         {
             "raw": "var(--quaternary-dark)",
@@ -123,54 +138,49 @@
             "name": "Quaternary Darker"
         },
         {
-            "raw": "var(--base)",
-            "id": "100500",
-            "name": "Base"
+            "raw": "var(--quaternary-darkest)",
+            "id": "100406",
+            "name": "Quaternary Darkest"
+        },
+        {
+            "raw": "var(--base-white)",
+            "id": "100501",
+            "name": "Base White"
+        },
+        {
+            "raw": "var(--base-lightest)",
+            "id": "100502",
+            "name": "Base Lightest"
         },
         {
             "raw": "var(--base-lighter)",
-            "id": "100501",
+            "id": "100503",
             "name": "Base Lighter"
         },
         {
             "raw": "var(--base-light)",
-            "id": "100502",
+            "id": "100504",
             "name": "Base Light"
         },
         {
-            "raw": "var(--base-mid)",
-            "id": "100503",
-            "name": "Base Mid"
-        },
-        {
             "raw": "var(--base-dark)",
-            "id": "100504",
+            "id": "100505",
             "name": "Base Dark"
         },
         {
             "raw": "var(--base-darker)",
-            "id": "100505",
+            "id": "100506",
             "name": "Base Darker"
         },
         {
-            "raw": "var(--white)",
-            "id": "100600",
-            "name": "White"
+            "raw": "var(--base-darkest)",
+            "id": "100507",
+            "name": "Base Darkest"
         },
         {
-            "raw": "var(--white-off)",
-            "id": "100601",
-            "name": "Off White"
-        },
-        {
-            "raw": "var(--black)",
-            "id": "100602",
-            "name": "Black"
-        },
-        {
-            "raw": "var(--black-off)",
-            "id": "100603",
-            "name": "Off Black"
+            "raw": "var(--base-black)",
+            "id": "100508",
+            "name": "Base Black"
         }
     ]
 }

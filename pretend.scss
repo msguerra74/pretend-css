@@ -40,15 +40,15 @@ $z-index: false;
 
 // Color
 // Comment or uncomment to enable or disable colors.
-$primary: hsl(258deg 90% 66%);
-// $secondary: hsl(199deg 88% 49%);
-// $tertiary: hsl(160deg 82% 40%);
-// $quaternary: hsl(25deg 95% 53%);
-$error: hsl(360deg 85% 60%);
-$highlight: hsl(48deg 96% 77%);
-$info: hsl(199deg 88% 49%);
-$success: hsl(160deg 82% 40%);
-$warning: hsl(25deg 95% 53%);
+$primary: hsl(261deg 100% 66%);
+// $secondary: hsl(261deg 100% 66%);
+// $tertiary: hsl(261deg 100% 66%);
+// $quaternary: hsl(261deg 100% 66%);
+$error: hsl(357deg 95% 58%);
+$highlight: hsl(52deg 100% 56%);
+$info: hsl(190deg 100% 43%);
+$success: hsl(160deg 100% 37%);
+$warning: hsl(36deg 100% 50%);
 
 $color: (
     primary: $primary,
@@ -63,7 +63,7 @@ $color: (
 );
 
 // Color - Base
-$base: hsl(24deg 11% 4%);
+$base: hsl(240deg 5% 46%);
 
 $color-base: (
     base: $base
