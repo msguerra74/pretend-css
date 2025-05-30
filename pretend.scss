@@ -4,6 +4,9 @@
 
 // --- SCSS Options --- //
 
+// Builders
+$bricks: true; // Default True
+
 // Utility Classes
 $alignment: false;
 $aspect-ratio: false;
@@ -3889,6 +3892,22 @@ fieldset:has([name="_pretend-check"]) {
 
     .z--top {
         z-index: var(--z-top);
+    }
+}
+
+// --- Builders --- //
+
+@if $bricks {
+    .brxe-block {
+        @extend .block;
+    }
+
+    .brxe-container {
+        @extend .container;
+    }
+
+    .brxe-section {
+        @extend .section;
     }
 }
 
