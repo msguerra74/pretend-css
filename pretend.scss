@@ -89,7 +89,8 @@ $breakpoint: (
     sm: $width-sm,
     md: $width-md,
     lg: $width-lg,
-    xl: $width-xl
+    xl: $width-xl,
+    // wide: $width-wide,
 );
 
 // Convert PX to REM
@@ -133,6 +134,9 @@ $breakpoint: (
 
 // Light Color Scheme
 .color-scheme--light,
+.btn:not(.btn--dark, .btn--light),
+input[type="submit"]:not(.btn--dark, .btn--light),
+button[type="submit"]:not(.btn--dark, .btn--light),
 [data-color-scheme="light"],
 :root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
 
@@ -475,12 +479,12 @@ $breakpoint: (
 ::before,
 ::after {
     box-sizing: border-box;
-}
-
-// Reset
-* {
     margin: 0;
     padding: 0;
+}
+
+:target {
+    scroll-margin-block: var(--space-block);
 }
 
 // HTML
@@ -705,6 +709,11 @@ figure {
 img {
     border-radius: var(--border-radius);
     object-fit: cover;
+}
+
+ol[role='list'],
+ul[role='list'] {
+    list-style: none;
 }
 
 p {
@@ -1242,7 +1251,7 @@ $_value in $breakpoint {
 </section>
 */
 .bg-overlay {
-    block-size: 100% !important;
+    block-size: 100%;
     inline-size: 100%;
     inset: 0;
     margin-block-start: 0;
@@ -1317,7 +1326,7 @@ $_value in $breakpoint {
     &--outline {
         --color-btn: var(--border-color-btn);
 
-        background-color: initial !important;
+        background-color: initial;
     }
 }
 
@@ -1775,7 +1784,7 @@ button[type="submit"] {
 }
 
 // Textarea
-textarea {
+textarea:not([rows]) {
     min-block-size: var(--height-textarea);
     resize: vertical;
 }
