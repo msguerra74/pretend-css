@@ -1,81 +1,86 @@
 {
-    "id": "100000",
-    "name": "Colors",
-    "colors": [
-        {
-            "raw": "var(--primary)",
-            "id": "100100",
-            "name": "Primary"
-        },
-        {
-            "raw": "var(--primary-lightest)",
-            "id": "100101",
-            "name": "Primary Lightest"
-        },
-        {
-            "raw": "var(--primary-lighter)",
-            "id": "100102",
-            "name": "Primary Lighter"
-        },
-        {
-            "raw": "var(--primary-light)",
-            "id": "100103",
-            "name": "Primary Light"
-        },
-        {
-            "raw": "var(--primary-dark)",
-            "id": "100104",
-            "name": "Primary Dark"
-        },
-        {
-            "raw": "var(--primary-darker)",
-            "id": "100105",
-            "name": "Primary Darker"
-        },
-        {
-            "raw": "var(--primary-darkest)",
-            "id": "100106",
-            "name": "Primary Darkest"
-        },
-        {
-            "raw": "var(--base-white)",
-            "id": "100501",
-            "name": "Base White"
-        },
-        {
-            "raw": "var(--base-lightest)",
-            "id": "100502",
-            "name": "Base Lightest"
-        },
-        {
-            "raw": "var(--base-lighter)",
-            "id": "100503",
-            "name": "Base Lighter"
-        },
-        {
-            "raw": "var(--base-light)",
-            "id": "100504",
-            "name": "Base Light"
-        },
-        {
-            "raw": "var(--base-dark)",
-            "id": "100505",
-            "name": "Base Dark"
-        },
-        {
-            "raw": "var(--base-darker)",
-            "id": "100506",
-            "name": "Base Darker"
-        },
-        {
-            "raw": "var(--base-darkest)",
-            "id": "100507",
-            "name": "Base Darkest"
-        },
-        {
-            "raw": "var(--base-black)",
-            "id": "100508",
-            "name": "Base Black"
-        }
-    ]
+  "id": "100000",
+  "name": "Colors",
+  "colors": [
+    {
+      "raw": "var(--primary)",
+      "id": "100100",
+      "name": "Primary"
+    },
+    {
+      "raw": "var(--primary-lightest)",
+      "id": "100101",
+      "name": "Primary Lightest"
+    },
+    {
+      "raw": "var(--primary-lighter)",
+      "id": "100102",
+      "name": "Primary Lighter"
+    },
+    {
+      "raw": "var(--primary-light)",
+      "id": "100103",
+      "name": "Primary Light"
+    },
+    {
+      "raw": "var(--primary-dark)",
+      "id": "100104",
+      "name": "Primary Dark"
+    },
+    {
+      "raw": "var(--primary-darker)",
+      "id": "100105",
+      "name": "Primary Darker"
+    },
+    {
+      "raw": "var(--primary-darkest)",
+      "id": "100106",
+      "name": "Primary Darkest"
+    },
+    {
+      "raw": "var(--base)",
+      "id": "100500",
+      "name": "Base"
+    },
+    {
+      "raw": "var(--base-white)",
+      "id": "100501",
+      "name": "Base White"
+    },
+    {
+      "raw": "var(--base-lightest)",
+      "id": "100502",
+      "name": "Base Lightest"
+    },
+    {
+      "raw": "var(--base-lighter)",
+      "id": "100503",
+      "name": "Base Lighter"
+    },
+    {
+      "raw": "var(--base-light)",
+      "id": "100504",
+      "name": "Base Light"
+    },
+    {
+      "raw": "var(--base-dark)",
+      "id": "100505",
+      "name": "Base Dark"
+    },
+    {
+      "raw": "var(--base-darker)",
+      "id": "100506",
+      "name": "Base Darker"
+    },
+    {
+      "raw": "var(--base-darkest)",
+      "id": "100507",
+      "name": "Base Darkest"
+    },
+    {
+      "raw": "var(--base-black)",
+      "id": "100508",
+      "name": "Base Black"
+    }
+  ]
 }

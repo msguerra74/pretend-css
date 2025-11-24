@@ -7,6 +7,10 @@
 // Builders
 $bricks: true; // Default True
 
+//Misc
+$space-scale: true; // Default True
+$type-scale: true; // Default True
+
 // Utility Classes
 $alignment: false;
 $aspect-ratio: false;
@@ -17,29 +21,29 @@ $border: false;
 $breakout: false;
 $clear: false;
 $color: true; // Default True
-$content-column: false;
+$content-column: true;
 $cursor: false;
 $flex: false;
 $flip: false;
 $gap: false;
-$height: false;
+$height: true;
 $hide-show: true; // Default True
 $hide-visually: true; // Default True
 $list: false;
-$margin: false;
+$margin: true;
 $object: false;
-$opacity: false;
-$order: false;
+$opacity: true;
+$order: true;
 $overflow: false;
-$padding: false;
+$padding: true;
 $position: false;
-$shadow-box: false;
-$shadow-drop: false;
-$text: false;
+$shadow-box: true;
+$shadow-drop: true;
+$text: true;
 $transition: false;
 $vertical-text: false;
-$width: false;
-$z-index: false;
+$width: true;
+$z-index: true;
 
 // Color
 // Comment or uncomment to enable or disable colors.
@@ -72,6 +76,36 @@ $color-base: (
     base: $base
 );
 
+// Font
+$font-base-min: 16px;
+$font-base-max: 18px;
+$font-scale-min: 1.2;
+$font-scale-max: 1.25;
+
+// Font Scale
+$type-scale: (
+    sm: -1,
+    md: 0,
+    lg: 1,
+    xl: 2,
+    '2xl': 3,
+    '3xl': 4,
+    '4xl': 5,
+    '5xl': 6
+);
+
+// Space Scale
+$space-scale: (
+    xs: 0.5,
+    sm: 0.75,
+    md: 1,
+    lg: 1.5,
+    xl: 2,
+    '2xl': 3,
+    '3xl': 4,
+    '4xl': 6
+);
+
 // Width
 $width-min: 320px;
 $width-sm: 512px;
@@ -92,6 +126,21 @@ $breakpoint: (
     xl: $width-xl,
     // wide: $width-wide,
 );
+
+// Calculates the power of a base number to an exponent.
+// --
+// Usage: pow(2, 3) // 2^3 = 8
+// @param: $_base // Base number
+// @param: $_exp // Exponent number
+@function pow($_base, $_exp) {
+    $result: 1;
+
+    @for $_ from 1 through abs($_exp) {
+        $result: if($_exp > 0, $result * $_base, $result / $_base);
+    }
+
+    @return $result;
+}
 
 // Convert PX to REM
 // --
@@ -135,8 +184,7 @@ $breakpoint: (
 // Light Color Scheme
 .color-scheme--light,
 .btn:not(.btn--dark, .btn--light),
-input[type="submit"]:not(.btn--dark, .btn--light),
-button[type="submit"]:not(.btn--dark, .btn--light),
+button:not(.btn--dark, .btn--light),
 [data-color-scheme="light"],
 :root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
 
@@ -246,12 +294,13 @@ button[type="submit"]:not(.btn--dark, .btn--light),
 
     // Border
     --border-color: var(--base-dark);
-    --border-radius: var(--space-xs);
-    --border-radius-alt: var(--space-sm);
+    --border-radius: var(--space-4px);
+    --border-radius-alt: var(--space-xs);
     --border-radius-oval: 10rem;
     --border-radius-round: 50%;
     --border-style: solid;
     --border-width: var(--space-2px);
+    --border: var(--border-width) var(--border-style) var(--border-color);
 
     // Font
     --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
@@ -280,29 +329,45 @@ button[type="submit"]:not(.btn--dark, .btn--light),
     --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
 
     // Font - Sizing
-    --font-size-xs: #{fluid(12px, 14px)};
-    --font-size-sm: #{fluid(14px, 16px)};
-    --font-size-md: #{fluid(16px, 18px)};
-    --font-size-lg: #{fluid(18px, 20px)};
-    --font-size-xl: #{fluid(20px, 24px)};
-    --font-size-2xl: #{fluid(24px, 30px)};
-    --font-size-3xl: #{fluid(30px, 38px)};
-    --font-size-4xl: #{fluid(38px, 48px)};
-    --font-size-5xl: #{fluid(38px, 60px)};
-    --font-size-6xl: #{fluid(38px, 74px)};
-    --font-size-7xl: #{fluid(38px, 90px)};
-    --font-size-8xl: #{fluid(38px, 108px)};
-    --font-size-9xl: #{fluid(38px, 128px)};
+    @if $type-scale {
+        // Font Size - Type Scale
+        $sm-min: $font-base-min / $font-scale-min;
+        $sm-max: $font-base-max / $font-scale-min;
 
-    // Font - Custom Sizing
-    --font-size-small: var(--font-size-xs);
+        --font-size-sm: #{fluid($sm-min, $sm-max)};
+        --font-size-md: #{fluid($font-base-min, $font-base-max)};
+
+        @for $i from 1 through 6 {
+            $name: nth(map-keys($type-scale), $i + 2); // skip sm, md
+            $step: $i;
+            $min: $font-base-min * pow($font-scale-min, $step);
+            $max: $font-base-max * pow($font-scale-max, $step);
+
+            --font-size-#{$name}: #{fluid($min, $max)};
+        }
+    }
+
+    @else {
+        // Font Size - Custom
+        --font-size-sm: #{fluid(13.33px, 14.40px)};
+        --font-size-md: #{fluid($font-base-min, $font-base-max)};
+        --font-size-lg: #{fluid(19.20px, 22.50px)};
+        --font-size-xl: #{fluid(23.04px, 28.13px)};
+        --font-size-2xl: #{fluid(27.65px, 35.16px)};
+        --font-size-3xl: #{fluid(33.18px, 43.95px)};
+        --font-size-4xl: #{fluid(39.81px, 54.93px)};
+        --font-size-5xl: #{fluid(47.78px, 68.66px)};
+    }
+
+    // Font - Contextual
+    --font-size-small: var(--font-size-sm);
     --font-size-body: var(--font-size-md);
     --font-size-lede: var(--font-size-lg);
     --font-size-h4: var(--font-size-xl);
     --font-size-h3: var(--font-size-2xl);
     --font-size-h2: var(--font-size-3xl);
     --font-size-h1: var(--font-size-4xl);
-    --font-size-hero: var(--font-size-5xl);
+    --font-size-display: var(--font-size-5xl);
 
     // Grid
     --grid-1: repeat(1, minmax(0, 1fr));
@@ -320,9 +385,9 @@ button[type="submit"]:not(.btn--dark, .btn--light),
     --grid-4-1: 4fr 1fr;
 
     // Object - Position
-    --object-start: 15%;
-    --object-center: 50%;
-    --object-end: 85%;
+    --position-start: 15%;
+    --position-center: 50%;
+    --position-end: 85%;
 
     // Shadow - Box
     --shadow-box-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
@@ -336,29 +401,58 @@ button[type="submit"]:not(.btn--dark, .btn--light),
     --shadow-drop-flat: drop-shadow(0 0 transparent);
 
     // Spacing
+    @if $space-scale {
+
+        // Spacing - Scale
+        @each $key, $multiplier in $space-scale {
+            $min: $font-base-min * $multiplier;
+            $max: $font-base-max * $multiplier;
+            --space-#{$key}: #{fluid($min, $max)};
+        }
+
+        // Spacing - Fluid Pairs
+        $keys: map-keys($space-scale);
+
+        @for $i from 1 through (length($keys) - 1) {
+            $key1: nth($keys, $i);
+            $key2: nth($keys, $i + 1);
+            $min: $font-base-min * map-get($space-scale, $key1);
+            $max: $font-base-max * map-get($space-scale, $key2);
+            --space-#{$key1}-#{$key2}: #{fluid($min, $max)};
+        }
+    }
+
+    @else {
+        // Spacing - Custom
+        --space-xs: #{fluid(8px, 9px)};
+        --space-sm: #{fluid(12px, 14px)};
+        --space-md: #{fluid($font-base-min, $font-base-max)};
+        --space-lg: #{fluid(24px, 27px)};
+        --space-xl: #{fluid(32px, 36px)};
+        --space-2xl: #{fluid(48px, 54px)};
+        --space-3xl: #{fluid(64px, 72px)};
+        --space-4xl: #{fluid(96px, 108px)};
+
+        // Spacing - Custom Pairs
+        --space-xs-sm: #{fluid(8px, 14px)};
+        --space-sm-md: #{fluid(12px, $font-base-max)};
+        --space-md-lg: #{fluid($font-base-min, 27px)};
+        --space-lg-xl: #{fluid(24px, 36px)};
+        --space-xl-2xl: #{fluid(32px, 54px)};
+        --space-2xl-3xl: #{fluid(48px, 72px)};
+        --space-3xl-4xl: #{fluid(64px, 108px)};
+    }
+
+    // Spacing - Contextual
     --space-px: #{px-rem(1px)};
     --space-2px: #{px-rem(2px)};
-    --space-xs: #{px-rem(4px)};
-    --space-sm: #{px-rem(8px)};
-    --space-md: #{px-rem(16px)};
-    --space-lg: #{px-rem(24px)};
-    --space-xl: #{px-rem(32px)};
-    --space-2xl: #{px-rem(48px)};
-    --space-3xl: #{fluid(48px, 64px)};
-    --space-4xl: #{fluid(64px, 96px)};
-    --space-5xl: #{fluid(96px, 128px)};
-    --space-6xl: #{fluid(128px, 160px)};
-    --space-7xl: #{fluid(160px, 192px)};
-    --space-8xl: #{fluid(192px, 224px)};
-    --space-9xl: #{fluid(224px, 256px)};
-
-    // Spacing - Custom
-    --space-icon: var(--space-sm);
-    --space-block: #{fluid(24px, 32px)};
-    --space-edge: #{fluid(24px, 48px)};
-    --space-grid: #{fluid(24px, 48px)};
-    --space-container: var(--space-3xl);
-    --space-section: var(--space-4xl);
+    --space-4px: #{px-rem(4px)};
+    --space-icon: var(--space-xs);
+    --space-block: var(--space-lg);
+    --space-edge: var(--space-lg-xl);
+    --space-grid: var(--space-lg-xl);
+    --space-container: var(--space-2xl-3xl);
+    --space-section: var(--space-3xl-4xl);
 
     // Transition
     --transition: .3s;
@@ -586,7 +680,7 @@ a.link--dark {
 }
 
 // Heading
-.text--hero,
+.text--display,
 h1,
 .h--1,
 h2,
@@ -608,9 +702,9 @@ h6,
     text-wrap: balance;
 }
 
-.text--hero {
+.text--display {
     --color-heading: inherit;
-    --font-size-heading: var(--font-size-hero);
+    --font-size-heading: var(--font-size-display);
     --font-weight-heading: 700;
     --text-transform-heading: uppercase;
 }
@@ -667,7 +761,7 @@ h6,
 hr {
     block-size: var(--border-width);
     border: 0;
-    border-block-start: var(--border-width) var(--border-style) var(--border-color);
+    border-block-start: var(--border);
     inline-size: 100%;
     margin-inline: auto;
     padding: 0;
@@ -702,7 +796,7 @@ figure {
     display: block;
 
     & > figcaption {
-        margin-block-start: var(--space-sm);
+        margin-block-start: var(--space-xs);
     }
 }
 
@@ -733,58 +827,58 @@ small,
 
 .space-content {
     & > * + * {
-        margin-block-start: var(--space-lg);
+        margin-block-start: var(--space-block);
     }
 
     & > * + blockquote {
-        margin-block-start: var(--space-lg);
+        margin-block-start: var(--space-block);
     }
 
     & > * + figure,
     & > * + img,
     & > * + picture,
     & > * + video {
-        margin-block: var(--space-lg);
+        margin-block: var(--space-block);
     }
 
     & figcaption {
-        margin-block-start: var(--space-sm);
+        margin-block-start: var(--space-4px);
     }
 
     & > * + h1 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + h2 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + h3 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + h4 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + h5 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + h6 {
-        margin-block-start: var(--space-xl);
+        margin-block-start: var(--space-block);
     }
 
     & > * + p {
-        margin-block-start: var(--space-md);
+        margin-block-start: var(--space-block);
     }
 
     & > * + ol,
     & > * + ul,
     & > ol ol,
     & > ul ul {
-        margin-block-start: var(--space-md);
-        padding-inline-start: var(--space-md);
+        margin-block-start: var(--space-block);
+        padding-inline-start: var(--space-block);
     }
 
     & > ol * + li,
@@ -860,149 +954,45 @@ small,
     </div>
 </section>
 */
-.grid,
-.grid--1,
-.grid--2,
-.grid--3,
-.grid--4,
-.grid--5,
-.grid--1-2,
-.grid--1-3,
-.grid--1-4,
-.grid--2-1,
-.grid--2-3,
-.grid--3-1,
-.grid--3-2,
-.grid--4-1 {
+$grid-columns: (
+    1,
+    2,
+    3,
+    4,
+    5,
+    '1-2',
+    '1-3',
+    '1-4',
+    '2-1',
+    '2-3',
+    '3-1',
+    '3-2',
+    '4-1'
+);
+
+@mixin grid {
     display: grid;
     gap: var(--space-grid);
     inline-size: 100%;
 }
 
-.grid--1 {
-    grid-template-columns: var(--grid-1);
+.grid {
+    @include grid;
 }
 
-.grid--2 {
-    grid-template-columns: var(--grid-2);
-}
-
-.grid--3 {
-    grid-template-columns: var(--grid-3);
-}
-
-.grid--4 {
-    grid-template-columns: var(--grid-4);
-}
-
-.grid--5 {
-    grid-template-columns: var(--grid-5);
-}
-
-.grid--1-2 {
-    grid-template-columns: var(--grid-1-2);
-}
-
-.grid--1-3 {
-    grid-template-columns: var(--grid-1-3);
-}
-
-.grid--1-4 {
-    grid-template-columns: var(--grid-1-4);
-}
-
-.grid--2-1 {
-    grid-template-columns: var(--grid-2-1);
-}
-
-.grid--2-3 {
-    grid-template-columns: var(--grid-2-3);
-}
-
-.grid--3-1 {
-    grid-template-columns: var(--grid-3-1);
-}
-
-.grid--3-2 {
-    grid-template-columns: var(--grid-3-2);
-}
-
-.grid--4-1 {
-    grid-template-columns: var(--grid-4-1);
+@each $column in $grid-columns {
+    .grid--#{$column} {
+        @extend .grid;
+        grid-template-columns: var(--grid-#{$column});
+    }
 }
 
 @each $_key, $_value in $breakpoint {
     @include breakpoint($_value) {
-
-        .grid--#{$_key},
-        .grid--#{$_key}-1,
-        .grid--#{$_key}-2,
-        .grid--#{$_key}-3,
-        .grid--#{$_key}-4,
-        .grid--#{$_key}-5,
-        .grid--#{$_key}-1-2,
-        .grid--#{$_key}-1-3,
-        .grid--#{$_key}-1-4,
-        .grid--#{$_key}-2-1,
-        .grid--#{$_key}-2-3,
-        .grid--#{$_key}-3-1,
-        .grid--#{$_key}-3-2,
-        .grid--#{$_key}-4-1 {
-            display: grid;
-            gap: var(--space-grid);
-            inline-size: 100%;
-        }
-
-        .grid--#{$_key}-1 {
-            grid-template-columns: var(--grid-1);
-        }
-
-        .grid--#{$_key}-2 {
-            grid-template-columns: var(--grid-2);
-        }
-
-        .grid--#{$_key}-3 {
-            grid-template-columns: var(--grid-3);
-        }
-
-        .grid--#{$_key}-4 {
-            grid-template-columns: var(--grid-4);
-        }
-
-        .grid--#{$_key}-5 {
-            grid-template-columns: var(--grid-5);
-        }
-
-        .grid--#{$_key}-1-2 {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid--#{$_key}-1-3 {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid--#{$_key}-1-4 {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid--#{$_key}-2-1 {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid--#{$_key}-2-3 {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid--#{$_key}-3-1 {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid--#{$_key}-3-2 {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid--#{$_key}-4-1 {
-            grid-template-columns: var(--grid-4-1);
+        @each $column in $grid-columns {
+            .grid--#{$_key}-#{$column} {
+                grid-template-columns: var(--grid-#{$column});
+            }
         }
     }
 }
@@ -1256,7 +1246,7 @@ $_value in $breakpoint {
     inset: 0;
     margin-block-start: 0;
     object-fit: cover;
-    object-position: var(--object-center);
+    object-position: var(--position-center);
     overflow: hidden;
     position: absolute;
     z-index: var(--z-back);
@@ -1334,7 +1324,7 @@ $_value in $breakpoint {
 .btn--small {
     --font-size-btn: var(--font-size-small);
     --padding-x-btn: var(--space-md);
-    --padding-y-btn: var(--space-sm);
+    --padding-y-btn: var(--space-xs);
 }
 
 .btn--large {
@@ -1388,7 +1378,8 @@ $_value in $breakpoint {
 
     &,
     &__head,
-    &__body {
+    &__body,
+    &__foot {
         align-items: var(--align-card);
         background-color: var(--bg-color-card);
         border-radius: var(--border-radius-card);
@@ -1431,6 +1422,19 @@ $_value in $breakpoint {
     }
 
     &__body {
+        --align-card: flex-start;
+        --bg-color-card: inherit;
+        --border-color-card: var(--border-color);
+        --border-radius-card: var(--border-radius);
+        --border-style-card: none;
+        --border-width-card: var(--border-width);
+        --color-card: inherit;
+        --gap-card: var(--space-block);
+        --padding-card: 0;
+        --text-align-card: left;
+    }
+
+    &__foot {
         --align-card: flex-start;
         --bg-color-card: inherit;
         --border-color-card: var(--border-color);
@@ -1594,7 +1598,6 @@ $_value in $breakpoint {
     --bg-color-form-success: var(--success);
     --bg-color-input-disabled: var(--base-lighter);
     --bg-color-input: var(--base-lightest);
-    --bg-color-submit: var(--primary);
     --border-color-input: var(--border-color);
     --border-radius-checkbox: var(--border-radius);
     --border-radius-input: var(--border-radius);
@@ -1607,20 +1610,19 @@ $_value in $breakpoint {
     --color-input: var(--base-darkest);
     --color-label: inherit;
     --color-placeholder: var(--base-darkest);
-    --color-submit: var(--primary-lightest);
     --font-size-form-error: var(--font-size-body);
     --font-size-form-success: var(--font-size-body);
     --font-size-input: var(--font-size-body);
     --font-size-label: var(--font-size-body);
     --font-weight-label: 400;
     --gap-form: var(--space-grid);
-    --gap-label: var(--space-sm);
+    --gap-label: var(--space-xs);
     --height-input: var(--space-2xl);
-    --height-textarea: calc(var(--space-2xl) * 5);
+    --height-textarea: calc(var(--space-xl) * 5);
     --line-height-input: var(--line-height-heading);
     --opacity-placeholder: .5;
     --padding-x-input: var(--space-md);
-    --padding-y-input: var(--space-sm);
+    --padding-y-input: var(--space-xs);
     --size-checkbox: var(--space-lg);
 }
 
@@ -1769,14 +1771,7 @@ select {
 }
 
 // Submit
-input[type="submit"],
-button[type="submit"] {
-    @extend .btn;
-
-    --bg-color-btn: var(--bg-color-submit);
-    --border-color-btn: var(--bg-color-submit);
-    --color-btn: var(--color-submit);
-
+button {
     &:disabled {
         cursor: not-allowed;
         opacity: 0.75;
@@ -1798,6 +1793,7 @@ fieldset:has([name="_pretend-check"]) {
 // Messages
 .form-error,
 .form-success {
+    align-items: center;
     justify-content: center;
     border-radius: var(--border-radius-input);
     display: flex;
@@ -2128,8 +2124,8 @@ fieldset:has([name="_pretend-check"]) {
     .bg-blur--sm,
     .bg-blur--md,
     .bg-blur--lg {
-        --blur-sm: var(--space-xs);
-        --blur-md: var(--space-sm);
+        --blur-sm: var(--space-4px);
+        --blur-md: var(--space-xs);
         --blur-lg: var(--space-md);
 
         background-color: var(--bg-color-blur);
@@ -2389,67 +2385,42 @@ fieldset:has([name="_pretend-check"]) {
 }
 
 @if $content-column {
-
     // Content Column
-    .content-column--1,
-    .content-column--2,
-    .content-column--3,
-    .content-column--4,
-    .content-column--5 {
-        --gap-content-column: var(--space-block);
-        --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
+    $content-columns: (
+        1,
+        2,
+        3,
+        4,
+        5
+    );
 
-        column-gap: var(--gap-content-column);
-        column-rule: var(--rule-content-column);
+.content-column {
+    --gap-content-column: var(--space-block);
+    --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
+
+    column-gap: var(--gap-content-column);
+    column-rule: var(--rule-content-column);
+}
+
+@each $column in $content-columns {
+    .content-columns--#{$column} {
+        @extend .content-column;
     }
+}
 
-    .content-column--1 {
-        column-count: 1;
-    }
-
-    .content-column--2 {
-        column-count: 2;
-    }
-
-    .content-column--3 {
-        column-count: 3;
-    }
-
-    .content-column--4 {
-        column-count: 4;
-    }
-
-    .content-column--5 {
-        column-count: 5;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .content-column--#{$_key}-1 {
-                column-count: 1;
-            }
-
-            .content-column--#{$_key}-2 {
-                column-count: 2;
-            }
-
-            .content-column--#{$_key}-3 {
-                column-count: 3;
-            }
-
-            .content-column--#{$_key}-4 {
-                column-count: 4;
-            }
-
-            .content-column--#{$_key}-5 {
-                column-count: 5;
+@each $_key, $_value in $breakpoint {
+    @include breakpoint($_value) {
+        @each $column in $content-columns {
+            .content-column--#{$_key}-#{$column} {
+                column-count: #{$column};
             }
         }
     }
+}
 
-    .content-column-span--all {
-        column-span: all;
-    }
+.content-column-span--all {
+    column-span: all;
+}
 }
 
 @if $cursor {
@@ -2905,35 +2876,58 @@ fieldset:has([name="_pretend-check"]) {
 }
 
 @if $height {
-
     // Height
-    .height--auto {
-        min-block-size: auto;
+    $heights: (
+        auto: auto,
+        fill: 100%,
+        full: 100svh
+    );
+
+// Base classes
+@each $name, $value in $heights {
+    .height--#{$name} {
+        min-block-size: #{$value};
     }
+}
 
-    .height--fill {
-        min-block-size: 100%;
-    }
-
-    .height--full {
-        min-block-size: 100svh;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .height--#{$_key}-auto {
-                min-block-size: auto;
-            }
-
-            .height--#{$_key}-fill {
-                min-block-size: 100%;
-            }
-
-            .height--#{$_key}-full {
-                min-block-size: 100svh;
+// Responsive classes grouped per breakpoint
+@each $breakpoint-name, $breakpoint-value in $breakpoint {
+    @include breakpoint($breakpoint-value) {
+        @each $name, $value in $heights {
+            .height--#{$breakpoint-name}-#{$name} {
+                min-block-size: #{$value};
             }
         }
     }
+}
+
+// .height--auto {
+//     min-block-size: auto;
+// }
+
+// .height--fill {
+//     min-block-size: 100%;
+// }
+
+// .height--full {
+//     min-block-size: 100svh;
+// }
+
+// @each $_key, $_value in $breakpoint {
+//     @include breakpoint($_value) {
+//         .height--#{$_key}-auto {
+//             min-block-size: auto;
+//         }
+
+//         .height--#{$_key}-fill {
+//             min-block-size: 100%;
+//         }
+
+//         .height--#{$_key}-full {
+//             min-block-size: 100svh;
+//         }
+//     }
+// }
 }
 
 @if $hide-show {
@@ -3008,155 +3002,183 @@ fieldset:has([name="_pretend-check"]) {
 @if $margin {
 
     // Margin
-    .margin {
-        &-top--icon {
-            margin-block-start: var(--space-icon);
-        }
+    $margin-scale: (
+        icon: var(--space-icon),
+        block: var(--space-block),
+        grid: var(--space-grid),
+        container: var(--space-container),
+        section: var(--space-section),
+        edge: var(--space-edge),
+        flat: 0
+    );
 
-        &-top--block {
-            margin-block-start: var(--space-block);
-        }
+$margin-directions: (
+    "-x": "margin-inline",
+    "-y": "margin-block",
+    "-top": "margin-block-start",
+    "-right": "margin-inline-end",
+    "-bottom": "margin-block-end",
+    "-left": "margin-inline-start"
+);
 
-        &-top--grid {
-            margin-block-start: var(--space-grid);
-        }
-
-        &-top--container {
-            margin-block-start: var(--space-container);
-        }
-
-        &-top--section {
-            margin-block-start: var(--space-section);
-        }
-
-        &-top--flat {
-            margin-block-start: 0;
-        }
-
-        &-right--icon {
-            margin-inline-end: var(--space-icon);
-        }
-
-        &-right--block {
-            margin-inline-end: var(--space-block);
-        }
-
-        &-right--grid {
-            margin-inline-end: var(--space-grid);
-        }
-
-        &-right--container {
-            margin-inline-end: var(--space-container);
-        }
-
-        &-right--section {
-            margin-inline-end: var(--space-section);
-        }
-
-        &-right--flat {
-            margin-inline-end: 0;
-        }
-
-        &-bottom--icon {
-            margin-block-end: var(--space-icon);
-        }
-
-        &-bottom--block {
-            margin-block-end: var(--space-block);
-        }
-
-        &-bottom--grid {
-            margin-block-end: var(--space-grid);
-        }
-
-        &-bottom--container {
-            margin-block-end: var(--space-container);
-        }
-
-        &-bottom--section {
-            margin-block-end: var(--space-section);
-        }
-
-        &-bottom--flat {
-            margin-block-end: 0;
-        }
-
-        &-left--icon {
-            margin-inline-start: var(--space-icon);
-        }
-
-        &-left--block {
-            margin-inline-start: var(--space-block);
-        }
-
-        &-left--grid {
-            margin-inline-start: var(--space-grid);
-        }
-
-        &-left--container {
-            margin-inline-start: var(--space-container);
-        }
-
-        &-left--section {
-            margin-inline-start: var(--space-section);
-        }
-
-        &-left--flat {
-            margin-inline-start: 0;
-        }
-
-        &-x--icon {
-            margin-inline: var(--space-icon);
-        }
-
-        &-x--block {
-            margin-inline: var(--space-block);
-        }
-
-        &-x--grid {
-            margin-inline: var(--space-grid);
-        }
-
-        &-x--container {
-            margin-inline: var(--space-container);
-        }
-
-        &-x--section {
-            margin-inline: var(--space-section);
-        }
-
-        &-x--flat {
-            margin-inline: 0;
-        }
-
-        &-y--icon {
-            margin-block: var(--space-icon);
-        }
-
-        &-y--block {
-            margin-block: var(--space-block);
-        }
-
-        &-y--grid {
-            margin-block: var(--space-grid);
-        }
-
-        &-y--container {
-            margin-block: var(--space-container);
-        }
-
-        &-y--section {
-            margin-block: var(--space-section);
-        }
-
-        &-y--flat {
-            margin-block: 0;
-        }
-
-        &--flat {
-            margin: 0;
+// Generate margin utility classes
+@each $key, $value in $margin-scale {
+    @each $suffix, $property in $margin-directions {
+        .margin#{$suffix}--#{$key} {
+            #{$property}: #{$value};
         }
     }
+}
+
+// .margin {
+//     &-top--icon {
+//         margin-block-start: var(--space-icon);
+//     }
+
+//     &-top--block {
+//         margin-block-start: var(--space-block);
+//     }
+
+//     &-top--grid {
+//         margin-block-start: var(--space-grid);
+//     }
+
+//     &-top--container {
+//         margin-block-start: var(--space-container);
+//     }
+
+//     &-top--section {
+//         margin-block-start: var(--space-section);
+//     }
+
+//     &-top--flat {
+//         margin-block-start: 0;
+//     }
+
+//     &-right--icon {
+//         margin-inline-end: var(--space-icon);
+//     }
+
+//     &-right--block {
+//         margin-inline-end: var(--space-block);
+//     }
+
+//     &-right--grid {
+//         margin-inline-end: var(--space-grid);
+//     }
+
+//     &-right--container {
+//         margin-inline-end: var(--space-container);
+//     }
+
+//     &-right--section {
+//         margin-inline-end: var(--space-section);
+//     }
+
+//     &-right--flat {
+//         margin-inline-end: 0;
+//     }
+
+//     &-bottom--icon {
+//         margin-block-end: var(--space-icon);
+//     }
+
+//     &-bottom--block {
+//         margin-block-end: var(--space-block);
+//     }
+
+//     &-bottom--grid {
+//         margin-block-end: var(--space-grid);
+//     }
+
+//     &-bottom--container {
+//         margin-block-end: var(--space-container);
+//     }
+
+//     &-bottom--section {
+//         margin-block-end: var(--space-section);
+//     }
+
+//     &-bottom--flat {
+//         margin-block-end: 0;
+//     }
+
+//     &-left--icon {
+//         margin-inline-start: var(--space-icon);
+//     }
+
+//     &-left--block {
+//         margin-inline-start: var(--space-block);
+//     }
+
+//     &-left--grid {
+//         margin-inline-start: var(--space-grid);
+//     }
+
+//     &-left--container {
+//         margin-inline-start: var(--space-container);
+//     }
+
+//     &-left--section {
+//         margin-inline-start: var(--space-section);
+//     }
+
+//     &-left--flat {
+//         margin-inline-start: 0;
+//     }
+
+//     &-x--icon {
+//         margin-inline: var(--space-icon);
+//     }
+
+//     &-x--block {
+//         margin-inline: var(--space-block);
+//     }
+
+//     &-x--grid {
+//         margin-inline: var(--space-grid);
+//     }
+
+//     &-x--container {
+//         margin-inline: var(--space-container);
+//     }
+
+//     &-x--section {
+//         margin-inline: var(--space-section);
+//     }
+
+//     &-x--flat {
+//         margin-inline: 0;
+//     }
+
+//     &-y--icon {
+//         margin-block: var(--space-icon);
+//     }
+
+//     &-y--block {
+//         margin-block: var(--space-block);
+//     }
+
+//     &-y--grid {
+//         margin-block: var(--space-grid);
+//     }
+
+//     &-y--container {
+//         margin-block: var(--space-container);
+//     }
+
+//     &-y--section {
+//         margin-block: var(--space-section);
+//     }
+
+//     &-y--flat {
+//         margin-block: 0;
+//     }
+
+//     &--flat {
+//         margin: 0;
+//     }
+// }
 }
 
 @if $object {
@@ -3176,113 +3198,101 @@ fieldset:has([name="_pretend-check"]) {
 
     // Object Position
     .object--bottom-center {
-        object-position: var(--object-center) var(--object-end);
+        object-position: var(--position-center) var(--position-end);
     }
 
     .object--bottom-left {
-        object-position: var(--object-start) var(--object-end);
+        object-position: var(--position-start) var(--position-end);
     }
 
     .object--bottom-right {
-        object-position: var(--object-end);
+        object-position: var(--position-end) var(--position-end);
     }
 
     .object--center {
-        object-position: var(--object-center);
+        object-position: var(--position-center);
     }
 
     .object--center-left {
-        object-position: var(--object-start) var(--object-center);
+        object-position: var(--position-start) var(--position-center);
     }
 
     .object--center-right {
-        object-position: var(--object-end) var(--object-center);
+        object-position: var(--position-end) var(--position-center);
     }
 
     .object--top-center {
-        object-position: var(--object-center) var(--object-start);
+        object-position: var(--position-center) var(--position-start);
     }
 
     .object--top-left {
-        object-position: var(--object-start);
+        object-position: var(--position-start) var(--position-start);
     }
 
     .object--top-right {
-        object-position: var(--object-end) var(--object-start);
+        object-position: var(--position-end) var(--position-start);
     }
 
     @each $_key, $_value in $breakpoint {
         @include breakpoint($_value) {
 
             .object--#{$-key}-bottom-center {
-                object-position: var(--object-center) var(--object-end);
+                object-position: var(--position-center) var(--position-end);
             }
 
             .object--#{$-key}-bottom-left {
-                object-position: var(--object-start) var(--object-end);
+                object-position: var(--position-start) var(--position-end);
             }
 
             .object--#{$-key}-bottom-right {
-                object-position: var(--object-end);
+                object-position: var(--position-end) var(--position-end);
             }
 
             .object--#{$-key}-center {
-                object-position: var(--object-center);
+                object-position: var(--position-center);
             }
 
             .object--#{$-key}-center-left {
-                object-position: var(--object-start) var(--object-center);
+                object-position: var(--position-start) var(--position-center);
             }
 
             .object--#{$-key}-center-right {
-                object-position: var(--object-end) var(--object-center);
+                object-position: var(--position-end) var(--position-center);
             }
 
             .object--#{$-key}-top-center {
-                object-position: var(--object-center) var(--object-start);
+                object-position: var(--position-center) var(--position-start);
             }
 
             .object--#{$-key}-top-left {
-                object-position: var(--object-start);
+                object-position: var(--position-start) var(--position-start);
+                ;
             }
 
             .object--#{$-key}-top-right {
-                object-position: var(--object-end) var(--object-start);
+                object-position: var(--position-end) var(--position-start);
             }
         }
     }
 }
 
 @if $opacity {
-
     // Opacity
-    .opacity--5 {
-        opacity: .05;
-    }
+    $opacities: (
+        5: .05,
+        10: .1,
+        25: .25,
+        50: .5,
+        75: .75,
+        90: .9,
+        95: .95
+    );
 
-    .opacity--10 {
-        opacity: .1;
+@each $name, $value in $opacities {
+    .opacity--#{$name} {
+        opacity: $value;
     }
-
-    .opacity--25 {
-        opacity: .25;
-    }
-
-    .opacity--50 {
-        opacity: .5;
-    }
-
-    .opacity--75 {
-        opacity: .75;
-    }
-
-    .opacity--90 {
-        opacity: .9;
-    }
-
-    .opacity--95 {
-        opacity: .95;
-    }
+}
 }
 
 @if $order {
@@ -3296,17 +3306,29 @@ fieldset:has([name="_pretend-check"]) {
         order: 1000;
     }
 
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .order--#{$_key}-first {
+    @each $breakpoint-name, $breakpoint-value in $breakpoint {
+        @include breakpoint($breakpoint-value) {
+            .order--#{$breakpoint-name}-first {
                 order: -1;
             }
 
-            .order--#{$_key}-last {
+            .order--#{$breakpoint-name}-last {
                 order: 1000;
             }
         }
     }
+
+    // @each $_key, $_value in $breakpoint {
+    //     @include breakpoint($_value) {
+    //         .order--#{$_key}-first {
+    //             order: -1;
+    //         }
+
+    //         .order--#{$_key}-last {
+    //             order: 1000;
+    //         }
+    //     }
+    // }
 }
 
 @if $overflow {
@@ -3336,99 +3358,128 @@ fieldset:has([name="_pretend-check"]) {
 @if $padding {
 
     // Padding
-    .padding {
-        &--icon {
-            padding: var(--space-icon);
-        }
+    $padding-scale: (
+        icon: var(--space-icon),
+        block: var(--space-block),
+        grid: var(--space-grid),
+        container: var(--space-container),
+        section: var(--space-section),
+        edge: var(--space-edge),
+        flat: 0
+    );
 
-        &-x--icon {
-            padding-inline: var(--space-icon);
-        }
+$padding-directions: (
+    "": "padding",
+    "-x": "padding-inline",
+    "-y": "padding-block",
+    "-top": "padding-block-start",
+    "-right": "padding-inline-end",
+    "-bottom": "padding-block-end",
+    "-left": "padding-inline-start"
+);
 
-        &-y--icon {
-            padding-block: var(--space-icon);
-        }
-
-        &--block {
-            padding: var(--space-block);
-        }
-
-        &-x--block {
-            padding-inline: var(--space-block);
-        }
-
-        &-y--block {
-            padding-block: var(--space-block);
-        }
-
-        &-x--edge {
-            padding-inline: var(--space-edge);
-        }
-
-        &--grid {
-            padding: var(--space-grid);
-        }
-
-        &-x--grid {
-            padding-inline: var(--space-grid);
-        }
-
-        &-y--grid {
-            padding-block: var(--space-grid);
-        }
-
-        &--container {
-            padding: var(--space-container);
-        }
-
-        &-x--container {
-            padding-inline: var(--space-container);
-        }
-
-        &-y--container {
-            padding-block: var(--space-container);
-        }
-
-        &--section {
-            padding: var(--space-section) var(--space-edge);
-        }
-
-        &-x--section {
-            padding-inline: var(--space-edge);
-        }
-
-        &-y--section {
-            padding-block: var(--space-section);
-        }
-
-        &-top--flat {
-            padding-block-start: 0;
-        }
-
-        &-right--flat {
-            padding-inline-end: 0;
-        }
-
-        &-bottom--flat {
-            padding-block-end: 0;
-        }
-
-        &-left--flat {
-            padding-inline-start: 0;
-        }
-
-        &-x--flat {
-            padding-inline: 0;
-        }
-
-        &-y--flat {
-            padding-block: 0;
-        }
-
-        &--flat {
-            padding: 0;
+// Generate padding utility classes
+@each $key, $value in $padding-scale {
+    @each $suffix, $property in $padding-directions {
+        .padding#{$suffix}--#{$key} {
+            #{$property}: #{$value};
         }
     }
+}
+
+// .padding {
+//     &--icon {
+//         padding: var(--space-icon);
+//     }
+
+//     &-x--icon {
+//         padding-inline: var(--space-icon);
+//     }
+
+//     &-y--icon {
+//         padding-block: var(--space-icon);
+//     }
+
+//     &--block {
+//         padding: var(--space-block);
+//     }
+
+//     &-x--block {
+//         padding-inline: var(--space-block);
+//     }
+
+//     &-y--block {
+//         padding-block: var(--space-block);
+//     }
+
+//     &-x--edge {
+//         padding-inline: var(--space-edge);
+//     }
+
+//     &--grid {
+//         padding: var(--space-grid);
+//     }
+
+//     &-x--grid {
+//         padding-inline: var(--space-grid);
+//     }
+
+//     &-y--grid {
+//         padding-block: var(--space-grid);
+//     }
+
+//     &--container {
+//         padding: var(--space-container);
+//     }
+
+//     &-x--container {
+//         padding-inline: var(--space-container);
+//     }
+
+//     &-y--container {
+//         padding-block: var(--space-container);
+//     }
+
+//     &--section {
+//         padding: var(--space-section) var(--space-edge);
+//     }
+
+//     &-x--section {
+//         padding-inline: var(--space-edge);
+//     }
+
+//     &-y--section {
+//         padding-block: var(--space-section);
+//     }
+
+//     &-top--flat {
+//         padding-block-start: 0;
+//     }
+
+//     &-right--flat {
+//         padding-inline-end: 0;
+//     }
+
+//     &-bottom--flat {
+//         padding-block-end: 0;
+//     }
+
+//     &-left--flat {
+//         padding-inline-start: 0;
+//     }
+
+//     &-x--flat {
+//         padding-inline: 0;
+//     }
+
+//     &-y--flat {
+//         padding-block: 0;
+//     }
+
+//     &--flat {
+//         padding: 0;
+//     }
+// }
 }
 
 @if $position {
@@ -3552,205 +3603,280 @@ fieldset:has([name="_pretend-check"]) {
 @if $shadow-box {
 
     // Shadow - Box
-    .shadow-box--sm {
-        box-shadow: var(--shadow-box-sm);
+    $shadow-boxes: (
+        sm: var(--shadow-box-sm),
+        md: var(--shadow-box-md),
+        lg: var(--shadow-box-lg),
+        flat: none
+    );
+
+// Base classes
+@each $name, $value in $shadow-boxes {
+    .shadow-box--#{$name} {
+        box-shadow: #{$value};
     }
+}
 
-    .shadow-box--md {
-        box-shadow: var(--shadow-box-md);
-    }
-
-    .shadow-box--lg {
-        box-shadow: var(--shadow-box-lg);
-    }
-
-    .shadow-box--flat {
-        box-shadow: none;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .shadow-box--#{$_key}-sm {
-                box-shadow: var(--shadow-box-sm);
-            }
-
-            .shadow-box--#{$_key}-md {
-                box-shadow: var(--shadow-box-md);
-            }
-
-            .shadow-box--#{$_key}-lg {
-                box-shadow: var(--shadow-box-lg);
-            }
-
-            .shadow-box--#{$_key}-flat {
-                box-shadow: none;
+// Responsive classes
+@each $breakpoint-name, $breakpoint-value in $breakpoint {
+    @include breakpoint($breakpoint-value) {
+        @each $name, $value in $shadow-boxes {
+            .shadow-box--#{$breakpoint-name}-#{$name} {
+                box-shadow: #{$value};
             }
         }
     }
+}
+
+// .shadow-box--sm {
+//     box-shadow: var(--shadow-box-sm);
+// }
+
+// .shadow-box--md {
+//     box-shadow: var(--shadow-box-md);
+// }
+
+// .shadow-box--lg {
+//     box-shadow: var(--shadow-box-lg);
+// }
+
+// .shadow-box--flat {
+//     box-shadow: none;
+// }
+
+// @each $_key, $_value in $breakpoint {
+//     @include breakpoint($_value) {
+//         .shadow-box--#{$_key}-sm {
+//             box-shadow: var(--shadow-box-sm);
+//         }
+
+//         .shadow-box--#{$_key}-md {
+//             box-shadow: var(--shadow-box-md);
+//         }
+
+//         .shadow-box--#{$_key}-lg {
+//             box-shadow: var(--shadow-box-lg);
+//         }
+
+//         .shadow-box--#{$_key}-flat {
+//             box-shadow: none;
+//         }
+//     }
+// }
 }
 
 @if $shadow-drop {
 
     // Shadow - Drop
-    .shadow-drop--sm {
-        filter: var(--shadow-drop-sm);
+    $shadow-drop: (
+        sm: var(--shadow-drop-sm),
+        md: var(--shadow-drop-md),
+        lg: var(--shadow-drop-lg),
+        flat: var(--shadow-drop-flat)
+    );
+
+// Base classes
+@each $name, $value in $shadow-drop {
+    .shadow-drop--#{$name} {
+        filter: #{$value};
     }
+}
 
-    .shadow-drop--md {
-        filter: var(--shadow-drop-md);
-    }
-
-    .shadow-drop--lg {
-        filter: var(--shadow-drop-lg);
-    }
-
-    .shadow-drop--flat {
-        filter: var(--shadow-drop-flat);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .shadow-drop--#{$_key}-sm {
-                filter: var(--shadow-drop-sm);
-            }
-
-            .shadow-drop--#{$_key}-md {
-                filter: var(--shadow-drop-md);
-            }
-
-            .shadow-drop--#{$_key}-lg {
-                filter: var(--shadow-drop-lg);
-            }
-
-            .shadow-drop--#{$_key}-flat {
-                filter: var(--shadow-drop-flat);
+// Responsive classes
+@each $breakpoint-name, $breakpoint-value in $breakpoint {
+    @include breakpoint($breakpoint-value) {
+        @each $name, $value in $shadow-drop {
+            .shadow-drop--#{$breakpoint-name}-#{$name} {
+                filter: #{$value};
             }
         }
     }
 }
 
+// .shadow-drop--sm {
+//     filter: var(--shadow-drop-sm);
+// }
+
+// .shadow-drop--md {
+//     filter: var(--shadow-drop-md);
+// }
+
+// .shadow-drop--lg {
+//     filter: var(--shadow-drop-lg);
+// }
+
+// .shadow-drop--flat {
+//     filter: var(--shadow-drop-flat);
+// }
+
+// @each $_key, $_value in $breakpoint {
+//     @include breakpoint($_value) {
+//         .shadow-drop--#{$_key}-sm {
+//             filter: var(--shadow-drop-sm);
+//         }
+
+//         .shadow-drop--#{$_key}-md {
+//             filter: var(--shadow-drop-md);
+//         }
+
+//         .shadow-drop--#{$_key}-lg {
+//             filter: var(--shadow-drop-lg);
+//         }
+
+//         .shadow-drop--#{$_key}-flat {
+//             filter: var(--shadow-drop-flat);
+//         }
+//     }
+// }
+}
+
 @if $text {
 
     // Text - Align
-    .text-align--center {
-        text-align: center;
+    $text-alignments: (
+        center: center,
+        justify: justify,
+        left: start,
+        right: end
+    );
+
+// Base classes
+@each $name, $value in $text-alignments {
+    .text-align--#{$name} {
+        text-align: #{$value};
     }
+}
 
-    .text-align--justify {
-        text-align: justify;
-    }
-
-    .text-align--left {
-        text-align: start;
-    }
-
-    .text-align--right {
-        text-align: end;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .text-align--#{$-key}-center {
-                text-align: center;
-            }
-
-            .text-align--#{$-key}-justify {
-                text-align: justify;
-            }
-
-            .text-align--#{$-key}-left {
-                text-align: start;
-            }
-
-            .text-align--#{$-key}-right {
-                text-align: end;
+// Responsive classes
+@each $breakpoint-name, $breakpoint-value in $breakpoint {
+    @include breakpoint($breakpoint-value) {
+        @each $name, $value in $text-alignments {
+            .text-align--#{$breakpoint-name}-#{$name} {
+                text-align: #{$value};
             }
         }
     }
+}
 
-    // Text - Decoration
-    .text-decoration--flat {
-        text-decoration: none;
-    }
+// .text-align--center {
+//     text-align: center;
+// }
 
-    .text-decoration--overline {
-        text-decoration: overline;
-    }
+// .text-align--justify {
+//     text-align: justify;
+// }
 
-    .text-decoration--strike {
-        text-decoration: line-through;
-    }
+// .text-align--left {
+//     text-align: start;
+// }
 
-    .text-decoration--underline {
-        text-decoration: underline;
-    }
+// .text-align--right {
+//     text-align: end;
+// }
 
-    // Text - Height
-    .text-height--body {
-        line-height: var(--line-height-body);
-    }
+// @each $_key, $_value in $breakpoint {
+//     @include breakpoint($_value) {
 
-    .text-height--heading {
-        line-height: var(--line-height-heading);
-    }
+//         .text-align--#{$-key}-center {
+//             text-align: center;
+//         }
 
-    // Text - Spaced
-    .text-spaced {
-        letter-spacing: var(--space-px);
-    }
+//         .text-align--#{$-key}-justify {
+//             text-align: justify;
+//         }
 
-    // Text - Style
-    .text-style--italic {
-        font-style: italic;
-    }
+//         .text-align--#{$-key}-left {
+//             text-align: start;
+//         }
 
-    .text-style--normal {
-        font-style: normal;
-    }
+//         .text-align--#{$-key}-right {
+//             text-align: end;
+//         }
+//     }
+// }
 
-    // Text - Transform
-    .text-transform--capitalize {
-        text-transform: capitalize;
-    }
+// Text - Decoration
+.text-decoration--flat {
+    text-decoration: none;
+}
 
-    .text-transform--lowercase {
-        text-transform: lowercase;
-    }
+.text-decoration--overline {
+    text-decoration: overline;
+}
 
-    .text-transform--none {
-        text-transform: none;
-    }
+.text-decoration--strike {
+    text-decoration: line-through;
+}
 
-    .text-transform--uppercase {
-        text-transform: uppercase;
-    }
+.text-decoration--underline {
+    text-decoration: underline;
+}
 
-    // Text - Weight
-    .text-weight--normal {
-        font-weight: 400;
-    }
+// Text - Height
+.text-height--body {
+    line-height: var(--line-height-body);
+}
 
-    .text-weight--bold {
-        font-weight: 700;
-    }
+.text-height--heading {
+    line-height: var(--line-height-heading);
+}
 
-    // Text - Wrap
-    .text-wrap {
-        text-wrap: wrap;
-    }
+// Text - Spaced
+.text-spaced {
+    letter-spacing: var(--space-px);
+}
 
-    .text-wrap--balance {
-        text-wrap: balance;
-    }
+// Text - Style
+.text-style--italic {
+    font-style: italic;
+}
 
-    .text-wrap--none {
-        text-wrap: nowrap;
-    }
+.text-style--normal {
+    font-style: normal;
+}
 
-    .text-wrap--pretty {
-        text-wrap: pretty;
-    }
+// Text - Transform
+.text-transform--capitalize {
+    text-transform: capitalize;
+}
+
+.text-transform--lowercase {
+    text-transform: lowercase;
+}
+
+.text-transform--none {
+    text-transform: none;
+}
+
+.text-transform--uppercase {
+    text-transform: uppercase;
+}
+
+// Text - Weight
+.text-weight--normal {
+    font-weight: 400;
+}
+
+.text-weight--bold {
+    font-weight: 700;
+}
+
+// Text - Wrap
+.text-wrap {
+    text-wrap: wrap;
+}
+
+.text-wrap--balance {
+    text-wrap: balance;
+}
+
+.text-wrap--none {
+    text-wrap: nowrap;
+}
+
+.text-wrap--pretty {
+    text-wrap: pretty;
+}
 }
 
 @if $transition {
@@ -3823,85 +3949,134 @@ fieldset:has([name="_pretend-check"]) {
 @if $width {
 
     // Width
-    .width--min,
-    .width--sm,
-    .width--md,
-    .width--lg,
-    .width--xl,
-    .width--wide,
-    .width--max,
-    .width--prose,
-    .width--fill {
-        inline-size: 100%;
+    $width-utilities: (
+        min: var(--width-min),
+        sm: var(--width-sm),
+        md: var(--width-md),
+        lg: var(--width-lg),
+        xl: var(--width-xl),
+        wide: var(--width-wide),
+        max: var(--width-max),
+        prose: var(--width-prose),
+        fill: 100%,
+        fit: fit-content
+    );
+
+    .width {
+        inline-size: 100% ;
     }
 
-    .width--min {
-        max-inline-size: var(--width-min);
+    @each $name, $value in $width-utilities {
+    .width--#{$name} {
+        @extend .width;
     }
+}
 
-    .width--sm {
-        max-inline-size: var(--width-sm);
-    }
 
-    .width--md {
-        max-inline-size: var(--width-md);
-    }
 
-    .width--lg {
-        max-inline-size: var(--width-lg);
+// Generate width utility classes
+@each $name, $value in $width-utilities {
+    .width--#{$name} {
+        max-inline-size: #{$value};
     }
+}
 
-    .width--xl {
-        max-inline-size: var(--width-xl);
-    }
+// .width--min,
+// .width--sm,
+// .width--md,
+// .width--lg,
+// .width--xl,
+// .width--wide,
+// .width--max,
+// .width--prose,
+// .width--fill {
+//     inline-size: 100%;
+// }
 
-    .width--wide {
-        max-inline-size: var(--width-wide);
-    }
+// .width--min {
+//     max-inline-size: var(--width-min);
+// }
 
-    .width--max {
-        max-inline-size: var(--width-max);
-    }
+// .width--sm {
+//     max-inline-size: var(--width-sm);
+// }
 
-    .width--fit {
-        max-inline-size: fit-content;
-    }
+// .width--md {
+//     max-inline-size: var(--width-md);
+// }
 
-    .width--prose {
-        max-inline-size: var(--width-prose);
-    }
+// .width--lg {
+//     max-inline-size: var(--width-lg);
+// }
+
+// .width--xl {
+//     max-inline-size: var(--width-xl);
+// }
+
+// .width--wide {
+//     max-inline-size: var(--width-wide);
+// }
+
+// .width--max {
+//     max-inline-size: var(--width-max);
+// }
+
+// .width--fit {
+//     max-inline-size: fit-content;
+// }
+
+// .width--prose {
+//     max-inline-size: var(--width-prose);
+// }
 }
 
 @if $z-index {
 
     // Z-Index
-    .z--back {
-        z-index: var(--z-back);
-    }
+    $z-indexes: (
+        back: var(--z-back),
+        flat: var(--z-flat),
+        front: var(--z-front),
+        low: var(--z-low),
+        mid: var(--z-mid),
+        high: var(--z-high),
+        top: var(--z-top)
+    );
 
-    .z--flat {
-        z-index: var(--z-flat);
+// Generate z-index utility classes
+@each $name, $value in $z-indexes {
+    .z--#{$name} {
+        z-index: #{$value};
     }
+}
 
-    .z--front {
-        z-index: var(--z-front);
-    }
+// .z--back {
+//     z-index: var(--z-back);
+// }
 
-    .z-low {
-        z-index: var(--z-low);
-    }
+// .z--flat {
+//     z-index: var(--z-flat);
+// }
 
-    .z-mid {
-        z-index: var(--z-mid);
-    }
+// .z--front {
+//     z-index: var(--z-front);
+// }
 
-    .z-high {
-        z-index: var(--z-high);
-    }
+// .z-low {
+//     z-index: var(--z-low);
+// }
 
-    .z--top {
-        z-index: var(--z-top);
-    }
+// .z-mid {
+//     z-index: var(--z-mid);
+// }
+
+// .z-high {
+//     z-index: var(--z-high);
+// }
+
+// .z--top {
+//     z-index: var(--z-top);
+// }
 }
 
 // --- Builders --- //
@@ -3927,9 +4102,9 @@ fieldset:has([name="_pretend-check"]) {
     *,
     ::before,
     ::after {
-        background-color: var(--base-black) !important;
+        background-color: var(--base-white) !important;
         box-shadow: none !important;
-        color: var(--base-white) !important;
+        color: var(--base-black) !important;
         text-shadow: none !important;
     }
 
