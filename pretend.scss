@@ -1,1916 +1,1501 @@
-/*! Pretend CSS [Made by Pretend](https://madebypretend.com) */
+/*! Pretend CSS — [Made by Pretend](https://pretend.studio) */
 
-@use "sass:math";
+// --- SCSS --- //
 
-// --- SCSS Options --- //
-
-// Builders
-$bricks: true; // Default True
-
-//Misc
-$space-scale: true; // Default True
-$type-scale: true; // Default True
-
-// Utility Classes
-$alignment: false;
-$aspect-ratio: false;
-$bg-blur: false;
-$bg-color: true; // Default True
-$bg-isolate: false;
-$border: false;
-$breakout: false;
-$clear: false;
-$color: true; // Default True
-$content-column: true;
-$cursor: false;
-$flex: false;
-$flip: false;
-$gap: false;
-$height: true;
-$hide-show: true; // Default True
-$hide-visually: true; // Default True
-$list: false;
-$margin: true;
-$object: false;
-$opacity: true;
-$order: true;
-$overflow: false;
-$padding: true;
-$position: false;
-$shadow-box: true;
-$shadow-drop: true;
-$text: true;
-$transition: false;
-$vertical-text: false;
-$width: true;
-$z-index: true;
-
-// Color
-// Comment or uncomment to enable or disable colors.
-$primary: hsl(261deg 100% 66%);
-// $secondary: hsl(261deg 100% 66%);
-// $tertiary: hsl(261deg 100% 66%);
-// $quaternary: hsl(261deg 100% 66%);
-$error: hsl(357deg 95% 58%);
-$highlight: hsl(52deg 100% 56%);
-$info: hsl(190deg 100% 43%);
-$success: hsl(160deg 100% 37%);
-$warning: hsl(36deg 100% 50%);
-
-$color: (
-    primary: $primary,
-    // secondary: $secondary,
-    // tertiary: $tertiary,
-    // quaternary: $quaternary,
-    error: $error,
-    highlight: $highlight,
-    info: $info,
-    success: $success,
-    warning: $warning
+// Colors
+$colors: (
+    primary: hsl(271deg 91% 65%),
+    // secondary: hsl(271deg 91% 65%),
+    // tertiary: hsl(271deg 91% 65%),
+    // quaternary: hsl(271deg 91% 65%),
+    error: hsl(0deg 84% 60%),
+    highlight: hsl(45deg 93% 47%),
+    info: hsl(189deg 94% 43%),
+    success: hsl(160deg 84% 39%),
+    warning: hsl(25deg 95% 53%),
+    base: hsl(240deg 4% 46%),
 );
 
-// Color - Base
-$base: hsl(240deg 5% 46%);
-
-$color-base: (
-    base: $base
+// Shades - Light Color Scheme
+$light-shades: (
+    lightest: 98%,
+    lighter: 96%,
+    light: 90%,
+    dark: 16%,
+    darker: 10%,
+    darkest: 4%,
 );
 
-// Font
-$font-base-min: 16px;
-$font-base-max: 18px;
-$font-scale-min: 1.2;
-$font-scale-max: 1.25;
-
-// Font Scale
-$type-scale: (
-    sm: -1,
-    md: 0,
-    lg: 1,
-    xl: 2,
-    '2xl': 3,
-    '3xl': 4,
-    '4xl': 5,
-    '5xl': 6
+// Shades - Dark Color Scheme
+$dark-shades: (
+    lightest: 4%,
+    lighter: 10%,
+    light: 16%,
+    dark: 90%,
+    darker: 96%,
+    darkest: 98%,
 );
-
-// Space Scale
-$space-scale: (
-    xs: 0.5,
-    sm: 0.75,
-    md: 1,
-    lg: 1.5,
-    xl: 2,
-    '2xl': 3,
-    '3xl': 4,
-    '4xl': 6
-);
-
-// Width
-$width-min: 320px;
-$width-sm: 512px;
-$width-md: 768px;
-$width-lg: 1024px;
-$width-xl: 1280px;
-$width-wide: 1536px;
-$width-max: 1920px;
-$width-layout: $width-xl;
-
-// Breakpoint
-// Comment or uncomment to enable or disable breakpoints.
-$minmax: min;
-$breakpoint: (
-    sm: $width-sm,
-    md: $width-md,
-    lg: $width-lg,
-    xl: $width-xl,
-    // wide: $width-wide,
-);
-
-// Calculates the power of a base number to an exponent.
-// --
-// Usage: pow(2, 3) // 2^3 = 8
-// @param: $_base // Base number
-// @param: $_exp // Exponent number
-@function pow($_base, $_exp) {
-    $result: 1;
-
-    @for $_ from 1 through abs($_exp) {
-        $result: if($_exp > 0, $result * $_base, $result / $_base);
-    }
-
-    @return $result;
-}
-
-// Convert PX to REM
-// --
-// Usage: px-rem(24px, 16px)
-// @param: $_px // Pixel value
-// @param: $_root // Root font size: 16px
-@function px-rem($_px, $_root: 16px) {
-    @return math.div($_px, $_root) * 1rem;
-}
-
-// Convert PX values to fluid values
-// --
-// Usage: fluid(16px, 18px, 512px, 1280px)
-// @param: $min-size // Minimum Size
-// @param: $max-size // Maximum Size
-// @param: $min-width // Minimum Breakpoint
-// @param: $max-width // Maximum Breakpoint
-@function fluid($_min-size, $_max-size, $_min-width: $width-sm, $_max-width: $width-layout) {
-    $_min-size-rem: px-rem($_min-size);
-    $_max-size-rem: px-rem($_max-size);
-    $_slope: math.div($_max-size - $_min-size, $_max-width - $_min-width);
-    $_slope-vw: $_slope * 100vw;
-    $_intercept: px-rem($_min-size - $_slope * $_min-width);
-
-    @return clamp(#{$_min-size-rem}, calc(#{$_slope-vw} + #{$_intercept}), #{$_max-size-rem});
-}
 
 // Breakpoint Mixin
-// --
-// Usage: @include breakpoint(768px, min) {}
-// @param: $_width // Breakpoint width
-// @param: $_minmax // min-width vs max-width
-@mixin breakpoint($_width, $_minmax: $minmax) {
-    @media (#{$_minmax}-width: (#{$_width})) {
-        @content;
+// @param: $breakpoint: The breakpoint name to target (SM, MD, LG, XL)
+// @usage: @include breakpoint(sm) { ... }
+$breakpoints: (
+    sm: 512px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px,
+);
+
+@mixin breakpoint($breakpoint) {
+    $width: map-get($breakpoints, $breakpoint);
+    @if $width {
+        @media (min-width: $width) {
+            @content;
+        }
+    } @else {
+        @warn "There doesn't seem to be a `#{$breakpoint}` breakpoint.";
     }
 }
 
-// --- Color Schemes --- //
-
-// Light Color Scheme
-.color-scheme--light,
-.btn:not(.btn--dark, .btn--light),
-button:not(.btn--dark, .btn--light),
-[data-color-scheme="light"],
-:root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
-
-    // Color
-    @each $_key, $_value in $color {
-        --#{$_key}-h: #{hue($_value)};
-        --#{$_key}-s: #{saturation($_value)};
-        --#{$_key}-l: #{lightness($_value)};
-        --#{$_key}: hsl(var(--#{$_key}-h) var(--#{$_key}-s) var(--#{$_key}-l));
-        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-    }
-
-    // Color - Base
-    @each $_key, $_value in $color-base {
-        --#{$_key}-h: #{hue($_value)};
-        --#{$_key}-s: #{saturation($_value)};
-        --#{$_key}-l: #{lightness($_value)};
-        --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
-        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 60%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-    }
-
-    // Color - Background Blur
-    --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.9);
+// PX to REM Function
+// @param: $px: The pixel value to convert to REM
+// @param: $base: The base pixel value to use for conversion (default: 16px)
+// @usage: px-rem(16px) → 1rem
+@function px-rem($px, $base: 16px) {
+    @return ($px / $base) * 1rem;
 }
 
-// Dark Color Scheme - Toggle
-.color-scheme--dark,
-[data-color-scheme="dark"] {
+// Fluid Clamp Function
+// @param: $min: The minimum value to clamp
+// @param: $max: The maximum value to clamp
+// @usage: fluid(16px, 18px) → clamp(1rem, 0.9166666667rem + 0.0026041667 * 100vw, 1.125rem)
+@function fluid($min, $max) {
+    $min-width: map-get($breakpoints, sm);
+    $max-width: map-get($breakpoints, xl);
+    $min-rem: px-rem($min);
+    $max-rem: px-rem($max);
+    $min-width-rem: px-rem($min-width);
+    $max-width-rem: px-rem($max-width);
+    $slope: ($max-rem - $min-rem) / ($max-width-rem - $min-width-rem);
+    $y-intercept: $min-rem - $slope * $min-width-rem;
 
-    // Color
-    @each $_key, $_value in $color {
-        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-    }
-
-    // Color - Base
-    @each $_key, $_value in $color-base {
-        --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-        --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-        --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-        --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-        --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
-        --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-        --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-        --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
-    }
-
-    // Color - Background Blur
-    --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+    @return clamp(
+        #{$min-rem},
+        calc(#{$y-intercept} + #{$slope} * 100vw),
+        #{$max-rem}
+    );
 }
 
-// Dark Color Scheme - Automatic
-@media (prefers-color-scheme: dark) {
-    :root:not([data-color-scheme]) {
+// --- CSS --- //
 
-        // Color
-        @each $_key, $_value in $color {
-            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
+@layer variable, reset, base, component, utility, builder, print;
+
+// --- Variables Layer --- //
+
+@layer variable {
+    :root,
+    [data-color-scheme="light"],
+    .color-scheme--light,
+    .btn:not(.btn--dark, .btn--light),
+    button:not(.btn--dark, .btn--light) {
+        // Shades
+        --shade-white: 100%;
+        @each $shade, $value in $light-shades {
+            --shade-#{$shade}: #{$value};
         }
+        --shade-black: 0%;
 
-        // Color - Base
-        @each $_key, $_value in $color-base {
-            --#{$_key}-white: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 0%);
-            --#{$_key}-lightest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 10%);
-            --#{$_key}-lighter: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 25%);
-            --#{$_key}-light: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 40%);
-            --#{$_key}-dark: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 75%);
-            --#{$_key}-darker: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 85%);
-            --#{$_key}-darkest: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 95%);
-            --#{$_key}-black: hsl(var(--#{$_key}-h) var(--#{$_key}-s) 100%);
+        // Colors
+        @each $color, $value in $colors {
+            --#{$color}-h: #{hue($value)};
+            --#{$color}-s: #{saturation($value)};
+            --#{$color}-l: #{lightness($value)};
+            --#{$color}: hsl(
+                var(--#{$color}-h) var(--#{$color}-s) var(--#{$color}-l)
+            );
         }
+        // Color Shades
+        @each $shade, $value in $light-shades {
+            @each $color, $value in $colors {
+                --#{$color}-#{$shade}: hsl(
+                    var(--#{$color}-h) var(--#{$color}-s) var(--shade-#{$shade})
+                );
+            }
+        }
+        --base-white: hsl(var(--base-h) var(--base-s) var(--shade-white));
+        --base-black: hsl(var(--base-h) var(--base-s) var(--shade-black));
 
-        // Color - Background Blur
-        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.9);
+        // Background Blur
+        --bg-blur: hsl(
+            var(--base-h) var(--base-s) #{map-get($light-shades, lighter)} / 0.9
+        );
     }
-}
 
-// --- CSS Options --- //
-
-:root {
-    // Aspect Ratio
-    --aspect-square: 1;
-    --aspect-landscape: 4 / 3;
-    --aspect-portrait: 3 / 4;
-    --aspect-cinema: 16 / 9;
-    --aspect-wide: 2 / 1;
-
-    // Border
-    --border-color: var(--base-dark);
-    --border-radius: var(--space-4px);
-    --border-radius-alt: var(--space-xs);
-    --border-radius-oval: 10rem;
-    --border-radius-round: 50%;
-    --border-style: solid;
-    --border-width: var(--space-2px);
-    --border: var(--border-width) var(--border-style) var(--border-color);
-
-    // Font
-    --font-family-body: var(--font-family-humanist), var(--font-family-emoji);
-    --font-family-heading: var(--font-family-humanist);
-    --font-family-code: var(--font-family-monospace-code);
-    --line-height-body: calc(6px + 2ex);
-    --line-height-heading: calc(4px + 2ex);
-
-    // Font - Family
-    // https://github.com/system-fonts/modern-font-stacks
-    --font-family-antique: Superclarendon, "Bookman Old Style", "URW Bookman", "URW Bookman L", "Georgia Pro", Georgia, serif;
-    --font-family-didone: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
-    --font-family-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-handwritten: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
-    --font-family-humanist: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-classical: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
-    --font-family-humanist-geometric: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
-    --font-family-industrial: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium", "Nimbus Sans Narrow", sans-serif-condensed, sans-serif;
-    --font-family-monospace-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-    --font-family-monospace-slab-serif: "Nimbus Mono PS", "Courier New", monospace;
-    --font-family-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
-    --font-family-old-style: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif;
-    --font-family-rounded-sans: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT", "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
-    --font-family-slab-serif: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Sitka Small", serif;
-    --font-family-system: system-ui, sans-serif;
-    --font-family-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
-
-    // Font - Sizing
-    @if $type-scale {
-        // Font Size - Type Scale
-        $sm-min: $font-base-min / $font-scale-min;
-        $sm-max: $font-base-max / $font-scale-min;
-
-        --font-size-sm: #{fluid($sm-min, $sm-max)};
-        --font-size-md: #{fluid($font-base-min, $font-base-max)};
-
-        @for $i from 1 through 6 {
-            $name: nth(map-keys($type-scale), $i + 2); // skip sm, md
-            $step: $i;
-            $min: $font-base-min * pow($font-scale-min, $step);
-            $max: $font-base-max * pow($font-scale-max, $step);
-
-            --font-size-#{$name}: #{fluid($min, $max)};
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --shade-white: 0%;
+            @each $shade, $value in $dark-shades {
+                --shade-#{$shade}: #{$value};
+            }
+            --shade-black: 100%;
+            --bg-blur: hsl(
+                var(--base-h) var(--base-s) #{map-get($dark-shades, lighter)} /
+                    0.9
+            );
         }
     }
 
-    @else {
-        // Font Size - Custom
-        --font-size-sm: #{fluid(13.33px, 14.40px)};
-        --font-size-md: #{fluid($font-base-min, $font-base-max)};
-        --font-size-lg: #{fluid(19.20px, 22.50px)};
-        --font-size-xl: #{fluid(23.04px, 28.13px)};
-        --font-size-2xl: #{fluid(27.65px, 35.16px)};
-        --font-size-3xl: #{fluid(33.18px, 43.95px)};
-        --font-size-4xl: #{fluid(39.81px, 54.93px)};
-        --font-size-5xl: #{fluid(47.78px, 68.66px)};
+    [data-color-scheme="dark"],
+    .color-scheme--dark {
+        --shade-white: 0%;
+        @each $shade, $value in $dark-shades {
+            --shade-#{$shade}: #{$value};
+        }
+        --shade-black: 100%;
+        --bg-blur: hsl(
+            var(--base-h) var(--base-s) #{map-get($dark-shades, lighter)} / 0.9
+        );
     }
 
-    // Font - Contextual
-    --font-size-small: var(--font-size-sm);
-    --font-size-body: var(--font-size-md);
-    --font-size-lede: var(--font-size-lg);
-    --font-size-h4: var(--font-size-xl);
-    --font-size-h3: var(--font-size-2xl);
-    --font-size-h2: var(--font-size-3xl);
-    --font-size-h1: var(--font-size-4xl);
-    --font-size-display: var(--font-size-5xl);
+    // CSS Custom Properties
+    :root {
+        // Aspect Ratio
+        --aspect-square: 1;
+        --aspect-landscape: 4 / 3;
+        --aspect-portrait: 3 / 4;
+        --aspect-cinema: 16 / 9;
+        --aspect-wide: 2 / 1;
 
-    // Grid
-    --grid-1: repeat(1, minmax(0, 1fr));
-    --grid-2: repeat(2, minmax(0, 1fr));
-    --grid-3: repeat(3, minmax(0, 1fr));
-    --grid-4: repeat(4, minmax(0, 1fr));
-    --grid-5: repeat(5, minmax(0, 1fr));
-    --grid-1-2: 1fr 2fr;
-    --grid-1-3: 1fr 3fr;
-    --grid-1-4: 1fr 4fr;
-    --grid-2-1: 2fr 1fr;
-    --grid-2-3: 2fr 3fr;
-    --grid-3-1: 3fr 1fr;
-    --grid-3-2: 3fr 2fr;
-    --grid-4-1: 4fr 1fr;
+        // Border
+        --border: var(--border-width) var(--border-style) var(--border-color);
+        --border-color: var(--base);
+        --border-radius: var(--space-4px);
+        --border-radius-oval: #{px-rem(160px)};
+        --border-radius-round: 50%;
+        --border-style: solid;
+        --border-width: var(--space-2px);
 
-    // Object - Position
-    --position-start: 15%;
-    --position-center: 50%;
-    --position-end: 85%;
+        // Font - Family
+        // @link: https://github.com/system-fonts/modern-font-stacks
+        --font-family-emoji:
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+            "Noto Color Emoji";
+        --font-family-monospace:
+            ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+            "DejaVu Sans Mono", monospace;
+        --font-family-sans:
+            Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+            sans-serif;
+        --font-family-serif:
+            Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
+        --font-family-slab:
+            Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif",
+            "Sitka Small", serif;
+        --font-family-system: system-ui, sans-serif;
 
-    // Shadow - Box
-    --shadow-box-sm: 0 0 #{px-rem(12px)} hsl(0deg 0% 0% / 0.1);
-    --shadow-box-md: 0 0 #{px-rem(24px)} hsl(0deg 0% 0% / 0.15);
-    --shadow-box-lg: 0 0 #{px-rem(48px)} hsl(0deg 0% 0% / 0.2);
+        // Font - Size
+        --font-size-small: #{fluid(13.3333px, 14.4px)};
+        --font-size-body: #{fluid(16px, 18px)};
+        --font-size-lede: #{fluid(19.2px, 22.5px)};
+        --font-size-large: #{fluid(23.04px, 28.125px)};
+        --font-size-subheading: #{fluid(27.648px, 35.1563px)};
+        --font-size-heading: #{fluid(33.1776px, 43.9453px)};
+        --font-size-title: #{fluid(39.8131px, 54.9316px)};
+        --font-size-display: #{fluid(47.7757px, 68.6646px)};
 
-    // Shadow - Drop
-    --shadow-drop-sm: drop-shadow(0 #{px-rem(10px)} #{px-rem(8px)} hsl(0deg 0% 0% / 0.04)) drop-shadow(0 #{px-rem(4px)} #{px-rem(3px)} hsl(0deg 0% 0% / 0.1));
-    --shadow-drop-md: drop-shadow(0 #{px-rem(20px)} #{px-rem(13px)} hsl(0deg 0% 0% / 0.03)) drop-shadow(0 #{px-rem(8px)} #{px-rem(5px)} hsl(0deg 0% 0% / 0.08));
-    --shadow-drop-lg: drop-shadow(0 #{px-rem(25px)} #{px-rem(25px)} hsl(0deg 0% 0% / 0.15));
-    --shadow-drop-flat: drop-shadow(0 0 transparent);
+        // Grid
+        --grid-1: repeat(1, minmax(0, 1fr));
+        --grid-2: repeat(2, minmax(0, 1fr));
+        --grid-3: repeat(3, minmax(0, 1fr));
+        --grid-4: repeat(4, minmax(0, 1fr));
+        --grid-5: repeat(5, minmax(0, 1fr));
+        --grid-1-2: 1fr 2fr;
+        --grid-1-3: 1fr 3fr;
+        --grid-1-4: 1fr 4fr;
+        --grid-2-1: 2fr 1fr;
+        --grid-2-3: 2fr 3fr;
+        --grid-3-1: 3fr 1fr;
+        --grid-3-2: 3fr 2fr;
+        --grid-4-1: 4fr 1fr;
 
-    // Spacing
-    @if $space-scale {
+        // Object Position
+        --position-start: 10%;
+        --position-center: 50%;
+        --position-end: 90%;
 
-        // Spacing - Scale
-        @each $key, $multiplier in $space-scale {
-            $min: $font-base-min * $multiplier;
-            $max: $font-base-max * $multiplier;
-            --space-#{$key}: #{fluid($min, $max)};
-        }
+        // Shadow - Box
+        --shadow-box-sm: 0 0 0.75rem hsl(0deg 0% 0% / 0.1);
+        --shadow-box-md: 0 0 1.5rem hsl(0deg 0% 0% / 0.15);
+        --shadow-box-lg: 0 0 3rem hsl(0deg 0% 0% / 0.2);
 
-        // Spacing - Fluid Pairs
-        $keys: map-keys($space-scale);
+        // Shadow - Drop
+        --shadow-drop-sm: drop-shadow(0 0.625rem 0.5rem hsl(0deg 0% 0% / 0.04))
+            drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.1));
+        --shadow-drop-md: drop-shadow(
+                0 1.25rem 0.8125rem hsl(0deg 0% 0% / 0.03)
+            )
+            drop-shadow(0 0.5rem 0.3125rem hsl(0deg 0% 0% / 0.08));
+        --shadow-drop-lg: drop-shadow(
+            0 1.5625rem 1.5625rem hsl(0deg 0% 0% / 0.15)
+        );
+        --shadow-drop-flat: drop-shadow(0 0 transparent);
 
-        @for $i from 1 through (length($keys) - 1) {
-            $key1: nth($keys, $i);
-            $key2: nth($keys, $i + 1);
-            $min: $font-base-min * map-get($space-scale, $key1);
-            $max: $font-base-max * map-get($space-scale, $key2);
-            --space-#{$key1}-#{$key2}: #{fluid($min, $max)};
-        }
-    }
-
-    @else {
-        // Spacing - Custom
+        // Space
         --space-xs: #{fluid(8px, 9px)};
         --space-sm: #{fluid(12px, 14px)};
-        --space-md: #{fluid($font-base-min, $font-base-max)};
+        --space-md: #{fluid(16px, 18px)};
         --space-lg: #{fluid(24px, 27px)};
         --space-xl: #{fluid(32px, 36px)};
         --space-2xl: #{fluid(48px, 54px)};
         --space-3xl: #{fluid(64px, 72px)};
         --space-4xl: #{fluid(96px, 108px)};
 
-        // Spacing - Custom Pairs
+        // Space - Pairs
         --space-xs-sm: #{fluid(8px, 14px)};
-        --space-sm-md: #{fluid(12px, $font-base-max)};
-        --space-md-lg: #{fluid($font-base-min, 27px)};
+        --space-sm-md: #{fluid(12px, 18px)};
+        --space-md-lg: #{fluid(16px, 27px)};
         --space-lg-xl: #{fluid(24px, 36px)};
         --space-xl-2xl: #{fluid(32px, 54px)};
         --space-2xl-3xl: #{fluid(48px, 72px)};
         --space-3xl-4xl: #{fluid(64px, 108px)};
-    }
 
-    // Spacing - Contextual
-    --space-px: #{px-rem(1px)};
-    --space-2px: #{px-rem(2px)};
-    --space-4px: #{px-rem(4px)};
-    --space-icon: var(--space-xs);
-    --space-block: var(--space-lg);
-    --space-edge: var(--space-lg-xl);
-    --space-grid: var(--space-lg-xl);
-    --space-container: var(--space-2xl-3xl);
-    --space-section: var(--space-3xl-4xl);
+        // Space - Custom
+        --space-px: #{px-rem(1px)};
+        --space-2px: #{px-rem(2px)};
+        --space-4px: #{px-rem(4px)};
+        --space-icon: var(--space-xs);
+        --space-block: var(--space-lg);
+        --space-edge: var(--space-lg-xl);
+        --space-grid: var(--space-lg-xl);
+        --space-container: var(--space-2xl-3xl);
+        --space-section: var(--space-3xl-4xl);
 
-    // Transition
-    --transition: .3s;
-    --transition-fast: .2s;
-    --transition-slow: .4s;
-    --transition-easing: ease-in-out;
+        // Transition
+        --transition: 0.3s;
+        --transition-fast: 0.2s;
+        --transition-slow: 0.4s;
+        --transition-easing: ease-in-out;
 
-    // Width
-    --width-min: #{px-rem($width-min)};
-    --width-sm: #{px-rem($width-sm)};
-    --width-md: #{px-rem($width-md)};
-    --width-lg: #{px-rem($width-lg)};
-    --width-xl: #{px-rem($width-xl)};
-    --width-wide: #{px-rem($width-wide)};
-    --width-max: #{px-rem($width-max)};
-    --width-prose: 65ch;
-    --width-layout: #{px-rem($width-layout)};
+        // Width
+        --width-xs: #{px-rem(320px)};
+        --width-sm: #{px-rem(map-get($breakpoints, sm))};
+        --width-md: #{px-rem(map-get($breakpoints, md))};
+        --width-lg: #{px-rem(map-get($breakpoints, lg))};
+        --width-xl: #{px-rem(map-get($breakpoints, xl))};
+        --width-2xl: #{px-rem(1536px)};
+        --width-3xl: #{px-rem(1920px)};
 
-    // Z-Index
-    --z-back: -1;
-    --z-flat: 0;
-    --z-front: 1;
-    --z-low: 10;
-    --z-mid: 100;
-    --z-high: 1000;
-    --z-top: 10000;
-}
+        // Width - Custom
+        --width-min: var(--width-xs);
+        --width-layout: var(--width-xl);
+        --width-wide: var(--width-2xl);
+        --width-max: var(--width-3xl);
+        --width-prose: 65ch;
 
-// --- CSS Supports --- //
-
-// Check for CSS Backdrop Filter Support
-@supports ((backdrop-filter: blur())) {
-
-    // Light Color Scheme
-    .color-scheme--light,
-    [data-color-scheme="light"],
-    :root:not(.color-scheme--dark, [data-color-scheme="dark"]) {
-        // Color - Background Blur
-        --bg-color-blur: hsl(var(--base-h) var(--base-s) 95% / 0.2);
-    }
-
-    // Dark Color Scheme - Toggle
-    .color-scheme--dark,
-    [data-color-scheme="dark"] {
-        // Color - Background Blur
-        --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.2);
-    }
-
-    // Dark Color Scheme - Automatic
-    @media (prefers-color-scheme: dark) {
-        :root:not([data-color-scheme]) {
-            // Color - Background Blur
-            --bg-color-blur: hsl(var(--base-h) var(--base-s) 10% / 0.2);
-        }
+        // Z-Index
+        --z-back: -1;
+        --z-flat: 0;
+        --z-front: 1;
+        --z-low: 10;
+        --z-mid: 100;
+        --z-high: 1000;
+        --z-top: 10000;
     }
 }
 
-// --- Reduced Motion --- //
+// --- Reset Layer --- //
 
-@media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-        scroll-behavior: auto !important;
-    }
-
+@layer reset {
+    // Universal Reset
     *,
     ::before,
     ::after {
-        animation-delay: -1ms !important;
-        animation-duration: 1ms !important;
-        animation-iteration-count: 1 !important;
-        background-attachment: initial !important;
-        scroll-behavior: auto !important;
-        transition-duration: 1ms !important;
-        transition-delay: -1ms !important;
-    }
-}
-
-/* --- Base --- */
-
-// Focus
-:focus:not(:focus-visible) {
-    outline: none;
-}
-
-:focus-visible,
-.link-overlay:focus-within {
-    --color-focus: var(--primary);
-    --offset-focus: var(--border-width);
-    --outline-focus: var(--border-style);
-    --width-focus: var(--border-width);
-
-    outline: var(--width-focus) var(--outline-focus) var(--color-focus);
-    outline-offset: var(--offset-focus);
-
-    &.focus--light,
-    .focus--light & {
-        --color-focus: var(--primary-lightest);
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
-    &.focus--dark,
-    .focus--dark & {
-        --color-focus: var(--primary-darkest);
-    }
-}
+    // Reduced Motion - User Preference
+    @media (prefers-reduced-motion: reduce) {
+        html:focus-within {
+            scroll-behavior: auto !important;
+        }
 
-// Selection
-::selection {
-    --bg-color-selection: var(--primary-lighter);
-    --color-selection: var(--primary-darker);
-
-    background-color: var(--bg-color-selection);
-    color: var(--color-selection);
-    text-shadow: none;
-}
-
-// Universal
-*,
-::before,
-::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:target {
-    scroll-margin-block: var(--space-block);
-}
-
-// HTML
-html {
-    --bg-color-html: var(--base-white);
-
-    background-color: var(--bg-color-html);
-    font-size: 100%;
-    text-size-adjust: none;
-
-    &:focus-within {
-        scroll-behavior: smooth;
-    }
-}
-
-// Body
-body {
-    --bg-color-body: var(--base-lightest);
-    --color-body: var(--base-darkest);
-
-    background-color: var(--bg-color-body);
-    block-size: 100%;
-    color: var(--color-body);
-    -webkit-font-smoothing: auto;
-    inline-size: 100%;
-    margin-inline: auto;
-    max-inline-size: var(--width-max);
-    min-block-size: 100svh;
-    min-inline-size: var(--width-min);
-    overflow-wrap: break-word;
-    overflow-x: hidden;
-}
-
-body,
-.text--body {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-body);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-}
-
-// Anchor
-a:not(.btn, .link) {
-    --color-anchor: var(--primary);
-
-    color: var(--color-anchor);
-    transition: color var(--transition) var(--transition-easing);
-
-    &:not(.btn, .link):hover {
-        --color-anchor: var(--primary-dark);
-    }
-}
-
-// Link
-main a:not([class]),
-a.link {
-    --color-link: inherit;
-    --decoration-color-link: var(--primary);
-    --decoration-line-link: underline;
-    --decoration-style-link: solid;
-    --decoration-thickness-link: var(--border-width);
-    --underline-offset-link: var(--border-width);
-
-    color: var(--color-link);
-    text-decoration-color: var(--decoration-color-link);
-    text-decoration-line: var(--decoration-line-link);
-    text-decoration-style: var(--decoration-style-link);
-    text-decoration-thickness: var(--decoration-thickness-link);
-    text-underline-offset: var(--underline-offset-link);
-    transition: color var(--transition), text-decoration-color var(--transition);
-
-    &:hover {
-        --color-link: var(--primary);
-        --decoration-color-link: var(--base-dark);
-    }
-}
-
-// Link - Color
-main .link--light > a:not([class]),
-a.link--light {
-    --color-link: var(--primary-lightest);
-    --decoration-color-link: var(--primary-lightest);
-
-    &:hover {
-        --color-link: var(--primary-lightest);
-        --decoration-color-link: var(--primary-lightest);
-    }
-}
-
-main .link--dark > a:not([class]),
-a.link--dark {
-    --color-link: var(--primary-darkest);
-    --decoration-color-link: var(--primary-darkest);
-
-    &:hover {
-        --color-link: var(--primary-darkest);
-        --decoration-color-link: var(--primary-darkest);
-    }
-}
-
-// Heading
-.text--display,
-h1,
-.h--1,
-h2,
-.h--2,
-h3,
-.h--3,
-h4,
-.h--4,
-h5,
-.h--5,
-h6,
-.h--6 {
-    color: var(--color-heading);
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-heading);
-    font-weight: var(--font-weight-heading);
-    line-height: var(--line-height-heading);
-    text-transform: var(--text-transform-heading);
-    text-wrap: balance;
-}
-
-.text--display {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-display);
-    --font-weight-heading: 700;
-    --text-transform-heading: uppercase;
-}
-
-h1,
-.h--1 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-h1);
-    --font-weight-heading: 700;
-    --text-transform-heading: uppercase;
-}
-
-h2,
-.h--2 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-h2);
-    --font-weight-heading: 700;
-    --text-transform-heading: uppercase;
-}
-
-h3,
-.h--3 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-h3);
-    --font-weight-heading: 700;
-    --text-transform-heading: none;
-}
-
-h4,
-.h--4 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-h4);
-    --font-weight-heading: 700;
-    --text-transform-heading: none;
-}
-
-h5,
-.h--5 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-lede);
-    --font-weight-heading: 700;
-    --text-transform-heading: none;
-}
-
-h6,
-.h--6 {
-    --color-heading: inherit;
-    --font-size-heading: var(--font-size-body);
-    --font-weight-heading: 700;
-    --text-transform-heading: none;
-}
-
-// Horizontal Rule
-hr {
-    block-size: var(--border-width);
-    border: 0;
-    border-block-start: var(--border);
-    inline-size: 100%;
-    margin-inline: auto;
-    padding: 0;
-}
-
-// Misc
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-    vertical-align: middle;
-}
-
-canvas,
-img,
-picture,
-svg,
-video {
-    block-size: auto;
-    display: block;
-    max-inline-size: 100%;
-}
-
-code,
-pre {
-    font-family: var(--font-family-code);
-}
-
-figure {
-    display: block;
-
-    & > figcaption {
-        margin-block-start: var(--space-xs);
-    }
-}
-
-img {
-    border-radius: var(--border-radius);
-    object-fit: cover;
-}
-
-ol[role='list'],
-ul[role='list'] {
-    list-style: none;
-}
-
-p {
-    main & {
-        text-wrap: pretty;
-    }
-}
-
-small,
-.text--small {
-    font-size: var(--font-size-small);
-}
-
-.text--lede {
-    font-size: var(--font-size-lede);
-}
-
-.space-content {
-    & > * + * {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + blockquote {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + figure,
-    & > * + img,
-    & > * + picture,
-    & > * + video {
-        margin-block: var(--space-block);
-    }
-
-    & figcaption {
-        margin-block-start: var(--space-4px);
-    }
-
-    & > * + h1 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + h2 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + h3 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + h4 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + h5 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + h6 {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + p {
-        margin-block-start: var(--space-block);
-    }
-
-    & > * + ol,
-    & > * + ul,
-    & > ol ol,
-    & > ul ul {
-        margin-block-start: var(--space-block);
-        padding-inline-start: var(--space-block);
-    }
-
-    & > ol * + li,
-    & > ul * + li {
-        margin-block-start: var(--space-2px);
-    }
-}
-
-/* --- Layout --- */
-
-// Block
-// Add to content blocks.
-/* Block HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
-        </div>
-    </div>
-</section>
-*/
-.block {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-block);
-    inline-size: 100%;
-
-    // Block with block and float options, rather than flex.
-    &-float {
-        display: block;
-
-        & > * + * {
-            margin-block-start: var(--space-block);
+        *,
+        ::before,
+        ::after {
+            animation-delay: -1ms !important;
+            animation-duration: 1ms !important;
+            animation-iteration-count: 1 !important;
+            background-attachment: initial !important;
+            scroll-behavior: auto !important;
+            transition-duration: 1ms !important;
+            transition-delay: -1ms !important;
         }
     }
 }
 
-// Container
-// Add inside sections to contain blocks and grids.
-/* Container HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
-        </div>
-    </div>
-</section>
-*/
-.container {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-container);
-    inline-size: 100%;
-    margin-inline: auto;
-    max-inline-size: var(--width-layout);
-}
+// --- Base Layer --- //
 
-// Grid
-// Add to layouts containing grid items.
-/* Grid HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="grid grid--md-2">
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-        </div>
-    </div>
-</section>
-*/
-$grid-columns: (
-    1,
-    2,
-    3,
-    4,
-    5,
-    '1-2',
-    '1-3',
-    '1-4',
-    '2-1',
-    '2-3',
-    '3-1',
-    '3-2',
-    '4-1'
-);
+@layer base {
+    // Focus
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
 
-@mixin grid {
-    display: grid;
-    gap: var(--space-grid);
-    inline-size: 100%;
-}
+    :focus-visible,
+    .link-overlay:focus-within {
+        --focus-color: var(--primary);
+        --focus-color-light: var(--primary-lightest);
+        --focus-color-dark: var(--primary-darkest);
+        --focus-offset: var(--border-width);
+        --focus-outline: var(--border-style);
+        --focus-width: var(--border-width);
 
-.grid {
-    @include grid;
-}
+        outline: var(--focus-width) var(--focus-outline) var(--focus-color);
+        outline-offset: var(--focus-offset);
 
-@each $column in $grid-columns {
-    .grid--#{$column} {
-        @extend .grid;
-        grid-template-columns: var(--grid-#{$column});
+        &.focus--light,
+        .focus--light & {
+            --focus-color: var(--focus-color-light);
+        }
+
+        &.focus--dark,
+        .focus--dark & {
+            --focus-color: var(--focus-color-dark);
+        }
+    }
+
+    // Selection
+    ::selection {
+        --selection-bg-color: var(--primary-lighter);
+        --selection-color: var(--primary-darker);
+
+        background-color: var(--selection-bg-color);
+        color: var(--selection-color);
+        text-shadow: none;
+    }
+
+    // Target
+    :target {
+        scroll-margin-block: var(--space-block);
+    }
+
+    // HTML
+    html {
+        --html-bg-color: var(--base-white);
+        --html-color: var(--base-black);
+
+        background-color: var(--html-bg-color);
+        color: var(--html-color);
+        font-size: 100%;
+        text-size-adjust: none;
+
+        &:focus-within {
+            scroll-behavior: smooth;
+        }
+    }
+
+    // Body
+    body {
+        --body-bg-color: var(--base-lightest);
+        --body-color: var(--base-darkest);
+
+        -webkit-font-smoothing: auto;
+        background-color: var(--body-bg-color);
+        block-size: 100%;
+        color: var(--body-color);
+        inline-size: 100%;
+        margin-inline: auto;
+        max-inline-size: var(--width-max);
+        min-block-size: 100svh;
+        min-inline-size: var(--width-min);
+        overflow-wrap: break-word;
+        overflow-x: hidden;
+    }
+
+    body,
+    text--body {
+        --body-font-family: var(--font-family-sans), var(--font-family-emoji);
+        --body-font-size: var(--font-size-body);
+        --body-line-height: 1.6;
+
+        font-family: var(--body-font-family);
+        font-size: var(--body-font-size);
+        font-weight: 400;
+        line-height: var(--body-line-height);
+    }
+
+    // Anchor
+    a:not(.btn, .link) {
+        --color-anchor: var(--primary);
+
+        color: var(--color-anchor);
+        transition: color var(--transition) var(--transition-easing);
+
+        &:not(.btn, .link):hover {
+            --color-anchor: var(--primary-dark);
+        }
+    }
+
+    // Link
+    main a:not([class]),
+    a.link {
+        --link-color: inherit;
+        --link-decoration-color: var(--primary);
+        --link-decoration-line: underline;
+        --link-decoration-style: solid;
+        --link-decoration-thickness: var(--border-width);
+        --link-underline-offset: var(--border-width);
+
+        color: var(--link-color);
+        text-decoration-color: var(--link-decoration-color);
+        text-decoration-line: var(--link-decoration-line);
+        text-decoration-style: var(--link-decoration-style);
+        text-decoration-thickness: var(--link-decoration-thickness);
+        text-underline-offset: var(--link-underline-offset);
+        transition:
+            color var(--transition),
+            text-decoration-color var(--transition);
+
+        &:hover {
+            --link-color: var(--primary);
+            --link-decoration-color: var(--base);
+        }
+    }
+
+    main .link--light > a:not([class]),
+    a.link--light {
+        --link-color: var(--base-lightest);
+        --link-decoration-color: var(--base-lightest);
+
+        &:hover {
+            --link-color: var(--base-lightest);
+            --link-decoration-color: var(--base-lightest);
+        }
+    }
+
+    main .link--dark > a:not([class]),
+    a.link--dark {
+        --link-color: var(--base-darkest);
+        --link-decoration-color: var(--base-darkest);
+
+        &:hover {
+            --link-color: var(--base-darkest);
+            --link-decoration-color: var(--base-darkest);
+        }
+    }
+
+    // Heading
+    h1,
+    .h--1,
+    h2,
+    .h--2,
+    h3,
+    .h--3,
+    h4,
+    .h--4,
+    h5,
+    .h--5,
+    h6,
+    .h--6,
+    .h--display {
+        --heading-font-family: var(--font-family-sans);
+
+        color: var(--heading-color);
+        font-family: var(--heading-font-family);
+        font-size: var(--heading-font-size);
+        font-weight: var(--heading-font-weight);
+        line-height: var(--heading-line-height);
+        text-transform: var(--heading-text-transform);
+        text-wrap: balance;
+    }
+
+    h1,
+    .h--1 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-title);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.2;
+        --heading-text-transform: uppercase;
+    }
+
+    h2,
+    .h--2 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-heading);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.2;
+        --heading-text-transform: uppercase;
+    }
+
+    h3,
+    .h--3 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-subheading);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.6;
+        --heading-text-transform: none;
+    }
+
+    h4,
+    .h--4 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-large);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.6;
+        --heading-text-transform: none;
+    }
+
+    h5,
+    .h--5 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-lede);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.6;
+        --heading-text-transform: none;
+    }
+
+    h6,
+    .h--6 {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-body);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.6;
+        --heading-text-transform: none;
+    }
+
+    .h--display {
+        --heading-color: inherit;
+        --heading-font-size: var(--font-size-display);
+        --heading-font-weight: 700;
+        --heading-line-height: 1.2;
+        --heading-text-transform: uppercase;
+    }
+
+    // Misc
+    audio,
+    canvas,
+    iframe,
+    img,
+    svg,
+    video {
+        vertical-align: middle;
+    }
+
+    canvas,
+    img,
+    picture,
+    svg,
+    video {
+        block-size: auto;
+        display: block;
+        max-inline-size: 100%;
+    }
+
+    code,
+    pre {
+        --code-font-family: var(--font-family-monospace);
+        --code-line-height: calc(6px + 2ex);
+
+        font-family: var(--code-font-family);
+        line-height: var(--code-line-height);
+    }
+
+    figure {
+        display: block;
+
+        & > figcaption {
+            margin-block-start: var(--space-xs);
+        }
+    }
+
+    hr {
+        block-size: var(--border-width);
+        border: 0;
+        border-block-start: var(--border);
+        inline-size: 100%;
+        margin-inline: auto;
+        padding: 0;
+    }
+
+    img {
+        border-radius: var(--border-radius);
+        object-fit: cover;
+    }
+
+    ol[role="list"],
+    ul[role="list"] {
+        list-style: none;
+    }
+
+    p {
+        main & {
+            text-wrap: pretty;
+        }
+    }
+
+    small,
+    .text--small {
+        --text-font-size: var(--font-size-small);
+        --text-line-height: 1.4;
+
+        font-size: var(--text-font-size);
+        line-height: var(--text-line-height);
+    }
+
+    .text--lede {
+        --text-font-size: var(--font-size-lede);
+        --text-line-height: 1.6;
+
+        font-size: var(--text-font-size);
+        line-height: var(--text-line-height);
     }
 }
 
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        @each $column in $grid-columns {
-            .grid--#{$_key}-#{$column} {
-                grid-template-columns: var(--grid-#{$column});
+// --- Layout Layer --- //
+
+@layer layout {
+    // Block
+    // Add to content blocks.
+    /* Block HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+    </section>
+    */
+    .block {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-block);
+        inline-size: 100%;
+
+        // Block with float options, rather than flex.
+        &-float {
+            display: block;
+
+            & > * + * {
+                margin-block-start: var(--space-block);
             }
         }
     }
-}
 
-// Grid - Alternate
-// Add to grid parent containers to alternate grid items.
-/* Grid Alternate HTML Example:
-<section class="section">
-    <div class="container grid--md-alternate">
-        <div class="grid grid--md-2">
+    // Container
+    // Add inside sections to contain blocks and grids.
+    /* Container HTML Example:
+    <section class="section">
+        <div class="container">
             <div class="block">
-                <!-- Grid Block -->
-            </div>
-            <div class="block">
-                <!-- Grid Block -->
+                <!-- Content -->
             </div>
         </div>
-        <div class="grid grid--md-2">
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-        </div>
-    </div>
-</section>
-*/
-@each $_key,
-$_value in $breakpoint {
-    @include breakpoint($_value, min) {
-        .grid-alternate--#{$_key} > .grid--#{$_key}-2:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-1);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-2:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-1);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-3:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) {
-            grid-template-columns: var(--grid-4-1);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-1-4:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-2);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-2-1:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) {
-            grid-template-columns: var(--grid-3-2);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-2-3:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-3);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-3-1:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) {
-            grid-template-columns: var(--grid-2-3);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-3-2:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) {
-            grid-template-columns: var(--grid-1-4);
-        }
-
-        .grid-alternate--#{$_key} > .grid--#{$_key}-4-1:nth-of-type(even) > *:last-child {
-            order: -1;
-        }
-    }
-}
-
-// Grid - Auto
-// Add to layouts containing grid items that need to auto-size as the screen size changes.
-/* Grid Auto HTML Example:
-<section class="section">
-    <div class="container">
-        <div class="grid-auto">
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-            <div class="block">
-                <!-- Grid Block -->
-            </div>
-        </div>
-    </div>
-</section>
-*/
-.grid-auto {
-    @extend .grid;
-
-    --grid-auto-column-min: var(--width-min);
-
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-auto-column-min), 100%), 1fr));
-    grid-template-rows: var(--grid-1);
-}
-
-// Grid - Layout
-// Add to layouts containing grid items that need to expand beyond the layout width.
-/* Grid Layout HTML Example:
-<div class="grid-layout">
-    <div class="block">
-        <!-- Default Layout Width -->
-    </div>
-    <div class="block grid-layout__wide">
-        <!-- Wide Layout Width -->
-    </div>
-    <div class="block grid-layout__full">
-        <!-- Full Layout Width -->
-    </div>
-</div>
-*/
-.grid-layout {
-    --grid-layout-width: var(--width-layout);
-    --grid-layout-wide: calc((var(--width-wide) - var(--grid-layout-width)) / 2);
-
-    column-gap: 0;
-    display: grid;
-    grid-template-columns: [full-start] minmax(var(--space-edge), 1fr) [wide-start] minmax(0, var(--grid-layout-wide)) [content-start] min(var(--grid-layout-width), 100% - var(--space-edge) * 2) [content-end] minmax(0, var(--grid-layout-wide)) [wide-end] minmax(var(--space-edge), 1fr) [full-end];
-    inline-size: 100%;
-    padding-inline: 0;
-    row-gap: var(--space-block);
-
-    & > :not(&__full, &__wide) {
-        grid-column: content;
-    }
-
-    & > &__wide {
-        grid-column: wide;
-    }
-
-    & > &__full {
-        grid-column: full;
-    }
-}
-
-// Header
-// Add to header elements.
-/* Header HTML Example:
-<header class="header" data-header-style="fixed">
-    <div class="header__container">
-        <!-- Header Content -->
-    </div>
-</header>
-*/
-.header {
-    --spacing-header: var(--space-block);
-
-    display: flex;
-    flex-direction: column;
-    inline-size: 100%;
-    padding: var(--spacing-header) var(--space-edge);
-    row-gap: var(--spacing-header);
-
-    &__container {
+    </section>
+    */
+    .container {
+        align-items: flex-start;
         display: flex;
-        flex-direction: row;
-        gap: var(--spacing-header);
+        flex-direction: column;
+        gap: var(--space-container);
         inline-size: 100%;
-        justify-content: space-between;
         margin-inline: auto;
         max-inline-size: var(--width-layout);
     }
 
-    &--fixed,
-    &--overlay {
+    // Grid
+    // Add to layouts containing grid items.
+    /* Grid HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="grid grid--md-2">
+                <div class="block">
+                    <!-- Grid Block -->
+                </div>
+                <div class="block">
+                    <!-- Grid Block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    $grid-columns: (
+        1,
+        2,
+        3,
+        4,
+        5,
+        "1-2",
+        "1-3",
+        "1-4",
+        "2-1",
+        "2-3",
+        "3-1",
+        "3-2",
+        "4-1"
+    );
+
+    .grid {
+        display: grid;
+        gap: var(--space-grid);
         inline-size: 100%;
-        inset-block-start: 0;
-        inset-inline-end: 0;
-        inset-inline-start: 0;
-        z-index: var(--z-high);
     }
 
-    &--fixed {
-        position: fixed;
+    @each $column in $grid-columns {
+        .grid--#{$column} {
+            @extend .grid;
+
+            grid-template-columns: var(--grid-#{$column});
+        }
     }
 
-    &--overlay {
-        position: absolute;
+    @each $breakpoint, $width in $breakpoints {
+        @include breakpoint($breakpoint) {
+            @each $column in $grid-columns {
+                .grid--#{$breakpoint}-#{$column} {
+                    grid-template-columns: var(--grid-#{$column});
+                }
+            }
+        }
     }
-}
 
-// Section
-// Add to section elements.
-/* Section HTML Example:
-<section class="section">
-    <div class="container">
+    // Grid - Auto
+    // Add to layouts containing grid items that need to auto-size as the screen size changes.
+    /* Grid Auto HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="grid-auto">
+                <div class="block">
+                    <!-- Grid Block -->
+                </div>
+                <div class="block">
+                    <!-- Grid Block -->
+                </div>
+                <div class="block">
+                    <!-- Grid Block -->
+                </div>
+            </div>
+        </div>
+    </section>
+    */
+    .grid-auto {
+        --grid-auto-column-min: var(--width-min);
+
+        @extend .grid;
+
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(var(--grid-auto-column-min), 100%), 1fr)
+        );
+        grid-template-rows: var(--grid-1);
+    }
+
+    // Grid - Layout
+    // Add to layouts containing grid items that need to expand beyond the layout width.
+    /* Grid Layout HTML Example:
+    <div class="grid-layout">
         <div class="block">
-            <!-- Content -->
+            <!-- Default Layout Width -->
+        </div>
+        <div class="block grid-layout__wide">
+            <!-- Wide Layout Width -->
+        </div>
+        <div class="block grid-layout__full">
+            <!-- Full Layout Width -->
         </div>
     </div>
-</section>
-*/
-.section {
-    display: flex;
-    flex-direction: column;
-    inline-size: 100%;
-    padding: var(--space-section) var(--space-edge);
-    row-gap: var(--space-section);
-}
+    */
+    .grid-layout {
+        --grid-layout-width: var(--width-layout);
+        --grid-layout-wide: calc(
+            (var(--width-wide) - var(--grid-layout-width)) / 2
+        );
 
-/* --- Component --- */
+        column-gap: 0;
+        display: grid;
+        grid-template-columns:
+            [full-start] minmax(var(--space-edge), 1fr)
+            [wide-start] minmax(0, var(--grid-layout-wide))
+            [content-start] min(
+                var(--grid-layout-width),
+                100% - var(--space-edge) * 2
+            )
+            [content-end] minmax(0, var(--grid-layout-wide))
+            [wide-end] minmax(var(--space-edge), 1fr) [full-end];
+        inline-size: 100%;
+        padding-inline: 0;
+        row-gap: var(--space-block);
 
-// Background Overlay
-// Add to elements inside sections that need to overlay the section background.
-/* Background Overlay HTML Example:
-<section class="bg-overlay-parent section">
-    <div class="container">
-        <div class="block">
-            <!-- Content -->
+        & > :not(&__full, &__wide) {
+            grid-column: content;
+        }
+
+        & > &__wide {
+            grid-column: wide;
+        }
+
+        & > &__full {
+            grid-column: full;
+        }
+    }
+
+    // Section
+    // Add to section elements.
+    /* Section HTML Example:
+    <section class="section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
         </div>
-    </div>
-    <div class="bg-overlay bg--primary"><!-- div, img, and video elements --></div>
-</section>
-*/
-.bg-overlay {
-    block-size: 100%;
-    inline-size: 100%;
-    inset: 0;
-    margin-block-start: 0;
-    object-fit: cover;
-    object-position: var(--position-center);
-    overflow: hidden;
-    position: absolute;
-    z-index: var(--z-back);
-
-    &-parent {
-        isolation: isolate;
-        position: relative;
-    }
-}
-
-// Button
-// Add to anchor links and buttons.
-/* Button HTML Example:
-<a class="btn" href="#">Anchor Link</a>
-<button class="btn">Button</button>
-*/
-.btn {
-    --bg-color-btn: var(--primary);
-    --border-color-btn: var(--primary);
-    --border-radius-btn: var(--border-radius);
-    --border-style-btn: var(--border-style);
-    --border-width-btn: var(--border-width);
-    --color-btn: var(--primary-lightest);
-    --font-size-btn: var(--font-size-body);
-    --font-weight-btn: 400;
-    --gap-btn: var(--space-icon);
-    --line-height-btn: 1;
-    --padding-x-btn: var(--space-xl);
-    --padding-y-btn: var(--space-md);
-    --text-spaced-btn: var(--space-px);
-    --text-transform-btn: none;
-    --transition-btn: var(--transition);
-    --width-btn: fit-content;
-
-    align-items: center;
-    background-color: var(--bg-color-btn);
-    border-color: var(--border-color-btn);
-    border-radius: var(--border-radius-btn);
-    border-style: var(--border-style-btn);
-    border-width: var(--border-width-btn);
-    color: var(--color-btn);
-    cursor: pointer;
-    display: inline-flex;
-    font-size: var(--font-size-btn);
-    font-weight: var(--font-weight-btn);
-    gap: var(--gap-btn);
-    inline-size: var(--width-btn);
-    justify-content: center;
-    letter-spacing: var(--text-spaced-btn);
-    line-height: var(--line-height-btn);
-    padding-block: var(--padding-y-btn);
-    padding-inline: var(--padding-x-btn);
-    text-align: center;
-    text-decoration: none;
-    text-transform: var(--text-transform-btn);
-    transition: background-color var(--transition-btn) var(--transition-easing), border-color var(--transition-btn) var(--transition-easing), color var(--transition-btn) var(--transition-easing);
-
-    &:focus-visible {
-        transition: none;
-    }
-
-    &--icon {
-        --padding-x-btn: var(--space-icon);
-        --padding-y-btn: var(--space-icon);
-    }
-
-    &--outline {
-        --color-btn: var(--border-color-btn);
-
-        background-color: initial;
-    }
-}
-
-// Button - Sizing
-.btn--small {
-    --font-size-btn: var(--font-size-small);
-    --padding-x-btn: var(--space-md);
-    --padding-y-btn: var(--space-xs);
-}
-
-.btn--large {
-    --font-size-btn: var(--font-size-body);
-    --padding-x-btn: var(--space-2xl);
-    --padding-y-btn: var(--space-lg);
-}
-
-// Button - Color
-.btn--light {
-    --bg-color-btn: var(--base-lightest);
-    --border-color-btn: var(--base-lightest);
-    --color-btn: var(--base-darkest);
-
-    &:focus-visible {
-        @extend .focus--light;
-    }
-
-    &.btn--outline {
-        --color-btn: var(--base-lightest);
-    }
-}
-
-.btn--dark {
-    --bg-color-btn: var(--base-darkest);
-    --border-color-btn: var(--base-darkest);
-    --color-btn: var(--base-lightest);
-
-    &:focus-visible {
-        @extend .focus--dark;
-    }
-
-    &.btn--outline {
-        --color-btn: var(--base-darkest);
-    }
-}
-
-// Card
-// Add to card elements.
-/* Card HTML Example:
-<div class="card">
-    <div class="card__head">
-        <!-- Card Head -->
-    </div>
-    <div class="card__body">
-        <!-- Card Body -->
-    </div>
-</div>
-*/
-.card {
-
-    &,
-    &__head,
-    &__body,
-    &__foot {
-        align-items: var(--align-card);
-        background-color: var(--bg-color-card);
-        border-radius: var(--border-radius-card);
-        border: var(--border-width-card) var(--border-style-card) var(--border-color-card);
-        color: var(--color-card);
+    </section>
+    */
+    .section {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-card);
         inline-size: 100%;
-        justify-content: space-between;
-        overflow: clip;
-        padding: var(--padding-card);
-        text-align: var(--text-align-card);
-    }
-
-    & {
-        --align-card: flex-start;
-        --bg-color-card: inherit;
-        --border-color-card: var(--border-color);
-        --border-radius-card: var(--border-radius);
-        --border-style-card: var(--border-style);
-        --border-width-card: var(--border-width);
-        --color-card: inherit;
-        --gap-card: var(--space-block);
-        --padding-card: var(--space-block);
-        --text-align-card: left;
-    }
-
-    &__head {
-        --align-card: flex-start;
-        --bg-color-card: inherit;
-        --border-color-card: var(--border-color);
-        --border-radius-card: var(--border-radius);
-        --border-style-card: none;
-        --border-width-card: var(--border-width);
-        --color-card: inherit;
-        --gap-card: var(--space-block);
-        --padding-card: 0;
-        --text-align-card: left;
-    }
-
-    &__body {
-        --align-card: flex-start;
-        --bg-color-card: inherit;
-        --border-color-card: var(--border-color);
-        --border-radius-card: var(--border-radius);
-        --border-style-card: none;
-        --border-width-card: var(--border-width);
-        --color-card: inherit;
-        --gap-card: var(--space-block);
-        --padding-card: 0;
-        --text-align-card: left;
-    }
-
-    &__foot {
-        --align-card: flex-start;
-        --bg-color-card: inherit;
-        --border-color-card: var(--border-color);
-        --border-radius-card: var(--border-radius);
-        --border-style-card: none;
-        --border-width-card: var(--border-width);
-        --color-card: inherit;
-        --gap-card: var(--space-block);
-        --padding-card: 0;
-        --text-align-card: left;
+        padding: var(--space-section) var(--space-edge);
+        row-gap: var(--space-section);
     }
 }
 
-// Form
-// Add to forms or containers that contain form elements.
-/* Form HTML Example:
-<!-- Formspark form with Botpoison -->
-<form action="https://submit-form.com/XXXXXXXXX" class="form" data-botpoison-public-key="XX_XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
-    <input name="_email.from" tabindex="-1" type="hidden" value="Form Name">
-    <input name="_email.template.footer" tabindex="-1" type="hidden" value="false">
-    <input name="_email.template.title" tabindex="-1" type="hidden" value="false">
-    <input name="_redirect" tabindex="-1" type="hidden" value="https://website.com">
-    <fieldset>
-        <label for="company">Company Name</label>
-        <input aria-label="Company Name" id="company" name="company" type="text">
-    </fieldset>
-    <div class="grid grid--lg-2">
-        <fieldset>
-            <label for="first-name">First Name</label>
-            <input aria-label="First Name" id="first-name" name="first-name" required type="text">
-        </fieldset>
-        <fieldset>
-            <label for="last-name">Last Name</label>
-            <input aria-label="Last Name" id="last-name" name="last-name" type="text">
-        </fieldset>
-    </div>
-    <div class="grid grid--lg-2">
-        <fieldset>
-            <label for="email">Email Address</label>
-            <input aria-label="Email Address" id="email" name="email" required type="email">
-        </fieldset>
-        <fieldset>
-            <label for="phone">Phone Number</label>
-            <input aria-label="Phone Number" id="phone" name="phone" type="tel">
-        </fieldset>
-    </div>
-    <fieldset>
-        <label for="message">Message</label>
-        <textarea aria-label="Message" id="message" name="message" required></textarea>
-    </fieldset>
-    <fieldset>
-        <label for="pretend-check">Pretend Check</label>
-        <input autocomplete="off" id="pretend-check" name="_pretend-check" tabindex="-1" type="checkbox">
-    </fieldset>
-    <button type="submit">Send Message</button>
-</form>
+// --- Component Layer --- //
 
-<!-- Generic form with various input types -->
-<form class="form">
-    <fieldset>
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Pretend Person" required>
-    </fieldset>
-    <div class="grid grid--md-2">
-        <fieldset>
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="hello@madebypretend.com" required>
-        </fieldset>
-        <fieldset>
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
-        </fieldset>
-    </div>
-    <div class="grid grid--md-2">
-        <fieldset>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </fieldset>
-        <fieldset>
-            <label for="url">Website</label>
-            <input type="url" id="url" name="url" placeholder="https://madebypretend.com" disabled>
-        </fieldset>
-    </div>
-    <div class="grid grid--md-2">
-        <fieldset>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date">
-        </fieldset>
-        <fieldset>
-            <label for="time">Time</label>
-            <input type="time" id="time" name="time">
-        </fieldset>
-    </div>
-    <fieldset>
-        <label for="number">Number</label>
-        <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
-    </fieldset>
-    <fieldset>
-        <label for="search">Search</label>
-        <input type="search" id="search" name="search" placeholder="Search...">
-    </fieldset>
-    <fieldset>
-        <label for="country">Country</label>
-        <select id="country" name="country" required>
-            <option value="">Select a country</option>
-            <option value="us">United States</option>
-            <option value="ca">Canada</option>
-            <option value="mx">Mexico</option>
-            <option value="other">Other</option>
-        </select>
-    </fieldset>
-    <fieldset>
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
-    </fieldset>
-    <div class="grid grid--md-2">
-        <fieldset>
-            <legend>Preferences</legend>
-            <label>
-                <input type="checkbox" name="option1" value="yes">
-                Option One
-            </label>
-            <label>
-                <input type="checkbox" name="option2" value="accepted" required>
-                Option Two
-            </label>
-        </fieldset>
-        <fieldset>
-            <legend>More Preference</legend>
-            <label>
-                <input type="radio" name="contact" value="option3" required>
-                Option Three
-            </label>
-            <label>
-                <input type="radio" name="contact" value="option4">
-                Option Four
-            </label>
-        </fieldset>
-    </div>
-    <div class="form-error">
-        <p>This is what an error message looks like.</p>
-    </div>
-    <div class="form-success">
-        <p>This is what a success message looks like.</p>
-    </div>
-    <button type="submit">Submit Form</button>
-</form>
-*/
-.form,
-.form form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-grid);
-    inline-size: 100%;
-}
+@layer component {
+    // Background Overlay
+    // Add to elements inside sections that need to overlay the section background.
+    /* Background Overlay HTML Example:
+    <section class="bg-overlay-parent section">
+        <div class="container">
+            <div class="block">
+                <!-- Content -->
+            </div>
+        </div>
+        <div class="bg-overlay bg--primary"><!-- div, img, and video elements --></div>
+    </section>
+    */
+    .bg-overlay {
+        block-size: 100%;
+        inline-size: 100%;
+        inset: 0;
+        margin-block-start: 0;
+        object-fit: cover;
+        object-position: var(--position-center);
+        overflow: hidden;
+        position: absolute;
+        z-index: var(--z-back);
 
-.form {
-    --bg-color-checkbox-checked: var(--primary);
-    --bg-color-checkbox: var(--bg-color-input);
-    --bg-color-form-error: var(--error);
-    --bg-color-form-success: var(--success);
-    --bg-color-input-disabled: var(--base-lighter);
-    --bg-color-input: var(--base-lightest);
-    --border-color-input: var(--border-color);
-    --border-radius-checkbox: var(--border-radius);
-    --border-radius-input: var(--border-radius);
-    --border-radius-radio: var(--border-radius-round);
-    --border-style-input: var(--border-style);
-    --border-width-input: var(--border-width);
-    --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md) var(--base-white);
-    --color-form-error: var(--error-lightest);
-    --color-form-success: var(--success-lightest);
-    --color-input: var(--base-darkest);
-    --color-label: inherit;
-    --color-placeholder: var(--base-darkest);
-    --font-size-form-error: var(--font-size-body);
-    --font-size-form-success: var(--font-size-body);
-    --font-size-input: var(--font-size-body);
-    --font-size-label: var(--font-size-body);
-    --font-weight-label: 400;
-    --gap-form: var(--space-grid);
-    --gap-label: var(--space-xs);
-    --height-input: var(--space-2xl);
-    --height-textarea: calc(var(--space-xl) * 5);
-    --line-height-input: var(--line-height-heading);
-    --opacity-placeholder: .5;
-    --padding-x-input: var(--space-md);
-    --padding-y-input: var(--space-xs);
-    --size-checkbox: var(--space-lg);
-}
-
-// Checkbox, Radio
-input[type="checkbox"],
-input[type="radio"] {
-    appearance: none;
-    background-color: var(--bg-color-checkbox);
-    block-size: var(--size-checkbox);
-    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-    cursor: pointer;
-    display: grid;
-    inline-size: var(--size-checkbox);
-    place-content: center;
-
-    &::before {
-        box-shadow: var(--box-shadow-checkbox-checked);
-        content: "";
-        height: calc(var(--size-checkbox) * .75);
-        transform: scale(0);
-        transition: transform var(--transition);
-        width: calc(var(--size-checkbox) * .75);
+        &-parent {
+            isolation: isolate;
+            position: relative;
+        }
     }
 
-    &:checked {
-        background-color: var(--bg-color-checkbox-checked);
-        border-color: var(--bg-color-checkbox-checked);
+    // Button
+    // Add to anchor links and buttons.
+    /* Button HTML Example:
+    <a class="btn" href="#">Anchor Link</a>
+    <button class="btn">Button</button>
+    */
+    .btn {
+        --btn-bg-color: var(--primary);
+        --btn-border-radius: var(--border-radius);
+        --btn-border-style: var(--border-style);
+        --btn-border-width: var(--border-width);
+        --btn-color: var(--primary-lightest);
+        --btn-font-size: var(--font-size-body);
+        --btn-font-weight: 400;
+        --btn-gap: var(--space-icon);
+        --btn-letter-spacing: var(--space-px);
+        --btn-line-height: 1;
+        --btn-padding-block: var(--space-md);
+        --btn-padding-inline: var(--space-lg);
+
+        align-items: center;
+        background-color: var(--btn-bg-color);
+        border-color: var(--btn-bg-color);
+        border-radius: var(--btn-border-radius);
+        border-style: var(--btn-border-style);
+        border-width: var(--btn-border-width);
+        color: var(--btn-color);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: var(--btn-font-size);
+        font-weight: var(--btn-font-weight);
+        gap: var(--btn-gap);
+        inline-size: fit-content;
+        justify-content: center;
+        letter-spacing: var(--btn-letter-spacing);
+        line-height: var(--btn-line-height);
+        padding-block: var(--btn-padding-block);
+        padding-inline: var(--btn-padding-inline);
+        text-align: center;
+        text-decoration: none;
+        text-transform: none;
+        transition:
+            background-color var(--transition) var(--transition-easing),
+            border-color var(--transition) var(--transition-easing),
+            color var(--transition) var(--transition-easing);
+
+        &:focus-visible {
+            transition: none;
+        }
+
+        // Button - Color
+        &--dark {
+            --btn-bg-color: var(--base-black);
+            --btn-color: var(--base-white);
+
+            &:focus-visible {
+                @extend .focus--dark;
+            }
+
+            &.btn--outline {
+                --btn-color: var(--btn-bg-color);
+            }
+        }
+
+        &--light {
+            --btn-bg-color: var(--base-white);
+            --btn-color: var(--base-black);
+
+            &:focus-visible {
+                @extend .focus--light;
+            }
+
+            &.btn--outline {
+                --btn-color: var(--btn-bg-color);
+            }
+        }
+
+        // Button - Size
+        .btn--large {
+            --btn-font-size: var(--font-size-body);
+            --btn-padding-block: var(--space-lg);
+            --btn-padding-inline: var(--space-xl);
+        }
+
+        .btn--small {
+            --btn-font-size: var(--font-size-small);
+            --btn-padding-block: var(--space-sm);
+            --btn-padding-inline: var(--space-md);
+        }
+
+        // Button - Style
+        &--icon {
+            --btn-padding-block: var(--space-icon);
+            --btn-padding-inline: var(--space-icon);
+        }
+
+        &--outline {
+            --btn-color: var(--btn-bg-color);
+
+            background-color: initial;
+        }
     }
 
-    &:checked:before {
-        transform: scale(0.75);
+    // Form
+    // Add to forms or containers that contain form elements.
+    /* Form HTML Example:
+    <form class="form">
+        <fieldset>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Pretend Person" required>
+        </fieldset>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="hello@pretend.studio" required>
+            </fieldset>
+            <fieldset>
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(987) 654-3210">
+            </fieldset>
+        </div>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </fieldset>
+            <fieldset>
+                <label for="url">Website</label>
+                <input type="url" id="url" name="url" placeholder="https://pretend.studio" disabled>
+            </fieldset>
+        </div>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date">
+            </fieldset>
+            <fieldset>
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time">
+            </fieldset>
+        </div>
+        <fieldset>
+            <label for="number">Number</label>
+            <input type="number" id="number" name="number" min="0" max="100" step="1" placeholder="Enter a number">
+        </fieldset>
+        <fieldset>
+            <label for="search">Search</label>
+            <input type="search" id="search" name="search" placeholder="Search...">
+        </fieldset>
+        <fieldset>
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+                <option value="">Select a country</option>
+                <option value="us">United States</option>
+                <option value="ca">Canada</option>
+                <option value="mx">Mexico</option>
+                <option value="other">Other</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Enter your message here..." required></textarea>
+        </fieldset>
+        <div class="grid grid--md-2">
+            <fieldset>
+                <legend>Preferences</legend>
+                <label>
+                    <input type="checkbox" name="option1" value="yes">
+                    Option One
+                </label>
+                <label>
+                    <input type="checkbox" name="option2" value="accepted" required>
+                    Option Two
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>More Preference</legend>
+                <label>
+                    <input type="radio" name="contact" value="option3" required>
+                    Option Three
+                </label>
+                <label>
+                    <input type="radio" name="contact" value="option4">
+                    Option Four
+                </label>
+            </fieldset>
+        </div>
+        <div class="form-error">
+            <p>This is what an error message looks like.</p>
+        </div>
+        <div class="form-success">
+            <p>This is what a success message looks like.</p>
+        </div>
+        <button type="submit">Submit Form</button>
+    </form>
+    */
+    .form,
+    .form form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-grid);
+        inline-size: 100%;
     }
 
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.75;
+    .form {
+        --bg-color-checkbox-checked: var(--primary);
+        --bg-color-checkbox: var(--bg-color-input);
+        --bg-color-form-error: var(--error);
+        --bg-color-form-success: var(--success);
+        --bg-color-input-disabled: var(--base-lighter);
+        --bg-color-input: var(--base-lightest);
+        --border-color-input: var(--border-color);
+        --border-radius-checkbox: var(--border-radius);
+        --border-radius-input: var(--border-radius);
+        --border-radius-radio: var(--border-radius-round);
+        --border-style-input: var(--border-style);
+        --border-width-input: var(--border-width);
+        --box-shadow-checkbox-checked: inset var(--space-md) var(--space-md)
+            var(--base-white);
+        --color-form-error: var(--error-lightest);
+        --color-form-success: var(--success-lightest);
+        --color-input: var(--base-darkest);
+        --color-label: inherit;
+        --color-placeholder: var(--base-darkest);
+        --font-size-form-error: var(--font-size-body);
+        --font-size-form-success: var(--font-size-body);
+        --font-size-input: var(--font-size-body);
+        --font-size-label: var(--font-size-body);
+        --font-weight-label: 400;
+        --gap-form: var(--space-grid);
+        --gap-label: var(--space-xs);
+        --height-input: var(--space-2xl);
+        --height-textarea: calc(var(--space-xl) * 5);
+        --line-height-input: 1.2;
+        --opacity-placeholder: 0.5;
+        --padding-x-input: var(--space-md);
+        --padding-y-input: var(--space-xs);
+        --size-checkbox: var(--space-lg);
     }
-}
 
-input[type="checkbox"] {
-    border-radius: var(--border-radius-checkbox);
+    // Checkbox, Radio
+    input[type="checkbox"],
+    input[type="radio"] {
+        appearance: none;
+        background-color: var(--bg-color-checkbox);
+        block-size: var(--size-checkbox);
+        border: var(--border-width-input) var(--border-style-input)
+            var(--border-color-input);
+        cursor: pointer;
+        display: grid;
+        inline-size: var(--size-checkbox);
+        place-content: center;
 
-    &::before {
-        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        &::before {
+            box-shadow: var(--box-shadow-checkbox-checked);
+            content: "";
+            height: calc(var(--size-checkbox) * 0.75);
+            transform: scale(0);
+            transition: transform var(--transition);
+            width: calc(var(--size-checkbox) * 0.75);
+        }
+
+        &:checked {
+            background-color: var(--bg-color-checkbox-checked);
+            border-color: var(--bg-color-checkbox-checked);
+        }
+
+        &:checked:before {
+            transform: scale(0.75);
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
     }
-}
 
-input[type="radio"] {
-    border-radius: var(--border-radius-radio);
+    input[type="checkbox"] {
+        border-radius: var(--border-radius-checkbox);
 
-    &::before {
+        &::before {
+            clip-path: polygon(
+                14% 44%,
+                0 65%,
+                50% 100%,
+                100% 16%,
+                80% 0%,
+                43% 62%
+            );
+        }
+    }
+
+    input[type="radio"] {
         border-radius: var(--border-radius-radio);
-    }
-}
 
-// Fieldset
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-// Input, Textarea
-input[type="date"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-textarea {
-    background-color: var(--bg-color-input);
-    border-radius: var(--border-radius-input);
-    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-    color: var(--color-input);
-    font-family: inherit;
-    font-size: var(--font-size-input);
-    inline-size: 100%;
-    line-height: var(--line-height-input);
-    min-block-size: var(--height-input);
-    padding: var(--padding-y-input) var(--padding-x-input);
-    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-
-    &::placeholder {
-        color: var(--color-placeholder);
-        opacity: var(--opacity-placeholder);
+        &::before {
+            border-radius: var(--border-radius-radio);
+        }
     }
 
-    &:disabled {
-        background-color: var(--bg-color-input-disabled);
-        cursor: not-allowed;
-        opacity: 0.75;
-    }
-}
-
-// Label, Legend
-label,
-legend {
-    align-items: center;
-    color: var(--color-label);
-    cursor: pointer;
-    display: flex;
-    font-size: var(--font-size-label);
-    font-weight: var(--font-weight-label);
-    gap: var(--gap-label);
-    margin-block-end: var(--gap-label);
-
-    &:has(+ input:disabled),
-    &:has(+ select:disabled),
-    &:has(+ textarea:disabled) {
-        cursor: not-allowed;
-        opacity: 0.75;
-    }
-}
-
-// Select
-select {
-    appearance: none;
-    background-color: var(--bg-color-input);
-    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: calc(100% - var(--padding-x-input) - 5px) calc(50% + 1px), calc(100% - var(--padding-x-input)) calc(50% + 1px);
-    background-repeat: no-repeat;
-    background-size: 5px 5px, 5px 5px;
-    border: var(--border-width-input) var(--border-style-input) var(--border-color-input);
-    border-radius: var(--border-radius-input);
-    color: var(--color-input);
-    cursor: pointer;
-    font-family: inherit;
-    font-size: var(--font-size-input);
-    inline-size: 100%;
-    line-height: var(--line-height-input);
-    min-block-size: var(--height-input);
-    padding: var(--padding-y-input) var(--padding-x-input);
-    transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
-
-    &:disabled {
-        background-color: var(--bg-color-input-disabled);
-        cursor: not-allowed;
-        opacity: 0.75;
-    }
-}
-
-// Submit
-button {
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.75;
-    }
-}
-
-// Textarea
-textarea:not([rows]) {
-    min-block-size: var(--height-textarea);
-    resize: vertical;
-}
-
-// Honeypot
-fieldset:has([name="_pretend-check"]) {
-    left: -625rem;
-    position: absolute;
-}
-
-// Messages
-.form-error,
-.form-success {
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius-input);
-    display: flex;
-    min-block-size: var(--height-input);
-    padding: var(--padding-y-input) var(--padding-x-input);
-}
-
-.form-error {
-    background-color: var(--bg-color-form-error);
-    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-error);
-    color: var(--color-form-error);
-    font-size: var(--font-size-form-error);
-}
-
-.form-success {
-    background-color: var(--bg-color-form-success);
-    border: var(--border-width-input) var(--border-style-input) var(--bg-color-form-success);
-    color: var(--color-form-success);
-    font-size: var(--font-size-form-success);
-}
-
-// Link Overlay
-// Add to an anchor link that need to expand to fill the parent container.
-/* Link Overlay HTML Example:
-<div class="link-overlay">
-    <a href="#">Link</a>
-</div>
-*/
-.link-overlay {
-    position: relative;
-
-    & :focus {
-        outline: none !important;
+    // Fieldset
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
     }
 
-    & a {
-        position: static;
+    // Input, Textarea
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    textarea {
+        background-color: var(--bg-color-input);
+        border-radius: var(--border-radius-input);
+        border: var(--border-width-input) var(--border-style-input)
+            var(--border-color-input);
+        color: var(--color-input);
+        font-family: inherit;
+        font-size: var(--font-size-input);
+        inline-size: 100%;
+        line-height: var(--line-height-input);
+        min-block-size: var(--height-input);
+        padding: var(--padding-y-input) var(--padding-x-input);
+        transition:
+            background-color var(--transition) var(--transition-easing),
+            border-color var(--transition) var(--transition-easing);
+
+        &::placeholder {
+            color: var(--color-placeholder);
+            opacity: var(--opacity-placeholder);
+        }
+
+        &:disabled {
+            background-color: var(--bg-color-input-disabled);
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
     }
 
-    & a::after {
-        content: "";
+    // Label, Legend
+    label,
+    legend {
+        align-items: center;
+        color: var(--color-label);
         cursor: pointer;
         display: flex;
-        inset: 0;
+        font-size: var(--font-size-label);
+        font-weight: var(--font-weight-label);
+        gap: var(--gap-label);
+        margin-block-end: var(--gap-label);
+
+        &:has(+ input:disabled),
+        &:has(+ select:disabled),
+        &:has(+ textarea:disabled) {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+    }
+
+    // Select
+    select {
+        appearance: none;
+        background-color: var(--bg-color-input);
+        background-image:
+            linear-gradient(45deg, transparent 50%, currentColor 50%),
+            linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position:
+            calc(100% - var(--padding-x-input) - 5px) calc(50% + 1px),
+            calc(100% - var(--padding-x-input)) calc(50% + 1px);
+        background-repeat: no-repeat;
+        background-size:
+            5px 5px,
+            5px 5px;
+        border: var(--border-width-input) var(--border-style-input)
+            var(--border-color-input);
+        border-radius: var(--border-radius-input);
+        color: var(--color-input);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--font-size-input);
+        inline-size: 100%;
+        line-height: var(--line-height-input);
+        min-block-size: var(--height-input);
+        padding: var(--padding-y-input) var(--padding-x-input);
+        transition:
+            background-color var(--transition) var(--transition-easing),
+            border-color var(--transition) var(--transition-easing);
+
+        &:disabled {
+            background-color: var(--bg-color-input-disabled);
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+    }
+
+    // Submit
+    button {
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+    }
+
+    // Textarea
+    textarea:not([rows]) {
+        min-block-size: var(--height-textarea);
+        resize: vertical;
+    }
+
+    // Honeypot
+    fieldset:has([name="_pretend-check"]) {
+        left: -625rem;
         position: absolute;
+    }
+
+    // Messages
+    .form-error,
+    .form-success {
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-input);
+        display: flex;
+        min-block-size: var(--height-input);
+        padding: var(--padding-y-input) var(--padding-x-input);
+    }
+
+    .form-error {
+        background-color: var(--bg-color-form-error);
+        border: var(--border-width-input) var(--border-style-input)
+            var(--bg-color-form-error);
+        color: var(--color-form-error);
+        font-size: var(--font-size-form-error);
+    }
+
+    .form-success {
+        background-color: var(--bg-color-form-success);
+        border: var(--border-width-input) var(--border-style-input)
+            var(--bg-color-form-success);
+        color: var(--color-form-success);
+        font-size: var(--font-size-form-success);
+    }
+
+    // Link Overlay
+    // Add to an anchor link that need to expand to fill the parent container.
+    /* Link Overlay HTML Example:
+    <div class="link-overlay">
+        <a href="#">Link</a>
+    </div>
+    */
+    .link-overlay {
+        position: relative;
+
+        & :focus {
+            outline: none !important;
+        }
+
+        & a {
+            position: static;
+        }
+
+        & a::after {
+            content: "";
+            cursor: pointer;
+            display: flex;
+            inset: 0;
+            position: absolute;
+        }
     }
 }
 
-/* --- Utility --- */
+// --- Utility Layer --- //
 
-@if $alignment {
+@layer utility {
+    // Background Blur
+    .bg-blur--sm,
+    .bg-blur--md,
+    .bg-blur--lg {
+        --blur-sm: var(--space-4px);
+        --blur-md: var(--space-xs);
+        --blur-lg: var(--space-md);
 
-    // Alignment
-    .align--center-all {
-        align-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
-        text-align: center;
+        background-color: var(--bg-blur);
     }
 
-    .align--center-x {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
+    .bg-blur--sm {
+        backdrop-filter: blur(var(--blur-sm));
     }
 
-    .align--center-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        justify-items: center;
+    .bg-blur--md {
+        backdrop-filter: blur(var(--blur-md));
     }
 
-    .align--end-x {
-        align-items: flex-end;
-        display: flex;
-        flex-direction: column;
-        text-align: right;
+    .bg-blur--lg {
+        backdrop-filter: blur(var(--blur-lg));
     }
 
-    .align--end-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        justify-items: flex-end;
+    // Background Color
+    @each $color, $value in $colors {
+        .bg--#{$color} {
+            background-color: var(--#{$color});
+        }
     }
 
-    .align--start-x {
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
+    .bg--base-white {
+        background-color: var(--base-white);
     }
 
-    .align--start-y {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        justify-items: flex-start;
+    @each $shade, $value in $light-shades {
+        @each $color, $value in $colors {
+            .bg--#{$color}-#{$shade} {
+                background-color: var(--#{$color}-#{$shade});
+            }
+        }
     }
 
-    .align--stretch-all {
-        align-content: stretch;
-        align-items: stretch;
-        justify-content: stretch;
-        justify-items: stretch;
+    .bg--base-black {
+        background-color: var(--base-black);
     }
 
-    .aligncenter,
-    .center--self {
-        margin-inline: auto;
+    .bg--transparent {
+        background-color: transparent;
     }
 
+    // Breakout
+    .breakout--wide {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline-start: 50%;
+        max-inline-size: var(--width-wide);
+        transform: translateX(-50%);
+    }
+
+    .breakout--max {
+        align-self: flex-start;
+        inline-size: 100vw;
+        margin-inline-start: 50%;
+        max-inline-size: var(--width-max);
+        transform: translateX(-50%);
+    }
+
+    // Clear
+    .clear {
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+
+        &::after {
+            clear: both;
+        }
+    }
+
+    // Color
+    @each $color, $value in $colors {
+        .color--#{$color} {
+            color: var(--#{$color});
+        }
+    }
+
+    .color--base-white {
+        color: var(--base-white);
+    }
+
+    @each $shade, $value in $light-shades {
+        @each $color, $value in $colors {
+            .color--#{$color}-#{$shade} {
+                color: var(--#{$color}-#{$shade});
+            }
+        }
+    }
+
+    .color--base-black {
+        color: var(--base-black);
+    }
+
+    .color--transparent {
+        color: transparent;
+    }
+
+    // Flip
+    .flip--x {
+        transform: scaleX(-1);
+    }
+
+    .flip--y {
+        transform: scaleY(-1);
+    }
+
+    .flip--xy {
+        transform: scale(-1, -1);
+    }
+
+    // Float
     .alignleft,
     .float--left,
     .float--left-offset {
@@ -1941,996 +1526,37 @@ fieldset:has([name="_pretend-check"]) {
         margin-inline-end: calc(var(--space-edge) * -1);
     }
 
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .align--#{$_key}-center-all {
-                align-content: center;
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                justify-items: center;
-                text-align: center;
-            }
-
-            .align--#{$_key}-center-x {
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .align--#{$_key}-center-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                justify-items: center;
-            }
-
-            .align--#{$_key}-end-x {
-                align-items: flex-end;
-                display: flex;
-                flex-direction: column;
-                text-align: right;
-            }
-
-            .align--#{$_key}-end-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                justify-items: flex-end;
-            }
-
-            .align--#{$_key}-start-x {
-                align-items: flex-start;
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-            }
-
-            .align--#{$_key}-start-y {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                justify-items: flex-start;
-            }
-
-            .align--#{$_key}-stretch-all {
-                align-content: stretch;
-                align-items: stretch;
-                justify-content: stretch;
-                justify-items: stretch;
-            }
-
-            .center--#{$_key}-self {
-                float: none;
-                margin-block-end: 0;
-                margin-inline: auto;
-            }
-
-            .float--#{$_key}-left,
-            .float--#{$_key}-left-offset {
+    @each $breakpoint, $width in $breakpoints {
+        @include breakpoint($breakpoint) {
+            .float--#{$breakpoint}-left,
+            .float--#{$breakpoint}-left-offset {
                 float: inline-start;
                 margin-block-end: var(--space-block);
                 margin-inline-end: var(--space-block);
-                margin-inline-start: 0;
             }
 
-            .float--#{$_key}-left-offset {
+            .float--#{$breakpoint}-left-offset {
                 margin-inline-start: calc(var(--space-edge) * -1);
             }
 
-            .float--#{$_key}-none {
+            .float--#{$breakpoint}-none {
                 float: none;
                 margin-block-end: 0;
                 margin-inline: 0;
             }
 
-            .float--#{$_key}-right,
-            .float--#{$_key}-right-offset {
+            .float--#{$breakpoint}-right,
+            .float--#{$breakpoint}-right-offset {
                 float: inline-end;
                 margin-block-end: var(--space-block);
-                margin-inline-end: 0;
                 margin-inline-start: var(--space-block);
             }
 
-            .float--#{$_key}-right-offset {
+            .float--#{$breakpoint}-right-offset {
                 margin-inline-end: calc(var(--space-edge) * -1);
             }
         }
     }
-}
-
-@if $aspect-ratio {
-
-    // Aspect Ratio
-    .aspect--square iframe,
-    .aspect--landscape iframe,
-    .aspect--portrait iframe,
-    .aspect--cinema iframe,
-    .aspect--wide iframe {
-        block-size: 100%;
-        inline-size: 100%;
-    }
-
-    .aspect--square,
-    .aspect--square iframe {
-        aspect-ratio: var(--aspect-square);
-    }
-
-    .aspect--landscape,
-    .aspect--landscape iframe {
-        aspect-ratio: var(--aspect-landscape);
-    }
-
-    .aspect--portrait,
-    .aspect--portrait iframe {
-        aspect-ratio: var(--aspect-portrait);
-    }
-
-    .aspect--cinema,
-    .aspect--cinema iframe {
-        aspect-ratio: var(--aspect-cinema);
-    }
-
-    .aspect--wide,
-    .aspect--wide iframe {
-        aspect-ratio: var(--aspect-wide);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .aspect--#{$_key}-square iframe,
-            .aspect--#{$_key}-landscape iframe,
-            .aspect--#{$_key}-portrait iframe,
-            .aspect--#{$_key}-cinema iframe,
-            .aspect--#{$_key}-wide iframe {
-                block-size: 100%;
-                inline-size: 100%;
-            }
-
-            .aspect--#{$_key}-square,
-            .aspect--#{$_key}-square iframe {
-                aspect-ratio: var(--aspect-square);
-            }
-
-            .aspect--#{$_key}-landscape,
-            .aspect--#{$_key}-landscape iframe {
-                aspect-ratio: var(--aspect-landscape);
-            }
-
-            .aspect--#{$_key}-portrait,
-            .aspect--#{$_key}-portrait iframe {
-                aspect-ratio: var(--aspect-portrait);
-            }
-
-            .aspect--#{$_key}-cinema,
-            .aspect--#{$_key}-cinema iframe {
-                aspect-ratio: var(--aspect-cinema);
-            }
-
-            .aspect--#{$_key}-wide,
-            .aspect--#{$_key}-wide iframe {
-                aspect-ratio: var(--aspect-wide);
-            }
-        }
-    }
-}
-
-@if $bg-blur {
-
-    // Background Blur
-    .bg-blur--sm,
-    .bg-blur--md,
-    .bg-blur--lg {
-        --blur-sm: var(--space-4px);
-        --blur-md: var(--space-xs);
-        --blur-lg: var(--space-md);
-
-        background-color: var(--bg-color-blur);
-    }
-
-    .bg-blur--sm {
-        backdrop-filter: blur(var(--blur-sm));
-    }
-
-    .bg-blur--md {
-        backdrop-filter: blur(var(--blur-md));
-    }
-
-    .bg-blur--lg {
-        backdrop-filter: blur(var(--blur-lg));
-    }
-}
-
-@if $bg-color {
-
-    // Background Color
-    @each $_key, $_value in $color {
-        .bg--#{$_key} {
-            background-color: var(--#{$_key});
-        }
-
-        .bg--#{$_key}-lightest {
-            background-color: var(--#{$_key}-lightest);
-        }
-
-        .bg--#{$_key}-lighter {
-            background-color: var(--#{$_key}-lighter);
-        }
-
-        .bg--#{$_key}-light {
-            background-color: var(--#{$_key}-light);
-        }
-
-        .bg--#{$_key}-dark {
-            background-color: var(--#{$_key}-dark);
-        }
-
-        .bg--#{$_key}-darker {
-            background-color: var(--#{$_key}-darker);
-        }
-
-        .bg--#{$_key}-darkest {
-            background-color: var(--#{$_key}-darkest);
-        }
-    }
-
-    @each $_key, $_value in $color-base {
-        .bg--#{$_key}-white {
-            background-color: var(--#{$_key}-white);
-        }
-
-        .bg--#{$_key}-lightest {
-            background-color: var(--#{$_key}-lightest);
-        }
-
-        .bg--#{$_key}-lighter {
-            background-color: var(--#{$_key}-lighter);
-        }
-
-        .bg--#{$_key}-light {
-            background-color: var(--#{$_key}-light);
-        }
-
-        .bg--#{$_key}-dark {
-            background-color: var(--#{$_key}-dark);
-        }
-
-        .bg--#{$_key}-darker {
-            background-color: var(--#{$_key}-darker);
-        }
-
-        .bg--#{$_key}-darkest {
-            background-color: var(--#{$_key}-darkest);
-        }
-
-        .bg--#{$_key}-black {
-            background-color: var(--#{$_key}-black);
-        }
-    }
-
-    .bg--transparent {
-        background-color: transparent;
-    }
-}
-
-@if $bg-isolate {
-
-    // Background Isolate
-    .bg-isolate {
-        isolation: isolate;
-    }
-}
-
-@if $border {
-
-    // Borders, Radius
-    .border {
-        & {
-            border: var(--border-width) var(--border-style) var(--border-color);
-            border-radius: var(--border-radius);
-        }
-
-        &--top {
-            border-top: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--right {
-            border-right: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--bottom {
-            border-bottom: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--left {
-            border-left: var(--border-width) var(--border-style) var(--border-color);
-        }
-
-        &--flat {
-            border: none;
-        }
-
-        &-radius {
-            border-radius: var(--border-radius);
-        }
-
-        &-radius--alt {
-            border-radius: var(--border-radius-alt);
-        }
-
-        &-radius--oval {
-            border-radius: var(--border-radius-oval);
-        }
-
-        &-radius--round {
-            border-radius: var(--border-radius-round);
-        }
-
-        &-radius--flat {
-            border-radius: 0;
-        }
-    }
-}
-
-@if $breakout {
-
-    // Breakout
-    .breakout--wide {
-        align-self: flex-start;
-        inline-size: 100vw;
-        margin-inline-start: 50%;
-        max-inline-size: var(--width-wide);
-        transform: translateX(-50%);
-    }
-
-    .breakout--max {
-        align-self: flex-start;
-        inline-size: 100vw;
-        margin-inline-start: 50%;
-        max-inline-size: var(--width-max);
-        transform: translateX(-50%);
-    }
-}
-
-@if $clear {
-
-    // Clear
-    .clear {
-
-        &::before,
-        &::after {
-            content: "";
-            display: table;
-        }
-
-        &::after {
-            clear: both;
-        }
-    }
-}
-
-@if $color {
-
-    // Color
-    @each $_key, $_value in $color {
-        .color--#{$_key} {
-            color: var(--#{$_key});
-        }
-
-        .color--#{$_key}-lightest {
-            color: var(--#{$_key}-lightest);
-        }
-
-        .color--#{$_key}-lighter {
-            color: var(--#{$_key}-lighter);
-        }
-
-        .color--#{$_key}-light {
-            color: var(--#{$_key}-light);
-        }
-
-        .color--#{$_key}-dark {
-            color: var(--#{$_key}-dark);
-        }
-
-        .color--#{$_key}-darker {
-            color: var(--#{$_key}-darker);
-        }
-
-        .color--#{$_key}-darkest {
-            color: var(--#{$_key}-darkest);
-        }
-    }
-
-    @each $_key, $_value in $color-base {
-        .color--#{$_key}-white {
-            color: var(--#{$_key}-white);
-        }
-
-        .color--#{$_key}-lightest {
-            color: var(--#{$_key}-lightest);
-        }
-
-        .color--#{$_key}-lighter {
-            color: var(--#{$_key}-lighter);
-        }
-
-        .color--#{$_key}-light {
-            color: var(--#{$_key}-light);
-        }
-
-        .color--#{$_key}-dark {
-            color: var(--#{$_key}-dark);
-        }
-
-        .color--#{$_key}-darker {
-            color: var(--#{$_key}-darker);
-        }
-
-        .color--#{$_key}-darkest {
-            color: var(--#{$_key}-darkest);
-        }
-
-        .color--#{$_key}-black {
-            color: var(--#{$_key}-black);
-        }
-    }
-
-    .color--transparent {
-        color: transparent;
-    }
-}
-
-@if $content-column {
-    // Content Column
-    $content-columns: (
-        1,
-        2,
-        3,
-        4,
-        5
-    );
-
-.content-column {
-    --gap-content-column: var(--space-block);
-    --rule-content-column: var(--border-width) var(--border-style) var(--border-color);
-
-    column-gap: var(--gap-content-column);
-    column-rule: var(--rule-content-column);
-}
-
-@each $column in $content-columns {
-    .content-columns--#{$column} {
-        @extend .content-column;
-    }
-}
-
-@each $_key, $_value in $breakpoint {
-    @include breakpoint($_value) {
-        @each $column in $content-columns {
-            .content-column--#{$_key}-#{$column} {
-                column-count: #{$column};
-            }
-        }
-    }
-}
-
-.content-column-span--all {
-    column-span: all;
-}
-}
-
-@if $cursor {
-
-    // Cursor
-    .cursor--default {
-        cursor: default;
-    }
-
-    .cursor--pointer {
-        cursor: pointer;
-    }
-}
-
-@if $flex {
-
-    // Flex - Align
-    .align-content--start {
-        align-content: flex-start;
-    }
-
-    .align-content--center {
-        align-content: center;
-    }
-
-    .align-content--end {
-        align-content: flex-end;
-    }
-
-    .align-content--around {
-        align-content: space-around;
-    }
-
-    .align-content--baseline {
-        align-content: baseline;
-    }
-
-    .align-content--between {
-        align-content: space-between;
-    }
-
-    .align-content--evenly {
-        align-content: space-evenly;
-    }
-
-    .align-content--stretch {
-        align-content: stretch;
-    }
-
-    .align-items--start {
-        align-items: flex-start;
-    }
-
-    .align-items--center {
-        align-items: center;
-    }
-
-    .align-items--end {
-        align-items: flex-end;
-    }
-
-    .align-items--baseline {
-        align-items: baseline;
-    }
-
-    .align-items--stretch {
-        align-items: stretch;
-    }
-
-    .align-self--start {
-        align-self: flex-start;
-    }
-
-    .align-self--center {
-        align-self: center;
-    }
-
-    .align-self--end {
-        align-self: flex-end;
-    }
-
-    .align-self--baseline {
-        align-self: baseline;
-    }
-
-    .align-self--stretch {
-        align-self: stretch;
-    }
-
-    .justify-content--start {
-        justify-content: flex-start;
-    }
-
-    .justify-content--center {
-        justify-content: center;
-    }
-
-    .justify-content--end {
-        justify-content: flex-end;
-    }
-
-    .justify-content--evenly {
-        justify-content: space-evenly;
-    }
-
-    .justify-content--around {
-        justify-content: space-around;
-    }
-
-    .justify-content--between {
-        justify-content: space-between;
-    }
-
-    .justify-content--stretch {
-        justify-content: stretch;
-    }
-
-    .justify-items--start {
-        justify-items: flex-start;
-    }
-
-    .justify-items--center {
-        justify-items: center;
-    }
-
-    .justify-items--end {
-        justify-items: flex-end;
-    }
-
-    .justify-items--stretch {
-        justify-items: stretch;
-    }
-
-    .justify-self--start {
-        justify-self: flex-start;
-    }
-
-    .justify-self--center {
-        justify-self: center;
-    }
-
-    .justify-self--end {
-        justify-self: flex-end;
-    }
-
-    .justify-self--stretch {
-        justify-self: stretch;
-    }
-
-    @each $_key,
-    $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .align-content--#{$_key}-start {
-                align-content: flex-start;
-            }
-
-            .align-content--#{$_key}-center {
-                align-content: center;
-            }
-
-            .align-content--#{$_key}-end {
-                align-content: flex-end;
-            }
-
-            .align-content--#{$_key}-around {
-                align-content: space-around;
-            }
-
-            .align-content--#{$_key}-baseline {
-                align-content: baseline;
-            }
-
-            .align-content--#{$_key}-between {
-                align-content: space-between;
-            }
-
-            .align-content--#{$_key}-evenly {
-                align-content: space-evenly;
-            }
-
-            .align-content--#{$_key}-stretch {
-                align-content: stretch;
-            }
-
-            .align-items--#{$_key}-start {
-                align-items: flex-start;
-            }
-
-            .align-items--#{$_key}-center {
-                align-items: center;
-            }
-
-            .align-items--#{$_key}-end {
-                align-items: flex-end;
-            }
-
-            .align-items--#{$_key}-baseline {
-                align-items: baseline;
-            }
-
-            .align-items--#{$_key}-stretch {
-                align-items: stretch;
-            }
-
-            .align-self--#{$_key}-start {
-                align-self: flex-start;
-            }
-
-            .align-self--#{$_key}-center {
-                align-self: center;
-            }
-
-            .align-self--#{$_key}-end {
-                align-self: flex-end;
-            }
-
-            .align-self--#{$_key}-baseline {
-                align-self: baseline;
-            }
-
-            .align-self--#{$_key}-stretch {
-                align-self: stretch;
-            }
-
-            .justify-content--#{$_key}-start {
-                justify-content: flex-start;
-            }
-
-            .justify-content--#{$_key}-center {
-                justify-content: center;
-            }
-
-            .justify-content--#{$_key}-end {
-                justify-content: flex-end;
-            }
-
-            .justify-content--#{$_key}-evenly {
-                justify-content: space-evenly;
-            }
-
-            .justify-content--#{$_key}-around {
-                justify-content: space-around;
-            }
-
-            .justify-content--#{$_key}-between {
-                justify-content: space-between;
-            }
-
-            .justify-content--#{$_key}-stretch {
-                justify-content: stretch;
-            }
-
-            .justify-items--#{$_key}-start {
-                justify-items: flex-start;
-            }
-
-            .justify-items--#{$_key}-center {
-                justify-items: center;
-            }
-
-            .justify-items--#{$_key}-end {
-                justify-items: flex-end;
-            }
-
-            .justify-items--#{$_key}-stretch {
-                justify-items: stretch;
-            }
-
-            .justify-self--#{$_key}-start {
-                justify-self: flex-start;
-            }
-
-            .justify-self--#{$_key}-center {
-                justify-self: center;
-            }
-
-            .justify-self--#{$_key}-end {
-                justify-self: flex-end;
-            }
-
-            .justify-self--#{$_key}-stretch {
-                justify-self: stretch;
-            }
-        }
-    }
-
-    // Flex - Direction
-    .flex--column {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .flex--column-reverse {
-        flex-direction: column-reverse;
-    }
-
-    .flex--row {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .flex--row-reverse {
-        flex-direction: row-reverse;
-    }
-
-    @each $_key,
-    $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .flex--#{$_key}-column {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .flex--#{$_key}-column-reverse {
-                flex-direction: column-reverse;
-            }
-
-            .flex--#{$_key}-row {
-                display: flex;
-                flex-direction: row;
-            }
-
-            .flex--#{$_key}-row-reverse {
-                flex-direction: row-reverse;
-            }
-        }
-    }
-
-    // Flex - Grow
-    .flex-grow {
-        flex-grow: 1;
-    }
-
-    .flex-grow--flat {
-        flex-grow: 0;
-    }
-
-    // Flex - Shrink
-    .flex-shrink {
-        flex-shrink: 1;
-    }
-
-    .flex-shrink--flat {
-        flex-shrink: 0;
-    }
-
-    // Flex - Wrap
-    .flex--nowrap {
-        flex-wrap: nowrap;
-    }
-
-    .flex--wrap {
-        flex-wrap: wrap;
-    }
-
-    .flex--wrap-reverse {
-        flex-wrap: wrap-reverse;
-    }
-}
-
-@if $flip {
-
-    // Flip
-    .flip--x {
-        transform: scaleX(-1);
-    }
-
-    .flip--y {
-        transform: scaleY(-1);
-    }
-
-    .flip--xy {
-        transform: scale(-1, -1);
-    }
-}
-
-@if $gap {
-
-    // Gap
-    .gap {
-        &--icon {
-            gap: var(--space-icon);
-
-            &-column {
-                column-gap: var(--space-icon);
-            }
-
-            &-row {
-                row-gap: var(--space-icon);
-            }
-        }
-
-        &--block {
-            gap: var(--space-block);
-
-            &-column {
-                column-gap: var(--space-block);
-            }
-
-            &-row {
-                row-gap: var(--space-block);
-            }
-        }
-
-        &--grid {
-            gap: var(--space-grid);
-
-            &-column {
-                column-gap: var(--space-grid);
-            }
-
-            &-row {
-                row-gap: var(--space-grid);
-            }
-        }
-
-        &--container {
-            gap: var(--space-container);
-
-            &-column {
-                column-gap: var(--space-container);
-            }
-
-            &-row {
-                row-gap: var(--space-container);
-            }
-        }
-
-        &--section {
-            gap: var(--space-section);
-
-            &-column {
-                column-gap: var(--space-section);
-            }
-
-            &-row {
-                row-gap: var(--space-section);
-            }
-        }
-
-        &--flat {
-            gap: 0;
-
-            &-column {
-                column-gap: 0;
-            }
-
-            &-row {
-                row-gap: 0;
-            }
-        }
-    }
-}
-
-@if $height {
-    // Height
-    $heights: (
-        auto: auto,
-        fill: 100%,
-        full: 100svh
-    );
-
-// Base classes
-@each $name, $value in $heights {
-    .height--#{$name} {
-        min-block-size: #{$value};
-    }
-}
-
-// Responsive classes grouped per breakpoint
-@each $breakpoint-name, $breakpoint-value in $breakpoint {
-    @include breakpoint($breakpoint-value) {
-        @each $name, $value in $heights {
-            .height--#{$breakpoint-name}-#{$name} {
-                min-block-size: #{$value};
-            }
-        }
-    }
-}
-
-// .height--auto {
-//     min-block-size: auto;
-// }
-
-// .height--fill {
-//     min-block-size: 100%;
-// }
-
-// .height--full {
-//     min-block-size: 100svh;
-// }
-
-// @each $_key, $_value in $breakpoint {
-//     @include breakpoint($_value) {
-//         .height--#{$_key}-auto {
-//             min-block-size: auto;
-//         }
-
-//         .height--#{$_key}-fill {
-//             min-block-size: 100%;
-//         }
-
-//         .height--#{$_key}-full {
-//             min-block-size: 100svh;
-//         }
-//     }
-// }
-}
-
-@if $hide-show {
 
     // Hide, Show
     .hide {
@@ -2945,26 +1571,23 @@ fieldset:has([name="_pretend-check"]) {
         display: flex;
     }
 
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .hide--#{$_key} {
+    @each $breakpoint, $width in $breakpoints {
+        @include breakpoint($breakpoint) {
+            .hide--#{$breakpoint} {
                 display: none;
             }
 
-            .show--#{$_key} {
+            .show--#{$breakpoint} {
                 display: block;
             }
 
-            .show--#{$_key}-flex {
+            .show--#{$breakpoint}-flex {
                 display: flex;
             }
         }
     }
-}
 
-@if $hide-visually {
-
-    // Hide - Visually
+    // Hide Visually
     .hide--visually:not(:focus):not(:active) {
         block-size: 1px !important;
         border: 0 !important;
@@ -2976,9 +1599,6 @@ fieldset:has([name="_pretend-check"]) {
         position: absolute !important;
         white-space: nowrap !important;
     }
-}
-
-@if $list {
 
     // List - Flat
     ol.list--flat,
@@ -2991,1097 +1611,120 @@ fieldset:has([name="_pretend-check"]) {
         padding-inline-start: 0;
     }
 
-    // List - Marker
-    .list-marker--color li::marker {
-        --color-marker: var(--primary);
-
-        color: var(--color-marker);
-    }
-}
-
-@if $margin {
-
-    // Margin
-    $margin-scale: (
-        icon: var(--space-icon),
-        block: var(--space-block),
-        grid: var(--space-grid),
-        container: var(--space-container),
-        section: var(--space-section),
-        edge: var(--space-edge),
-        flat: 0
-    );
-
-$margin-directions: (
-    "-x": "margin-inline",
-    "-y": "margin-block",
-    "-top": "margin-block-start",
-    "-right": "margin-inline-end",
-    "-bottom": "margin-block-end",
-    "-left": "margin-inline-start"
-);
-
-// Generate margin utility classes
-@each $key, $value in $margin-scale {
-    @each $suffix, $property in $margin-directions {
-        .margin#{$suffix}--#{$key} {
-            #{$property}: #{$value};
-        }
-    }
-}
-
-// .margin {
-//     &-top--icon {
-//         margin-block-start: var(--space-icon);
-//     }
-
-//     &-top--block {
-//         margin-block-start: var(--space-block);
-//     }
-
-//     &-top--grid {
-//         margin-block-start: var(--space-grid);
-//     }
-
-//     &-top--container {
-//         margin-block-start: var(--space-container);
-//     }
-
-//     &-top--section {
-//         margin-block-start: var(--space-section);
-//     }
-
-//     &-top--flat {
-//         margin-block-start: 0;
-//     }
-
-//     &-right--icon {
-//         margin-inline-end: var(--space-icon);
-//     }
-
-//     &-right--block {
-//         margin-inline-end: var(--space-block);
-//     }
-
-//     &-right--grid {
-//         margin-inline-end: var(--space-grid);
-//     }
-
-//     &-right--container {
-//         margin-inline-end: var(--space-container);
-//     }
-
-//     &-right--section {
-//         margin-inline-end: var(--space-section);
-//     }
-
-//     &-right--flat {
-//         margin-inline-end: 0;
-//     }
-
-//     &-bottom--icon {
-//         margin-block-end: var(--space-icon);
-//     }
-
-//     &-bottom--block {
-//         margin-block-end: var(--space-block);
-//     }
-
-//     &-bottom--grid {
-//         margin-block-end: var(--space-grid);
-//     }
-
-//     &-bottom--container {
-//         margin-block-end: var(--space-container);
-//     }
-
-//     &-bottom--section {
-//         margin-block-end: var(--space-section);
-//     }
-
-//     &-bottom--flat {
-//         margin-block-end: 0;
-//     }
-
-//     &-left--icon {
-//         margin-inline-start: var(--space-icon);
-//     }
-
-//     &-left--block {
-//         margin-inline-start: var(--space-block);
-//     }
-
-//     &-left--grid {
-//         margin-inline-start: var(--space-grid);
-//     }
-
-//     &-left--container {
-//         margin-inline-start: var(--space-container);
-//     }
-
-//     &-left--section {
-//         margin-inline-start: var(--space-section);
-//     }
-
-//     &-left--flat {
-//         margin-inline-start: 0;
-//     }
-
-//     &-x--icon {
-//         margin-inline: var(--space-icon);
-//     }
-
-//     &-x--block {
-//         margin-inline: var(--space-block);
-//     }
-
-//     &-x--grid {
-//         margin-inline: var(--space-grid);
-//     }
-
-//     &-x--container {
-//         margin-inline: var(--space-container);
-//     }
-
-//     &-x--section {
-//         margin-inline: var(--space-section);
-//     }
-
-//     &-x--flat {
-//         margin-inline: 0;
-//     }
-
-//     &-y--icon {
-//         margin-block: var(--space-icon);
-//     }
-
-//     &-y--block {
-//         margin-block: var(--space-block);
-//     }
-
-//     &-y--grid {
-//         margin-block: var(--space-grid);
-//     }
-
-//     &-y--container {
-//         margin-block: var(--space-container);
-//     }
-
-//     &-y--section {
-//         margin-block: var(--space-section);
-//     }
-
-//     &-y--flat {
-//         margin-block: 0;
-//     }
-
-//     &--flat {
-//         margin: 0;
-//     }
-// }
-}
-
-@if $object {
-
-    // Object - Fit
-    .object--contain {
-        object-fit: contain;
-    }
-
-    .object--cover {
-        object-fit: cover;
-    }
-
-    .object--none {
-        object-fit: none;
-    }
-
-    // Object Position
-    .object--bottom-center {
-        object-position: var(--position-center) var(--position-end);
-    }
-
-    .object--bottom-left {
-        object-position: var(--position-start) var(--position-end);
-    }
-
-    .object--bottom-right {
-        object-position: var(--position-end) var(--position-end);
-    }
-
-    .object--center {
-        object-position: var(--position-center);
-    }
-
-    .object--center-left {
-        object-position: var(--position-start) var(--position-center);
-    }
-
-    .object--center-right {
-        object-position: var(--position-end) var(--position-center);
-    }
-
-    .object--top-center {
-        object-position: var(--position-center) var(--position-start);
-    }
-
-    .object--top-left {
-        object-position: var(--position-start) var(--position-start);
-    }
-
-    .object--top-right {
-        object-position: var(--position-end) var(--position-start);
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .object--#{$-key}-bottom-center {
-                object-position: var(--position-center) var(--position-end);
-            }
-
-            .object--#{$-key}-bottom-left {
-                object-position: var(--position-start) var(--position-end);
-            }
-
-            .object--#{$-key}-bottom-right {
-                object-position: var(--position-end) var(--position-end);
-            }
-
-            .object--#{$-key}-center {
-                object-position: var(--position-center);
-            }
-
-            .object--#{$-key}-center-left {
-                object-position: var(--position-start) var(--position-center);
-            }
-
-            .object--#{$-key}-center-right {
-                object-position: var(--position-end) var(--position-center);
-            }
-
-            .object--#{$-key}-top-center {
-                object-position: var(--position-center) var(--position-start);
-            }
-
-            .object--#{$-key}-top-left {
-                object-position: var(--position-start) var(--position-start);
-                ;
-            }
-
-            .object--#{$-key}-top-right {
-                object-position: var(--position-end) var(--position-start);
-            }
-        }
-    }
-}
-
-@if $opacity {
-    // Opacity
-    $opacities: (
-        5: .05,
-        10: .1,
-        25: .25,
-        50: .5,
-        75: .75,
-        90: .9,
-        95: .95
-    );
-
-@each $name, $value in $opacities {
-    .opacity--#{$name} {
-        opacity: $value;
-    }
-}
-}
-
-@if $order {
-
-    // Order
-    .order--first {
-        order: -1;
-    }
-
-    .order--last {
-        order: 1000;
-    }
-
-    @each $breakpoint-name, $breakpoint-value in $breakpoint {
-        @include breakpoint($breakpoint-value) {
-            .order--#{$breakpoint-name}-first {
-                order: -1;
-            }
-
-            .order--#{$breakpoint-name}-last {
-                order: 1000;
-            }
-        }
-    }
-
-    // @each $_key, $_value in $breakpoint {
-    //     @include breakpoint($_value) {
-    //         .order--#{$_key}-first {
-    //             order: -1;
-    //         }
-
-    //         .order--#{$_key}-last {
-    //             order: 1000;
-    //         }
-    //     }
-    // }
-}
-
-@if $overflow {
-
-    // Overflow
-    .overflow--auto {
-        overflow: auto;
-    }
-
-    .overflow--clip {
-        overflow: clip;
-    }
-
-    .overflow--hidden {
-        overflow: hidden;
-    }
-
-    .overflow--scroll-x {
-        overflow-x: scroll;
-    }
-
-    .overflow--scroll-y {
-        overflow-y: scroll;
-    }
-}
-
-@if $padding {
-
-    // Padding
-    $padding-scale: (
-        icon: var(--space-icon),
-        block: var(--space-block),
-        grid: var(--space-grid),
-        container: var(--space-container),
-        section: var(--space-section),
-        edge: var(--space-edge),
-        flat: 0
-    );
-
-$padding-directions: (
-    "": "padding",
-    "-x": "padding-inline",
-    "-y": "padding-block",
-    "-top": "padding-block-start",
-    "-right": "padding-inline-end",
-    "-bottom": "padding-block-end",
-    "-left": "padding-inline-start"
-);
-
-// Generate padding utility classes
-@each $key, $value in $padding-scale {
-    @each $suffix, $property in $padding-directions {
-        .padding#{$suffix}--#{$key} {
-            #{$property}: #{$value};
-        }
-    }
-}
-
-// .padding {
-//     &--icon {
-//         padding: var(--space-icon);
-//     }
-
-//     &-x--icon {
-//         padding-inline: var(--space-icon);
-//     }
-
-//     &-y--icon {
-//         padding-block: var(--space-icon);
-//     }
-
-//     &--block {
-//         padding: var(--space-block);
-//     }
-
-//     &-x--block {
-//         padding-inline: var(--space-block);
-//     }
-
-//     &-y--block {
-//         padding-block: var(--space-block);
-//     }
-
-//     &-x--edge {
-//         padding-inline: var(--space-edge);
-//     }
-
-//     &--grid {
-//         padding: var(--space-grid);
-//     }
-
-//     &-x--grid {
-//         padding-inline: var(--space-grid);
-//     }
-
-//     &-y--grid {
-//         padding-block: var(--space-grid);
-//     }
-
-//     &--container {
-//         padding: var(--space-container);
-//     }
-
-//     &-x--container {
-//         padding-inline: var(--space-container);
-//     }
-
-//     &-y--container {
-//         padding-block: var(--space-container);
-//     }
-
-//     &--section {
-//         padding: var(--space-section) var(--space-edge);
-//     }
-
-//     &-x--section {
-//         padding-inline: var(--space-edge);
-//     }
-
-//     &-y--section {
-//         padding-block: var(--space-section);
-//     }
-
-//     &-top--flat {
-//         padding-block-start: 0;
-//     }
-
-//     &-right--flat {
-//         padding-inline-end: 0;
-//     }
-
-//     &-bottom--flat {
-//         padding-block-end: 0;
-//     }
-
-//     &-left--flat {
-//         padding-inline-start: 0;
-//     }
-
-//     &-x--flat {
-//         padding-inline: 0;
-//     }
-
-//     &-y--flat {
-//         padding-block: 0;
-//     }
-
-//     &--flat {
-//         padding: 0;
-//     }
-// }
-}
-
-@if $position {
-
-    // Position
-    .position {
-        &--absolute {
-            position: absolute;
-        }
-
-        &--fixed {
-            position: fixed;
-        }
-
-        &--relative {
-            position: relative;
-        }
-
-        &--static {
-            position: static;
-        }
-
-        &--sticky {
-            inset-block-start: 0;
-            position: sticky;
-
-            &-offset {
-                inset-block-start: var(--space-base);
-            }
-        }
-
-        &-inset--top {
-            inset-block-start: 0;
-        }
-
-        &-inset--right {
-            inset-inline-end: 0;
-        }
-
-        &-inset--bottom {
-            inset-block-end: 0;
-        }
-
-        &-inset--left {
-            inset-inline-start: 0;
-        }
-
-        &-inset--x {
-            inset-inline: 0;
-        }
-
-        &-inset--y {
-            inset-block: 0;
-        }
-
-        &-inset {
-            inset: 0;
-        }
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-            .position {
-                &--#{$_key}-absolute {
-                    position: absolute;
-                }
-
-                &--#{$_key}-fixed {
-                    position: fixed;
-                }
-
-                &--#{$_key}-relative {
-                    position: relative;
-                }
-
-                &--#{$_key}-static {
-                    position: static;
-                }
-
-                &--#{$_key}-sticky {
-                    inset-block-start: 0;
-                    position: sticky;
-
-                    &-offset {
-                        inset-block-start: var(--space-base);
-                    }
-                }
-
-                &-inset--#{$_key}-top {
-                    inset-block-start: 0;
-                }
-
-                &-inset--#{$_key}-right {
-                    inset-inline-end: 0;
-                }
-
-                &-inset--#{$_key}-bottom {
-                    inset-block-end: 0;
-                }
-
-                &-inset--#{$_key}-left {
-                    inset-inline-start: 0;
-                }
-
-                &-inset--#{$_key}-x {
-                    inset-inline: 0;
-                }
-
-                &-inset--#{$_key}-y {
-                    inset-block: 0;
-                }
-
-                &-inset-#{$_key} {
-                    inset: 0;
-                }
-            }
-        }
-    }
-}
-
-@if $shadow-box {
-
     // Shadow - Box
-    $shadow-boxes: (
+    $shadow-box: (
         sm: var(--shadow-box-sm),
         md: var(--shadow-box-md),
         lg: var(--shadow-box-lg),
-        flat: none
+        flat: none,
     );
 
-// Base classes
-@each $name, $value in $shadow-boxes {
-    .shadow-box--#{$name} {
-        box-shadow: #{$value};
+    @each $name, $value in $shadow-box {
+        .shadow-box--#{$name} {
+            box-shadow: #{$value};
+        }
     }
-}
 
-// Responsive classes
-@each $breakpoint-name, $breakpoint-value in $breakpoint {
-    @include breakpoint($breakpoint-value) {
-        @each $name, $value in $shadow-boxes {
-            .shadow-box--#{$breakpoint-name}-#{$name} {
-                box-shadow: #{$value};
+    @each $breakpoint, $width in $breakpoints {
+        @include breakpoint($breakpoint) {
+            @each $name, $value in $shadow-box {
+                .shadow-box--#{$breakpoint}-#{$name} {
+                    box-shadow: #{$value};
+                }
             }
         }
     }
-}
-
-// .shadow-box--sm {
-//     box-shadow: var(--shadow-box-sm);
-// }
-
-// .shadow-box--md {
-//     box-shadow: var(--shadow-box-md);
-// }
-
-// .shadow-box--lg {
-//     box-shadow: var(--shadow-box-lg);
-// }
-
-// .shadow-box--flat {
-//     box-shadow: none;
-// }
-
-// @each $_key, $_value in $breakpoint {
-//     @include breakpoint($_value) {
-//         .shadow-box--#{$_key}-sm {
-//             box-shadow: var(--shadow-box-sm);
-//         }
-
-//         .shadow-box--#{$_key}-md {
-//             box-shadow: var(--shadow-box-md);
-//         }
-
-//         .shadow-box--#{$_key}-lg {
-//             box-shadow: var(--shadow-box-lg);
-//         }
-
-//         .shadow-box--#{$_key}-flat {
-//             box-shadow: none;
-//         }
-//     }
-// }
-}
-
-@if $shadow-drop {
 
     // Shadow - Drop
     $shadow-drop: (
         sm: var(--shadow-drop-sm),
         md: var(--shadow-drop-md),
         lg: var(--shadow-drop-lg),
-        flat: var(--shadow-drop-flat)
+        flat: var(--shadow-drop-flat),
     );
 
-// Base classes
-@each $name, $value in $shadow-drop {
-    .shadow-drop--#{$name} {
-        filter: #{$value};
+    @each $name, $value in $shadow-drop {
+        .shadow-drop--#{$name} {
+            filter: #{$value};
+        }
     }
-}
 
-// Responsive classes
-@each $breakpoint-name, $breakpoint-value in $breakpoint {
-    @include breakpoint($breakpoint-value) {
-        @each $name, $value in $shadow-drop {
-            .shadow-drop--#{$breakpoint-name}-#{$name} {
-                filter: #{$value};
+    @each $breakpoint, $width in $breakpoints {
+        @include breakpoint($breakpoint) {
+            @each $name, $value in $shadow-drop {
+                .shadow-drop--#{$breakpoint}-#{$name} {
+                    filter: #{$value};
+                }
             }
+        }
+    }
+
+    // Spaced Content
+    .spaced-content {
+        & > * + * {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + blockquote {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + figure,
+        & > * + img,
+        & > * + picture,
+        & > * + video {
+            margin-block: var(--space-block);
+        }
+
+        & figcaption {
+            margin-block-start: var(--space-4px);
+        }
+
+        & > * + h1 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + h2 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + h3 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + h4 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + h5 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + h6 {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + p {
+            margin-block-start: var(--space-block);
+        }
+
+        & > * + ol,
+        & > * + ul,
+        & > ol ol,
+        & > ul ul {
+            margin-block-start: var(--space-block);
+            padding-inline-start: var(--space-block);
+        }
+
+        & > ol * + li,
+        & > ul * + li {
+            margin-block-start: var(--space-2px);
         }
     }
 }
 
-// .shadow-drop--sm {
-//     filter: var(--shadow-drop-sm);
-// }
-
-// .shadow-drop--md {
-//     filter: var(--shadow-drop-md);
-// }
-
-// .shadow-drop--lg {
-//     filter: var(--shadow-drop-lg);
-// }
-
-// .shadow-drop--flat {
-//     filter: var(--shadow-drop-flat);
-// }
-
-// @each $_key, $_value in $breakpoint {
-//     @include breakpoint($_value) {
-//         .shadow-drop--#{$_key}-sm {
-//             filter: var(--shadow-drop-sm);
-//         }
-
-//         .shadow-drop--#{$_key}-md {
-//             filter: var(--shadow-drop-md);
-//         }
-
-//         .shadow-drop--#{$_key}-lg {
-//             filter: var(--shadow-drop-lg);
-//         }
-
-//         .shadow-drop--#{$_key}-flat {
-//             filter: var(--shadow-drop-flat);
-//         }
-//     }
-// }
-}
-
-@if $text {
-
-    // Text - Align
-    $text-alignments: (
-        center: center,
-        justify: justify,
-        left: start,
-        right: end
-    );
-
-// Base classes
-@each $name, $value in $text-alignments {
-    .text-align--#{$name} {
-        text-align: #{$value};
-    }
-}
-
-// Responsive classes
-@each $breakpoint-name, $breakpoint-value in $breakpoint {
-    @include breakpoint($breakpoint-value) {
-        @each $name, $value in $text-alignments {
-            .text-align--#{$breakpoint-name}-#{$name} {
-                text-align: #{$value};
-            }
-        }
-    }
-}
-
-// .text-align--center {
-//     text-align: center;
-// }
-
-// .text-align--justify {
-//     text-align: justify;
-// }
-
-// .text-align--left {
-//     text-align: start;
-// }
-
-// .text-align--right {
-//     text-align: end;
-// }
-
-// @each $_key, $_value in $breakpoint {
-//     @include breakpoint($_value) {
-
-//         .text-align--#{$-key}-center {
-//             text-align: center;
-//         }
-
-//         .text-align--#{$-key}-justify {
-//             text-align: justify;
-//         }
-
-//         .text-align--#{$-key}-left {
-//             text-align: start;
-//         }
-
-//         .text-align--#{$-key}-right {
-//             text-align: end;
-//         }
-//     }
-// }
-
-// Text - Decoration
-.text-decoration--flat {
-    text-decoration: none;
-}
-
-.text-decoration--overline {
-    text-decoration: overline;
-}
-
-.text-decoration--strike {
-    text-decoration: line-through;
-}
-
-.text-decoration--underline {
-    text-decoration: underline;
-}
-
-// Text - Height
-.text-height--body {
-    line-height: var(--line-height-body);
-}
-
-.text-height--heading {
-    line-height: var(--line-height-heading);
-}
-
-// Text - Spaced
-.text-spaced {
-    letter-spacing: var(--space-px);
-}
-
-// Text - Style
-.text-style--italic {
-    font-style: italic;
-}
-
-.text-style--normal {
-    font-style: normal;
-}
-
-// Text - Transform
-.text-transform--capitalize {
-    text-transform: capitalize;
-}
-
-.text-transform--lowercase {
-    text-transform: lowercase;
-}
-
-.text-transform--none {
-    text-transform: none;
-}
-
-.text-transform--uppercase {
-    text-transform: uppercase;
-}
-
-// Text - Weight
-.text-weight--normal {
-    font-weight: 400;
-}
-
-.text-weight--bold {
-    font-weight: 700;
-}
-
-// Text - Wrap
-.text-wrap {
-    text-wrap: wrap;
-}
-
-.text-wrap--balance {
-    text-wrap: balance;
-}
-
-.text-wrap--none {
-    text-wrap: nowrap;
-}
-
-.text-wrap--pretty {
-    text-wrap: pretty;
-}
-}
-
-@if $transition {
-
-    // Transition
-    .transition {
-        transition-duration: var(--transition);
-
-        &--fast {
-            transition-duration: var(--transition-fast);
-        }
-
-        &--slow {
-            transition-duration: var(--transition-slow);
-        }
-
-        &,
-        &--fast,
-        &--slow {
-            transition-timing-function: var(--transition-easing);
-        }
-    }
-}
-
-@if $vertical-text {
-
-    // Vertical Text
-    .vertical-text--left,
-    .vertical-text--right {
-        writing-mode: vertical-lr;
-    }
-
-    .vertical-text--left {
-        transform: scale(-1);
-    }
-
-    .vertical-text--right {
-        transform: scale(1);
-    }
-
-    .vertical-text--unset {
-        transform: scale(1);
-        writing-mode: unset;
-    }
-
-    @each $_key, $_value in $breakpoint {
-        @include breakpoint($_value) {
-
-            .vertical-text--#{$_key}-left,
-            .vertical-text--#{$_key}-right {
-                writing-mode: vertical-lr;
-            }
-
-            .vertical-text--#{$_key}-left {
-                transform: scale(-1);
-            }
-
-            .vertical-text--#{$_key}-right {
-                transform: scale(1);
-            }
-
-            .vertical-text--#{$_key}-unset {
-                transform: scale(1);
-                writing-mode: unset;
-            }
-        }
-    }
-}
-
-@if $width {
-
-    // Width
-    $width-utilities: (
-        min: var(--width-min),
-        sm: var(--width-sm),
-        md: var(--width-md),
-        lg: var(--width-lg),
-        xl: var(--width-xl),
-        wide: var(--width-wide),
-        max: var(--width-max),
-        prose: var(--width-prose),
-        fill: 100%,
-        fit: fit-content
-    );
-
-    .width {
-        inline-size: 100% ;
-    }
-
-    @each $name, $value in $width-utilities {
-    .width--#{$name} {
-        @extend .width;
-    }
-}
-
-
-
-// Generate width utility classes
-@each $name, $value in $width-utilities {
-    .width--#{$name} {
-        max-inline-size: #{$value};
-    }
-}
-
-// .width--min,
-// .width--sm,
-// .width--md,
-// .width--lg,
-// .width--xl,
-// .width--wide,
-// .width--max,
-// .width--prose,
-// .width--fill {
-//     inline-size: 100%;
-// }
-
-// .width--min {
-//     max-inline-size: var(--width-min);
-// }
-
-// .width--sm {
-//     max-inline-size: var(--width-sm);
-// }
-
-// .width--md {
-//     max-inline-size: var(--width-md);
-// }
-
-// .width--lg {
-//     max-inline-size: var(--width-lg);
-// }
-
-// .width--xl {
-//     max-inline-size: var(--width-xl);
-// }
-
-// .width--wide {
-//     max-inline-size: var(--width-wide);
-// }
-
-// .width--max {
-//     max-inline-size: var(--width-max);
-// }
-
-// .width--fit {
-//     max-inline-size: fit-content;
-// }
-
-// .width--prose {
-//     max-inline-size: var(--width-prose);
-// }
-}
-
-@if $z-index {
-
-    // Z-Index
-    $z-indexes: (
-        back: var(--z-back),
-        flat: var(--z-flat),
-        front: var(--z-front),
-        low: var(--z-low),
-        mid: var(--z-mid),
-        high: var(--z-high),
-        top: var(--z-top)
-    );
-
-// Generate z-index utility classes
-@each $name, $value in $z-indexes {
-    .z--#{$name} {
-        z-index: #{$value};
-    }
-}
-
-// .z--back {
-//     z-index: var(--z-back);
-// }
-
-// .z--flat {
-//     z-index: var(--z-flat);
-// }
-
-// .z--front {
-//     z-index: var(--z-front);
-// }
-
-// .z-low {
-//     z-index: var(--z-low);
-// }
-
-// .z-mid {
-//     z-index: var(--z-mid);
-// }
-
-// .z-high {
-//     z-index: var(--z-high);
-// }
-
-// .z--top {
-//     z-index: var(--z-top);
-// }
-}
-
-// --- Builders --- //
-
-@if $bricks {
+@layer builder {
+    // Bricks
     .brxe-block {
         @extend .block;
     }
@@ -4095,43 +1738,42 @@ $padding-directions: (
     }
 }
 
-// --- Print Styles --- //
+@layer print {
+    @media print {
+        *,
+        ::before,
+        ::after {
+            background-color: var(--base-white) !important;
+            box-shadow: none !important;
+            color: var(--base-black) !important;
+            text-shadow: none !important;
+        }
 
-@media print {
+        pre {
+            white-space: pre-wrap !important;
+        }
 
-    *,
-    ::before,
-    ::after {
-        background-color: var(--base-white) !important;
-        box-shadow: none !important;
-        color: var(--base-black) !important;
-        text-shadow: none !important;
-    }
+        pre,
+        blockquote {
+            border: var(--space-px) solid var(--base-black) !important;
+            page-break-inside: avoid !important;
+        }
 
-    pre {
-        white-space: pre-wrap !important;
-    }
+        tr,
+        img {
+            page-break-inside: avoid !important;
+        }
 
-    pre,
-    blockquote {
-        border: var(--space-px) solid var(--base-black) !important;
-        page-break-inside: avoid !important;
-    }
+        p,
+        h2,
+        h3 {
+            orphans: 3 !important;
+            widows: 3 !important;
+        }
 
-    tr,
-    img {
-        page-break-inside: avoid !important;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3 !important;
-        widows: 3 !important;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid !important;
+        h2,
+        h3 {
+            page-break-after: avoid !important;
+        }
     }
 }
