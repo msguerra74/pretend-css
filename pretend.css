@@ -681,7 +681,7 @@
         </div>
     </section>
     */
-    .container {
+    .container, [data-etch-element=container] {
         -webkit-box-align: start;
             -ms-flex-align: start;
                 align-items: flex-start;
@@ -1055,7 +1055,7 @@
         </div>
     </section>
     */
-    .section {
+    .section, [data-etch-element=section] {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;

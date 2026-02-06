@@ -3,8 +3,9 @@
 // --- SCSS --- //
 
 // Options
-$bricks-builder: false;
-$fluent-forms: true;
+$bricks: false;
+$etch: true;
+$fluentforms: true;
 
 // Colors
 $colors: (
@@ -1744,8 +1745,9 @@ $breakpoints: (
     }
 }
 
+
 @layer app {
-    @if $bricks-builder {
+    @if $bricks {
         // Bricks
         .brxe-block {
             @extend .block;
@@ -1760,7 +1762,18 @@ $breakpoints: (
         }
     }
 
-    @if $fluent-forms {
+    @if $etch {
+        // Etch
+        [data-etch-element="section"] {
+            @extend .section;
+        }
+
+        [data-etch-element="container"] {
+            @extend .container;
+        }
+    }
+
+    @if $fluentforms {
         // Fluent Forms
         .form .frm-fluent-form {
             --fluentform-danger: var(--error) !important;
