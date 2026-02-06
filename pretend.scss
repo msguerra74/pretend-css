@@ -2,6 +2,10 @@
 
 // --- SCSS --- //
 
+// Options
+$bricks-builder: false;
+$fluent-forms: true;
+
 // Colors
 $colors: (
     primary: hsl(271deg 91% 65%),
@@ -88,7 +92,7 @@ $breakpoints: (
 
 // --- CSS --- //
 
-@layer variable, reset, base, component, utility, builder, print;
+@layer variable, reset, base, component, utility, app, print;
 
 // --- Variables Layer --- //
 
@@ -1090,7 +1094,8 @@ $breakpoints: (
     </form>
     */
     .form,
-    .form form {
+    .form form,
+    .form > div:has(form) {
         display: flex;
         flex-direction: column;
         gap: var(--space-grid);
@@ -1115,6 +1120,7 @@ $breakpoints: (
         --color-form-error: var(--error-lightest);
         --color-form-success: var(--success-lightest);
         --color-input: var(--base-darkest);
+        --color-input-required: var(--primary);
         --color-label: inherit;
         --color-placeholder: var(--base-darkest);
         --font-size-form-error: var(--font-size-body);
@@ -1223,7 +1229,6 @@ $breakpoints: (
         font-size: var(--font-size-input);
         inline-size: 100%;
         line-height: var(--line-height-input);
-        min-block-size: var(--height-input);
         padding: var(--padding-y-input) var(--padding-x-input);
         transition:
             background-color var(--transition) var(--transition-easing),
@@ -1239,6 +1244,26 @@ $breakpoints: (
             cursor: not-allowed;
             opacity: 0.75;
         }
+    }
+
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"] {
+        min-block-size: var(--height-input);
+    }
+
+    textarea {
+        min-block-size: var(--height-textarea);
+        resize: vertical;
     }
 
     // Label, Legend
@@ -1299,16 +1324,12 @@ $breakpoints: (
 
     // Submit
     button {
+        @extend .btn;
+
         &:disabled {
             cursor: not-allowed;
             opacity: 0.75;
         }
-    }
-
-    // Textarea
-    textarea:not([rows]) {
-        min-block-size: var(--height-textarea);
-        resize: vertical;
     }
 
     // Honeypot
@@ -1723,18 +1744,50 @@ $breakpoints: (
     }
 }
 
-@layer builder {
-    // Bricks
-    .brxe-block {
-        @extend .block;
+@layer app {
+    @if $bricks-builder {
+        // Bricks
+        .brxe-block {
+            @extend .block;
+        }
+
+        .brxe-container {
+            @extend .container;
+        }
+
+        .brxe-section {
+            @extend .section;
+        }
     }
 
-    .brxe-container {
-        @extend .container;
-    }
+    @if $fluent-forms {
+        // Fluent Forms
+        .form .frm-fluent-form {
+            --fluentform-danger: var(--error) !important;
+        }
 
-    .brxe-section {
-        @extend .section;
+        .form fieldset {
+            display: grid !important;
+            gap: var(--space-grid) !important;
+        }
+
+        .form .fluentform .ff-el-group {
+            margin-bottom: 0 !important;
+        }
+
+        .form .fluentform .ff-el-input--label.ff-el-is-required.asterisk-right label:after {
+            color: var(--color-input-required) !important;
+        }
+
+        .form .frm-fluent-form .ff-t-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-grid) !important;
+
+            @include breakpoint(md) {
+                flex-direction: row;
+            }
+        }
     }
 }
 

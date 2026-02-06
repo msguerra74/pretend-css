@@ -1,6 +1,6 @@
 @charset "UTF-8";
-/*! Pretend CSS — [Made by Pretend](https://pretend.studio) */
-@layer variable, reset, base, component, utility, builder, print;
+/*! Pretend CSS — [Made by Pretend](https://madebypretend.com) */
+@layer variable, reset, base, component, utility, app, print;
 @layer variable {
     :root,
     [data-color-scheme=light],
@@ -447,13 +447,13 @@
         font-weight: 400;
         line-height: var(--body-line-height);
     }
-    a:not(.btn, .link) {
+    a:not(.btn, button, .link) {
         --color-anchor: var(--primary);
         color: var(--color-anchor);
         -webkit-transition: color var(--transition) var(--transition-easing);
         transition: color var(--transition) var(--transition-easing);
     }
-    a:not(.btn, .link):not(.btn, .link):hover {
+    a:not(.btn, button, .link):not(.btn, button, .link):hover {
         --color-anchor: var(--primary-dark);
     }
     main a:not([class]),
@@ -651,7 +651,7 @@
         </div>
     </section>
     */
-    .block, .brxe-block {
+    .block {
         -webkit-box-align: start;
             -ms-flex-align: start;
                 align-items: flex-start;
@@ -681,7 +681,7 @@
         </div>
     </section>
     */
-    .container, .brxe-container {
+    .container {
         -webkit-box-align: start;
             -ms-flex-align: start;
                 align-items: flex-start;
@@ -1055,7 +1055,7 @@
         </div>
     </section>
     */
-    .section, .brxe-section {
+    .section {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -1101,7 +1101,7 @@
     <a class="btn" href="#">Anchor Link</a>
     <button class="btn">Button</button>
     */
-    .btn {
+    .btn, button {
         --btn-bg-color: var(--primary);
         --btn-border-radius: var(--border-radius);
         --btn-border-style: var(--border-style);
@@ -1146,7 +1146,7 @@
         -webkit-transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing), color var(--transition) var(--transition-easing);
         transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing), color var(--transition) var(--transition-easing);
     }
-    .btn:focus-visible {
+    .btn:focus-visible, button:focus-visible {
         -webkit-transition: none;
         transition: none;
     }
@@ -1164,12 +1164,12 @@
     .btn--light.btn--outline {
         --btn-color: var(--btn-bg-color);
     }
-    .btn .btn--large {
+    .btn .btn--large, button .btn--large {
         --btn-font-size: var(--font-size-body);
         --btn-padding-block: var(--space-lg);
         --btn-padding-inline: var(--space-xl);
     }
-    .btn .btn--small {
+    .btn .btn--small, button .btn--small {
         --btn-font-size: var(--font-size-small);
         --btn-padding-block: var(--space-sm);
         --btn-padding-inline: var(--space-md);
@@ -1274,7 +1274,8 @@
     </form>
     */
     .form,
-    .form form {
+    .form form,
+    .form > div:has(form) {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -1303,6 +1304,7 @@
         --color-form-error: var(--error-lightest);
         --color-form-success: var(--success-lightest);
         --color-input: var(--base-darkest);
+        --color-input-required: var(--primary);
         --color-label: inherit;
         --color-placeholder: var(--base-darkest);
         --font-size-form-error: var(--font-size-body);
@@ -1401,7 +1403,6 @@
         font-size: var(--font-size-input);
         inline-size: 100%;
         line-height: var(--line-height-input);
-        min-block-size: var(--height-input);
         padding: var(--padding-y-input) var(--padding-x-input);
         -webkit-transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
         transition: background-color var(--transition) var(--transition-easing), border-color var(--transition) var(--transition-easing);
@@ -1454,6 +1455,24 @@
         background-color: var(--bg-color-input-disabled);
         cursor: not-allowed;
         opacity: 0.75;
+    }
+    input[type=date],
+    input[type=datetime-local],
+    input[type=email],
+    input[type=month],
+    input[type=number],
+    input[type=password],
+    input[type=search],
+    input[type=tel],
+    input[type=text],
+    input[type=time],
+    input[type=url],
+    input[type=week] {
+        min-block-size: var(--height-input);
+    }
+    textarea {
+        min-block-size: var(--height-textarea);
+        resize: vertical;
     }
     label,
     legend {
@@ -1508,10 +1527,6 @@
     button:disabled {
         cursor: not-allowed;
         opacity: 0.75;
-    }
-    textarea:not([rows]) {
-        min-block-size: var(--height-textarea);
-        resize: vertical;
     }
     fieldset:has([name=_pretend-check]) {
         left: -625rem;
@@ -2411,7 +2426,40 @@
                 margin-block-start: var(--space-2px);
     }
 }
-@layer builder {}
+@layer app {
+    .form .frm-fluent-form {
+        --fluentform-danger: var(--error) !important;
+    }
+    .form fieldset {
+        display: -ms-grid !important;
+        display: grid !important;
+        gap: var(--space-grid) !important;
+    }
+    .form .fluentform .ff-el-group {
+        margin-bottom: 0 !important;
+    }
+    .form .fluentform .ff-el-input--label.ff-el-is-required.asterisk-right label:after {
+        color: var(--color-input-required) !important;
+    }
+    .form .frm-fluent-form .ff-t-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        gap: var(--space-grid) !important;
+    }
+    @media (min-width: 768px) {
+        .form .frm-fluent-form .ff-t-container {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: row;
+                    flex-direction: row;
+        }
+    }
+}
 @layer print {
     @media print {
         *,
