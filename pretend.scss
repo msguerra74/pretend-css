@@ -2,11 +2,6 @@
 
 // --- SCSS --- //
 
-// Options
-$bricks: false;
-$etch: true;
-$fluentforms: true;
-
 // Colors
 $colors: (
     primary: hsl(271deg 91% 65%),
@@ -93,7 +88,7 @@ $breakpoints: (
 
 // --- CSS --- //
 
-@layer variable, reset, base, component, utility, app, print;
+@layer variable, reset, base, component, utility, print;
 
 // --- Variables Layer --- //
 
@@ -405,30 +400,25 @@ $breakpoints: (
     body {
         --body-bg-color: var(--base-lightest);
         --body-color: var(--base-darkest);
+        --body-font-family: var(--font-family-sans), var(--font-family-emoji);
+        --body-font-size: var(--font-size-body);
+        --body-line-height: 1.6;
 
         -webkit-font-smoothing: auto;
         background-color: var(--body-bg-color);
         block-size: 100%;
         color: var(--body-color);
+        font-family: var(--body-font-family);
+        font-size: var(--body-font-size);
+        font-weight: 400;
         inline-size: 100%;
+        line-height: var(--body-line-height);
         margin-inline: auto;
         max-inline-size: var(--width-max);
         min-block-size: 100svh;
         min-inline-size: var(--width-min);
         overflow-wrap: break-word;
         overflow-x: hidden;
-    }
-
-    body,
-    text--body {
-        --body-font-family: var(--font-family-sans), var(--font-family-emoji);
-        --body-font-size: var(--font-size-body);
-        --body-line-height: 1.6;
-
-        font-family: var(--body-font-family);
-        font-size: var(--body-font-size);
-        font-weight: 400;
-        line-height: var(--body-line-height);
     }
 
     // Anchor
@@ -641,20 +631,57 @@ $breakpoints: (
     }
 
     small,
-    .text--small {
-        --text-font-size: var(--font-size-small);
-        --text-line-height: 1.4;
-
+    .text--small,
+    .text--body,
+    .text--lede,
+    .text--large,
+    .text--subheading,
+    .text--heading,
+    .text--title,
+    .text--display {
         font-size: var(--text-font-size);
         line-height: var(--text-line-height);
+    }
+
+    small,
+    .text--small {
+        --text-font-size: var(--font-size-small);
+        --text-line-height: 1.6;
+    }
+
+    .text--body {
+        --text-font-size: var(--font-size-body);
+        --text-line-height: 1.6;
     }
 
     .text--lede {
         --text-font-size: var(--font-size-lede);
         --text-line-height: 1.6;
+    }
 
-        font-size: var(--text-font-size);
-        line-height: var(--text-line-height);
+    .text--large {
+        --text-font-size: var(--font-size-large);
+        --text-line-height: 1.6;
+    }
+
+    .text--subheading {
+        --text-font-size: var(--font-size-subheading);
+        --text-line-height: 1.6;
+    }
+
+    .text--heading {
+        --text-font-size: var(--font-size-heading);
+        --text-line-height: 1.2;
+    }
+
+    .text--title {
+        --text-font-size: var(--font-size-title);
+        --text-line-height: 1.2;
+    }
+
+    .text--display {
+        --text-font-size: var(--font-size-display);
+        --text-line-height: 1.2;
     }
 }
 
@@ -1741,65 +1768,6 @@ $breakpoints: (
         & > ol * + li,
         & > ul * + li {
             margin-block-start: var(--space-2px);
-        }
-    }
-}
-
-
-@layer app {
-    @if $bricks {
-        // Bricks
-        .brxe-block {
-            @extend .block;
-        }
-
-        .brxe-container {
-            @extend .container;
-        }
-
-        .brxe-section {
-            @extend .section;
-        }
-    }
-
-    @if $etch {
-        // Etch
-        [data-etch-element="section"] {
-            @extend .section;
-        }
-
-        [data-etch-element="container"] {
-            @extend .container;
-        }
-    }
-
-    @if $fluentforms {
-        // Fluent Forms
-        .form .frm-fluent-form {
-            --fluentform-danger: var(--error) !important;
-        }
-
-        .form fieldset {
-            display: grid !important;
-            gap: var(--space-grid) !important;
-        }
-
-        .form .fluentform .ff-el-group {
-            margin-bottom: 0 !important;
-        }
-
-        .form .fluentform .ff-el-input--label.ff-el-is-required.asterisk-right label:after {
-            color: var(--color-input-required) !important;
-        }
-
-        .form .frm-fluent-form .ff-t-container {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-grid) !important;
-
-            @include breakpoint(md) {
-                flex-direction: row;
-            }
         }
     }
 }
