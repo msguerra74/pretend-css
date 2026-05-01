@@ -5,35 +5,26 @@
 // Colors
 $colors: (
     primary: hsl(271deg 91% 65%),
-    // secondary: hsl(271deg 91% 65%),
-    // tertiary: hsl(271deg 91% 65%),
-    // quaternary: hsl(271deg 91% 65%),
+    // secondary: hsl(0deg 84% 60%),
+    // tertiary: hsl(189deg 94% 43%),
+    // quaternary: hsl(160deg 84% 39%),
     error: hsl(0deg 84% 60%),
     highlight: hsl(45deg 93% 47%),
     info: hsl(189deg 94% 43%),
     success: hsl(160deg 84% 39%),
     warning: hsl(25deg 95% 53%),
-    base: hsl(240deg 4% 46%),
 );
 
-// Shades - Light Color Scheme
-$light-shades: (
+$base: hsl(240deg 4% 46%);
+
+// Shades
+$shades: (
     lightest: 98%,
     lighter: 96%,
     light: 90%,
     dark: 16%,
     darker: 10%,
     darkest: 4%,
-);
-
-// Shades - Dark Color Scheme
-$dark-shades: (
-    lightest: 4%,
-    lighter: 10%,
-    light: 16%,
-    dark: 90%,
-    darker: 96%,
-    darkest: 98%,
 );
 
 // Breakpoint Mixin
@@ -93,14 +84,13 @@ $breakpoints: (
 // --- Variables Layer --- //
 
 @layer variable {
-    :root,
-    [data-color-scheme="light"],
-    .color-scheme--light,
-    .btn:not(.btn--dark, .btn--light),
-    button:not(.btn--dark, .btn--light) {
+    // CSS Custom Properties
+    :root {
+        color-scheme: light dark;
+
         // Shades
         --shade-white: 100%;
-        @each $shade, $value in $light-shades {
+        @each $shade, $value in $shades {
             --shade-#{$shade}: #{$value};
         }
         --shade-black: 0%;
@@ -114,51 +104,53 @@ $breakpoints: (
                 var(--#{$color}-h) var(--#{$color}-s) var(--#{$color}-l)
             );
         }
-        // Color Shades
-        @each $shade, $value in $light-shades {
-            @each $color, $value in $colors {
-                --#{$color}-#{$shade}: hsl(
-                    var(--#{$color}-h) var(--#{$color}-s) var(--shade-#{$shade})
-                );
-            }
-        }
-        --base-white: hsl(var(--base-h) var(--base-s) var(--shade-white));
-        --base-black: hsl(var(--base-h) var(--base-s) var(--shade-black));
+
+        // Base
+        --base-h: #{hue($base)};
+        --base-s: #{saturation($base)};
+        --base-l: #{lightness($base)};
+        --base: hsl(var(--base-h) var(--base-s) var(--base-l));
+
+        // Base Shades
+        --base-white: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-white)),
+            hsl(var(--base-h) var(--base-s) var(--shade-black))
+        );
+        --base-lightest: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-lightest)),
+            hsl(var(--base-h) var(--base-s) var(--shade-darkest))
+        );
+        --base-lighter: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-lighter)),
+            hsl(var(--base-h) var(--base-s) var(--shade-darker))
+        );
+        --base-light: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-light)),
+            hsl(var(--base-h) var(--base-s) var(--shade-dark))
+        );
+        --base-dark: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-dark)),
+            hsl(var(--base-h) var(--base-s) var(--shade-light))
+        );
+        --base-darker: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-darker)),
+            hsl(var(--base-h) var(--base-s) var(--shade-lighter))
+        );
+        --base-darkest: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-darkest)),
+            hsl(var(--base-h) var(--base-s) var(--shade-lightest))
+        );
+        --base-black: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-black)),
+            hsl(var(--base-h) var(--base-s) var(--shade-white))
+        );
 
         // Background Blur
-        --bg-blur: hsl(
-            var(--base-h) var(--base-s) #{map-get($light-shades, lighter)} / 0.9
+        --bg-blur: light-dark(
+            hsl(var(--base-h) var(--base-s) var(--shade-lighter) / 0.9),
+            hsl(var(--base-h) var(--base-s) var(--shade-darker) / 0.9)
         );
-    }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --shade-white: 0%;
-            @each $shade, $value in $dark-shades {
-                --shade-#{$shade}: #{$value};
-            }
-            --shade-black: 100%;
-            --bg-blur: hsl(
-                var(--base-h) var(--base-s) #{map-get($dark-shades, lighter)} /
-                    0.9
-            );
-        }
-    }
-
-    [data-color-scheme="dark"],
-    .color-scheme--dark {
-        --shade-white: 0%;
-        @each $shade, $value in $dark-shades {
-            --shade-#{$shade}: #{$value};
-        }
-        --shade-black: 100%;
-        --bg-blur: hsl(
-            var(--base-h) var(--base-s) #{map-get($dark-shades, lighter)} / 0.9
-        );
-    }
-
-    // CSS Custom Properties
-    :root {
         // Aspect Ratio
         --aspect-square: 1;
         --aspect-landscape: 4 / 3;
@@ -193,30 +185,30 @@ $breakpoints: (
             "Sitka Small", serif;
         --font-family-system: system-ui, sans-serif;
 
-        // Font - Size
-        --font-size-small: #{fluid(13.3333px, 14.4px)};
-        --font-size-body: #{fluid(16px, 18px)};
-        --font-size-lede: #{fluid(19.2px, 22.5px)};
-        --font-size-large: #{fluid(23.04px, 28.125px)};
-        --font-size-subheading: #{fluid(27.648px, 35.1563px)};
-        --font-size-heading: #{fluid(33.1776px, 43.9453px)};
-        --font-size-title: #{fluid(39.8131px, 54.9316px)};
-        --font-size-display: #{fluid(47.7757px, 68.6646px)};
+        // Font
+        --font-size-xs: #{fluid(12px, 14px)};
+        --font-size-sm: #{fluid(14px, 16px)};
+        --font-size-md: #{fluid(16px, 18px)};
+        --font-size-lg: #{fluid(18px, 20px)};
+        --font-size-xl: #{fluid(20px, 24px)};
+        --font-size-2xl: #{fluid(24px, 30px)};
+        --font-size-3xl: #{fluid(30px, 38px)};
+        --font-size-4xl: #{fluid(38px, 48px)};
+        --font-size-5xl: #{fluid(38px, 60px)};
+        --font-size-6xl: #{fluid(38px, 74px)};
+        --font-size-7xl: #{fluid(38px, 90px)};
+        --font-size-8xl: #{fluid(38px, 108px)};
+        --font-size-9xl: #{fluid(38px, 128px)};
 
-        // Grid
-        --grid-1: repeat(1, minmax(0, 1fr));
-        --grid-2: repeat(2, minmax(0, 1fr));
-        --grid-3: repeat(3, minmax(0, 1fr));
-        --grid-4: repeat(4, minmax(0, 1fr));
-        --grid-5: repeat(5, minmax(0, 1fr));
-        --grid-1-2: 1fr 2fr;
-        --grid-1-3: 1fr 3fr;
-        --grid-1-4: 1fr 4fr;
-        --grid-2-1: 2fr 1fr;
-        --grid-2-3: 2fr 3fr;
-        --grid-3-1: 3fr 1fr;
-        --grid-3-2: 3fr 2fr;
-        --grid-4-1: 4fr 1fr;
+        // Font - Custom
+        --font-size-small: var(--font-size-sm);
+        --font-size-body: var(--font-size-md);
+        --font-size-lede: var(--font-size-lg);
+        --font-size-large: var(--font-size-xl);
+        --font-size-subheading: var(--font-size-2xl);
+        --font-size-heading: var(--font-size-3xl);
+        --font-size-title: var(--font-size-4xl);
+        --font-size-display: var(--font-size-5xl);
 
         // Object Position
         --position-start: 10%;
@@ -224,51 +216,47 @@ $breakpoints: (
         --position-end: 90%;
 
         // Shadow - Box
-        --shadow-box-sm: 0 0 0.75rem hsl(0deg 0% 0% / 0.1);
-        --shadow-box-md: 0 0 1.5rem hsl(0deg 0% 0% / 0.15);
-        --shadow-box-lg: 0 0 3rem hsl(0deg 0% 0% / 0.2);
+        --shadow-box-low: 0 0 0.75rem hsl(0deg 0% 0% / 0.1);
+        --shadow-box-mid: 0 0 1.5rem hsl(0deg 0% 0% / 0.15);
+        --shadow-box-high: 0 0 3rem hsl(0deg 0% 0% / 0.2);
 
         // Shadow - Drop
-        --shadow-drop-sm: drop-shadow(0 0.625rem 0.5rem hsl(0deg 0% 0% / 0.04))
+        --shadow-drop-low: drop-shadow(0 0.625rem 0.5rem hsl(0deg 0% 0% / 0.04))
             drop-shadow(0 0.25rem 0.1875rem hsl(0deg 0% 0% / 0.1));
-        --shadow-drop-md: drop-shadow(
+        --shadow-drop-mid: drop-shadow(
                 0 1.25rem 0.8125rem hsl(0deg 0% 0% / 0.03)
             )
             drop-shadow(0 0.5rem 0.3125rem hsl(0deg 0% 0% / 0.08));
-        --shadow-drop-lg: drop-shadow(
+        --shadow-drop-high: drop-shadow(
             0 1.5625rem 1.5625rem hsl(0deg 0% 0% / 0.15)
         );
         --shadow-drop-flat: drop-shadow(0 0 transparent);
 
         // Space
-        --space-xs: #{fluid(8px, 9px)};
-        --space-sm: #{fluid(12px, 14px)};
-        --space-md: #{fluid(16px, 18px)};
-        --space-lg: #{fluid(24px, 27px)};
-        --space-xl: #{fluid(32px, 36px)};
-        --space-2xl: #{fluid(48px, 54px)};
-        --space-3xl: #{fluid(64px, 72px)};
-        --space-4xl: #{fluid(96px, 108px)};
-
-        // Space - Pairs
-        --space-xs-sm: #{fluid(8px, 14px)};
-        --space-sm-md: #{fluid(12px, 18px)};
-        --space-md-lg: #{fluid(16px, 27px)};
-        --space-lg-xl: #{fluid(24px, 36px)};
-        --space-xl-2xl: #{fluid(32px, 54px)};
-        --space-2xl-3xl: #{fluid(48px, 72px)};
-        --space-3xl-4xl: #{fluid(64px, 108px)};
-
-        // Space - Custom
         --space-px: #{px-rem(1px)};
         --space-2px: #{px-rem(2px)};
         --space-4px: #{px-rem(4px)};
+        --space-xs: #{px-rem(8px)};
+        --space-sm: #{px-rem(12px)};
+        --space-md: #{px-rem(16px)};
+        --space-lg: #{px-rem(24px)};
+        --space-xl: #{px-rem(32px)};
+        --space-2xl: #{px-rem(48px)};
+        --space-3xl: #{fluid(48px, 64px)};
+        --space-4xl: #{fluid(64px, 96px)};
+        --space-5xl: #{fluid(96px, 128px)};
+        --space-6xl: #{fluid(128px, 160px)};
+        --space-7xl: #{fluid(160px, 192px)};
+        --space-8xl: #{fluid(192px, 224px)};
+        --space-9xl: #{fluid(224px, 256px)};
+
+        // Space - Custom
         --space-icon: var(--space-xs);
-        --space-block: var(--space-lg);
-        --space-edge: var(--space-lg-xl);
-        --space-grid: var(--space-lg-xl);
-        --space-container: var(--space-2xl-3xl);
-        --space-section: var(--space-3xl-4xl);
+        --space-block: #{fluid(24px, 32px)};
+        --space-edge: #{fluid(24px, 48px)};
+        --space-grid: #{fluid(24px, 48px)};
+        --space-container: var(--space-3xl);
+        --space-section: var(--space-4xl);
 
         // Transition
         --transition: 0.3s;
@@ -601,7 +589,7 @@ $breakpoints: (
         display: block;
 
         & > figcaption {
-            margin-block-start: var(--space-xs);
+            margin-block-start: var(--space-icon);
         }
     }
 
@@ -1157,13 +1145,13 @@ $breakpoints: (
         --font-size-label: var(--font-size-body);
         --font-weight-label: 400;
         --gap-form: var(--space-grid);
-        --gap-label: var(--space-xs);
+        --gap-label: var(--space-icon);
         --height-input: var(--space-2xl);
         --height-textarea: calc(var(--space-xl) * 5);
         --line-height-input: 1.2;
         --opacity-placeholder: 0.5;
         --padding-x-input: var(--space-md);
-        --padding-y-input: var(--space-xs);
+        --padding-y-input: var(--space-icon);
         --size-checkbox: var(--space-lg);
     }
 
@@ -1429,7 +1417,7 @@ $breakpoints: (
     .bg-blur--md,
     .bg-blur--lg {
         --blur-sm: var(--space-4px);
-        --blur-md: var(--space-xs);
+        --blur-md: var(--space-icon);
         --blur-lg: var(--space-md);
 
         background-color: var(--bg-blur);
@@ -1458,12 +1446,28 @@ $breakpoints: (
         background-color: var(--base-white);
     }
 
-    @each $shade, $value in $light-shades {
-        @each $color, $value in $colors {
-            .bg--#{$color}-#{$shade} {
-                background-color: var(--#{$color}-#{$shade});
-            }
-        }
+    .bg--base-lightest {
+        background-color: var(--base-lightest);
+    }
+
+    .bg--base-lighter {
+        background-color: var(--base-lighter);
+    }
+
+    .bg--base-light {
+        background-color: var(--base-light);
+    }
+
+    .bg--base-dark {
+        background-color: var(--base-dark);
+    }
+
+    .bg--base-darker {
+        background-color: var(--base-darker);
+    }
+
+    .bg--base-darkest {
+        background-color: var(--base-darkest);
     }
 
     .bg--base-black {
@@ -1515,12 +1519,28 @@ $breakpoints: (
         color: var(--base-white);
     }
 
-    @each $shade, $value in $light-shades {
-        @each $color, $value in $colors {
-            .color--#{$color}-#{$shade} {
-                color: var(--#{$color}-#{$shade});
-            }
-        }
+    .color--base-lightest {
+        color: var(--base-lightest);
+    }
+
+    .color--base-lighter {
+        color: var(--base-lighter);
+    }
+
+    .color--base-light {
+        color: var(--base-light);
+    }
+
+    .color--base-dark {
+        color: var(--base-dark);
+    }
+
+    .color--base-darker {
+        color: var(--base-darker);
+    }
+
+    .color--base-darkest {
+        color: var(--base-darkest);
     }
 
     .color--base-black {
@@ -1529,6 +1549,15 @@ $breakpoints: (
 
     .color--transparent {
         color: transparent;
+    }
+
+    // Color Scheme
+    .color-scheme--light {
+        color-scheme: light;
+    }
+
+    .color-scheme--dark {
+        color-scheme: dark;
     }
 
     // Flip
@@ -1662,9 +1691,9 @@ $breakpoints: (
 
     // Shadow - Box
     $shadow-box: (
-        sm: var(--shadow-box-sm),
-        md: var(--shadow-box-md),
-        lg: var(--shadow-box-lg),
+        low: var(--shadow-box-low),
+        mid: var(--shadow-box-mid),
+        high: var(--shadow-box-high),
         flat: none,
     );
 
@@ -1686,9 +1715,9 @@ $breakpoints: (
 
     // Shadow - Drop
     $shadow-drop: (
-        sm: var(--shadow-drop-sm),
-        md: var(--shadow-drop-md),
-        lg: var(--shadow-drop-lg),
+        low: var(--shadow-drop-low),
+        mid: var(--shadow-drop-mid),
+        high: var(--shadow-drop-high),
         flat: var(--shadow-drop-flat),
     );
 
